@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.OnlineEmploeeMapper">
+  
+  <select id="selectOnlineEmploeebyCompanyID" parameterType="cn.usst.market.po.Company" resultType="cn.usst.market.po.OnlineEmploee">
+  	select * from onlineemploeesaler WHERE companyid=#{id}
+  </select>
+  
+  <update id="updateOnlineEmploeebyCompanyID" parameterType="cn.usst.market.po.OnlineEmploee">
+    update onlineemploeesaler set
+    saler = #{saler},
+    aftersale = #{aftersale}
+    where companyid = #{companyid}
+    and quater = #{quater}
+  </update>
+  
+  <insert id="insertCompanyEmploeeInfo" parameterType="cn.usst.market.po.OnlineEmploee" >
+   insert into pysicalemploee (companyid,saler,aftersale,quater)
+    values ( #{companyid},#{saler}, #{aftersale}, #{quater})
+  </insert>
+  
+</mapper>

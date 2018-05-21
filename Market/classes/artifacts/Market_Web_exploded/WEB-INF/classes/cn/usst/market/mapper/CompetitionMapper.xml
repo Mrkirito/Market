@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.CompetitionMapper">
+  
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from competition
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+   
+  <insert id="insert" parameterType="cn.usst.market.po.Competition">
+    insert into competition (id, name, license, 
+      current_quarter, quarter, member, 
+      team, teacher_id, start_time, 
+      end_time, status, is_lock, 
+      physical_rate)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{license,jdbcType=VARCHAR}, 
+      #{currentQuarter,jdbcType=INTEGER}, #{quarter,jdbcType=INTEGER}, #{member,jdbcType=INTEGER}, 
+      #{team,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{isLock,jdbcType=INTEGER}, 
+      #{physicalRate,jdbcType=REAL})
+  </insert>
+
+
+	<select id="checkCompetitionExist" parameterType="java.lang.String" resultType="cn.usst.market.po.Competition" >
+  		select * from competition where name=#{name}
+  	</select>
+  
+	<select id="findCompetitionById" parameterType="Integer" resultType="cn.usst.market.po.Competition" >
+		select * from competition where id=#{id,jdbcType=INTEGER}
+	</select>
+  
+	<select id="findCompetitionByTeacherId" parameterType="Integer" resultType="cn.usst.market.po.Competition" >
+		select * from competition where teacher_id=#{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="findAllCompetition" resultType="cn.usst.market.po.Competition">
+		select * from competition
+	</select>
+	
+	<select id="findCompetitonByLicense" parameterType="cn.usst.market.po.Competition" resultType="cn.usst.market.po.Competition">
+		select * from  competition where license=#{license}
+	</select>
+  
+  
+  <!-- Guan -->
+  <sql id="query_competition_where">
+   		<!-- <if test="teacher!=null">
+   			<if test="teacher.id!=null and teacher.id!=''">
+   				and competition.teacher_id=${teacher.id}
+   			</if>
+   		</if> -->
+   		<if test="competition!=null">
+   			<if test="competition.name!=null and competition.name!=''">
+   				and competition.name LIKE '%${competition.name}%'
+   			</if>
+   			<if test="competition.license!=null and competition.license!=''">
+   				and competition.license LIKE '%${competition.license}%'
+   			</if>		
+   		</if>	
+   </sql>
+  	<select id="findCompetitionList" parameterType="cn.usst.market.po.TeacherQueryVo"
+  		 resultType="cn.usst.market.po.Competition">
+  		SELECT competition.* FROM competition  
+  		<where>
+  			<include refid="query_competition_where"></include>
+  		</where>
+  	</select>
+  	
+  	
+  	
+  	<!-- 分页查询 -->
+  	<select id="selectCompetitionByPage" parameterType="cn.usst.market.po.TeacherQueryVo"
+  		 resultType="cn.usst.market.po.Competition">
+  		SELECT * FROM competition
+  		<where>
+  			<include refid="query_competition_where"></include>
+  		</where>
+  		order by competition.id desc
+  		limit #{startPos},#{pageSize}
+  	</select>
+  	
+  	<select id="getCompetitionCount" parameterType="cn.usst.market.po.TeacherQueryVo" resultType="long" >
+  		select count(*) from competition
+  		<where>
+  			<include refid="query_competition_where"></include>
+  		</where>
+  	</select>
+  	
+  	<update id="updateCompetitionInfo" parameterType="cn.usst.market.po.Competition">
+  		update competition set license =#{license},status=#{status} where id=#{id}	
+  	</update>
+  	
+  	<select id="findCompetitionByCompanyId" parameterType="Integer" resultType="cn.usst.market.po.Competition">
+  		select competition.* from competition,company
+		where company.competition_id=competition.id 
+		and company.id =#{value}
+  	</select>
+  	
+  	<select id="getCurrentQuarterByCompanyId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  		select current_quarter
+		from company,competition
+		where company.competition_id=competition.id
+		and company.id=#{id}
+  	</select>
+  	
+  	<select id="selectMarketInfoWeight" resultType="cn.usst.market.po.MarketInfoWeight">
+  		select * from market_info_weight 
+  	</select>
+  	
+  	<insert id="insertMarketInfo">
+  		insert into market_info2 (competition_id,city,perfect,
+  		business,practical,web_perfect,web_business,web_practical,
+  		rent,open,web_rent,web_open,img)values(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8},#{9},#{10},#{11},#{12})
+  	</insert>
+  
+  	<select id="insertMarketOpened">
+  		replace into market_opened(company_id) values(#{0});
+  	</select>
+  	
+  	<!-- 给公司提交或者取消提交 -->
+  	<select id="updateCompanySubmit" parameterType="cn.usst.market.po.CompanyQuarterTime">
+  		update company_quarter_time set is_submit=#{isSubmit,jdbcType=INTEGER},
+  		end_time=#{endTime,jdbcType=VARCHAR}
+		where company_id=#{companyId,jdbcType=INTEGER}
+		and `quarter`=#{quarter,jdbcType=INTEGER}
+  		
+  	</select>
+  	
+  	<!-- 查找公司的提交状态 -->
+  	<select id="findCompanyQuarterTime" resultType="cn.usst.market.po.CompanyQuarterTime">
+  		select * from company_quarter_time
+  		where company_id=#{0}
+  		and quarter=#{1}
+  	</select>
+
+	<select id="findOneByCompetitionIdQuarter" resultType="cn.usst.market.po.CompanyQuarterTime">
+  	select * from company_quarter_time where
+  	company_id=#{0} and quarter=#{1}
+  </select>
+
+</mapper>

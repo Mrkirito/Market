@@ -1,0 +1,43 @@
+body{
+    margin:4px;
+    width: 99%;
+    /*height: 500px;*/
+    /*border:3px solid blue;*/
+    background: #fafafa;
+}
+.panel{
+            margin: 0px;
+        }
+#nav44{
+    /*border:2px solid black;*/
+    height: 100%;
+    width: 100%;
+    /*overflow: auto;*/
+    margin:0;
+    padding:0;
+}
+#nav44 span{
+    text-align: center;
+    /*padding-bottom:30px;*/
+    letter-spacing: 0.3em;
+    font-size: 16px;
+}
+#nav44 .form-group{
+   /* padding-bottom: 20px;*/
+}
+.col-md-2{
+    /*border:2px solid blue;*/
+}
+.form-horizontal{
+/*    border:2px solid red;*/
+    width: 99%;
+}
+.form-group{
+    /*border:2px solid black;*/
+    width: 100%;
+}
+#btndiv{
+/*    border:2px solid red;*/
+    margin-right: 50px;
+    text-align: right;
+}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.FinalCheckMapper">
+    <!-- 查询当前公司信息 -->
+    <select id="selectCompanyById" parameterType="java.lang.Integer" resultType="cn.usst.market.po.Company">
+        select * from company where id=#{companyId}
+    </select>
+
+    <!-- 查询当前公司目标策略信息 -->
+    <select id="selectStrategyByCompanyId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.StrategyPojo">
+        select main_pro as mainPro,minor_pro as minorPro,service as service,strategy_id as strategyId
+        from company_strategy where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <!-- 查询当前公司职位信息 -->
+    <select id="selectPositionByCompanyId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.PositionPojo">
+        select main_id as mainId,minor_id as minorId from company_duty where company_id=#{companyId}
+    </select>
+
+    <!-- 查询当前公司规则 -->
+    <select id="selectRulesByCompanyId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.RulePojo">
+        select rule_id as ruleId from company_rule where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <!-- 查询销售渠道信息 -->
+    <select id="selectMarketInfoByCompanyId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.MarketPojo">
+        select market_id as marketId,is_phy as isPhy from company_market
+        where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <!-- 查询生产制造信息 -->
+    <select id="selectProductByCompanyId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.ProductPojo">
+        select name,detail from company_product
+        where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <!-- 查询产能信息 -->
+    <select id="selectCapacityByCompanyId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.CapacityPojo">
+        select capacity_now as capacityNow,capacity_add as capacityAdd from company_capacity
+        where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <!-- 查询持股信息 -->
+    <select id="selectStockByCompanyId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.StockPojo">
+        select stock_type as stockType,owner,stock_number as stockNumner,stock_price as stockPrice
+        ,total_price as totalPrice from company_stock
+        where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <!-- 查询持股信息 -->
+    <select id="selectDepositByCompanyId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.DepositPojo">
+        select cunkuan_last as cunkuanLast,tiqu,cunru,lilv from fixed_deposit
+        where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <update id="updateCompanyQuaterTime">
+        update company_quarter_time set end_time=#{curTime} and is_submit=1
+        where company_id=#{comId}
+    </update>
+
+    <select id="selectProductByCompanyIdAndQuarter" resultType="cn.usst.market.po.ProductPrice">
+        select * from product_price where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <select id="selectSalary" resultType="cn.usst.market.po.SalaryDO">
+        select  ss.salary as salesSalary, ws.salary as workersSalary from sales_salary ss,workers_salary ws
+        where ss.company_id=#{0} and ws.company_id=#{0} and ss.quarter=#{1} and ws.quarter=#{1}
+    </select>
+
+    <select id="selectCompanyMarketByCompanyIdAndQuarter" resultType="cn.usst.market.po.CompanyMarket">
+        select * from company_market where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <select id="selectHirePeopleByCompanyIdAndQuarter" resultType="cn.usst.market.po.HirePeople">
+        select *
+        from hire_people where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <select id="selectHirePeopleOnlineByCompanyIdAndQuarter" resultType="cn.usst.market.po.HirePeopleOnline">
+        select *
+        from hire_people_online where company_id=#{0} and quarter=#{1}
+    </select>
+
+</mapper>

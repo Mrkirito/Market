@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+
+#notice1{
+   	min-height:420px;
+}
+
+.course_content{
+	border:1px solid #0ff;
+	margin-top:10px;
+	padding:20px;
+	min-height:220px;
+	font-size:14px;
+	letter-spacing:1px;
+}
+.left{
+	/* border:1px solid blue; */
+	width:450px;
+	padding:20px;
+	float:left;
+	background:#eee;
+	margin:10px 0 0 2px;
+	min-height:220px;
+}
+.left_title span i{
+	color:#009;
+	font-size:18px;
+	margin-right:6px;
+}
+
+
+.right{
+	/* border:1px solid blue; */
+	width:400px;
+	padding:20px;
+	float:left;
+	background:#abcdef;
+	margin:10px 0 0 100px;
+	min-height:120px;
+}
+
+.right_title span i{
+	color:red;
+	font-size:22px;
+	margin-right:6px;
+}

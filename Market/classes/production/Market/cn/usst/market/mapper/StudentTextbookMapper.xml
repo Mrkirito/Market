@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.usst.market.mapper.StudentTextbookMapper">
+
+	<select id="selectByPrimaryKey" resultType="cn.usst.market.po.StudentTextbook"
+		parameterType="java.lang.Integer">
+		select *
+		from student_textbook
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectTextbookListByStudentId" resultType="cn.usst.market.po.TeacherTextbook"
+		parameterType="java.lang.Integer">
+		select teacher_textbook.*
+		from student_textbook,teacher_textbook
+		where student_textbook.student_id=#{id,jdbcType=INTEGER}
+		and student_textbook.teacher_textbook_id=teacher_textbook.id
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from student_textbook
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+	<select id="deleteByTeacherTextbookId" parameterType="Integer">
+		delete from student_textbook
+		where teacher_textbook_id=#{id}
+	</select>
+
+	<insert id="insert" parameterType="cn.usst.market.po.StudentTextbook">
+		insert into student_textbook (student_id, teacher_textbook_id
+		)
+		values (#{studentId,jdbcType=INTEGER}, #{teacherTextbookId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.usst.market.po.StudentTextbook">
+		insert into student_textbook
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="studentId != null">
+				student_id,
+			</if>
+			<if test="teacherTextbookId != null">
+				teacher_textbook_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="studentId != null">
+				#{studentId,jdbcType=INTEGER},
+			</if>
+			<if test="teacherTextbookId != null">
+				#{teacherTextbookId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

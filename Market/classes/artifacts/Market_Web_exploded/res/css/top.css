@@ -1,0 +1,70 @@
+body{
+    padding:0px;
+    margin:0px;
+    height: 74px;
+    /*border-bottom:5px solid black;*/
+}
+#head{
+    width: 100%;
+    height: 74px;
+    /*background: url(../images/banner1.jpg) no-repeat;
+   
+    background-size: cover;*/
+    
+/*    height: 10%;*/
+    background: #1e485d;
+    color: white;
+    position: relative;
+    
+}
+#head-left{
+    padding:15px 0px 0px 30px;
+    float: left;
+}
+#head-left img{
+    width: 45px;
+    height: 45px;
+}
+#head-title{
+    display: block;
+    font-size: 26px;
+    margin:-39px 0px 0px 70px;
+}
+#head-right{
+    float: left;
+    margin: 14px 0px 0px 930px;
+    padding: 8px 0px 0px 8px;
+/*    border:1px solid black;*/
+    height: 60px;
+    width: 55px;
+}
+#head-right a{
+    color: white;
+}
+#head-right .fa-user-circle{
+ 
+    font-size: 35px;
+}
+#head-right:hover div{
+    
+    /*border: 1px solid rgba(0,0,0,0.2);*/
+    box-shadow: 1px 1px 2px #aaa;
+    opacity: 1;
+    transition: all 0.5s ease;
+    transform: translate(0px,0px);
+    visibility: visible;
+    z-index: 999;
+}
+#head-right div{
+    background: white;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 73px;
+    left:84%;
+    padding: 0px 0px 0px 20px;
+    transform: translate(0px,10px);
+    opacity: 0;
+    color:#333;
+    visibility: hidden;
+}

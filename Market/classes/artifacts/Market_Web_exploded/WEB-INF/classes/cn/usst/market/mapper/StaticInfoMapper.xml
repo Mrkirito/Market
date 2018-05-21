@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.StaticInfoMapper">
+
+	<select id="showUsageInfo" resultType="cn.usst.market.po.UsageInfo">
+     	select * from usage_info
+     </select>
+     
+
+	 
+	 <select id="showMarketInfo" resultType="cn.usst.market.po.MarketInfo">
+	  	select * from market_info2 where competition_id=#{0}
+	 </select>
+	 
+	 <select id="showPriceInfo" resultType="cn.usst.market.po.PriceInfo">
+  		select * from price_info
+  	</select>
+  	
+  	<select id="showMediaInfo" resultType="cn.usst.market.po.MediaInfo">
+  		select * from media_info
+  	</select>
+  	
+  	<select id="showAdvertiseInfo" resultType="cn.usst.market.po.AdvertiseInfo">
+  		select * from advertise_info
+  	</select>
+  	
+
+</mapper>

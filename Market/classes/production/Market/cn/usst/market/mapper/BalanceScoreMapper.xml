@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.BalanceScoreMapper">
+  <resultMap type="BalanceScoreVo" id="BalanceScoreMap">
+  	<id column="id" />
+  	<association property="balanceScore" javaType="BalanceScore">
+  		<result column="id" property="id"/>
+  		<result column="gross_revenue" property="grossRevenue"/>
+  		<result column="gross_cost" property="grossCost"/>
+  		<result column="operating_profit" property="operatingProfit"/>
+  		<result column="cash_equivalent" property="cashEquivalent"/>
+  		<result column="market_share" property="marketShare"/>
+  		<result column="unit_marketing_revenue" property="unitMarketingRevenue"/>
+  		<result column="sales_staff_remuneration" property="salesStaffRemuneration"/>
+  		<result column="training_time" property="trainingTime"/>
+  		<result column="asset_management" property="assetManagement"/>
+  		<result column="production_efficiency" property="productionEfficiency"/>
+  		<result column="quarter" property="quarter"/>
+  		<result column="company_id" property="companyId"/>
+  	</association>
+  	<association property="company" javaType="cn.usst.market.po.Company">
+		<result column="companyId" property="id"/>
+		<result column="companyName" property="name"/>
+	</association>
+  </resultMap>
+  
+  <resultMap type="BalanceScoreMinData" id="MinDataMap">
+  	<result column="gross_revenue" property="grossRevenue"/>
+	<result column="gross_cost" property="grossCost"/>
+	<result column="operating_profit" property="operatingProfit"/>
+	<result column="cash_equivalent" property="cashEquivalent"/>
+	<result column="market_share" property="marketShare"/>
+	<result column="unit_marketing_revenue" property="unitMarketingRevenue"/>
+	<result column="sales_staff_remuneration" property="salesStaffRemuneration"/>
+	<result column="training_time" property="trainingTime"/>
+	<result column="asset_management" property="assetManagement"/>
+	<result column="production_efficiency" property="productionEfficiency"/>
+  </resultMap>
+  <resultMap type="BalanceScoreMaxData" id="MaxDataMap" extends="MinDataMap">
+  	
+  </resultMap>
+  <resultMap type="BalanceScoreAvgData" id="AvgDataMap" extends="MinDataMap">
+  	
+  </resultMap>
+  
+  <resultMap type="CompanyMediaVo" id="CompanyMediaVoMap">
+  	<id column="id" />
+  	<association property="companyMedia" javaType="CompanyMedia">
+  		<result column="id" property="id"/>
+  		<result column="company_id" property="companyId"/>
+  		<result column="quarter" property="quarter"/>
+  		<result column="product_id" property="productId"/>
+  		<result column="media_id" property="mediaId"/>
+  		<result column="num" property="num"/>
+  	</association>
+  	<association property="mediaInfo" javaType="MediaInfo">
+		<result column="detail" property="detail"/>
+		<result column="cost" property="cost"/>
+	</association>
+  </resultMap>
+  <select id="loadBalanceScore" parameterType="BalanceScore" resultMap="BalanceScoreMap">
+  	SELECT
+	balance_score.*,
+	company.id companyId,
+	company.name companyName 
+	FROM balance_score,company
+	WHERE balance_score.company_id = company.id 
+	and company_id = #{companyId}
+	and quarter = #{quarter}
+  </select>
+  
+  <select id="loadAllBalanceScore" parameterType="BalanceScoreVo" resultMap="BalanceScoreMap">
+  	SELECT
+	balance_score.*,
+	company.id companyId,
+	company.name companyName 
+	FROM balance_score,company
+	WHERE balance_score.company_id = company.id 
+	and company.competition_id = #{company.competitionId}
+	and quarter = #{balanceScore.quarter}
+  </select>
+  
+  <select id="getMinData" resultMap="MinDataMap">
+  	SELECT cast(MIN(gross_revenue) as decimal(15,3)) gross_revenue,cast(MIN(gross_cost) as decimal(15,3)) gross_cost,
+	cast(MIN(operating_profit) as decimal(15,3)) operating_profit,
+	cast(MIN(cash_equivalent) as decimal(15,3)) cash_equivalent,cast(MIN(market_share) as decimal(15,3)) market_share,
+	cast(MIN(unit_marketing_revenue) as decimal(15,3)) unit_marketing_revenue,cast(MIN(sales_staff_remuneration) as decimal(15,3)) sales_staff_remuneration,
+	cast(MIN(training_time) as decimal(15,3)) training_time,cast(MIN(asset_management) as decimal(15,3)) asset_management,
+	cast(MIN(production_efficiency) as decimal(15,3)) production_efficiency
+	from balance_score,company 
+	WHERE balance_score.company_id=company.id 
+	and competition_id = #{0}
+	and quarter = #{1}
+  </select>
+  
+  <select id="getMaxData" resultMap="MaxDataMap">
+  	SELECT cast(MAX(gross_revenue) as decimal(15,3)) gross_revenue,cast(MAX(gross_cost) as decimal(15,3)) gross_cost,
+	cast(MAX(operating_profit) as decimal(15,3)) operating_profit,
+	cast(MAX(cash_equivalent) as decimal(15,3)) cash_equivalent,cast(MAX(market_share) as decimal(15,3)) market_share,
+	cast(MAX(unit_marketing_revenue) as decimal(15,3)) unit_marketing_revenue,cast(MAX(sales_staff_remuneration) as decimal(15,3)) sales_staff_remuneration,
+	cast(MAX(training_time) as decimal(15,3)) training_time,cast(MAX(asset_management) as decimal(15,3)) asset_management,
+	cast(MAX(production_efficiency) as decimal(15,3)) production_efficiency
+	from balance_score,company 
+	WHERE balance_score.company_id=company.id 
+	and competition_id = #{0}
+	and quarter = #{1}
+  </select>
+  
+  <select id="getAvgData" resultMap="AvgDataMap">
+  	SELECT cast(AVG(gross_revenue) as decimal(15,3)) gross_revenue,
+	cast(AVG(gross_cost) as decimal(15,3)) gross_cost,
+	cast(AVG(operating_profit) as decimal(15,3)) operating_profit,
+	cast(AVG(cash_equivalent) as decimal(15,3)) cash_equivalent,
+	cast(AVG(market_share) as decimal(15,3)) market_share,
+	cast(AVG(unit_marketing_revenue) as decimal(15,3)) unit_marketing_revenue,
+	cast(AVG(sales_staff_remuneration) as decimal(15,3)) sales_staff_remuneration,
+	cast(AVG(training_time) as decimal(15,3)) training_time,
+	cast(AVG(asset_management) as decimal(15,3)) asset_management, 
+	cast(AVG(production_efficiency) as decimal(15,3)) production_efficiency 
+	from balance_score,company 
+	WHERE balance_score.company_id=company.id 
+	and competition_id = #{0}
+	and quarter = #{1}
+  </select>
+  
+  <insert id="insertBalanceScore" parameterType="BalanceScore">
+   INSERT INTO balance_score(gross_revenue,gross_cost,operating_profit,
+	cash_equivalent,market_share,unit_marketing_revenue,sales_staff_remuneration,
+	training_time,asset_management,production_efficiency,quarter,company_id)
+	VALUES(#{grossRevenue},#{grossCost},#{operatingProfit},#{cashEquivalent},
+	#{marketShare},#{unitMarketingRevenue},#{salesStaffRemuneration},#{trainingTime},
+	#{assetManagement},#{productionEfficiency},#{quarter},#{companyId})
+  </insert>
+  
+  <insert id="insertLearnTime" parameterType="LearnTime">
+  	INSERT INTO learnTime(time, quarter, member_id) VALUES(#{time}, #{quarter}, #{memberId})
+  </insert>
+  
+  <update id="updateLearnTime" parameterType="LearnTime">
+  	UPDATE learnTime SET time = #{time} WHERE member_id = #{memberId} and quarter = #{quarter}
+  </update>
+  
+  <select id="getLearnTimeByMemberId" parameterType="LearnTime" resultType="LearnTime">
+  	SELECT * FROM learnTime WHERE member_id = #{memberId} and quarter = #{quarter}
+  </select>
+  
+  <select id="getLearnTimeByCompanyId" parameterType="LearnTimeVo" resultType="LearnTime">
+  	select learnTime.* from member,learnTime
+	where member.id = learntime.member_id
+	and company_id = #{companyId}
+	and quarter = #{learnTime.quarter}
+  </select>
+  
+  <select id="getCompanyMediaCostByCompanyId" parameterType="CompanyMediaVo" resultMap="CompanyMediaVoMap">
+  	SELECT company_media.*, media_info.detail detail, media_info.cost cost
+  	FROM company_media, media_info
+	WHERE company_id = #{companyMedia.companyId}
+	and quarter = #{companyMedia.quarter}
+	and company_media.media_id = media_info.id
+  </select>
+  
+  <select id="getSalesSalaryByCompanyIdQuarter" resultType="SalesSalary">
+  	SELECT * FROM sales_salary
+	WHERE company_id = #{0}
+	and quarter = #{1}
+  </select>
+  
+  <select id="getHirePeopleByCompanyIdQuarter" resultType="HirePeople">
+  	SELECT * 
+	FROM hire_people
+	WHERE company_id = #{0}
+  </select>
+  
+  <select id="getHirePeopleOnlineByCompanyIdQuarter" resultType="HirePeopleOnline">
+  	SELECT * 
+  	FROM hire_people_online
+	WHERE company_id = #{0}
+  </select>
+</mapper>

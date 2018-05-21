@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.ChatMapper">
+  <insert id="insertMessage" parameterType="Chat">
+  	INSERT INTO chat_record(sender,receiver,send_date,content,competition_id)
+	VALUES(#{sender},#{receiver},#{sendDate},#{content},#{competitionId})
+  </insert>
+  
+  <select id="selectAllChatByCompetitionId" parameterType="java.lang.Integer" resultType="Chat">
+  	select * from chat_record WHERE competition_id=#{id} ORDER BY sender
+  </select>
+  
+  <!-- 分页查询 -->
+  	<select id="selectChatByPage" parameterType="cn.usst.market.po.ChatVo"
+  		 resultType="Chat">
+  		select * from chat_record WHERE competition_id=#{chat.competitionId} order by id desc limit #{startPos},#{pageSize}
+  	</select>
+  	
+  	<select id="getChatCount" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+  		select count(*) from chat_record WHERE competition_id=#{id}
+  	</select>
+</mapper>

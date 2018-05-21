@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.usst.market.mapper.TeacherPolicyDecisionMapper">
+	<!-- 查看团队成员职责 -->
+	<!-- <select id="findMemberDutyList" parameterType="Integer" resultType="cn.usst.market.po.MemberDutyCustom">
+		select member.`name`,b1.position mainDuty,b2.position minorDuty
+		from (select * from member where member.company_id=#{value }) as member
+		LEFT JOIN member_duty on member.id=member_duty.member_id
+		LEFT JOIN duty b1 on member_duty.main_duty_id=b1.id
+		LEFT JOIN duty b2 on member_duty.minor_duty_id=b2.id
+	</select> -->
+	<select id="findMemberDutyList" parameterType="Integer" resultType="cn.usst.market.po.MemberDutyCustom">
+		select member.`name`,b1.position mainDuty,b2.position minorDuty
+		from (select * from member where member.company_id=#{value}) as member
+		LEFT JOIN company_duty on member.id=company_duty.member_id
+		LEFT JOIN duty b1 on company_duty.main_id=b1.id
+		LEFT JOIN duty b2 on company_duty.minor_id=b2.id
+	</select>
+	
+	<!-- 目标与策略 -->
+	<select id="findCompanyGoalAndPolicy" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CompanyStrategy">
+		select * from company_strategy
+		where company_strategy.company_id=#{id,jdbcType=INTEGER}
+		and company_strategy.`quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 查找已选择的策略 -->
+	<select id="findStrategyById" parameterType="Integer" resultType="cn.usst.market.po.StrategyInfo">
+		select * from strategy_info
+		where id=#{value}
+	</select>
+	
+	<!-- 团队规则 -->
+	<select id="findCompanyRule" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CompanyRule">
+		select * from company_rule
+		where company_rule.company_id=#{id,jdbcType=INTEGER}
+		and company_rule.`quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 查找已选择的团队规则 -->
+	<select id="findRuleInfoById" parameterType="Integer" resultType="cn.usst.market.po.CompanyRuleInfo">
+		select * from company_rule_info
+		where id=#{value}
+	</select>
+	
+	<!-- 查找个人目标 -->
+	<select id="findPersonalGoalByMemberId" parameterType="Integer" resultType="cn.usst.market.po.PersonalGoal">
+		select * from personal_goal
+		where member_id=#{value}
+	</select>
+	
+	<!-- 查找个人目标的详细信息 -->
+	<select id="findPersonalGoalInfoById" parameterType="Integer" resultType="cn.usst.market.po.PersonalGoalInfo">
+		select * from personal_goal_info
+		where id=#{value}
+	</select>
+	
+	<!-- 市场营销，品牌设计 -->
+	<select id="findProductInfoById" parameterType="Integer" resultType="cn.usst.market.po.ProductInfo">
+		select * from product_info
+		where id=#{value}
+	</select>
+	
+	<!-- 找公司生产的产品 -->
+	<select id="findProductsByCompanyIdQuarter" resultType="cn.usst.market.po.CompanyProduct">
+		select * from company_product
+		where company_id=#{0}
+		and quarter &lt;=#{1}
+	</select>
+	
+	<!-- 找最低价格产品 -->
+	<select id="findMinPriceProduct" parameterType="cn.usst.market.po.IdQuarter" resultType="java.lang.Integer">
+		select IFNULL((select CEIL(cost) from company_product
+		where company_id=#{id,jdbcType=INTEGER}
+		and quarter &lt;=#{quarter,jdbcType=INTEGER}
+		ORDER BY cost
+		LIMIT 1),0) as minprice
+	</select>
+	
+	<!-- 找最高价产品 -->
+	<select id="findMaxPriceProduct" parameterType="cn.usst.market.po.IdQuarter" resultType="java.lang.Integer">
+		select IFNULL((select CEIL(cost) from company_product
+		where company_id=#{id,jdbcType=INTEGER}
+		and quarter &lt;=#{quarter,jdbcType=INTEGER}
+		ORDER BY cost desc
+		LIMIT 1),0) as maxprice
+	</select>
+	
+	<!-- 找平均价格 -->
+	<select id="findAvgPriceProduct" parameterType="cn.usst.market.po.IdQuarter" resultType="java.lang.Integer">
+		select IFNULL((select CEIL(AVG(cost)) from company_product
+		where company_id=#{id,jdbcType=INTEGER}
+		and quarter &lt;=#{quarter,jdbcType=INTEGER}),0) as avgprice
+	</select>
+	
+	<!-- 根据companyId季度找设计的广告 -->
+	<select id="findAdvertiseByCompanyIdQuarter"  resultType="cn.usst.market.po.CompanyAdvertise">
+		select * from company_advertise
+		where company_id=#{0}
+		and `quarter` &lt;=#{1}
+	</select>
+	
+	<!-- 根据产品ID季度找广告 -->
+	<select id="findAdvertiseByProductIdQuarter" resultType="cn.usst.market.po.CompanyAdvertise">
+		select * from company_advertise
+		where product_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+	<!-- 找广告设计详细信息 -->
+	<select id="findAdvertiseInfoById" parameterType="Integer" resultType="cn.usst.market.po.AdvertiseInfo">
+		select * from advertise_info
+		where id=#{value}
+	</select>
+	
+	<!-- 根据ID找产品 -->
+	<select id="findProductById" parameterType="Integer" resultType="cn.usst.market.po.CompanyProduct">
+		select * from company_product
+		where id=#{value}
+	</select>
+
+	<!-- 查找各个品牌的广告投放数量 -->
+	<select id="findCompanyMediaByIdQuarterPid" resultType="cn.usst.market.po.CompanyMedia">
+		select * from company_media
+		where company_id=#{0}
+		and `quarter`=#{1}
+		and product_id=#{2}
+	</select>
+	
+	<!-- 媒体投放总数量 -->
+	<select id="findMediaNumByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="java.lang.Integer">
+		select ifnull((select CEIL(sum(num)) from company_media
+		where company_media.company_id=#{id,jdbcType=INTEGER}
+		and company_media.`quarter`=#{quarter,jdbcType=INTEGER}),0) as mediaNum
+	</select>
+	
+	<!-- 找媒体投放中产品ID -->
+	<select id="findProductIdFromMedia" parameterType="cn.usst.market.po.IdQuarter" resultType="java.lang.Integer">
+		select product_id from company_media
+		where company_id=#{id,jdbcType=INTEGER}
+		and `quarter`=#{quarter,jdbcType=INTEGER}
+		GROUP BY product_id
+	</select>
+	
+	<!-- 找所有媒体 -->
+	<select id="findAllMediaInfo" resultType="cn.usst.market.po.MediaInfo">
+		select * from media_info
+	</select>
+	
+	<!-- 根据ID找媒体详细信息 -->
+	<select id="findMediaInfoById" parameterType="java.lang.Integer" resultType="cn.usst.market.po.MediaInfo">
+		select * from media_info
+		where media_info.id=#{value}
+	</select>
+		
+	<!-- 根据公司ID和季度找该公司所有媒体投放量 -->
+	<select id="findMediabyCompanyIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CompanyMedia">
+		select * from company_media
+		where company_id=#{id,jdbcType=INTEGER}
+		and `quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 找产品零售ID -->
+	<select id="findProductIdFromProdPrice" parameterType="cn.usst.market.po.IdQuarter" resultType="Integer">
+		select product_id from product_price
+		where company_id=#{id,jdbcType=INTEGER}
+		and `quarter` &lt;=#{quarter,jdbcType=INTEGER}
+	</select>
+	<select id="findProductSalePriceByIdQPid" resultType="cn.usst.market.po.ProductPrice">
+		select * from product_price
+		where company_id=#{0}
+		and `quarter` =#{1}
+		and product_id=#{2}
+	</select>
+	
+	<!-- 找是否购买市场调研报告 -->
+	<select id="findComReportByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CompanyReport">
+		SELECT * from company_report
+		where company_id=#{id,jdbcType=INTEGER}
+		and `quarter`=#{quarter,jdbcType=INTEGER}
+		and buy_report=1
+	</select>
+
+	
+	
+	<!-- 找公司开设实体市场 -->
+	<select id="findCompanyPhyMarketByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CompanyMarket">
+		select * from company_market
+		WHERE company_market.company_id=#{id,jdbcType=INTEGER}
+		and company_market.`quarter`=#{quarter,jdbcType=INTEGER}
+		and company_market.is_phy=1
+	</select>
+	
+	<!-- 找公司开设网络市场 -->
+	<select id="findCompanyNetMarketByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CompanyMarket">
+		select * from company_market
+		WHERE company_market.company_id=#{id,jdbcType=INTEGER}
+		and company_market.`quarter`=#{quarter,jdbcType=INTEGER}
+		and company_market.is_phy=0
+	</select>
+	
+	<!-- 根据ID找具体市场信息 -->
+	<select id="findMarketInfoById" parameterType="Integer" resultType="cn.usst.market.po.MarketInfo">
+		select * from market_info2
+		where id=#{value}
+	</select>
+	
+	<!-- 实体市场销售人员人数 -->
+	<select id="findHirePeopleByCompanyIdQuarter" resultType="cn.usst.market.po.HirePeople">
+		select * from hire_people
+		where company_id=#{0}
+		and `quarter`=#{1}
+	</select>
+	<!-- 网络销售市场人数 -->
+	<select id="findHirePeopleOnlineByCompanyIdQuarter" resultType="cn.usst.market.po.HirePeopleOnline">
+		select * from hire_people_online
+		where company_id=#{0}
+		and `quarter`=#{1}
+	</select>
+	
+	<!-- 销售人员薪酬 -->
+	<select id="findSalesSalaryByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.SalesSalary">
+		select * from sales_salary
+		where company_id=#{id,jdbcType=INTEGER}
+		and `quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	<!-- 工厂工人薪酬 -->
+	<select id="findWorkersSalaryByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.WorkersSalary">
+		select * from workers_salary
+		where company_id=#{id,jdbcType=INTEGER}
+		and `quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	
+	
+	<!-- 找公司产能 -->
+	<select id="findCompanyCapacityByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CompanyCapacity">
+		select * from company_capacity
+		where company_capacity.company_id=#{id,jdbcType=INTEGER}
+		and company_capacity.`quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 找公司产能的另一种方式 -->
+	<select id="findCompanyCapacityByCompanyIdQuarter" resultType="cn.usst.market.po.CompanyCapacity">
+		select * from company_capacity
+		where company_capacity.company_id=#{0}
+		and company_capacity.`quarter`=#{1}
+	</select>
+	
+	<!-- 找公司运行产能 -->
+	<select id="findOpeartionCapacityByCompanyIdQuarter" resultType="cn.usst.market.po.OperationCapacity">
+		select * from operation_capacity
+		where company_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+	<!-- 根据产品id和quarter找产品预测需求量 -->
+	<select id="findForecastDemandByProductIdQuarter" resultType="Integer">
+		select IFNULL(sum(demand),0) as demand
+		from company_product_demand
+		where product_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+	<!-- 根据产品id和quarter找产品库存 -->
+	<select id="findProductInventoryByProductIdQuarter" resultType="Integer">
+		select IFNULL(sum(inventory),0) as demand
+		from company_product_inventory
+		where product_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+	<!-- 公司持股 -->
+	<select id="findCompanyStockByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CompanyStock">
+		select * from company_stock
+		where company_stock.company_id=#{id,jdbcType=INTEGER}
+		and company_stock.`quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 公司定期存款 -->
+	<select id="findCompanyFixedDepositByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.FixedDeposit">
+		select * from fixed_deposit
+		where fixed_deposit.company_id=#{id,jdbcType=INTEGER}
+		and fixed_deposit.`quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	
+</mapper>

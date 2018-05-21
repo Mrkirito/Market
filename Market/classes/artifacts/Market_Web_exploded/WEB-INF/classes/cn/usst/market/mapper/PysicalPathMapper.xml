@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.PysicalPathMapper">
+
+	<!-- 商品查询的sql片段
+	建议是以单表为单位定义查询条件
+	建议将常用的查询条件都写出来
+	 -->
+	<sql id="query_items_where">
+		<if test="pysicalEmploee!=null">
+			<if test="pysicalEmploee.companyid!=null">
+				AND companyid = #{pysicalEmploee.companyid}
+			</if>
+		</if>
+	</sql>
+	
+	<!-- 商品查询 
+	parameterType：输入 查询条件
+	-->
+	
+	<select id="findPhysicalStoreEmploeeListByCompanyid" parameterType="cn.usst.market.po.PysicalEmploeeVo" 
+			resultType="cn.usst.market.po.PysicalEmploeePo">
+		SELECT * FROM pysicalemploee
+		<where>
+			<include refid="query_items_where"/>
+		</where>
+	</select>
+	
+	<select id="findhiredpeople" parameterType="cn.usst.market.po.PysicalEmploeeVo" 
+			resultType="Integer">
+		select ifnull(sum(saleman+after_sale),0) from hire_people where company_id = #{pysicalEmploee.companyid} and quarter = #{pysicalEmploee.quater}
+	</select>
+	
+	<select id="findhiredpeopleonline" parameterType="cn.usst.market.po.PysicalEmploeeVo" 
+			resultType="Integer">
+		select ifnull(sum(saleman+after_sale),0) from hire_people_online where company_id = #{pysicalEmploee.companyid} and quarter = #{pysicalEmploee.quater}
+	</select>
+	
+  <update id="updateCompanyEmploeeInfo" parameterType="cn.usst.market.po.PysicalEmploeeVo">
+    update pysicalemploee set
+    
+    saller = #{pysicalEmploee.saller},
+    
+    aftersale = #{pysicalEmploee.aftersale}
+        
+    where companyid = #{pysicalEmploee.companyid}
+    
+    and location = #{pysicalEmploee.location}
+    
+    and quater = #{pysicalEmploee.quater}
+  </update>
+  
+  <insert id="insertCompanyEmploeeInfo" parameterType="cn.usst.market.po.PysicalEmploeeVo" >
+   insert into pysicalemploee (companyid, location, 
+      saller,aftersale,quater
+      )
+    values ( #{pysicalEmploee.companyid}, #{pysicalEmploee.location}, 
+      #{pysicalEmploee.saller}, #{pysicalEmploee.aftersale}, #{pysicalEmploee.quater}
+      )
+  </insert>
+  
+  <delete id="deleteCompanyEmploeeInfo" parameterType="cn.usst.market.po.PysicalEmploeeVo">
+		delete from
+		pysicalemploee 
+		where
+			companyid = #{pysicalEmploee.companyid} and
+			location = #{pysicalEmploee.location} and
+			quater = #{pysicalEmploee.quater}
+  </delete>
+
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.usst.market.mapper.TeacherReferenceMapper" >
+<!-- resultMap的定义 -->
+<resultMap type="cn.usst.market.po.TeacherReference" id="teacherReference">
+	<id column="id" property="id"/>
+	<result column="reference_name" property="referenceName"/>
+	<result column="introduction" property="introduction"/>
+	
+	<!-- 多个书的信息,使用collection映射 
+		association映射到单个pojo中
+		collection映射到集合中
+	-->
+	<collection property="TeacherReferenceBookList" ofType="cn.usst.market.po.TeacherReferenceBook">
+		<id column="book_id" property="id"/>
+		<result column="book_name" property="bookName"/>
+		<result column="path" property="path"/>
+	</collection>
+	
+</resultMap>
+
+<!-- 查询教师资料 -->	
+<select id="findTeacherReference" resultMap="teacherReference">
+select 
+	teacher_reference.*,
+	teacher_reference_book.id book_id,
+	teacher_reference_book.book_name,
+	teacher_reference_book.path
+from 
+	teacher_reference,teacher_reference_book
+where 
+	teacher_reference_book.teacher_reference_id=teacher_reference.id
+</select> 
+</mapper>

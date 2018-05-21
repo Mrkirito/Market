@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.DeleteReleaseResultMapper">
+  <!-- 删除竞赛结果发布后添加的记录 -->
+  <select id="deleteCompanyInvestByCompetitionIdQuarter" >
+  	delete from company_investment
+	where company_investment.competition_id=#{0}
+	and company_investment.quarter=#{1}
+  </select>
+  
+  <select id="deleteProductEfficiencyByCompetitionIdQuarter" >
+ 	delete from product_efficiency
+	where product_efficiency.competition_id=#{0}
+	and product_efficiency.quarter=#{1}
+  </select>
+  
+  <select id="deleteProductMarketShareByCompetitionIdQuarter">
+  	delete from product_market_share
+	where product_market_share.competition_id=#{0}
+	and product_market_share.quarter=#{1}
+  </select>
+  
+  <select id="deleteCompanyMarketShareByCompanyIdQuarter">
+  	delete from company_market_share
+	where company_market_share.company_id=#{0}
+	and company_market_share.quarter=#{1}
+  </select>
+  
+  <select id="deleteCompanyQuarterTimeByCompetitionIdQuarter">
+  	delete from company_quarter_time
+	where company_quarter_time.competition_id=#{0}
+	and company_quarter_time.quarter=#{1}
+  </select>
+  
+  <select id="deleteBalanceScoreByCompanyIdQuarter">
+  	delete from balance_score
+	where balance_score.company_id=#{0}
+	and balance_score.quarter=#{1}
+  </select>
+  
+  <select id="deleteFinancialRatioByCompanyIdQuarter">
+  	delete from financial_ratio
+	where financial_ratio.company_id=#{0}
+	and financial_ratio.quarter=#{1}
+  </select>
+  
+
+</mapper>

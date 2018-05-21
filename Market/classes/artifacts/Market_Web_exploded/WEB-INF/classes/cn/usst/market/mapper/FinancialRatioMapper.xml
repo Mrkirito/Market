@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.FinancialRatioMapper">
+	<resultMap type="FinancialRatioVo" id="FinancialRatioMap">
+		<id column="id" />
+		<association property="financialRatio" javaType="FinancialRatio">
+			<result column="id" property="id"/>
+			<result column="quick_ratio" property="quickRatio"/>
+			<result column="inventoryover_ratio" property="inventoryoverRatio"/>
+			<result column="fixedassetover_ratio" property="fixedassetoverRatio"/>
+			<result column="totalasset_ratio" property="totalassetRatio"/>
+			<result column="debt_ratio" property="debtRatio"/>
+			<result column="grossprofit_ratio" property="grossprofitRatio"/>
+			<result column="netprofit_ratio" property="netprofitRatio"/>
+			<result column="return_ratio" property="returnRatio"/>
+			<result column="quarter" property="quarter"/>
+			<result column="company_id" property="companyId"/>
+		</association>
+		
+		<association property="company" javaType="Company">
+			<result column="company_name" property="name"/>
+		</association>
+	</resultMap>
+	
+	<select id="findFinancialRatioByCompanyId" resultMap="FinancialRatioMap">
+		SELECT financial_ratio.*, company.name company_name
+		from financial_ratio, company
+		WHERE financial_ratio.company_id=company.id
+		and company_id = #{0}
+		and quarter = #{1}
+	</select>
+	
+	<select id="getMin" resultType="FinancialRatioMin">
+		SELECT cast(MIN(quick_ratio) as decimal(10,3)) quick_ratio,
+		cast(MIN(inventoryover_ratio) as decimal(10,3)) inventoryover_ratio,
+		cast(MIN(fixedassetover_ratio) as decimal(10,3)) fixedassetover_ratio,
+		cast(MIN(totalasset_ratio) as decimal(10,3)) totalasset_ratio,
+		cast(MIN(debt_ratio) as decimal(10,3)) debt_ratio,
+		cast(MIN(grossprofit_ratio) as decimal(10,3)) grossprofit_ratio,
+		cast(MIN(netprofit_ratio) as decimal(10,3)) netprofit_ratio,
+		cast(MIN(return_ratio) as decimal(10,3)) return_ratio
+		from financial_ratio,company 
+		WHERE financial_ratio.company_id=company.id 
+		and competition_id = #{0}
+		and quarter = #{1}
+	</select>
+	
+	<select id="getMax" resultType="FinancialRatioMax">
+		SELECT cast(MAX(quick_ratio) as decimal(10,3)) quick_ratio,
+		cast(MAX(inventoryover_ratio) as decimal(10,3)) inventoryover_ratio,
+		cast(MAX(fixedassetover_ratio) as decimal(10,3)) fixedassetover_ratio,
+		cast(MAX(totalasset_ratio) as decimal(10,3)) totalasset_ratio,
+		cast(MAX(debt_ratio) as decimal(10,3)) debt_ratio,
+		cast(MAX(grossprofit_ratio) as decimal(10,3)) grossprofit_ratio,
+		cast(MAX(netprofit_ratio) as decimal(10,3)) netprofit_ratio,
+		cast(MAX(return_ratio) as decimal(10,3)) return_ratio
+		from financial_ratio,company 
+		WHERE financial_ratio.company_id=company.id 
+		and competition_id = #{0}
+		and quarter = #{1}
+	</select>
+	
+	<select id="getAvg" resultType="FinancialRatioAvg">
+		SELECT cast(AVG(quick_ratio) as decimal(10,3)) quick_ratio,
+		cast(AVG(inventoryover_ratio) as decimal(10,3)) inventoryover_ratio,
+		cast(AVG(fixedassetover_ratio) as decimal(10,3)) fixedassetover_ratio,
+		cast(AVG(totalasset_ratio) as decimal(10,3)) totalasset_ratio,
+		cast(AVG(debt_ratio) as decimal(10,3)) debt_ratio,
+		cast(AVG(grossprofit_ratio) as decimal(10,3)) grossprofit_ratio,
+		cast(AVG(netprofit_ratio) as decimal(10,3)) netprofit_ratio,
+		cast(AVG(return_ratio) as decimal(10,3)) return_ratio
+		from financial_ratio,company 
+		WHERE financial_ratio.company_id=company.id 
+		and competition_id = #{0}
+		and quarter = #{1}
+	</select>
+	
+	<insert id="insertFinancialRatio" parameterType="FinancialRatio">
+		INSERT INTO
+		financial_ratio(quick_ratio,inventoryover_ratio,
+		fixedassetover_ratio,totalasset_ratio,debt_ratio,
+		grossprofit_ratio,netprofit_ratio,return_ratio,
+		quarter,company_id) 
+		VALUES(#{quickRatio},#{inventoryoverRatio},#{fixedassetoverRatio},#{totalassetRatio},#{debtRatio},#{grossprofitRatio},#{netprofitRatio},#{returnRatio},#{quarter},#{companyId})
+	</insert>
+</mapper>

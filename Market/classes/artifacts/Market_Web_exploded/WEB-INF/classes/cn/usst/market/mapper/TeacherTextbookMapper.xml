@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.usst.market.mapper.TeacherTextbookMapper">
+
+	<!-- 查看每个竞赛中的资料 -->
+	<select id="selectByCompetitionId" parameterType="Integer"
+		resultType="cn.usst.market.po.TeacherTextbook">
+		select * from teacher_textbook
+		where
+		teacher_textbook.competition_id=#{competitionId}
+		order by id desc
+	</select>
+	
+	<!-- 查看教师上传的所有资料 -->
+	<select id="selectByTeacherId" parameterType="Integer" resultType="cn.usst.market.po.TeacherTextbook">
+		select teacher_textbook.* from teacher_textbook,competition,teacher
+		where teacher_textbook.competition_id=competition.id
+		and competition.teacher_id=#{teacherId}
+		GROUP BY id
+		desc
+	</select>
+	
+	<select id="selectById" parameterType="Integer" resultType="cn.usst.market.po.TeacherTextbook">
+		select * from teacher_textbook
+		where
+		teacher_textbook.id=#{id}
+	
+	</select>
+	
+	<select id="deleteByPrimaryKey" parameterType="cn.usst.market.po.TeacherTextbook">
+		delete from
+		teacher_textbook
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="insertTeacherTextbook" parameterType="cn.usst.market.po.TeacherTextbook">
+		insert into
+		teacher_textbook(name,path,upload_time,competition_id)
+		values(#{name},#{path},#{uploadTime},#{competitionId})
+	</select>
+
+	<update id="updateByPrimaryKey" parameterType="cn.usst.market.po.TeacherTextbook">
+		update teacher_textbook
+		set name = #{name,jdbcType=VARCHAR},
+		path = #{path,jdbcType=VARCHAR},
+		upload_time = #{uploadTime,jdbcType=VARCHAR},
+		competition_id = #{competitionId,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

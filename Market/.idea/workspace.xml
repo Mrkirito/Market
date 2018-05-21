@@ -6,7 +6,870 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22e96821-0a6e-40d6-be6b-61fb7435ac22" name="Default" comment="" />
+    <list default="true" id="22e96821-0a6e-40d6-be6b-61fb7435ac22" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/annotation/MethodLog.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/annotation/MethodLogAspect.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/BalanceScoreController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/ChatController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/CompanyController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/CompetitionController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/CompetitionResultController$TypeEnum.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/CompetitionResultController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/CustomerSupportController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/HelpDocumentController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/InforController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/LogController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/MarketingController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/OnlineEmploeeController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/PerformanceReportController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/PolicyDecisionController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/PysicalPathController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/TeacherToolController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/TestController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/controller/UserController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/BalanceScoreMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CashFlowMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/ChatMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CompanyMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CompetitionMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CompetitionResultMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CustomerSupportMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/DeleteReleaseResultMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/DemandInfoMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/FinalCheckMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/FinancialRatioMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/HelpDocumentMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/LogMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/MarketingMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/MemberMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/OnlineEmploeeMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/PerformanceReportMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/PysicalPathMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/SallSituationMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/StaticInfoMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/StudentTextbookMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherPolicyDecisionMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherReferenceMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherTextbookMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherToolMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/UserMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/AdDetail.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/AdPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/AdvertiseInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/AllSalesSalaryVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/AllWorkersSalaryVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/AverageSalary.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/BalanceScore.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/BalanceScoreAvgData.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/BalanceScoreMaxData.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/BalanceScoreMinData.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/BalanceScoreVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/BalanceSheet.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/BalanceSheetResult.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/BrandOfRival.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CapacityInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CapacityPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CashFlow.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Chat.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/ChatVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CheckResult.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Company.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyAd.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyAdvertise.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyCapacity.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyDecision.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyDecitionPo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyDecitionZLYPo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyDuty.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyFinanceVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyInvestment.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyLoan.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyMarket.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyMarketShare.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyMedia.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyMediaVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyPersonGoal.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyProduct.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyProductDemand.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyProductInventory.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyProductVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyProductVo2.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyProductVo2List.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyQuarterTime.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyReport.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyRule.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyRuleInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyStock.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompanyStrategy.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Competition.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompetitionQuarterTime.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CompetitivePowerVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Component.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CostOfProduction.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/CustomerSupport.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/DemandForecast.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/DemandInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/DepositPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Duty.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/EveryProductMarketShareVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/FinalCheck.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/FinalCheckDO.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/FinalCheckDTO.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/FinancialRatio.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/FinancialRatioAvg.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/FinancialRatioMax.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/FinancialRatioMin.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/FinancialRatioVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/FixedDeposit.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/GlobalPathNeedsVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/HelpDocument.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/HirePeople.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/HirePeopleList.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/HirePeopleOnline.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/HirePeopleOnlineList.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/HirePeopleOnlineVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/HirePeopleVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/IdQuarter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/IncomeStatement.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/KeyDecisionVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/LearnTime.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/LearnTimeVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Log.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/LogVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MainMedia.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MarketInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MarketInfo2.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MarketInfoWeight.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MarketOpenedPo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MarketPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MarketSaleNumVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MarketShare.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MarketShareWeight.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MarketWebOpened.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MediaAdNum.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MediaInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Member.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MemberDuty.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/MemberDutyCustom.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/OnlineEmploee.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/OnlineStore.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/OperationCapacity.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Page.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Pager.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/PerformanceReport.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/PersonalGoal.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/PersonalGoalCustom.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/PersonalGoalInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/PositionPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/PriceInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/PriceSale.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/ProductEfficiency.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/ProductInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/ProductMarketShare.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/ProductMediaNumVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/ProductPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/ProductPrice.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/ProductPriceList.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/ProductPriceVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Profit.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/PysicalEmploeePo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/PysicalEmploeeVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/RulePojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/SalaryDO.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/SaleIncomVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/SaleStratge.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/SalesSalary.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/SallSituationVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/StateOfSign.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/StockLevelVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/StockPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/StoreInforVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/StrategyInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/StrategyPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/StudentTextbook.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/Teacher.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/TeacherQueryVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/TeacherReference.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/TeacherReferenceBook.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/TeacherTextbook.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/UsageInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/User.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/po/WorkersSalary.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/BalanceScoreService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/ChatService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/CompanyService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/CompetitionResultService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/CompetitionService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/CustomerSupportService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/DeleteReleaseResultService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/LogService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/MemberService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/OnlineEmploeeService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/PerformanceReportService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/PolicyDecisionService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/PysicalPathService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/SearchService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/StaticInfoService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/TeacherService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/BalanceScoreServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/ChatServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/CompanyServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/CompetitionResultServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/CompetitionServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/CustomerSupportServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/DeleteReleaseResultServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/LogServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/MemberServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/OnlineEmploeeServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/PerformanceReportServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/PolicyDecisionServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/PysicalPathServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/SearchServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/StaticInfoServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/service/impl/TeacherServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/marketUtil/Md5Encoder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/marketUtil/RandomCode.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/marketUtil/StringRandom.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/marketUtil/Test.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/aopalliance-1.0.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/asm-4.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/aspectj-1.7.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/aspectjweaver-1.7.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/cglib-3.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/commons-dbcp-1.2.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/commons-fileupload-1.3.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/commons-io-2.5.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/commons-logging-1.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/commons-pool-1.3.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/ehcache-core-2.6.5.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/jackson-annotations-2.2.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/jackson-core-2.2.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/jackson-core-asl-1.8.8.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/jackson-databind-2.2.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/jackson-mapper-asl-1.8.8.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/jackson-module-jaxb-annotations-2.2.1.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/javassist-3.17.1-GA.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/jstl-1.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/log4j-1.2.17.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/log4j-api-2.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/log4j-core-2.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/log4j.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/mybatis-3.3.0.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/mybatis-ehcache-1.0.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/mybatis-spring-1.2.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/mysql-connector-java-5.1.26-bin.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/slf4j-api-1.7.12.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/slf4j-log4j12-1.7.12.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-aop-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-beans-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-context-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-core-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-expression-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-jdbc-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-orm-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-test-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-tx-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-web-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/lib/spring-webmvc-4.2.4.RELEASE.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/BebasNeue-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/BebasNeue-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/BebasNeue-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/fontomas-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/fontomas-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/fontomas-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/franchise-bold-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/franchise-bold-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/franchise-bold-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/FontAwesome.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/fontawesome-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/fontawesome-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/fontawesome-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/fontawesome-webfont.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/glyphicons-halflings-regular.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/summernote.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/summernote.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/summernote.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/FontAwesome.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/fontawesome-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/fontawesome-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/fontawesome-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/fontawesome-webfont.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/summernote.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/summernote.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/summernote.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/111.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/arrow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/banner1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/bg.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/bgm1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/bgm2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/bgm4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/bgmiphone.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/bgmiphone2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/bgmiphone3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/commerce.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/date_bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/design_iphone.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/economy.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/extreme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/hongkong.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/ico1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/img-sinapore.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/indexbg.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/map.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/moscow.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/moscow1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/newdelhi.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/office.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/pexels-photo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/phone.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/quarter1_bg_1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/quarter1_bg_2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/quarter1_bg_3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/russia.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/sinapore.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/trueIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/welcome.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/world.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/annotation/MethodLog.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/annotation/MethodLogAspect.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/BalanceScoreController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/ChatController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/CompanyController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/CompetitionController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/CompetitionResultController$TypeEnum.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/CompetitionResultController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/CustomerSupportController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/HelpDocumentController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/InforController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/LogController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/MarketingController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/OnlineEmploeeController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/PerformanceReportController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/PolicyDecisionController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/PysicalPathController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/TeacherToolController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/TestController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/controller/UserController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/BalanceScoreMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CashFlowMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/ChatMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CompanyMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CompetitionMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CompetitionResultMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CustomerSupportMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/DeleteReleaseResultMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/DemandInfoMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/FinalCheckMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/FinancialRatioMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/HelpDocumentMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/LogMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/MarketingMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/MemberMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/OnlineEmploeeMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/PerformanceReportMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/PysicalPathMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/SallSituationMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/StaticInfoMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/StudentTextbookMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherPolicyDecisionMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherReferenceMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherTextbookMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherToolMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/UserMapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/AdDetail.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/AdPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/AdvertiseInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/AllSalesSalaryVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/AllWorkersSalaryVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/AverageSalary.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/BalanceScore.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/BalanceScoreAvgData.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/BalanceScoreMaxData.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/BalanceScoreMinData.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/BalanceScoreVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/BalanceSheet.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/BalanceSheetResult.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/BrandOfRival.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CapacityInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CapacityPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CashFlow.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Chat.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/ChatVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CheckResult.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Company.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyAd.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyAdvertise.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyCapacity.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyDecision.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyDecitionPo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyDecitionZLYPo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyDuty.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyFinanceVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyInvestment.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyLoan.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyMarket.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyMarketShare.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyMedia.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyMediaVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyPersonGoal.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyProduct.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyProductDemand.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyProductInventory.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyProductVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyProductVo2.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyProductVo2List.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyQuarterTime.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyReport.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyRule.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyRuleInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyStock.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompanyStrategy.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Competition.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompetitionQuarterTime.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CompetitivePowerVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Component.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CostOfProduction.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/CustomerSupport.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/DemandForecast.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/DemandInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/DepositPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Duty.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/EveryProductMarketShareVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/FinalCheck.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/FinalCheckDO.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/FinalCheckDTO.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/FinancialRatio.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/FinancialRatioAvg.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/FinancialRatioMax.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/FinancialRatioMin.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/FinancialRatioVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/FixedDeposit.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/GlobalPathNeedsVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/HelpDocument.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/HirePeople.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/HirePeopleList.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/HirePeopleOnline.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/HirePeopleOnlineList.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/HirePeopleOnlineVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/HirePeopleVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/IdQuarter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/IncomeStatement.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/KeyDecisionVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/LearnTime.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/LearnTimeVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Log.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/LogVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MainMedia.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MarketInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MarketInfo2.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MarketInfoWeight.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MarketOpenedPo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MarketPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MarketSaleNumVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MarketShare.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MarketShareWeight.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MarketWebOpened.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MediaAdNum.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MediaInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Member.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MemberDuty.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/MemberDutyCustom.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/OnlineEmploee.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/OnlineStore.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/OperationCapacity.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Page.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Pager.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/PerformanceReport.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/PersonalGoal.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/PersonalGoalCustom.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/PersonalGoalInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/PositionPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/PriceInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/PriceSale.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/ProductEfficiency.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/ProductInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/ProductMarketShare.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/ProductMediaNumVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/ProductPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/ProductPrice.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/ProductPriceList.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/ProductPriceVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Profit.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/PysicalEmploeePo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/PysicalEmploeeVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/RulePojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/SalaryDO.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/SaleIncomVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/SaleStratge.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/SalesSalary.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/SallSituationVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/StateOfSign.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/StockLevelVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/StockPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/StoreInforVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/StrategyInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/StrategyPojo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/StudentTextbook.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/Teacher.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/TeacherQueryVo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/TeacherReference.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/TeacherReferenceBook.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/TeacherTextbook.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/UsageInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/User.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/po/WorkersSalary.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/BalanceScoreService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/ChatService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/CompanyService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/CompetitionResultService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/CompetitionService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/CustomerSupportService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/DeleteReleaseResultService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/LogService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/MemberService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/OnlineEmploeeService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/PerformanceReportService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/PolicyDecisionService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/PysicalPathService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/SearchService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/StaticInfoService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/TeacherService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/BalanceScoreServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/ChatServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/CompanyServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/CompetitionResultServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/CompetitionServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/CustomerSupportServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/DeleteReleaseResultServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/LogServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/MemberServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/OnlineEmploeeServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/PerformanceReportServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/PolicyDecisionServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/PysicalPathServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/SearchServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/StaticInfoServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/service/impl/TeacherServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/marketUtil/Md5Encoder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/marketUtil/RandomCode.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/marketUtil/StringRandom.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/marketUtil/Test.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/smartfox/common_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/GlobalPath.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/SaleAbility.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/SalePath.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/StoreInfor.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/BalanceScoreMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CashFlowMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/ChatMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CompanyMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CompetitionMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CompetitionResultMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/CustomerSupportMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/DeleteReleaseResultMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/DemandInfoMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/FinalCheckMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/FinancialRatioMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/HelpDocumentMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/LogMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/MarketingMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/MemberMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/OnlineEmploeeMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/PerformanceReportMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/PysicalPathMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/SallSituationMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/StaticInfoMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/StudentTextbookMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherPolicyDecisionMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherReferenceMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherTextbookMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/TeacherToolMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/cn/usst/market/mapper/UserMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/db.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/log4j.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/mybatis/SqlMapConfig.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/spring/applicationContext-dao.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/spring/applicationContext-service.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/spring/applicationContext-transaction.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/classes/spring/springmvc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/jsp/items/itemsList.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/jsp/user/showUser.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/WEB-INF/web.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/adCheck.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/adDesign.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/adOfMain.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/adOfRival.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/allSalesSalary.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/allWorkersSalary.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/assertSheet.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/balanceScoreContent.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/balance_score.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/balance_score_report.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/brandDemandReport.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/brandDs.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/brandEva.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/brandOfRival.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/brandProfit.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/brand_ds2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/buyInvesReport.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/buyReport.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/cashFlow.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/chatAndmail.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/check.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/checkAdvertise.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/companyMarketShare.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/company_rule.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/competitivePower.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/constantProduce.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/creatCorporation.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/customRequired.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/customerService.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/demandForecast.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/design.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/design_advertise.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/duty.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/emergencyLoan.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/failed.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/financialRatio.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/fixedDeposite.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/frameset1.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/frameset2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/gradeEvaluation.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/hirePeople.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/hirePeopleOnline.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/incomeStatement.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/index1.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/index2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/inventoryControl.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/competitionResult.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/balanceSheet.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/cashFlow.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/customRequired.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyAdPlan.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyBalanceScore.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyMarketNeedNum.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyMarketSaleNum.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyMarketShare.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyNetSaleNum.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyOpenMarket.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyPhySaleNum.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyPolicyDecisionTime.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanySaleAndStockoun.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanySalesSalary.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyCompanyWorkerSalary.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyProductNeedNum.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/everyProductPrice.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/incomeStatement.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/marketPrice.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/marketScale.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/mediaInfo.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResult/productUse.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResultQ2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/detailedCompetitionResultQ3.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/everyIndicatorChart.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/releaseResult.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/resultSummary.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/resultSummaryQ2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/resultSummaryQ3.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/usefulChart.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/usefulChartQ2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/competitionResult/usefulChartQ3.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/operationCapacity.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/companyDecisionSummary.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/companyDecisionSummaryQ2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/companyDecisionSummaryQ3.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/companyErrorAndWarn.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/decisionSummary.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/errorAndWarn.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/keyDecision.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/keyDecisionQ2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/keyDecisionQ3.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/newProducts.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/policyDecision/policyDecision.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherHelpDocument/HelpDocument.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherQuery/editCompany.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherQuery/editCompanyAll.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherQuery/editCompetition.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherQuery/editMember.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherQuery/queryCompany.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherQuery/queryCompetition.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherQuery/queryMember.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherQuery/teacherQuery.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherReferenceBook/teacherReference.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTextbook/teacherTextbook.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTextbook/teacherTextbookList.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/NewFile.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/competitionAdvancedOption.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/competitionDealDate.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/competitionEmailNotification.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/competitionGrantAccess.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/competitionName.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/competitionTeamMemberNumber.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/dicisionLocks.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/fineAndOtherIncome.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/stockSetting.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/studentBatchRegister.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/studentFeedback.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/studentMove.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/studentMoveEdit.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/studentRegisterNotes.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/studentRegistryRight.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/studentSumbitLog.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/teacherTool.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teacherTool/technologyLicensing.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teachingEvaluation/evaluationRule.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teachingEvaluation/evaluationRuleCustom.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/jsp/teachingEvaluation/teachingEvaluation.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/keyDecision.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/keyDecisionQ2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/keyDecisionQ3.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/left1.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/left2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/left3.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/left4.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/left5.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/login.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/loginTest.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/marketPrice.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/marketScale.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/mediaInfo.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/onlineStore.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/onlineemploeehiring.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/operateMedia.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/operationCapacity.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/personal_goal.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/physicalStore.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/physicalemploeehiring.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/priceAndSale.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/priceOfPro.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/priceOfRival.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/productUse.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/profile.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/quarterResult.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/queryAd.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/Brand_ds.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/animate-custom.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/competition_content.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/course.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/design.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/font-awesome.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/font-awesome.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/BebasNeue-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/Dharma Type Font License.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/fontomas-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/fonts/franchise-bold-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/index2.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/lyz.calendar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/onlineStore.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/pagination.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/physicalStore.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/score.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/strategy.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/style2.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/summernote.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/teacher_design.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/teacher_index1.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/teacherquery.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/top.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/css/zzsc.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/fontawesome-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/font/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/fontawesome-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/images/tooltip1.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/accordion.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/btnControl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/chatAndMail.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/classIntroduction.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/easing.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/echarts.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/gradeEvaluation.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/helpDocument.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/jquery-2.2.4.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/jquery.pagination.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/lyz.calendar.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/modernizr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/studentOperate.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/summernote.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/teacher_design.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/res/js/zzsc.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/salesSalary.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/setPrice.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/shareHold.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/showUser.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/showUserByCondition.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/showUserByPage.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/soldCost.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/staffWage.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/strategy.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/studentOperate.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/success.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/teacher_competition_content.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/teacher_design_competition.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/teacher_index.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/teacher_score.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/test.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/testFinalCheck.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/top2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/totalSalesReport.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/uselessInventory.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/welcome.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/artifacts/Market_Web_exploded/workersSalary.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/BalanceScoreMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CashFlowMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/ChatMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CompanyMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CompetitionMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CompetitionResultMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/CustomerSupportMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/DeleteReleaseResultMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/DemandInfoMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/FinalCheckMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/FinancialRatioMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/HelpDocumentMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/LogMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/MarketingMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/MemberMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/OnlineEmploeeMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/PerformanceReportMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/PysicalPathMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/SallSituationMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/StaticInfoMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/StudentTextbookMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherPolicyDecisionMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherReferenceMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherTextbookMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/TeacherToolMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/cn/usst/market/mapper/UserMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/db.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/log4j.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/mybatis/SqlMapConfig.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/spring/applicationContext-dao.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/spring/applicationContext-service.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/spring/applicationContext-transaction.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes/production/Market/spring/springmvc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/db.properties" afterPath="$PROJECT_DIR$/config/db.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/usst/market/mapper/CompanyMapper.xml" afterPath="$PROJECT_DIR$/src/cn/usst/market/mapper/CompanyMapper.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/WebRoot/WEB-INF/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,122 +900,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="left1.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebRoot/left1.jsp">
+      <file leaf-file-name="MarketingMapper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/cn/usst/market/mapper/MarketingMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2376">
-              <caret line="66" column="39" lean-forward="false" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompetitionResultController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/usst/market/controller/CompetitionResultController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121680">
-              <caret line="3443" column="8" lean-forward="false" selection-start-line="3443" selection-start-column="8" selection-end-line="3443" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detailedCompetitionResult.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebRoot/jsp/competitionResult/detailedCompetitionResult.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="usefulChart.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebRoot/jsp/competitionResult/usefulChart.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="teacher_index.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WebRoot/teacher_index.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-88">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompetitionService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/usst/market/service/CompetitionService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompetitionServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/usst/market/service/impl/CompetitionServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DemandInfoMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/usst/market/mapper/DemandInfoMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1496211579097" expanded="true" signature="286:311" ph="select * fro... demand_info" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompetitionMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/usst/market/mapper/CompetitionMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1522549677363" expanded="true" signature="293:354" ph="delete from competition... " />
-                <marker date="1522549677363" expanded="true" signature="444:1041" ph="insert into competition... " />
-                <marker date="1522549677363" expanded="true" signature="1174:1218" ph="select * fro... competition" />
-                <marker date="1522549677363" expanded="true" signature="1340:1397" ph="select * fro... competition" />
-                <marker date="1522549677363" expanded="true" signature="1524:1589" ph="select * fro... competition" />
-                <marker date="1522549677363" expanded="true" signature="1682:1707" ph="select * fro... competition" />
-                <marker date="1522549677363" expanded="true" signature="1851:1902" ph="select * fro... competition" />
-                <marker date="1522549677363" expanded="true" signature="2617:2654" ph="SELECT compe... competition" />
-                <marker date="1522549677363" expanded="true" signature="2923:3097" ph="SELECT * FRO... competition" />
-                <marker date="1522549677363" expanded="true" signature="3224:3256" ph="select count... competition" />
-                <marker date="1522549677363" expanded="true" signature="3445:3519" ph="update competition... " />
-                <marker date="1522549677363" expanded="true" signature="3653:3772" ph="select compe... competition" />
-                <marker date="1522549677363" expanded="true" signature="3905:4023" ph="select curre... company" />
-                <marker date="1522549677363" expanded="true" signature="4133:4165" ph="select * fro... market_info_weight" />
-                <marker date="1522549677363" expanded="true" signature="4222:4451" ph="insert into market_info2... " />
-                <marker date="1522549677363" expanded="true" signature="4696:4901" ph="update company_quarter_time... " />
-                <marker date="1522549677363" expanded="true" signature="5040:5121" ph="select * fro... company_quarter_time" />
-                <marker date="1522549677363" expanded="true" signature="5234:5310" ph="select * fro... company_quarter_time" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StaticInfoService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/usst/market/service/StaticInfoService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="13" column="38" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="38" />
+            <state relative-caret-position="288">
+              <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -205,7 +957,7 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="D:" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -248,14 +1000,12 @@
         <option value="$PROJECT_DIR$/src/cn/usst/market/service/CompanyService.java" />
         <option value="$PROJECT_DIR$/src/cn/usst/market/po/StateOfSign.java" />
         <option value="$PROJECT_DIR$/src/cn/usst/market/mapper/CompanyMapper.java" />
-        <option value="$PROJECT_DIR$/src/cn/usst/market/mapper/CompanyMapper.xml" />
         <option value="$PROJECT_DIR$/WebRoot/onlineStore.jsp" />
         <option value="$PROJECT_DIR$/src/cn/usst/market/controller/MarketingController.java" />
         <option value="$PROJECT_DIR$/WebRoot/left5.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/buyReport.jsp" />
         <option value="$PROJECT_DIR$/src/cn/usst/market/mapper/SallSituationMapper.xml" />
         <option value="$PROJECT_DIR$/src/cn/usst/market/controller/TestController.java" />
-        <option value="$PROJECT_DIR$/config/db.properties" />
         <option value="$PROJECT_DIR$/src/cn/usst/market/controller/CompetitionController.java" />
         <option value="$PROJECT_DIR$/WebRoot/constantProduce.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/duty.jsp" />
@@ -266,6 +1016,8 @@
         <option value="$PROJECT_DIR$/src/cn/usst/market/controller/CompanyController.java" />
         <option value="$PROJECT_DIR$/WebRoot/jsp/policyDecision/companyDecisionSummaryQ2.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/teacher_index.jsp" />
+        <option value="$PROJECT_DIR$/config/db.properties" />
+        <option value="$PROJECT_DIR$/src/cn/usst/market/mapper/CompanyMapper.xml" />
       </list>
     </option>
   </component>
@@ -289,6 +1041,7 @@
     <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
@@ -327,14 +1080,14 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="hm&#9;ACTION&#9;EditorDeleteToWordEndInDifferentHumpsMode&#10;physicalStore&#9;FILE&#9;file://D:/idea/Market/WebRoot/physicalStore.jsp&#10;onlineStore&#9;FILE&#9;file://D:/idea/Market/WebRoot/onlineStore.jsp&#10;showMarketInfo&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showMarketInfo&#10;SallSituationMapper&#9;FILE&#9;file://D:/idea/Market/src/cn/usst/market/mapper/SallSituationMapper.xml&#10;ShowCompanyReport&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#ShowCompanyReport&#10;demandForecast&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#demandForecast&#10;buyReport&#9;FILE&#9;file://D:/idea/Market/WebRoot/buyReport.jsp&#10;left&#9;FILE&#9;file://D:/idea/Market/WebRoot/left2.jsp&#10;left4&#9;FILE&#9;file://D:/idea/Market/WebRoot/left4.jsp&#10;left5.jsp&#9;FILE&#9;file://D:/idea/Market/WebRoot/left5.jsp&#10;teacherPolicyDecisionMapper&#9;FILE&#9;file://D:/idea/Market/src/cn/usst/market/mapper/TeacherPolicyDecisionMapper.xml&#10;online&#9;FILE&#9;file://D:/idea/Market(6)/Market/WebRoot/onlineStore.jsp&#10;companyMapper&#9;FILE&#9;file://D:/idea/Market(6)/Market/src/cn/usst/market/mapper/CompanyMapper.java&#10;cashFlowMapper&#9;FILE&#9;file://D:/文档/Market/src/cn/usst/market/mapper/CashFlowMapper.xml&#10;companyMap&#9;FILE&#9;file://D:/文档/Market/src/cn/usst/market/mapper/CompanyMapper.xml&#10;submit&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#submit&#10;finalCheck&#9;FILE&#9;file://D:/文档/Market/WebRoot/testFinalCheck.jsp&#10;showEmergencyLoan&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showEmergencyLoan&#10;hirePeopleOnline&#9;FILE&#9;file://D:/文档/Market/WebRoot/hirePeopleOnline.jsp&#10;hireSalePeopleOnline&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#hireSalePeopleOnline&#10;companyma&#9;FILE&#9;file://D:/idea/项目备份/Market/src/cn/usst/market/mapper/CompanyMapper.xml&#10;test&#9;FILE&#9;file://D:/idea/项目备份/Market/src/cn/usst/market/controller/TestController.java&#10;left1&#9;FILE&#9;file://D:/idea/项目备份/Market/WebRoot/left1.jsp&#10;co&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/src/cn/usst/market/controller/CompanyController.java&#10;companymapper.&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/src/cn/usst/market/mapper/CompanyMapper.xml&#10;companymapper&#9;PSI&#9;JAVA://cn.usst.market.mapper.CompanyMapper&#10;showMarketWebInfo&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showMarketWebInfo&#10;teacher_design&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/res/css/teacher_design.css&#10;designCompetition&#9;PSI&#9;JAVA://cn.usst.market.controller.CompetitionController#designCompetition&#10;testf&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/testFinalCheck.jsp&#10;adDesign&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/adDesign.jsp&#10;operateMedia&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/operateMedia.jsp&#10;showOperateMedia&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showOperateMedia&#10;fixedDeposite&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/fixedDeposite.jsp&#10;emergencyLoan&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/emergencyLoan.jsp&#10;showCapacityInfo&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showCapacityInfo&#10;constantProduce&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/constantProduce.jsp&#10;operationCapacity&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/operationCapacity.jsp&#10;showOperationCapacity&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showOperationCapacity&#10;inventoryControl&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/inventoryControl.jsp&#10;showInventoryControl&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showInventoryControl&#10;hirePeople&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/hirePeople.jsp&#10;hireSalePeople&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#hireSalePeople&#10;workersSalary&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/workersSalary.jsp&#10;showWorkersSalary&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showWorkersSalary&#10;salesSalary&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/salesSalary.jsp&#10;showSalesSalary&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showSalesSalary&#10;priceAndSale&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/priceAndSale.jsp&#10;showProductPrice&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showProductPrice" />
+    <property name="SearchEverywhereHistoryKey" value="companyMapp&#9;FILE&#9;file://D:/idea/worksapce/Market/src/cn/usst/market/mapper/CompanyMapper.xml&#10;marketMapp&#9;FILE&#9;file://D:/idea/worksapce/Market/src/cn/usst/market/mapper/MarketingMapper.xml&#10;hm&#9;ACTION&#9;EditorDeleteToWordEndInDifferentHumpsMode&#10;physicalStore&#9;FILE&#9;file://D:/idea/Market/WebRoot/physicalStore.jsp&#10;onlineStore&#9;FILE&#9;file://D:/idea/Market/WebRoot/onlineStore.jsp&#10;showMarketInfo&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showMarketInfo&#10;SallSituationMapper&#9;FILE&#9;file://D:/idea/Market/src/cn/usst/market/mapper/SallSituationMapper.xml&#10;ShowCompanyReport&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#ShowCompanyReport&#10;demandForecast&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#demandForecast&#10;buyReport&#9;FILE&#9;file://D:/idea/Market/WebRoot/buyReport.jsp&#10;left&#9;FILE&#9;file://D:/idea/Market/WebRoot/left2.jsp&#10;left4&#9;FILE&#9;file://D:/idea/Market/WebRoot/left4.jsp&#10;left5.jsp&#9;FILE&#9;file://D:/idea/Market/WebRoot/left5.jsp&#10;teacherPolicyDecisionMapper&#9;FILE&#9;file://D:/idea/Market/src/cn/usst/market/mapper/TeacherPolicyDecisionMapper.xml&#10;online&#9;FILE&#9;file://D:/idea/Market(6)/Market/WebRoot/onlineStore.jsp&#10;companyMapper&#9;FILE&#9;file://D:/idea/Market(6)/Market/src/cn/usst/market/mapper/CompanyMapper.java&#10;cashFlowMapper&#9;FILE&#9;file://D:/文档/Market/src/cn/usst/market/mapper/CashFlowMapper.xml&#10;companyMap&#9;FILE&#9;file://D:/文档/Market/src/cn/usst/market/mapper/CompanyMapper.xml&#10;submit&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#submit&#10;finalCheck&#9;FILE&#9;file://D:/文档/Market/WebRoot/testFinalCheck.jsp&#10;showEmergencyLoan&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showEmergencyLoan&#10;hirePeopleOnline&#9;FILE&#9;file://D:/文档/Market/WebRoot/hirePeopleOnline.jsp&#10;hireSalePeopleOnline&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#hireSalePeopleOnline&#10;companyma&#9;FILE&#9;file://D:/idea/项目备份/Market/src/cn/usst/market/mapper/CompanyMapper.xml&#10;test&#9;FILE&#9;file://D:/idea/项目备份/Market/src/cn/usst/market/controller/TestController.java&#10;left1&#9;FILE&#9;file://D:/idea/项目备份/Market/WebRoot/left1.jsp&#10;co&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/src/cn/usst/market/controller/CompanyController.java&#10;companymapper.&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/src/cn/usst/market/mapper/CompanyMapper.xml&#10;companymapper&#9;PSI&#9;JAVA://cn.usst.market.mapper.CompanyMapper&#10;showMarketWebInfo&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showMarketWebInfo&#10;teacher_design&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/res/css/teacher_design.css&#10;designCompetition&#9;PSI&#9;JAVA://cn.usst.market.controller.CompetitionController#designCompetition&#10;testf&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/testFinalCheck.jsp&#10;adDesign&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/adDesign.jsp&#10;operateMedia&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/operateMedia.jsp&#10;showOperateMedia&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showOperateMedia&#10;fixedDeposite&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/fixedDeposite.jsp&#10;emergencyLoan&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/emergencyLoan.jsp&#10;showCapacityInfo&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showCapacityInfo&#10;constantProduce&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/constantProduce.jsp&#10;operationCapacity&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/operationCapacity.jsp&#10;showOperationCapacity&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showOperationCapacity&#10;inventoryControl&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/inventoryControl.jsp&#10;showInventoryControl&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showInventoryControl&#10;hirePeople&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/hirePeople.jsp&#10;hireSalePeople&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#hireSalePeople&#10;workersSalary&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/workersSalary.jsp&#10;showWorkersSalary&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showWorkersSalary&#10;salesSalary&#9;FILE&#9;file://E:/SANSUX/IdeaProjects/Market/WebRoot/salesSalary.jsp&#10;showSalesSalary&#9;PSI&#9;JAVA://cn.usst.market.controller.CompanyController#showSalesSalary" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -790,7 +1543,7 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\陈立阳\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -832,12 +1585,12 @@
       <workItem from="1526388480262" duration="1630000" />
       <workItem from="1526432017218" duration="5029000" />
       <workItem from="1526518816042" duration="1246000" />
-      <workItem from="1526884838613" duration="229000" />
+      <workItem from="1526884838613" duration="2728000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147889000" />
+    <option name="totallyTimeSpent" value="150388000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -849,18 +1602,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297619" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039285716" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4194053" sideWeight="0.50292826" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-9" y="248" width="1854" height="557" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297619" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -870,7 +1623,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44880953" sideWeight="0.49707174" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44854587" sideWeight="0.49707174" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -879,7 +1632,6 @@
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.039285716" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -901,6 +1653,7 @@
       <path value="D:" />
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -966,20 +1719,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/cn/usst/market/service/TeacherService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="99" column="38" lean-forward="true" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/usst/market/mapper/TeacherPolicyDecisionMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="190" column="35" lean-forward="true" selection-start-line="187" selection-start-column="8" selection-end-line="190" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebRoot/salesSalary.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3240">
@@ -1093,25 +1832,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/usst/market/mapper/CompanyMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9884">
-          <caret line="353" column="0" lean-forward="false" selection-start-line="353" selection-start-column="0" selection-end-line="353" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/usst/market/controller/TestController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3248">
           <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/db.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1196,6 +1921,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3416">
           <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1259,6 +1985,49 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1526390940954" expanded="true" signature="292:936" ph="insert into balance_sheet... " />
+            <marker date="1526390940954" expanded="true" signature="1085:1247" ph="select * fro... balance_sheet_result" />
+            <marker date="1526390940954" expanded="true" signature="1389:1539" ph="select * fro... cash_flow_result" />
+            <marker date="1526390940954" expanded="true" signature="1695:1866" ph="select * fro... income_statement_result" />
+            <marker date="1526390940954" expanded="true" signature="1979:2066" ph="update competition " />
+            <marker date="1526390940954" expanded="true" signature="2245:2406" ph="select compa... company_quarter_time" />
+            <marker date="1526390940954" expanded="true" signature="2523:2788" ph="insert into company_quarter_time... " />
+            <marker date="1526390940954" expanded="true" signature="2913:2990" ph="select * fro... company_quarter_time" />
+            <marker date="1526390940954" expanded="true" signature="3134:3309" ph="select compa... company_product" />
+            <marker date="1526390940954" expanded="true" signature="3440:3538" ph="select * fro... company_media" />
+            <marker date="1526390940954" expanded="true" signature="3668:3712" ph="select * fro... media_info" />
+            <marker date="1526390940954" expanded="true" signature="3855:3901" ph="select * fro... product_info" />
+            <marker date="1526390940954" expanded="true" signature="4018:4109" ph="SELECT * fro... company_market" />
+            <marker date="1526390940954" expanded="true" signature="4256:4767" ph="SELECT ROUND... sales_salary" />
+            <marker date="1526390940954" expanded="true" signature="4912:5443" ph="SELECT ROUND... workers_salary" />
+            <marker date="1526390940954" expanded="true" signature="5561:5629" ph="select * fro... hire_people" />
+            <marker date="1526390940954" expanded="true" signature="5729:5804" ph="select * fro... hire_people_online" />
+            <marker date="1526390940954" expanded="true" signature="5920:5966" ph="select * fro... market_info2" />
+            <marker date="1526390940954" expanded="true" signature="6094:6165" ph="SELECT * fro... sales_salary" />
+            <marker date="1526390940954" expanded="true" signature="6295:6368" ph="SELECT * fro... workers_salary" />
+            <marker date="1526390940954" expanded="true" signature="6487:6559" ph="SELECT * fro... product_price" />
+            <marker date="1526390940954" expanded="true" signature="6695:6767" ph="SELECT * fro... product_price" />
+            <marker date="1526390940954" expanded="true" signature="6896:7510" ph="insert into product_efficiency... " />
+            <marker date="1526390940954" expanded="true" signature="7641:7765" ph="select * fro... product_efficiency" />
+            <marker date="1526390940954" expanded="true" signature="7968:8121" ph="select count... " />
+            <marker date="1526390940954" expanded="true" signature="11402:12353" ph="insert into company_market_share... " />
+            <marker date="1526390940954" expanded="true" signature="12503:12604" ph="select * fro... product_market_share" />
+            <marker date="1526390940954" expanded="true" signature="12749:12854" ph="select * fro... product_market_share" />
+            <marker date="1526390940954" expanded="true" signature="13009:13090" ph="select * fro... product_market_share" />
+            <marker date="1526390940954" expanded="true" signature="13411:15460" ph="update product_market_share... " />
+            <marker date="1526390940954" expanded="true" signature="15611:15688" ph="select * fro... product_market_share" />
+            <marker date="1526390940954" expanded="true" signature="15820:15897" ph="select * fro... company_market_share" />
+            <marker date="1526390940954" expanded="true" signature="16026:16077" ph="select * fro... market_share_weight" />
+            <marker date="1526390940954" expanded="true" signature="16206:17124" ph="insert into company_investment... " />
+            <marker date="1526390940954" expanded="true" signature="17260:17335" ph="select * fro... company_investment" />
+            <marker date="1526390940954" expanded="true" signature="17463:17533" ph="select * fro... balance_score" />
+            <marker date="1526390940954" expanded="true" signature="17674:17756" ph="select * fro... income_statement_result" />
+            <marker date="1526390940954" expanded="true" signature="17865:17891" ph="select * fro... market_info2" />
+            <marker date="1526390940954" expanded="true" signature="18024:18078" ph="select * fro... market_info2" />
+            <marker date="1526390940954" expanded="true" signature="18228:18317" ph="select * fro... company_market" />
+            <marker date="1526390940954" expanded="true" signature="18464:18541" ph="select * fro... product_market_share" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1266,6 +2035,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
           <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <marker date="1514629554014" expanded="true" signature="284:308" ph="select * fro... usage_info" />
+            <marker date="1514629554014" expanded="true" signature="411:463" ph="select * fro... market_info2" />
+            <marker date="1514629554014" expanded="true" signature="554:578" ph="select * fro... price_info" />
+            <marker date="1514629554014" expanded="true" signature="672:696" ph="select * fro... media_info" />
+            <marker date="1514629554014" expanded="true" signature="798:826" ph="select * fro... advertise_info" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1300,7 +2076,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="13" column="38" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="38" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1308,7 +2086,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1316,7 +2096,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1369#1370#0" expanded="false" />
+            <element signature="e#1424#1425#0" expanded="false" />
+            <element signature="e#1784#1785#0" expanded="false" />
+            <element signature="e#1831#1832#0" expanded="false" />
+            <element signature="e#2776#2777#0" expanded="false" />
+            <element signature="e#2830#2831#0" expanded="false" />
+            <element signature="e#3757#3758#0" expanded="false" />
+            <element signature="e#3811#3812#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1330,26 +2120,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/left1.jsp">
+    <entry file="file://$PROJECT_DIR$/WebRoot/teacher_index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2376">
-          <caret line="66" column="39" lean-forward="false" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/usst/market/controller/CompetitionResultController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121680">
-          <caret line="3443" column="8" lean-forward="false" selection-start-line="3443" selection-start-column="8" selection-end-line="3443" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/jsp/competitionResult/detailedCompetitionResult.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="307">
+          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1362,10 +2136,279 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/teacher_index.jsp">
+    <entry file="file://$PROJECT_DIR$/WebRoot/jsp/competitionResult/detailedCompetitionResult.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-88">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/usst/market/controller/CompetitionResultController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="3443" column="8" lean-forward="false" selection-start-line="3443" selection-start-column="8" selection-end-line="3443" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/left1.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="66" column="39" lean-forward="false" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/db.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="1" column="22" lean-forward="false" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/usst/market/mapper/MarketingMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="205" column="37" lean-forward="true" selection-start-line="205" selection-start-column="37" selection-end-line="205" selection-end-column="37" />
+          <folding>
+            <marker date="1522393792619" expanded="true" signature="292:569" ph="select compa... company" />
+            <marker date="1522393792619" expanded="true" signature="665:727" ph="select detai... product_info" />
+            <marker date="1522393792619" expanded="true" signature="825:1103" ph="select compa... company" />
+            <marker date="1522393792619" expanded="true" signature="1207:1449" ph="select ca.co... company_advertise" />
+            <marker date="1522393792619" expanded="true" signature="1549:1795" ph="select id,qu... company_advertise" />
+            <marker date="1522393792619" expanded="true" signature="1877:1929" ph="select detai... advertise_info" />
+            <marker date="1522393792619" expanded="true" signature="2075:2500" ph="select compa... product_market_share" />
+            <marker date="1522393792619" expanded="true" signature="2655:3143" ph="select compa... product_market_share" />
+            <marker date="1522393792619" expanded="true" signature="3224:3274" ph="select name company" />
+            <marker date="1522393792619" expanded="true" signature="3355:3413" ph="select name company_product" />
+            <marker date="1522393792619" expanded="true" signature="3495:3565" ph="select name company_product" />
+            <marker date="1522393792619" expanded="true" signature="3661:3872" ph="select pp.co... product_price" />
+            <marker date="1522393792619" expanded="true" signature="3975:4049" ph="select price... product_price" />
+            <marker date="1522393792619" expanded="true" signature="4146:4300" ph="select compa... product_price" />
+            <marker date="1522393792619" expanded="true" signature="4387:4459" ph="select cost company_product" />
+            <marker date="1522393792619" expanded="true" signature="4608:4858" ph="select ca.co... company_advertise" />
+            <marker date="1522393792619" expanded="true" signature="4948:4972" ph="select * fro... media_info" />
+            <marker date="1522393792619" expanded="true" signature="5062:5222" ph="select mi.de... media_info" />
+            <marker date="1522393792619" expanded="true" signature="5314:5448" ph="select produ... company_advertise" />
+            <marker date="1522393792619" expanded="true" signature="5542:5692" ph="select compa... product_price" />
+            <marker date="1522393792619" expanded="true" signature="5787:5881" ph="select media... company_media" />
+            <marker date="1522393792619" expanded="true" signature="5970:6021" ph="select cost media_info" />
+            <marker date="1522393792619" expanded="true" signature="6121:6197" ph="select youji... product_price" />
+            <marker date="1522393792619" expanded="true" signature="6292:6354" ph="select compe... company" />
+            <marker date="1522393792619" expanded="true" signature="6468:6540" ph="select * fro... company_product" />
+            <marker date="1522393792619" expanded="true" signature="6593:6670" ph="delete from " />
+            <marker date="1522393792619" expanded="true" signature="6828:6903" ph="select * fro... company_product_demand" />
+            <marker date="1522393792619" expanded="true" signature="6989:7065" ph="update produ... " />
+            <marker date="1522393792619" expanded="true" signature="7227:7297" ph="select count... final_check" />
+            <marker date="1522393792619" expanded="true" signature="7359:7448" ph="update final... " />
+            <marker date="1522393792619" expanded="true" signature="7503:7557" ph="update final... " />
+            <marker date="1522393792619" expanded="true" signature="7618:7696" ph="update final... " />
+            <marker date="1522393792619" expanded="true" signature="7758:7835" ph="update final... " />
+            <marker date="1522393792619" expanded="true" signature="7889:7960" ph="update final... " />
+            <marker date="1522393792619" expanded="true" signature="8018:8095" ph="update final... " />
+            <marker date="1522393792619" expanded="true" signature="8143:8228" ph="insert into final_check... " />
+            <marker date="1522393792619" expanded="true" signature="8280:8351" ph="insert into final_check... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/usst/market/mapper/CompanyMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="1059" column="0" lean-forward="true" selection-start-line="1059" selection-start-column="0" selection-end-line="1059" selection-end-column="0" />
+          <folding>
+            <marker date="1526890015326" expanded="true" signature="890:970" ph="select * fro... company" />
+            <marker date="1526890015326" expanded="true" signature="1102:1138" ph="select * fro... company" />
+            <marker date="1526890015326" expanded="true" signature="1239:1428" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="1555:1603" ph="select * fro... company" />
+            <marker date="1526890015326" expanded="true" signature="1688:1728" ph="select disti... strategy_info" />
+            <marker date="1526890015326" expanded="true" signature="1864:1912" ph="select * fro... strategy_info" />
+            <marker date="1526890015326" expanded="true" signature="2000:2044" ph="select disti... company_rule_info" />
+            <marker date="1526890015326" expanded="true" signature="2198:2250" ph="select * fro... company_rule_info" />
+            <marker date="1526890015326" expanded="true" signature="2338:2383" ph="select disti... personal_goal_info" />
+            <marker date="1526890015326" expanded="true" signature="2539:2592" ph="select * fro... personal_goal_info" />
+            <marker date="1526890015326" expanded="true" signature="2679:2697" ph="select * fro... duty" />
+            <marker date="1526890015326" expanded="true" signature="2789:2843" ph="select * fro... market_info2" />
+            <marker date="1526890015326" expanded="true" signature="4790:5246" ph="select * fro... *" />
+            <marker date="1526890015326" expanded="true" signature="4805:5229" ph="select compa... company" />
+            <marker date="1526890015326" expanded="true" signature="5492:6118" ph="select * fro... *" />
+            <marker date="1526890015326" expanded="true" signature="5507:5931" ph="select compa... company" />
+            <marker date="1526890015326" expanded="true" signature="6949:7008" ph="select compa... company" />
+            <marker date="1526890015326" expanded="true" signature="7107:7201" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="7291:7348" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="7445:7470" ph="select * fro... competition" />
+            <marker date="1526890015326" expanded="true" signature="7594:7630" ph="select * fro... company" />
+            <marker date="1526890015326" expanded="true" signature="7729:7769" ph="select * fro... company" />
+            <marker date="1526890015326" expanded="true" signature="7830:7884" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="7995:8292" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="8400:8739" ph="insert into company_strategy... " />
+            <marker date="1526890015326" expanded="true" signature="8854:8923" ph="select * fro... company_strategy" />
+            <marker date="1526890015326" expanded="true" signature="8977:9021" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="9127:9189" ph="select * fro... company_product" />
+            <marker date="1526890015326" expanded="true" signature="9294:9338" ph="select * fro... company_product" />
+            <marker date="1526890015326" expanded="true" signature="9985:10173" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="10234:10290" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="10342:10389" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="10442:10526" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="10663:10727" ph="select * fro... product_info" />
+            <marker date="1526890015326" expanded="true" signature="10833:10881" ph="select * fro... company_duty" />
+            <marker date="1526890015326" expanded="true" signature="10981:11193" ph="insert into company_duty... " />
+            <marker date="1526890015326" expanded="true" signature="11293:11461" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="11569:11617" ph="select * fro... company_duty" />
+            <marker date="1526890015326" expanded="true" signature="11711:11768" ph="select membe... company_duty" />
+            <marker date="1526890015326" expanded="true" signature="11876:11925" ph="select * fro... company_duty" />
+            <marker date="1526890015326" expanded="true" signature="12023:12088" ph="select * fro... company_rule" />
+            <marker date="1526890015326" expanded="true" signature="12189:12333" ph="insert into company_rule... " />
+            <marker date="1526890015326" expanded="true" signature="12434:12579" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="12689:12761" ph="select * fro... company_person_goal" />
+            <marker date="1526890015326" expanded="true" signature="12874:13025" ph="insert into company_person_goal... " />
+            <marker date="1526890015326" expanded="true" signature="13138:13290" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="13391:13633" ph="insert into company_market... " />
+            <marker date="1526890015326" expanded="true" signature="13789:13941" ph="select * fro... company_market" />
+            <marker date="1526890015326" expanded="true" signature="14051:14131" ph="select * fro... company_market" />
+            <marker date="1526890015326" expanded="true" signature="14237:14425" ph="insert into company_market... " />
+            <marker date="1526890015326" expanded="true" signature="14530:14733" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="14844:15056" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="15161:15223" ph="select * fro... cash_flow" />
+            <marker date="1526890015326" expanded="true" signature="15278:15352" ph="update cash_... " />
+            <marker date="1526890015326" expanded="true" signature="15403:15498" ph="insert into cash_flow... " />
+            <marker date="1526890015326" expanded="true" signature="15557:15635" ph="update cash_... " />
+            <marker date="1526890015326" expanded="true" signature="15723:15774" ph="select open " />
+            <marker date="1526890015326" expanded="true" signature="15865:15920" ph="select web_o... market_info2" />
+            <marker date="1526890015326" expanded="true" signature="15976:16056" ph="update cash_... " />
+            <marker date="1526890015326" expanded="true" signature="16115:16199" ph="update cash_... " />
+            <marker date="1526890015326" expanded="true" signature="16315:16384" ph="select * fro... income_statement" />
+            <marker date="1526890015326" expanded="true" signature="16446:16523" ph="update incom... " />
+            <marker date="1526890015326" expanded="true" signature="16586:16674" ph="update incom... " />
+            <marker date="1526890015326" expanded="true" signature="16740:16832" ph="update incom... " />
+            <marker date="1526890015326" expanded="true" signature="16889:16956" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="17044:17083" ph="select disti... product_info" />
+            <marker date="1526890015326" expanded="true" signature="17219:17266" ph="select * fro... product_info" />
+            <marker date="1526890015326" expanded="true" signature="17358:17384" ph="select * fro... product_info" />
+            <marker date="1526890015326" expanded="true" signature="17479:17506" ph="select * fro... capacity_info" />
+            <marker date="1526890015326" expanded="true" signature="17638:17688" ph="select * fro... capacity_info" />
+            <marker date="1526890015326" expanded="true" signature="17788:17857" ph="select * fro... company_capacity" />
+            <marker date="1526890015326" expanded="true" signature="17940:18016" ph="select count... company_capacity" />
+            <marker date="1526890015326" expanded="true" signature="18073:18204" ph="insert into company_capacity... " />
+            <marker date="1526890015326" expanded="true" signature="18259:18362" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="18459:18525" ph="select * fro... balance_sheet" />
+            <marker date="1526890015326" expanded="true" signature="18613:18675" ph="select * fro... cash_flow" />
+            <marker date="1526890015326" expanded="true" signature="18777:18846" ph="select * fro... income_statement" />
+            <marker date="1526890015326" expanded="true" signature="18906:18981" ph="update balan... " />
+            <marker date="1526890015326" expanded="true" signature="19040:19114" ph="update balan... " />
+            <marker date="1526890015326" expanded="true" signature="19191:19297" ph="select ifnul... company_stock" />
+            <marker date="1526890015326" expanded="true" signature="19393:19459" ph="select * fro... company_stock" />
+            <marker date="1526890015326" expanded="true" signature="19512:19625" ph="insert into fixed_deposit" />
+            <marker date="1526890015326" expanded="true" signature="19724:19790" ph="select * fro... fixed_deposit" />
+            <marker date="1526890015326" expanded="true" signature="19843:19928" ph="update fixed... " />
+            <marker date="1526890015326" expanded="true" signature="20061:21517" ph="insert into cash_flow... " />
+            <marker date="1526890015326" expanded="true" signature="21631:22725" ph="insert into income_statement... " />
+            <marker date="1526890015326" expanded="true" signature="22833:23420" ph="insert into balance_sheet... " />
+            <marker date="1526890015326" expanded="true" signature="23526:23570" ph="select * fro... average_salary" />
+            <marker date="1526890015326" expanded="true" signature="23674:23718" ph="select * fro... average_salary" />
+            <marker date="1526890015326" expanded="true" signature="23820:24020" ph="insert into company_stock... " />
+            <marker date="1526890015326" expanded="true" signature="24119:24250" ph="insert into company_duty... " />
+            <marker date="1526890015326" expanded="true" signature="24425:24492" ph="select * fro... workers_salary" />
+            <marker date="1526890015326" expanded="true" signature="24602:24852" ph="insert into workers_salary... " />
+            <marker date="1526890015326" expanded="true" signature="24962:25213" ph="update worke... " />
+            <marker date="1526890015326" expanded="true" signature="25370:25435" ph="select * fro... sales_salary" />
+            <marker date="1526890015326" expanded="true" signature="25570:25635" ph="select * fro... sales_salary" />
+            <marker date="1526890015326" expanded="true" signature="25741:25989" ph="insert into sales_salary... " />
+            <marker date="1526890015326" expanded="true" signature="26095:26344" ph="update sales... " />
+            <marker date="1526890015326" expanded="true" signature="26418:26534" ph="insert into demand_forecast" />
+            <marker date="1526890015326" expanded="true" signature="26636:26704" ph="select * fro... demand_forecast" />
+            <marker date="1526890015326" expanded="true" signature="26759:26873" ph="update deman... " />
+            <marker date="1526890015326" expanded="true" signature="26978:27090" ph="insert into company_product" />
+            <marker date="1526890015326" expanded="true" signature="27194:27262" ph="select * fro... company_product" />
+            <marker date="1526890015326" expanded="true" signature="27367:27440" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="27559:27711" ph="insert into product_price... " />
+            <marker date="1526890015326" expanded="true" signature="27763:27849" ph="update produ... " />
+            <marker date="1526890015326" expanded="true" signature="27948:28015" ph="select * fro... product_price" />
+            <marker date="1526890015326" expanded="true" signature="28116:28183" ph="select * fro... product_price" />
+            <marker date="1526890015326" expanded="true" signature="28288:28360" ph="select * fro... company_product" />
+            <marker date="1526890015326" expanded="true" signature="28512:28616" ph="select * fro... company_media" />
+            <marker date="1526890015326" expanded="true" signature="28753:28819" ph="select * fro... company_media" />
+            <marker date="1526890015326" expanded="true" signature="28920:29055" ph="insert into company_media... " />
+            <marker date="1526890015326" expanded="true" signature="29154:29294" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="29466:29556" ph="select * fro... company_advertise" />
+            <marker date="1526890015326" expanded="true" signature="29665:29861" ph="insert into company_advertise... " />
+            <marker date="1526890015326" expanded="true" signature="29971:30143" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="30249:30326" ph="select buy_r... company_report" />
+            <marker date="1526890015326" expanded="true" signature="30416:30500" ph="insert into company_report... " />
+            <marker date="1526890015326" expanded="true" signature="30589:30669" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="30818:30888" ph="select * fro... company_advertise" />
+            <marker date="1526890015326" expanded="true" signature="31012:31054" ph="select * fro... advertise_info" />
+            <marker date="1526890015326" expanded="true" signature="31129:31247" ph="insert into operation_capacity" />
+            <marker date="1526890015326" expanded="true" signature="31355:31426" ph="select * fro... operation_capacity" />
+            <marker date="1526890015326" expanded="true" signature="31483:31599" ph="update opera... " />
+            <marker date="1526890015326" expanded="true" signature="31715:31781" ph="select * fro... fixed_deposit" />
+            <marker date="1526890015326" expanded="true" signature="31834:31942" ph="insert into fixed_deposit... " />
+            <marker date="1526890015326" expanded="true" signature="32066:32184" ph="insert into company_product" />
+            <marker date="1526890015326" expanded="true" signature="32292:32458" ph="select a.*,b... company_product" />
+            <marker date="1526890015326" expanded="true" signature="32577:32770" ph="select a.*,b... company_product" />
+            <marker date="1526890015326" expanded="true" signature="32835:32925" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="32990:33049" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="33155:33234" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="33303:33389" ph="insert into company_product_inventory... " />
+            <marker date="1526890015326" expanded="true" signature="33495:33667" ph="select marke... market_info2" />
+            <marker date="1526890015326" expanded="true" signature="33795:33865" ph="select *from... hire_people_online" />
+            <marker date="1526890015326" expanded="true" signature="35146:35226" ph="update hire_... " />
+            <marker date="1526890015326" expanded="true" signature="35339:35490" ph="update hire_... " />
+            <marker date="1526890015326" expanded="true" signature="35593:35749" ph="insert into hire_people" />
+            <marker date="1526890015326" expanded="true" signature="35861:35930" ph="select * fro... company_capacity" />
+            <marker date="1526890015326" expanded="true" signature="36047:36210" ph="insert into hire_people_online" />
+            <marker date="1526890015326" expanded="true" signature="36385:36496" ph="select * fro... hire_people_online" />
+            <marker date="1526890015326" expanded="true" signature="36641:36745" ph="select * fro... hire_people" />
+            <marker date="1526890015326" expanded="true" signature="36861:36970" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="37074:37176" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="37313:37386" ph="select * fro... product_market_share" />
+            <marker date="1526890015326" expanded="true" signature="37513:37586" ph="select * fro... company_product" />
+            <marker date="1526890015326" expanded="true" signature="37765:37850" ph="select * fro... company_investment" />
+            <marker date="1526890015326" expanded="true" signature="37971:38036" ph="select * fro... company_loan" />
+            <marker date="1526890015326" expanded="true" signature="38096:38214" ph="insert into company_loan... " />
+            <marker date="1526890015326" expanded="true" signature="38274:38365" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="38422:38537" ph="insert into company_loan... " />
+            <marker date="1526890015326" expanded="true" signature="38662:38726" ph="select * fro... hire_people" />
+            <marker date="1526890015326" expanded="true" signature="38843:38914" ph="select * fro... hire_people_online" />
+            <marker date="1526890015326" expanded="true" signature="39041:39109" ph="select * fro... demand_forecast" />
+            <marker date="1526890015326" expanded="true" signature="39219:39384" ph="select a.*,b... company_product" />
+            <marker date="1526890015326" expanded="true" signature="39457:39537" ph="insert into company_product_demand... " />
+            <marker date="1526890015326" expanded="true" signature="39598:39645" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="39710:39761" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="39902:39985" ph="select * fro... company_market" />
+            <marker date="1526890015326" expanded="true" signature="40095:40174" ph="delete from " />
+            <marker date="1526890015326" expanded="true" signature="40241:40337" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="40465:40538" ph="select count... company_market" />
+            <marker date="1526890015326" expanded="true" signature="40649:40755" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="40866:40987" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="41098:41241" ph="select compa... company_decision" />
+            <marker date="1526890015326" expanded="true" signature="41339:41390" ph="insert into company_decision... " />
+            <marker date="1526890015326" expanded="true" signature="41488:41577" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="41717:41900" ph="select id,co... company_media" />
+            <marker date="1526890015326" expanded="true" signature="41996:42055" ph="update produ... " />
+            <marker date="1526890015326" expanded="true" signature="42164:42271" ph="update produ... " />
+            <marker date="1526890015326" expanded="true" signature="42440:42516" ph="select * fro... company_product" />
+            <marker date="1526890015326" expanded="true" signature="42588:42639" ph="insert into market_webopened... " />
+            <marker date="1526890015326" expanded="true" signature="43125:43217" ph="select * fro... company_market" />
+            <marker date="1526890015326" expanded="true" signature="43923:43982" ph="insert into company_decision... " />
+            <marker date="1526890015326" expanded="true" signature="44052:44149" ph="update compa... " />
+            <marker date="1526890015326" expanded="true" signature="44521:44602" ph="select is_su... company_quarter_time" />
+            <marker date="1526890015326" expanded="true" signature="44694:44789" ph="select ifnul... company_capacity" />
+            <marker date="1526890015326" expanded="true" signature="44928:45054" ph="select is_su... state_of_sign" />
+            <marker date="1526890015326" expanded="true" signature="45150:45228" ph="update state... " />
+            <marker date="1526890015326" expanded="true" signature="45324:45372" ph="insert into stateOfSign... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/usst/market/mapper/MarketingMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
           <folding />
         </state>
       </provider>

@@ -1,0 +1,169 @@
+﻿
+
+
+#decisionFoot{
+    height:60px;
+    width:100%;
+    padding-top:15px;
+    overflow:hidden;
+}
+
+.label_name{
+    font-weight:bold;
+    font-family:新宋体;  
+    vertical-align:middle;
+    font-size:large;
+}
+
+div>span{
+    margin-top:2px;
+}
+
+.type_name{
+    font-family:新宋体;
+    color:black;
+    vertical-align:bottom;
+}
+#Brand_Name{
+    width:150px;
+    
+    
+}
+
+.pic_type{
+    width:11px;
+    height:15px;
+    vertical-align:middle;
+}
+
+#title_left{
+    margin-left:20px;
+    float:left;
+    width:30%;
+}
+
+#title_middle{
+    float:left;
+    width:40%;
+    margin-left:50px
+    
+}
+
+#title_right{
+    float:right;
+    margin-right:70px;
+    margin-top:5px;
+}
+
+ .label_class{
+     font-family:新宋体;
+     font-weight:bold;
+     font-size:large;
+     margin-left:5px;
+     margin-top:2px;
+ }
+
+ .info{
+     margin-left:2px;
+     font-size:small;
+     
+ }
+
+ .price{
+    float:right;
+    margin-right:2px
+ }
+
+ .radio{
+     float:left;
+     margin-top:4px;
+ }
+
+ .radio1{
+     width:100px;
+     height:24px;
+     display:inline-block;
+     padding-top:2px;
+     
+ }
+
+
+
+    #groupCell1 ,#groupCell2 ,#groupCell3 ,#groupCell4{
+        float:left;
+        padding:2px;
+        margin-top:10px;
+        background: rgba(247, 247, 247, 0.95) none repeat scroll 0% 0%;
+        border: 3px solid rgb(221, 221, 221);
+        border-radius: 6px;
+        width: 94%;
+    }
+
+
+     #box_1{
+        float: left;
+        width: 20%;
+        height: 100%;
+        opacity: 1;
+        overflow:hidden;
+        margin-left:20px;
+        
+    }
+    #box_2{
+        float: left;
+        width: 20%;
+        height: 100%;
+        opacity: 1;
+        margin-left:35px;
+    }
+    #box_3{
+         float: left;
+        width: 20%;
+        height: 100%;
+        opacity: 1;
+        overflow:hidden;
+        margin-left:35px;
+    }
+    #box_4{
+        float: left;
+        width: 20%;
+        height: 100%;
+        opacity: 1;
+        overflow:hidden;
+        margin-left:35px;
+        text-align:center;
+        margin-top:20px; 
+    }
+
+    .btn{
+        width:90px;
+        height:31px;
+        margin-left:6px;
+        background-color:#0fad84;
+        color:white;  
+        border-radius:2px;
+        float:right;
+        
+    }
+    .btn:hover {
+        color: #fff;
+        background-color:#0b5da4;
+        border-color: #204d74;
+        }
+    .btn:active {
+        color: #fff;
+        background-color:#04126a;
+        border-color: #204d74;
+        }
+
+    .phone{
+        width:100%;
+    }
+/******************* productContent  ************************/
+
+
+
+
+
+
+   
