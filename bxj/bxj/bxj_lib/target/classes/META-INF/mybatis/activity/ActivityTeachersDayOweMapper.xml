@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.activity.ActivityTeachersDayOweMapper">
+    <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.activity.ActivityTeachersDayOwe">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="owe_name" property="oweName" jdbcType="VARCHAR"/>
+        <result column="owe_content" property="oweContent" jdbcType="VARCHAR"/>
+        <result column="signed_name" property="signedName" jdbcType="VARCHAR"/>
+        <result column="signed_photo" property="signedPhoto" jdbcType="VARCHAR"/>
+        <result column="like_num" property="likeNum" jdbcType="INTEGER"/>
+        <result column="owe_type" property="oweType" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, phone, owe_name, owe_content, signed_name, signed_photo, like_num, owe_type, 
+    create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from activity_teachers_day_owe
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from activity_teachers_day_owe
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hangjia.bxj.model.activity.ActivityTeachersDayOwe">
+    insert into activity_teachers_day_owe (id, user_id, phone, 
+      owe_name, owe_content, signed_name, 
+      signed_photo, like_num, owe_type, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, 
+      #{oweName,jdbcType=VARCHAR}, #{oweContent,jdbcType=VARCHAR}, #{signedName,jdbcType=VARCHAR}, 
+      #{signedPhoto,jdbcType=VARCHAR}, #{likeNum,jdbcType=INTEGER}, #{oweType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hangjia.bxj.model.activity.ActivityTeachersDayOwe">
+        insert into activity_teachers_day_owe
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="oweName != null">
+                owe_name,
+            </if>
+            <if test="oweContent != null">
+                owe_content,
+            </if>
+            <if test="signedName != null">
+                signed_name,
+            </if>
+            <if test="signedPhoto != null">
+                signed_photo,
+            </if>
+            <if test="likeNum != null">
+                like_num,
+            </if>
+            <if test="oweType != null">
+                owe_type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="oweName != null">
+                #{oweName,jdbcType=VARCHAR},
+            </if>
+            <if test="oweContent != null">
+                #{oweContent,jdbcType=VARCHAR},
+            </if>
+            <if test="signedName != null">
+                #{signedName,jdbcType=VARCHAR},
+            </if>
+            <if test="signedPhoto != null">
+                #{signedPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="likeNum != null">
+                #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="oweType != null">
+                #{oweType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.activity.ActivityTeachersDayOwe">
+        update activity_teachers_day_owe
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="oweName != null">
+                owe_name = #{oweName,jdbcType=VARCHAR},
+            </if>
+            <if test="oweContent != null">
+                owe_content = #{oweContent,jdbcType=VARCHAR},
+            </if>
+            <if test="signedName != null">
+                signed_name = #{signedName,jdbcType=VARCHAR},
+            </if>
+            <if test="signedPhoto != null">
+                signed_photo = #{signedPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="likeNum != null">
+                like_num = #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="oweType != null">
+                owe_type = #{oweType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.activity.ActivityTeachersDayOwe">
+    update activity_teachers_day_owe
+    set user_id = #{userId,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      owe_name = #{oweName,jdbcType=VARCHAR},
+      owe_content = #{oweContent,jdbcType=VARCHAR},
+      signed_name = #{signedName,jdbcType=VARCHAR},
+      signed_photo = #{signedPhoto,jdbcType=VARCHAR},
+      like_num = #{likeNum,jdbcType=INTEGER},
+      owe_type = #{oweType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--**************************** extend begin here *******************************-->
+    <!-- 查询条件 -->
+    <sql id="Public_Query_Conditions">
+        <where>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="signedName != null and signedName !=''">
+                and signed_name = #{signedName,jdbcType=VARCHAR}
+            </if>
+            <if test="oweType != null and oweType !=''">
+                and owe_type = #{oweType,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 排序 -->
+    <sql id="Public_Order_Datas">
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+    </sql>
+
+    <!-- 分页 -->
+    <sql id="Public_Page">
+        <if test="pageFirstItem != null and pageSize != null">
+            LIMIT #{pageFirstItem}, #{pageSize}
+        </if>
+    </sql>
+
+    <select id="queryOweDataPage" parameterType="com.hangjia.bxj.query.activity.TeachersDayOweQuery"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from activity_teachers_day_owe
+        <include refid="Public_Query_Conditions"/>
+        <include refid="Public_Order_Datas"/>
+        <include refid="Public_Page"/>
+    </select>
+
+    <select id="queryOweDataCount" parameterType="com.hangjia.bxj.query.activity.TeachersDayOweQuery"
+            resultType="java.lang.Integer">
+        select
+        count(*)
+        from activity_teachers_day_owe
+        <include refid="Public_Query_Conditions"/>
+    </select>
+</mapper>

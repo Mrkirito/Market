@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<title>新闻详情</title>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta name="keywords" content="计划书">
+	<meta name="description" content="计划书">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/headlines/css/detail.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/planbook_finish/css/planbook_finish.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+</head>
+<body>
+	<div class="container container_forum" >
+		<div class="hd clearfix">
+			<div class="teacher">
+				<h2>$!news.title</h2>
+				<h3><span class="time">$!date.format('yyyy-MM-dd',$!news.onlineTime)</span></h3>
+			</div>
+		</div>
+		<!--个人名片信息模块，APP外显示，APP内隐藏 -->
+		#if($user)
+		<div class="namecard_title_block">
+			<span class="name"><span>$!user.name</span> 分享</span>
+			#if($user.phone)<span class="namecard">查看微名片</span>#end
+		</div>
+		#end
+		<!-- 名片模块结束 -->
+		#if($!share.shareContext && $!share.shareContext != "")
+    		<div class="mypoint">
+    			<p><strong >TA的观点：</strong>$!share.shareContext</p>
+    		</div>
+		#end
+		<div class="main_block">
+			<p>$!news.newsContent</p>
+		</div>
+		#if($!news.isDisplayReprint == 1)
+		<div class="slogan_block">
+			<p>$!news.reprintContent</p>
+		</div>
+		#end
+
+	</div>
+	<input type="hidden" id="id" value="$!news.id"/>
+
+	<!-- 底部下载导航层 -->
+	#if($user.phone)
+	<div class="author_block">
+		<div class="headimg_block">
+			#if($user.photo)
+				<img src="$!user.photo" />
+			#else
+				<img src="$static_path/bxj_three/static/namecard_share/image/headimg_bg.png">
+			#end		
+		</div>
+		<div class="name_block">
+			<span>$!user.name</span>
+		</div>
+		<a class="telphone_block" href="tel:$!user.phone">
+			<span>$!user.phone</span>
+		</a>
+		<a class="namecard_block" href="$bxj_path/planUserCard/$user.fid/shareUserCard.page">
+			<span>查看名片</span>
+		</a>
+	</div>
+	#end
+	<a href="javascript:;" class="top_icon" id="fixnav"></a><!-- 回到顶部按钮 -->
+	<!-- 弹出框 结束-->
+</body>
+</html>
+
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+FastClick.attach(document.body);//快速点击绑定
+$(function(){
+	$('.share_div').click(function(){
+		$(this).addClass('checked').siblings('.share_div').removeClass('checked');
+	})
+	
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$!news.title',
+                desc: '我正在保险家看保险头条新闻，快来一起了解最新的保险圈大事件！',
+                imgUrl: !'$!news.imgUrl' ? '$static_path/bxj_three/static/headlines/image/default_news_img.jpg' : '$!news.fileUrl',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+	
+	// 微名片
+	$('.namecard').on('click',function(){
+		window.location.href='$bxj_path/planUserCard/$!user.fid/shareUserCard.page?hd=1'
+	})
+	
+})
+
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>

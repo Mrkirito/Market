@@ -1,0 +1,13 @@
+com\hangjia\bxj\service\RegistService.class
+com\hangjia\champion\service\ChampionSupportService.class
+com\hangjia\bxj\vo\VersionInfoRespDto.class
+com\hangjia\bxj\service\MySupportService.class
+com\hangjia\bxj\service\BxjToolsService.class
+com\hangjia\champion\vo\ChampionVideoVo.class
+com\hangjia\bxj\App.class
+com\hangjia\bxj\vo\FriendCircleApiDto.class
+com\hangjia\bxj\vo\MyConfRespDto.class
+com\hangjia\bxj\service\CdnOperateService.class
+com\hangjia\champion\constant\SearchConstant.class
+com\hangjia\bxj\service\BxjSupportService.class
+com\hangjia\bxj\vo\IpInfoRespDto.class

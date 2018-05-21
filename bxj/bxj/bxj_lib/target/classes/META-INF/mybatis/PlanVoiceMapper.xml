@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.PlanVoiceDao">
+
+	<resultMap type="com.hangjia.bxj.model.PlanVoice" id="PlanVoice">
+		<id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="modifyAt" column="modify_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+		<result property="videoUrl" column="video_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="voiceName" column="voice_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="voiceTime" column="voice_time" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="createAt" column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+		<result property="userId" column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="statusVoice" column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="dispaly" column="dispaly" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+	</resultMap>
+
+	<select id="getVoice" parameterType="java.lang.Integer" resultMap="PlanVoice">
+	SELECT
+		id,
+		user_id,
+		modify_at,
+		video_url,
+		create_at,
+		dispaly,
+		status,
+		voice_name,
+		voice_time
+	FROM
+		plan_voice
+	WHERE
+		user_id = #{fid} and status = 0
+	</select>
+	
+	<insert id="saveVoice" parameterType="com.hangjia.bxj.model.PlanVoice" useGeneratedKeys="true" keyProperty="id">
+			insert into 
+			plan_voice 
+			(user_id,video_url,voice_name,voice_time)
+			values(
+			 #{userId},#{videoUrl},#{voiceName},#{voiceTime}
+			)
+	</insert>
+	
+	<delete id="deleteVoice" parameterType="com.hangjia.bxj.model.PlanVoice">
+		update plan_voice set  status = 1  where id=#{id}
+	</delete>
+	
+	<delete id="renameVoice" parameterType="com.hangjia.bxj.model.PlanVoice">
+		update plan_voice set  voice_name = #{ VoiceName }  where id=#{id}
+	</delete>
+	<select id="getPlanVoiceById" parameterType="java.lang.Long" resultMap="PlanVoice">
+		SELECT
+		id,
+		user_id,
+		modify_at,
+		video_url,
+		create_at,
+		dispaly,
+		status,
+		voice_name,
+		voice_time
+		FROM
+		plan_voice
+		WHERE
+		id = #{id}
+	</select>
+</mapper>

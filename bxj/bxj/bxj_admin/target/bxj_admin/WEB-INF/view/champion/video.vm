@@ -1,0 +1,292 @@
+<!--头部 开始-->
+$pageModule.init("app/champion/video", "list")
+##$navigation.add("首页", "index/index.jhtml")
+##$navigation.add("音/视频列表", true)
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">文件类型&nbsp;</label>
+                                <select class="form-control sVideoType">
+                                    <option value="">请选择</option>
+                                    <option value="1">视频</option>
+                                    <option value="2">音频</option>
+                                    <option value="3">付费精品</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">审核状态&nbsp;</label>
+                                <select class="form-control sAuditStatus">
+                                    <option value="">请选择</option>
+                                    <option value="0">待审核</option>
+                                    <option value="2">审核通过</option>
+                					<option value="1">审核不通过</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">是否独播&nbsp;</label>
+                                <select class="form-control sPlayType">
+                                    <option value="">请选择</option>
+                                    <option value="0">否</option>
+                					<option value="1">是</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">是否推荐&nbsp;</label>
+                                <select class="form-control sIsRecommend">
+                                    <option value="">请选择</option>
+                                    <option value="0">否</option>
+                					<option value="1">是</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">是否用券&nbsp;</label>
+                                <select class="form-control sVoucherType">
+                                    <option value="">请选择</option>
+                                    <option value="0">否</option>
+                					<option value="1">是</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">上传时间&nbsp;</label>
+								<input type="text" class="form-control sUploadTime">
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">分类&nbsp;</label>
+                                <input type="hidden" class="sChannel">
+                            </div>
+							<div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">音/视频标题/产品id&nbsp;</label>
+                                <input placeholder="音/视频标题/产品id" type="text" class="form-control stitle">
+                            </div>
+							<div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">讲师&nbsp;</label>
+                                <input type="hidden" class="sLecturer">
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">假播放总数&nbsp;</label>
+                                <div class="newline">
+                                    <select id="demo-foo-filter-status" class="form-control falseCountType">
+                                        <option value="0" disabled="" selected="">请选择</option>
+                                        <option value="1">&gt;=</option>
+                                        <option value="2">&lt;=</option>
+                                        <option value="3">=</option>
+                                    </select>
+                                    <input type="text" class="form-control input-sm falseCount" >
+                                </div>
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<!--底部 结束-->
+
+<div class="video-tpl hidden">
+    <div class="form-body">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">音/视频类型选择</label>
+			<div class="col-md-9">
+                <input type="radio" name="videoType" class="videoType" value="1" checked > 视频 </input>
+                <input type="radio" name="videoType" class="videoType" value="2"> 音频 </input>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">标题</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" id="title">
+			</div>
+		</div>
+		<div class="form-group col-sm-12 voice" style="display:none">
+			<label class="col-md-3 control-label">音频文件</label>
+			<div class="">
+            <div class="col-md-9">
+                <div class="">
+				    <div class="uploadVoice">
+						<li style="display: inline-block; margin-right: 3px;" >
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 70px;">
+    		            <audio style="height: 100px;width: 250px;" src="" data-url="" data-id="" class="voiceUrl" controls="controls">
+    		            </span></li>
+						<a class="btn btn-primary remove-img">删除</a>
+						<a class="btn btn-primary infos-voice">上传音频</a>
+                	</div>
+                </div>
+            </div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">链接</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control pageUrl" placeholder="有外链地址时填写">
+			</div>
+        </div>
+		<div class="form-group col-sm-12 video">
+			<label class="col-md-3 control-label">视频大小</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control videoSize" placeholder="单位M">
+			</div>
+        </div>
+		<div class="form-group col-sm-12 video">
+			<label class="col-md-3 control-label">视频地址</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control videoUrl">
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">持续时间</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control durationTime">
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">上传时间</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control uploadTime">
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">音/视频分类</label>
+    		<div class="col-md-9">
+                <input type="hidden" class="channel">
+            </div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">关联讲师</label>
+    		<div class="col-md-9">
+                <input type="hidden" class="lecturer">
+            </div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">关联标签</label>
+    		<div class="col-md-9">
+                <input type="hidden" class="videoTag">
+            </div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">封面图片</label>
+			<div class="">
+            <div class="col-md-9">
+                <div class="">
+				    <div class="uploadImg">
+						<li style="display: inline-block; margin-right: 3px;" >
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+    		            <a class="btn btn-primary remove-img">删除</a>
+    		            </span></li>
+						<a class="btn btn-primary infos-images">上传封面图片</a>
+                	</div>
+                </div>
+            </div>
+			</div>
+		</div>
+		#*<div class="form-group col-sm-12">
+			<label>跳转页面url</label>
+			<div class=" col-sm-6">
+				<input type="text" class="form-control pageUrl" placeholder="">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">是否推荐</label>
+			<div class="col-md-9">
+                <select class="form-control isRecommend">
+                    <option disabled='disabled' selected>请选择</option>
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+			</div>
+		</div>*#
+		<div class="form-group col-sm-12 video">
+			<label class="col-md-3 control-label">播放类型</label>
+			<div class="col-md-9">
+                <select class="form-control isUnicast">
+                    <option disabled='disabled' selected>请选择</option>
+                    <option value="1">点播</option>
+                    <option value="0">直播</option>
+                </select>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">是否独播</label>
+			<div class="col-md-9">
+                <select class="form-control playType">
+                    <option disabled='disabled' selected>请选择</option>
+                    <option value="1">独播</option>
+                    <option value="0">非独播</option>
+                </select>
+			</div>
+		</div>
+
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">是否显示假播放总数</label>
+			<div class="col-md-9">
+                <select class="form-control isFalseCount ">
+                    <option disabled='disabled' selected>请选择</option>
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">用券数</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control voucherCount" placeholder="不填写则默认不使用券">
+			</div>
+		</div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">观看费用</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control money" placeholder="观看费用(元)" onkeyup="this.value=this.value.replace(/[^(\d|.)]/g,'')"  onafterpaste="this.value=this.value.replace(/[^(\d|.)]/g,'')">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">观看时长</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control watchTime" placeholder="观看时长(天)" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')">
+            </div>
+        </div>
+		<!-- <div class="form-group col-sm-12">
+			<label>费用</label>
+			<div class=" col-sm-2">
+				<input type="text" class="form-control money">
+			</div>
+		</div> -->
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">描述</label>
+			<div class="col-md-9">
+                <textarea rows="3" cols="70" placeholder="非必输" class="description"></textarea>
+			</div>
+		</div>
+		<div class="form-group col-sm-12 video">
+			<label class="col-md-3 control-label">七牛id</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control qiniuId">
+			</div>
+		</div>
+	</div>
+</div>
+

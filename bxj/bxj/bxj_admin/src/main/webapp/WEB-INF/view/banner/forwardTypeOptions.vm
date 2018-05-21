@@ -1,0 +1,51 @@
+<option value="">请选择</option>
+	                                    <optgroup label="展业宝">
+	                                    	<option value="http" type="startWith">链接</option>
+		                					<option value="app://invite" type="eq">邀请函</option>
+		                					<option value="app://usercard" type="eq">名片</option>
+		                					<option value="app://webview?$bxjweb_path/plan/make" type="startWith">计划书</option>
+	                					</optgroup>
+	                					
+	                					<optgroup label="增险">
+		                					<option value="app://webview?$bxjweb_path/free/listFreeInsurances.page" type="startWith">增险列表</option>
+		                					<option value="app://webview?$bxjweb_path/free/getFreeInsuranceDetails1.page" type="startWith">增险ID</option>
+	                					</optgroup>
+	                					<optgroup label="冠军论坛">
+		                					<option value="app://">冠军论坛</option>
+		                					<option value="app://">冠军论坛单场会议</option>
+	                					</optgroup>
+	                					
+	                					<optgroup label="冠军说">
+		                					<option value="app://championsay?type=jx" type="eq">冠军说-精选</option>
+		                					<option value="app://championsay?type=fl" type="eq">冠军说-分类</option>
+		                					<option value="app://championsay?type=js" type="eq">冠军说-讲师</option>
+		                					<option value="app://championsay?type=bd" type="eq">冠军说-榜单</option>
+		                					
+		                					<option value="app://championsay?type=sp&id=" type="startWith">视频详情</option>
+		                					<option value="app://championsay?type=js&id=" type="startWith">讲师详情</option>
+		                					
+		                					<option value="app://championsay?type=jx&module=xm" type="eq">精选-限免</option>
+		                					<option value="app://championsay?type=jx&id=" type="startWith">精选-类别</option>
+		                					<option value="app://championsay?type=fl&id=" type="startWith">分类-主题</option>
+		                					<option value="app://championsay?type=fl&module=gjlt" type="eq">分类-冠军论坛</option>
+		                					<option value="app://championsay?type=js&id=all" type="eq">讲师-全部讲师</option>
+		                					<option value="app://championsay?type=bd&id=" type="startWith">榜单-分榜单</option>
+	                					</optgroup>
+	                					
+	                					<optgroup label="学习">
+		                					<option value="app://study?module=newman" type="eq">新人通</option>
+		                					<option value="app://study?module=category" type="eq">学习-全部分类</option>
+		                					<option value="app://webview?$bxjweb_path/study/detail.page" type="startWith">学习-文章详情</option>
+	                					</optgroup>
+	                					
+	                					<optgroup label="我的">
+		                					<option value="app://myInfo" type="eq">我的资料</option>
+		                					<option value="app://myConcern" type="eq">我的关注</option>
+		                					<option value="app://myCollects" type="eq">我的收藏</option>
+		                					<option value="app://myPayed" type="eq">我的购买</option>
+		                					<option value="app://myItems" type="eq">我的福袋</option>
+		                					<option value="app://webview?$bxjweb_path/planUserCard/myPlanbook.page">我的计划书</option>
+		                					<option value="app://webview?$bxjweb_path/customer/myCustomers.page">我的客户</option>
+		                					<option value="app://myInvite" type="eq">我的邀请好友</option>
+		                					<option value="app://myMessage" type="eq">我的消息</option>
+	                					</optgroup>

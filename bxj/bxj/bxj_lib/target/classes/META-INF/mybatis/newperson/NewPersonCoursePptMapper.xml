@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.newperson.dao.NewPersonCoursePptMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.newperson.model.NewPersonCoursePpt" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="ppt_url" property="pptUrl" jdbcType="VARCHAR" />
+    <result column="paragraph_title" property="paragraphTitle" jdbcType="VARCHAR" />
+    <result column="paragraph_context" property="paragraphContext" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="enable_status" property="enableStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, course_id, ppt_url, paragraph_title, paragraph_context, sort, enable_status, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_new_person_course_ppt
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from study_new_person_course_ppt
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.newperson.model.NewPersonCoursePpt" >
+    insert into study_new_person_course_ppt (id, course_id, ppt_url, 
+      paragraph_title, paragraph_context, sort, 
+      enable_status, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, #{pptUrl,jdbcType=VARCHAR}, 
+      #{paragraphTitle,jdbcType=VARCHAR}, #{paragraphContext,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{enableStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCoursePpt" >
+    insert into study_new_person_course_ppt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="pptUrl != null" >
+        ppt_url,
+      </if>
+      <if test="paragraphTitle != null" >
+        paragraph_title,
+      </if>
+      <if test="paragraphContext != null" >
+        paragraph_context,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="enableStatus != null" >
+        enable_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="pptUrl != null" >
+        #{pptUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paragraphTitle != null" >
+        #{paragraphTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="paragraphContext != null" >
+        #{paragraphContext,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null" >
+        #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCoursePpt" >
+    update study_new_person_course_ppt
+    <set >
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="pptUrl != null" >
+        ppt_url = #{pptUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paragraphTitle != null" >
+        paragraph_title = #{paragraphTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="paragraphContext != null" >
+        paragraph_context = #{paragraphContext,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null" >
+        enable_status = #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.newperson.model.NewPersonCoursePpt" >
+    update study_new_person_course_ppt
+    set course_id = #{courseId,jdbcType=BIGINT},
+      ppt_url = #{pptUrl,jdbcType=VARCHAR},
+      paragraph_title = #{paragraphTitle,jdbcType=VARCHAR},
+      paragraph_context = #{paragraphContext,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      enable_status = #{enableStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions" >
+    <where>
+      <if test="courseId != null" >
+        and course_id = #{courseId,jdbcType=BIGINT}
+      </if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询总条数 -->
+  <select id="selectByCount" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    count(*)
+    from study_new_person_course_ppt
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Base_Column_List" />
+    from study_new_person_course_ppt
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+</mapper>

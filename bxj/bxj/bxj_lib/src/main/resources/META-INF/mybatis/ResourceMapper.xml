@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.right.ResourceDO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="resource_code" property="resourceCode" jdbcType="VARCHAR" />
+    <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+    <result column="resource_icon" property="resourceIcon" jdbcType="VARCHAR" />
+    <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
+    <result column="permission_control" property="permissionControl" jdbcType="TINYINT" />
+    <result column="menu_show" property="menuShow" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="nav_code" property="navCode" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, resource_code, resource_name, resource_icon, resource_url, permission_control, 
+    menu_show, sort, parent_id, nav_code, status, create_time, create_name, update_time, 
+    update_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_sys_resource
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_sys_resource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.right.ResourceDO" >
+    insert into bxj_sys_resource (id, resource_code, resource_name, 
+      resource_icon, resource_url, permission_control, 
+      menu_show, sort, parent_id, 
+      nav_code, status, create_time, 
+      create_name, update_time, update_name
+      )
+    values (#{id,jdbcType=BIGINT}, #{resourceCode,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR}, 
+      #{resourceIcon,jdbcType=VARCHAR}, #{resourceUrl,jdbcType=VARCHAR}, #{permissionControl,jdbcType=TINYINT}, 
+      #{menuShow,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
+      #{navCode,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.right.ResourceDO" >
+    insert into bxj_sys_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resourceCode != null" >
+        resource_code,
+      </if>
+      <if test="resourceName != null" >
+        resource_name,
+      </if>
+      <if test="resourceIcon != null" >
+        resource_icon,
+      </if>
+      <if test="resourceUrl != null" >
+        resource_url,
+      </if>
+      <if test="permissionControl != null" >
+        permission_control,
+      </if>
+      <if test="menuShow != null" >
+        menu_show,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="navCode != null" >
+        nav_code,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="resourceCode != null" >
+        #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceIcon != null" >
+        #{resourceIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionControl != null" >
+        #{permissionControl,jdbcType=TINYINT},
+      </if>
+      <if test="menuShow != null" >
+        #{menuShow,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="navCode != null" >
+        #{navCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.right.ResourceDO" >
+    update bxj_sys_resource
+    <set >
+      <if test="resourceCode != null" >
+        resource_code = #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null" >
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceIcon != null" >
+        resource_icon = #{resourceIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionControl != null" >
+        permission_control = #{permissionControl,jdbcType=TINYINT},
+      </if>
+      <if test="menuShow != null" >
+        menu_show = #{menuShow,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="navCode != null" >
+        nav_code = #{navCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.right.ResourceDO" >
+    update bxj_sys_resource
+    set resource_code = #{resourceCode,jdbcType=VARCHAR},
+      resource_name = #{resourceName,jdbcType=VARCHAR},
+      resource_icon = #{resourceIcon,jdbcType=VARCHAR},
+      resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      permission_control = #{permissionControl,jdbcType=TINYINT},
+      menu_show = #{menuShow,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      nav_code = #{navCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_name = #{createName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_name = #{updateName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- admin -->
+  <sql id="resource_colums">
+    a.id as "id",
+    a.resource_code as "resourceCode",
+    a.resource_name as "resourceName",
+    a.resource_url as "resourceUrl",
+    a.resource_icon as "resourceIcon",
+    a.permission_control as "permissionControl",
+    a.menu_show as "menuShow",
+    a.status as "status",
+    a.sort as "sort",
+    a.parent_id as "parentId",
+    a.create_time as "createTime",
+    a.create_name as "createName",
+    a.update_time as "updateTime",
+    a.update_name as "updateName",
+    b.resource_name as "parentName",
+    a.nav_code as "navCode",
+    c.nav_name as "navName"
+  </sql>
+
+  <sql id="resource_where">
+      <where>
+          <if test="status == null">and a.status = 1</if>
+          <if test="status != null">and a.status = #{status}</if>
+          <if test="parentId != null">and a.parent_id = #{parentId}</if>
+          <if test="navCode != null and navCode != ''">and a.nav_code = #{navCode}</if>
+          <if test="resourceCode != null and resourceCode != ''">and a.resource_code = #{resourceCode}</if>
+          <if test="resourceName != null and resourceName != ''">and a.resource_name like concat('%', #{resourceName}, '%')</if>
+      </where>
+  </sql>
+
+  <select id="queryResourcePageData" parameterType="com.hangjia.bxj.query.right.ResourceQuery" resultType="com.hangjia.bxj.model.right.ResourceDO">
+      SELECT
+      <include refid="resource_colums"/>
+      from bxj_sys_resource a
+      left join bxj_sys_resource b on a.parent_id = b.id
+      left join bxj_sys_navigation c on a.nav_code = c.nav_code
+      <include refid="resource_where"/>
+      <if test="orderBy != null and orderBy != ''">
+          order by ${orderBy}
+      </if>
+      <if test="orderBy == null or orderBy == ''">
+          order by a.sort
+      </if>
+      limit ${pageFirstItem}, ${pageSize}
+  </select>
+
+  <select id="queryResourcePageCount" parameterType="com.hangjia.bxj.query.right.ResourceQuery" resultType="int">
+      select count(1) from bxj_sys_resource a
+      <include refid="resource_where"/>
+  </select>
+  
+  <insert id="addResource" parameterType="com.hangjia.bxj.model.right.ResourceDO">
+      insert into bxj_sys_resource (
+          resource_code, resource_name, resource_url, resource_icon, permission_control, menu_show, sort, parent_id,
+          create_time, create_name, update_time, update_name, nav_code
+      ) values (
+          #{resourceCode}, #{resourceName}, #{resourceUrl}, #{resourceIcon}, #{permissionControl}, #{menuShow}, #{sort}, #{parentId},
+           now(), #{createName}, now(), #{updateName}, #{navCode}
+      )
+  </insert>
+
+  <update id="updateResource" parameterType="com.hangjia.bxj.model.right.ResourceDO">
+    update bxj_sys_resource
+      SET
+          resource_name = #{resourceName},
+          resource_url = #{resourceUrl},
+          resource_icon = #{resourceIcon},
+          permission_control = #{permissionControl},
+          menu_show = #{menuShow},
+          sort = #{sort},
+          parent_id = #{parentId},
+          update_time = now(),
+          update_name = #{updateName}
+      where id = #{id}
+  </update>
+
+  <update id="deleteResource" parameterType="list">
+      update bxj_sys_resource set status = 0 where id in (
+      <foreach collection="list" item="id" separator=",">
+          #{id}
+      </foreach>
+      )
+  </update>
+
+  <select id="queryResourceList" parameterType="string" resultType="com.hangjia.bxj.model.right.ResourceDO">
+      SELECT
+      <include refid="resource_colums"/>
+      from bxj_sys_resource a
+      left join bxj_sys_resource b on a.parent_id = b.id
+      left join bxj_sys_navigation c on a.nav_code = c.nav_code
+      where a.status = 1
+      <if test="value != null">and a.nav_code = #{value}</if>
+      order by a.sort
+  </select>
+
+
+  <select id="queryUserResourceList" parameterType="long" resultType="com.hangjia.bxj.model.right.ResourceDO">
+      SELECT
+      <include refid="resource_colums"/>
+      from bxj_sys_resource a
+      left join bxj_sys_resource b on a.parent_id = b.id
+      left join bxj_sys_navigation c on a.nav_code = c.nav_code
+      where a.status = 1
+      and a.permission_control = 1
+      and exists (
+      SELECT
+      1
+      FROM bxj_sys_uic_role_resource c
+      LEFT JOIN bxj_sys_uic_user_role d ON c.role_id = d.role_id AND d. STATUS = 1
+      WHERE a.id = c.resource_id
+      AND c. STATUS = 1
+      AND d.user_id = #{value}
+      )
+  </select>
+
+
+  <select id="queryUserResourceList2" parameterType="map" resultType="com.hangjia.bxj.model.right.ResourceDO">
+      SELECT
+      <include refid="resource_colums"/>
+      from bxj_sys_resource a
+      left join bxj_sys_resource b on a.parent_id = b.id
+      left join bxj_sys_navigation c on a.nav_code = c.nav_code
+      where a.status = 1
+      and a.permission_control = 1
+      and exists (
+      SELECT
+      1
+      FROM bxj_sys_uic_role_resource c
+      LEFT JOIN bxj_sys_uic_user_role d ON c.role_id = d.role_id AND d. STATUS = 1
+      WHERE a.id = c.resource_id
+      AND c. STATUS = 1
+      AND d.user_id = #{userId}
+      )
+      and a.nav_code in
+      <foreach collection="navCode" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+	  </foreach>
+  </select>
+
+  <select id="queryUserRoleResourceList" parameterType="map" resultType="com.hangjia.bxj.model.right.ResourceDO">
+      SELECT
+      <include refid="resource_colums"/>
+      from bxj_sys_resource a
+      left join bxj_sys_resource b on a.parent_id = b.id
+      left join bxj_sys_navigation c on a.nav_code = c.nav_code
+      where a.status = 1
+      and a.permission_control = 1
+      and exists (
+      SELECT
+      1
+      FROM bxj_sys_uic_role_resource c
+      LEFT JOIN bxj_sys_uic_user_role d ON c.role_id = d.role_id AND d. STATUS = 1
+      WHERE a.id = c.resource_id
+      AND c. STATUS = 1
+      AND d.user_id = #{userId}
+      and d.role_id = #{roleId}
+      )
+  </select>
+
+  <select id="queryAllResourceList" parameterType="java.util.List" resultType="com.hangjia.bxj.model.right.ResourceDO">
+      SELECT
+      <include refid="resource_colums"/>
+      from bxj_sys_resource a
+      left join bxj_sys_resource b on a.parent_id = b.id
+      left join bxj_sys_navigation c on a.nav_code = c.nav_code
+      where a.status = 1
+       <if test=" navCode != null and navCode.length > 0">
+      	   and a.nav_code in
+      	  <foreach collection="navCode" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+		  </foreach>
+      </if>
+  </select>
+
+  <select id="queryFreeResourceList" parameterType="java.util.List" resultType="com.hangjia.bxj.model.right.ResourceDO">
+      select
+      <include refid="resource_colums"/>
+      from bxj_sys_resource a
+      left join bxj_sys_resource b on a.parent_id = b.id
+      left join bxj_sys_navigation c on a.nav_code = c.nav_code
+      where a.permission_control = 0
+      and a.status = 1
+      and b.status = 1
+      <if test=" navCode != null and navCode.length > 0">
+      	   and a.nav_code in
+      	  <foreach collection="navCode" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+		  </foreach>
+      </if>
+  </select>
+
+
+  <!-- ================================ function ===================================== -->
+  <sql id="function_columns">
+      a.id,
+      a.func_code as "funcCode",
+      a.func_name as "funcName",
+      a.resource_code as "resourceCode",
+      a.sort,
+      a.status,
+      a.create_time as "createTime",
+      a.create_name as "createName",
+      a.update_time as "updateTime",
+      a.update_name as "updateName"
+  </sql>
+
+  <sql id="function_where">
+      <where>
+          <if test="resourceCode != null and resourceCode != ''">and a.resource_code = #{resourceCode}</if>
+          <if test="funcCode != null and funcCode != ''">and a.func_code = #{funcCode}</if>
+          <if test="funcName != null and funcName != ''">and a.func_name = #{funcName}</if>
+          <if test="status == null">and a.status = 1</if>
+          <if test="status != null">and a.status = #{status}</if>
+      </where>
+  </sql>
+
+  <select id="queryFunctionPageData" parameterType="com.hangjia.bxj.query.right.FunctionQuery" resultType="com.hangjia.bxj.model.right.FunctionDO">
+      SELECT
+      <include refid="function_columns"/>
+      from bxj_sys_uic_function a
+      <include refid="function_where"/>
+      order by a.sort
+      limit ${pageFirstItem}, ${pageSize}
+  </select>
+
+  <select id="queryFunctionPageCount" parameterType="com.hangjia.bxj.query.right.FunctionQuery" resultType="int">
+      select count(1) from bxj_sys_uic_function a
+      <include refid="function_where"/>
+  </select>
+
+  <insert id="addFunction" parameterType="com.hangjia.bxj.model.right.FunctionDO">
+      insert into bxj_sys_uic_function (
+        func_code, func_name, resource_code, sort, create_time, create_name, update_time, update_name
+      ) values (
+        #{funcCode}, #{funcName}, #{resourceCode}, #{sort}, now(), #{createName}, now(), #{updateName}
+      )
+  </insert>
+
+  <update id="updateFunction" parameterType="com.hangjia.bxj.model.right.FunctionDO">
+      update bxj_sys_uic_function
+        SET
+        	funcCode = #{funcCode},
+            func_name = #{funcName},
+            sort = #{sort},
+            update_time = now(),
+            update_name = #{updateName}
+        where id = #{id}
+  </update>
+
+  <update id="deleteFunction" parameterType="list">
+      update bxj_sys_uic_function set status = 0 where id in (
+      <foreach collection="list" item="id" separator=",">
+          #{id}
+      </foreach>
+      )
+  </update>
+
+
+  <select id="queryFunctionList" parameterType="string" resultType="com.hangjia.bxj.model.right.FunctionDO">
+      SELECT
+      <include refid="function_columns"/>
+      from bxj_sys_uic_function a
+      where a.resource_code = #{value}
+      and a.status = 1
+  </select>
+
+  <select id="queryAllFunctionList" resultType="com.hangjia.bxj.model.right.FunctionDO">
+      SELECT
+      <include refid="function_columns"/>
+      from bxj_sys_uic_function a
+      where a.status = 1
+  </select>
+
+  <select id="queryResourceFunction" parameterType="string" resultType="com.hangjia.bxj.model.right.FunctionDO">
+      SELECT
+      <include refid="function_columns"/>
+      FROM
+      bxj_sys_uic_function a,
+      bxj_sys_resource b
+      WHERE
+      a.resource_code = b.resource_code
+      AND a.status = 1
+      AND b.status = 1
+      AND b.resource_url = #{value}
+  </select>
+
+  <select id="queryUserFunctionId" parameterType="long" resultType="long">
+      SELECT DISTINCT
+          a.id
+      FROM
+          bxj_sys_uic_function a,
+          bxj_sys_uic_role_function b,
+          bxj_sys_uic_user_role c
+      WHERE
+          a.id = b.func_id
+      AND b.status = 1
+      AND b.role_id = c.role_id
+      AND c.status = 1
+      AND c.user_id = #{value}
+  </select>
+
+  <select id="queryUserFunctionList" parameterType="long" resultType="com.hangjia.bxj.model.right.FunctionDO">
+      SELECT DISTINCT
+      <include refid="function_columns"/>
+      FROM
+      bxj_sys_uic_function a,
+      bxj_sys_uic_role_function b,
+      bxj_sys_uic_user_role c
+      WHERE
+      a.id = b.func_id
+      AND b.status = 1
+      AND b.role_id = c.role_id
+      AND c.status = 1
+      AND c.user_id = #{value}
+  </select>
+
+
+  <select id="queryResourceById" parameterType="long" resultType="com.hangjia.bxj.model.right.ResourceDO">
+      SELECT
+      <include refid="resource_colums"/>
+      from bxj_sys_resource a
+      left join bxj_sys_resource b on a.parent_id = b.id
+      left join bxj_sys_navigation c on a.nav_code = c.nav_code
+      where a.status = 1
+      and a.id = #{value}
+  </select>
+
+  <select id="queryFuncResourceMap" parameterType="list" resultType="map">
+      SELECT
+        a.id AS "funcId",
+        b.id AS "resourceId"
+      FROM bxj_sys_uic_function a LEFT JOIN bxj_sys_resource b ON a.resource_code = b.resource_code
+      WHERE a.status = 1
+            AND b.status = 1
+            AND a.id IN (
+              <foreach collection="list" item="funcId" separator=",">
+                  #{funcId}
+              </foreach>
+            )
+  </select>
+  
+</mapper>

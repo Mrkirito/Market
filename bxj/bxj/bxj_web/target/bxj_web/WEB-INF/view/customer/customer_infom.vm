@@ -1,0 +1,116 @@
+
+#set($header_params = {"title":"客户资料", "css":["index/css/style.css"]})
+#bxj_header($header_params)
+
+<!--导航 开始-->
+<!--导航 开始-->
+
+#if(!$request.getParameter('hd') || $request.getParameter('hd').length() == 0)
+    <header class="head">
+        <a class="header_left" href="customer/myCustomers.page?hf=$!request.getParameter('hf')"></a>
+        <h1>客户资料</h1>
+        <a class="header_right_font" href="customer/updateMyCustomer.page?customerId=$model.id">编辑</a>
+    </header>
+#end
+<!--导航 结束-->
+
+<!--内容 开始-->
+<div class="container container_customerinform">
+    <ul class="baseinform_block">
+    	<div class="head_div">
+    		#if($model.imageUrl!="")
+    		<img id="head-icon" src="$static_path/upload/c/$model.id/images/$model.imageUrl" width="100%"/>
+    		#elseif($model.sex==1)
+    		<img id="head-icon" src="$static_path/index/images/head_bg02.png" width="100%"/>
+    		#else
+    		<img id="head-icon" src="$static_path/index/images/head_bg.png" width="100%"/>
+    		#end
+        </div>
+        <li><span>$!model.name</span><span>#if($model.sex==1)女#else男#end</span></li>
+        <li><span>出生日期</span><span>$!model.birthdayCN</span></li>
+        <li><span>联系电话</span><span>$!model.mobile</span>#if($model.mobile!="")<a class="tel_a" href="tel:$model.mobile"></a>#end</li>
+    </ul>
+    
+    <ul class="infrom_block">
+    	<li>
+            <dt>详细地址</dt>
+            <dd>$!model.address</dd>
+            <div class="clear"></div>
+        </li>
+        <li>
+            <dt>电子邮箱</dt>
+            <dd>$!model.email</dd>
+            <div class="clear"></div>
+        </li>
+        <li>
+            <dt>备注</dt>
+            <dd>$!model.remark</dd>
+            <div class="clear"></div>
+        </li>
+    </ul>
+#if(!$!request.getParameter('hda') || $!request.getParameter('hda').length() == 0)
+    #if($bookList.size() != 0)
+    <ul class="plan_history">
+    	<h1>计划书记录</h1>
+    	#foreach($i in $bookList)
+    	<li>
+        	<a href="$bxj_path/plan/detail${i.bookId}.page?customerId=${i.customerId}">
+        	<div class="history_block">
+        		#if($i.readed)
+        		<span class="besaw">已查阅</span>
+        		#else
+        		<span class="nosaw">未查阅</span>
+        		#end
+            	
+                <h2>$!i.name</h2>
+                <span class="date">制作日期</span><span class="finish_date">$!i.createAtCN</span>
+            </div>
+            </a>
+            <!--
+        	<span class="list-button borderright" onclick="javascript:window.location.href='$bxj_path/plan/edit${i.bookId}.page?customerId=${i.customerId}';"><img src="$static_path/index/images/planlist-icon01.png" width="14"/>编辑</span>
+            <span class="list-button" onclick="deleteBook($i.relId,'$i.name')"><img src="$static_path/index/images/planlist-icon02.png" width="12" />删除</span>
+            -->
+            <div class="clear"></div>
+        </li>
+    	#end
+        
+    </ul>
+    #end
+    
+    #if($freeList.size() != 0)
+    <ul class="gift_history">
+    	<h1>赠险记录</h1>
+    	#foreach($i in $freeList)
+    	
+    	<li onclick="location='free/getFreeInsuranceDetails.page?pid=$i.freeId&shareId=$model.userId'">
+    		#if($i.received)
+        	<img src="$static_path/index/images/gift_icon.png" width="18"/>
+        	<span class="date">$i.createAtCN</span>
+			<span class="name">$!i.name</span>
+            <span class="state_get">已领</span>
+            #else
+            <img src="$static_path/index/images/gift_icon02.png" width="18"/>
+        	<span class="date">$i.createAtCN</span>
+			<span class="name">$!i.name</span>
+            <span class="state_unget">未领</span>
+            #end
+        </li>
+    	#end
+    </ul>
+    #end
+    
+    <button onclick="location='plan/list.page?customerId=$model.id'">新增计划书</button>
+#end
+</div>
+<!--内容 结束-->
+
+#set( $footer_params = {"js": "index/js/Messager.js"})
+
+#bxj_footer($footer_params)
+<script>
+	function deleteBook(rel, name) {
+		Messager.confirm('删除计划书 [' + name + ']？', function() {
+			location = 'customer/deleteMyCustomerBook.do?customerId=$model.id&relId=' + rel;
+		});
+	}
+</script>

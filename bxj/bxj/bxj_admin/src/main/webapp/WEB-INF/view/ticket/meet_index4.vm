@@ -1,0 +1,107 @@
+$pageModule.init("app/ticket/ticket44", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>会议名称&nbsp;</label>
+								<select class="form-control basicId">
+                                    <option value="">请选择</option>
+									#foreach($s in $surplusTickets)
+                                        <option value="$!s.fid">$!s.activityName</option>
+									#end
+                                </select>
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>状态&nbsp;</label>
+    								<select class="form-control state">
+										<option value="">请选择</option>
+										<option value="4">锁定</option>
+                                        <option value="0">待售</option>
+										<option value="1">已售</option>
+										<option value="2">在售中</option>
+										<option value="3">回源票</option>
+    								</select>
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>楼&nbsp;</label>
+								<input type="input" class="form-control floor" placeholder="请输入楼" />
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>区&nbsp;</label>
+								<input type="input" class="form-control area" placeholder="请输入区" />
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>排&nbsp;</label>
+								<input type="input" class="form-control rows" placeholder="请输入排" />
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>号&nbsp;</label>
+								<input type="input" class="form-control number" placeholder="请输入号" />
+                            </div>							
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>序号起始&nbsp;</label>
+								<input type="input" class="form-control start" placeholder="请输入序号起始数字" />
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>序号终止&nbsp;</label>
+								<input type="input" class="form-control end" placeholder="请输入序号终止数字" />
+                            </div>	
+							<div class="form-group col-md-1 col-xs-12">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+						</div>
+						<!--
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                            </div>
+                        </div>
+						-->
+                    </div>
+                </div>
+            </div>
+			<div class="data-list2"></div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+</div>
+<div class="video-tpl hidden">
+	<form id="form">
+    <div class="form-body">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">会议名称</label>
+			<div class="col-md-9">
+				<select class="form-control" name="basicId">
+					#foreach($s in $surplusTickets)
+						<option value="$!s.basicId">$!s.activityName</option>
+					#end
+                </select>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">序号起始</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="start" />
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">序号终止</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="end" />
+			</div>
+        </div>	
+		<div class="form-group col-sm-12">
+			<p><font color="red">*</font>默认取待售的票据进行锁定</p>
+		</div>	
+	</div>
+	</form>
+</div>

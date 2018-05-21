@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  <mapper namespace="com.hangjia.bxj.dao.firendcircle.FriendCircleCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.firendcircle.FriendCircleCategory" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="simtitle" property="simtitle" jdbcType="VARCHAR" />
+    <result column="words" property="words" jdbcType="VARCHAR" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="is_display" property="isDisplay" jdbcType="BIT" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_user" property="modifyUser" jdbcType="BIGINT" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, title,simtitle, words, pic, is_display, create_user, create_at, modify_user, modify_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_friend_circle_category
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_friend_circle_category
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleCategory" >
+    insert into bxj_friend_circle_category (fid, title,simtitle, words,
+      pic, is_display, create_user, 
+      create_at, modify_user, modify_at
+      )
+    values (#{fid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{simtitle,jdbcType=VARCHAR}, #{words,jdbcType=VARCHAR},
+      #{pic,jdbcType=VARCHAR}, #{isDisplay,jdbcType=BIT}, #{createUser,jdbcType=BIGINT}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=BIGINT}, #{modifyAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleCategory" >
+    insert into bxj_friend_circle_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="simtitle != null" >
+        simtitle,
+      </if>
+      <if test="words != null" >
+        words,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyUser != null" >
+        modify_user,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="simtitle != null" >
+        #{simtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="words != null" >
+        #{words,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleCategory" >
+    update bxj_friend_circle_category
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="simtitle != null" >
+        simtitle = #{simtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="words != null" >
+        words = #{words,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleCategory" >
+    update bxj_friend_circle_category
+    set title = #{title,jdbcType=VARCHAR},
+      simtitle = #{simtitle,jdbcType=VARCHAR},
+      words = #{words,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      is_display = #{isDisplay,jdbcType=BIT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  
+  
+  <sql id="where_category_Info">
+    WHERE is_display=1
+        <if test="title!= null">
+            AND title like CONCAT(CONCAT('%', #{title}), '%')
+        </if>
+         <if test="id != null">AND fid = #{id}</if>
+  </sql>
+  <select id="queryCountCateGory" resultType="int" parameterType="com.hangjia.bxj.query.app.FriendCircleQuery" >
+         SELECT count(fid) 
+          FROM bxj_friend_circle_category  
+         <include refid="where_category_Info"></include>
+  </select>
+  
+  <!-- 后台查询 朋友圈分类 -->
+  <select id="selectList" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.query.app.FriendCircleQuery" >
+         SELECT fid,title,simtitle,pic,words,modify_at
+          FROM bxj_friend_circle_category  
+          <include refid="where_category_Info"></include>
+         order by modify_at desc, create_at desc
+        <if test="pageFirstItem != null and pageSize != null">
+          LIMIT #{pageFirstItem},#{pageSize}
+        </if>
+  </select>
+
+
+  <!-- 朋友圈新分类 -->
+  <select id="selectCategoryList" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.query.app.FriendCircleQuery" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM bxj_friend_circle_category
+    where is_display=1 order by sort asc
+  </select>
+  
+</mapper>

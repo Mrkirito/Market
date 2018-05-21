@@ -1,0 +1,92 @@
+$pageModule.init("app/shop/shop_orders", "list")
+#set($admin_path = ${configuration.getProperty("urlPath","bxj_path")})
+<script src="$admin_path/res/media/js/app/common/city.min.js"></script>
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">创建时间&nbsp;</label>
+                                <input type="text" class="form-control createTime">
+                                <input type="hidden" class="startTime"/>
+                                <input type="hidden" class="endTime"/>
+                            </div>
+
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">业务订单ID&nbsp;</label>
+                                <input type="text" placeholder="业务订单ID" class="form-control orderId">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">姓名&nbsp;</label>
+                                <input type="text" placeholder="姓名" class="form-control name">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">手机&nbsp;</label>
+                                <input type="text" placeholder="手机" class="form-control phone">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">支付方式&nbsp;</label>
+                                <select class="form-control payType">
+                                    <option value="" checked>请选择</option>
+                                    <option value="WX">APP内微信支付</option>
+                                    <option value="ALIPAY">APP内支付宝支付</option>
+                                    <option value="WX_JSAPI">公众号内支付</option>
+                                </select>
+                            </div>
+                            #*<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">状态&nbsp;</label>
+                                <select class="form-control status">
+                                    <option value="">请选择</option>
+                                    <option value="1">创建</option>
+                                    <option value="2">客户端回调成功</option>
+                                    <option value="3">失败</option>
+                                    <option value="4">用户取消</option>
+                                    <option value="5" selected>服务器验证成功</option>
+                                    <option value="6">管理员取消</option>
+                                </select>
+                            </div>*#
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">类别&nbsp;</label><br>
+                                <input type="hidden" class="shopGoodsType" id="shopGoodsType" />
+                            </div>
+                            <div>
+                                <button class="btn btn-primary search-data">查询</button>
+                                <button class="btn btn-default reset-data">重置</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="data-list">
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+	
+
+<div class="video-tpl hidden">
+			<form id="insure_info" method="post"  action="shopOrders/importExcel.json" enctype="multipart/form-data" accept-charset="utf-8">
+            <div class="form-body">
+        		<div class="form-group col-sm-12">
+        			<label class="col-md-3 control-label">EXCEL文件&nbsp;</label>
+        			<div class="col-md-9">
+        				<input type="file" class="form-control" name="file" id="file"/>
+        			</div>
+                </div>
+        	</div>
+			</form>
+</div>

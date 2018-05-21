@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.PlanProductCategroyMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.PlanProductCategroy" >
+    <id column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="selected" property="selected" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, cname, state,selected,sort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan_product_categroy
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from plan_product_categroy
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.PlanProductCategroy" >
+    insert into plan_product_categroy (fid, cname, state, selected,
+      sort)
+    values (#{fid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER},#{selected,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.PlanProductCategroy" >
+    insert into plan_product_categroy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="selected != null" >
+        selected,
+      </if>      
+      <if test="sort != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="selected != null" >
+        #{selected,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.PlanProductCategroy" >
+    update plan_product_categroy
+    <set >
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="selected != null" >
+        selected = #{selected,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.PlanProductCategroy" >
+    update plan_product_categroy
+    set cname = #{cname,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      selected= #{selected,jdbcType=INTEGER}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <select id="getProductCategroys" resultType="com.hangjia.bxj.model.PlanProductCategroy">
+ 	SELECT a.fid,a.cname,b.state,b.selected,b.sort,b.gs FROM plan_company_categroy_rel b INNER JOIN plan_product_categroy a ON b.cid=a.fid WHERE b.state=1 ORDER BY b.gs,b.sort  
+  </select>
+  <select id="getAllProductCategroys" resultType="com.hangjia.bxj.model.PlanProductCategroy">
+ 	SELECT fid, cname, state,selected,sort FROM plan_product_categroy where fid != 99 
+  </select>
+  <select id="getProductCategroyByPid" resultType="com.hangjia.bxj.model.PlanProductCategroy" parameterType="java.lang.Integer">      
+	  SELECT a.cid as fid,b.cname FROM plan_product_categroy_rel a INNER JOIN plan_product_categroy b on a.cid=b.fid WHERE a.pid=#{pid}  
+  </select>
+</mapper>

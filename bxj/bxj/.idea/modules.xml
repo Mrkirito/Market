@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bxj.iml" filepath="$PROJECT_DIR$/bxj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bxj_admin/bxj_admin.iml" filepath="$PROJECT_DIR$/bxj_admin/bxj_admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bxj_client/bxj_client.iml" filepath="$PROJECT_DIR$/bxj_client/bxj_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bxj_lib/bxj_lib.iml" filepath="$PROJECT_DIR$/bxj_lib/bxj_lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bxj_search/bxj_search.iml" filepath="$PROJECT_DIR$/bxj_search/bxj_search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bxj_service/bxj_service.iml" filepath="$PROJECT_DIR$/bxj_service/bxj_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bxj_web/bxj_web.iml" filepath="$PROJECT_DIR$/bxj_web/bxj_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core_lib/core_lib.iml" filepath="$PROJECT_DIR$/core_lib/core_lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qibao_lib/qibao_lib.iml" filepath="$PROJECT_DIR$/qibao_lib/qibao_lib.iml" />
+    </modules>
+  </component>
+</project>

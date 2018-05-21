@@ -1,0 +1,227 @@
+#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="format-detection" content="telephone=no">
+		<title></title>
+		<meta name="keywords" content="计划书">
+		<meta name="description" content="计划书">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="$static_path/public/css/mobilebone.css?v=98">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css?v=100">
+		<link rel="stylesheet" type="text/css" media="screen" href="$static_path/bxj_three/static/css/style.css?v=2016113014">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/css/mobiscroll.custom-2.6.2.min.css?v=20161124">
+		<script>
+		var bxj_path = '$bxj_path/', static_path = '$static_path/',zxPid='$!product.fid';
+		</script>
+		<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js"></script>
+		<script src="$static_path/bxj_three/static/js/mobiscroll.custom-2.6.2.min.js"></script>
+		<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+		<script src="$static_path/bxj_three/public/js/public.js?v=98"></script>
+		
+		<script src="$static_path/bxj_three/static/js/core.js?v=115"></script>
+		
+		<script src="$static_path/bxj_three/static/js/commons.js?v=98"></script>
+		<script src="$static_path/bxj_three/static/js/PlanBook.js?v=201704071"></script>
+		
+		<!--[if lt IE 9]>
+		    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+		<![endif]-->
+	
+	</head>
+	<body>
+<input type="hidden" name="cardFlag" value="$cardFlag" />
+<div class="grey_block" id="cardPop">
+		<div class="name_popblock pop_Downblock">
+			<h1>完善姓名让用户认识真实的你</h1>
+		<div class="input_block">
+			<span>姓名</span>
+			<input placeholder="请输入您的真实姓名" type="text" name="userName" maxlength="9"/>
+		</div>
+		<span class="error_span" id="error_userCard" style="display:none;">姓名不能带有特殊字符</span>
+		<a class="cancel_a">放弃</a>
+		<a class="sure_a">确定</a>
+	</div>
+</div>	
+		#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+		<!--导航 开始-->
+		<header class="head" id="doc-header">
+		  	<a class="header_left" href="javascript:history.back();"></a>
+		    <h1 id="header-title"></h1>
+		</header>
+		<div class="header_heightblock"></div>
+		#end
+		<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+		<div class="common_info totail_price wrp absoluteHeight" id="total-price">
+			<span class="title">首年总保费</span>
+			<span class="price"></span>
+		</div>
+		
+		<div class="container container_demotype01">
+			<form id="form">
+				<input type="hidden" name="appVersionCode"/>
+				<input type="hidden" name="appVersionName"/>
+				<input type="hidden" name="appOs"/>
+				<input type="hidden" name="name" value="$!product.name" />				
+				<input type="hidden" name="customerId" value="" />
+				<input type="hidden" name="voiceId" value=""/>
+				<input type="hidden" name="bf" id="hidden-total-price">
+				<input type="hidden" name="userId" value="$!userId"/>
+				<input type="hidden" name="articleId" value="$!request.getParameter('articleId')"/>
+				<input type="hidden" name="pid" value="${fid}" id="produce-pid"/>
+				<input type="hidden" name="planxh" value="" />	
+				<div class="common_info">
+					<h1 class="assured_info_title bbr_title">被保险人信息</h1>
+					<ul class="common-info-ul">
+						<li class="info-item" id="beiBaoRenSex">
+							<label class="info-name">性别</label>
+							<input type="radio" checked name="sex" value="1" id="beiBaoRenSex-1"/>
+							<label for="beiBaoRenSex-1" class="inputRadio_label">男</label>
+							<input type="radio" name="sex" value="0" id="beiBaoRenSex-0"/>
+							<label for="beiBaoRenSex-0" class="inputRadio_label">女</label>
+						</li>
+						<li class="info-item">
+							<label class="info-name" for="beiBaoRenAge">年龄</label>
+							<select id="beiBaoRenAge" class="ageselect" name="age"></select>
+                			<input type="text" placeholder="生日" data-begin="$!beginAgeStr" data-current="$!currentAgeStr" data-end="$!endAgeStr" id="bbrBirthday" name="birthday" class="birthday icon-birth common-icon birthdayicon" />      		
+							<span class="arrowr special_arrow"></span>	
+						</li>
+					</ul>
+				</div>
+				
+				<div class="common_info" id="touBaoRenInfo">
+					<h1 class="assured_info_title tbr_title">投保险人信息</h1>
+					<ul class="common-info-ul">
+						<li class="info-item">
+				            <input class="checkbox-single" id="touBaoRenSwitch" type="checkbox">
+				    	    <label for="touBaoRenSwitch">设置投保人</label>
+				    	</li>
+						<li class="info-item" id="touBaoRenSex">
+							<label class="info-name">性别</label>
+							<input type="radio" id="tbrxb_1" name="tbrxb" value="1" checked/>
+							<label for="tbrxb_1" class="inputRadio_label">男</label>
+							<input type="radio" id="tbrxb_0" name="tbrxb" value="0"/>
+							<label for="tbrxb_0" name="tbrxb" class="inputRadio_label">女</label>
+						</li>
+						<li class="info-item">
+							<label class="info-name" for="touBaoRenAge">年龄</label>
+							<select id="touBaoRenAge" class="factor"></select>
+							<span class="arrowr"></span>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="common_info" id="touBaoXuanZe">
+					<h1 class="assured_info_title tbxz_title">投保选择</h1>
+					#parse("product/${fid}.vm")
+				</div>
+				<div class="common_info">
+					<h1 class="assured_info_title bbr_title">会说话的计划书</h1>
+					
+					<span class="new-tips"></span>
+					<span class="creatDes-add-btn02"> 
+						<em class="add_icon01"></em>
+						<em class="add_font">添加语音</em>
+					</span>
+					<ul class="common-info-ul" style="display:none;">
+						<li class="info-item">
+							<label class="left_label"></label>
+							<label class="right_label"><span></span></label>
+						</li>
+					</ul>
+				</div>
+				<div class="common_info">
+					<h1 class="assured_info_title tbln_title" id="baoXianLiNianTitle"></h1>
+					<ul class="common-info-ul" id="baoXianLiNianInfo">
+					</ul>
+				</div>
+							<div class="common_info">
+				<h1 class="assured_info_title bbr_title down_arrow_h1 checked">封面内容<span class="grey_span">封面内容可自由编辑</span></h1>
+				<ul class="common-info-ul" style="display: none;">
+					<li class="info-item">
+						<input type="text" class="demo_name factor" name="cover" maxlength="12" placeholder="每行最多输入12个字" value="是保障">
+					</li>
+					<li class="info-item">
+						<input type="text" class="demo_name factor" name="cover" maxlength="12" placeholder="每行最多输入12个字" value="也是投资">
+					</li>
+					<li class="info-item">
+						<input type="text" class="demo_name factor" name="cover" maxlength="12" placeholder="每行最多输入12个字" value="更是永不止息的爱" >
+					</li>
+				</ul>
+			</div>
+			<!-- 封面内容 结束--> 
+				<div class="common_info">
+					<h1 class="assured_info_title bbr_title">收件人信息</h1>
+					<!-- 
+					<a class="listimport">从客户列表导入</a>
+					 -->
+					
+					<ul class="common-info-ul">
+						<li class="info-item">
+							<label class="info-name">姓名</label>
+							<input type="text" class="demo_name factor" name="author" placeholder="输入姓名可生成个性化封面" />
+						</li>
+                        <li class="info-item" style="display:none">
+                            <input type="text"/>
+                        </li>
+						<!-- 
+						<li class="info-item">
+							<label class="info-name">性别</label>
+							<input type="radio" name="sjrsex" id="sjrmale" checked="checked" />
+							<label for="sjrmale" class="inputRadio_label">男</label>
+							<input type="radio" name="sjrsex" id="sjrfemale"/>
+							<label for="sjrfemale" class="inputRadio_label">女</label>
+						</li>
+						 -->
+						
+					</ul>
+				</div>
+						<!-- 收件人信息结束 -->
+			
+			<div class="common_info">
+				<h1 class="assured_info_title bbr_title">实时获得客户反馈<span class="new-tips"></span></h1>
+				<h4 class="">客户对这份计划书的反馈会实时通知你哦~</h4>
+			</div>
+			<!-- 用户反馈 结束-->
+			</form>
+			
+			<div class="btn" id="submit_btn">
+				<a href="javascript:;" class="planform-form-submit">生成计划书演示</a>
+			</div>
+		</div>
+		
+		<div class="greyDiv"style="display:none;"></div>
+	<div class="showDiv" id="insures_popup_dialog_6" style="display:none;">
+			<h1>姓名重复确认</h1>
+		    <div class="scroll-div">
+				<p class="inform_txt" id="hasCustomerName"></p>
+		    	<div style="clear:both"></div>
+		    </div>
+			<a class="cancel_button">新建客户</a>
+		    <a class="sure_button">添加到原客户</a>
+	</div>
+	<div class="showDiv" id="insures_popup_dialog_7" style="display:none;">
+			<h1>请选择添加到那位客户</h1>
+		    <div class="scroll-div">
+		        <ul class="choose_user"></ul>
+		        <div style="clear:both"></div>
+		    </div>
+			<a class="single_button">确认添加</a>
+		</div>
+		
+		$footer
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+	 })();
+</script>
+	</body>	
+</html>

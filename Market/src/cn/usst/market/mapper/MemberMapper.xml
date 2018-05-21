@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.MemberMapper">
+  
+	<select id="doMemberLogin"  parameterType="cn.usst.market.po.Member" resultType="cn.usst.market.po.Member">
+		select * from member where email =#{email} and password=#{password}
+	</select>
+	
+	<select id="findMeberByEmail" parameterType="cn.usst.market.po.Member" resultType="cn.usst.market.po.Member">
+		select * from member where email =#{email}
+	</select>
+ 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+ 
+  <insert id="insert" parameterType="cn.usst.market.po.Member">
+  	<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+    insert into member (id, company_id, email, 
+      password, name, age, 
+      gender, city, nation, 
+      diplomas)
+    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{gender,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{diplomas,jdbcType=VARCHAR})
+  </insert>
+  
+  
+  <select id="showAllMemberByComapnyId" parameterType="Integer" resultType="cn.usst.market.po.Member">
+  	select * from member where company_id=#{companyId}
+  </select>
+  
+  <!-- Guan -->
+  <resultMap type="cn.usst.market.po.TeacherQueryVo" id="memberResultMap">
+		<id column="id"/>
+		<association property="member" javaType="cn.usst.market.po.Member">
+			<result column="id" property="id"/>
+			<result column="name" property="name"/>
+			<result column="email" property="email"/>
+			<result column="password" property="password"/>
+			<result column="company_id" property="companyId"/>
+			<result column="age" property="age"/>
+			<result column="gender" property="gender"/>
+			<result column="city" property="city"/>
+			<result column="nation" property="nation"/>
+			<result column="diplomas" property="diplomas"/>
+		</association>
+		<association property="company" javaType="cn.usst.market.po.Company">
+			<result column="company_id" property="id"/>
+			<result column="companyName" property="name"/>
+		</association>
+		<association property="competition" javaType="cn.usst.market.po.Competition">
+			<result column="competitionId" property="id"/>
+			<result column="competitionName" property="name"/>
+		</association>
+	</resultMap>
+	
+   <sql id="query_member_where">
+   		<if test="member!=null">
+   			<if test="member.name!=null and member.name!=''">
+   				and member.name LIKE '%${member.name}%'
+   			</if>
+   			<if test="member.email!=null and member.email!=''">
+   				and member.email LIKE '%${member.email}%'
+   			</if>
+   		</if>	
+   </sql>
+
+  	<select id="findMemberList" parameterType="cn.usst.market.po.TeacherQueryVo"
+  		 resultMap="memberResultMap">
+  		select member.*, company.`name` as companyName,competition.id as competitionId,
+		competition.`name` as competitionName,competition.license as competitionLicense 
+  		from member,company,competition,teacher
+  		<where>
+  			member.company_id=company.id
+			and company.competition_id=competition.id
+			and competition.teacher_id=#{teacher.id}
+  			<include refid="query_member_where"></include>
+  		</where>
+  	</select>
+  	
+  	<select id="selectMemberByPage" parameterType="cn.usst.market.po.TeacherQueryVo"
+  		 resultMap="memberResultMap">
+  		select member.*, company.`name` as companyName,competition.id as competitionId,
+		competition.`name` as competitionName,competition.license as competitionLicense 
+  		from member,company,competition,teacher
+  		<where>
+  			member.company_id=company.id
+			and company.competition_id=competition.id
+			and competition.teacher_id=teacher.id
+			and teacher.id=#{teacher.id}
+  			<include refid="query_member_where"></include>
+  		</where>
+  		ORDER BY member.id desc
+  		limit #{startPos},#{pageSize}
+  	</select>
+  	
+  	<select id="getMemberCount" parameterType="cn.usst.market.po.TeacherQueryVo" resultType="long" >
+  		select count(*) from member
+  		<where>
+  			<include refid="query_member_where"></include>
+  		</where>
+  	</select>
+  
+
+
+</mapper>

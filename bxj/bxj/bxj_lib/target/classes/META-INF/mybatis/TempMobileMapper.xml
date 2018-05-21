@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.TempMobileMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.TempMobile" >
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.TempMobile" >
+    insert into temp_mobile (mobile)
+    values (#{mobile,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.TempMobile" >
+    insert into temp_mobile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mobile != null" >
+        mobile,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+   *
+    from temp_mobile
+  </select>
+</mapper>

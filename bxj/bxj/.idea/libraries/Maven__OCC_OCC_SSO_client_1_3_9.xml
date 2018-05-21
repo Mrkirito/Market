@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: OCC:OCC_SSO_client:1.3.9">
+    <CLASSES>
+      <root url="jar://D:/eclipse/maven/MavenRepository/OCC/OCC_SSO_client/1.3.9/OCC_SSO_client-1.3.9.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/eclipse/maven/MavenRepository/OCC/OCC_SSO_client/1.3.9/OCC_SSO_client-1.3.9-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/eclipse/maven/MavenRepository/OCC/OCC_SSO_client/1.3.9/OCC_SSO_client-1.3.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

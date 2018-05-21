@@ -1,0 +1,160 @@
+$pageModule.init("app/account/account", "list")
+<style>
+    th, td {
+        white-space: nowrap;
+    }
+
+    div.dataTables_wrapper {
+        /*width: 900px;*/
+        margin: 0 auto;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default search">
+            <div class="panel-heading">
+                <h3 class="panel-title">查询条件</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row form ">
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="userCode" >帐号: </label>
+                        <input type="text" placeholder="帐号" id="userCode" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="userName" >昵称: </label>
+                        <input type="text" placeholder="昵称" id="userName" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="email" >邮箱: </label>
+                        <input type="text" placeholder="邮箱" id="email" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="mobile" >电话: </label>
+                        <input type="text" placeholder="电话" id="mobile" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="status" >状态: </label>
+                        <select class="status form-control" placeholder="状态" id="status">
+                            <option value="1">正常</option>
+                            <option value="0">已禁用</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div style="text-align: center;">
+                <button class="btn btn-primary search-data">查询</button>
+                <button class="btn btn-default reset-data">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="data-list" style=""></div>
+
+
+<div class="user-edit-tpl hidden">
+    <input type="hidden" class="id">
+    <input type="hidden" class="leaderId">
+    <input type="hidden" class="roleIds">
+    <div class="row">
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">帐号</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control userCode">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">昵称</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control userName">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">密码</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="password" class="form-control password">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">部门</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control department">
+                    </div>
+                </div>
+            </div>
+        </div>
+    #*<div class="col-sm-12" style="margin-bottom: 3px;">
+		<div class="form-group">
+			<label class="col-md-3 control-label">职位</label>
+			<div class="col-md-9">
+				<div class="">
+					<input type="text" class="form-control positionTitle">
+				</div>
+			</div>
+		</div>
+	</div>*#
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">主管</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control leaderName">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">角色</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control roleNames">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">邮箱</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control email">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wb-user-tpl hidden">
+    <div class="row">
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">外包信息</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="hidden" class="wbUserId">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

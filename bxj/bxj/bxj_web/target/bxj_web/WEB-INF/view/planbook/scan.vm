@@ -1,0 +1,22 @@
+#set($header_params = {"title":"计划书", "css":["index/css/style.css"]})
+#bxj_header($header_params)
+
+<!--导航 开始-->
+<header class="head">
+    <a class="header_left" href="javascript:history.back(-1);"></a>
+    <h1>保险家二维码</h1>
+    <a class="header_right" href="javascript:void(0);" style="display:none;"></a>
+</header>
+        <!--导航 结束-->
+<div class="container container_me">
+    <div class="scan">
+    <img data-s="300,640" data-type="jpeg"  src="$!static_path/index/images/scan.jpg" style="width: auto !important; visibility: visible !important; height: auto !important;">
+    </div>
+</div>
+<!--底部 开始-->
+<!--底部 开始-->
+#bxj_footer_html(4)
+
+
+#bxj_footer($footer_params)
+

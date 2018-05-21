@@ -1,0 +1,112 @@
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-pid="636" data-jbbe="10000" data-cpjc="鑫利" style="display:none" data-table="0">
+		<input type="hidden" name="bxnx" value="126" class="factor" data-text="至80岁" />
+		<li class="info-item main_line_height">
+			<label class="info-name">缴费期限</label>
+			<select class="factor" name="jfnx">
+	        	<option value="12">30年</option>
+	        	<option value="11">20年</option>
+	        	<option value="10">15年</option>
+	            <option value="9">10年</option>
+	            <option value="8">5年</option>
+			</select>
+			<span class="arrowr"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">保额</label>
+			<input type="tel" placeholder="请输入保额" value="10000" data-min="10000" class="demo_price factor" name="be" maxlength="15"/>
+			<i class="icon">元</i>
+			<span class="error-tips" style="display:none;"></span>
+		</li>	
+	</div>
+	<li class="main_item li_table_0">
+		<div class="creatDes_header">
+				<span class="createDes-title">
+					<em>鑫利</em>
+					<em class="price">首年保费：930</em>
+				</span>
+				<span class="createDes-btn">
+					<a class="main_edit_btn" data-table="0">修改</a>
+				</span>
+		</div>
+		<table class="createDes-table">
+			<thead>
+				<tr>
+					<td>险种</td>
+					<td>保额</td>
+					<td>保费</td>
+					<td>保障期</td>
+					<td>缴费期</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>鑫利</td>
+					<td>10000</td>
+					<td>930</td>
+					<td>至80岁</td>
+					<td>30年</td>
+				</tr>
+			</tbody>
+		</table>
+	</li>
+	<li class="main_item" style="display:none">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>			
+					</span>
+					<span class="creatDes-add-btn"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+	<li class="main_item li_table_2" style="">
+	<div class="creatDes_header">
+		<span class="createDes-title ">
+			<em>附加险</em> 
+			<em class="price">首年保费：488</em>
+		</span> 
+		<span class="createDes-btn"> 
+			<a class="main_edit_btn" data-table="2">修改</a>
+		</span>
+	</div>
+	<table class="createDes-table">
+			<thead>
+				<tr>
+					<td>险种</td>
+					<td>保额/份数</td>
+					<td>保费</td>
+					<td>保障期</td>
+					<td>缴费期</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>健享人生A</td>
+					<td>2份</td>
+					<td>390</td>
+					<td>1年</td>
+					<td>1年</td>
+				</tr>
+				<tr>
+					<td>意外伤害2013</td>
+					<td>100000</td>
+					<td>200</td>
+					<td>1年</td>
+					<td>1年</td>
+				</tr>
+				<tr>
+					<td>意外医疗A</td>
+					<td>10000</td>
+					<td>78</td>
+					<td>1年</td>
+					<td>1年</td>
+				</tr>
+			</tbody>
+	</table>
+	</li>	
+	</ul>
+</div>

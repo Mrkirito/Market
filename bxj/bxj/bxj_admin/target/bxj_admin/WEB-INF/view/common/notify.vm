@@ -1,0 +1,29 @@
+
+<style>
+    .alert-info a {
+        color: #fff
+    }
+</style>
+<!--Shortcut buttons-->
+<!--================================-->
+<div id="mainnav-shortcut">
+    <ul class="list-unstyled">
+        <li class="col-xs-4" data-content="个人信息">
+            <a id="demo-toggle-aside" class="shortcut-grid" href="javascript:void(0);">
+                <i class="fa fa-user"></i>
+            </a>
+        </li>
+        <li class="col-xs-4" data-content="消息">
+            <a id="demo-alert" class="shortcut-grid" href="javascript:void(0);">
+                <i class="fa fa-bullhorn"></i>
+            </a>
+        </li>
+        <li class="col-xs-4" data-content="意见反馈">
+            <a id="demo-page-alert" class="shortcut-grid" href="javascript:void(0);">
+                <i class="fa fa-bell"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<!--================================-->
+<!--End shortcut buttons-->

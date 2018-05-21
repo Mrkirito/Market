@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+   #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+  #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>课件详情</title>
+	<meta name="keywords" content="新人通">
+	<meta name="description" content="新人通">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/theNew/css/ppt.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<!--导航 开始 $bxj_path/newPeoplePass/showNewPeople.page -->
+   <div id="courseTitleID">
+
+	<header class="head">
+	  	<a class="header_left" href="javascript:history.go(-1)"></a>   
+	    <h1>课件详情</h1>
+	     <a class="header_right_shareicon" onclick="shareNewPeopleInfo()"></a>
+	</header>
+	<div class="header_heightblock"></div>
+
+   </div>
+	<!-- 导航 结束-->
+	<div class="container container_forum" >
+		<div class="hd clearfix">
+			<div class="teacher">
+				<h2>$!newCourseVo.title</h2>
+				<h3><span class="name">$!newCourseVo.lecturerName</span><span class="viewnum">
+				 #if($!newCourseVo.playCount <= 10000)
+                    <label id="playCount">$!newCourseVo.playCount</label>
+				#elseif($!newCourseVo.playCount > 10000 && $!newCourseVo.playCount <= 100000000)
+					#set($playCount1 = $!newCourseVo.playCount+"")
+					#set($length1=$playCount1.length())
+					#set($length2=($length1) - 4)
+					#set($playCount2 = $playCount1.substring(0, $length2))
+					#set($length3=($length1) - 3)
+					#set($playCount3 = $playCount1.substring($length2, $length3))
+					#if("0"==$playCount3)
+						$playCount2万次播放
+					#else
+						$playCount2.$playCount3万次播放
+					#end
+				#elseif($!newCourseVo.playCount > 100000000)
+					#set($playCount1 = $!newCourseVo.playCount+"")
+					#set($length1=$playCount1.length())
+					#set($length2=($length1) - 8)
+					#set($playCount2 = $playCount1.substring(0, $length2))
+					#set($length3=($length1) - 7)
+					#set($playCount3 = $playCount1.substring($length2, $length3))
+					#if("0"==$playCount3)
+						$playCount2亿次播放
+					#else
+						$playCount2.$playCount3亿次播放
+					#end
+				#end
+				 </span></h3>
+				<p class="font_tips">点击PPT放大图片</p>
+			</div>
+		</div>
+		<div class="img_block" >
+
+		</div>
+
+	</div>
+	<div id="share_id"> <a class="share_block" href="javascript:downApp()"></a> </div>
+	<a href="javascript:;" class="top_icon" id="fixnav"></a>
+
+</body>
+</html>
+
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/static/theNew/js/lazeload.min.js"></script>
+<script type="text/javascript" src="$static_path/bxj_three/public/js/2.3-2.4-newpeople.js"></script>
+<script>
+$(function(){
+
+	 var dom='';
+	 var coursePPTNum='$!newCourseVo.coursePPTNum';
+	 for(var i=1;i<=coursePPTNum;i++){
+	 	dom+='<div class="img_div"><img class="lazy" src="$static_path/bxj_three/static/theNew/image/load.png" data-original="$static_path/bxj_three/static/theNew/image/$!newCourseVo.courseUrl'+i+'.png" ></div>';
+	 }
+	 $('.img_block').append(dom);
+
+	$("img.lazy").lazyload({
+	    effect : "fadeIn",
+	    threshold : 200,
+	    container: $(".container")
+	});
+
+	$('.top_icon').click(function(event) {
+		$('.container').animate({
+			'scrollTop':0
+		}, 500);
+	});
+})
+</script>
+<link href="$static_path/bxj_three/static/theNew/js/photoswipe.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="$static_path/bxj_three/static/theNew/js/klass.min.js"></script>
+<script type="text/javascript" src="$static_path/bxj_three/static/theNew/js/code.photoswipe.jquery-3.0.5.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.img_block .img_div img').each(function(i,o){
+        o=$(o);
+        o.wrap('<a href="'+o.attr('data-original')+'"></a>');
+    })
+    var myPhotoSwipe = $(".img_block .img_div a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+});
+</script>
+
+<script src="$static_path/bxj_three/public/js/share.js"></script>
+
+<script>
+
+   shareLoadInfo();
+  
+    //分享后 不显示下载 
+    function shareLoadInfo(){
+      var shareValue='$!shareVal';
+      if(shareValue=="shareVal"){
+         $("#share_id").show(); //分享在app外 显示下载链接
+         $("#courseTitleID").hide(); //分享在app外 不显示课件详情头
+       }else{
+         $("#share_id").hide(); //在app 不显示下载链接
+         $("#courseTitleID").show(); //在app显示 课件详情头
+       }         
+    }
+    
+    //下载app
+    function downApp(){
+      window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster";
+    }
+    
+    //点击分享 
+    function shareNewPeopleInfo(){
+	    var _sharePara = {
+				title : '$!newCourseVo.title',
+				desc :  '我正在保险家新人通学习保险知识，快来一起学习五天超级新人课程！',
+				image : '$static_path/bxj_three/static/theNew/image/courseShare.jpg',
+				location :'${bxj_path}/newPeoplePass/showpptDetail.page?courseID=$!newCourseVo.id'
+		};
+	  	setShareInfo(_sharePara);
+		app_share(_sharePara.title,_sharePara.desc,_sharePara.image,_sharePara.location);
+    
+    }
+    
+    var _sharePara = {
+				title : '$!newCourseVo.title',
+				desc :  '我正在保险家新人通学习保险知识，快来一起学习五天超级新人课程！',
+				image : '$static_path/bxj_three/static/theNew/image/courseShare.jpg',
+				location :'${bxj_path}/newPeoplePass/showpptDetail.page?courseID=$!newCourseVo.id'
+		};
+	  	setShareInfo(_sharePara);
+
+   
+  </script>
+  
+  
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+   //二次分享 
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$!newCourseVo.title',
+                desc: '我正在保险家新人通学习保险知识，快来一起学习五天超级新人课程！',
+                imgUrl: '$static_path/bxj_three/static/theNew/image/courseShare.jpg',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+    
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+    
+  </script>
+

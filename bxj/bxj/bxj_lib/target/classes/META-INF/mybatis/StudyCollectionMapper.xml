@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.StudyCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.StudyCollection" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="study_id" property="studyId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="is_collection" property="isCollection" jdbcType="BIT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="cancel_at" property="cancelAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, study_id, user_id, is_collection, create_at, cancel_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_collection
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from study_collection
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.StudyCollection" >
+    insert into study_collection (id, study_id, user_id, 
+      is_collection, create_at, cancel_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{studyId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{isCollection,jdbcType=BIT}, #{createAt,jdbcType=TIMESTAMP}, #{cancelAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.StudyCollection" >
+    insert into study_collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="studyId != null" >
+        study_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="isCollection != null" >
+        is_collection,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="cancelAt != null" >
+        cancel_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="studyId != null" >
+        #{studyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="isCollection != null" >
+        #{isCollection,jdbcType=BIT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelAt != null" >
+        #{cancelAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.StudyCollection" >
+    update study_collection
+    <set >
+      <if test="studyId != null" >
+        study_id = #{studyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="isCollection != null" >
+        is_collection = #{isCollection,jdbcType=BIT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelAt != null" >
+        cancel_at = #{cancelAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.StudyCollection" >
+    update study_collection
+    set study_id = #{studyId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      is_collection = #{isCollection,jdbcType=BIT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      cancel_at = #{cancelAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 查询条件 -->
+   <sql id="choose_where">
+     <if test="studyId != null" >
+       AND  study_id = #{studyId,jdbcType=BIGINT}
+      </if>
+      <if test="userId != null" >
+       AND  user_id = #{userId,jdbcType=BIGINT}
+      </if>
+   </sql>
+  <!-- 查询收藏 -->
+  <select id="selectCollectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_collection
+    where  1=1 
+      <include refid="choose_where"></include>
+      <if test="start != null and end != null" >
+           LIMIT #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+       </if>
+  </select>
+  
+  <!-- 总数 -->
+  <select id="selectTotal" resultType="int" parameterType="java.util.Map" >
+     select  count(id) from study_collection
+  </select>
+</mapper>

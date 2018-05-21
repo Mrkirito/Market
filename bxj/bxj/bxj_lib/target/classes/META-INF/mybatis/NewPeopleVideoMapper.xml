@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hangjia.bxj.dao.NewPeopleVideoMapper" >
+    <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.NewPeopleVideo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="video_id" property="videoId" jdbcType="BIGINT" />
+    <result column="day" property="day" jdbcType="INTEGER" />
+    <result column="know_Exp" property="knowExp" jdbcType="VARCHAR" />
+    <result column="video_Name" property="videoName" jdbcType="VARCHAR" />
+    <result column="course_Name" property="courseName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="newtext" property="newText" jdbcType="VARCHAR" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="browse_Num" jdbcType="INTEGER" property="browseNum" /> 
+  </resultMap>  
+  <sql id="Base_Column_List" >
+    id, user_id, video_id, day, know_Exp, video_Name, course_Name, create_time, status, browse_Num 
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from newpeople_video
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from newpeople_video
+    where id = #{id,jdbcType=BIGINT}
+  </delete>  
+  <insert id="insert" parameterType="com.hangjia.bxj.model.NewPeopleVideo" >
+    insert into newpeople_video (id, user_id, video_id, 
+      day, know_Exp, video_Name, 
+      course_Name, create_time,newtext, status,browse_Num
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{videoId,jdbcType=BIGINT}, 
+      #{day,jdbcType=INTEGER}, #{knowExp,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
+      #{courseName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{newText,jdbcType=VARCHAR},
+       #{status,jdbcType=INTEGER}, #{browseNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.NewPeopleVideo" >
+    insert into newpeople_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="knowExp != null" >
+        know_Exp,
+      </if>
+      <if test="videoName != null" >
+        video_Name,
+      </if>
+      <if test="courseName != null" >
+        course_Name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="browseNum != null" >
+        browse_Num,
+      </if>
+        
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=INTEGER},
+      </if>
+      <if test="knowExp != null" >
+        #{knowExp,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null" >
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+       <if test="browseNum != null" >
+        #{browseNum,jdbcType=INTEGER},
+      </if>
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.NewPeopleVideo" >
+    update newpeople_video
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null" >
+        video_id = #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=INTEGER},
+      </if>
+      <if test="knowExp != null" >
+        know_Exp = #{knowExp,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null" >
+        video_Name = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null" >
+        course_Name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="browseNum != null" >
+        browse_Num = #{browseNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.NewPeopleVideo" >
+    update newpeople_video
+    set user_id = #{userId,jdbcType=BIGINT},
+      video_id = #{videoId,jdbcType=BIGINT},
+      day = #{day,jdbcType=INTEGER},
+      know_Exp = #{knowExp,jdbcType=VARCHAR},
+      video_Name = #{videoName,jdbcType=VARCHAR},
+      course_Name = #{courseName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      browse_Num = #{browseNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+   
+   <resultMap  id="oneNewpeopleMap" type="com.hangjia.bxj.vo.NewPeoplePassVo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="videoId" property="videoId" jdbcType="BIGINT" />
+    <result column="day" property="day" jdbcType="INTEGER" />
+    <result column="know_Exp" property="knowExp" jdbcType="VARCHAR" />
+    <result column="video_Name" property="videoName" jdbcType="VARCHAR" />
+    <result column="course_Name" property="courseName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="newtext" property="newText" jdbcType="VARCHAR" />
+      <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+      
+     <result column="video_title" property="title" jdbcType="VARCHAR" />
+     <result column="cover_Image_Url" property="coverImageUrl" jdbcType="VARCHAR" />
+     <result column="lecturer_name" property="lecturerName" jdbcType="VARCHAR" />
+     <result column="page_url" property="pageUrl" jdbcType="VARCHAR" />
+     <result column="duration_time" property="durationTime" jdbcType="VARCHAR" />
+     <result column="play_Count" property="playCount" jdbcType="INTEGER" />
+     <result column="browse_Num" jdbcType="INTEGER" property="browseNum" /> 
+    
+  </resultMap>
+  
+ <select id="selOneNewpeople" resultMap="oneNewpeopleMap" parameterType="java.util.Map" >
+   SELECT  newpeo.id,vd.fid as videoId, vd.title AS video_title,newpeo.user_id, vd.page_url,vd.cover_Image_Url, vd.lecturer_name,  vd.duration_time,
+    CASE is_false_count WHEN 1 THEN false_count ELSE browse_Num END AS play_Count,newpeo.know_Exp ,newpeo.video_Name,newpeo.course_Name ,newtext,day
+    from
+    champion_video vd join  newpeople_video newpeo on vd.fid = newpeo.video_id
+    WHERE newpeo.id =  #{id,jdbcType=BIGINT}
+    GROUP BY newpeo.id DESC 
+  </select>
+  
+  <!-- AND video_id IS NULL AND user_id IS NULL -->
+  <select id="selList" resultMap="oneNewpeopleMap" parameterType="java.util.Map" >
+    SELECT  newpeo.id,newpeo.user_id, 
+      newpeo.know_Exp ,newpeo.video_Name,newpeo.course_Name,newtext,day,browse_Num AS browseNum
+    from
+    newpeople_video newpeo  
+    WHERE   newpeo.status=2 
+     <if test="day != null" >
+        AND day = #{day,jdbcType=INTEGER}
+      </if>
+  </select>
+  
+  <select id="selListNewpeopleVD" resultMap="oneNewpeopleMap" parameterType="java.util.Map" >
+   SELECT  newpeo.id,vd.fid as videoId, vd.title AS video_title,newpeo.user_id, vd.page_url,vd.cover_Image_Url, vd.lecturer_name,  vd.duration_time,
+    CASE is_false_count WHEN 1 THEN false_count ELSE browse_Num END AS play_Count ,newpeo.know_Exp ,newpeo.video_Name,newpeo.course_Name,newtext,day
+    ,browse_Num AS browseNum
+    from
+    champion_video vd join  newpeople_video newpeo on vd.fid = newpeo.video_id
+    WHERE vd.channel_id=12 AND newpeo.status=0  AND day is not NULL
+     <if test="userId != null" >
+        AND newpeo.user_id =  #{userId,jdbcType=BIGINT}
+     </if> 
+    
+     <if test="day != null" >
+       AND day = #{day,jdbcType=INTEGER}
+      </if>
+    GROUP BY newpeo.id DESC 
+    <if test="start != null and end != null" >
+           limit #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+       </if>
+  </select>
+  
+   <insert id="insertState" parameterType="com.hangjia.bxj.model.NewPeopleVideo" >
+    insert into newpeople_video (user_id, video_id, 
+      day, know_Exp, video_Name, 
+      course_Name,  status
+      )
+    values (#{userId,jdbcType=BIGINT}, #{videoId,jdbcType=BIGINT}, 
+      #{day,jdbcType=INTEGER}, #{knowExp,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
+      #{courseName,jdbcType=VARCHAR},  #{status,jdbcType=INTEGER}
+      )
+  </insert>  
+  
+   <update id="updateNumAdd" parameterType="com.hangjia.bxj.vo.NewPeoplePassVo">
+    update newpeople_video
+    set  
+      browse_Num = browse_Num+1      
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+</mapper>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+		#set($static_path = ${configuration.getProperty("urlPath","static_path")})
+    	#set($bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="format-detection" content="telephone=no">
+		<title>计划书智能推荐</title>
+		<meta name="keywords" content="计划书">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="$static_path/activity/css/intelligent/intelligent.css">
+		<link rel="stylesheet" type="text/css" href="$static_path/public/css/public.css">
+		<script src="$static_path/public/js/flexible.js"></script>
+		<script>var bxj_path = '$bxj_path', static_path = '$static_path',zxPid='$!product.fid';</script>
+		<!--[if lt IE 9]>
+		    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+		<![endif]-->
+</head>
+<body>
+	<div class="container">
+		<div class="container_intelligent">
+			<div class="warper">				
+				<ul class="intelligent_list">
+					<li class="clearfix">还在担心不能根据客户的需求推荐最优的保险产品？</li>
+					<li class="clearfix">还在为客户的种种需求困扰？</li>
+					<li class="clearfix">保险家计划书，一键完成智能推荐！</li>
+				</ul>
+				<div class="insurance">
+					<dl>
+						<dt>投保信息</dt>
+						<dd>
+							<ul>
+								<li class="clearfix">
+									<span class="input-text">性别</span>
+									<div class="input-group">
+										<label for="bbrmale" class="inputRadio_label">
+											<input class="regular-radio" type="radio" name="sex" id="bbrmale" checked="checked" value="1" />
+											<i></i>
+											男
+										</label>
+				
+										<label for="bbrfemale" class="inputRadio_label">
+											<input class="regular-radio" type="radio" name="sex" id="bbrfemale" value="0"/>
+											<i></i>
+											女
+										</label>										
+									</div>
+								</li>
+
+								<li class="clearfix">
+									<span class="input-text">年龄</span>
+									<div class="input-group">
+										<select name="age" value="" class="age">
+                                            <option>0</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                            <option>21</option>
+                                            <option>22</option>
+                                            <option>23</option>
+                                            <option>24</option>
+                                            <option>25</option>
+                                            <option>26</option>
+                                            <option>27</option>
+                                            <option>28</option>
+                                            <option>29</option>
+                                            <option>30</option>
+                                            <option>31</option>
+                                            <option>32</option>
+                                            <option>33</option>
+                                            <option>34</option>
+                                            <option>35</option>
+                                            <option>36</option>
+                                            <option>37</option>
+                                            <option>38</option>
+                                            <option>39</option>
+                                            <option>40</option>
+                                            <option>41</option>
+                                            <option>42</option>
+                                            <option>43</option>
+                                            <option>44</option>
+                                            <option>45</option>
+                                            <option>46</option>
+                                            <option>47</option>
+                                            <option>48</option>
+                                            <option>49</option>
+                                            <option>50</option>
+                                            <option>51</option>
+                                            <option>52</option>
+                                            <option>53</option>
+                                            <option>54</option>
+                                            <option>55</option>
+				                		</select>
+				                		<i class="arrow"></i>
+				                		<input type="date" placeholder="2015-08-27"  id="txtBirthday" name="birthday" class="fete" />
+										<span class="arrowr special_arrow"></span>
+									</div>
+								</li>
+
+								<li class="clearfix">
+									<span class="input-text">保障类型</span>
+									<div class="input-group genre">
+										<select class="">
+											#foreach($categroy in $categroyList)
+												#if($categroy.fid <20)
+												<option value="$!categroy.fid">$!categroy.cname</option>
+												#end
+											#end
+										</select>
+										<i class="arrow"></i>
+									</div>
+								</li>
+
+								<li class="clearfix">
+									<span class="input-text">年缴保费</span>
+									<div class="input-group premium">
+										<select class="">
+											<option>1000元</option>
+										</select>
+										<i class="arrow"></i>
+									</div>
+								</li>
+							</ul>
+							<div class="insurance-btn">
+								<span class="btn">给我推荐</span>
+							</div>
+						</dd>
+					</dl>
+					<!--<p class="tips">的框架爱疯死飞机上打开爱疯死飞机上打开爱疯死飞机疯死上打开爱疯死飞机上打开</p>-->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="$static_path/public/js/jquery.min.js"></script>
+<script src="$static_path/public/js/public.js"></script>
+<script src="$static_path/public/js/fastclick.js"></script>
+<script>
+FastClick.attach(document.body);
+</script>

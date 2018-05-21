@@ -1,0 +1,88 @@
+$pageModule.init("app/ad/list_ad", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            
+           <div class="form-inline">
+             <div class="form-group col-sm-3">
+                <label class="control-label pad-btm">知识标题:&nbsp;</label>
+                <input placeholder="标题" type="text" class="form-control lookText">
+            </div>
+            <div class="form-group col-sm-3">
+				<button class="btn btn-primary search-action">查询</button>
+            </div>
+          </div>
+            
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+
+
+</div>
+
+<!--底部 结束-->
+
+<div class="headline-banner-tpl hidden">
+	<form id="form">
+	<input type="hidden" name="fid" />
+	<input type="hidden" name="imgUrl" />
+    <div class="form-body">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">标题</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="title" />
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">状态</label>
+			<div class="col-md-9">
+				<select name="status" class="form-control">
+						<option value="0">关闭</option>
+						<option value="1">开启</option>
+                </select>
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">广告图片事件</label>
+			<div class="col-md-9">
+				<select name="action" class="form-control">
+						<option value="0">无事件处理</option>
+						<option value="1">打开URL</option>
+                </select>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">URL链接</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="openUrl">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">广告图片</label>
+                <div class="input-group col-md-8">
+                    <div class="col-sm-6">
+                        <div class="">
+                            <div class="uploadImg">
+                                <li style="display: inline-block; margin-right: 3px;">
+    		                        <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+                		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+    		                        <a class="btn btn-primary remove-img">删除</a>
+    		                        </span>
+                                </li>
+                                <a class="btn btn-primary infos-images">上传图片</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	</div>
+	</form>
+</div>
+

@@ -1,0 +1,69 @@
+#set($header_params = {"title":"邀请注册", "css":[]})
+#bxj_header2($header_params)
+
+<div class="container container_out">
+		<div class="banner">
+			<img src="$static_path/bxj_two/static/image/invent_banner.gif" width="100%">
+		</div>
+		<div class="input_block">
+			<input class="tel_input" type="tel" id="mobile" placeholder="请输入手机号码" maxlength="11"></input>
+			<button class="submit_button" onclick="doRegistAndDownload()">立即体验</button>
+			<p class="introduce_p">中国最中立的的计划书系统</p>
+		</div>
+		<div class="bottom_img">
+			<img src="$static_path/bxj_two/static/image/invent_bottom_bg.gif" width="100%">
+		</div>
+		<!-- <div class="text_block">
+			<h1>关于保险家</h1>
+			<p class="main_text">保险家app是一款保险展业类工具软件，拥有中国最公平、中立的计划书制作系统，为中国每一个保险代理人提供终身免费的展业辅助。保险家 app 获得中国保险经理人协会的高度认可，是值得每一个保险家都拥有的互联网保险展业必备工具。</p>
+		</div> -->
+</div>
+	
+#set( $footer_params = ["index/js/Messager.js?v=20160312", "index/js/layer.m.js", "index/js/ajax.js?v=20160312"])
+#bxj_footer($footer_params)
+
+<script>
+	function doRegistAndDownload() {
+		var m = jQuery('#mobile').val();
+		if (!m) {
+			Messager.toast('请填写手机号');
+			return;
+		}
+		
+		var reg = /^0?(13|15|18|14|17)[0-9]{9}$/;
+		if (!reg.test(m)) {
+			Messager.toast('请输入11位大陆手机号');
+			return;
+		}
+    	
+    	var shareId = '$request.getParameter("shareId")';
+    	
+    	ajaxTodo({
+    		url: 'junior/regist.do',
+    		data: {
+    			shareId: shareId,
+    			mobile: m
+    		},
+    		type: 'post',
+    		onSuccess: function() {
+    			Messager.toast('邀请成功，快去体验吧');
+    			setTimeout(function() {
+    				location = 'http://dwz.cn/2LInYL';
+    			}, 2000);
+    		},
+    		
+    		onFail: function() {
+    			setTimeout(function() {
+    				location = 'http://dwz.cn/2LInYL';
+    			}, 2000);
+    		}
+    	});
+	};
+	
+	$('.submit_button').bind('touchend',function(){
+		$('button.submit_button').css({'transform':'translate(0,0)','box-shadow':'0 0.133333rem 0 #e63e17'});
+	}).bind('touchstart',function(){
+		$('button.submit_button').css({'transform':'translate(0,0.133333rem)','box-shadow':'0 0 0 #e63e17'});
+	})
+	
+</script>

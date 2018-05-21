@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <bean id="taskService" class="com.hangjia.bxj.service.impl.TaskService"/>
+    <task:scheduled-tasks>
+       <task:scheduled ref="taskService" method="weekFriendCircle" cron="1 0 0 ? * MON" />
+       <task:scheduled ref="taskService" method="newPeopleStatistics" cron="0 10 0 * * ?"  />
+       <task:scheduled ref="taskService" method="goodStartStatistics" cron="0 20 0 * * ?"  />
+    </task:scheduled-tasks>
+</beans>

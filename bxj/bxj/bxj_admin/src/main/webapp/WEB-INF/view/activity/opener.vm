@@ -1,0 +1,62 @@
+$pageModule.init("app/activity/opener", "list")
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">文章标题&nbsp;</label>
+                                <input type="text" class="form-control title">
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">发布日期&nbsp;</label>
+                                <input type="text" class="form-control publishDate">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">文章类型&nbsp;</label>
+                                <select class="form-control typeId">
+                                    <option value="" checked>全部</option>
+                                    <option value="1">成功秘籍</option>
+                                    <option value="2">开单宝典</option>
+                                    <option value="3">热门产品</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">显示状态&nbsp;</label>
+                                <select class="form-control showStatus">
+                                    <option value="" checked>全部</option>
+                                    <option value="1">显示</option>
+                                    <option value="0">隐藏</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data-list">
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<div class="article_detail hidden">
+    <div class="contentDetail">
+    </div>
+</div>

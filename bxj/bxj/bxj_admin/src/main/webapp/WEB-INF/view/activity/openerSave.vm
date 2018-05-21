@@ -1,0 +1,149 @@
+#set($admin_path = ${configuration.getProperty("urlPath","bxj_path")})
+<script>
+    window.UEDITOR_HOME_URL = '$admin_path/res/media/ue/';
+</script>
+<script type="text/javascript" src="$admin_path/res/media/ue/ueditor.config.js"></script>
+<script type="text/javascript" src="$admin_path/res/media/ue/ueditor.all.min.js"></script>
+<script type="text/javascript" src="$admin_path/res/media/ue/third-party/zeroclipboard/ZeroClipboard.min.js"></script>
+
+$pageModule.init("app/activity/openerSave", "list")
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">创建开门红文章</h3>
+                        </div>
+
+                        <input type="hidden" id="articleId" value="$!id"/>
+
+                        <div class="panel-body">
+                            <div class="form-group col-sm-12">
+                                <label class="col-md-2 control-label">文章标题</label>
+                                <div class="input-group col-md-10">
+                                    <input type="text" class="form-control title" placeholder="请输入文章标题">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-md-2 control-label">文章类型</label>
+                                <div class="col-md-3">
+                                    <select class="form-control typeId">
+                                        <option disabled='disabled' selected>请选择</option>
+                                        <option value="1">成功秘籍</option>
+                                        <option value="2">开单宝典</option>
+                                        <option value="3">热门产品</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <label class="col-md-2 control-label">发布日期</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control publishDate" placeholder="请选择发布日期">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-md-3 control-label">文章icon</label>
+                                <div class="col-md-9">
+                                    <div class="">
+                                        <div class="uploadImg">
+                                            <li style="display: inline-block; margin-right: 3px;">
+                                            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+                                            <img style="height: 100px;width: 100px;" src="" data-url="" data-id=""
+                                                 class="picUrl iconUrl">
+                                            <a class="btn btn-primary remove-img">删除</a>
+                                            </span></li>
+                                            <a class="btn btn-primary infos-images">上传文章附图</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-md-2 control-label">文章声明</label>
+                                <div class="input-group col-md-10">
+                                    <input type="text" class="form-control articleSource" value="保险家原创出品，转载请注明“源自保险家”"
+                                           placeholder="请输入文章声明,默认为 保险家原创出品，转载请注明“源自保险家”">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-md-2 control-label">文章内容</label>
+                                <div class="col-md-10 input-group">
+                                    <script id="articleContent" type="text/plain" style="width:100%;height:500px;"
+                                            class="form-control" name="articleContent">
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-md-2 control-label">虚拟浏览数</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control browseCountVirtual" placeholder="默认为 0">
+                                </div>
+                                <div class="col-md-2"></div>
+                                <label class="col-md-2 control-label">虚拟分享数</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control shareCountVirtual" placeholder="默认为 0">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label class="col-md-2 control-label">最新icon显示状态</label>
+                                <div class="col-md-3">
+                                    <select class="form-control showNewStatus">
+                                        <option disabled='disabled' selected>请选择</option>
+                                        <option value="1">显示</option>
+                                        <option value="0">隐藏</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <label class="col-md-2 control-label">热门icon显示状态</label>
+                                <div class="col-md-3">
+                                    <select class="form-control showHotStatus">
+                                        <option disabled='disabled' selected>请选择</option>
+                                        <option value="1">显示</option>
+                                        <option value="0">隐藏</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-12">
+                                <label class="col-md-2 control-label">排序</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control sort" placeholder="默认为 0">
+                                </div>
+                                <div class="col-md-2"></div>
+                                <label class="col-md-2 control-label">显示状态</label>
+                                <div class="col-md-3">
+                                    <select class="form-control showStatus">
+                                        <option disabled='disabled' selected>请选择</option>
+                                        <option value="1">显示</option>
+                                        <option value="0">隐藏</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div style="text-align: right;">
+                                <button class="btn btn-primary btn-back">返回</button>
+                                <button class="btn btn-primary btn-preview">预览</button>
+                                <button class="btn btn-primary btn-submit">提交</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data-list">
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<div class="article_detail hidden">
+    <div class="contentDetail">
+    </div>
+</div>
+

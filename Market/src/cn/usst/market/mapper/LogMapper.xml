@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.LogMapper">
+  <resultMap type="cn.usst.market.po.LogVo" id="LogResultMap">
+		<id column="id"/>
+		<association property="log" javaType="cn.usst.market.po.Log">
+			<result column="id" property="id"/>
+			<result column="content" property="content"/>
+			<result column="operate_date" property="operateDate"/>
+			<result column="member_id" property="memberId"/>
+			<result column="quarter" property="quarter"/>
+			<result column="submit_tag" property="submitTag"/>
+		</association>
+		<association property="member" javaType="cn.usst.market.po.Member">
+			<result column="member_id" property="id"/>
+			<result column="memberName" property="name"/>
+		</association>
+		<association property="company" javaType="cn.usst.market.po.Company">
+			<result column="companyId" property="id"/>
+			<result column="companyName" property="name"/>
+		</association>
+	</resultMap>
+
+  <insert id="insertLog" parameterType="Log">
+  	INSERT INTO log(content, operate_date, member_id, quarter, submit_tag)
+	VALUES(#{content},#{operateDate},#{memberId},#{quarter},#{submitTag})
+  </insert>
+  
+  <select id="selectLog" parameterType="Log" resultType="Log">
+  	select * from log where content = #{content} and member_id = #{memberId} and quarter = #{quarter}
+  </select>
+  
+  <select id="getCount" parameterType="LogVo" resultType="java.lang.Integer">
+  	select count(*) 
+  	FROM log,member,company
+	<where>
+		log.member_id = member.id 
+		and member.company_id = company.id
+		and member.company_id = #{company.id}
+		and log.quarter = #{log.quarter}
+	</where>
+  </select>
+  
+  <select id="selectMemberOperateByPage" parameterType="LogVo" resultMap="LogResultMap">
+  	select log.*,
+	member.name memberName,
+	company.id companyId,
+	company.name companyName
+	FROM log,member,company
+	<where>
+		log.member_id = member.id 
+		and member.company_id = company.id
+		and member.company_id = #{company.id}
+		and log.quarter = #{log.quarter}
+	</where>
+	ORDER BY operate_date DESC
+	LIMIT #{startPos},#{pageSize}
+  </select>
+</mapper>

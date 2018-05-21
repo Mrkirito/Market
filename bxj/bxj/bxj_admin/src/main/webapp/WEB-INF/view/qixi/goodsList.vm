@@ -1,0 +1,83 @@
+<!--头部 开始-->
+$pageModule.init("app/qixi/goods", "list")
+
+<div class="page-container row-fluid">
+    <div class="data-list">
+    </div>
+</div>
+</div>
+
+<!--add update 修改 -->
+<div class="hidden" id="dialog">
+    <div class="form-body">
+        <div class="circleTextclass"> <!--add 修改 div开始 标志-->
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">名称</label>
+
+                <div class="input-group col-md-9">
+                    <input type="hidden" id="id">
+                    <input type="text" class="form-control" id="name" placeholder="名称不超过50字">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">原价格</label>
+
+                <div class="input-group col-md-2">
+                    <input type="text" class="form-control" id="price1" placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">会员价格</label>
+
+                <div class="input-group col-md-2">
+                    <input type="text" class="form-control" id="price2" placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">新会员价格</label>
+
+                <div class="input-group col-md-2">
+                    <input type="text" class="form-control" id="price3" placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">假销量</label>
+
+                <div class="input-group col-md-2">
+                    <input type="text" class="form-control" id="falseSaleCount" placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">描述</label>
+                <div class="input-group col-md-9">
+                    <textarea  class="form-control" rows="5" id="description"> </textarea>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">图片</label>
+
+                <div class="input-group col-md-9">
+                    <div class="col-sm-6">
+                        <div class="">
+                            <div class="uploadImg">
+                                <li style="display: inline-block; margin-right: 3px;">
+                		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		                            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl" id="picture">
+                    		            <a class="btn btn-primary remove-img">删除</a>
+    		                    </span>
+                                </li>
+                                <a class="btn btn-primary infos-images">上传图片</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<!--头部 开始-->
+#set($header_params = {"title":"管理后台首页", "css":["media/css/select2_metro.css", "media/css/DT_bootstrap.css"]})
+#social_header($header_params)
+#social_top()
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    #social_left()
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <div id="portlet-config" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"></button>
+                <h3>portlet Settings</h3>
+            </div>
+            <div class="modal-body">
+                <p>Here will be a configuration form</p>
+            </div>
+        </div>
+        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet box blue">
+                        <div class="portlet-title">
+                            <div class="caption"><i class="icon-globe"></i>Banner列表</div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse"></a>
+                                <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                <a href="javascript:;" class="reload"></a>
+
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="clearfix">
+                                <div class="btn-group">
+                                    <button id="sample_editable_1_new" class="btn green">
+                                        添加 <i class="icon-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="btn-group pull-right">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">工具 <i class="icon-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0)">打印</a></li>
+                                        <li><a href="javascript:void(0)">保存为PDF</a></li>
+                                        <li><a href="javascript:void(0)">导出为EXCEL</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                <thead>
+                                <tr>
+                                    <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
+                                    <th class="hidden-480">主键</th>
+                                    <th class="hidden-480">名称</th>
+                                    <th class="hidden-480">是否显示</th>
+                                    <th class="hidden-480">链接URL</th>
+                                    <th class="hidden-480">图片URL</th>
+                                    <th ></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                #foreach($b in $banner)
+                                <tr class="odd gradeX">
+                                    <td><input type="checkbox" class="checkboxes" value="$b.fid" /></td>
+                                    <td>$b.fid</td>
+                                    <td>$b.title</td>
+                                    <td class="hidden-480">1</td>
+                                    <td class="hidden-480">$b.location</td>
+                                    <td class="center hidden-480">$b.imageURL</td>
+                                    <td ><span class="label label-success">Approved</span></td>
+                                </tr>
+                                #end
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+            </div>
+
+
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+
+
+</div>
+#social_bottom()
+
+<!--底部 结束-->
+#set($footer_params = ["media/js/select2.min.js", "media/js/jquery.dataTables.js", "media/js/DT_bootstrap.js", "media/js/app.js", "media/js/table-managed.js"])
+#social_footer($footer_params)
+<script>
+    jQuery(document).ready(function() {
+        App.init();
+        TableManaged.init();
+    });
+</script>
+
+
+
+
+

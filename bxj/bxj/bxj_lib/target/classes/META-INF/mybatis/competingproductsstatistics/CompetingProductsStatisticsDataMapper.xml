@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.hangjia.bxj.dao.competingproductsstatistics.CompetingProductsStatisticsDataMapper">
+	<resultMap id="BaseResultMap"
+		type="com.hangjia.bxj.model.competingproductsstatistics.CompetingProductsStatisticsData">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="data_time" property="dataTime" jdbcType="TIMESTAMP" />
+		<result column="bxs_count" property="bxsCount" jdbcType="INTEGER" />
+		<result column="bxr_count" property="bxrCount" jdbcType="INTEGER" />
+		<result column="bxzs_count" property="bxzsCount" jdbcType="INTEGER" />
+		<result column="ssbd_count" property="ssbdCount" jdbcType="INTEGER" />
+		<result column="bxj_count" property="bxjCount" jdbcType="INTEGER" />
+		<result column="jm_count" property="jmCount" jdbcType="INTEGER" />
+		<result column="jjbx_count" property="jjbxCount" jdbcType="INTEGER" />
+		<result column="bxdk_count" property="bxdkCount" jdbcType="INTEGER" />
+		<result column="iyb_count" property="iybCount" jdbcType="INTEGER" />
+		<result column="bxww_count" property="bxwwCount" jdbcType="INTEGER" />
+		<result column="create_name" property="createName" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_name" property="updateName" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, data_time, bxs_count, bxr_count, bxzs_count,
+		ssbd_count, create_name,
+		create_time, update_name,
+		update_time,bxj_count,jm_count,jjbx_count,bxdk_count,iyb_count,bxww_count
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from bxj_app_competingproducts_data
+		where  id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="getCpsDatasByDate" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from bxj_app_competingproducts_data
+		where date_format(data_time,'%Y%m%d') = #{date}
+	</select>
+
+	<insert id="insertSelective"
+		parameterType="com.hangjia.bxj.model.competingproductsstatistics.CompetingProductsStatisticsData">
+		insert into bxj_app_competingproducts_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="dataTime != null">
+				data_time,
+			</if>
+			<if test="bxsCount != null">
+				bxs_count,
+			</if>
+			<if test="bxzsCount != null">
+				bxzs_count,
+			</if>
+			<if test="bxrCount != null">
+				bxr_count,
+			</if>
+			<if test="ssbdCount != null">
+				ssbd_count,
+			</if>
+			<if test="createName != null">
+				create_name,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateName != null">
+				update_name,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="bxjCount != null">
+				bxj_count,
+			</if>
+			<if test="jmCount != null">
+				jm_count,
+			</if>
+			<if test="jjbxCount != null">
+				jjbx_count,
+			</if>
+			<if test="bxdkCount != null">
+				bxdk_count,
+			</if>
+			<if test="iybCount != null">
+				iyb_count,
+			</if>
+			<if test="bxwwCount != null">
+				bxww_count,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="dataTime != null">
+				#{dataTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bxsCount != null">
+				#{bxsCount,jdbcType=INTEGER},
+			</if>
+			<if test="bxzsCount != null">
+				#{bxzsCount,jdbcType=INTEGER},
+			</if>
+			<if test="bxrCount != null">
+				#{bxrCount,jdbcType=INTEGER},
+			</if>
+			<if test="ssbdCount != null">
+				#{ssbdCount,jdbcType=INTEGER},
+			</if>
+			<if test="createName != null">
+				#{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateName != null">
+				#{updateName,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bxjCount != null">
+				#{bxjCount,jdbcType=INTEGER},
+			</if>
+			<if test="jmCount != null">
+				#{jmCount,jdbcType=INTEGER},
+			</if>
+			<if test="jjbxCount != null">
+				#{jjbxCount,jdbcType=INTEGER},
+			</if>
+			<if test="bxdkCount != null">
+				#{bxdkCount,jdbcType=INTEGER},
+			</if>
+			<if test="iybCount != null">
+				#{iybCount,jdbcType=INTEGER},
+			</if>
+			<if test="bxwwCount != null">
+				#{bxwwCount,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.hangjia.bxj.model.competingproductsstatistics.CompetingProductsStatisticsData">
+		update bxj_app_competingproducts_data
+		<set>
+			<if test="dataTime != null">
+				data_time = #{dataTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bxsCount != null">
+				bxs_count = #{bxsCount,jdbcType=INTEGER},
+			</if>
+			<if test="bxzsCount != null">
+				bxzs_count = #{bxzsCount,jdbcType=INTEGER},
+			</if>
+			<if test="bxrCount != null">
+				bxr_count = #{bxrCount,jdbcType=INTEGER},
+			</if>
+			<if test="ssbdCount != null">
+				ssbd_count = #{ssbdCount,jdbcType=INTEGER},
+			</if>
+			<if test="createName != null">
+				create_name = #{createName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateName != null">
+				update_name = #{updateName,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bxjCount != null">
+				bxj_count = #{bxjCount,jdbcType=INTEGER},
+			</if>
+			<if test="jmCount != null">
+				jm_count = #{jmCount,jdbcType=INTEGER},
+			</if>
+			<if test="jjbxCount != null">
+				jjbx_count = #{jjbxCount,jdbcType=INTEGER},
+			</if>
+			<if test="bxdkCount != null">
+				bxdk_count = #{bxdkCount,jdbcType=INTEGER},
+			</if>
+			<if test="iybCount != null">
+				iyb_count = #{iybCount,jdbcType=INTEGER},
+			</if>
+			<if test="bxwwCount != null">
+				bxww_count = #{bxwwCount,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAllBxjAppKmhDatas" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM bxj_app_competingproducts_data ORDER BY data_time
+	</select>
+
+	<!--查询条件 -->
+	<sql id="Public_Query_Conditions">
+		<where>
+			<if test="startTime != null and endTime != null">
+				AND
+				DATE(data_time) <![CDATA[>=]]>
+				DATE(#{startTime})
+				AND
+				DATE(data_time) <![CDATA[<=]]>
+				DATE(#{endTime})
+			</if>
+		</where>
+	</sql>
+
+	<!-- 排序 -->
+	<sql id="Public_Order_Datas">
+		<if test="orderBy != null and orderBy != ''">
+			ORDER BY ${orderBy}
+		</if>
+	</sql>
+
+	<!-- 分页 -->
+	<sql id="Public_Page">
+		<if test="pageFirstItem != null and pageSize != null">
+			LIMIT #{pageFirstItem},#{pageSize}
+		</if>
+	</sql>
+	<!-- 查询总条数 -->
+	<select id="selectByCount" resultType="int"
+		parameterType="com.hangjia.bxj.common.BaseCommonQuery">
+		SELECT
+		COUNT(*)
+		FROM bxj_app_competingproducts_data
+		<include refid="Public_Query_Conditions" />
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="selectByPage" resultMap="BaseResultMap"
+		parameterType="com.hangjia.bxj.common.BaseCommonQuery">
+		select
+		<include refid="Base_Column_List" />
+		FROM bxj_app_competingproducts_data
+		<include refid="Public_Query_Conditions" />
+		<include refid="Public_Order_Datas" />
+		<include refid="Public_Page" />
+	</select>
+
+	<!-- 查询总条数 -->
+	<select id="selectCountByQuery" resultType="int"
+		parameterType="com.hangjia.bxj.query.competingproductsstatistics.CompetingProductsStatisticsDataQuery">
+		select
+		count(*)
+		FROM bxj_app_competingproducts_data
+		<include refid="Public_Query_Conditions" />
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="selectPageByQuery" resultMap="BaseResultMap"
+		parameterType="com.hangjia.bxj.query.competingproductsstatistics.CompetingProductsStatisticsDataQuery">
+		select
+		<include refid="Base_Column_List" />
+		FROM bxj_app_competingproducts_data
+		<include refid="Public_Query_Conditions" />
+		<include refid="Public_Order_Datas" />
+		<include refid="Public_Page" />
+	</select>
+
+
+	<!-- 查询 -->
+	<select id="queryKmhDataPage" parameterType="com.hangjia.bxj.query.report.ProductDataReportQuery"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bxj_app_competingproducts_data
+		<include refid="Public_Admin_Query_Conditions" />
+		<include refid="Public_Admin_Order_Datas" />
+		<!-- <include refid="Public_Admin_Page" /> -->
+	</select>
+	<!--**************************** extend admin begin here ******************************* -->
+	<!-- 查询条件 -->
+	<sql id="Public_Admin_Query_Conditions">
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=BIGINT}
+			</if>
+			<if test="queryMonth != null and queryMonth != ''">
+				and date_format(data_time,'%Y%m') =
+				#{queryMonth,jdbcType=VARCHAR}
+			</if>
+			<if test="dataDate != null and dataDate != ''">
+				and date_format(data_time,'%Y-%m-%d') =
+				date_format(#{dataDate,jdbcType=VARCHAR},'%Y-%m-%d')
+			</if>
+
+		</where>
+	</sql>
+
+	<!-- 排序 -->
+	<sql id="Public_Admin_Order_Datas">
+		<if test="orderBy != null and orderBy != ''">
+			order by ${orderBy}
+		</if>
+	</sql>
+</mapper>

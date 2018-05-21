@@ -1,0 +1,316 @@
+$pageModule.init("app/prize/eggPrizeAdd", "init")
+
+<div class="panel">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">砸蛋奖品与增量新增</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="tab-base">
+
+            <!--Nav Tabs-->
+            <ul class="nav nav-pills ms">
+                <li class="#if(!$in)active#end">
+                    <a data-toggle="tab" href="ui-tabs-accordions.html#demo-lft-tab-1">新增奖品</a>
+                </li>
+                <li class="#if($in)active#end">
+                    <a data-toggle="tab" href="ui-tabs-accordions.html#demo-lft-tab-2">奖品增量</a>
+                </li>
+            </ul>
+
+            <!--Tabs Content-->
+            <div class="tab-content">
+                <div id="demo-lft-tab-1" class="tab-pane fade #if(!$in)active in#end">
+                    <div class="panel-body activity-imgtext-edit-add prizeTemplate mainTemplate">
+                        <div class="panel-heading">
+                            <h3 class="panel-title prizeTitle text-danger">奖品1</h3>
+                        </div>
+						<div class="prizeTemplate">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品类型</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control type">
+                                        <option disabled='disabled' selected value="">请选择</option>
+                                        <option value="1">自动发放</option>
+                    					<option value="2">手动激活-充值</option>
+										<option value="3">手动激活-收货</option>
+                                    </select>
+                                </div>
+    							<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品名称</label>
+                                <div class="col-sm-3">
+                                    <input type="text" placeholder="奖品名称 不超过32个字" value='' class="form-control input-sm name">
+                                </div>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>中奖率</label>
+                                <div class="col-sm-3">
+    								<div class="input-group">
+                                    <input type="text" placeholder="中奖率" value='' class="form-control input-sm probability">
+    								<div class="input-group-addon">%</div>
+                                    </div>
+                                </div>
+    							<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品数</label>
+                                <div class="col-sm-3">
+                                    <input type="text" placeholder="奖品数" value='' class="form-control input-sm totalNum">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>限制金额</label>
+                                <div class="col-sm-3">
+									<div class="input-group">
+                                    <input type="text" placeholder="限制金额" value='' class="form-control input-sm amountLimit">
+									<div class="input-group-addon">元</div>
+									</div>
+                                </div>
+								<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品级别</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control level">
+                                        <option disabled='disabled' selected value="">请选择</option>
+                                        <option value="5">1</option>
+                        				<option value="4">2</option>
+                    					<option value="3">3</option>
+                    					<option value="2">4</option>
+                    					<option value="1">5</option>
+                                    </select>
+                                </div>
+                              </div>
+							  <div class="form-group">
+                                <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品价值</label>
+                                <div class="col-sm-3">
+									<div class="input-group">
+                                    <input type="text" placeholder="奖品价值" value='' class="form-control input-sm amount">
+									<div class="input-group-addon">元</div>
+									</div>
+                                </div>
+                              </div>
+                            <div class="form-group">
+    							<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品图片</label>
+                                <div class="col-sm-3">
+                                    <div class="">
+                    				    <div class="prizeImg">
+                    						<li style="display: inline-block; margin-right: 3px;" >
+                        		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+                        		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+                        		            <a class="btn btn-primary remove-img">删除</a>
+                        		            </span></li>
+                    						<a class="btn btn-primary infos-images">上传图片</a>
+                    						<p class="text-danger">注意：图片尺寸限制：138*138</p>
+                                    	</div>
+                                    </div>
+                                </div>
+    							<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>文案图片</label>
+                                <div class="col-sm-3">
+                                    <div class="">
+                    				    <div class="contextImg">
+                    						<li style="display: inline-block; margin-right: 3px;" >
+                        		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+                        		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+                        		            <a class="btn btn-primary remove-img">删除</a>
+                        		            </span></li>
+                    						<a class="btn btn-primary infos-images">上传图片</a>
+                    						<p class="text-danger">注意：图片尺寸限制：138*138</p>
+                                    	</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group hdkj count">
+                                <div class="col-sm-6">
+                					<a href="javascript:;" class="jia add_tpl">+</a>
+                                </div>
+                            </div>
+						</div>
+                    </div>
+					<p class="text-right">
+						<a class="btn btn-info save">提交</a>
+					</p>
+                </div>
+                <div id="demo-lft-tab-2" class="tab-pane fade #if($in)active in#end">
+                    <div class="panel-body activity-imgtext-edit-add prizeInTemplate mainInTemplate">
+                        <div class="panel-heading">
+                            <h3 class="panel-title prizeInTitle text-danger">增量1</h3>
+                        </div>
+						<div class="prizeInTemplate">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品</label>
+                                <div class="col-sm-3">
+                                    <input type="hidden" class="prizeIn"/>
+                                </div>
+                            </div>
+							<div class="form-group">
+    							<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>增量</label>
+                                <div class="col-sm-3">
+                                    <input type="text" placeholder="增量" value='' class="form-control input-sm incrementNum">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>限制金额</label>
+                                <div class="col-sm-3">
+    								<div class="input-group">
+                                    <input type="text" placeholder="限制金额" class="form-control input-sm amountLimit">
+    								<div class="input-group-addon">元</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group hdkj count">
+                                <div class="col-sm-6">
+                					<a href="javascript:;" class="jia add_in_tpl">+</a>
+                                </div>
+                            </div>
+						</div>
+                    </div>
+					<p class="text-right">
+						<a class="btn btn-info saveIn">提交</a>
+					</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer text-center">
+        <a class="btn btn-primary returnList">返回奖品列表</a>
+		<a class="btn btn-primary returnInList">返回增量列表</a>
+    </div>
+
+</div>
+	
+<input type="hidden" id="loginName" value="$!session.getAttribute("_u_n_")"/>
+<div class="template-tpl hidden">
+	<div>
+	<div class="panel-heading">
+        <h3 class="panel-title prizeTitle text-danger"></h3>
+    </div>
+	<div class="prizeTemplate">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品类型</label>
+            <div class="col-sm-3">
+                <select class="form-control type">
+                    <option disabled='disabled' selected value="">请选择</option>
+                    <option value="1">自动发放</option>
+					<option value="2">手动激活-充值</option>
+					<option value="3">手动激活-收货</option>
+                </select>
+            </div>
+    		<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品名称</label>
+            <div class="col-sm-3">
+                <input type="text" placeholder="奖品名称 不超过32个字" value='' class="form-control input-sm name">
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>中奖率</label>
+            <div class="col-sm-3">
+    			<div class="input-group">
+                <input type="text" placeholder="中奖率" value='' class="form-control input-sm probability">
+    			<div class="input-group-addon">%</div>
+                </div>
+            </div>
+    		<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品数</label>
+            <div class="col-sm-3">
+                <input type="text" placeholder="奖品数" value='' class="form-control input-sm totalNum">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>限制金额</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                <input type="text" placeholder="限制金额" value='' class="form-control input-sm amountLimit">
+				<div class="input-group-addon">元</div>
+				</div>
+            </div>
+			<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品级别</label>
+            <div class="col-sm-3">
+                <select class="form-control level">
+                    <option disabled='disabled' selected value="">请选择</option>
+                    <option value="5">1</option>
+    				<option value="4">2</option>
+					<option value="3">3</option>
+					<option value="2">4</option>
+					<option value="1">5</option>
+                </select>
+            </div>
+        </div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品价值</label>
+			<div class="col-sm-3">
+    			<div class="input-group">
+                <input type="text" placeholder="奖品价值" value='' class="form-control input-sm amount">
+    			<div class="input-group-addon">元</div>
+    			</div>
+            </div>
+		</div>
+        <div class="form-group">
+    		<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品图片</label>
+            <div class="col-sm-3">
+                <div class="">
+    			    <div class="prizeImg">
+    					<li style="display: inline-block; margin-right: 3px;" >
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+    		            <a class="btn btn-primary remove-img">删除</a>
+    		            </span></li>
+    					<a class="btn btn-primary infos-images">上传图片</a>
+    					<p class="text-danger">注意：图片尺寸限制：138*138</p>
+                	</div>
+                </div>
+            </div>
+    		<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>文案图片</label>
+            <div class="col-sm-3">
+                <div class="">
+    			    <div class="contextImg">
+    					<li style="display: inline-block; margin-right: 3px;" >
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+    		            <a class="btn btn-primary remove-img">删除</a>
+    		            </span></li>
+    					<a class="btn btn-primary infos-images">上传图片</a>
+    					<p class="text-danger">注意：图片尺寸限制：138*138</p>
+                	</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group hdkj count">
+            <div class="col-sm-6">
+    			<a href="javascript:;" class="jia del_tpl">-</a>
+            </div>
+        </div>
+	</div>
+	</div>
+</div>
+	
+<div class="template-in-tpl hidden">
+	<div>
+	<div class="panel-heading">
+        <h3 class="panel-title prizeInTitle text-danger"></h3>
+    </div>
+	<div class="prizeInTemplate">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>奖品</label>
+            <div class="col-sm-3">
+                <input type="hidden" class="prizeIn"/>
+            </div>
+        </div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>增量</label>
+            <div class="col-sm-3">
+                <input type="text" placeholder="增量" value='' class="form-control input-sm incrementNum">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="demo-is-inputsmall"><span class="text-danger">*</span>限制金额</label>
+            <div class="col-sm-3">
+				<div class="input-group">
+                <input type="text" placeholder="限制金额" class="form-control input-sm amountLimit">
+				<div class="input-group-addon">元</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group hdkj count">
+            <div class="col-sm-6">
+    			<a href="javascript:;" class="jia del_in_tpl">-</a>
+            </div>
+        </div>
+	</div>
+	</div>
+</div>

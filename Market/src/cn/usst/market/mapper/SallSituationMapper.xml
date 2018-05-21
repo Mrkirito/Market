@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.SallSituationMapper">
+
+  <resultMap type="cn.usst.market.po.SallSituationVo" id="saleSituationMap">
+    <result column="product_id" property="PP.productId"/>
+    <result column="company_id" property="PP.companyId"/>
+    <result column="price" property="PP.price"/>
+    <result column="youji" property="PP.youji"/>
+    <result column="product_type" property="PMS.productType"/>
+    <result column="market_share" property="PMS.marketShare"/>
+    
+    <result column="singapore_need" property="PMS.singaporeNeed"/>
+    <result column="hongkong_need" property="PMS.hongkongNeed"/>
+    <result column="moscow_need" property="PMS.moscowNeed"/>
+    <result column="newdelhi_need" property="PMS.newdelhiNeed"/>
+    <result column="online_need" property="PMS.onlineNeed"/>
+    
+    <result column="singapore_sale" property="PMS.singaporeSale"/>
+    <result column="hongkong_sale" property="PMS.hongkongSale"/>
+    <result column="moscow_sale" property="PMS.moscowSale"/>
+    <result column="newdelhi_sale" property="PMS.newdelhiSale"/>
+    <result column="online_sale" property="PMS.onlineSale"/>
+    
+    <result column="stockoun" property="PMS.stockoun"/>
+    <result column="online_stock" property="PMS.online_stock"/>
+    <result column="demandsum" property="demandsum"/>
+  </resultMap>
+
+  <!--  输入公式ID和季度编号，输出产品的市场和价格信息 -->
+  <!-- 这里选择这个传入PysicalEmploeePo只是为了方便调用companyid和quater两个字段而已 -->
+  <select id="selectSaleSituationbyCompanyID" parameterType="cn.usst.market.po.PysicalEmploeePo" resultMap="saleSituationMap">
+  	select
+        product_price.company_id,
+        product_price.product_id,
+        product_price.price,
+        product_price.youji,
+        cp.name product_type,
+        product_market_share.market_share,
+		product_market_share.singapore_need,
+		product_market_share.hongkong_need,
+		product_market_share.moscow_need,
+		product_market_share.newdelhi_need,
+		product_market_share.online_need,
+		product_market_share.newdelhi_sale,
+		product_market_share.online_sale,
+		product_market_share.moscow_sale,
+		product_market_share.hongkong_sale,
+		product_market_share.singapore_sale,
+        product_market_share.stockoun,
+        product_market_share.stock,
+		df.demand demandsum
+    from 
+        product_price,
+        product_market_share,
+		company_product_demand df,
+		company_product cp
+    where
+        product_price.company_id = #{companyid} and
+        product_price.quarter = #{quater} and
+        product_price.product_id = product_market_share.product_id and
+		df.product_id = product_price.product_id and
+		df.quarter = product_price.quarter and
+		cp.id = product_price.product_id and
+		product_market_share.quarter = product_price.quarter
+  </select>
+  
+  <resultMap type="cn.usst.market.po.SaleIncomVo" id="PathAbilityMap">
+  	<result column="cost" property="CP.cost"/>
+  	<result column="company_id" property="PMS.companyId"/>
+  	<result column="product_id" property="PMS.productId"/>
+  	<result column="youji" property="PP.youji"/>
+  	<result column="price" property="PP.price"/>
+  	    <result column="singapore_sale" property="PMS.singaporeSale"/>
+    <result column="hongkong_sale" property="PMS.hongkongSale"/>
+    <result column="moscow_sale" property="PMS.moscowSale"/>
+    <result column="newdelhi_sale" property="PMS.newdelhiSale"/>
+    <result column="online_sale" property="PMS.onlineSale"/>
+  </resultMap>
+  
+  <select id="selectPathAbilitybyCompanyID" parameterType="cn.usst.market.po.PysicalEmploeePo" resultMap="PathAbilityMap">
+	select
+		cp.cost,<!-- 生产成本 -->
+		pms.company_id,<!-- 公司ID -->
+		pms.product_id,<!-- 产品ID -->
+		pp.youji,<!-- 邮寄返款 -->
+		pp.price,<!-- 售价 -->
+		pms.newdelhi_sale,
+		pms.online_sale,
+		pms.moscow_sale,
+		pms.hongkong_sale,
+		pms.singapore_sale
+	from
+		product_price pp,
+		product_market_share pms,
+		company_product cp
+	where
+		pp.company_id = #{companyid}
+		and pp.quarter = #{quater}
+		and pms.product_id = pp.product_id
+		and cp.id = pp.product_id
+  </select>
+  
+  <resultMap type="cn.usst.market.po.GlobalPathNeedsVo" id="GlobalPathSharebycompanyidMap">
+    <result column="singapore_need" property="pms.singaporeNeed"/>
+    <result column="hongkong_need" property="pms.hongkongNeed"/>
+    <result column="moscow_need" property="pms.moscowNeed"/>
+    <result column="newdelhi_need" property="pms.newdelhiNeed"/>
+    <result column="online_need" property="pms.onlineNeed"/>
+    
+    <result column="singapore_sale" property="pms.singaporeSale"/>
+    <result column="hongkong_sale" property="pms.hongkongSale"/>
+    <result column="moscow_sale" property="pms.moscowSale"/>
+    <result column="newdelhi_sale" property="pms.newdelhiSale"/>
+    <result column="online_sale" property="pms.onlineSale"/>
+  	<result column="name" property="c.name"/>
+  	<result column="proname" property="cp.name"/>
+  	<result column="demandsum" property="demandssum"/>
+  </resultMap>
+  
+  <select id="selectGlobalPathSharebycompanyid" parameterType="cn.usst.market.po.PysicalEmploeePo" resultMap="GlobalPathSharebycompanyidMap">
+		select 
+		    pms.singapore_need,
+	    	pms.hongkong_need,
+		    pms.moscow_need,
+		    pms.newdelhi_need,
+		    pms.online_need,
+		    pms.newdelhi_sale,
+		    pms.online_sale,
+		    pms.moscow_sale,
+		    pms.hongkong_sale,
+		    pms.singapore_sale,
+			company.name name,
+			cp.name proname,
+			cp.quarter quarter,
+			df.demand demandsum
+		from
+			company,
+			product_market_share pms,
+			(
+				select
+					distinct competition_id
+				from
+					product_market_share
+				where
+					company_id = #{companyid}
+					and quarter = #{quater}
+			) subpms,
+			company_product cp,
+			company_product_demand df
+		where
+			pms.competition_id = subpms.competition_id
+			and company.id = pms.company_id
+			and company.competition_id = subpms.competition_id
+			and pms.product_id = cp.id
+			and df.product_id = cp.id
+			and df.quarter = #{quater}
+			and pms.quarter = df.quarter
+  </select>
+  
+  <resultMap type="cn.usst.market.po.StoreInforVo" id="selectStoreInforMapper">
+  	<result column="id" property="c.id"/>
+  	<result column="mi" property="CM.marketId"/>
+  	<result column="competition_id" property="c.competitionId"/>
+  	<result	column="isphy" property="CM.isPhy"/>
+  	<result column="name" property="c.name"/>
+  </resultMap>
+  
+  <select id="selectStoreInforbycompanyid" parameterType="cn.usst.market.po.PysicalEmploeePo" resultMap="selectStoreInforMapper">
+	select 
+		company.id id,
+		cm.market_id mi,
+		cm.is_phy isphy,
+		company.name name,
+		subc.competition_id competition_id
+	from
+		company,
+		company_market cm,
+		(
+			select
+				competition_id
+			from
+				company
+			where
+				id = #{companyid}
+		) subc
+	where
+		company.competition_id = subc.competition_id
+		and cm.company_id = company.id
+		and cm.quarter = #{quater}
+  </select>
+  
+  <insert id="CompanyDecitionLog" parameterType="cn.usst.market.po.CompanyDecitionZLYPo" >
+   insert into company_decision (company_id,money,decision_id)
+    values ( #{company_id},#{money},#{decision_id})
+  </insert>
+  
+  <delete id="DelCompanyDecitionLog" parameterType="cn.usst.market.po.CompanyDecitionZLYPo">
+		delete from
+		company_decision
+		where
+			decision_id = #{decision_id}
+  </delete>
+  
+  <select id="selectMoneySum" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+	select 
+		ifnull(sum(money),0)
+	from
+		company_decision
+	where
+		company_id = #{0}
+  </select>
+  
+  <select id="selectMoneybyDecitionID" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	select 
+		money
+	from
+		company_decision
+	where
+		decision_id = #{0}
+  </select>
+  
+   <select id="selectMoneybyDecitionIDandCompanyID" parameterType="cn.usst.market.po.CompanyDecision" resultType="java.lang.Integer">
+	select 
+		ifnull(sum(money),0)
+	from
+		company_decision
+	where
+		decision_id = #{decisionId} and
+		company_id = #{companyId}
+  </select>
+  
+  <select id="countMoneybyDecitionID" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	select 
+		count(money)
+	from
+		company_decision
+	where
+		decision_id = #{0}
+  </select>
+  
+  <select id="selectHirePeoplebyCompanyID" parameterType="cn.usst.market.po.PysicalEmploeePo" resultType="cn.usst.market.po.HirePeople">
+	select 
+		*
+	from
+		hire_people
+	where
+		company_id = #{companyid} and
+		quarter = #{quater}
+  </select>
+  
+  <delete id="deletHirePeoplebyCompanyID" parameterType="cn.usst.market.po.PysicalEmploeePo">
+	delete from
+		hire_people
+	where
+		company_id = #{companyid} and
+		quarter = #{quater}
+  </delete>
+  
+  <insert id="insertHirePeoplebyCompanyID" parameterType="cn.usst.market.po.HirePeople" >
+   insert into hire_people (company_id,market_id,quarter,saleman,after_sale)
+    values (#{companyId},#{marketId},#{quarter},#{saleman},#{afterSale})
+  </insert>
+  
+  <select id="countWhetherMarketOpened" parameterType="cn.usst.market.po.MarketOpenedPo" resultType="java.lang.Integer">
+	select 
+		count(company_id)
+	from
+		market_opened
+	where
+		company_id = #{company_id}
+  </select>
+  
+  <resultMap type="cn.usst.market.po.MarketOpenedPo" id="selectOpenedMarketMap">
+  	<result column="company_id" property="company_id"/>
+  	<result column="market_opened" property="market_opened"/>
+  </resultMap>
+  
+  <select id="selectOpenedMarket" parameterType="cn.usst.market.po.MarketOpenedPo" resultMap="selectOpenedMarketMap">
+	select 
+	    company_id,
+		market_opened
+	from
+		market_opened
+	where
+		company_id = #{company_id}
+  </select>
+  
+  <delete id="deletOpenedMarket" parameterType="cn.usst.market.po.MarketOpenedPo">
+	delete from
+		market_opened
+	where
+		company_id = #{company_id}
+  </delete>
+  
+  <insert id="insertOpenedMarket" parameterType="cn.usst.market.po.MarketOpenedPo" >
+   insert into market_opened (company_id,market_opened)
+    values (#{company_id},#{market_opened})
+  </insert>
+  
+  <update id="updateHirePeoplebyCompanyID" parameterType="cn.usst.market.po.HirePeople">
+  	UPDATE hire_people 
+  	SET saleman = #{saleman} , after_sale = #{afterSale} 
+  	WHERE company_id = #{companyId} and market_id = #{marketId} and quarter = #{quarter}
+  </update>
+  
+</mapper>

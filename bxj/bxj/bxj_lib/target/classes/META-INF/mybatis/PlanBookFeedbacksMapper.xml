@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.PlanBookFeedbacksMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.PlanBookFeedbacks" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="res" property="res" jdbcType="INTEGER" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, book_id, user_id, res, ctime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan_book_feedbacks
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from plan_book_feedbacks
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.PlanBookFeedbacks" >
+    insert into plan_book_feedbacks (fid, book_id, user_id, 
+      res, ctime)
+    values (#{fid,jdbcType=BIGINT}, #{bookId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{res,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.PlanBookFeedbacks" >
+    insert into plan_book_feedbacks
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="res != null" >
+        res,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="res != null" >
+        #{res,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.PlanBookFeedbacks" >
+    update plan_book_feedbacks
+    <set >
+      <if test="bookId != null" >
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="res != null" >
+        res = #{res,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.PlanBookFeedbacks" >
+    update plan_book_feedbacks
+    set book_id = #{bookId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      res = #{res,jdbcType=INTEGER},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <select id="getCountByPlanBookFeedbacks" parameterType="com.hangjia.bxj.model.PlanBookFeedbacks" resultType="int">
+      select count(*) from plan_book_feedbacks where 1=1       
+      <if test="bookId != null" >
+        and book_id=#{bookId}
+      </if>
+      <if test="userId != null" >
+        and user_id=#{userId}
+      </if>
+      <if test="res != null" >
+        and res=#{res}
+      </if>
+  </select>
+</mapper>

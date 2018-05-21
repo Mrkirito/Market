@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.NavigationMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.right.NavigationDO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="nav_code" property="navCode" jdbcType="VARCHAR" />
+    <result column="nav_name" property="navName" jdbcType="VARCHAR" />
+    <result column="nav_sort" property="navSort" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, nav_code, nav_name, nav_sort, status, create_time, create_name, update_time, 
+    update_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_sys_navigation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_sys_navigation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.right.NavigationDO" >
+    insert into bxj_sys_navigation (id, nav_code, nav_name, 
+      nav_sort, status, create_time, 
+      create_name, update_time, update_name
+      )
+    values (#{id,jdbcType=BIGINT}, #{navCode,jdbcType=VARCHAR}, #{navName,jdbcType=VARCHAR}, 
+      #{navSort,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.right.NavigationDO" >
+    insert into bxj_sys_navigation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="navCode != null" >
+        nav_code,
+      </if>
+      <if test="navName != null" >
+        nav_name,
+      </if>
+      <if test="navSort != null" >
+        nav_sort,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="navCode != null" >
+        #{navCode,jdbcType=VARCHAR},
+      </if>
+      <if test="navName != null" >
+        #{navName,jdbcType=VARCHAR},
+      </if>
+      <if test="navSort != null" >
+        #{navSort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.right.NavigationDO" >
+    update bxj_sys_navigation
+    <set >
+      <if test="navCode != null" >
+        nav_code = #{navCode,jdbcType=VARCHAR},
+      </if>
+      <if test="navName != null" >
+        nav_name = #{navName,jdbcType=VARCHAR},
+      </if>
+      <if test="navSort != null" >
+        nav_sort = #{navSort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.right.NavigationDO" >
+    update bxj_sys_navigation
+    set nav_code = #{navCode,jdbcType=VARCHAR},
+      nav_name = #{navName,jdbcType=VARCHAR},
+      nav_sort = #{navSort,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_name = #{createName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_name = #{updateName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- admin -->
+  
+  <sql id="navigation_colums">
+    a.id as "id",
+    a.nav_code as "navCode",
+    a.nav_name as "navName",
+    a.status as "status",
+    a.nav_sort as "navSort",
+    a.create_time as "createTime",
+    a.create_name as "createName",
+    a.update_time as "updateTime",
+    a.update_name as "updateName"
+  </sql>
+
+  <sql id="navigation_where">
+      <where>
+          <if test="status == null">and a.status = 1</if>
+          <if test="status != null">and a.status = #{status}</if>
+          <if test="navCode != null">and a.nav_code = #{navCode}</if>
+          <if test="navName != null">and a.nav_name like concat('%', #{navName}, '%')</if>
+      </where>
+  </sql>
+
+  <select id="queryNavigationPageData" parameterType="com.hangjia.bxj.query.right.NavigationQuery" resultType="com.hangjia.bxj.model.right.NavigationDO">
+      SELECT
+      <include refid="navigation_colums"/>
+      from bxj_sys_navigation a
+      <include refid="navigation_where"/>
+      <if test="orderBy != null">
+          order by ${orderBy}
+      </if>
+      <if test="orderBy == null">
+          order by a.nav_sort
+      </if>
+      limit ${pageFirstItem}, ${pageSize}
+  </select>
+
+  <select id="queryNavigationPageCount" parameterType="com.hangjia.bxj.query.right.NavigationQuery" resultType="int">
+      select count(1) from bxj_sys_navigation a
+      <include refid="navigation_where"/>
+  </select>
+
+  <insert id="addNavigation" parameterType="com.hangjia.bxj.model.right.NavigationDO">
+      insert into bxj_sys_navigation (
+          nav_code, nav_name, nav_sort,
+          create_time, create_name, update_time, update_name
+      ) values (
+          #{navCode}, #{navName}, #{navSort},
+           now(), #{createName}, now(), #{updateName}
+      )
+  </insert>
+
+  <update id="updateNavigation" parameterType="com.hangjia.bxj.model.right.NavigationDO">
+    update bxj_sys_navigation
+      SET
+          nav_name = #{navName},
+          nav_sort = #{navSort},
+          update_time = now(),
+          update_name = #{updateName}
+      where id = #{id}
+  </update>
+
+  <update id="deleteNavigation" parameterType="list">
+      update bxj_sys_navigation set status = 0 where id in (
+      <foreach collection="list" item="id" separator=",">
+          #{id}
+      </foreach>
+      )
+  </update>
+
+  <select id="queryNavigationList" resultType="com.hangjia.bxj.model.right.NavigationDO">
+      SELECT
+      <include refid="navigation_colums"/>
+      from bxj_sys_navigation a
+      where a.status = 1
+      order by a.nav_sort
+  </select>
+</mapper>

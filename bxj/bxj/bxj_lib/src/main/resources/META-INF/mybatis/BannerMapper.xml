@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.BannerDao">
+
+	<resultMap type="com.hangjia.bxj.model.Banner" id="Banner">
+		<id property="fid" column="fid" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="title" column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="location" column="page_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="imageURL" column="image_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<select id="list" resultMap="Banner">
+	SELECT
+		fid,
+		title,
+		page_url,
+		image_url
+	FROM
+		plan_banner
+	WHERE
+		is_display = 1
+	</select>
+	
+</mapper>

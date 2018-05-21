@@ -1,0 +1,27 @@
+#set($header_params = {"title":"我的邀请", "css":[]})
+#bxj_header2($header_params)
+
+#if(!$request.getParameter('hd'))
+<header class="head">
+	<a class="header_left" href="javascript:history.back(-1);"></a>
+    <h1>我的邀请</h1>
+</header>
+#end
+
+<div class="container container_invent_list">
+		<nav>
+			<span class>手机号码</span>
+			<span class>激活时间</span>
+		</nav>
+		<ul>
+			#foreach($i in $model)
+			<li>
+				<span class="telnum">$!i.sharedMobile</span>
+				<span class="data">$!i.createAtCN</span>
+			</li>
+			#end
+		</ul>
+	</div>
+	
+#set( $footer_params = [])
+#bxj_footer($footer_params)

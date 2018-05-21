@@ -1,0 +1,102 @@
+		<ul class="common-info-ul">
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>意外2013</em>
+					</span>
+					<span class="creatDes-add-btn" data-layer="mainLayer" data-enable="#btnAddon,#btnAddMore"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddon" data-layer="fjx-layer" data-title="附加险" data-products="['zyjt', 'zyyl', 'ywyl']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>险种组合</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddMore" data-layer="zhx-layer" data-title="险种组合" data-products="['xinli', 'xinsheng', 'xinxiang', 'ankang', 'anxiang', 'xingfuA']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加险种</em>
+					</span>
+				</div>
+			</li>
+			
+		</ul>
+		
+		#parse("product/product.pa.vm")
+	    <script>
+	    	$(function() {
+		    	bxj.PlanBook.init({
+		    		title: '意外2013',
+		    		gs: 'PingAn',
+		    		autoRefresh: true,
+		    		BeiBaoRen: {
+						age: {
+							min: 0,
+							max: 64,
+						}
+					},
+					TouBaoRen: {
+						enabled: false
+					}
+		    	});
+	    	});
+	    </script>
+	    
+	    #set($footer = '
+		
+	<div id="mainLayer" class="popup-layer" style="display: none" data-product="yiwai2013">
+	    <form class="popup-form-layer">
+	        <div class="popup-layer-title">意外2013</div>
+	        <ul class="popup-layer-ul" data-calc="yiwai2013">
+	        	<li>
+	                <label class="info-name disabled" for="paf-jfnx">保障期间</label>
+	                <label class="disabled">1年</label>
+	            </li>
+	            <li>
+	                <label class="info-name disabled" for="paf-jfnx">缴费期间</label>
+	                <label class="disabled">1年</label>
+	            </li>
+	            <li>
+	                <label class="info-name" for="yiwai13-zylb">职业类别</label>
+	                <select name="factor5" id="yiwai13-zylb" class="factor">
+	                	<option value="79">一类</option>
+				        <option value="67">二类</option>
+				        <option value="68">三类</option>
+				        <option value="75">四类</option>
+				        <option value="73">五类</option>
+				        <option value="65">六类</option>
+	                </select>
+	                <span class="arrowr"></span>
+	            </li>
+	            <li>
+	                <label class="info-name" for="yiwai13-be">意外保额</label>
+	                <input value="200000" pattern="[0-9]*" data-vali="between-maxRef" data-min="10000" maxlength="7" placeholder="1万以上" id="yiwai13-be" name="be">
+	                <i class="icon">元</i>
+	                
+	                <input type="hidden" name="jfnx" value="63">
+	                <input type="hidden" name="bxnx" value="62">
+	                <input type="hidden" name="pid" value="225">
+	            </li>
+	            
+	        </ul>
+	        <div class="popup-layer-btn">
+	            <span class="popup-layer-cancel-btn" data-cancel>取消</span><span class="popup-layer-ok-btn" data-ok>确定</span>
+	        </div>
+	    </form>
+	</div>
+	')

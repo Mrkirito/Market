@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>计划书未找到</title>
+	<link rel="stylesheet" type="text/css" href="http://cdn.hangjiabao.com/public/css/public.css">
+	<script src="http://cdn.hangjiabao.com/public/js/flexible.js"></script>
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+	<style>
+		.container_error{
+			background:#f8f8f8 url(http://cdn.hangjiabao.com/public/image/error_icon.png) no-repeat center top 2.906667rem;
+			background-size:2.64rem 2.3866667rem;
+		}
+		.container_error p{
+			margin-top:5.73333rem;
+			color:#a6a6a6;
+			font-size:15px;
+			line-height:0.5866667rem;
+		}
+		[data-dpr="2"] .container_error p {
+		  font-size: 30px;
+		}
+		[data-dpr="2.5"] .container_error p {
+		  font-size: 38px;
+		}
+		[data-dpr="2.75"] .container_error p {
+		  font-size: 41px;
+		}
+		[data-dpr="3"] .container_error p {
+		  font-size: 45px;
+		}
+		[data-dpr="4"] .container_error p {
+		  font-size: 60px;
+		}
+		.container_error span{
+			margin-top: 0.333333rem;
+			display: block;
+			color:#a6a6a6;
+			font-size:15px;
+			line-height:0.5866667rem;
+		}
+		[data-dpr="2"] .container_error span {
+		  font-size: 30px;
+		}
+		[data-dpr="2.5"] .container_error span {
+		  font-size: 38px;
+		}
+		[data-dpr="2.75"] .container_error span {
+		  font-size: 41px;
+		}
+		[data-dpr="3"] .container_error span {
+		  font-size: 45px;
+		}
+		[data-dpr="4"] .container_error span {
+		  font-size: 60px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container container_error">
+		<p>哎呀，计划书找不到啦，快去咨询您的代理人吧~</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.AdminReportMapper">
+
+    <select id="queryVoucherReportList" parameterType="com.hangjia.bxj.query.report.VoucherReportQuery"
+            resultType="com.hangjia.bxj.model.report.VoucherReport">
+        SELECT
+        c.sendSum,
+        c.sendUserCount,
+        c.useSum,
+        c.useUserCount
+        <if test="dimension != null and dimension == 1">
+            ,c.createAt
+        </if>
+        <if test="dimension == null">
+            ,d.haveUserCount
+        </if>
+        FROM
+        (
+        SELECT
+        sum(
+        CASE
+        WHEN a.type != 2 THEN
+        a.count
+        END
+        ) AS "sendSum",
+        count(
+        DISTINCT CASE
+        WHEN a.type != 2 THEN
+        a.user_id
+        END
+        ) AS "sendUserCount",
+        sum(
+        CASE
+        WHEN a.type = 2 THEN
+        a.count
+        END
+        ) AS "useSum",
+        count(
+        DISTINCT CASE
+        WHEN a.type = 2 THEN
+        a.user_id
+        END
+        ) AS "useUserCount"
+        <if test="dimension != null and dimension == 1">
+            ,date(a.create_at) AS "createAt"
+        </if>
+        FROM
+        champion_user_vocher_log a
+        <if test="startTime != null and endTime != null">
+            <where>
+                DATE(a.create_at) <![CDATA[>=]]> DATE(#{startTime})
+                AND
+                DATE(a.create_at) <![CDATA[<=]]> DATE(#{endTime})
+            </where>
+        </if>
+        <if test="dimension != null and dimension == 1">
+            GROUP BY
+            date(a.create_at)
+            ORDER BY
+            date(a.create_at) DESC
+        </if>
+        ) c
+        <if test="dimension == null">
+            ,
+            (
+            SELECT
+            count(DISTINCT(b.user_id)) haveUserCount
+            FROM
+            champion_user_voucher b
+            WHERE
+            (
+            date(b.create_time)  <![CDATA[<]]> '2016-06-15'
+            AND
+            b.get_Allcounts > 1
+            )
+            OR
+            (
+            date(b.create_time)  <![CDATA[>=]]> '2016-06-15'
+            AND
+            b.get_Allcounts > 0
+            )
+            ) d
+        </if>
+        LIMIT #{pageFirstItem},#{pageSize}
+    </select>
+
+    <select id="queryVoucherReportCount" parameterType="com.hangjia.bxj.query.report.VoucherReportQuery"
+            resultType="int">
+        SELECT
+        count(1)
+        FROM
+        (
+        SELECT
+        sum(
+        CASE
+        WHEN a.type != 2 THEN
+        a.count
+        END
+        ) AS "sendSum",
+        count(
+        DISTINCT CASE
+        WHEN a.type != 2 THEN
+        a.user_id
+        END
+        ) AS "sendUserCount",
+        sum(
+        CASE
+        WHEN a.type = 2 THEN
+        a.count
+        END
+        ) AS "useSum",
+        count(
+        DISTINCT CASE
+        WHEN a.type = 2 THEN
+        a.user_id
+        END
+        ) AS "useUserCount"
+        <if test="dimension != null and dimension == 1">
+            ,date(a.create_at) AS "createAt"
+        </if>
+        FROM
+        champion_user_vocher_log a
+        <if test="startTime != null and endTime != null">
+            <where>
+                DATE(a.create_at) <![CDATA[>=]]> DATE(#{startTime})
+                AND
+                DATE(a.create_at) <![CDATA[<=]]> DATE(#{endTime})
+            </where>
+        </if>
+        <if test="dimension != null and dimension == 1">
+            GROUP BY
+            date(a.create_at)
+            ORDER BY
+            date(a.create_at) DESC
+        </if>
+        ) c
+        <if test="dimension == null">
+            ,
+            (
+            SELECT
+            count(DISTINCT(b.user_id)) haveUserCount
+            FROM
+            champion_user_voucher b
+            WHERE
+            (
+            date(b.create_time)  <![CDATA[<]]> '2016-06-15'
+            AND
+            b.get_Allcounts > 1
+            )
+            OR
+            (
+            date(b.create_time)  <![CDATA[>=]]> '2016-06-15'
+            AND
+            b.get_Allcounts > 0
+            )
+            ) d
+        </if>
+    </select>
+
+    <select id="queryUserDataReportList" parameterType="com.hangjia.bxj.query.report.UserDataReportQuery"
+            resultType="com.hangjia.bxj.model.report.UserDataReport">
+        SELECT
+        id as "id"
+        ,new_ios_num as "newIosNum"
+        ,new_android_num as "newAndroidNum"
+        ,active_ios_num as "activeIosNum"
+        ,active_android_num as "activeAndroidNum"
+        ,new_add_target as "newAddTarget"
+        ,new_start_target as "newStartTarget"
+        ,sales_total_target as "salesTotalTarget"
+        ,times_ios_num as "timesIosNum"
+        ,times_android_num as "timesAndroidNum"
+        ,status as "status"
+        ,data_time as "dataTime"
+        ,create_name as "createName"
+        ,create_time as "createTime"
+        ,update_name as "updateName"
+        ,update_time as "updateTime"
+        ,(new_ios_num + new_android_num) as "newSumDay"
+        ,(active_ios_num + active_android_num) as "activeSumDay"
+        ,(times_ios_num + times_android_num) as "timesSumDay"
+        ,sales_total as salesTotal
+        ,sales_profits as salesProfits
+        ,bbw_new as bbwNew
+        ,bbw_start as bbwStart
+        ,bbapp_new as bbappNew
+        ,bbapp_start as bbappStart
+        ,hjapp_new as hjappNew
+        ,hjapp_start as hjappStart
+        ,hjw_pv as hjwPv
+        ,hjw_uv as hjwUv
+
+        FROM
+        bxj_app_user_data a
+        <include refid="user_data_report_where"/>
+        ORDER BY
+        a.data_time DESC
+        <if test="orderBy != null">
+            ,#{orderBy}
+        </if>
+        LIMIT #{pageFirstItem},#{pageSize}
+    </select>
+
+    <select id="queryUserDataReportCount" parameterType="com.hangjia.bxj.query.report.UserDataReportQuery"
+            resultType="int">
+        SELECT
+        COUNT(1)
+        FROM
+        bxj_app_user_data a
+        <include refid="user_data_report_where"/>
+    </select>
+
+    <sql id="user_data_report_where">
+        <where>
+            <if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+                AND
+                DATE(a.data_time) <![CDATA[>=]]> DATE(#{startTime})
+                AND
+                DATE(a.data_time) <![CDATA[<=]]> DATE(#{endTime})
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryUserDataSummary" resultType="com.hangjia.bxj.model.report.UserDataReport">
+		SELECT
+			(sum(a.new_ios_num) + sum(a.new_android_num)) as "newSum"
+		FROM
+			bxj_app_user_data a
+	</select>
+
+    <select id="queryUserDataYesterday" resultType="com.hangjia.bxj.model.report.UserDataReport">
+		SELECT
+			(a.new_ios_num + a.new_android_num) as "newSumYesterday"
+			,(a.active_ios_num + a.active_android_num) as "activeSumYesterday"
+			,((a.times_ios_num + a.times_android_num)/(a.active_ios_num + a.active_android_num)) as "timesAvgYesterday"
+		FROM
+			bxj_app_user_data a
+		WHERE
+			DATE(a.data_time) = date_sub(curdate(), interval 1 day)
+	</select>
+
+    <select id="queryUserDataAvg" resultType="com.hangjia.bxj.model.report.UserDataReport">
+		SELECT
+			sum(
+				a.new_ios_num + a.new_android_num
+			) / (
+				To_Days(
+					date_sub(curdate(), INTERVAL 1 DAY)
+				) - To_Days(
+					DATE_ADD(
+						curdate(),
+						INTERVAL - DAY (curdate()) + 1 DAY
+					)
+				) + 1
+			) AS "newAvgMonth",
+			sum(
+				a.active_ios_num + a.active_android_num
+			) / (
+				To_Days(
+					date_sub(curdate(), INTERVAL 1 DAY)
+				) - To_Days(
+					DATE_ADD(
+						curdate(),
+						INTERVAL - DAY (curdate()) + 1 DAY
+					)
+				) + 1
+			) AS "activeAvgMonth"
+		FROM
+			bxj_app_user_data a
+		WHERE
+			DATE(a.data_time) BETWEEN DATE_ADD(
+				curdate(),
+				INTERVAL - DAY (curdate()) + 1 DAY
+			)
+		AND date_sub(curdate(), INTERVAL 1 DAY);
+	</select>
+
+    <select id="queryUserDataAvg2" resultType="com.hangjia.bxj.model.report.UserDataReport">
+		SELECT
+			sum(
+				a.new_ios_num + a.new_android_num
+			) / (
+				DAYOFMONTH(
+					date_sub(
+						date_sub(
+							curdate(),
+							INTERVAL extract(DAY FROM curdate()) DAY
+						),
+						INTERVAL 0 MONTH
+					)
+				)
+			) AS "newAvgMonth",
+			sum(
+				a.active_ios_num + a.active_android_num
+			) / (
+				DAYOFMONTH(
+					date_sub(
+						date_sub(
+							curdate(),
+							INTERVAL extract(DAY FROM curdate()) DAY
+						),
+						INTERVAL 0 MONTH
+					)
+				)
+			) AS "activeAvgMonth"
+		FROM
+			bxj_app_user_data a
+		WHERE
+			DATE(a.data_time) BETWEEN date_sub(
+				date_sub(
+					curdate(),
+					INTERVAL extract(DAY FROM curdate()) - 1 DAY
+				),
+				INTERVAL 1 MONTH
+			)
+		AND date_sub(
+			date_sub(
+				curdate(),
+				INTERVAL extract(DAY FROM curdate()) DAY
+			),
+			INTERVAL 0 MONTH
+		);
+	</select>
+
+    <insert id="addUserData" parameterType="com.hangjia.bxj.model.report.UserDataReport">
+	  insert into bxj_app_user_data
+	  	  (
+	      new_ios_num,
+	      new_android_num,
+	      active_ios_num,
+	      active_android_num,
+	      new_add_target,
+	      new_start_target,
+	      sales_total_target,
+	      times_ios_num,
+	      times_android_num,
+	      data_time,
+	      create_name,
+	      create_time,
+	      sales_total,
+	      sales_profits,
+	      bbw_new,
+			bbw_start,
+			bbapp_new,
+			bbapp_start,
+			hjapp_new,
+			hjapp_start,
+			hjw_pv,
+			hjw_uv
+	      )
+	  VALUES
+      	  (
+          #{newIosNum},
+          #{newAndroidNum},
+          #{activeIosNum},
+          #{activeAndroidNum},
+          #{newAddTarget},
+          #{newStartTarget},
+          #{salesTotalTarget},
+          #{timesIosNum},
+          #{timesAndroidNum},
+          #{dataTime},
+          #{createName},
+          now(),
+          #{salesTotal},
+          #{salesProfits},
+          #{bbwNew},
+			#{bbwStart},
+			#{bbappNew},
+		  	#{bbappStart},
+			#{hjappNew},
+			#{hjappStart},
+			#{hjwPv},
+			#{hjwUv}
+          )
+	</insert>
+
+    <insert id="insertDataToBbw">
+		INSERT INTO bbw_data(bbw_new,bbw_start,times_num,bbw_message,bbw_sales_total,bbwPvLrr,bbwPvWeek,bbwPvMonth,bbwUvLrr,bbwUvWeek,bbwUvMonth,bbwTimesLrr,bbwTimesWeek,bbwTimesMonth)
+		SELECT
+		a.bbw_new , a.bbw_start,a.bbw_times,a.bbw_message,a.bbw_sales_total,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbw_new / b.bbw_new - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS bbwPvLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbw_new / b.bbw_new - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS bbwPvWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbw_new / b.bbw_new - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS bbwPvMonth,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbw_start / b.bbw_start - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS bbwUvLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbw_start / b.bbw_start - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS bbwUvWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbw_start / b.bbw_start - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS bbwUvMonth,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbw_times / b.bbw_times - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS bbwTimesLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbw_times / b.bbw_times - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS bbwTimesWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbw_times / b.bbw_times  - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS bbwTimesMonth
+		FROM
+		bxj_app_user_data a
+		WHERE DATE_FORMAT(a.data_time, '%Y-%m-%d') = DATE_SUB(
+				DATE_FORMAT(CURDATE(), '%Y-%m-%d'),
+				INTERVAL 1 DAY
+			);
+	</insert>
+
+    <insert id="insertDataToBbapp">
+		INSERT INTO bbapp_data(bbapp_new,bbapp_start,times_num,bbapp_message,bbapp_sales_total,bbappPvLrr,bbappPvWeek,bbappPvMonth,bbappUvLrr,bbappUvWeek,bbappUvMonth,bbappTimesLrr,bbappTimesWeek,bbappTimesMonth)
+		SELECT
+		a.bbapp_new ,a.bbapp_start,a.bbapp_times,a.bbapp_message,a.bbapp_sales_total,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbapp_new / b.bbapp_new - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS bbappPvLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbapp_new / b.bbapp_new - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS bbappPvWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbapp_new / b.bbapp_new - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS bbappPvMonth,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbapp_start / b.bbapp_start - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS bbappUvLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbapp_start / b.bbapp_start - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS bbappUvWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbapp_start / b.bbapp_start - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS bbappUvMonth,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbapp_times / b.bbapp_times - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS bbappTimesLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbapp_times / b.bbapp_times - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS bbappTimesWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.bbapp_times / b.bbapp_times - 1 , 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS bbappTimesMonth
+		FROM
+		bxj_app_user_data a
+		WHERE DATE_FORMAT(a.data_time, '%Y-%m-%d') = DATE_SUB(
+				DATE_FORMAT(CURDATE(), '%Y-%m-%d'),
+				INTERVAL 1 DAY
+			);
+	</insert>
+
+    <insert id="insertDataToBxjapp">
+		INSERT INTO bxjapp_data(new_num,active_num,times_num,bxjapp_message,bxjapp_sales_total,bxjappPvLrr,bxjappPvWeek,bxjappPvMonth,bxjappUvLrr,bxjappUvWeek,bxjappUvMonth,bxjappTimesLrr,bxjappTimesWeek,bxjappTimesMonth)
+		SELECT
+		(a.new_ios_num+a.new_android_num) new_num, (a.active_ios_num+a.active_android_num) active_num,(times_android_num+times_ios_num) times_num,message,sales_total,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE ((a.new_ios_num+a.new_android_num) / (b.new_ios_num+b.new_android_num) - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS bxjappPvLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE ((a.new_ios_num+a.new_android_num) / (b.new_ios_num+b.new_android_num) - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS bxjappPvWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE ((a.new_ios_num+a.new_android_num) / (b.new_ios_num+b.new_android_num) - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS bxjappPvMonth,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE ((a.active_ios_num+a.active_android_num) / (b.active_ios_num+b.active_android_num) - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS bxjappUvLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE ((a.active_ios_num+a.active_android_num) / (b.active_ios_num+b.active_android_num) - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS bxjappUvWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE ((a.active_ios_num+a.active_android_num) / (b.active_ios_num+b.active_android_num) - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS bxjappUvMonth,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE ((a.times_android_num+a.times_ios_num) / (b.times_android_num+b.times_ios_num) - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS bxjappTimesLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE ((a.times_android_num+a.times_ios_num) / (b.times_android_num+b.times_ios_num) - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS bxjappTimesWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE ((a.times_android_num+a.times_ios_num) / (b.times_android_num+b.times_ios_num) - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS bxjappTimesMonth
+		FROM
+		bxj_app_user_data a
+		WHERE DATE_FORMAT(a.data_time, '%Y-%m-%d') = DATE_SUB(
+				DATE_FORMAT(CURDATE(), '%Y-%m-%d'),
+				INTERVAL 1 DAY
+			);
+	</insert>
+
+    <insert id="insertDataToHjapp">
+		INSERT INTO hjapp_data(hjapp_new,hjapp_start,times_num,hjapp_message,hjapp_sales_total,hjappPvLrr,hjappPvWeek,hjappPvMonth,hjappUvLrr,hjappUvWeek,hjappUvMonth,hjappTimesLrr,hjappTimesWeek,hjappTimesMonth)
+		SELECT
+		a.hjapp_new ,a.hjapp_start,a.hjapp_times,a.hjapp_message,a.hjapp_sales_total,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.hjapp_new / b.hjapp_new - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS hjappPvLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.hjapp_new / b.hjapp_new - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS hjappPvWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.hjapp_new / b.hjapp_new - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS hjappPvMonth,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.hjapp_start / b.hjapp_start - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS hjappUvLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.hjapp_start / b.hjapp_start - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS hjappUvWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.hjapp_start / b.hjapp_start - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS hjappUvMonth,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.hjapp_times / b.hjapp_times - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 DAY
+		)
+		) AS hjappTimesLrr,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.hjapp_times / b.hjapp_times - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 7 DAY
+		)
+		) AS hjappTimesWeek,
+		(
+		SELECT
+		CONCAT(
+		TRUNCATE (a.hjapp_times / b.hjapp_times - 1, 2),
+		'%'
+		)
+		FROM
+		bxj_app_user_data b
+		WHERE
+		DATE_FORMAT(b.data_time, '%Y-%m-%d') = DATE_SUB(
+		DATE_FORMAT(a.data_time, '%Y-%m-%d'),
+		INTERVAL 1 MONTH
+		)
+		) AS hjappTimesMonth
+		FROM
+		bxj_app_user_data a
+		WHERE DATE_FORMAT(a.data_time, '%Y-%m-%d') = DATE_SUB(
+				DATE_FORMAT(CURDATE(), '%Y-%m-%d'),
+				INTERVAL 1 DAY
+			);
+	</insert>
+
+    <select id="queryBbwData" resultType="com.hangjia.bxj.model.export.BbwData">
+		select * from bbw_data;
+	</select>
+
+    <select id="queryBbappData" resultType="com.hangjia.bxj.model.export.BbappData">
+		select * from bbapp_data;
+	</select>
+
+    <select id="queryBxjappData" resultType="com.hangjia.bxj.model.export.BxjappData">
+		select * from bxjapp_data;
+	</select>
+
+    <select id="queryHjappData" resultType="com.hangjia.bxj.model.export.HjappData">
+		select * from hjapp_data;
+	</select>
+
+    <select id="selsectDataOfYesterday" resultType="com.hangjia.bxj.model.report.UserDataReport">
+		select * from bxj_app_user_data a
+		where DATE_FORMAT(a.data_time, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d');
+	</select>
+
+
+    <select id="queryEchartsData" parameterType="com.hangjia.bxj.query.report.UserDataReportQuery"
+            resultType="com.hangjia.bxj.model.report.UserDataReport">
+        SELECT
+        DATE(data_time) as "dataTime"
+        <if test="echartsType != null and echartsType == 1">
+            ,new_ios_num as "newIosNum"
+            ,new_android_num as "newAndroidNum"
+            ,(new_ios_num + new_android_num) as "newSumDay"
+            ,new_add_target as "newAddTarget"
+        </if>
+        <if test="echartsType != null and echartsType == 2">
+            ,active_ios_num as "activeIosNum"
+            ,active_android_num as "activeAndroidNum"
+            ,(active_ios_num + active_android_num) as "activeSumDay"
+            ,new_start_target as "newStartTarget"
+        </if>
+        <if test="echartsType != null and echartsType == 3">
+            ,sales_total as salesTotal
+            ,sales_profits as salesProfits
+            ,sales_total_target as "salesTotalTarget"
+        </if>
+        <if test="echartsType != null and echartsType == 4">
+            ,bbw_new as bbwNew,bbw_start as bbwStart
+        </if>
+        <if test="echartsType != null and echartsType == 5">
+            ,bbw_start as bbwStart
+        </if>
+        <if test="echartsType != null and echartsType == 6">
+            ,bbapp_new as bbappNew
+        </if>
+        <if test="echartsType != null and echartsType == 7">
+            ,bbapp_start as bbappStart
+        </if>
+        <if test="echartsType != null and echartsType == 8">
+            ,hjapp_new as hjappNew
+        </if>
+        <if test="echartsType != null and echartsType == 9">
+            ,hjapp_start as hjappStart
+        </if>
+        <if test="echartsType != null and echartsType == 10">
+            ,hjw_pv as hjwPv,hjw_uv as hjwUv
+        </if>
+        FROM
+        bxj_app_user_data
+        ORDER BY
+        data_time
+    </select>
+
+    <select id="queryVideoEchartsData" parameterType="com.hangjia.bxj.query.report.UserDataReportQuery"
+            resultType="com.hangjia.bxj.model.report.UserDataReport">
+		SELECT SUM(v.money) salesTotal, dataTime FROM(
+		SELECT money, DATE_FORMAT(create_time,'%Y-%m-%d') dataTime FROM champion_reward_video WHERE
+		(order_type = 2 or (order_type=1 and money=0.5))
+		AND STATUS = 5
+		) v GROUP BY dataTime
+
+	</select>
+
+    <update id="updateUserData" parameterType="com.hangjia.bxj.model.report.UserDataReport">
+        UPDATE bxj_app_user_data
+        <set>
+            new_ios_num = #{newIosNum,jdbcType=INTEGER},
+            new_android_num = #{newAndroidNum,jdbcType=INTEGER},
+            active_ios_num = #{activeIosNum,jdbcType=INTEGER},
+            active_android_num = #{activeAndroidNum,jdbcType=INTEGER},
+            times_ios_num = #{timesIosNum,jdbcType=INTEGER},
+            times_android_num = #{timesAndroidNum,jdbcType=INTEGER},
+            new_add_target = #{newAddTarget,,jdbcType=INTEGER},
+            new_start_target = #{newStartTarget,,jdbcType=INTEGER},
+            data_time = #{dataTime,jdbcType=TIMESTAMP},
+            update_name = #{updateName,jdbcType=VARCHAR},
+            update_time = now(),
+            sales_total=#{salesTotal},
+            sales_total_target=#{salesTotalTarget},
+            sales_profits=#{salesProfits},
+            bbw_new=#{bbwNew},
+            bbw_start=#{bbwStart},
+            bbapp_new=#{bbappNew},
+            bbapp_start=#{bbappStart},
+            hjapp_new=#{hjappNew},
+            hjapp_start=#{hjappStart},
+            hjw_pv=#{hjwPv},
+            hjw_uv=#{hjwUv}
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="existUserDataByDay" parameterType="com.hangjia.bxj.query.report.UserDataReportQuery" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM
+        bxj_app_user_data
+        WHERE
+        DATE(data_time) = DATE(#{dataTime})
+        <if test="id != null">
+            AND id != #{id}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,49 @@
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-pid="475" data-jbbe="1.00" data-cpjc="花样年华" data-sex="2" data-table="0">
+		<input type="hidden" name="bxnx" value="62" class="factor" data-text="保1年" />
+		<input type="hidden" name="jfnx" value="21" class="factor" data-text="1年交" />
+		<li class="info-item main_line_height">
+			<label class="info-name">份数</label>
+			<select class="factor" name="be">
+				<option value="1">1份</option>
+				<option value="2">2份</option>
+				<option value="3">3份</option>
+				<option value="4">4份</option>
+				<option value="5">5份</option>
+				<option value="6">6份</option>
+				<option value="7">7份</option>
+				<option value="8">8份</option>
+				<option value="9">9份</option>
+				<option value="10">10份</option>
+			<select>
+			<span class="arrowr"></span>
+		</li>
+	</div>
+	<li class="main_item li_table_0" style="display:none">
+		<div class="creatDes_header">
+			<span class="createDes-title">
+				<em>花样年华</em>
+				<em class="price"></em>
+			</span>
+			<span class="createDes-btn">
+				<a class="main_edit_btn" data-table="0">修改</a>
+			</span>
+		</div>
+		<table class="createDes-table">
+		<thead>
+			<tr>
+				<td>险种</td>
+				<td>保额</td>
+				<td>保费</td>
+				<td>保障期限</td>
+				<td>缴费期限</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		</table>
+	</li>
+	#parse("product/addzx.vm")
+	</ul>
+</div>

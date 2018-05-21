@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.HeadlineNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.HeadlineNews" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="page_url" property="pageUrl" jdbcType="VARCHAR" />
+    <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+    <result column="online_time" property="onlineTime" jdbcType="TIMESTAMP" />
+    <result column="offline_time" property="offlineTime" jdbcType="TIMESTAMP" />
+    <result column="is_display_tag" property="isDisplayTag" jdbcType="BIT" />
+    <result column="tag_content" property="tagContent" jdbcType="VARCHAR" />
+    <result column="hit_count" property="hitCount" jdbcType="BIGINT" />
+    <result column="virtual_hit_count" property="virtualHitCount" jdbcType="BIGINT" />
+    <result column="is_display_reprint" property="isDisplayReprint" jdbcType="BIT" />
+    <result column="reprint_content" property="reprintContent" jdbcType="VARCHAR" />
+    <result column="news_type" property="newsType" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hangjia.bxj.model.HeadlineNews" extends="BaseResultMap" >
+    <result column="news_content" property="newsContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, img_url, page_url, news_content, audit_status, online_time, offline_time, is_display_tag, 
+    tag_content, hit_count, virtual_hit_count, is_display_reprint, reprint_content, news_type, 
+    sort, create_by, create_time, update_by, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    news_content
+  </sql>
+  <sql id="Public_Page">
+    <if test="startIndex != null and pageSize != null">
+      limit #{startIndex},#{pageSize}
+    </if>
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from headline_news
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from headline_news
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.HeadlineNews" >
+    insert into headline_news (id, title, img_url, 
+      page_url, audit_status, online_time, 
+      offline_time, is_display_tag, tag_content, 
+      hit_count, virtual_hit_count, is_display_reprint, 
+      reprint_content, news_type, sort, 
+      create_by, create_time, update_by, 
+      update_time, news_content)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{pageUrl,jdbcType=VARCHAR}, #{auditStatus,jdbcType=INTEGER}, #{onlineTime,jdbcType=TIMESTAMP}, 
+      #{offlineTime,jdbcType=TIMESTAMP}, #{isDisplayTag,jdbcType=BIT}, #{tagContent,jdbcType=VARCHAR}, 
+      #{hitCount,jdbcType=BIGINT}, #{virtualHitCount,jdbcType=BIGINT}, #{isDisplayReprint,jdbcType=BIT}, 
+      #{reprintContent,jdbcType=VARCHAR}, #{newsType,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{newsContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.HeadlineNews" >
+    insert into headline_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+      <if test="pageUrl != null" >
+        page_url,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+      <if test="offlineTime != null" >
+        offline_time,
+      </if>
+      <if test="isDisplayTag != null" >
+        is_display_tag,
+      </if>
+      <if test="tagContent != null" >
+        tag_content,
+      </if>
+      <if test="hitCount != null" >
+        hit_count,
+      </if>
+      <if test="virtualHitCount != null" >
+        virtual_hit_count,
+      </if>
+      <if test="isDisplayReprint != null" >
+        is_display_reprint,
+      </if>
+      <if test="reprintContent != null" >
+        reprint_content,
+      </if>
+      <if test="newsType != null" >
+        news_type,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="newsContent != null" >
+        news_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlineTime != null" >
+        #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisplayTag != null" >
+        #{isDisplayTag,jdbcType=BIT},
+      </if>
+      <if test="tagContent != null" >
+        #{tagContent,jdbcType=VARCHAR},
+      </if>
+      <if test="hitCount != null" >
+        #{hitCount,jdbcType=BIGINT},
+      </if>
+      <if test="virtualHitCount != null" >
+        #{virtualHitCount,jdbcType=BIGINT},
+      </if>
+      <if test="isDisplayReprint != null" >
+        #{isDisplayReprint,jdbcType=BIT},
+      </if>
+      <if test="reprintContent != null" >
+        #{reprintContent,jdbcType=VARCHAR},
+      </if>
+      <if test="newsType != null" >
+        #{newsType,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsContent != null" >
+        #{newsContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.HeadlineNews" >
+    update headline_news
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        page_url = #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlineTime != null" >
+        offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisplayTag != null" >
+        is_display_tag = #{isDisplayTag,jdbcType=BIT},
+      </if>
+      <if test="tagContent != null" >
+        tag_content = #{tagContent,jdbcType=VARCHAR},
+      </if>
+      <if test="hitCount != null" >
+        hit_count = #{hitCount,jdbcType=BIGINT},
+      </if>
+      <if test="virtualHitCount != null" >
+        virtual_hit_count = #{virtualHitCount,jdbcType=BIGINT},
+      </if>
+      <if test="isDisplayReprint != null" >
+        is_display_reprint = #{isDisplayReprint,jdbcType=BIT},
+      </if>
+      <if test="reprintContent != null" >
+        reprint_content = #{reprintContent,jdbcType=VARCHAR},
+      </if>
+      <if test="newsType != null" >
+        news_type = #{newsType,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsContent != null" >
+        news_content = #{newsContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hangjia.bxj.model.HeadlineNews" >
+    update headline_news
+    set title = #{title,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      is_display_tag = #{isDisplayTag,jdbcType=BIT},
+      tag_content = #{tagContent,jdbcType=VARCHAR},
+      hit_count = #{hitCount,jdbcType=BIGINT},
+      virtual_hit_count = #{virtualHitCount,jdbcType=BIGINT},
+      is_display_reprint = #{isDisplayReprint,jdbcType=BIT},
+      reprint_content = #{reprintContent,jdbcType=VARCHAR},
+      news_type = #{newsType,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      news_content = #{newsContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.HeadlineNews" >
+    update headline_news
+    set title = #{title,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      is_display_tag = #{isDisplayTag,jdbcType=BIT},
+      tag_content = #{tagContent,jdbcType=VARCHAR},
+      hit_count = #{hitCount,jdbcType=BIGINT},
+      virtual_hit_count = #{virtualHitCount,jdbcType=BIGINT},
+      is_display_reprint = #{isDisplayReprint,jdbcType=BIT},
+      reprint_content = #{reprintContent,jdbcType=VARCHAR},
+      news_type = #{newsType,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="headline_news_where">
+  <where>
+  	status = 1
+  	<if test="title != null and title != ''">AND title like CONCAT(CONCAT('%', #{title}), '%')</if>
+  	<if test="auditStatus != null">AND audit_status = #{auditStatus}</if>
+  	<if test="onlineTime != null">AND DATE_FORMAT(online_time, '%Y-%m-%d') <![CDATA[>=]]> DATE_FORMAT(#{onlineTime}, '%Y-%m-%d')</if>
+  	<if test="offlineTime != null">AND DATE_FORMAT(offline_time, '%Y-%m-%d') <![CDATA[<=]]> DATE_FORMAT(#{offlineTime}, '%Y-%m-%d')</if>
+  </where>
+  </sql>
+  <select id="queryPageData" parameterType="com.hangjia.bxj.query.app.HeadlineNewsQuery" resultMap="ResultMapWithBLOBs">
+  	SELECT
+  	<include refid="Base_Column_List" />
+    FROM headline_news
+    <include refid="headline_news_where"/>
+    ORDER BY 
+    	news_type DESC,
+    	sort,
+    	online_time DESC,
+    	update_time DESC
+    	<if test="orderBy != null">
+    	,#{orderBy}
+    	</if>
+    LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  
+  <select id="queryPageDataCount" parameterType="com.hangjia.bxj.query.app.HeadlineNewsQuery" resultType="int">
+  	SELECT
+  		COUNT(1)
+  	FROM
+  		headline_news
+  	<include refid="headline_news_where"/>
+  </select>
+  
+   <select id="querySort" parameterType="com.hangjia.bxj.query.app.HeadlineNewsQuery" resultType="int">
+  	SELECT
+  		a.sort
+  	FROM
+  		headline_news a 
+  	WHERE
+  	<if test="upOrDown == 1">
+  		a.sort <![CDATA[<=]]> #{sort}
+  	</if>
+  	<if test="upOrDown == 2">
+  		a.sort <![CDATA[>=]]> #{sort}
+  	</if>
+  	and a.status = 1
+  	and a.id != #{id}
+  	and a.news_type = 2
+  	ORDER BY
+  		a.sort <if test="upOrDown == 1"> DESC </if>
+  	LIMIT 1
+  </select>
+  <select id="queryNewsList" parameterType="com.hangjia.bxj.model.Headline" resultMap="ResultMapWithBLOBs">
+  	SELECT
+  		a.id,
+  		a.title,
+  		a.img_url,
+  		a.online_time,
+  		a.is_display_tag,
+  		a.tag_content,
+  		a.hit_count,
+  		a.virtual_hit_count
+  	FROM
+  		headline_news a 
+  	WHERE
+  		a.audit_status = 2
+  	and a.status = 1
+  	AND
+  		(CURDATE() BETWEEN DATE_FORMAT(a.online_time, '%Y-%m-%d') AND DATE_FORMAT(a.offline_time, '%Y-%m-%d'))
+  	AND
+  		a.news_type = #{newsType}
+  	ORDER BY
+    	a.online_time DESC
+	<include refid="Public_Page" />
+  </select>
+  
+  <update id="updateHit" parameterType="java.lang.Long">
+    UPDATE headline_news
+    SET
+        hit_count = 
+	CASE   
+        WHEN  
+        	ISNULL(hit_count) THEN 1 
+        ELSE 
+        	hit_count + 1 
+    END   
+    WHERE 
+    	id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.PlanProductQyMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.PlanProductQy" >
+    <id column="FID" property="fid" jdbcType="INTEGER" />
+    <result column="PID" property="pid" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="IMG" property="img" jdbcType="VARCHAR" />
+    <result column="DES" property="des" jdbcType="VARCHAR" />
+    <result column="PX" property="px" jdbcType="INTEGER" />
+    <result column="QY" property="qy" jdbcType="INTEGER" />
+    <result column="BAK" property="bak" jdbcType="VARCHAR" />
+    <result column="head1" property="head1" jdbcType="VARCHAR" />
+    <result column="head2" property="head2" jdbcType="VARCHAR" />
+    <result column="head3" property="head3" jdbcType="VARCHAR" />
+    <result column="CTIME" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="UPTIME" property="uptime" jdbcType="TIMESTAMP" />
+    <result column="ver" property="ver" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FID, PID, NAME, IMG, DES, PX, QY, BAK, head1, head2, head3, CTIME, UPTIME, ver
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan_product_qy
+    where FID = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from plan_product_qy
+    where FID = #{fid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByPid" parameterType="java.lang.Integer" >
+    delete from plan_product_qy where pid = #{pid}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.PlanProductQy" >
+    insert into plan_product_qy (FID, PID, NAME, 
+      IMG, DES, PX, QY, 
+      BAK, head1, head2, 
+      head3, CTIME, UPTIME, 
+      ver)
+    values (#{fid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, #{px,jdbcType=INTEGER}, #{qy,jdbcType=INTEGER}, 
+      #{bak,jdbcType=VARCHAR}, #{head1,jdbcType=VARCHAR}, #{head2,jdbcType=VARCHAR}, 
+      #{head3,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, #{uptime,jdbcType=TIMESTAMP}, 
+      #{ver,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.PlanProductQy" >
+    insert into plan_product_qy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FID,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="img != null" >
+        IMG,
+      </if>
+      <if test="des != null" >
+        DES,
+      </if>
+      <if test="px != null" >
+        PX,
+      </if>
+      <if test="qy != null" >
+        QY,
+      </if>
+      <if test="bak != null" >
+        BAK,
+      </if>
+      <if test="head1 != null" >
+        head1,
+      </if>
+      <if test="head2 != null" >
+        head2,
+      </if>
+      <if test="head3 != null" >
+        head3,
+      </if>
+      <if test="ctime != null" >
+        CTIME,
+      </if>
+      <if test="uptime != null" >
+        UPTIME,
+      </if>
+      <if test="ver != null" >
+        ver,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null" >
+        #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="px != null" >
+        #{px,jdbcType=INTEGER},
+      </if>
+      <if test="qy != null" >
+        #{qy,jdbcType=INTEGER},
+      </if>
+      <if test="bak != null" >
+        #{bak,jdbcType=VARCHAR},
+      </if>
+      <if test="head1 != null" >
+        #{head1,jdbcType=VARCHAR},
+      </if>
+      <if test="head2 != null" >
+        #{head2,jdbcType=VARCHAR},
+      </if>
+      <if test="head3 != null" >
+        #{head3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uptime != null" >
+        #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ver != null" >
+        #{ver,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.PlanProductQy" >
+    update plan_product_qy
+    <set >
+      <if test="pid != null" >
+        PID = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        IMG = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null" >
+        DES = #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="px != null" >
+        PX = #{px,jdbcType=INTEGER},
+      </if>
+      <if test="qy != null" >
+        QY = #{qy,jdbcType=INTEGER},
+      </if>
+      <if test="bak != null" >
+        BAK = #{bak,jdbcType=VARCHAR},
+      </if>
+      <if test="head1 != null" >
+        head1 = #{head1,jdbcType=VARCHAR},
+      </if>
+      <if test="head2 != null" >
+        head2 = #{head2,jdbcType=VARCHAR},
+      </if>
+      <if test="head3 != null" >
+        head3 = #{head3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        CTIME = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uptime != null" >
+        UPTIME = #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ver != null" >
+        ver = #{ver,jdbcType=BIGINT},
+      </if>
+    </set>
+    where FID = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.PlanProductQy" >
+    update plan_product_qy
+    set PID = #{pid,jdbcType=INTEGER},
+      NAME = #{name,jdbcType=VARCHAR},
+      IMG = #{img,jdbcType=VARCHAR},
+      DES = #{des,jdbcType=VARCHAR},
+      PX = #{px,jdbcType=INTEGER},
+      QY = #{qy,jdbcType=INTEGER},
+      BAK = #{bak,jdbcType=VARCHAR},
+      head1 = #{head1,jdbcType=VARCHAR},
+      head2 = #{head2,jdbcType=VARCHAR},
+      head3 = #{head3,jdbcType=VARCHAR},
+      CTIME = #{ctime,jdbcType=TIMESTAMP},
+      UPTIME = #{uptime,jdbcType=TIMESTAMP},
+      ver = #{ver,jdbcType=BIGINT}
+    where FID = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

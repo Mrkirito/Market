@@ -1,0 +1,91 @@
+$pageModule.init("app/report/extendDataReport", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+	<div class="row">
+		<div id="newUser" style="width: 100%; min-height:300px;"></div>
+    </div>
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+			
+		   <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">统计时间&nbsp;</label>
+								<input type="text" class="form-control reportTime">
+								<input type="hidden" class="startTime"/>
+                                <input type="hidden" class="endTime"/>
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+</div>
+
+<div class="add-data-tpl hidden">
+    <div class="form-body">
+    	<form id="form">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>数据统计时间</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="dataTime" />
+			</div>
+		</div>
+		<input type="hidden" name="id" />
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>渠道及优化</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="channelNum" />
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>日常</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="everyNum" />
+			</div>
+		</div>		
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>微课堂</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="classroomNum" />
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>线下</label>
+			<div class="col-md-9">
+				<input type="text"  class="form-control is_number" name="lineNum" />
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>活动</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="activityNum" />
+			</div>
+		</div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><span class="text-danger">*</span>合计</label>
+            <div class="col-md-9">
+                <input type="text"  class="form-control is_number" name="totalNum" />
+            </div>
+        </div>
+    	</form>
+	</div>
+</div>

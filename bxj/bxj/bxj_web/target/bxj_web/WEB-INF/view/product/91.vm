@@ -1,0 +1,42 @@
+		
+	<ul class="common-info-ul">
+		<li class="info-item main_line_height" data-calc="ankang">
+			<label class="info-name">险种类型</label>
+			
+			<input type="radio" checked name="pid" value="91" id="ak-A"/>
+			<label for="ak-A">A（无社保）</label>
+			<input type="radio" name="pid" value="92" id="ak-B"/>
+			<label for="ak-B" id="sex_0">B（有社保）</label>
+			
+			<input type="hidden" name="bxnx" value="90">
+			<input type="hidden" name="jfnx" value="63">
+			<input type="hidden" name="be" value="1">
+		</li>
+	</ul>
+    
+    #parse("product/product.pa.vm")
+    <script>
+    	$(function() {
+	    	bxj.PlanBook.init({
+	    		title: '安康住院医疗',
+	    		gs: 'PingAn',
+	    		BeiBaoRen: {
+					age: {
+						min: 18,
+						max: 80,
+					}
+				},
+				TouBaoRen: {
+					enabled: false
+				}
+	    	});
+	    	
+	    	bxj.PlanBook.submitSimple('#touBaoXuanZe');
+	    	
+	    	$('#beiBaoRenAge,#beiBaoRenSex-1, #beiBaoRenSex-0, #ak-A, #ak-B').on('change', function() {
+	    		resultMap.clear();
+	    		bxj.PlanBook.submitSimple('#touBaoXuanZe');
+	    	});
+	    	
+    	});
+    </script>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.study.ArticleTypeManagerDao" >
+
+	<!-- 查询所有文章分类，子查询此分类中的文章数量 -->
+	<select id="listAllType" resultType="com.hangjia.bxj.model.study.type.ArticleTypeRow">
+		SELECT
+			t.id,
+			t.`name`,
+			t.sort,
+			t.display,
+			t.create_at createAt,
+			t.update_at updateAt,
+			(
+			SELECT
+				COUNT(*)
+			FROM
+				study3_articles a
+			WHERE
+				t.id = a.type_id AND a.display='true'
+			) AS articlesCount
+		FROM
+			study3_type t
+		ORDER BY
+			t.id DESC
+	</select>
+	
+	<!-- 彻底删除分类，此分类中 -->
+	<update id="deleteType">
+		UPDATE  
+			study3_type
+		SET display='false'
+		WHERE
+			id = #{typeId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+	<update id="updateDisplayStatus">
+		UPDATE
+			study3_type
+		SET
+			display = '${display}'
+		WHERE
+			id = #{typeId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+	<select id="findArticleTypeToUpdate" resultType="com.hangjia.bxj.model.study.type.ArticleTypeEntity">
+	
+		SELECT
+			t.id,
+			t.`name`,
+			t.sort,
+			t.display
+		FROM
+			study3_type t
+		WHERE
+			t.id = #{typeId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</select>
+	
+	<insert id="saveType" parameterType="com.hangjia.bxj.model.study.type.ArticleTypeEntity">
+		INSERT INTO study3_type(
+			`name`,
+			sort,
+			display
+		) VALUES (
+			#{name, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{sort, javaType=java.lang.Integer, jdbcType=INTEGER},
+			'${display}'
+		)
+	</insert>
+	
+	<update id="updateType" parameterType="com.hangjia.bxj.model.study.type.ArticleTypeEntity">
+		UPDATE
+			study3_type
+		SET
+			`name` = #{name, javaType=java.lang.String, jdbcType=VARCHAR},
+			sort = #{sort, javaType=java.lang.Integer, jdbcType=INTEGER},
+			display = '${display}'
+		WHERE
+			id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+</mapper>

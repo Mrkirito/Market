@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionVideoTagMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionVideoTag" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="video_id" property="videoId" jdbcType="BIGINT" />
+    <result column="tag_id" property="tagId" jdbcType="BIGINT" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_user" property="modifyUser" jdbcType="BIGINT" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, video_id, tag_id, create_user, create_at, modify_user, modify_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_video_tag
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_video_tag
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByVideoId" parameterType="java.lang.Long" >
+    delete from champion_video_tag
+    where video_id = #{videoId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionVideoTag" >
+    insert into champion_video_tag (fid, video_id, tag_id, 
+      create_user, create_at, modify_user, 
+      modify_at)
+    values (#{fid,jdbcType=BIGINT}, #{videoId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}, 
+      #{createUser,jdbcType=BIGINT}, #{createAt,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=BIGINT}, 
+      #{modifyAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionVideoTag" >
+    insert into champion_video_tag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="tagId != null" >
+        tag_id,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyUser != null" >
+        modify_user,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="tagId != null" >
+        #{tagId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionVideoTag" >
+    update champion_video_tag
+    <set >
+      <if test="videoId != null" >
+        video_id = #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="tagId != null" >
+        tag_id = #{tagId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionVideoTag" >
+    update champion_video_tag
+    set video_id = #{videoId,jdbcType=BIGINT},
+      tag_id = #{tagId,jdbcType=BIGINT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  
+  <select id="queryTagByVideoId" parameterType="com.hangjia.bxj.model.ChampionVideoTag" resultType="com.hangjia.bxj.model.ChampionTag">
+  	SELECT
+  		b.fid,
+  		b.name
+  	FROM
+  		champion_video_tag a
+  	LEFT JOIN 
+  		champion_tag b
+  	ON a.tag_id = b.fid
+  	WHERE
+  		a.video_id = #{videoId}
+  </select>
+</mapper>

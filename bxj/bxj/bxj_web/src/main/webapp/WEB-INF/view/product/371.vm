@@ -1,0 +1,56 @@
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-pid="371" data-jbbe="$!product.jbbe" data-cpjc="畅赢人生" data-calflag="2" data-table="0">
+		<input type="hidden" name="bxnx" value="158" class="factor" data-text="至99岁" />
+		<li class="info-item main_line_height">
+			<label class="info-name">缴费期限</label>
+			<select class="factor" name="jfnx">
+				<option value="11">20年交</option>
+				<option value="10">15年交</option>
+				<option value="9">10年交</option>
+				<option value="8">5年交</option>
+				<option value="19">3年交</option>
+				<option value="7">趸交</option>
+			</select>
+			<span class="arrowr"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">保费</label>
+			<input type="tel" placeholder="请输入保费" value="" class="demo_price factor" name="singlebf" maxlength="15"/>
+			<i class="icon">元</i>
+			<span class="error-tips" style="display:none;"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">保额</label>
+			<input type="tel" placeholder="保额" readonly="readonly" value="" class="demo_price factor" name="be" maxlength="15"/>
+			<i class="icon">元</i>
+			<span class="error-tips" style="display:none;"></span>
+		</li>
+	</div>
+	<li class="main_item li_table_0" style="display:none">
+		<div class="creatDes_header">
+			<span class="createDes-title">
+				<em>畅赢人生</em>
+				<em class="price"></em>
+			</span>
+			<span class="createDes-btn">
+				<a class="main_edit_btn" data-table="0">修改</a>
+			</span>
+		</div>
+		<table class="createDes-table">
+		<thead>
+			<tr>
+				<td>险种</td>
+				<td>保额</td>
+				<td>保费</td>
+				<td>保障期限</td>
+				<td>缴费期限</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		</table>
+	</li>
+	#parse("product/addzx.vm")
+	</ul>
+</div>

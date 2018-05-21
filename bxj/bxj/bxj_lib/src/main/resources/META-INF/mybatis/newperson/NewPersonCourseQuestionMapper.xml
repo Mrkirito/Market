@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.newperson.dao.NewPersonCourseQuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.newperson.model.NewPersonCourseQuestion" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="question_title" property="questionTitle" jdbcType="VARCHAR" />
+    <result column="question_type" property="questionType" jdbcType="INTEGER" />
+    <result column="question_answer1" property="questionAnswer1" jdbcType="VARCHAR" />
+    <result column="question_answer2" property="questionAnswer2" jdbcType="VARCHAR" />
+    <result column="question_answer3" property="questionAnswer3" jdbcType="VARCHAR" />
+    <result column="question_answer4" property="questionAnswer4" jdbcType="VARCHAR" />
+    <result column="question_answer5" property="questionAnswer5" jdbcType="VARCHAR" />
+    <result column="question_answer6" property="questionAnswer6" jdbcType="VARCHAR" />
+    <result column="correct_answer" property="correctAnswer" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="enable_status" property="enableStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, course_id, question_title, question_type, question_answer1, question_answer2, 
+    question_answer3, question_answer4, question_answer5, question_answer6, correct_answer, 
+    sort, enable_status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_new_person_course_question
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from study_new_person_course_question
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseQuestion" >
+    insert into study_new_person_course_question (id, course_id, question_title, 
+      question_type, question_answer1, question_answer2, 
+      question_answer3, question_answer4, question_answer5, 
+      question_answer6, correct_answer, sort, 
+      enable_status, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, #{questionTitle,jdbcType=VARCHAR}, 
+      #{questionType,jdbcType=INTEGER}, #{questionAnswer1,jdbcType=VARCHAR}, #{questionAnswer2,jdbcType=VARCHAR}, 
+      #{questionAnswer3,jdbcType=VARCHAR}, #{questionAnswer4,jdbcType=VARCHAR}, #{questionAnswer5,jdbcType=VARCHAR}, 
+      #{questionAnswer6,jdbcType=VARCHAR}, #{correctAnswer,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{enableStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseQuestion" >
+    insert into study_new_person_course_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="questionTitle != null" >
+        question_title,
+      </if>
+      <if test="questionType != null" >
+        question_type,
+      </if>
+      <if test="questionAnswer1 != null" >
+        question_answer1,
+      </if>
+      <if test="questionAnswer2 != null" >
+        question_answer2,
+      </if>
+      <if test="questionAnswer3 != null" >
+        question_answer3,
+      </if>
+      <if test="questionAnswer4 != null" >
+        question_answer4,
+      </if>
+      <if test="questionAnswer5 != null" >
+        question_answer5,
+      </if>
+      <if test="questionAnswer6 != null" >
+        question_answer6,
+      </if>
+      <if test="correctAnswer != null" >
+        correct_answer,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="enableStatus != null" >
+        enable_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="questionTitle != null" >
+        #{questionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null" >
+        #{questionType,jdbcType=INTEGER},
+      </if>
+      <if test="questionAnswer1 != null" >
+        #{questionAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer2 != null" >
+        #{questionAnswer2,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer3 != null" >
+        #{questionAnswer3,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer4 != null" >
+        #{questionAnswer4,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer5 != null" >
+        #{questionAnswer5,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer6 != null" >
+        #{questionAnswer6,jdbcType=VARCHAR},
+      </if>
+      <if test="correctAnswer != null" >
+        #{correctAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null" >
+        #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseQuestion" >
+    update study_new_person_course_question
+    <set >
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="questionTitle != null" >
+        question_title = #{questionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null" >
+        question_type = #{questionType,jdbcType=INTEGER},
+      </if>
+      <if test="questionAnswer1 != null" >
+        question_answer1 = #{questionAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer2 != null" >
+        question_answer2 = #{questionAnswer2,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer3 != null" >
+        question_answer3 = #{questionAnswer3,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer4 != null" >
+        question_answer4 = #{questionAnswer4,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer5 != null" >
+        question_answer5 = #{questionAnswer5,jdbcType=VARCHAR},
+      </if>
+      <if test="questionAnswer6 != null" >
+        question_answer6 = #{questionAnswer6,jdbcType=VARCHAR},
+      </if>
+      <if test="correctAnswer != null" >
+        correct_answer = #{correctAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null" >
+        enable_status = #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseQuestion" >
+    update study_new_person_course_question
+    set course_id = #{courseId,jdbcType=BIGINT},
+      question_title = #{questionTitle,jdbcType=VARCHAR},
+      question_type = #{questionType,jdbcType=INTEGER},
+      question_answer1 = #{questionAnswer1,jdbcType=VARCHAR},
+      question_answer2 = #{questionAnswer2,jdbcType=VARCHAR},
+      question_answer3 = #{questionAnswer3,jdbcType=VARCHAR},
+      question_answer4 = #{questionAnswer4,jdbcType=VARCHAR},
+      question_answer5 = #{questionAnswer5,jdbcType=VARCHAR},
+      question_answer6 = #{questionAnswer6,jdbcType=VARCHAR},
+      correct_answer = #{correctAnswer,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      enable_status = #{enableStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <sql id="Column_List" >
+    t1.id, t1.course_id, t1.question_title, t1.question_type, t1.question_answer1, t1.question_answer2,
+    t1.question_answer3, t1.question_answer4, t1.question_answer5, t1.question_answer6, t1.correct_answer,
+    t1.sort, t1.enable_status, t1.create_time, t1.update_time, t2.course_title courseTitle
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions" >
+    <where>
+
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询总条数 -->
+  <select id="selectByCount" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    count(*)
+    from study_new_person_course_question
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Base_Column_List" />
+    from study_new_person_course_question
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+
+  <!-- 查询总条数 -->
+  <select id="selectCountByQuery" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    count(*)
+    FROM study_new_person_course_question t1, study_new_person_course t2
+    WHERE t1.course_id = t2.id
+    <if test="courseId != null" >
+      and t1.course_id = #{courseId,jdbcType=BIGINT}
+    </if>
+    <if test="questionTitle != null and questionTitle != ''" >
+      and t1.question_title like CONCAT('%', #{questionTitle,jdbcType=VARCHAR}, '%')
+    </if>
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectPageByQuery" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Column_List" />
+    FROM study_new_person_course_question t1, study_new_person_course t2
+    WHERE t1.course_id = t2.id
+    <if test="courseId != null" >
+      and t1.course_id = #{courseId,jdbcType=BIGINT}
+    </if>
+    <if test="questionTitle != null and questionTitle != ''" >
+      and t1.question_title like CONCAT('%', #{questionTitle,jdbcType=VARCHAR}, '%')
+    </if>
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+</mapper>

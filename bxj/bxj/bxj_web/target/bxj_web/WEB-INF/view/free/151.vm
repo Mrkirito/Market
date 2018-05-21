@@ -1,0 +1,94 @@
+#set($header_params = {"title":"$model.name", "css":["index/css/style.css", "free/css/free.css", "free/css/free151.css"]})
+#bxj_header($header_params)
+
+#if(!$request.getParameter('hd'))
+<header class="head">
+	<a class="header_left" href="javascript:history.go(-1);"></a>
+    <h1>$model.name</h1>
+    <a class="header_right" href="javascript:;"></a>
+</header>
+
+<div class="morebutton">
+    <div>
+        <a href="plan/index.page" class="syico">首页</a>
+        <a href="javacript:void(0);" class="fenxico">分享</a>
+    </div>
+</div>
+#end
+<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+<div class="container bg-lan">
+	<div class="content">
+	<img src="$static_path/free/151/banner_01.jpg" class="ban-img">
+    <div class="chedao">
+        <div class="papers">
+            <p><input type="text" id="name" name="name" placeholder="请输入您的姓名"></p>
+		    <p><input type="tel" id="phone" name="phone" placeholder="请输入您的手机号码" maxlength="11"></p>
+		    <p><input type="text" id="idcard" name="idcard" placeholder="请输入您的身份证号" maxlength="18"></p>
+         	<input type="hidden" value="${shareId}" id="shareId">
+			<input type="hidden" value="$request.getParameter('pid')" id="pid">
+         </div>
+    </div>
+ 	<div class="asb-bt">
+	 	<a href="javascript:;" id="div_submit">
+	 		<img src="$static_path/free/151/asb-bt.png" width="166">
+	 	</a>
+ 	</div>
+    <div class="baozhang-div">
+    	<table>
+        	<tbody>
+            	<tr>
+                	<td>保障期限</td>
+                    <td>30天</td>
+                </tr>
+                <tr>
+                	<td>承保年龄</td>
+                    <td>23-49周岁</td>
+                </tr>
+                <tr>
+                	<td>保障责任</td>
+                    <td>私家车意外</td>
+                </tr>
+                <tr>
+                	<td class="border-zero">保额</td>
+                    <td class="border-zero">10万</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="baoxianzr">
+    	<p>保险责任</p>在保险期间内，被保险人乘坐或驾驶私家车时遭受意外伤害事故，并因此事故在180天内身故，保险公司按约定给付保险金额。
+    	<br>国家法定假日期间，产品承保时间会相应的顺延，具体承保时间请以承保短信为准！
+    </div>
+    </div>
+</div>
+
+#set( $footer_params = ["index/js/layer.m.js", "index/js/Messager.js", "index/js/ajax.js", "free/js/mfree.js?v=201603078", "index/js/share.js?v=201603078"])
+#bxj_footer($footer_params)
+
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$model.shareTitle',
+                desc: '$!model.shareDesc',
+                imgUrl: '$static_path/free/share_${model.id}.jpg',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+	var s = {
+		title: '$model.shareTitle',
+		desc: '$!model.shareDesc',
+		image: '$static_path/free/share_${model.id}.jpg',
+		location: '$bxj_path/free/getFreeInsuranceDetails.page?shareId=${shareId}&pid=$request.getParameter("pid")&hd=1'
+	};
+	
+	setShareInfo(s);
+	
+</script>

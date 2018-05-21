@@ -1,0 +1,222 @@
+<div id="plan_fjx_list" class="popup-layer" style="display:none;">
+	#if($product.fid==118)
+	<form class="popup-form-layer handler-host" id="fjx_form_118">
+		<header class="popup-layer-title">康宁宝贝(重疾)</header>
+		<ul class="popup-layer-ul">
+			<li class="li_product single_fjx" id="zx_product_118" style="display:none">
+				<input type="hidden" name="bxnx" value="102" class="factor" data-text="30年">
+				<input class="change checked" type="hidden"  data-cpjc="康宁宝贝(重疾)" name="pid" data-jbbe="1000" value="163">
+				<dl>
+					<dt style="display:none;">
+						<input type="checkbox" checked="checked" class="checkbox-single"> 
+						<label>康宁宝贝(重疾)</label>
+					</dt>
+					<dd>
+						<label class="layer-left-w">缴费期限</label> 
+						<select class="factor" name="jfnx">
+				        	<option value="9">10年交</option>
+				        	<option value="8">5年交</option>
+				    		<option value="19">3年交</option>
+			        	</select>
+			        	<span class="arrowr"></span>
+					</dd>
+					<dd>
+						<label class="layer-left-w">保额</label> 
+						<input type="tel"  placeholder="请输入保额" class="demo_price factor" value="" name="be">
+						<i class="icon">元</i>
+						<span class="error-tips" style="display:none;"></span>
+					</dd>
+				</dl>
+			</li>														
+		</ul>
+		<div class="popup-layer-btn">
+			<span class="popup-layer-cancel-btn">取消</span><span class="popup-layer-ok-btn" data-table="2">确定</span>
+		</div>
+	</form>
+	#else
+	 <form class="popup-form-layer handler-host" id="genger_form">
+		<header class="popup-layer-title">附加险</header>
+		<ul class="popup-layer-ul">
+			<li class="common_jfnx">
+				<label class="info-name">缴费期限</label>
+				<select class="factor" name="jfnx">
+					<option value="9">10年交</option>
+					<option value="8">5年交</option>
+					<option value="19">3年交</option>
+				</select>
+				<span class="arrowr"></span>
+			</li>
+			<li class="li_product">
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input class="change checked" type="hidden" data-cpjc="通用版" name="pid" data-jbbe="1000" value="602">
+				<select class="factor" name="jfnx" style="display:none;">
+					<option value="9">10年交</option>
+					<option value="8">5年交</option>
+					<option value="19">3年交</option>
+				</select>
+				<dl>
+				<dt class="single_li_dt">
+					<input class="checkbox-single" type="checkbox"> 
+					<label>通用版</label>
+				</dt>
+				<dd class="single_li_dd" style="display:none;">
+					<input type="tel"  placeholder="请输入保额" class="demo_price factor" name="be">
+					<i class="icon">元</i>
+				</dd>
+				<span class="error-tips" style=""></span>
+				</dl>
+			</li>
+			<li class="li_product">
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input class="change checked" type="hidden" data-cpjc="A(一般意外)" name="pid" data-jbbe="1000" value="603">	
+				<select class="factor" name="jfnx" style="display:none;">
+					<option value="9">10年交</option>
+					<option value="8">5年交</option>
+					<option value="19">3年交</option>
+				</select>
+				<dl>		
+				<dt class="single_li_dt">
+					<input class="checkbox-single" type="checkbox"> 
+					<label>A(一般意外)</label>
+				</dt>
+				<dd class="single_li_dd" style="display:none;">
+					<input type="tel"  placeholder="请输入保额" class="demo_price factor" name="be">
+					<i class="icon">元</i>
+				</dd>
+				<span class="error-tips" style=""></span>
+				</dl>
+			</li>
+			<li class="li_product">
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input class="change checked" type="hidden" data-cpjc="B(客运)" name="pid" data-jbbe="1000" value="604">	
+				<select class="factor" name="jfnx" style="display:none;">
+					<option value="9">10年交</option>
+					<option value="8">5年交</option>
+					<option value="19">3年交</option>
+				</select>		
+				<dl>
+				<dt class="single_li_dt">
+					<input class="checkbox-single" type="checkbox"> 
+					<label>B(客运)</label>
+				</dt>
+				<dd class="single_li_dd" style="display:none;">
+					<input type="tel"  placeholder="请输入保额" class="demo_price factor" name="be">
+					<i class="icon">元</i>
+				</dd>
+				<span class="error-tips" style=""></span>
+				</dl>
+			</li>
+			<li class="li_product">
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input class="change checked" type="hidden" data-cpjc="C(自驾)" name="pid" data-jbbe="1000" value="605">	
+				<select class="factor" name="jfnx" style="display:none;">
+					<option value="9">10年交</option>
+					<option value="8">5年交</option>
+					<option value="19">3年交</option>
+				</select>		
+				<dl>
+				<dt class="single_li_dt">
+					<input class="checkbox-single" type="checkbox"> 
+					<label>C(自驾)</label>
+				</dt>
+				<dd class="single_li_dd" style="display:none;">
+					<input type="tel"  placeholder="请输入保额" class="demo_price factor" name="be">
+					<i class="icon">元</i>
+				</dd>
+				<span class="error-tips" style=""></span>
+				</dl>
+			</li>
+			<li class="li_product">
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input class="change checked" type="hidden" data-cpjc="D(自然灾害)" name="pid" data-jbbe="1000" value="606">
+				<select class="factor" name="jfnx" style="display:none;">
+					<option value="9">10年交</option>
+					<option value="8">5年交</option>
+					<option value="19">3年交</option>
+				</select>			
+				<dl>
+				<dt class="single_li_dt">
+					<input class="checkbox-single" type="checkbox"> 
+					<label>D(自然灾害)</label>
+				</dt>
+				<dd class="single_li_dd" style="display:none;">
+					<input type="tel"  placeholder="请输入保额" class="demo_price factor" name="be">
+					<i class="icon">元</i>
+				</dd>
+				<span class="error-tips" style=""></span>
+				</dl>
+			</li>	
+			<li class="li_product">
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input class="change checked" type="hidden" data-cpjc="E(航空)" name="pid" data-jbbe="1000" value="607">
+				<select class="factor" name="jfnx" style="display:none;">
+					<option value="9">10年交</option>
+					<option value="8">5年交</option>
+					<option value="19">3年交</option>
+				</select>			
+				<dl>
+				<dt class="single_li_dt">
+					<input class="checkbox-single" type="checkbox"> 
+					<label>E(航空)</label>
+				</dt>
+				<dd class="single_li_dd" style="display:none;">
+					<input type="tel"  placeholder="请输入保额" class="demo_price factor" name="be">
+					<i class="icon">元</i>
+				</dd>
+				<span class="error-tips" style=""></span>
+				</dl>
+			</li>												
+		</ul>
+		<div class="popup-layer-btn">
+			<span class="popup-layer-cancel-btn">取消</span><span class="popup-layer-ok-btn" data-table="2">确定</span>
+		</div>
+	</form>		
+	#end	
+</div>
+<div id="plan_zx_list" class="popup-layer" style="display:none">
+	<form class="popup-form-layer handler-host">
+		<div class="popup-layer-title" id="popup_title">$!product.cpjc</div>
+		<ul class="popup-layer-ul" id="zx_ul" data-pid="$!product.fid" data-jbbe="$!product.jbbe" data-calflag="" data-cpjc="$!product.cpjc" data-table="0">
+		</ul>
+		<div class="popup-layer-btn">
+			<span class="popup-layer-cancel-btn">取消</span>
+			<span class="popup-layer-ok-btn" data-table="0">确定</span>
+		</div>
+	</form>
+</div>
+<div id="plan_zh_list" class="popup-layer" style="display:none;">
+	<form class="popup-form-layer handler-host">
+	        <header class="popup-layer-title">险种组合</header>
+	        <ul class="popup-layer-ul">
+	            <li data-pid="72" data-jbbe="10000" data-cpjc="康宁终身" data-table="0">
+					<input type="hidden" name="bxnx" value="6" class="factor" data-text="终身">
+	                <dl>
+	                    <dt>
+	                        <input id="t_72" class="checkbox-single" type="checkbox">
+	                        <label for="t_72">康宁终身</label>
+	                    </dt>
+						<div class="hide" style="display:none;">
+    					 	<dd>
+    							<label class="layer-left-w">缴费年限</label> 
+            		         	<select class="factor" name="jfnx">
+            				        <option value="11">20年交</option>
+            				        <option value="9">10年交</option>
+            				    	<option value="7">趸交</option>
+            			        </select>
+            			        <span class="arrowr"></span>
+    						</dd>
+    						<dd>
+    							<label class="layer-left-w">保额</label> 
+    							<input type="tel" placeholder="请输入保额" value="" class="demo_price factor" name="be" maxlength="15"/>
+								<i class="icon">元</i>
+								<span class="error-tips" style="display:none;"></span>
+    						</dd>
+						</div>
+	                </dl>
+	            </li>
+	        </ul>
+	        <div class="popup-layer-btn">
+	            <span class="popup-layer-cancel-btn">取消</span><span class="popup-layer-ok-btn">确定</span>
+	        </div>
+	  </form>    
+</div>	

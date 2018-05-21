@@ -1,0 +1,111 @@
+#set($header_params = {"title":"$model.name", "css":["index/css/style.css", "free/css/free.css", "free/css/free147.css"]})
+#bxj_header($header_params)
+
+#if(!$request.getParameter('hd'))
+<!-- 导航 开始-->
+<header class="head">
+	<a class="header_left" href="javascript:history.go(-1);"></a>
+    <h1>$model.name</h1>
+    <a class="header_right" href="javascript:;"></a>
+</header>
+
+
+<div class="morebutton">
+    <div>
+        <a href="plan/index.page" class="syico">首页</a>
+        <a href="javacript:void(0);" class="fenxico">分享</a>
+    </div>
+</div>
+#end
+<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+<div class="container">
+<div class="content">
+
+	<!-- 图片 -->
+	<div class="div_top_img">
+		<img src="$static_path/free/147/top_img_02.png"/>
+		<img src="$static_path/free/147/top_img_03.png"/>
+		<img src="$static_path/free/147/top_img_04.png"/>
+		<img src="$static_path/free/147/img1_02.png"/>
+	</div>
+	
+	<div class="div_yl">
+		<div class="div_yl_over">
+			<p>
+				<input class="div_self_ipt" type="text" id="name" name="name" placeholder="请输入您的姓名">
+			</p>
+			<p>
+				<input class="div_self_ipt" type="tel" id="phone" name="phone" placeholder="请输入您的手机号码" maxlength="11">
+			</p>
+			<p>
+				<input class="div_self_ipt" type="text" id="idcard" name="idcard" placeholder="请输入您的身份证号" maxlength="18">
+			</p>
+			<input type="hidden" value="${shareId}" id="shareId">
+			<input type="hidden" value="$request.getParameter('pid')" id="pid">
+			<input class="btn_self" type="button" id="btn_submit" value="免费领取" onclick="doSubmit();">
+		</div>
+	</div>
+</div>
+
+<div class="div_detail">
+	<div class="div_detail_left">
+		<p class="div_de_bdbtm">保障期间</p>
+		<p class="div_de_bdbtm">保障年龄</p>
+		<p class="div_de_bdbtm">保障责任</p>
+		<p class="div_de_left">保额</p>
+	</div>
+	<div class="div_detail_right">
+		<p class="div_de_bdbtm">1年内</p>
+		<p class="div_de_bdbtm">18-50岁</p>
+		<p class="div_de_bdbtm">39°发烧补偿服务</p>
+		<p class="div_de_right">100元</p>
+	</div>
+</div>
+
+<div class="div_btm">
+	<!--背景小图-->
+	<div class="div_btm_over">
+		<p>保险责任</p>
+		医院测得体温高于39度（含39度）保险家为您送上温暖补偿金100元。
+		<p>服务说明</p>
+		1.18岁-50岁用户，每人限领一份，多领无效；同一事件下发烧补偿的对象最多可获得一次补偿金；<br>
+		2.本服务仅为安装“保险家”手机应用APP并且领取了“39°的温暖”发烧补偿服务的用户提供发烧补偿金服务；<br>
+		3.服务领取30天（等待期）后，若用户因身体不适就医（仅限中国大陆二级以上医院）后，医院测得体温高于39度（含39度），保险家为您送上温暖补偿金100元；<br>
+		4.本服务等待期为30天（自领取之日开始）；本服务有效期限365天。
+		<br> 国家法定假日期间，产品承保时间会相应的顺延，具体承保时间请以承保短信为准！
+	</div>
+</div>
+
+</div>
+
+#set( $footer_params = ["index/js/layer.m.js", "index/js/Messager.js", "index/js/ajax.js", "free/js/mfree.js?v=201603078", "index/js/share.js?v=201603078"])
+#bxj_footer($footer_params)
+
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$model.shareTitle',
+                desc: '$!model.shareDesc',
+                imgUrl: '$static_path/free/share_${model.id}.jpg',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+
+	var s = {
+		title: '$model.shareTitle',
+		desc: '$!model.shareDesc',
+		image: '$static_path/free/share_${model.id}.jpg',
+		location: '$bxj_path/free/getFreeInsuranceDetails.page?shareId=${shareId}&pid=$request.getParameter("pid")&hd=1'
+	};
+	
+	setShareInfo(s);
+	
+</script>

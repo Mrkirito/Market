@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.MemberIdeaDao">
+
+	<!-- 保存用户反馈意见 -->
+	<insert id="save" parameterType="com.hangjia.bxj.model.MemberIdea" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO member_idea(
+			user_id,
+			contact_info,
+			`text`
+		) VALUES (
+			#{userId, jdbcType=INTEGER, javaType=java.lang.Integer},
+			#{contactInformation, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{text, jdbcType=VARCHAR, javaType=java.lang.String}
+		)
+	</insert>
+	
+  <select id="getIdeaCount" parameterType="com.hangjia.bxj.query.ProductQuery" resultType="int">
+    select count(*) from member_idea  WHERE create_at BETWEEN #{begin} AND #{end}
+  </select>
+  <select id="getIdeaData" parameterType="com.hangjia.bxj.query.ProductQuery" resultType="com.hangjia.bxj.model.MemberIdea">
+	select text,contact_info as contactInformation,create_at as createAt,state,mark,id from member_idea  WHERE date(create_at) BETWEEN #{begin} AND #{end} ORDER BY create_at desc LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  <update id="updateMember" parameterType="com.hangjia.bxj.model.MemberIdea">
+  	update member_idea 
+  	<set>
+  		<if test="state!=null">
+  			state=#{state},
+  		</if>
+  		<if test="mark!=null">
+  			mark=#{mark},
+  		</if>
+  	</set>
+  		where id=#{id}
+  </update>
+</mapper>

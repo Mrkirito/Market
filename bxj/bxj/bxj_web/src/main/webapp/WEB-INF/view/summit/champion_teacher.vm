@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/championforum/css/forum_index.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+    <title>冠军论坛</title>
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="mask" style="display: none;"><i class="loading"></i></div>
+	 
+	<section id="ChangshaMeeting" class="forum_list page out" data-title="$!summitName"  data-rel="auto">
+		<!--导航 开始-->
+		<header class="head" style="display: none;" >
+		  	<a class="header_left" href="javascript:history.back()" data-rel="back"></a>
+		    <h1>$!summitName</h1>
+		</header>
+		<div class="header_heightblock" style="display: none;"></div>
+		<!--导航 结束 v=232&shareios=1#/plan/detail -->
+		<div class="container container_forum_list" >
+			<ul>
+			  #if($!summitClassList && $!summitClassList.size() > 0)
+			   	#foreach($summitClass in $summitClassList)
+			   	<a href="$bxj_path/summit/oneTeacher.page?classId=$!summitClass.id&shareios=1#/plan/detail">
+				   <li>
+						<div class="imgblock">
+							<img src="$!summitClass.imgFileUrl" />
+						</div>
+						<div class="informblock">
+							<h1>$!summitClass.title</h1>
+							<span class="name">$!summitClass.teacherName</span>
+						</div>
+					</li>
+				 </a>
+			    #end
+			  #end
+			</ul>
+		</div>
+	</section>
+	   
+</body>
+</html>
+
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script>
+FastClick.attach(document.body);
+function jumpUrl(obj){
+	var isOnLoad = true;
+	var Url = obj.name;
+	var dom = '<iframe src="" style="width: 100%; height: 100%;"></iframe>';
+	//$('.mask').show();
+	$('.container_forumiframe iframe').remove();
+	$('.container_forumiframe').append(dom);
+	$('.container_forumiframe iframe').attr('src',Url);
+	$('.container_forumiframe iframe').load(function() {
+		isOnLoad = false;// 加载完成
+		$('.mask').hide();
+	});
+}
+</script>
+
+<script>
+<!-- 百度统计 -->
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>

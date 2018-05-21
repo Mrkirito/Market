@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.BxjHjAppWchartDataMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.BxjHjAppWchartData" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="data_date" property="dataDate" jdbcType="TIMESTAMP" />
+    <result column="data1" property="data1" jdbcType="BIGINT" />
+    <result column="data2" property="data2" jdbcType="BIGINT" />
+    <result column="data3" property="data3" jdbcType="BIGINT" />
+    <result column="data4" property="data4" jdbcType="BIGINT" />
+    <result column="data5" property="data5" jdbcType="BIGINT" />
+    <result column="data6" property="data6" jdbcType="BIGINT" />
+    <result column="data7" property="data7" jdbcType="BIGINT" />
+    <result column="data8" property="data8" jdbcType="BIGINT" />
+    <result column="data9" property="data9" jdbcType="BIGINT" />
+    <result column="data10" property="data10" jdbcType="BIGINT" />
+    <result column="data11" property="data11" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, data_date, data1, data2, data3, data4, data5, data6, data7, data8, data9,data10,data11, create_time,
+    create_by, update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_hj_app_wchart_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_hj_app_wchart_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.BxjHjAppWchartData" >
+    insert into bxj_hj_app_wchart_data (id, data_date, data1,
+      data2, data3, data4, data5, 
+      data6, data7, data8, data9, data10, data11
+      create_time, create_by, update_time, 
+      update_by)
+    values (#{id,jdbcType=BIGINT}, #{dataDate,jdbcType=TIMESTAMP}, #{data1,jdbcType=BIGINT}, 
+      #{data2,jdbcType=BIGINT}, #{data3,jdbcType=BIGINT}, #{data4,jdbcType=BIGINT}, #{data5,jdbcType=BIGINT}, 
+      #{data6,jdbcType=BIGINT}, #{data7,jdbcType=BIGINT}, #{data8,jdbcType=BIGINT}, #{data9,jdbcType=BIGINT},
+      #{data10,jdbcType=BIGINT}, #{data11,jdbcType=BIGINT},
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.BxjHjAppWchartData" >
+    insert into bxj_hj_app_wchart_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dataDate != null" >
+        data_date,
+      </if>
+      <if test="data1 != null" >
+        data1,
+      </if>
+      <if test="data2 != null" >
+        data2,
+      </if>
+      <if test="data3 != null" >
+        data3,
+      </if>
+      <if test="data4 != null" >
+        data4,
+      </if>
+      <if test="data5 != null" >
+        data5,
+      </if>
+      <if test="data6 != null" >
+        data6,
+      </if>
+      <if test="data7 != null" >
+        data7,
+      </if>
+      <if test="data8 != null" >
+        data8,
+      </if>
+      <if test="data9 != null" >
+        data9,
+      </if>
+      <if test="data10 != null" >
+        data10,
+      </if>
+      <if test="data11 != null" >
+        data11,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dataDate != null" >
+        #{dataDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="data1 != null" >
+        #{data1,jdbcType=BIGINT},
+      </if>
+      <if test="data2 != null" >
+        #{data2,jdbcType=BIGINT},
+      </if>
+      <if test="data3 != null" >
+        #{data3,jdbcType=BIGINT},
+      </if>
+      <if test="data4 != null" >
+        #{data4,jdbcType=BIGINT},
+      </if>
+      <if test="data5 != null" >
+        #{data5,jdbcType=BIGINT},
+      </if>
+      <if test="data6 != null" >
+        #{data6,jdbcType=BIGINT},
+      </if>
+      <if test="data7 != null" >
+        #{data7,jdbcType=BIGINT},
+      </if>
+      <if test="data8 != null" >
+        #{data8,jdbcType=BIGINT},
+      </if>
+      <if test="data9 != null" >
+        #{data9,jdbcType=BIGINT},
+      </if>
+      <if test="data10 != null" >
+        #{data10,jdbcType=BIGINT},
+      </if>
+      <if test="data11 != null" >
+        #{data11,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.BxjHjAppWchartData" >
+    update bxj_hj_app_wchart_data
+    <set >
+      <if test="dataDate != null" >
+        data_date = #{dataDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="data1 != null" >
+        data1 = #{data1,jdbcType=BIGINT},
+      </if>
+      <if test="data2 != null" >
+        data2 = #{data2,jdbcType=BIGINT},
+      </if>
+      <if test="data3 != null" >
+        data3 = #{data3,jdbcType=BIGINT},
+      </if>
+      <if test="data4 != null" >
+        data4 = #{data4,jdbcType=BIGINT},
+      </if>
+      <if test="data5 != null" >
+        data5 = #{data5,jdbcType=BIGINT},
+      </if>
+      <if test="data6 != null" >
+        data6 = #{data6,jdbcType=BIGINT},
+      </if>
+      <if test="data7 != null" >
+        data7 = #{data7,jdbcType=BIGINT},
+      </if>
+      <if test="data8 != null" >
+        data8 = #{data8,jdbcType=BIGINT},
+      </if>
+      <if test="data9 != null" >
+        data9 = #{data9,jdbcType=BIGINT},
+      </if>
+      <if test="data10 != null" >
+        data10 = #{data10,jdbcType=BIGINT},
+      </if>
+      <if test="data11 != null" >
+        data11 = #{data11,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.BxjHjAppWchartData" >
+    update bxj_hj_app_wchart_data
+    set data_date = #{dataDate,jdbcType=TIMESTAMP},
+      data1 = #{data1,jdbcType=BIGINT},
+      data2 = #{data2,jdbcType=BIGINT},
+      data3 = #{data3,jdbcType=BIGINT},
+      data4 = #{data4,jdbcType=BIGINT},
+      data5 = #{data5,jdbcType=BIGINT},
+      data6 = #{data6,jdbcType=BIGINT},
+      data7 = #{data7,jdbcType=BIGINT},
+      data8 = #{data8,jdbcType=BIGINT},
+      data9 = #{data9,jdbcType=BIGINT},
+      data10 = #{data10,jdbcType=BIGINT},
+      data11 = #{data11,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getBxjAppWchartDatasByMonth" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List" /> from bxj_hj_app_wchart_data where date_format(data_date,'%Y%m') = #{date}
+  </select>
+  <select id="getBxjAppWchartDatasByDate" resultType="int" parameterType="java.lang.String" >
+    select count(*) from bxj_hj_app_wchart_data where date_format(data_date,'%Y%m%d') = #{date}
+  </select>
+  <select id="getAppWchartDatasByDate" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List" /> from bxj_hj_app_wchart_data where date_format(data_date,'%Y%m%d') = #{date} order by data_date
+  </select>  
+    <select id="getAllBxjAppWchartDatas" resultMap="BaseResultMap" >
+    select <include refid="Base_Column_List" /> from bxj_hj_app_wchart_data order by data_date
+  </select>  
+ <select id="selectTable" resultType="com.hangjia.bxj.vo.ProductDetailVo">
+     <![CDATA[
+            select 1 productType,'<br>行家服务号' productName,'<br/>王彬' worker,'data1,data2,data3' dataName,'总用户<br/><hr>增加<br/><hr>净增' dataInfo from dual
+--             union ALL
+--             select 2 productType,'<br>行家微博号' productName,'<br/>王彬','data4,data5,data6' dataName,'总用户<br/><hr>增加<br/><hr>净增' dataInfo from dual
+--             union ALL
+--             select 3 productType,'<br>微信群' productName,'<br/>王彬' worker,'data7,data8,data10,data11' dataName,'群数<br/><hr>人数<br/><hr>增加<br/><hr>净增' dataInfo from dual union ALL
+--             select 4 productType,'总用户合计' productName,'' worker,'data9' dataName,'总计' dataInfo from dual
+        ]]>
+</select>
+</mapper>

@@ -1,0 +1,33 @@
+$pageModule.init("app/study_core/comment", "list")
+<!-- 查询 -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default search">
+            <div class="panel-heading">
+                <h3 class="panel-title">查询条件</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row form ">
+					<div class="form-group col-xs-12 col-md-3">
+                        <label for="userCode">文章标题: </label>
+                        <input type="text" placeholder="文章标题" id="articleTitle" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="userCode">评论内容: </label>
+                        <input type="text" placeholder="评论内容" id="content" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label>&nbsp;</label>
+                        <div class="control">
+                            <button class="btn btn-primary search-data">查询</button>
+                            <button class="btn btn-default reset-data">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 列表 -->
+<div class="data-list" style=""></div>

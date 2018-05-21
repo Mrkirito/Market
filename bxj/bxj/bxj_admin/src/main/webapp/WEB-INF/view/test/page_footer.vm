@@ -1,0 +1,69 @@
+<!-- 底部分页及页码 -->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="dataTables_info" id="DataTables_Table_0_info">
+            #set($ssize = "$bean.size")#set($sindex = "$bean.index")#set($stotalPage = "$bean.totalPage")#set($Integer = 0)#set($end = $Integer.parseInt($ssize) * $Integer.parseInt($sindex))#set($start = $Integer.parseInt($ssize) * ($Integer.parseInt($sindex) - 1) + 1)
+            第$start条到
+            #if ($bean.index==$bean.totalPage)
+                $bean.count
+            #else
+                $end
+            #end
+            条，总共$bean.count条
+        </div>
+    </div>
+    <div class="span12 center">
+        <div class="dataTables_paginate paging_bootstrap pagination">
+            <ul>
+                #if (1==$bean.index)
+                    <li class="prev disabled"><a href="javascript:void(0))">← Previous</a></li>
+                #else
+                    <li class="prev ">#set($p1=$Integer.parseInt($sindex) - 1)<a href="${bean.action}.jhtml?size=$bean.size&index=$p1">← Previous</a></li>
+                #end
+
+                #if($Integer.parseInt($stotalPage) < 6)
+                    #foreach($i in [1 .. $Integer.parseInt($stotalPage)])
+                        #if($i == $Integer.parseInt($sindex))
+                            <li class="active"><a href="${bean.action}.jhtml?size=$bean.size&index=$i">$i</a></li>
+                        #else
+                            <li><a href="${bean.action}.jhtml?size=$bean.size&index=$i">$i</a></li>
+                        #end
+                    #end
+                #else
+                    #if($Integer.parseInt($sindex)>2)
+                        <li>#set($p2=$Integer.parseInt($sindex) - 2)<a href="${bean.action}.jhtml?size=$bean.size&index=$p2">$p2</a></li>
+                    #end
+                    #if($Integer.parseInt($sindex)>1)
+                        <li>#set($p3=$Integer.parseInt($sindex) - 1)<a href="${bean.action}.jhtml?size=$bean.size&index=$p3">$p3</a></li>
+                    #end
+                    <li class="active">#set($p4=$Integer.parseInt($sindex))<a href="${bean.action}.jhtml?size=$bean.size&index=$p4">$p4</a></li>
+                    #if($Integer.parseInt($sindex) + 1 <= $Integer.parseInt($stotalPage))
+                        <li>#set($p5=$Integer.parseInt($sindex) + 1)<a href="${bean.action}.jhtml?size=$bean.size&index=$p5">$p5</a></li>
+                    #end
+                    #if($Integer.parseInt($sindex) + 2 <= $Integer.parseInt($stotalPage))
+                        <li>#set($p6=$Integer.parseInt($sindex) + 2)<a href="${bean.action}.jhtml?size=$bean.size&index=$p6">$p6</a></li>
+                    #end
+                    #if($Integer.parseInt($sindex)==1)
+                        #if($Integer.parseInt($sindex) + 3 <= $Integer.parseInt($stotalPage))
+                            <li>#set($p7=$Integer.parseInt($sindex) + 3)<a href="${bean.action}.jhtml?size=$bean.size&index=$p7">$p7</a></li>
+                        #end
+                        #if($Integer.parseInt($sindex) + 4 <= $Integer.parseInt($stotalPage))
+                            <li>#set($p8=$Integer.parseInt($sindex) + 4)<a href="${bean.action}.jhtml?size=$bean.size&index=$p8">$p8</a></li>
+                        #end
+                    #end
+                    #if($Integer.parseInt($sindex)==2)
+                        #if($Integer.parseInt($sindex) + 3 <= $Integer.parseInt($stotalPage))
+                            <li>#set($p9=$Integer.parseInt($sindex) + 3)<a href="${bean.action}.jhtml?size=$bean.size&index=$p9">$p9</a></li>
+                        #end
+                    #end
+                #end
+
+                #if ($bean.index==$bean.totalPage)
+                    <li class="next disabled"><a href="javascript:void(0))">Next → </a></li>
+                #else
+                    <li class="next">#set($p7=$Integer.parseInt($sindex) + 1)<a href="${bean.action}.jhtml?size=$bean.size&index=$p7">Next → </a></li>
+                #end
+            </ul>
+        </div>
+    </div>
+</div>

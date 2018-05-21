@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<export-root name="视频列表">
+    <export-fields >
+        <export-field name="fid" title="id"/>
+        <export-field name="title" title="视频标题"/>
+    </export-fields>
+</export-root>

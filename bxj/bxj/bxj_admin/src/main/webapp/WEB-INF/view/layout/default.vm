@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8" />
+    #showTitle("首页")
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    #set($social_path = ${configuration.getProperty("urlPath","bxj_path")})
+    #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $public_path = ${configuration.getProperty("urlPath","public_path")})
+	#set( $platform_static_path = ${configuration.getProperty("urlPath","platform_static_path")})
+    #set($nowNanoTime = ${DateUtility.getNanoTimeStamp()})
+    <base href="$social_path/">
+	<script >
+		var serverHost = "$!social_path",static_path="$static_path";
+		var platformStaticPath = "$!platform_static_path";
+    </script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="res/media/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="res/media/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+	<link href="res/media/css/google/ui-typography.css" rel="stylesheet" type="text/css"/>
+	<link href="res/media/css/nifty.css" rel="stylesheet" type="text/css"/>
+	<link href="res/media/js/lib/plugins/switchery/switchery.css" rel="stylesheet" type="text/css"/>
+	<link href="res/media/js/lib/plugins/bootstrap-select/bootstrap-select.css" rel="stylesheet" type="text/css"/>
+	<link href="res/media/css/nifty-test.css" rel="stylesheet" type="text/css"/>
+	<link href="res/media/css/mylayout.css" rel="stylesheet" type="text/css"/>
+	<link href="res/media/css/custom.css" rel="stylesheet" type="text/css"/>
+	#showStylesheets()
+</head>
+<body>
+
+<div id="container" class="effect mainnav-lg #if($pageModule.isShowAside()) aside-in aside-left aside-bright #end">
+	#parse("./common/header.vm")
+    <div class="boxed">
+        <!--CONTENT CONTAINER-->
+        <!--===================================================-->
+		<div id="content-container">
+        
+            <div id="page-content">
+                ###parse("./common/navigation.vm")
+                $screen_content
+            </div>
+       </div> 
+
+	   <nav id="mainnav-container">
+			<div id="mainnav">
+             #parse("./common/notify.vm")
+			 #parse("./common/menu.vm")
+            </div>
+        </nav>
+    </div>
+	#parse("./common/footer.vm")
+    <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+</div>
+#parse("./common/theme.vm")
+<input type="hidden" class="_u_f_" value='${userFunction}'>
+<input type="hidden" class="_u_r_c_" value="$!userRoleCodeList"/>
+#parse("./template/requirejs.vm")
+</body>
+</html>
+

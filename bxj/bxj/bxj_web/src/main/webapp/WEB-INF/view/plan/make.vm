@@ -1,0 +1,557 @@
+#set($header_params = {"title":"计划书", 
+	"css":["public/css/mobilebone.css","public/css/mobiscroll-2.17.1.min.css", "bxj_two/static/css/make_plan.css?v=20160414", "public/css/animate.css"], 
+	"baseTag":"false",
+	"js":["public/js/mobilebone.js", "public/js/mobiscroll-2.17.1.min.js", "public/js/loader.js?v=20160312", "invit/invit.js?v=20160322"]	
+})
+
+#bxj_header2($header_params)
+
+
+<!--导航 开始-->
+
+#set($bxj_header_params = {"title":"计划书", "isShare":5})
+#bxj_header_html($bxj_header_params)
+<!--导航 结束-->
+
+<div id="planMakePage" class="page in">
+<!--内容 开始-->
+<!-- 弹出层 -->
+<div class="greyDiv" style="display:none;" ></div><!-- 灰色蒙层 -->
+<div class="showDiv" data-confirm="0" id="insures_popup_dialog_0" style="display:none;">
+	<h1>附加险</h1>
+    <div class="scroll-div">
+	    #foreach($fjx in $product.childs)
+		   	<span class="click_choose #if($fjx.product.cdmc==1) long-type #else short-type #end" id="click_choose_$fjx.product.fid" data-single="1" data-pid="$fjx.product.fid">$fjx.product.cpjc</span>
+	    #end
+        <div style="clear:both"></div>
+    </div>
+    <a class="cancel_button">取消</a>
+    <a class="sure_button">确定</a>
+</div>
+<div class="showDiv" data-confirm="1" id="insures_popup_dialog_1" style="display:none;">
+	<h1>险种组合</h1>
+    <div class="scroll-div">
+    	#foreach($zx in $zxlist)
+	    	<span class="click_choose #if($zx.cdmc==1) long-type #else short-type #end" id="click_choose_$zx.fid" data-single="1" data-pid="$zx.fid">$zx.cpjc</span>
+    	#end
+        <div style="clear:both"></div>
+        <!--<span class="more_span">更多产品，即将上线~</span>-->
+    </div>
+    <a class="cancel_button">取消</a>
+    <a class="sure_button">确定</a>
+</div>
+<div class="showDiv" data-confirm="2" id="insures_popup_dialog_2" style="display:none;">
+</div>
+<div class="showDiv" data-confirm="3" id="insures_popup_dialog_3" style="display:none;">
+	<input type="hidden" id="delete_pid_rel" />
+	<p class="del-text">是否确认删除？</p>
+	<div class="scroll-div"></div>
+	<a class="cancel_button">取消</a>
+    <a class="sure_button">确定</a>
+</div>
+<div class="showDiv" data-confirm="4" id="insures_popup_dialog_4" style="display:none;">
+	<div class="scroll-div input_pop">
+		#if($product.zxflag==4)
+			<div class="input_div_$product.fid" style="display: none;" data-pid="$product.fid">
+		 	   		<h1>$product.groupName</h1>
+				 	#foreach($pc in $product.productConstants)
+		                	#if($pc.inputType==2)                	
+			                <div class="common_factors" #if($pc.hide==0)style="display:none;"#end >
+				                <dt>$!pc.name</dt>
+				                <dd>
+				                    <select class="selecttype_input" name="$!pc.columnField">
+				                    	#foreach($p in $pc.children)
+				                        	<option value="$!p.fid">$!p.name</option>
+				                        #end
+				                    </select>
+				                </dd>
+				            </div>   
+			                #end
+		                #end
+		                #foreach($pc in $product.productConstants)
+	                		#if($pc.inputType==3)                	
+						   		<dt>$product.cpjc</dt>
+						   		<dd><input type="tel" data-pid="$!product.fid" placeholder="$!pc.placeholder" value="$!pc.defaultValue" #if($pc.inputType==4)readonly="readonly"#end name="$pc.columnField" data-flag="$!pc.flag" data-zxid="$!pc.zxId" data-maxvalue="$!pc.maxValues" data-minvalue="$!pc.minValues" class="money_input current_input_$!product.fid"/></dd>
+		                	#end
+                		#end
+		                #foreach($child in $product.mustChilds)
+			            	#if($child.product.cplx==2)
+			            		<div style="display:none;" class="huomian_pid_$!child.product.fid"><dt><span class="arrow on"></span></dt><dd>$!child.product.cpjc</dd></div>
+								<input name="be" type="hidden" data-pid="$!child.product.fid" />
+				            #else
+							   #foreach($pc in $child.product.productConstants)
+					               	#if($pc.inputType==3)                	
+									   <dt>$child.product.cpjc</dt>
+									   <dd><input type="tel" data-pid="$!child.product.fid" placeholder="$!pc.placeholder" value="$!pc.defaultValue" #if($pc.inputType==4)readonly="readonly"#end name="$pc.columnField" data-flag="$!pc.flag" data-zxid="$!pc.zxId" data-maxvalue="$!pc.maxValues" data-minvalue="$!pc.minValues" class="money_input current_input_$!child.product.fid"/></dd>
+						            #end
+					           #end
+				            #end
+		            	#end
+	    	</div>
+    	#end
+	</div>
+	<a class="cancel_button">取消</a>
+    <a class="sure_button">确定</a>
+</div>
+<div class="showDiv" data-confirm="5" id="insures_popup_dialog_5" style="display:none;">
+	<h1>产品基本话术</h1><!-- 弹出框标题 -->
+    <div class="scroll-div">
+        <!-- 选择内容类保险 -->
+        <span class="click_choose min-type bechecked" data-value="5" data-single="1">草帽图</span>
+    	<!--<span class="click_choose min-type" data-value="1" data-single="1">开门红</span>-->
+    	<span class="click_choose min-type" data-value="2" data-single="1">养老</span>
+    	<span class="click_choose min-type" data-value="3" data-single="1">重疾</span>
+        <span class="click_choose min-type" data-value="4" data-single="1">意外</span>
+        <!-- 选择内容类保险 结束 -->
+        <div style="clear:both"></div><!-- 清除浮动，勿删 -->
+    </div>
+    <a class="sure_button02">保存</a>
+</div>
+<div class="showDiv" data-confirm="6" id="insures_popup_dialog_6" style="display:none;">
+	<h1>姓名重复确认</h1><!-- 弹出框标题 -->
+    <div class="scroll-div">
+    	<p class="inform" id="hasCustomerName"></p>
+    	<div style="clear:both"></div><!-- 清除浮动，勿删 -->
+    </div>
+	<a class="cancel_button">新建客户</a>
+    <a class="sure_button">添加到原客户</a>
+</div>
+<div class="showDiv" data-confirm="7" id="insures_popup_dialog_7" style="display:none;">
+	<h1>请选择添加到那位客户</h1><!-- 弹出框标题 -->
+    <div class="scroll-div">
+		<ul class="choose_user"></ul>
+    	<div style="clear:both"></div><!-- 清除浮动，勿删 -->
+    </div>
+	<a class="single_button">确认添加</a>
+</div>
+<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+<div class="container container_plan">
+	<!-- 独立带橙色标题模块 -->
+	<div class="plan_block inform">
+    	<div class="title"><!-- 标题内容 -->
+        	<img src="$static_path/index/images/title_icon01.png" width="12" height="13">
+        	<span>被保人信息</span>
+        </div>
+        <form id="insure_info">
+        <input type="hidden" name="pid" value="$!product.fid" />
+        <input type="hidden" name="name" value="$!product.name" />
+        <input type="hidden" name="gs" value="$!product.gs" />
+        <input type="hidden" name="bf" value="0"/>
+        <input type="hidden" name="kchs"/>
+        <input type="hidden" name="userId" value="$!userId"/>
+        <input type="hidden" name="customerId" />
+        <input type="hidden" name="hasCustomerId" value="false" />
+        <div class="plan_block_div">
+        	<dt>
+        		<span class="dt_span">性别</span>
+            </dt>
+            <dd>
+                <label class="gender_span checked" data-flag="1" for="male">
+                    <input type="radio" checked="checked" name="sex" id="male" value="1" class="radioclass sex">
+                </label>
+                <span>男</span>
+                <label class="gender_span margin-left" data-flag="1" for="female">
+                    <input type="radio" name="sex" id="female" value="0" class="radioclass sex">
+                </label>
+                <span>女</span>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt>
+        		<span class="dt_span">年龄</span>
+            </dt>
+            <dd>
+            	<select class="age_select" name="age" id="age_select_01">
+            		#foreach($age in $product.ages)
+            			<option #if($age==$product.hmstate)selected="selected"#end>$age</option>
+            		#end
+                </select>                
+            </dd>
+        </div>
+        </form>
+    </div>
+    <!-- 独立带橙色标题模块 结束 -->
+    
+    <!-- 独立带橙色标题模块 参考总监方案 -->
+    <div class="plan_block yes plan_block_table" style="display:none;">
+    	<div class="title">
+        	<img src="$static_path/index/images/title_icon02.png" width="15" height="15">
+        	<span>投保选择</span>
+        </div>
+        <div class="plan_block_div">
+        	<div id="make_products_rel_table">
+        	 #if($product.zxflag==4)	
+        	<div class="relative_product_$product.fid">
+        		<div class="relative" data-pid="$product.fid">
+        		<h1 class="title01">$!product.groupName</h1>
+        			<p class="title02">首年保费<span class="red totil_money"></span></p>
+        			<span class="button01">修改</span>
+        		</div>
+	        	<table><tbody><tr><th>险种名称</th><th>保额/份数</th><th>保费</th><th>保障期限</th><th>交费期限</th></tr>
+	        	<tr class="tr_$!product.fid"><td>$!product.cpjc</td><td></td><td></td><td></td><td></td></tr>
+	        	#foreach($child in $product.mustChilds)	            	
+					<tr class="tr_$!child.product.fid"><td>$!child.product.cpjc</td><td></td><td></td><td></td><td></td></tr>		        
+	            #end
+	        	</tbody></table>
+        	</div>
+	        	#end			
+        	</div>
+            <div class="totil">
+            	<p>总计首年保费：<span class="red totil_money table_totil_money"></span>元</p>
+            </div>
+            <p class="choose bottom_line font-h5 main_insure_button main_insure_button_0" data-extent="0" #if($product.zxflag!=2)style="display:none"#end>附加险<span class="choose_span01">添加附加险，让保障更完善</span></p>
+            <p class="choose font-h5 main_insure_button  main_insure_button_1" data-extent="1" #if($zxlist.size==0)style="display:none"#end>险种组合<span class="choose_span02">试试再添加一款主险，</br>可以让主险计划组合起来哦！</span></p>
+        </div>
+    </div>
+    <!-- 独立带橙色标题模块 结束 -->
+    
+    <!-- 独立带橙色标题模块 不参考总监方案-->
+    #if($product.zxflag==4)
+    <div class="plan_block no plan_block_input" style="display:;">
+    	<div class="title">
+        	<img src="$static_path/index/images/title_icon02.png" width="15" height="15">
+        	<span>投保选择</span>
+        </div>
+        <div class="plan_block_div">
+        	<form id="form" data-pid="$product.fid">
+        	<div class="bottom_line">
+                <h1 class="title01">$product.groupName</h1>
+                #foreach($pc in $product.productConstants)
+                	#if($pc.inputType==2)                	
+	                <div class="common_factors" #if($pc.hide==0)style="display:none;"#end >
+		                <dt>
+		                    <span class="dt_span">$!pc.name</span>
+		                </dt>
+		                <dd>
+		                    <select class="selecttype_input" name="$!pc.columnField">
+		                    	#foreach($p in $pc.children)
+		                        	<option value="$!p.fid">$!p.name</option>
+		                        #end
+		                    </select>
+		                </dd>
+		            </div>   
+	                #end
+                #end                
+            </div>
+            <div class="bottom_line relative">
+			    <h1 class="title03">$!product.cpjc</h1>
+			   	#foreach($pc in $product.productConstants)
+                	#if($pc.inputType==3)                	
+					   <dt><span class="dt_span">$pc.name</span></dt>
+					   <dd><input type="tel" data-pid="$!product.fid" placeholder="$!pc.placeholder" value="$!pc.defaultValue" #if($pc.inputType==4)readonly="readonly"#end name="$pc.columnField" data-flag="$!pc.flag" data-zxid="$!pc.zxId" data-maxvalue="$!pc.maxValues" data-minvalue="$!pc.minValues" class="money_input input_form current_input_$!product.fid"/></dd>
+	                #end
+                #end
+		    </div>
+            #foreach($child in $product.mustChilds)
+            	#if($child.product.cplx==2)
+					<p class="title03 greyfont chooss_arrow huomian_pid_$!child.product.fid" style="display:none;"><span class="arrow on"></span><span>$child.product.cpjc</span></p>	
+					<input name="be" type="hidden" data-pid="$!child.product.fid" />
+	            #else
+		           <div class="bottom_line relative">
+		            	<h1 class="title03">$child.product.cpjc</h1>
+				        #foreach($pc in $child.product.productConstants)
+		                	#if($pc.inputType==3)                	
+							   <dt><span class="dt_span">$pc.name</span></dt>
+							   <dd><input type="tel" data-pid="$!child.product.fid" placeholder="$!pc.placeholder" value="$!pc.defaultValue" #if($pc.inputType==4)readonly="readonly"#end name="$pc.columnField" data-flag="$!pc.flag" data-zxid="$!pc.zxId" data-maxvalue="$!pc.maxValues" data-minvalue="$!pc.minValues" class="money_input input_form current_input_$!child.product.fid"/></dd>
+			                #end
+		                #end
+		            </div>
+	            #end
+            #end
+            </form>
+            <div class="totil">
+            	<p>总计首年保费：<span class="red totil_money"></span>元</p>
+            </div>
+            <p class="choose bottom_line font-h5 main_insure_button main_insure_button_0" data-extent="0">附加险<span class="choose_span01">添加附加险，让保障更完善</span></p>
+            <p class="choose font-h5 main_insure_button  main_insure_button_1" data-extent="1">险种组合<span class="choose_span02">试试再添加一款主险，</br>可以让主险计划组合起来哦！</span></p>
+        </div>
+    </div>
+	#else
+    <!-- 独立带橙色标题模块 结束 -->
+    
+    <!-- 独立带橙色标题模块 不参考总监方案-->
+    <div class="plan_block no plan_block_input" style="display:;">
+    	<div class="title">
+        	<img src="$static_path/index/images/title_icon02.png" width="15" height="15">
+        	<span>投保选择</span>
+        </div>
+        <div class="plan_block_div">
+    		<form id="form" data-pid="$product.fid">
+        	<div class="bottom_line">
+                <h1 class="title01">$product.cpjc</h1>
+            </div>
+            #foreach($pc in $product.productConstants)
+	            <div class="plan_block_div" #if($pc.hide==0)style="display:none;"#end>
+	                <dt>
+	                    <span class="dt_span">$pc.name</span>
+	                </dt>
+	               	<dd>
+	                	#if($pc.inputType==2)
+		                	<select class="selecttype_input" name="$!pc.columnField">
+				                #foreach($p in $pc.children)
+				                	<option value="$p.fid">$p.name</option>
+				                #end
+			                </select>
+		                #else
+							<input type="tel" placeholder="$!pc.placeholder" value="$!pc.defaultValue" #if($pc.inputType==4)readonly="readonly"#end name="$pc.columnField" data-flag="$!pc.flag" data-zxid="$!pc.zxId" data-maxvalue="$!pc.maxValues" data-minvalue="$!pc.minValues" class="money_input current_input_$!product.fid"/>
+		                #end
+		            </dd>	                
+	            </div>
+            #end
+            </form>
+            <div class="totil">
+            	<p>总计首年保费：<span class="red totil_money input_totil_money"></span>元</p>
+            </div>
+            <p class="choose bottom_line font-h5 main_insure_button main_insure_button_0" data-extent="0" #if($product.zxflag!=2)style="display:none"#end>附加险<span class="choose_span01">添加附加险，让保障更完善</span></p>
+            <p class="choose font-h5 main_insure_button  main_insure_button_1" data-extent="1" #if($zxlist.size==0)style="display:none"#end>险种组合<span class="choose_span02">试试再添加一款主险，</br>可以让主险计划组合起来哦！</span></p>
+        </div>
+    </div>
+    #end
+    <!-- 独立带橙色标题模块 结束 -->
+    
+    <!-- 独立带橙色标题模块 收件人信息-->
+    <div class="plan_block">
+    	<div class="title">
+        	<img src="$static_path/index/images/title_icon03.png" width="15" height="13">
+        	<span>收件人信息</span>
+        </div>
+        <div class="plan_block_div">
+        	<dt>
+        		<span class="dt_span">姓名</span>
+            </dt>
+            <dd>
+            	<input type="text" placeholder="请输入姓名" name="author" value="" class="cusname"/>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+            <dt>
+        		<span class="dt_span">开场话术</span>
+            </dt>
+            <dd>
+            	<input type="text" placeholder="请选择开场话术" readonly="readonly" class="selecttype_input" name="kcdh"/>
+            </dd>
+        </div>
+    </div>
+    <!-- 独立带橙色标题模块 结束 -->
+     
+    <!-- 独立带橙色标题模块 收件人信息-->
+    <div class="plan_block">
+    	<div class="title">
+        	<img src="$static_path/index/images/title_icon04.png" width="15" height="16">
+        	<span>个人名片编辑</span>
+        </div>
+        <input type="hidden" name="companyh" value="$!userCard.companyCode"/>
+        <input type="hidden" name="areah" value="$!userCard.areaCode"/>
+        <input type="hidden" name="jobh" value="$!userCard.jobCode"/>
+        <form id="userCard">
+        <input type="hidden" name="company" value="$!userCard.company"/>
+        <input type="hidden" name="area" value="$!userCard.area"/>
+        <input type="hidden" name="job" value="$!userCard.job"/>
+        <input type="hidden" name="fid" value="$!userId"/>
+        <div class="plan_block_div">
+        	<p class="tran_p">编辑个人名片，可以展示给客户你最好的一面</p>
+        </div>
+        <div class="plan_block_div">
+        	<dt>
+        		<span class="dt_span">姓名</span>
+            </dt>
+            <dd>
+            	<input type="text" placeholder="请输入姓名" name="name" value="$!userCard.name" class="cusname"/>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt>
+        		<span class="dt_span">性别</span>
+            </dt>
+            <dd>
+                <label class="gender_span #if($userCard.sex==1)checked#end" data-flag="3" for="male">
+                    <input type="radio" #if($userCard.sex==1)checked="checked"#end name="sex" id="male" value="1" class="radioclass sex">
+                </label>
+                <span>男</span>
+                <label class="gender_span margin-left #if($userCard.sex==0)checked#end" data-flag="3" for="female">
+                    <input type="radio" #if($userCard.sex==0)checked="checked"#end name="sex" id="female" value="0" class="radioclass sex">
+                </label>
+                <span>女</span>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+            <dt>
+        		<span class="dt_span">所属公司</span>
+            </dt>
+            <dd>
+            	<select name="companyCode">
+            		<option value="">请选择所属公司</option>
+                    #foreach($vo in ${companys})
+                        <option value="$vo.fid">$vo.name</option>
+                    #end
+              	</select>
+            </dd>
+        </div>
+        
+        <div class="plan_block_div">
+            <dt>
+        		<span class="dt_span">公司地区</span>
+            </dt>
+            <dd id="areaDD">
+            	<!--<input type="text" placeholder="请选择公司地区"  class="selecttype_input"/>-->
+            </dd>
+        </div>
+        <div class="plan_block_div">
+            <dt>
+        		<span class="dt_span">我的职位</span>
+            </dt>
+            <dd>
+            	<select name="jobCode">
+            		<option value="">选择职位</option>
+                	<option value="0">业务员</option>
+                	<option value="1">主任</option>
+					<option value="5">客户经理</option>
+                	<option value="2">经理</option>
+                	<option value="3">高级经理</option>
+                	<option value="4">总监</option>
+                </select>
+            </dd>
+        </div>
+         </form>
+       
+    </div>
+    <div class="plan_block" style="display:none;">
+        <div class="title">
+            <img src="$static_path/index/images/title_icon05.png" width="15" height="15">
+            <span>酒会邀请函</span>
+            <img src="$static_path/index/images/new_func.png" class="float_img">
+            <!-- 
+            <a href="$bxj_path/invitation/include.page" data-title="邀请函" data-reload data-ajax="true" id="btnToInvit">
+            	<img src="$static_path/index/images/title_detail_icon.png" width="19" height="20" class="right_detail_icon">
+            </a>
+            <a href="javascript:void(0);" id="btnCleanInvit" style="display: none;">
+            	<img src="$static_path/index/images/title_del_icon.png" width="17" height="21" class="right_del_icon">
+            </a>
+             -->
+            
+        </div>
+        
+        <!-- 增加选项 -->
+        <div class="plan_block_div">
+            <span class="dt_span leftspan">是否在计划书中添加酒会邀请函?</span>
+        </div>
+        <div class="plan_block_div">   
+            <dd class="invi_select">
+            	#if(!$request.getParameter('hd'))
+                <a href="$bxj_path/invitation/include.page" data-title="邀请函" data-reload data-ajax="true" data-preventdefault="useInv">
+                #else
+                <a href="$bxj_path/invitation/include.page?hd=1" data-title="邀请函" data-reload data-ajax="true" data-preventdefault="useInv">
+                #end
+                <label class="" data-flag="1" id="lab_addinvit">
+                    <input type="radio" class="radioclass sex">
+                </label>
+                <span>是</span>
+                </a>
+                
+                <label class="margin-left checked" data-flag="1" onclick="hideInv()" id="lab_removeinvi">
+                    <input type="radio" class="radioclass sex">
+                </label>
+                <span>否</span>
+            </dd>
+        </div>
+        
+        #if(!$request.getParameter('hd'))
+        <a href="$bxj_path/invitation/include.page" data-title="邀请函" data-reload data-ajax="true" id="btnShowInv">
+        #else
+        <a href="$bxj_path/invitation/include.page?hd=1" data-title="邀请函" data-reload data-ajax="true" id="btnShowInv">
+        #end
+        <li class="date_li" style="display: none;" id="plan_inv_date"></li>
+        <li class="address_li" style="display: none;" id="plan_inv_addr"></li>
+        </a>
+        <input type="hidden" id="plan_inv_id" name="invitationId">
+    </div>
+    <div class="plan_block" >
+        <div class="title">
+            <img src="$static_path/index/images/title_icon06.png" width="12" height="18">
+            <span>语音计划书</span>
+            <img src="$static_path/index/images/new_func.png" class="float_img">
+        </div>
+        
+        <!-- 增加选项 -->
+        <div class="plan_block_div">
+            <span class="dt_span leftspan">是否在计划书中添加您的语音解释?</span>
+        </div>
+        <div class="plan_block_div">   
+            <dd class="invi_select">
+                <label id="voice_edit_">
+                    <input type="radio" class="radioclass sex">
+                </label>
+                <span>是</span>
+                
+                <label class="margin-left checked" id="voice_delete_">
+                    <input type="radio" class="radioclass sex">
+                </label>
+                <span>否</span>
+            </dd>
+        </div>
+        
+        <li class="voice_li clear" id="voice_li_span" style="display:none"><span class="left_span" id="voice_name"></span><span class="right_span" id="voice_time"><div class="checkbg checked"></div></span></li>
+        <input type="hidden" id="voiceId" name="voiceId" value="">
+    </div>
+    <!-- 独立带橙色标题模块 结束 -->
+    <p class="button Urlbutton">生成计划书演示</p><!-- 提交按钮 -->
+    
+</div>
+</div>
+<script id="amap_script" src="http://webapi.amap.com/maps?v=1.3&key=ae45ce6b854a4e99f3ac8b95abf545c9&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder,AMap.Geolocation"></script>
+
+<!--内容 结束-->
+#set( $footer_params = ["layer_mobile/layer/layer.m/layer.m.js?v=20160322","index/js/province.js","index/js/make.js?v=201600405", "index/js/Messager.js?v=2016032116", "index/js/ajax.js?v=2016032116"])
+#bxj_footer($footer_params)
+
+<script type="text/javascript">
+	$(function() {
+		Mobilebone.evalScript = true;
+	});
+	
+	var planInvName = null;
+	$('#btnCleanInvit').click(function() {
+		$(this).hide();
+		$('#btnToInvit').show();
+		$('#plan_inv_date').html('').hide();
+    	$('#plan_inv_addr').html('').hide();
+    	$('#plan_inv_id').val('');
+    	planInvName = null;
+	});
+	
+	function useInv() {
+		## “是” 按钮，如果有id（选择过），再次选择这个id，并阻止新页面（返回true），否则返回false，加载新页面选择邀请函。
+		if($('#plan_inv_id').val()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function hideInv() {
+		## 点击否，“否”按钮添加激活样式，移除“是”按钮激活样式
+		$('#lab_addinvit').removeClass('checked');
+		$('#lab_removeinvi').addClass('checked');
+		$('#plan_inv_date').html('').hide();
+    	$('#plan_inv_addr').html('').hide();
+    	$('#plan_inv_id').val('');
+    	planInvName = null;
+	}
+    	
+    function invitationOkCallback(inv) {
+    	## 选择邀请函后回调方法，“是”按钮添加激活样式，移除“否”按钮激活样式
+    	$('#lab_addinvit').addClass('checked');
+		$('#lab_removeinvi').removeClass('checked');
+    	$('#btnCleanInvit').show();
+    	$('#btnToInvit').hide();
+    	$('#plan_inv_date').html(inv.dateAtCN).show();
+    	$('#plan_inv_addr').html(inv.address).show();
+    	$('#plan_inv_id').val(inv.id);
+    	//checked = undefined;
+    	planInvName = inv.name;
+    }
+    
+    function getCheckedInvName() {
+    	return planInvName;
+    }
+</script>

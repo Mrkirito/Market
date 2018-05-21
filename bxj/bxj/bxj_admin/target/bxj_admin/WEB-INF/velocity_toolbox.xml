@@ -1,0 +1,31 @@
+<toolbox>
+    <xhtml>true</xhtml>
+
+    <tool>
+        <key>configuration</key>
+        <scope>application</scope>
+        <class>com.baobao.framework.support.utility.Configuration</class>
+    </tool>
+
+    <tool>
+        <key>DateUtility</key>
+        <scope>application</scope>
+        <class>com.baobao.framework.support.utility.DateUtility</class>
+    </tool>
+
+	<tool>
+		<key>pageModule</key>
+		<scope>request</scope>
+		<class>com.hangjia.bxj.util.PageModule</class>
+	</tool>
+	<tool>
+		<key>navigation</key>
+		<scope>request</scope>
+		<class>com.hangjia.bxj.util.Navigation</class>
+	</tool>
+	<tool>
+   <key>date</key>
+   <scope>application</scope>
+   <class>org.apache.velocity.tools.generic.DateTool</class>
+</tool>
+</toolbox>

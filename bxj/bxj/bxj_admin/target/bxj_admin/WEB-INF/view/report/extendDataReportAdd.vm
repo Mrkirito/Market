@@ -1,0 +1,58 @@
+$pageModule.init("app/report/extendDataReportAdd", "init")
+<!-- BEGIN CONTAINER -->
+<div class="panel">
+	<div class="panel-heading">
+        <h3 class="panel-title">app运营推广统计数据新增</h3>
+    </div>
+	<div class="panel-body">
+		<div class="form-body">
+			<form id="form">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>数据统计时间</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="dataTime"  />
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>渠道及优化</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="channelNum" />
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>日常</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="everyNum" />
+			</div>
+		</div>		
+		<div class="form-group col-sm-12" style="display:none">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>微课堂</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="classroomNum" value="0"/>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>线下</label>
+			<div class="col-md-9">
+				<input type="text"  class="form-control is_number" name="lineNum" />
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>活动</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="activityNum" />
+			</div>
+		</div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><span class="text-danger">*</span>合计</label>
+            <div class="col-md-9">
+                <input type="text"  class="form-control is_number" name="totalNum" />
+            </div>
+        </div>
+		</form>
+			<p class="text-right">
+				<a class="btn btn-info saveIn">新增</a>
+			</p>
+    	</div>
+	</div>
+</div>

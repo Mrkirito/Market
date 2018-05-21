@@ -1,0 +1,108 @@
+		<ul class="common-info-ul">
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>幸福A</em>
+					</span>
+					<span class="creatDes-add-btn" data-layer="mainLayer" data-enable="#btnAddon,#btnAddMore"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddon" data-layer="fjx-layer" data-title="附加险" data-products="['zyjt', 'zyyl', 'ywyl']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>险种组合</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddMore" data-layer="zhx-layer" data-title="险种组合" data-products="['xinli', 'xinsheng', 'xinxiang', 'ankang', 'anxiang']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加险种</em>
+					</span>
+				</div>
+			</li>
+			
+		</ul>
+		
+		#parse("product/product.pa.vm")
+		<script>
+			$(function() {
+				bxj.PlanBook.init({
+					gs: 'PingAn',
+					title: '幸福A',
+					autoRefresh: true,
+					BaoXianRen: {
+						age: {
+							min: 18,
+							max: 60,
+							defaults: 30,
+						}
+					},
+					
+					TouBaoRen: {
+						enabled: false
+					}
+				});
+				
+			});
+			
+		</script>
+		
+		
+		#set($footer = '
+		
+	<div id="mainLayer" class="popup-layer" style="display: none" data-product="xingfuA">
+	    <form class="popup-form-layer">
+	        <div class="popup-layer-title">幸福A</div>
+	        <ul class="popup-layer-ul" data-calc="xingfuA">
+	        	<li>
+	                <label class="info-name" for="xingfuA-bxnx">保障期间</label>
+	                <select id="xingfuA-bxnx" data-class="select_type" name="bxnx" text-name="xfA_bxnx">
+	                    <option value="46">10年</option>
+	                    <option value="82">15年</option>
+	                    <option value="47" selected>20年</option>
+	                    <option value="50">30年</option>
+	                </select>
+	                <span class="arrowr"></span>
+	                <input type="hidden" name="pid" value="247">
+	                <input type="hidden" data-name="limit" value="true">
+	            </li>
+	        
+	            <li>
+	                <label class="info-name" for="xingfuA-jfnx">缴费期间</label>
+	                <select id="xingfuA-jfnx" data-class="select_type" name="jfnx" text-name="xfA_jfnx">
+	                	<option value="7">趸交</option>
+	                	<option value="8">5年</option>
+	                	<option value="9">10年</option>
+	                	<option value="10">15年</option>
+	                	<option value="11" selected>20年</option>
+	                	<option value="12">30年</option>
+	                </select>
+	                <span class="arrowr"></span>
+	            </li>
+	            <li>
+	                <label class="info-name" for="baoe_xingfuA">幸福A保额</label>
+	                <input value="350000" data-vali="min" data-min="10000" data-min-msg="主险保额不得低于1万" name="be" data-name="xfA_be" placeholder="请输入保额" id="baoe_xingfuA" pattern="[0-9]*">
+	            	<i class="icon">元</i>
+	            </li>
+	            
+	        </ul>
+	        <div class="popup-layer-btn">
+	            <span class="popup-layer-cancel-btn" data-cancel>取消</span><span class="popup-layer-ok-btn" data-ok>确定</span>
+	        </div>
+	    </form>
+	</div>
+		')

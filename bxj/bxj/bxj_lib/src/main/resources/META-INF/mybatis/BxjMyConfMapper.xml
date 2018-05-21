@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.BxjMyConfMapper">
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.BxjMyConf">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
+    <result column="page_url" jdbcType="VARCHAR" property="pageUrl" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="is_display" jdbcType="BIT" property="isDisplay" />
+    <result column="group_type" jdbcType="INTEGER" property="groupType" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="is_display_new" jdbcType="BIT" property="isDisplayNew" />
+    <result column="conf_type" jdbcType="INTEGER" property="confType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parent_id, name, icon_url, page_url, description, is_display, group_type, sort, 
+    is_display_new, conf_type, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_my_conf
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bxj_my_conf
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.BxjMyConf">
+    insert into bxj_my_conf (id, parent_id, name, 
+      icon_url, page_url, description, 
+      is_display, group_type, sort, 
+      is_display_new, conf_type, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{iconUrl,jdbcType=VARCHAR}, #{pageUrl,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{isDisplay,jdbcType=BIT}, #{groupType,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{isDisplayNew,jdbcType=BIT}, #{confType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.BxjMyConf">
+    insert into bxj_my_conf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="iconUrl != null">
+        icon_url,
+      </if>
+      <if test="pageUrl != null">
+        page_url,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="isDisplay != null">
+        is_display,
+      </if>
+      <if test="groupType != null">
+        group_type,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="isDisplayNew != null">
+        is_display_new,
+      </if>
+      <if test="confType != null">
+        conf_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null">
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null">
+        #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null">
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="groupType != null">
+        #{groupType,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isDisplayNew != null">
+        #{isDisplayNew,jdbcType=BIT},
+      </if>
+      <if test="confType != null">
+        #{confType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.BxjMyConf">
+    update bxj_my_conf
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null">
+        icon_url = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null">
+        page_url = #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null">
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="groupType != null">
+        group_type = #{groupType,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isDisplayNew != null">
+        is_display_new = #{isDisplayNew,jdbcType=BIT},
+      </if>
+      <if test="confType != null">
+        conf_type = #{confType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.BxjMyConf">
+    update bxj_my_conf
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      is_display = #{isDisplay,jdbcType=BIT},
+      group_type = #{groupType,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      is_display_new = #{isDisplayNew,jdbcType=BIT},
+      conf_type = #{confType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions">
+    <where>
+      <if test="id != null">
+        and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="isDisplay != null">
+        and is_display = #{isDisplay,jdbcType=BIT}
+      </if>
+      <if test="parentId != null">
+        and parent_id = #{parentId,jdbcType=BIGINT}
+      </if>
+      <if test="groupType != null">
+        and group_type = #{groupType,jdbcType=BIGINT}
+      </if>
+      <if test="confType != null">
+        and conf_type = #{confType,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas">
+    <if test="orderDatas != null and orderDatas != ''">
+      order by
+      <foreach collection="orderDatas" item="orderData" separator=",">
+        ${orderData.field} ${orderData.direction}
+      </foreach>
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="startIndex != null and pageSize != null">
+      limit #{startIndex},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询 -->
+  <select id="selectBySelective" parameterType="com.hangjia.bxj.model.BxjMyConf" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bxj_my_conf
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+  </select>
+</mapper>

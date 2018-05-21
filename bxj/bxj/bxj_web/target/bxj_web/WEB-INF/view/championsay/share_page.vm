@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+    #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+    <base href="$bxj_path/">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>保险家</title>
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/video_share/css/video_share.css">
+    <script src="$static_path/bxj_three/public/js/flexible.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container_video_share">
+    <div class="logo"></div>
+    <div class="video_img_block">
+        <img src="$coverImageUrl">
+        <div class="cover_block"></div>
+        <div class="inform_block">
+            <p>$title</p>
+            <p>讲师：<span>$lecturerName</span></p>
+        </div>
+    </div>
+    <span class="button_span"  onclick="window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster'"><img src="${static_path}/bxj_three/static/video_share/image/button_icon.png">下载保险家，看讲师视频</span>
+    <div class="font_block"></div>
+</div>
+</body>
+</html>
+
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script>
+    $(function(){
+        var Button = $('.button_span')
+        Button.bind('touchend',function(){
+            Button.css({'transform':'translate(0,0)','box-shadow':'0 0.133333rem 0 #ba5326'});
+        })
+        Button.bind('touchstart',function(){
+            Button.css({'transform':'translate(0,0.133333rem)','box-shadow':'0 0 0 #ba5326'});
+        })
+    })
+</script>
+
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$title',
+                desc: '保险行业神话级的金牌讲师视频都在保险家，与讲师一起共同进步的才是真伙伴！！',
+                imgUrl: '$coverImageUrl',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+</script>

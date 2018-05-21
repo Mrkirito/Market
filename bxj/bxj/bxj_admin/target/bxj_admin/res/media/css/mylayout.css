@@ -1,0 +1,593 @@
+div hr {
+    margin: 10px 0
+}
+
+div div.panel-body {
+    padding: 15px 20px
+}
+
+div div.panel-body div.btn-group.bootstrap-select {
+    margin-bottom: 0
+}
+
+div div.panel-body span.mall-form-inline-text {
+	
+   /* display: block;
+    float: left;
+    margin: 0 10px;*/
+     display: inline-block;
+    line-height: 32px;
+    
+}
+
+div div.panel-body div.floor-info {
+    width: 100%;
+    height: 32px
+}
+
+div div.panel-body div.floor-info ul {
+    width: 100%;
+    height: 32px
+}
+
+div div.panel-body div.floor-info ul li {
+    width: 50%;
+    float: left;
+    height: 32px;
+    list-style: none
+}
+
+div div.panel-body div.floor-info ul li span.t {
+    width: 20%;
+    display: block;
+    height: 32px;
+    line-height: 32px;
+    float: left;
+    text-align: right
+}
+
+div div.panel-body div.floor-info ul li span.c {
+    margin-left: 5%;
+    width: 25%;
+    height: 32px;
+    line-height: 32px;
+    display: block;
+    float: left
+}
+
+div div.panel-body table.table-bordered.ms {
+    margin-top: 20px
+}
+
+div div.panel-body table.table-bordered.mspic td img {
+    width: 100%;
+    height: auto
+}
+
+div div.panel-body table.table-bordered.msspic td img {
+    width: 20%;
+    float: left;
+    height: auto;
+    margin: 5px
+}
+
+div div.panel-body ul.nav.nav-tabs.ms li a {
+    background-color: #e7ebee
+}
+
+div div.panel-body.floor-plan span.title {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 {
+    width: 100%
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 div.tab-base {
+    width: 100%
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 div.tab-base ul.nav.nav-tabs li a {
+    background-color: #e7ebee
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 div.tab-base div.tab-content {
+    width: 100%;
+    height: 530px;
+    border: 1px solid #e7ebee;
+    margin-top: 5px;
+    overflow: hidden;
+    padding: 15px
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 div.tab-base div.tab-content div.control-btn {
+    height: 500px;
+    width: 5%;
+    float: left;
+    overflow: hidden
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 div.tab-base div.tab-content div.control-btn ul {
+    padding: 0;
+    width: 100%;
+    float: left
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 div.tab-base div.tab-content div.control-btn ul li {
+    list-style: none;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #e7ebee;
+    opacity: 0.7;
+    margin-bottom: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #666;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -ms-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+    margin: 0 auto 10px 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 div.tab-base div.tab-content div.control-btn ul li:hover {
+    opacity: 1
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 div.tab-base div.tab-content div.mainpic {
+    width: 90%;
+    float: left;
+    height: 500px;
+    overflow: hidden
+}
+
+div div.panel-body.floor-plan div.row div.col-lg-6 div.tab-base div.tab-content div.mainpic img {
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out
+}
+
+div div.panel-body.tabel-filtering tr td button {
+    margin-bottom: 10px
+}
+
+div div.panel-body.tabel-filtering tr td img {
+    width: 50px;
+    height: 50px
+}
+
+div div.panel-body.tabel-filtering div.form-group.fr {
+    float: right
+}
+
+div div.panel-body.tabel-filtering div.col-sm-6.text-xs-center {
+    width: 100%
+}
+
+div div.panel-body.tabel-filtering div.col-sm-6.text-xs-center.marg {
+    margin: 20px 0
+}
+
+div div.panel-body.tabel-filtering div.col-sm-6.text-xs-center.marg > a {
+    margin-right: 20px
+}
+
+div div.panel-body.tabel-filtering div.col-sm-6.text-xs-center div.form-group {
+    margin-right: 25px;
+    margin-bottom: 10px
+}
+
+div div.panel-body.tabel-filtering div.col-sm-6.text-xs-center div.form-group div.row.calendar-component {
+    margin: 0;
+    padding: 0
+}
+
+div div.panel-body.tabel-filtering div.col-sm-6.text-xs-center div.form-group div.row.calendar-component div.col-lg-6 {
+    margin: 0;
+    padding: 0;
+    width: 100%
+}
+
+div div.panel-body.tabel-filtering div.col-sm-6.text-xs-center div.form-group div.row.calendar-component div.col-lg-6 div.panel {
+    box-shadow: none;
+    margin: 0;
+    padding: 0
+}
+
+div div.panel-body.tabel-filtering table tr td i {
+    display: none
+}
+
+div div.panel-body.tabel-filtering table tr td button {
+    margin-right: 5px
+}
+
+div div.panel-body.tabel-filtering div.add {
+    float: right
+}
+
+div div.panel-body.tabel-filtering .fr {
+    float: right
+}
+
+div div.panel-body.tabel-filtering div.form-group.calendar-component div.row.calendar-component div.col-lg-6 div.panel {
+    box-shadow: none;
+    margin: 0;
+    padding: 0
+}
+
+div div.panel-body.tabel-filtering div.form-group.calendar-component div.row.calendar-component div.col-lg-6 div.panel div.panel-body {
+    margin: 0;
+    padding: 0
+}
+
+div div.panel-body.mall-typeofbusiness-add div.form-group {
+    zoom: 1
+}
+
+div div.panel-body.mall-typeofbusiness-add div.form-group:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0
+}
+
+div div.panel-body.mall-merchat-add div.form-group, div div.panel-body.activity-imgtext-edit-add div.form-group {
+    zoom: 1
+}
+
+div div.panel-body.mall-merchat-add div.form-group:after, div div.panel-body.activity-imgtext-edit-add div.form-group:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0
+}
+
+div div.panel-body.mall-merchat-add div.form-group a.jia, div div.panel-body.activity-imgtext-edit-add div.form-group a.jia {
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 26px;
+    border: 1px solid #e5e5e5;
+    color: #666;
+    line-height: 30px;
+    text-align: center;
+    float: left;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -ms-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in
+}
+
+div div.panel-body.mall-merchat-add div.form-group a.jia:hover, div div.panel-body.activity-imgtext-edit-add div.form-group a.jia:hover {
+    background-color: #3399fe;
+    color: #fff
+}
+
+div div.panel-body.mall-merchat-add div.form-group div.fc, div div.panel-body.activity-imgtext-edit-add div.form-group div.fc {
+    margin-left: 20px;
+    zoom: 1;
+    padding-bottom: 10px
+}
+
+div div.panel-body.mall-merchat-add div.form-group div.fc:after, div div.panel-body.activity-imgtext-edit-add div.form-group div.fc:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0
+}
+
+div div.panel-body.mall-merchat-add div.form-group div.fc ul, div div.panel-body.activity-imgtext-edit-add div.form-group div.fc ul {
+    zoom: 1
+}
+
+div div.panel-body.mall-merchat-add div.form-group div.fc ul:after, div div.panel-body.activity-imgtext-edit-add div.form-group div.fc ul:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0
+}
+
+div div.panel-body.mall-merchat-add div.form-group div.fc ul li, div div.panel-body.activity-imgtext-edit-add div.form-group div.fc ul li {
+    list-style: none;
+    width: 100%;
+    float: left;
+    margin-top: 10px
+}
+
+div div.panel-body.mall-merchat-add div.form-group div.fc ul li label, div div.panel-body.activity-imgtext-edit-add div.form-group div.fc ul li label {
+    padding-left: 25px;
+    margin: 5px 0
+}
+
+div div.panel-body.mall-merchat-add div.form-group.hide, div div.panel-body.activity-imgtext-edit-add div.form-group.hide {
+    display: none
+}
+
+div div.panel-body.mall-merchat-add div.form-group img, div div.panel-body.activity-imgtext-edit-add div.form-group img {
+    width: 128px;
+    height: 128px
+}
+
+div div.panel-body.mall-merchat-add div.form-group input.short.short, div div.panel-body.activity-imgtext-edit-add div.form-group input.short.short {
+    width: 50%
+}
+
+div div.panel-body.mall-merchat-add div.form-group input.short.fl, div div.panel-body.activity-imgtext-edit-add div.form-group input.short.fl {
+    float: left
+}
+
+div div.panel-body.mall-merchat-add div.form-group input.short.mt, div div.panel-body.activity-imgtext-edit-add div.form-group input.short.mt {
+    margin-top: 10px
+}
+
+div div.panel-body.mall-merchat-add div.form-group input.short.marg, div div.panel-body.activity-imgtext-edit-add div.form-group input.short.marg {
+    margin-right: 10%;
+    margin-bottom: 10px
+}
+
+div div.panel-body.mall-merchat-add div.form-group div.col-sm-6 img, div div.panel-body.activity-imgtext-edit-add div.form-group div.col-sm-6 img {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px
+}
+
+div div.panel-body.mall-merchat-add div.form-group a.addimg, div div.panel-body.activity-imgtext-edit-add div.form-group a.addimg {
+    display: block;
+    width: 126px;
+    height: 126px;
+    border: 1px solid #eeeeee;
+    float: left;
+    font-size: 30px;
+    line-height: 125px;
+    text-align: center;
+    color: #555555
+}
+
+div div.panel-body.mall-merchat-add div.form-group.calendar-component, div div.panel-body.activity-imgtext-edit-add div.form-group.calendar-component {
+    margin-right: 25px;
+    margin-bottom: 10px
+}
+
+div div.panel-body.mall-merchat-add div.form-group.calendar-component div.row.calendar-component, div div.panel-body.activity-imgtext-edit-add div.form-group.calendar-component div.row.calendar-component {
+    width: 50%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    margin-left: 17px
+}
+
+div div.panel-body.mall-merchat-add div.form-group.calendar-component div.row.calendar-component div.col-lg-6, div div.panel-body.activity-imgtext-edit-add div.form-group.calendar-component div.row.calendar-component div.col-lg-6 {
+    margin: 0;
+    padding: 0;
+    width: 100%
+}
+
+div div.panel-body.mall-merchat-add div.form-group.calendar-component div.row.calendar-component div.col-lg-6 div.panel, div div.panel-body.activity-imgtext-edit-add div.form-group.calendar-component div.row.calendar-component div.col-lg-6 div.panel {
+    box-shadow: none;
+    margin: 0;
+    padding: 0
+}
+
+div div.panel-body.mall-merchat-add div.form-group.calendar-component div.row.calendar-component div.col-lg-6 div.panel div.panel-body, div div.panel-body.activity-imgtext-edit-add div.form-group.calendar-component div.row.calendar-component div.col-lg-6 div.panel div.panel-body {
+    margin: 0;
+    padding: 0
+}
+
+div div.panel-body.mall-merchat-add div.hdkj textarea, div div.panel-body.activity-imgtext-edit-add div.hdkj textarea {
+    margin-top: 10px;
+    resize: none
+}
+
+div div.panel-body.mall-merchat-add div.hdkj a.jia, div div.panel-body.activity-imgtext-edit-add div.hdkj a.jia {
+    display: block;
+    width: 50px;
+    height: 50px;
+    font-size: 26px;
+    border: 1px solid #e5e5e5;
+    color: #666;
+    line-height: 50px;
+    text-align: center;
+    margin-top: 10px;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -ms-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in
+}
+
+div div.panel-body.mall-merchat-add div.hdkj a.jia:hover, div div.panel-body.activity-imgtext-edit-add div.hdkj a.jia:hover {
+    background-color: #3399fe;
+    color: #fff
+}
+
+div form.form-horizonta.detail-info div.panel-body div.form-group {
+    zoom: 1;
+    width: 100%
+}
+
+div form.form-horizonta.detail-info div.panel-body div.form-group:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0
+}
+
+div form.form-horizonta.detail-info div.panel-body div.form-group label {
+    width: 25%;
+    line-height: 30px;
+    text-align: right
+}
+
+div form.form-horizonta.detail-info div.panel-body div.form-group div.mall-pic {
+    width: 240px;
+    height: 228px;
+    overflow: hidden;
+    padding-left: 12px;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+div form.form-horizonta.detail-info div.panel-body div.form-group div.mall-pic img {
+    width: 100%;
+    height: 100%
+}
+
+div form.form-horizonta.detail-info div.panel-body div.row {
+    margin: 0 auto
+}
+
+div form.form-horizonta.detail-info div.panel-body div.row div.col-sm-9.col-sm-offset-3 {
+    margin-left: 25%
+}
+
+div form.form-horizonta.detail-info div.panel-body div.row div.col-sm-9.col-sm-offset-3 button {
+    width: 100px
+}
+
+div.myalert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 50%;
+    height: 400px;
+    left: 25%;
+    top: 100px;
+    border: 1px solid #9e9e9e;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+    display: none;
+    border-color: rgba(0, 0, 0, 0.11)
+}
+
+div.myalert div.title {
+    display: block;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    text-indent: 12px;
+    border-bottom: 1px solid #9e9e9e;
+    border-color: rgba(0, 0, 0, 0.11)
+}
+
+div.myalert div.title a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 25px;
+    float: right;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid #9e9e9e;
+    text-indent: 0;
+    margin: 10px 10px 0 0;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+    border-color: rgba(0, 0, 0, 0.11)
+}
+
+div.myalert div.title a:hover {
+    color: #fff;
+    border-color: #fff;
+    background-color: #f54928
+}
+
+div.myalert div.con {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10px
+}
+
+div.myalert div.con p.name {
+    display: block;
+    width: 100%;
+    font-size: 14px
+}
+
+div.myalert div.con p.name em {
+    color: #f54928;
+    font-style: normal
+}
+
+div.myalert div.con textarea {
+    width: 100%;
+    height: 250px;
+    resize: none;
+    line-height: 24px
+}
+
+div.myalert a.sub {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 30px;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #579ddb;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 10px
+}
+
+div.myalert a.sub:hover {
+    background-color: #5fa2dd
+}
+
+div.myalert input {
+    margin-top: 10px
+}
+.parkTList label.control-label,.commonWidth label.control-label{width:60px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*# sourceMappingURL=mylayout.css.map */

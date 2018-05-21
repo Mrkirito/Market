@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+   #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+  #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>冠军论坛</title>
+	<meta name="keywords" content="冠军论坛">
+	<meta name="description" content="冠军论坛">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/theNew/css/ppt.css">
+	<link href="$static_path/bxj_three/static/theNew/js/photoswipe.css" type="text/css" rel="stylesheet" />
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	<script>var bxj_path = '$bxj_path', static_path = '$static_path';</script>
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<!--导航 开始 -->
+   <div id="courseTitleID">
+	<header class="head" style="display:none;">
+	  	<a class="header_left" href="javascript:history.go(-1)"></a>
+	    <h1>冠军论坛</h1>
+	     <a class="header_right_shareicon" onclick="shareNewPeopleInfo()"></a>
+	</header>
+	<div class="header_heightblock" style="display:none;"></div>
+   </div>
+	<!-- 导航 结束-->
+	<div class="container container_forum" >
+		<div class="hd clearfix">
+			<div class="teacher">
+				<h2>$!newCourseVo.title</h2>
+				<h3><span class="name">$!newCourseVo.lecturerName</span><span class="viewnum">
+				 #if($!newCourseVo.playCount <= 10000)
+                    <label id="playCount">$!newCourseVo.playCount</label>
+				#elseif($!newCourseVo.playCount > 10000 && $!newCourseVo.playCount <= 100000000)
+					#set($playCount1 = $!newCourseVo.playCount+"")
+					#set($length1=$playCount1.length())
+					#set($length2=($length1) - 4)
+					#set($playCount2 = $playCount1.substring(0, $length2))
+					#set($length3=($length1) - 3)
+					#set($playCount3 = $playCount1.substring($length2, $length3))
+					#if("0"==$playCount3)
+						$playCount2万次播放
+					#else
+						$playCount2.$playCount3万次播放
+					#end
+				#elseif($!newCourseVo.playCount > 100000000)
+					#set($playCount1 = $!newCourseVo.playCount+"")
+					#set($length1=$playCount1.length())
+					#set($length2=($length1) - 8)
+					#set($playCount2 = $playCount1.substring(0, $length2))
+					#set($length3=($length1) - 7)
+					#set($playCount3 = $playCount1.substring($length2, $length3))
+					#if("0"==$playCount3)
+						$playCount2亿次播放
+					#else
+						$playCount2.$playCount3亿次播放
+					#end
+				#end
+				 </span></h3>
+			</div>
+		</div>
+		<div class="img_block" >
+
+		</div>
+
+	</div>
+	<div id="share_id"> <a class="share_block" href="javascript:window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster';"></a> </div>
+	<a href="javascript:;" class="top_icon" id="fixnav"></a>
+</body>
+</html>
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/static/theNew/js/lazeload.min.js"></script>
+<script type="text/javascript" src="$static_path/bxj_three/static/theNew/js/klass.min.js"></script>
+<script type="text/javascript" src="$static_path/bxj_three/static/theNew/js/code.photoswipe.jquery-3.0.5.min.js"></script>
+<script>
+	var coursePPTNum='$!newCourseVo.coursePPTNum';
+	var link = window.location.href;
+	var _sharePara = {
+			title : '$!newCourseVo.title',
+			desc :  '我正在保险家学习中国保险冠军论坛讲师课件，快来一起学习！',
+			image : '$static_path/bxj_three/static/theNew/image/$!newCourseVo.courseImageUrl',
+			location : link.replace('shareios','share')
+	};
+$(function(){
+	 var dom='';
+	 var coursePPTNum='$!newCourseVo.coursePPTNum';
+	 for(var i=1;i<=coursePPTNum;i++){
+	 	dom+='<div class="img_div"><img class="lazy" src="$static_path/bxj_three/static/theNew/image/load.png" data-original="$static_path/bxj_three/static/theNew/image/$!newCourseVo.courseUrl ('+i+').jpg" ></div>';
+	 }
+	 $('.img_block').append(dom);
+
+	$("img.lazy").lazyload({
+	    effect : "fadeIn",
+	    threshold : 200,
+	    container: $(".container")
+	});
+
+	$('.top_icon').click(function(event) {
+		$('.container').animate({
+			'scrollTop':0
+		}, 500);
+	});
+	
+})
+</script>
+<script type="text/javascript" src="$static_path/index/js/share.js?v=11"></script>
+<script type="text/javascript" src="$static_path/bxj_three/static/championforum/js/detail2.js?v=8885"></script>
+<script>
+$(document).ready(function(){
+    $('.img_block .img_div img').each(function(i,o){
+        o=$(o);
+        o.wrap('<a href="'+o.attr('data-original')+'"></a>');
+    })
+    var myPhotoSwipe = $(".img_block .img_div a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+});
+
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>

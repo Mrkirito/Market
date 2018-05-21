@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<base href="$bxj_path/">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+			<link id="bootstrap-style" href="$bxj_path/res2/media/css/bootstrap.min.css" rel="stylesheet">
+	<link href="$bxj_path/res2/media/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link id="base-style" href="$bxj_path/res2/media/css/style.css" rel="stylesheet">
+	<link id="base-style-responsive" href="$bxj_path/res2/media/css/style-responsive.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" charset="utf-8" src="$bxj_path/uedit/ueditor.config.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="$bxj_path/uedit/ueditor.all.min.js"> </script>
+    	<script type="text/javascript" charset="utf-8" src="$bxj_path/uedit/lang/zh-cn/zh-cn.js"></script>
+    	<script>var bxj_path = '$bxj_path', static_path = '$static_path';</script>
+    	    <style type="text/css">
+        div{
+            width:100%;
+        }
+        .inform{position:fixed; text-align:center; padding:0.3666667rem 0.4rem; background:rgba(0,0,0,0.8); color:#fff; z-index:99; border-radius:0.333333rem;top:50%;left:25%; box-sizing:border-box;width:50%;font-size:16px;}
+[data-dpr="2"] .inform {
+  font-size: 32px;
+}
+[data-dpr="2.5"] .inform{
+  font-size: 40px;
+}
+[data-dpr="2.75"] .inform{
+  font-size: 44px;
+}
+[data-dpr="3"] .inform{
+  font-size: 48px;
+}
+[data-dpr="4"] .inform{
+  font-size: 64px;
+}
+.disabled {
+	color: #afafaf !important;
+}
+    </style>
+		<title>产品数据导入</title>
+	</head>
+	
+	<body>
+		<!--内容 开始-->
+        <form id="insure_info" >
+        <table border="1" style="table-layout: fixed;width:99%;">
+        	<tr>
+        	<td class="title">产品名称：</td>
+        	<td class="dom"><input type="text" name="name" /></td>
+        	<td class="title">产品简称：</td>
+        	<td class="dom"><input type="text" name="cpjc" /></td>
+        	<td class="title">上下架：</td>
+        	<td class="dom"><select name="sxj"><option value="1">上架</option><option value="0">下架</option></select>
+        	</td>
+        	<td class="title">公司：</td>
+        	<td class="dom">
+        	<select class="age_select" name="gs">
+            	#foreach($company in $gs)
+	    			<option value="$company.fid">$company.name</option>
+    			#end
+            </select>
+            </td>
+        	</tr>
+        	<tr>
+        	<td class="title">产品类别</td>
+        	<td class="dom">
+			   <select name="cptype">
+               <option value="1">医疗</option>
+               <option value="2">重疾</option>
+               <option value="3">人寿</option>
+               <option value="4">意外</option>
+               <option value="5">理财</option>
+               </select>
+			</td>
+        	<td class="title">基本保额：</td>
+        	<td class="dom"><input type="tel" name="jbbe" /></td>
+        	<td class="title">主附产品:</td>
+        	<td class="dom">
+			  <select name="xz">
+               <option value="1">主险</option>
+               <option value="0">附加险</option>
+               </select> 
+        	</td> 
+        	<td class="title">投保起始年龄：</td>
+        	<td class="dom">
+			  <input type="tel" name="tbnlks" /> - <input type="tel" name="tbnljs" /> 
+        	</td> 
+        	</tr>
+        	<tr>
+        	<td class="title">默认年龄：</td>
+        	<td class="dom">
+				<input type="tel" name="hmstate" /> 
+        	</td> 
+        	<td class="title"> 主险分类标签（计划，热卖等）：</td>
+        	<td class="dom">
+				 <input type="text" name="cplb" value="HOT" />
+        	</td>         	
+        	<td class="title">主险产品描述：</td>
+        	<td class="dom">
+				 <input type="text" name="cpms" />
+        	</td>
+        	<td class="title">产品计算方式选择：</td>
+        	<td class="dom">
+               <select name="calflag">
+               <option value="1">保额算保费</option>
+               <option value="2">保费算保额</option>
+               <option value="3">保额保费互算 </option>
+               </select> 
+        	</td>             	         	       		        	
+        	</tr>
+        	<tr>
+        	<td class="title">免除：
+        	</td>
+        	<td colspan="7">
+        	<script id="mc" type="text/plain" style="width:100%;height:80px;"></script>
+        	<input type="hidden" name="mc">
+        	</td>
+        	</tr>
+        	<tr>
+        	<td class="title">案例说明：
+        	</td>
+        	<td colspan="3">
+        	<script id="bbrqy" type="text/plain" style="width:100%;height:100px;"></script>
+        	<input type="hidden" name="bbrqy">
+        	</td>
+        	<td class="title">产品特色：
+        	</td>
+        	<td colspan="3">
+        	<script id="cpts" type="text/plain" style="width:100%;height:100px;"></script>
+        	<input type="hidden" name="cpts">
+        	</td>
+        	</tr>        	
+        </table>
+       	</form>
+       	<table border="1" id="qy_table" style="table-layout: fixed;width:99%;">
+       		<tr>
+       			<th>一级标题</th>
+       			<th>二级标题</th>
+       			<th>三级标题</th>
+       			<th><button type="button" id="add_qy">添加权益</button></th>
+       		</tr>
+       	</table>
+       	<button type="button" onclick="javascript:trySubmit(this);">生成产品</button>
+	</body>	
+</html>
+<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="$bxj_path/public/add.js"></script>

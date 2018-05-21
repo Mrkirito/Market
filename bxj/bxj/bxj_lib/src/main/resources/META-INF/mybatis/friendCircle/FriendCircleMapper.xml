@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.firendcircle.FriendCircleMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.firendcircle.FriendCircle" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="pfid" property="pfid" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="words" property="words" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="share_count" property="shareCount" jdbcType="INTEGER" />
+    <result column="share_count_real" property="shareCountReal" jdbcType="INTEGER" />
+    <result column="week_share_count" property="weekShareCount" jdbcType="INTEGER" />
+    <result column="week_share_count_real" property="weekShareCountReal" jdbcType="INTEGER" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="pic1" property="pic1" jdbcType="VARCHAR" />
+    <result column="pic2" property="pic2" jdbcType="VARCHAR" />
+    <result column="pic3" property="pic3" jdbcType="VARCHAR" />
+    <result column="pic4" property="pic4" jdbcType="VARCHAR" />
+    <result column="pic5" property="pic5" jdbcType="VARCHAR" />
+    <result column="pic6" property="pic6" jdbcType="VARCHAR" />
+    <result column="pic7" property="pic7" jdbcType="VARCHAR" />
+    <result column="pic8" property="pic8" jdbcType="VARCHAR" />
+    <result column="pic9" property="pic9" jdbcType="VARCHAR" />
+    <result column="width" property="width" jdbcType="INTEGER" />
+    <result column="height" property="height" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="udpate_user" property="udpateUser" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hangjia.bxj.model.firendcircle.FriendCircle" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, category_id,company,pfid, type, status, publish_time, source, words, title, sort, share_count,
+    share_count_real, week_share_count, week_share_count_real, like_count, pic1, pic2, 
+    pic3, pic4, pic5, pic6, pic7, pic8, pic9, width, height, create_time, create_user, 
+    update_time, udpate_user
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bxj_friend_circle
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_friend_circle
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" >
+    insert into bxj_friend_circle (fid, category_id,company,pfid, type,
+      status, publish_time, source, 
+      words, title, sort, 
+      share_count, share_count_real, week_share_count, 
+      week_share_count_real, like_count, pic1, 
+      pic2, pic3, pic4, pic5, 
+      pic6, pic7, pic8, pic9, 
+      width, height, create_time, 
+      create_user, update_time, udpate_user, 
+      content)
+    values (#{fid,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{company,jdbcType=VARCHAR},#{pfid,jdbcType=BIGINT}, #{type,jdbcType=INTEGER},
+      #{status,jdbcType=INTEGER}, #{publishTime,jdbcType=TIMESTAMP}, #{source,jdbcType=VARCHAR}, 
+      #{words,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{shareCount,jdbcType=INTEGER}, #{shareCountReal,jdbcType=INTEGER}, #{weekShareCount,jdbcType=INTEGER}, 
+      #{weekShareCountReal,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER}, #{pic1,jdbcType=VARCHAR}, 
+      #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{pic4,jdbcType=VARCHAR}, #{pic5,jdbcType=VARCHAR}, 
+      #{pic6,jdbcType=VARCHAR}, #{pic7,jdbcType=VARCHAR}, #{pic8,jdbcType=VARCHAR}, #{pic9,jdbcType=VARCHAR}, 
+      #{width,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{udpateUser,jdbcType=BIGINT}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" >
+    insert into bxj_friend_circle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="pfid != null" >
+        pfid,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="words != null" >
+        words,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="shareCount != null" >
+        share_count,
+      </if>
+      <if test="shareCountReal != null" >
+        share_count_real,
+      </if>
+      <if test="weekShareCount != null" >
+        week_share_count,
+      </if>
+      <if test="weekShareCountReal != null" >
+        week_share_count_real,
+      </if>
+      <if test="likeCount != null" >
+        like_count,
+      </if>
+      <if test="pic1 != null" >
+        pic1,
+      </if>
+      <if test="pic2 != null" >
+        pic2,
+      </if>
+      <if test="pic3 != null" >
+        pic3,
+      </if>
+      <if test="pic4 != null" >
+        pic4,
+      </if>
+      <if test="pic5 != null" >
+        pic5,
+      </if>
+      <if test="pic6 != null" >
+        pic6,
+      </if>
+      <if test="pic7 != null" >
+        pic7,
+      </if>
+      <if test="pic8 != null" >
+        pic8,
+      </if>
+      <if test="pic9 != null" >
+        pic9,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="udpateUser != null" >
+        udpate_user,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="pfid != null" >
+        #{pfid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="words != null" >
+        #{words,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCountReal != null" >
+        #{shareCountReal,jdbcType=INTEGER},
+      </if>
+      <if test="weekShareCount != null" >
+        #{weekShareCount,jdbcType=INTEGER},
+      </if>
+      <if test="weekShareCountReal != null" >
+        #{weekShareCountReal,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="pic1 != null" >
+        #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null" >
+        #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="pic4 != null" >
+        #{pic4,jdbcType=VARCHAR},
+      </if>
+      <if test="pic5 != null" >
+        #{pic5,jdbcType=VARCHAR},
+      </if>
+      <if test="pic6 != null" >
+        #{pic6,jdbcType=VARCHAR},
+      </if>
+      <if test="pic7 != null" >
+        #{pic7,jdbcType=VARCHAR},
+      </if>
+      <if test="pic8 != null" >
+        #{pic8,jdbcType=VARCHAR},
+      </if>
+      <if test="pic9 != null" >
+        #{pic9,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udpateUser != null" >
+        #{udpateUser,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" >
+    update bxj_friend_circle
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="pfid != null" >
+        pfid = #{pfid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="words != null" >
+        words = #{words,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        share_count = #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCountReal != null" >
+        share_count_real = #{shareCountReal,jdbcType=INTEGER},
+      </if>
+      <if test="weekShareCount != null" >
+        week_share_count = #{weekShareCount,jdbcType=INTEGER},
+      </if>
+      <if test="weekShareCountReal != null" >
+        week_share_count_real = #{weekShareCountReal,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="pic1 != null" >
+        pic1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        pic2 = #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null" >
+        pic3 = #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="pic4 != null" >
+        pic4 = #{pic4,jdbcType=VARCHAR},
+      </if>
+      <if test="pic5 != null" >
+        pic5 = #{pic5,jdbcType=VARCHAR},
+      </if>
+      <if test="pic6 != null" >
+        pic6 = #{pic6,jdbcType=VARCHAR},
+      </if>
+      <if test="pic7 != null" >
+        pic7 = #{pic7,jdbcType=VARCHAR},
+      </if>
+      <if test="pic8 != null" >
+        pic8 = #{pic8,jdbcType=VARCHAR},
+      </if>
+      <if test="pic9 != null" >
+        pic9 = #{pic9,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null" >
+        width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udpateUser != null" >
+        udpate_user = #{udpateUser,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" >
+    update bxj_friend_circle
+    set category_id = #{categoryId,jdbcType=BIGINT},
+      company = #{company,jdbcType=VARCHAR},
+      pfid = #{pfid,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      source = #{source,jdbcType=VARCHAR},
+      words = #{words,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      share_count = #{shareCount,jdbcType=INTEGER},
+      share_count_real = #{shareCountReal,jdbcType=INTEGER},
+      week_share_count = #{weekShareCount,jdbcType=INTEGER},
+      week_share_count_real = #{weekShareCountReal,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      pic1 = #{pic1,jdbcType=VARCHAR},
+      pic2 = #{pic2,jdbcType=VARCHAR},
+      pic3 = #{pic3,jdbcType=VARCHAR},
+      pic4 = #{pic4,jdbcType=VARCHAR},
+      pic5 = #{pic5,jdbcType=VARCHAR},
+      pic6 = #{pic6,jdbcType=VARCHAR},
+      pic7 = #{pic7,jdbcType=VARCHAR},
+      pic8 = #{pic8,jdbcType=VARCHAR},
+      pic9 = #{pic9,jdbcType=VARCHAR},
+      width = #{width,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      udpate_user = #{udpateUser,jdbcType=BIGINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" >
+    update bxj_friend_circle
+    set category_id = #{categoryId,jdbcType=BIGINT},
+      company = #{company,jdbcType=VARCHAR},
+      pfid = #{pfid,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      source = #{source,jdbcType=VARCHAR},
+      words = #{words,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      share_count = #{shareCount,jdbcType=INTEGER},
+      share_count_real = #{shareCountReal,jdbcType=INTEGER},
+      week_share_count = #{weekShareCount,jdbcType=INTEGER},
+      week_share_count_real = #{weekShareCountReal,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      pic1 = #{pic1,jdbcType=VARCHAR},
+      pic2 = #{pic2,jdbcType=VARCHAR},
+      pic3 = #{pic3,jdbcType=VARCHAR},
+      pic4 = #{pic4,jdbcType=VARCHAR},
+      pic5 = #{pic5,jdbcType=VARCHAR},
+      pic6 = #{pic6,jdbcType=VARCHAR},
+      pic7 = #{pic7,jdbcType=VARCHAR},
+      pic8 = #{pic8,jdbcType=VARCHAR},
+      pic9 = #{pic9,jdbcType=VARCHAR},
+      width = #{width,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      udpate_user = #{udpateUser,jdbcType=BIGINT}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions">
+    <where>
+      <if test="fid != null">
+        and fid = #{fid,jdbcType=BIGINT}
+      </if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas">
+    <if test="orderDatas != null and orderDatas != ''">
+      order by
+      <foreach collection="orderDatas" item="orderData" separator=",">
+        ${orderData.field} ${orderData.direction}
+      </foreach>
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="startIndex != null and pageSize != null">
+      limit #{startIndex},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询 -->
+  <select id="selectByPage" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bxj_friend_circle
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+
+  <!-- 总个数 -->
+  <select id="selectCount" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" resultType="int">
+    select
+    count(*)
+    from bxj_friend_circle
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 查询 -->
+  <select id="selectIndexByPage" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" resultMap="BaseResultMap">
+    SELECT t1.* FROM
+    bxj_friend_circle t1,
+    (SELECT DISTINCT DATE_FORMAT(publish_time, '%Y-%m-%d') publish FROM bxj_friend_circle
+    where status=2 and publish_time &lt; #{publishTime,jdbcType=TIMESTAMP}
+    ORDER BY publish DESC LIMIT #{startIndex}, #{pageSize}
+    ) v
+    WHERE DATE_FORMAT(t1.publish_time, '%Y-%m-%d') = v.publish AND t1.STATUS=2
+    ORDER BY t1.publish_time DESC, t1.sort
+  </select>
+
+  <!-- 总个数 -->
+  <select id="selectIndexCount" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" resultType="int">
+    select
+    count(*) from
+    (
+    SELECT DISTINCT publish_time
+    from bxj_friend_circle
+    where status=2 and publish_time &lt; #{publishTime,jdbcType=TIMESTAMP}
+    <if test="categoryId != null">
+      and category_id = #{categoryId,jdbcType=BIGINT}
+    </if>
+    ) v
+  </select>
+
+  <!-- 后台  条件-->
+  <sql id="friend_circle_where">
+    <where>
+      <if test="status == null">AND status != 4 </if>
+      <if test="id != null">AND fid = #{id}</if>
+      <if test="title != null and title != ''">AND title like CONCAT(CONCAT('%', #{title}), '%')</if>
+      <if test="type != null">AND type = #{type}</if>
+      <if test="status != null">AND status = #{status}</if>
+      <if test="publishTime != null">AND DATE_FORMAT(publish_time, '%Y-%m-%d') <![CDATA[=]]> DATE_FORMAT(#{publishTime}, '%Y-%m-%d')</if>
+    </where>
+  </sql>
+  <!-- 后台  查询-->
+  <select id="queryPageData" parameterType="com.hangjia.bxj.query.app.FriendCircleQuery" resultMap="ResultMapWithBLOBs">
+    SELECT
+    <include refid="Base_Column_List" />
+    ,(select cate.title from bxj_friend_circle_category  cate where cate.is_display=1 AND cate.fid=fd.category_id ) AS categoryTitle
+    FROM bxj_friend_circle fd
+    <include refid="friend_circle_where" />
+    ORDER BY  publish_time DESC, sort , fid DESC
+
+    LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  <!-- 后台 -->
+  <select id="queryPageDataCount" parameterType="com.hangjia.bxj.query.app.FriendCircleQuery" resultType="int">
+    SELECT
+    COUNT(1)
+    FROM
+    bxj_friend_circle
+    <include refid="friend_circle_where" />
+  </select>
+
+  <!-- 后台 上线 -->
+  <update id="updateByPK" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle">
+    update bxj_friend_circle
+    <set>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="pfid != null">
+        pfid = #{pfid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="words != null">
+        words = #{words,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null">
+        share_count = #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="pic1 != null">
+        pic1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+
+      <if test="width != null">
+        width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udpateUser != null">
+        udpate_user = #{udpateUser,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT}
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <!-- 重置周分享数据 -->
+  <update id="clearWeekShareCount" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle">
+    update bxj_friend_circle set week_share_count=0,week_share_count_real=0
+  </update>
+
+  <!-- 后台 修改 -->
+  <update id="updateImgsByPK" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle">
+    update bxj_friend_circle
+    <set>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="pfid != null">
+        pfid = #{pfid,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="words != null">
+        words = #{words,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null">
+        share_count = #{shareCount,jdbcType=INTEGER},
+      </if>
+
+      pic1 = #{pic1,jdbcType=VARCHAR},
+
+      pic2 = #{pic2,jdbcType=VARCHAR},
+
+      pic3 = #{pic3,jdbcType=VARCHAR},
+
+      pic4 = #{pic4,jdbcType=VARCHAR},
+
+      pic5 = #{pic5,jdbcType=VARCHAR},
+
+      pic6 = #{pic6,jdbcType=VARCHAR},
+
+      pic7 = #{pic7,jdbcType=VARCHAR},
+
+      pic8 = #{pic8,jdbcType=VARCHAR},
+
+      pic9 = #{pic9,jdbcType=VARCHAR},
+
+      <if test="width != null">
+        width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udpateUser != null">
+        udpate_user = #{udpateUser,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT}
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+
+  <!-- 查询 3.2 -->
+  <select id="selectIndexByPage_v32" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" resultMap="BaseResultMap">
+    SELECT t1.*, t2.title as categoryTitle, t2.words as categoryWord, t2.pic as categoryPic FROM
+    bxj_friend_circle t1,
+    (SELECT DISTINCT DATE_FORMAT(publish_time, '%Y-%m-%d') publish FROM bxj_friend_circle
+    where status=2 and publish_time &lt; #{publishTime,jdbcType=TIMESTAMP}
+    ORDER BY publish DESC LIMIT #{startIndex}, #{pageSize}
+    ) v,
+    bxj_friend_circle_category t2
+    WHERE DATE_FORMAT(t1.publish_time, '%Y-%m-%d') = v.publish AND t1.STATUS=2 and t1.category_id = t2.fid and t1.publish_time &lt; #{publishTime,jdbcType=TIMESTAMP}
+    <if test="categoryId != null">
+      and t1.category_id = #{categoryId,jdbcType=BIGINT} and t2.is_display = 1
+    </if>
+    and (t1.company is null or t1.company='')
+    ORDER BY t1.publish_time DESC, t1.create_time DESC
+  </select>
+
+
+  <!-- 查询 3.2 -->
+  <select id="selectIndexByPage_company" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" resultMap="BaseResultMap">
+    SELECT t1.*, CONCAT(t2.title, '(', t1.company ,')')as categoryTitle, t2.words as categoryWord, t2.pic as categoryPic FROM
+    bxj_friend_circle t1,
+    (SELECT DISTINCT DATE_FORMAT(publish_time, '%Y-%m-%d') publish FROM bxj_friend_circle
+    where status=2 and publish_time &lt; #{publishTime,jdbcType=TIMESTAMP}
+    ORDER BY publish DESC LIMIT #{startIndex}, #{pageSize}
+    ) v,
+    bxj_friend_circle_category t2
+    WHERE DATE_FORMAT(t1.publish_time, '%Y-%m-%d') = v.publish AND t1.STATUS=2 and t1.category_id = t2.fid and t1.publish_time &lt; #{publishTime,jdbcType=TIMESTAMP}
+    <if test="categoryId != null">
+      and t1.category_id = #{categoryId,jdbcType=BIGINT} and t2.is_display = 1
+    </if>
+    and t1.company=#{company,jdbcType=VARCHAR}
+    ORDER BY t1.publish_time DESC, t1.create_time DESC
+  </select>
+
+  <select id="selectRankCategoryCount" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" resultType="int">
+    select
+    count(*) from
+    (
+    SELECT t1.* FROM
+    bxj_friend_circle t1,bxj_friend_circle_category t2
+    WHERE t1.STATUS=2 and t1.category_id = t2.fid and t1.publish_time &lt; #{publishTime,jdbcType=TIMESTAMP}
+    <if test="categoryId != 0">
+      and t1.category_id = #{categoryId,jdbcType=BIGINT}
+    </if>
+    <if test="type == 1">
+      and t1.week_share_count <![CDATA[ <> 0 ]]>
+    </if>
+    and t2.is_display = 1
+    ) v
+  </select>
+  <!-- 查询人气排行 3.3 -->
+  <select id="selectRankCategory" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" resultMap="BaseResultMap">
+    SELECT t1.*, t2.title as categoryTitle, t2.words as categoryWord, t2.pic as categoryPic,t2.simtitle FROM
+    bxj_friend_circle t1,bxj_friend_circle_category t2
+    WHERE t1.STATUS=2 and t1.category_id = t2.fid and t1.publish_time &lt; #{publishTime,jdbcType=TIMESTAMP}
+    <if test="categoryId != 0">
+      and t1.category_id = #{categoryId,jdbcType=BIGINT}
+    </if>
+    and t2.is_display = 1
+    <if test="type == 1">
+      and t1.week_share_count <![CDATA[ <> 0 ]]>
+      ORDER BY t1.week_share_count DESC
+    </if>
+    <if test="type != 1">
+      ORDER BY t1.share_count DESC
+    </if>
+
+    LIMIT #{startIndex}, #{pageSize}
+  </select>
+
+  <select id="selectRankCategoryOrderByTime" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircle" resultMap="BaseResultMap">
+    SELECT t1.*, t2.title as categoryTitle, t2.words as categoryWord, t2.pic as categoryPic,t2.simtitle FROM
+    bxj_friend_circle t1,bxj_friend_circle_category t2
+    WHERE t1.STATUS=2 and t1.category_id = t2.fid and t1.publish_time &lt; #{publishTime,jdbcType=TIMESTAMP}
+    <if test="categoryId != 0">
+      and t1.category_id = #{categoryId,jdbcType=BIGINT}
+    </if>
+    and t2.is_display = 1
+
+    ORDER BY t1.publish_time DESC, t1.create_time DESC
+
+    LIMIT #{startIndex}, #{pageSize}
+  </select>
+</mapper>

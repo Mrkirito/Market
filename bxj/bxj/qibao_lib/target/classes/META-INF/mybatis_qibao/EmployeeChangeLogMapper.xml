@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.znb.cms.dao.mapper.EmployeeChangeLogMapper" >
+  <resultMap id="BaseResultMap" type="com.znb.cms.model.mapper.EmployeeChangeLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="flag" property="flag" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <resultMap id="BaseResultEmployeeDtoMap" type="com.znb.cms.model.dto.EmployeeDto" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="card_type_id" property="cardTypeId" jdbcType="INTEGER" />
+    <result column="cardNo" property="cardno" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="vocation" property="vocation" jdbcType="INTEGER" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, employee_id, order_id, flag, create_time, price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dt_employee_change_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dt_employee_change_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.znb.cms.model.mapper.EmployeeChangeLog" >
+    insert into dt_employee_change_log (id, employee_id, order_id, 
+      flag, create_time, price
+      )
+    values (#{id,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+      #{flag,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.znb.cms.model.mapper.EmployeeChangeLog" >
+    insert into dt_employee_change_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.znb.cms.model.mapper.EmployeeChangeLog" >
+    update dt_employee_change_log
+    <set >
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.znb.cms.model.mapper.EmployeeChangeLog" >
+    update dt_employee_change_log
+    set employee_id = #{employeeId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByOrderId" resultMap="BaseResultEmployeeDtoMap" parameterType="java.lang.Integer" >
+    select 
+  	em.name, em.card_type_id, em.cardNo, em.gender, em.birthday, em.vocation, log.price,log.flag
+    from dt_employee_change_log log
+    left join dt_employee em on log.employee_id = em.id
+    where log.order_id = #{orderId,jdbcType=INTEGER}
+    order by log.flag desc
+  </select>
+</mapper>

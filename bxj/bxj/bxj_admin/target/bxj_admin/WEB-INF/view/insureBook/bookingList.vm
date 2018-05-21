@@ -1,0 +1,131 @@
+$pageModule.init("app/insureBook/insureBookingList","list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">在线预约</h3>
+                        </div>
+                        <form id="queryForm">
+                            <div class="panel-body">
+                                <!-- BEGIN PAGE HEADER-->
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>产品名称</label>
+                                    <input placeholder="产品名称" type="text" name="productName" class="form-control">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>产品ID</label>
+                                    <input placeholder="产品代码" type="text" name="productId" class="form-control">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>企业名称</label>
+                                    <input placeholder="产品名称" type="text" name="firmName" class="form-control">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>客户姓名</label>
+                                    <input placeholder="客户姓名" type="text" name="customerName" class="form-control">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label >会员id</label>
+                                    <input type="text" id="createTime" class="form-control" name="userId">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>处理状态</label>
+                                    <select class="form-control" name="dealState">
+                                        <option value="">请选择</option>
+                                        <option value="0">未处理</option>
+                                        <option value="1">已处理</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                        </form>
+
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sadhashdhsa">
+            <div class="page-toolbar" style="float: right; margin-top: -20px; margin-bottom: 10px;">
+                <div class="btn-group page-toolbar-list product_info_tbars"></div>
+            </div>
+            <div class="data-list"></div>
+
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+</div>
+<!-- END PAGE -->
+
+<!--底部 结束-->
+<!--add update 修改 -->
+<!--basic 编辑-->
+<div class="video-tpl hidden">
+    <form id="editForm">
+        <input type="hidden" name="id" />
+        <div class="form-group col-md-4 col-xs-12" >
+            <label>产品名称</label>
+            <input type="text" width="200px" class="form-control" name="productName" placeholder="产品名称" >
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>产品ID</label>
+            <input type="text" width="800px" class="form-control" name="productId" placeholder="产品ID" >
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>企业名称</label>
+            <input type="text" width="800px" class="form-control" name="firmName" placeholder="企业名称" >
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>客户姓名</label>
+            <input type="text" width="800px" class="form-control" name="customerName" placeholder="客户姓名" >
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>客户IP</label>
+            <input type="text" width="800px" class="form-control" name="customerIp" placeholder="客户Ip" >
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>客户手机号</label>
+            <input type="text" width="800px" class="form-control" name="customerPhone" placeholder="客户手机号" >
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>客户备注</label>
+            <input type="text" width="800px" class="form-control" name="customerMark" placeholder="客户备注" >
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>会员id</label>
+            <input type="text" width="800px" class="form-control" name="userId" placeholder="会员id" >
+        </div>
+
+        <div class="form-group col-md-4 col-xs-12">
+            <label>处理意见</label>
+            <input type="text" width="800px" class="form-control" name="dealMsg" placeholder="处理意见" >
+        </div>
+        <div class="form-group col-md-4 col-xs-12" name="createTime">
+            <label>创建时间</label>
+            <input type="text" width="200px" class="form-control form-creatTime" name="createTime" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12" name="updateTime">
+            <label>修改时间</label>
+            <input type="text" width="50" class="form-control form-updateTime" name="updateTime" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>处理状态</label>
+            <select class="form-control" name="dealState">
+                <option value="0">未处理</option>
+                <option value="1">已处理</option>
+            </select>
+        </div>
+
+    </form>
+</div>

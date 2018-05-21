@@ -1,0 +1,86 @@
+$pageModule.init("app/order/accountCash", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">交易日期&nbsp;</label>
+								<input type="text" class="form-control createTime">
+								<input type="hidden" class="startTime"/>
+                                <input type="hidden" class="endTime"/>
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">会员id&nbsp;</label>
+								<input type="text" class="form-control userId">
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">开户银行&nbsp;</label>
+								<input type="text" class="form-control bankName">
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">真实姓名&nbsp;</label>
+								<input type="text" class="form-control bankUserName">
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">开户城市&nbsp;</label>
+								<input type="text" class="form-control bankCityName">
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">审核状态&nbsp;</label>
+                                <select class="form-control auditStatus">
+                                    <option value="">请选择</option>
+                                    <option value="1">提交审核</option>
+									<option value="2" selected="selected">审核成功</option>
+									<option value="3">审核失败</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">维度&nbsp;</label>
+                                <select class="form-control dimension">
+                                    <option value="0" checked>否</option>
+                                    <option value="1">按人统计</option>
+									<option value="2">按天统计</option>
+									<option value="3">按人按天统计</option>
+									<option value="4">按每笔统计</option>
+                                </select>
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<!--底部 结束-->
+
+<div class="cash-tpl hidden">
+    <div class="form-body">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>拒绝原因</label>
+			<div class="col-md-9">
+                <textarea rows="10" cols="50" placeholder="必输(128字内)" class="auditReason"></textarea>
+			</div>
+		</div>
+	</div>
+</div>

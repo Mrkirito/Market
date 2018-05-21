@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.newperson.dao.NewPersonCourseTypeMapper">
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.newperson.model.NewPersonCourseType">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="course_stage_id" jdbcType="BIGINT" property="courseStageId" />
+    <result column="course_stage_name" jdbcType="VARCHAR" property="courseStageName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="enable_status" jdbcType="INTEGER" property="enableStatus"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, course_stage_id, name, icon_url, sort, enable_status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from study_new_person_course_type
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from study_new_person_course_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseType">
+    insert into study_new_person_course_type (id, course_stage_id, name, 
+      icon_url, sort, enable_status, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{courseStageId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{iconUrl,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{enableStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseType">
+    insert into study_new_person_course_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="courseStageId != null">
+        course_stage_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="iconUrl != null">
+        icon_url,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="enableStatus != null">
+        enable_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="courseStageId != null">
+        #{courseStageId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null">
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null">
+        #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseType">
+    update study_new_person_course_type
+    <set>
+      <if test="courseStageId != null">
+        course_stage_id = #{courseStageId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null">
+        icon_url = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null">
+        enable_status = #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseType">
+    update study_new_person_course_type
+    set course_stage_id = #{courseStageId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      enable_status = #{enableStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <!--**************************** extend begin here *******************************-->
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions">
+    <where>
+      <if test="name != null and name != ''">
+        and name like CONCAT('%',#{name,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="courseStageId != null">
+        and course_stage_id = #{courseStageId,jdbcType=BIGINT}
+      </if>
+      <if test="enableStatus != null">
+        and enable_status = #{enableStatus,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas">
+    <if test="orderBy != null and orderBy != ''">
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询总条数 -->
+  <select id="selectByCount" parameterType="com.hangjia.bxj.newperson.query.NewPersonCourseTypeQuery" resultType="int">
+    select
+    count(*)
+    from study_new_person_course_type
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectByPage" parameterType="com.hangjia.bxj.newperson.query.NewPersonCourseTypeQuery" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from study_new_person_course_type
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+
+  <!-- 查询总条数 -->
+  <select id="selectCountByQuery" parameterType="com.hangjia.bxj.newperson.query.NewPersonCourseTypeQuery" resultType="int">
+    select
+    count(*)
+    from study_new_person_course_type
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectPageByQuery" parameterType="com.hangjia.bxj.newperson.query.NewPersonCourseTypeQuery" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,course_stage_name
+    from (select t1.*,t2.name course_stage_name from study_new_person_course_type t1
+    LEFT JOIN study_new_person_course_stage t2
+    on t1.course_stage_id = t2.id) t
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+</mapper>

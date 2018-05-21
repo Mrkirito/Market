@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	#set( $bxj_v3 = ${configuration.getProperty("urlPath","bxj_v3")})
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>冠军论坛</title>
+	<meta name="keywords" content="计划书">
+	<meta name="description" content="计划书">
+	<link rel="stylesheet" type="text/css" href="$bxj_v3/activity/css/send_activity/send_activity.css">
+	<link rel="stylesheet" type="text/css" href="$bxj_v3/public/css/public.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="container container_send_activity">
+		<div class="img01"></div>
+		<div class="img02"></div>
+		<div class="img03"></div>
+		<div class="img04"></div>
+		<div class="img05"></div>
+		<div class="img06"></div>
+		<div class="img07" onclick="window.location.href='$bxj_path/myInvite/toMyInviteVoucher.page?hd=1'"></div>
+		<div class="img08"></div>
+	</div>
+</body>
+</html>
+<script src="$bxj_v3/public/js/jquery.min.js"></script>
+<script src="$bxj_v3/public/js/public.js"></script>
+<script src="$bxj_v3/public/js/fastclick.js"></script>
+<script>
+//快速点击绑定
+FastClick.attach(document.body);
+</script>
+

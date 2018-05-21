@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.usst.market.mapper.CompetitionResultMapper" >
+  <insert id="insert" parameterType="cn.usst.market.po.BalanceSheet" >
+    insert into balance_sheet (id, competition_id, serial_number, 
+      quarter, huobi, cunkuan, 
+      lixi_collection, cunhuo, zichan, 
+      daikuan_emergency, lixi_pay, daikuan_normal, 
+      guben, liucun)
+    values (#{id,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER}, #{serialNumber,jdbcType=INTEGER}, 
+      #{quarter,jdbcType=INTEGER}, #{huobi,jdbcType=REAL}, #{cunkuan,jdbcType=REAL}, 
+      #{lixiCollection,jdbcType=REAL}, #{cunhuo,jdbcType=REAL}, #{zichan,jdbcType=REAL}, 
+      #{daikuanEmergency,jdbcType=REAL}, #{lixiPay,jdbcType=REAL}, #{daikuanNormal,jdbcType=REAL}, 
+      #{guben,jdbcType=REAL}, #{liucun,jdbcType=REAL})
+  </insert>
+	<select id="findBalanceSheetByIdAndQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.BalanceSheet">
+		select * from balance_sheet_result
+		where balance_sheet_result.company_id=#{id,jdbcType=INTEGER}
+		and balance_sheet_result.`quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	
+	<select id="findCashFlowByIdAndQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CashFlow">
+		select * from cash_flow_result
+		where cash_flow_result.company_id=#{id,jdbcType=INTEGER}
+		and cash_flow_result.`quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	
+	<select id="findIncomeStatementByIdAndQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.IncomeStatement">
+		select * from income_statement_result
+		where income_statement_result.company_id=#{id,jdbcType=INTEGER}
+		and income_statement_result.`quarter`=#{quarter,jdbcType=INTEGER}
+	</select>
+	<!-- 上面这部分可以不要，学生端有方法 -->
+	
+	
+	
+	<!-- 更改竞赛当前季度 -->
+	<select id="updateCompetitionCurrentQuarter">
+		update  competition 
+		set competition.current_quarter=#{1}
+		where competition.id=#{0}
+	</select>
+	
+	<!-- 找当前季度没有提交的公司 -->
+	<select id="findNoSubmitCompanyByIdQuarter" parameterType="cn.usst.market.po.IdQuarter" resultType="cn.usst.market.po.CompanyQuarterTime">
+		select company_quarter_time.* from company_quarter_time
+		where competition_id=#{id,jdbcType=INTEGER}
+		and quarter=#{quarter,jdbcType=INTEGER}
+		and is_submit=0
+	</select>
+	
+	<!-- 插入公司时间 -->
+	<select id="insertCompanyQuarterTime" parameterType="cn.usst.market.po.IdQuarter">
+		insert into company_quarter_time 
+		(company_id,quarter,start_time,is_submit,competition_id)
+		values(#{companyId,jdbcType=INTEGER},
+		#{quarter,jdbcType=INTEGER},
+		#{startTime,jdbcType=VARCHAR},
+		#{isSubmit,jdbcType=INTEGER},
+		#{competitionId,jdbcType=INTEGER})
+	</select>
+	
+	<!-- 查找公司所用时间时间 -->
+	<select id="findCompanyQuarterTime" resultType="cn.usst.market.po.CompanyQuarterTime">
+		select * from company_quarter_time
+		where company_id=#{0}
+		and quarter=#{1}
+	</select>
+		
+	<!-- 根据竞赛ID找本次竞赛下，前几季度的所有产品 -->
+	<select id="findProductsByCompetIdAndQuarter" resultType="cn.usst.market.po.CompanyProduct">
+		select company_product.* from company_product,company
+		where company_product.company_id=company.id
+		and company.competition_id=#{0}
+		and company_product.`quarter` &lt;=#{1}
+	</select>
+	
+	<!-- 根据产品ID和季度找媒体投放 -->
+	<select id="findMediaByProductIdAndQuarter" resultType="cn.usst.market.po.CompanyMedia">
+		select * from company_media
+		where company_media.product_id=#{0}
+		and company_media.quarter=#{1}
+	</select>
+	
+	<!-- 根据媒体ID找媒体 -->
+	<select id="findMediaById" parameterType="Integer" resultType="cn.usst.market.po.MediaInfo">
+		select * from media_info
+		where id=#{value}
+	</select>
+	
+	<!-- 根据ID找产品设计的详细信息 -->
+	<select id="findProductInfoById" parameterType="Integer" resultType="cn.usst.market.po.ProductInfo">
+		select * from product_info
+		where id=#{value}
+	</select>
+	
+	<!-- 根据公司ID找开放的市场 -->
+	<select id="findCompanyMarket" resultType="cn.usst.market.po.CompanyMarket">
+		SELECT * from company_market
+		where company_id=#{0}
+		and `quarter`=#{1}
+		and is_phy=#{2}
+	</select>
+	
+	
+	
+	<!-- 找本次竞赛下面所有公司设置的销售人员平均工资 -->
+	<select id="findAvgSalesSalaryByCompetIdQuarter" resultType="cn.usst.market.po.SalesSalary">
+		SELECT ROUND(avg(sales_salary.salary)) as salary,
+		ROUND(avg(sales_salary.welfare)) as welfare,
+		ROUND(avg(sales_salary.holiday)) as holiday,
+		ROUND(avg(sales_salary.public_fund)) as public_fund,
+		ROUND(avg(sales_salary.company_pension)) as company_pension,
+		ROUND(avg(sales_salary.retired_pay)) as retired_pay,
+		ROUND(avg(sales_salary.salary_total)) as salary_total
+		from sales_salary,company
+		where sales_salary.company_id=company.id
+		and company.competition_id=#{0}
+		and sales_salary.`quarter`=#{1}
+	</select>
+	<!-- 找本次竞赛下面所有公司设置的工厂工人平均工资 -->
+	<select id="findAvgWorkersSalaryByCompetIdQuarter" resultType="cn.usst.market.po.WorkersSalary">
+		SELECT ROUND(avg(workers_salary.salary)) as salary,
+		ROUND(avg(workers_salary.welfare)) as welfare,
+		ROUND(avg(workers_salary.holiday)) as holiday,
+		ROUND(avg(workers_salary.public_fund)) as public_fund,
+		ROUND(avg(workers_salary.company_pension)) as company_pension,
+		ROUND(avg(workers_salary.retired_pay)) as retired_pay,
+		ROUND(avg(workers_salary.salary_total)) as salary_total
+		from workers_salary,company
+		where workers_salary.company_id=company.id
+		and company.competition_id=#{0}
+		and workers_salary.`quarter`=#{1}
+	</select>
+	
+	<!-- 找公司实体销售人员数量 -->
+	<select id="findCompanyPhySalesNum" resultType="cn.usst.market.po.HirePeople">
+		select * from hire_people
+		where company_id=#{0}
+		and quarter=#{1}
+	</select>
+	<select id="findCompanyNetSalesNum" resultType="cn.usst.market.po.HirePeopleOnline">
+		select * from hire_people_online
+		where company_id=#{0}
+		and quarter=#{1}
+	</select>
+	<!-- 找公司每个市场的人数 -->
+	
+	
+	<select id="findMarketInfoById" resultType="cn.usst.market.po.MarketInfo2">
+		select * from market_info2
+		where id=#{value}
+	</select>
+		
+	<!-- 找该公司销售工人的工资 -->
+	<select id="findSalesSalaryByCompanyIdQuar" resultType="cn.usst.market.po.SalesSalary">
+		SELECT * from sales_salary
+		where company_id=#{0}
+		and `quarter`=#{1}
+	</select>
+	
+	<!-- 找该公司工厂工人的工资 -->
+	<select id="findWorkerSalaryByCompanyIdQuar" resultType="cn.usst.market.po.WorkersSalary">
+		SELECT * from workers_salary
+		where company_id=#{0}
+		and `quarter`=#{1}
+	</select>
+	
+	<!-- 找产品定价 -->
+	<select id="findProductPriceByIdQuarter" resultType="cn.usst.market.po.ProductPrice">
+		SELECT * from product_price
+		where product_id=#{0}
+		and `quarter`=#{1}
+	</select>
+	
+	<!-- 找一个公司下面的所有产品的定价 -->
+	<select id="findProductPriceByCompanyIdQuarter" resultType="cn.usst.market.po.ProductPrice">
+		SELECT * from product_price
+		where company_id=#{0}
+		and `quarter`=#{1}
+	</select>
+	
+	
+	<!-- 插入产品的各种效用 -->
+	<select id="insertProductEfficiency" parameterType="cn.usst.market.po.ProductEfficiency">
+		insert into product_efficiency
+		(competition_id,company_id,product_id,quarter,product_type,market_id,
+			ad_weight,design_weight,market_weight,saleman_num,
+			saleman_salary,price
+		)
+		values(
+			#{competitionId,jdbcType=INTEGER},
+			#{companyId,jdbcType=INTEGER},
+			#{productId,jdbcType=INTEGER},
+			#{quarter,jdbcType=INTEGER},
+			#{productType,jdbcType=VARCHAR},
+			#{marketId,jdbcType=INTEGER},
+			#{adWeight,jdbcType=INTEGER},
+			#{designWeight,jdbcType=INTEGER},
+			#{marketWeight,jdbcType=INTEGER},
+			#{salemanNum,jdbcType=INTEGER},
+			#{salemanSalary,jdbcType=INTEGER},
+			#{price,jdbcType=INTEGER}
+		)
+	</select>
+	
+	<!-- 查找本次竞赛本季度所有产品的各种效用 -->
+	<select id="findProductEfficiency" resultType="cn.usst.market.po.ProductEfficiency">
+		select * from product_efficiency
+		where competition_id=#{0}
+		and quarter=#{1}
+		and product_type=#{2}
+		and market_id=#{3}
+	</select>
+	
+	<!-- 插入产品市场份额 -->
+	<insert id="insertOrUpdateProductMarketShare" parameterType="cn.usst.market.po.ProductMarketShare">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			select count(*) as count from product_market_share
+			where product_id = #{productId, jdbcType=INTEGER}
+	     	and quarter = #{quarter, jdbcType=INTEGER} 
+		</selectKey>
+		<if test="count > 0">
+			update product_market_share
+		     <trim prefix="set" suffixOverrides=",">  
+		        <if test='marketShare != null and marketShare != "" '>
+		          market_share = #{marketShare, jdbcType=DOUBLE},
+		        </if>
+		        <if test='singaporeNeed != null and singaporeNeed != "" '>
+		          singapore_need = #{singaporeNeed, jdbcType=INTEGER},
+		        </if>
+		        <if test='singaporeSale != null and singaporeSale != "" '>
+		          singapore_sale = #{singaporeSale, jdbcType=INTEGER},
+		        </if>
+		        
+		        <if test='hongkongNeed != null and hongkongNeed != "" '>
+		          hongkong_need = #{hongkongNeed, jdbcType=INTEGER},
+		        </if>
+		        <if test='hongkongSale != null and hongkongSale != "" '>
+		          hongkong_sale = #{hongkongSale, jdbcType=INTEGER},
+		        </if>
+		        
+		        <if test='moscowNeed != null and moscowNeed != "" '>
+		          moscow_need = #{moscowNeed, jdbcType=INTEGER},
+		        </if>
+		        <if test='moscowSale != null and moscowSale != "" '>
+		          moscow_sale = #{moscowSale, jdbcType=INTEGER},
+		        </if>
+		        
+		        <if test='newdelhiNeed != null and newdelhiNeed != "" '>
+		          newdelhi_need = #{newdelhiNeed, jdbcType=INTEGER},
+		        </if>
+		        <if test='newdelhiSale != null and newdelhiSale != "" '>
+		          newdelhi_sale = #{newdelhiSale, jdbcType=INTEGER},
+		        </if>
+		        
+		        <if test='onlineNeed != null and onlineNeed != "" '>
+		          online_need = #{onlineNeed, jdbcType=INTEGER},
+		        </if>
+		        <if test='onlineSale != null and onlineSale != "" '>
+		          online_sale = #{onlineSale, jdbcType=INTEGER},
+		        </if>
+		        
+		        <if test='stockoun != null and stockoun != "" '>
+		          stockoun = #{stockoun, jdbcType=INTEGER},
+		        </if>
+		        <if test='stock != null and stock != "" '>
+		          stock = #{stock, jdbcType=INTEGER},
+		        </if>
+		        
+		     </trim>  
+		     where product_id = #{productId, jdbcType=INTEGER}
+		     and quarter = #{quarter, jdbcType=INTEGER}
+		</if>
+		<if test="count == 0">
+			insert into product_market_share
+			(
+				competition_id,company_id,product_id,quarter,
+				product_type,market_share,
+				singapore_need,singapore_sale,
+				hongkong_need,hongkong_sale,
+				moscow_need,moscow_sale,
+				newdelhi_need,newdelhi_sale,
+				online_need,online_sale,
+				stockoun,stock
+			)
+			values(
+				#{competitionId,jdbcType=INTEGER},
+				#{companyId,jdbcType=INTEGER},
+				#{productId,jdbcType=INTEGER},
+				#{quarter,jdbcType=INTEGER},
+				#{productType,jdbcType=VARCHAR},
+				#{marketShare,jdbcType=DOUBLE},
+				#{singaporeNeed,jdbcType=INTEGER},
+				#{singaporeSale,jdbcType=INTEGER},
+				#{hongkongNeed,jdbcType=INTEGER},
+				#{hongkongSale,jdbcType=INTEGER},
+				#{moscowNeed,jdbcType=INTEGER},
+				#{moscowSale,jdbcType=INTEGER},
+				#{newdelhiNeed,jdbcType=INTEGER},
+				#{newdelhiSale,jdbcType=INTEGER},
+				#{onlineNeed,jdbcType=INTEGER},
+				#{onlineSale,jdbcType=INTEGER},
+				#{stockoun,jdbcType=INTEGER},
+				#{stock,jdbcType=INTEGER}
+			)
+		</if>		
+		
+	</insert>
+	
+	<!-- 插入公司市场份额 -->
+	<select id="insertCompanyMarketShare" parameterType="cn.usst.market.po.CompanyMarketShare">
+		insert into company_market_share
+		(
+			company_id,quarter,
+			practical_share,practical_need,practical_sale,practical_stockoun,practical_stock,
+			perfect_share,perfect_need,perfect_sale,perfect_stockoun,perfect_stock,
+			business_share,business_need,business_sale,business_stockoun,business_stock
+		)
+		values(
+			#{companyId,jdbcType=INTEGER},
+			#{quarter,jdbcType=INTEGER},
+			#{practicalShare,jdbcType=DOUBLE},
+			#{practicalNeed,jdbcType=INTEGER},
+			#{practicalSale,jdbcType=INTEGER},
+			#{practicalStockoun,jdbcType=INTEGER},
+			#{practicalStock,jdbcType=INTEGER},
+			#{perfectShare,jdbcType=DOUBLE},
+			#{perfectNeed,jdbcType=INTEGER},
+			#{perfectSale,jdbcType=INTEGER},
+			#{perfectStockoun,jdbcType=INTEGER},
+			#{perfectStock,jdbcType=INTEGER},
+			#{businessShare,jdbcType=DOUBLE},
+			#{businessNeed,jdbcType=INTEGER},
+			#{businessSale,jdbcType=INTEGER},
+			#{businessStockoun,jdbcType=INTEGER},
+			#{businessStock,jdbcType=INTEGER}
+		)
+	</select>
+	
+	<!-- 根据公司ID和季度和类型找各个产品的市场份额 -->
+	<select id="findProductMSByCompanyIdQuarterType" resultType="cn.usst.market.po.ProductMarketShare">
+		select * from product_market_share
+		where company_id=#{0}
+		and quarter=#{1}
+		and product_type=#{2}
+	</select>
+	
+	<!-- 找本次竞赛下面每个类型的产品市场份额 -->
+	<select id="findProductMSByCompetIdQuarterType" resultType="cn.usst.market.po.ProductMarketShare">
+		select * from product_market_share
+		where competition_id=#{0}
+		and quarter=#{1}
+		and product_type=#{2}
+	</select>
+	
+	<!-- 根据竞赛ID和季度，找本次竞赛本季度的所有产品的需求量 -->
+	<select id="findProductMSByCompetitionIdQuarter" resultType="cn.usst.market.po.ProductMarketShare">
+		select * from product_market_share
+		where competition_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+	<!-- 根据产品id和季度，修改产品的市场份额 -->	
+	<!-- <select id="updateProductMSByProductIdQuarter">
+		update product_market_share
+		set market_share=#{2}
+		where product_id=#{0}
+		and quarter=#{1}
+	</select> -->
+	<update id="updateProductMSByProductIdQuarter"  parameterType="cn.usst.market.po.ProductMarketShare" >
+	     update product_market_share
+	     <trim prefix="set" suffixOverrides=",">  
+	        <if test='marketShare != null and marketShare != "" '>
+	          market_share = #{marketShare, jdbcType=DOUBLE},
+	        </if>
+	        <!-- <if test='singaporeNeed != null and singaporeNeed != "" '>
+	          singapore_need = #{singaporeNeed, jdbcType=INTEGER},
+	        </if>
+	        <if test='singaporeSale != null and singaporeSale != "" '>
+	          singapore_sale = #{singaporeSale, jdbcType=INTEGER},
+	        </if>
+	        
+	        <if test='hongkongNeed != null and hongkongNeed != "" '>
+	          hongkong_need = #{hongkongNeed, jdbcType=INTEGER},
+	        </if>
+	        <if test='hongkongSale != null and hongkongSale != "" '>
+	          hongkong_sale = #{hongkongSale, jdbcType=INTEGER},
+	        </if>
+	        
+	        <if test='moscowNeed != null and moscowNeed != "" '>
+	          moscow_need = #{moscowNeed, jdbcType=INTEGER},
+	        </if>
+	        <if test='moscowSale != null and moscowSale != "" '>
+	          moscow_sale = #{moscowSale, jdbcType=INTEGER},
+	        </if>
+	        
+	        <if test='newdelhiNeed != null and newdelhiNeed != "" '>
+	          newdelhi_need = #{newdelhiNeed, jdbcType=INTEGER},
+	        </if>
+	        <if test='newdelhiSale != null and newdelhiSale != "" '>
+	          newdelhi_sale = #{newdelhiSale, jdbcType=INTEGER},
+	        </if>
+	        
+	        <if test='onlineNeed != null and onlineNeed != "" '>
+	          online_need = #{onlineNeed, jdbcType=INTEGER},
+	        </if>
+	        <if test='onlineSale != null and onlineSale != "" '>
+	          online_sale = #{onlineSale, jdbcType=INTEGER},
+	        </if>
+	        
+	        <if test='stockoun != null and stockoun != "" '>
+	          stockoun = #{stockoun, jdbcType=INTEGER},
+	        </if>
+	        <if test='stock != null and stock != "" '>
+	          stock = #{stock, jdbcType=INTEGER},
+	        </if> -->
+	        
+	     </trim>  
+	     where product_id = #{productId, jdbcType=INTEGER}
+	     and quarter = #{quarter, jdbcType=INTEGER} 
+	</update>
+	
+	
+	
+	<!-- 根据公司ID和季度找本公司的所有产品市场份额 -->
+	<select id="findProductMSByCompanyIdQuarter" resultType="cn.usst.market.po.ProductMarketShare">
+		select * from product_market_share
+		where company_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+	<!-- 根据公司ID和季度找公司的市场份额 -->
+	<select id="findCompanyMarketShare" resultType="cn.usst.market.po.CompanyMarketShare">
+		select * from company_market_share
+		where company_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+	
+	<!-- 根据类型找权值矩阵 -->
+	<select id="findMaketShareWeightByType" resultType="cn.usst.market.po.MarketShareWeight">
+		select * from market_share_weight
+		where type=#{0}
+	</select>
+	
+	
+	<!-- 插入公司的各种投资 -->
+	<select id="insertCompanyInvestment" parameterType="cn.usst.market.po.CompanyInvestment">
+		insert into company_investment
+		(
+			competition_id,company_id,quarter,
+			product_num,product_avg_price,ad_num,ad_cost,
+			phy_market_num,phy_market_cost,net_market_num,net_market_cost,
+			phy_sales_num,phy_sales_cost,net_sales_num,net_sales_cost,
+			worker_efficiency,sales_efficiency
+		)
+		value(
+			#{competitionId,jdbcType=INTEGER},
+			#{companyId,jdbcType=INTEGER},
+			#{quarter,jdbcType=INTEGER},
+			#{productNum,jdbcType=INTEGER},
+			#{productAvgPrice,jdbcType=INTEGER},
+			#{adNum,jdbcType=INTEGER},
+			#{adCost,jdbcType=INTEGER},
+			#{phyMarketNum,jdbcType=INTEGER},
+			#{phyMarketCost,jdbcType=INTEGER},
+			#{netMarketNum,jdbcType=INTEGER},
+			#{netMarketCost,jdbcType=INTEGER},
+			#{phySalesNum,jdbcType=INTEGER},
+			#{phySalesCost,jdbcType=INTEGER},
+			#{netSalesNum,jdbcType=INTEGER},
+			#{netSalesCost,jdbcType=INTEGER},
+			#{workerEfficiency,jdbcType=DOUBLE},
+			#{salesEfficiency,jdbcType=DOUBLE}
+		)
+	</select>
+	
+	<!-- 查找公司的各种投资 -->
+	<select id="findCompanyInvestByCompanyIdQuarter" resultType="cn.usst.market.po.CompanyInvestment">
+		select * from company_investment
+		where company_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+	<!-- 查找平衡记分卡 -->
+	<select id="findBalanceScoreByCompanyIdQuarter" resultType="cn.usst.market.po.BalanceScore">
+		select * from balance_score
+		where company_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+	<!-- 找资产负债表结果 -->
+	<select id="findIncomeStatementResultByCompanyIdQuarter" resultType="cn.usst.market.po.IncomeStatement">
+		select * from income_statement_result 
+		where company_id=#{0} 
+		and quarter=#{1}
+	</select>
+	
+	<!-- 找市场总需求 -->
+	<select id="findAllMarketInfo" resultType="cn.usst.market.po.MarketInfo2">
+		select * from market_info2
+	</select>
+	
+	<!-- 找市场总需求market_info2 -->
+	<select id="findMarketInfoByCompetitionId" resultType="cn.usst.market.po.MarketInfo2">
+		select * from market_info2
+		where competition_id=#{0}
+	</select>
+	
+	<!-- 根据公司id和季度找开放的市场,1实体市场，0网络市场 -->
+	<select id="findCompanyMarketByCompanyIdQuarter" resultType="cn.usst.market.po.CompanyMarket">
+		select * from company_market
+		where company_id=#{0}
+		and quarter=#{1}
+		and is_phy=#{2}
+	</select>
+	
+	<!-- 根据产品id和季度从产品销售份额表中找产品记录 -->
+	<select id="findProductMSByProductIdQuarter" resultType="cn.usst.market.po.ProductMarketShare">
+		select * from product_market_share
+		where product_id=#{0}
+		and quarter=#{1}
+	</select>
+	
+</mapper>

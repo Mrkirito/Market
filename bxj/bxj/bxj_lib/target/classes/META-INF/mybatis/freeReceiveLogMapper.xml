@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.FreeReceiveLogDao">
+
+	<resultMap type="com.hangjia.bxj.model.FreeReceiveLog" id="FreeReceiveLog">
+		<id property="id" column="id"/>
+		<result property="freeId" column="free_id"/>
+		<result property="customerId" column="customer_id"/>
+		<result property="createAt" column="create_at"/>
+		<result property="status" column="status"/>
+		<result property="name" column="name"/>
+	</resultMap>
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.hangjia.bxj.model.FreeReceiveLog">
+	INSERT INTO free_receive
+	(
+		free_id,
+		customer_id,
+		`status`
+	) VALUES (#{freeId, jdbcType=VARCHAR}, #{customerId, jdbcType=BIGINT}, #{status, jdbcType=INTEGER})
+	</insert>
+	
+	<select id="listCustomersReceiveLog" resultMap="FreeReceiveLog">
+		SELECT
+			r.id,
+			r.free_id,
+			r.customer_id,
+			r.create_at,
+			r.`status`,
+			(select f.name from free f where r.free_id = f.id) `name`
+		FROM
+			free_receive r
+		JOIN
+			customer c
+		ON
+			c.user_id = #{0, jdbcType=INTEGER} AND r.customer_id = c.id
+		WHERE
+			r.customer_id = #{1, jdbcType=BIGINT}
+	</select>
+	
+	<resultMap type="com.hangjia.bxj.model.FreeInsurance" id="FreeInsurance">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="status" column="status"/>
+		<result property="shareTitle" column="share_title"/>
+		<result property="shareDesc" column="share_desc"/>
+	</resultMap>
+	
+	<!-- 查询所有赠险产品 -->
+	<select id="listFreeInsurances" resultMap="FreeInsurance">
+		SELECT
+			id,
+			`name`,
+			`status`
+		FROM
+			free
+		WHERE
+			`status` = 0
+	</select>
+	
+	<select id="getFreeInsurance" resultMap="FreeInsurance">
+		SELECT
+			id,
+			`name`,
+			share_title,
+			share_desc,
+			`status`
+		FROM
+			free
+		WHERE
+			id = #{0, jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

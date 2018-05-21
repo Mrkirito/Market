@@ -1,0 +1,426 @@
+#set($admin_path = ${configuration.getProperty("urlPath","bxj_path")})
+<script>
+	var studyWebPath = '${configuration.getProperty("study","study_web_path")}/study/details.page?articleId=';
+	var module;
+</script>
+<link href="$admin_path/res/media/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css"/>
+<link href="$admin_path/res/media/chosen/chosen.min.css" rel="stylesheet" type="text/css"/>
+
+<style>
+.field-name {
+	font-size: larger;
+	width: 90px;
+}
+div .form-group {
+	padding-left: 0px;
+}
+.chosen-container-multi .chosen-choices {
+	font-size: 12px;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid #e9e9e9;
+    transition-duration: .5s;
+}
+</style>
+
+<div class="page-container row-fluid">
+    <div class="page-content">
+        <div class="container-fluid">
+        	<div class="col-sm-12">
+				<div class="panel panel-default search">
+                    <div class="panel-heading">
+						<h3 class="panel-title">创建【学习】文章</h3>
+					</div>
+            		<div class="panel-body">
+						<form action="" id="articleForm">
+							<table class="form-group  col-sm-12">
+								<tr>
+									<td class="field-name">标题：</td>
+									<td><input name="title" id="in_title" placeholder="文章标题，必填。在列表页和详情页均会显示此标题" type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td class="field-name">分类：</td>
+									<td>
+										<div class="form-group col-sm-3">
+											<select class="form-control" name="typeId" id="slt_typeId">
+			                                    #foreach($i in $typies)
+			                                    <option value="$i.id">$i.name</option>
+			                                    #end
+			                                </select>
+		                                </div>
+		                                
+		                                <div class="form-group col-sm-3">
+											<select class="form-control displayType" name="displayType">
+			                                    <option value="NORMAL">普通文章</option>
+			                                    <option value="TOP">置顶文章</option>
+                                                <option value="TOPIC_ONE">专题文章(单内容)</option>
+                                                <option value="TOPIC_MORE">专题文章(多内容)</option>
+			                                </select>
+		                                </div>
+		                                <div class="form-group col-sm-6">
+		                                	<input name="publishAt" placeholder="发布时间，如需立即发布请留空。" type="text" class="form-control" id="in_publishAt" readonly>
+		                                </div>
+									</td>
+								</tr>
+								<tr class="normal_article">
+									<td class="field-name">关联分类：</td>
+									<td>
+										<select class="chzn-select" style="width: 100%" name="refTypies" id="slt_refTypies" multiple data-placeholder="   可选择相关分类标签，排名不以选择顺序为先后。">
+			                                #foreach($i in $typies)
+			                                <option value="$i.id">$i.name</option>
+			                                #end
+			                            </select>
+									</td>
+								</tr>
+								<tr class="normal_article">
+									<td class="field-name">转载信息：</td>
+									<td><input name="sourceInfo" style="margin-top: 6px;" placeholder="如原创，请留空，在详情页会显示“保险家原创”，否则请填写，详情页显示“转载自“填写内容””" type="text" class="form-control"></td>
+								</tr>
+								<tr class="normal_article">
+									<td colspan="2">
+										<script id="editor" type="text/plain" style="width:100%;height:500px;" class="form-control" name="content">
+											<div>请编辑正文：</div>
+											<div>1. 可从网页上直接复制粘帖，网页上的图片将自动上传至服务器。</div>
+											<div>2. 如果从word文件复制，格式可保留，但由于浏览器安全问题，可能无法读取图片。若出现此情况，请手动上传图片。</div>
+										</script>
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name" style="vertical-align: top;">封面图片：</td>
+									<td>
+										<div class="form-group col-sm-3">
+											<select class="form-control" name="displayStyle" id="slt_displayStype" title="此文章在用户端文章列表中的显示样式">
+			                                    <option value="IMG_BOTTOM_MORE">下方多图</option>
+			                                    <option value="IMG_RIGHT_SMALL">右侧小图</option>
+                                                <option value="IMG_TOPIC">专题大图</option>
+			                                    <option value="TEXT_ONLY" selected>无图</option>
+			                                </select>
+		                                </div>
+		                                <div class="form-group col-sm-3">
+		                                	<select class="form-control" id="slt_img_fn" name="imageType" title="此文章在用户端文章列表中封面图片的确认方式，自动：截取正文中最前面的图片（最多3张）作为封面图片，并根据图片数量自动确定显示样式，后台系统将这些图片制作成封面图（另外存放，不会影响文章中图片）。手动：选择此模式后，右侧出现选择图片按钮，需要手动上传图片（220*150像素），并确定显示样式，后台系统将不会对上传的图片和样式做任何干预。">
+			                                    <option value="AUTO">自动档</option>
+			                                    <option value="NORMAL">手动档</option>
+			                                </select>
+		                                </div>
+		                                <div class="form-group col-sm-3">
+		                                	<button class="btn btn-primary" type="button" id="btn-upimg" style="width: 100%;display: none;">选择图片</button>
+		                                </div>
+		                                <div class="form-group col-sm-12" id="imgPreview">
+		                                </div>
+									</td>
+								</tr>
+                                <tr class="topic_more_article">
+                                    <td class="field-name" style="vertical-align: top;">banner图：</td>
+                                    <td>
+                                        <div class="form-group col-sm-3">
+                                            <button class="btn btn-primary" type="button" id="btn-upimg-banner" style="width: 100%;">选择图片</button>
+                                        </div>
+                                        <div class="form-group col-sm-12" id="imgPreviewBanner">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="topic_more_article">
+                                    <td class="field-name" style="vertical-align: top;">分享图片：</td>
+                                    <td>
+                                        <div class="form-group col-sm-3">
+                                            <button class="btn btn-primary" type="button" id="btn-upimg-share" style="width: 100%;">选择图片</button>
+                                        </div>
+                                        <div class="form-group col-sm-12" id="imgPreviewShare">
+                                        </div>
+                                    </td>
+                                </tr>
+								<tr class="normal_article">
+									<td class="field-name">评论设置：</td>
+									<td>
+										<div class="form-group col-sm-3">
+											<select class="form-control" name="showComment" title="用户端文章详情中将不加载评论列表。">
+			                                    <option value="true">允许显示评论</option>
+			                                    <option value="false">不显示评论</option>
+			                                </select>
+		                                </div>
+		                                <div class="form-group col-sm-3">
+											<select class="form-control" name="canComment" title="用户端文章详情中将不显示评论输入框，此文章不可评论。">
+			                                    <option value="true">允许发表评论</option>
+			                                    <option value="false">禁止发表评论</option>
+			                                </select>
+		                                </div>
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name" title="虚拟点击数：在用户端显示的点击数，实际上是此虚拟点击数与实际点击数的和。">虚拟点击：</td>
+									<td>
+										<div class="form-group col-sm-12">
+											<input class="form-control" type="number" name="clickTimesSham" value="0">
+		                                </div>
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name" title="排序依据：在用户端显示的文章列表中值越小越靠前，默认为 100。如果值相同，则按发布时间，越晚越靠前。">权重：</td>
+									<td>
+										<div class="form-group col-sm-12">
+											<input class="form-control" readOnly type="number" name="sort" value="100">
+		                                </div>
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name" title="自定义分享简介：如留空，则自动截取正文前60字。">分享简介：</td>
+									<td><input name="shareText" placeholder="如留空，则自动截取正文前60字。" type="text" class="form-control"></td>
+								</tr>
+								<tr>
+									<td class="field-name"></td>
+									<td style="text-align: right;">
+										
+										<label class="checkbox" style="display: inline-block;margin-right: 50px;">
+											完成后：
+											<select id="postAction">
+												<option value="preview">预览详情</option>
+												<option value="create">继续创建文章</option>
+												<option value="list">返回列表页</option>
+											</select>
+									    </label>
+									    <button class="btn btn-primary" type="button" id="btn-submit" style="margin-top: 10px;width: 100px">提交</button></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+	                            
+            </div>
+		</div>
+	</div>
+	
+	<script id="imgUploader" type="text/plain" style="width:0;height:0;">
+</div>
+
+<script>
+window.UEDITOR_HOME_URL = '$admin_path/res/media/ue/';
+</script>
+<script type="text/javascript" src="$admin_path/res/media/js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="$admin_path/res/media/ue/ueditor.config.js"></script>
+<script type="text/javascript" src="$admin_path/res/media/ue/ueditor.all.min.js"></script>
+<script type="text/javascript" src="$admin_path/res/media/ue/third-party/zeroclipboard/ZeroClipboard.min.js"></script>
+<script type="text/javascript" src="$admin_path/res/media/datetimepicker/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="$admin_path/res/media/chosen/chosen.jquery.min.js"></script>
+<script>
+	var serverPath = '$admin_path/';
+	UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+	UE.Editor.prototype.getActionUrl = function(action) {
+	    if (action == 'catchimage') {
+	        return serverPath + 'study/catchImage.json';
+	    } else if (action == 'uploadimage') {
+			return serverPath + 'study/uploadImage.json';
+		} else if (action == 'listimage') {
+			return serverPath + 'study/listImage.json';
+		} else {
+	        return this._bkGetActionUrl.call(this, action);
+	    }
+	}
+	var ue = UE.getEditor('editor');
+	
+	//ue.addListener("beforePaste",function(type, data) {
+		
+		//var html = $(data.html), result = [];
+		//for (var i = 0; i < html.length; i++) {
+		//	var e = html[i], $this = $(e);
+		//	if ($this.is('p') && $this.children().is('br')) {
+			
+		//	} else {
+		//		result.push(e.outerHTML);
+		//	}
+			
+		//}
+		//data.html=result.join('');
+	//});
+	ue.addListener("contentChange",function() {
+		if ($('#slt_img_fn').val() != 'AUTO') {
+			return;
+		}
+		
+    	var html = ue.getContent(), con = $('#imgPreview').empty();
+		var imgs = $(html).find('img');
+		if (imgs.length) {
+			imgs.each(function(i) {
+				if (i < 3) {
+					$('<img width="220" height="150" style="margin-right: 15px">').attr('src', this.src).appendTo(con);
+					$('<input type="hidden" name="images">').appendTo(con).val(this.src);
+				} else {
+					return false;
+				}
+			});
+			
+			if (imgs.length == 1) {
+				$('#slt_displayStype').val('IMG_RIGHT_SMALL');
+			} else {
+				$('#slt_displayStype').val('IMG_BOTTOM_MORE');
+			}
+		} else {
+			$('#slt_displayStype').val('TEXT_ONLY');
+		}
+		
+	});
+
+	var imgUploader = UE.getEditor('imgUploader', {
+		isShow: false
+	});
+	var imgType = 1;
+	
+	imgUploader.addListener('beforeInsertImage', function() {
+		imgUploader.setContent('');
+	});
+	
+	imgUploader.addListener('afterInsertImage', function() {
+		if(imgType == 1){
+            if ($('#slt_img_fn').val() != 'NORMAL') {
+                return;
+            }
+
+            var html = imgUploader.getContent(), con = $('#imgPreview').empty();
+            var imgs = $(html).find('img');
+            if (imgs.length) {
+                imgs.each(function(i) {
+                    if (i < 3) {
+                        $('<img width="220" height="150" style="margin-right: 15px">').attr('src', this.src).appendTo(con);
+                        $('<input type="hidden" name="images">').appendTo(con).val(this.src);
+                    } else {
+                        return false;
+                    }
+                });
+            }
+        } else if (imgType == 2) {
+            var html = imgUploader.getContent(), con = $('#imgPreviewBanner').empty();
+            var imgs = $(html).find('img');
+            if (imgs.length) {
+                imgs.each(function (i) {
+                    if (i < 1) {
+                        $('<img width="220" height="150" style="margin-right: 15px">').attr('src', this.src).appendTo(con);
+                        $('<input type="hidden" name="bannerImage">').appendTo(con).val(this.src);
+                    } else {
+                        return false;
+                    }
+                });
+            }
+        } else if (imgType == 3) {
+            var html = imgUploader.getContent(), con = $('#imgPreviewShare').empty();
+            var imgs = $(html).find('img');
+            if (imgs.length) {
+                imgs.each(function (i) {
+                    if (i < 1) {
+                        $('<img width="220" height="150" style="margin-right: 15px">').attr('src', this.src).appendTo(con);
+                        $('<input type="hidden" name="shareImage">').appendTo(con).val(this.src);
+                    } else {
+                        return false;
+                    }
+                });
+            }
+        }
+
+	});
+
+	$('#btn-submit').on('click', function() {
+	
+		if (!$('#in_title').val()) {
+			alert('请输入标题');
+			return;
+		}
+        $('#slt_displayStype').attr("disabled", false);
+        $('#slt_img_fn').attr("disabled", false);
+		
+		var args = $('#articleForm').serialize();
+		
+		jQuery.ajax({
+			url: 'study/create.json',
+			data: args,
+			type: 'post',
+			error: function() {
+				alert('服务器出错');
+			},
+			success: function(json) {
+				var act = $('#postAction').val();
+				if (act == 'preview') {
+					var id = json.result;
+					
+					// 打开网页 详情页，并转到编辑页
+					window.open(studyWebPath + id);
+					
+					location = 'study/update.jhtml?articleId=' + id;
+				} else if (act == 'create') {
+					location.reload();
+				} else {
+					location = 'study/index.jhtml';
+				}
+			}
+		});
+	});
+
+	$('#btn-upimg').on('click', function() {
+        imgType = 1;
+		imgUploader.getDialog("insertimage").open();
+	});
+
+    $('#btn-upimg-banner').on('click', function() {
+        imgType = 2;
+        imgUploader.getDialog("insertimage").open();
+    });
+
+    $('#btn-upimg-share').on('click', function() {
+        imgType = 3;
+        imgUploader.getDialog("insertimage").open();
+    });
+
+
+	$('#slt_img_fn').on('change', function() {
+		if (this.value == 'AUTO') {
+			$('#btn-upimg').hide();
+			ue.fireEvent('contentChange');
+		} else {
+			$('#btn-upimg').show();
+			imgUploader.fireEvent('afterInsertImage');
+		}
+	});
+	
+	$('#in_publishAt').datetimepicker({
+		lang:'ch',
+		timepicker: true,
+		format:'Y-m-d H:i',
+		step:5,
+		formatDate:'Y-m-d H:i',
+		showButtonPanel:true
+	});
+	
+	
+	var sltTypeId = $('#slt_refTypies').chosen();
+	$('#slt_typeId').on('change', function() {
+		
+		sltTypeId.chosen('destroy');
+		sltTypeId.find('option').show().removeAttr('selected');
+		sltTypeId.find('option[value=' + this.value + ']').hide();
+		
+		sltTypeId.chosen({
+			max_selected_options: 2
+		});
+	}).trigger('change');
+
+    $('.displayType').on('change', function () {
+        if ('TOPIC_MORE' == $('.displayType').val()) {
+            $('.topic_more_article').show();
+            $('.normal_article').hide();
+            $('#slt_displayStype').attr("disabled", "disabled").val("IMG_TOPIC");
+            $('#slt_img_fn').attr("disabled", "disabled").val("NORMAL");
+            $('#btn-upimg').show();
+            imgUploader.fireEvent('afterInsertImage');
+        } else if ('TOPIC_ONE' == $('.displayType').val()) {
+            $('#slt_displayStype').attr("disabled", true).val("IMG_TOPIC");
+            $('#slt_img_fn').attr("disabled", true).val("NORMAL");
+            $('#slt_img_fn').val("NORMAL");
+            $('#btn-upimg').show();
+            imgUploader.fireEvent('afterInsertImage');
+        } else {
+            $('.topic_more_article').hide();
+            $('.normal_article').show();
+            $('#slt_displayStype').removeAttr("disabled");
+            $('#slt_img_fn').removeAttr("disabled");
+        }
+    }).trigger('change');
+
+</script>

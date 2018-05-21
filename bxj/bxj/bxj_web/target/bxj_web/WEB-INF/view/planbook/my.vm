@@ -1,0 +1,112 @@
+#set($header_params = {"title":"计划书", "css":["index/css/style.css"]})
+#bxj_header($header_params)
+<style>
+    #scroller {
+        position: absolute;
+        z-index: 1;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        width: 100%;
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-text-size-adjust: none;
+        -moz-text-size-adjust: none;
+        -ms-text-size-adjust: none;
+        -o-text-size-adjust: none;
+        text-size-adjust: none;
+    }
+    </style>
+<!--导航 开始-->
+<header class="head">
+    <h1>我</h1>
+    <a class="header_right" href="javascript:"></a>
+</header>
+<div class="morebutton">
+    <div>
+        <a href="javascript:logout();" class="fxico">切换账号</a>
+    </div>
+</div>
+<!--导航 结束-->
+<!--导航 结束-->
+<div class="container container_me"  id="wrapper">
+	<div id="scroller">
+	<img src="$static_path/index/images/final-bg03.jpg" width="100%" />
+    <!-- 有名片内容 开始-->
+	#if($cardFlag=='false')
+		<div class="namecard" onclick="javascript:window.location.href='$bxj_path/planUserCard/userCard.page?hf=$!request.getParameter('hf')';">
+	        <img src="$static_path/index/images/final-img001.png" width="9" class="left-top"/>
+	        <img src="$static_path/index/images/final-img001.png" width="9" class="right-top"/>
+	        <ul>
+	            <li><h1>$!userCard.name&nbsp;</h1></li>
+	            <li><h2>$!userCard.job&nbsp;</h2></li>
+	            <li class="icon-li icon-li01"><span>$!userCard.phone&nbsp;</span></li>
+	            <li class="icon-li icon-li02"><span>$!userCard.company&nbsp;</span></li>
+	            <li class="icon-li icon-li03"><span>$!userCard.area&nbsp;</span></li>
+                <li class=""><span>$!userCard.department&nbsp;</span></li>
+                <li class=""><span>$!userCard.address&nbsp;</span></li>
+	        </ul>
+	        <div class="headicon-div">
+	            <span class="head-icon">
+					#if($userCard.photo)
+	   					 <img src="$userCard.photo"/>
+					#else
+	   					 <img src="$static_path/index/images/final-head-icon.jpg"/>
+					#end
+	            </span>
+	            <span class="button_icon"></span>
+	        </div>
+	    </div>
+		#else
+    	<div class="namecard nonamecard">
+	    	<img src="$static_path/index/images/final-img001.png" width="9" class="left-top"/>
+	        <img src="$static_path/index/images/final-img001.png" width="9" class="right-top"/>
+	        <span class="head-icon">
+	            <img src="$static_path/index/images/nonamecard-icon.jpg"/>
+	        </span>
+	        <p>您还没有名片</p>
+	        <button type="button" onclick="javascript:window.location.href='$bxj_path/planUserCard/userCard.page?hf=$!request.getParameter('hf')';">去创建名片</button>
+        </div>
+ 		#end
+    <div class="namecard" onclick="javascript:window.location.href='$bxj_path/planUserCard/myPlanbook.page';">
+    	<li class="list-a plan_icon">已生成的计划书</li>
+    </div>
+    <div class="namecard" onclick="location='$bxj_path/invitation/index.page'" style="display:none;">
+        <li class="list-a party_icon">邀请函管理</li>
+    </div>
+    <div class="namecard" id="voice_edit_" style="display:none;">
+        <li class="list-a voice_icon">语音管理</li>
+    </div>
+    <div class="namecard invent" onclick="javascript:window.location.href='$bxj_path/junior/index.page';">
+        <li class="list-a invent_icon">邀请好友</li>
+    </div>
+    <!--    
+    <div class="namecard invent" >
+    	<dt>
+        	<img src="$static_path/index/images/invent_img.png" width="60"/>
+        </dt>
+        <dd>
+        	<p>邀请好友来做计划书</p>
+            <p>玩转各种开场话术</p>
+        </dd>
+        <div class="clear"></div>
+    </div>-->
+    </div>
+</div>
+
+<!--底部 开始-->
+<!--底部 开始-->
+#bxj_footer_html(4)
+<!--底部 结束-->
+<script>
+    var isBjPage   =1;
+</script>
+<!--底部 结束-->
+#set( $footer_params = ["index/js/ajax.js", "index/js/layer.m.js", "index/js/Messager.js","public/js/iscroll.js?v=20160323","index/js/my.js?v=87"])
+#bxj_footer($footer_params)

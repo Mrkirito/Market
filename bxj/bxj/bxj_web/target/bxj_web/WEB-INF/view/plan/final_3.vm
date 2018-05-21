@@ -1,0 +1,120 @@
+<div class="container container_planbook_zyrs">
+		<div class="banner">
+			<span class="company_tip">$!mainRel.planProductMain.gsName</span>
+			<img src="$static_path/bxj_three/static/planbook_finish/image/banner_zyrs.jpg">
+		</div>
+		<div class="sexname_block">
+			<span class="sex">性别：<span>#if($!plan.sex==1)男#else女#end</span></span>
+			<span class="age">年龄：<span>$!plan.age</span></span>
+		</div>
+		<div class="result_block main_block">
+			<div class="inform_block">
+				<span class="inform_title">保险期间</span>
+				<span class="inform_text">$!mainRel.bxnxConstant.name</span>
+			</div>
+			<div class="inform_block">
+				<span class="inform_title">首年保费</span>
+				<span class="inform_text">$!plan.bf</span>
+			</div>
+			<span class="arrow_block downarrow" style="display: block;"></span>
+		</div>
+		<div class="result_block table_block iconbutton_block" style="display:none;">
+			<table>
+				<thead>
+					<tr>
+						<th>险种</br>名称</th>
+						<th>保额/份数</th>
+						<th>保费</th>
+						<th>保障</br>期限</th>
+						<th>缴费</br>期间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+                		<td>智悦人生</td>
+                 		<td>120000</td>                 
+                 		<td>6000</td>
+                 		<td>终身</td>       
+                 		<td>10年交</td>
+                    </tr>
+                    #if($!plan.age<46)
+                    <tr>
+                		<td>重疾提前给付</td>
+                 		<td>#if($!plan.age<36)80000 #else 50000 #end</td>                 
+                 		<td>从账户扣</td>
+                 		<td>终身</td>       
+                 		<td>-</td>
+                    </tr>
+                    #end
+            #foreach($rel in $rels)
+            #if($rel.pid!=253)
+            <tr>
+                <td>$!rel.planProductMain.cpjc</td>
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.be</td> #end
+                <td>$!rel.bf</td>
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.bxnxConstant.name</td> #end
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.jfnxConstant.name</td> #end
+            </tr>
+            #end
+            #end
+				</tbody>
+			</table>
+			<span class="arrow_block uparrow" style="display:none;"></span>
+		</div>
+		<div class="result_block font_block">
+			<h2>全方位保障 让您乐享人生</h2>
+			<p class="large_font"><span class="redfont">45类</span>重疾保障，<span class="redfont">281项</span>伤残保障</p>
+			<p class="large_font">高额身价有保障，意外医疗可报销</p>
+		</div>
+		<div class="result_block font_block">
+			<h2>让您的财富 不断积累</h2>
+			<p class="large_font">日计息月结算，下有保底上不封顶</p>
+			<p class="large_font">持续交费有奖励，账户安全又增值</p>
+		</div>
+		<div class="result_block font_block">
+			<h2>满足人生不同阶段的<span class="redfont">保障/财务</span>需求</h2>
+			<p class="large_font">保证可调 领取自由</p>
+		</div>
+		#foreach($qy in $qys)
+		<div class="result_block font_block">
+			$!qy.head1
+    		$!qy.head2
+    		$!qy.head3
+		</div>
+		#end
+		<div class="result_block font_block">
+			<h2>说明</h2>
+			<p class="large_font">此计划为经典计划演示，如您需要其他保障组合，请联系您的代理人</p>
+		</div>
+		<div class="result_block font_block">
+			<h2>一个账户 多重保障</h2>
+			<p class="large_font">假定不同万能账户结算利率</p>
+			<div class="age_choose">
+            	<span class="" data-value="low">低(1.75%)</span>
+                <span class="middle_span checked" data-value="mid">中(4.5%)</span>
+                <span data-value="high">高(6%)</span>
+            </div>
+            <div class="zhjz">
+            <div style="display:none;">
+            #foreach($zh in $zhjz)
+            	#if($zh.min>0)            
+            		<p class="age_font"><span class="redfont">$zh.year</span>年后，最多可领<span class="redfont">$zh.min</span>元</p>
+            	#end            	
+            #end
+            </div>
+            <div style="">
+            #foreach($zh in $zhjz)
+            	#if($zh.middle>0)            
+            		<p class="age_font"><span class="redfont">$zh.year</span>年后，最多可领<span class="redfont">$zh.middle</span>元</p>
+           		#end            	
+            #end
+            </div>
+            <div style="display:none;">
+            #foreach($zh in $zhjz)
+            	#if($zh.max>0)            
+            		<p class="age_font"><span class="redfont">$zh.year</span>年后，最多可领<span class="redfont">$zh.max</span>元</p>
+            	#end            	
+            #end
+            </div>
+            </div>
+		</div>

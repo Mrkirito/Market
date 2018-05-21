@@ -1,0 +1,54 @@
+		
+		<ul class="common-info-ul" data-calc="anxiang">
+			<li class="info-item main_line_height">
+				<label class="info-name">险种类型</label>
+				
+				<input type="radio" name="factor6" value="116" id="ax-A" checked="checked">
+				<label for="ax-A">A(无社保)</label>
+				<input type="radio" name="factor6" value="117" id="ax-B">
+				<label for="ax-B">B(有社保)</label>
+				
+				<input name="pid" value="226" type="hidden">
+				<input name="jfnx" value="63" type="hidden">
+				<input name="bxnx" value="62" type="hidden">
+				<input name="be" value="1" type="hidden">
+			</li>
+			<li class="info-item main_line_height">
+				<label class="info-name" for="ax-jihua">安享计划</label>
+				<select class="factor" name="factor5" data-enhance="select" id="ax-jihua">
+	                <option value="118">计划1</option>
+					<option value="119">计划2</option>
+					<option value="120">计划3</option>
+					<option value="121">计划4</option>
+	            </select>
+	            <span class="arrowr"></span>
+			</li>
+		</ul>
+		
+		#parse("product/product.pa.vm")
+		<script>
+			$(function() {
+				bxj.PlanBook.init({
+					gs: 'PingAn',
+					title: '安享住院医疗',
+					BeiBaoRen: {
+						age: {
+							min: 18,
+							max: 80,
+							defaults: 18,
+						}
+					},
+					
+					TouBaoRen: {
+						enabled: false
+					}
+				});
+				
+				bxj.PlanBook.submitSimple('#touBaoXuanZe');
+				
+				$('#beiBaoRenAge,#beiBaoRenSex-1, #beiBaoRenSex-0, #ax-A,#ax-B, #ax-jihua').on('change', function() {
+					bxj.PlanBook.submitSimple('#touBaoXuanZe');
+				});
+				
+			});
+		</script>

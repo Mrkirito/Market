@@ -1,0 +1,179 @@
+$pageModule.init("app/report/userDataHjReport", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+
+    <hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
+    <div class="row">
+        <div id="hjappNew" style="width: 100%; min-height:300px;"></div>
+    </div>
+
+    <div class="row">
+        <div id="hjappStart" style="width: 100%; min-height:300px;"></div>
+    </div>
+
+    <div class="row">
+        <div id="hjw" style="width: 100%; min-height:300px;"></div>
+    </div>
+    <hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
+
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">统计时间&nbsp;</label>
+								<input type="text" class="form-control reportTime">
+								<input type="hidden" class="startTime"/>
+                                <input type="hidden" class="endTime"/>
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+</div>
+
+<div class="add-data-tpl hidden">
+    <div class="form-body">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>数据统计时间</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control dataTime">
+			</div>
+		</div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>目标用户数</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="目标用户数" class="form-control newAddTarget">
+##            </div>
+##        </div>
+##		<div class="form-group col-sm-12">
+##			<label class="col-md-3 control-label"><span class="text-danger">*</span>ios新增用户</label>
+##			<div class="col-md-9">
+				<input type="hidden" placeholder="ios新增用户" class="form-control newIosNum">
+##			</div>
+##		</div>
+##		<div class="form-group col-sm-12">
+##			<label class="col-md-3 control-label"><span class="text-danger">*</span>安卓新增用户</label>
+##			<div class="col-md-9">
+				<input type="hidden" placeholder="安卓新增用户" class="form-control newAndroidNum">
+##			</div>
+##		</div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>目标启动数</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="目标启动数" class="form-control newStartTarget">
+##            </div>
+##        </div>
+##		<div class="form-group col-sm-12">
+##			<label class="col-md-3 control-label"><span class="text-danger">*</span>ios启动用户</label>
+##			<div class="col-md-9">
+				<input type="hidden" placeholder="ios启动用户" class="form-control activeIosNum">
+##			</div>
+##		</div>
+##		<div class="form-group col-sm-12">
+##			<label class="col-md-3 control-label"><span class="text-danger">*</span>安卓启动用户</label>
+##			<div class="col-md-9">
+				<input type="hidden" placeholder="安卓启动用户" class="form-control activeAndroidNum">
+##			</div>
+##		</div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>ios启动次数</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="ios启动次数" class="form-control timesIosNum">
+##            </div>
+##        </div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>安卓启动次数</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="安卓启动次数" class="form-control timesAndroidNum">
+##            </div>
+##        </div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>目标销售额</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="目标销售额" class="form-control salesTotalTarget">
+##            </div>
+##        </div>
+##		<div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>总销售额</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="总销售额" class="form-control salesTotal">
+##            </div>
+##        </div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>毛利</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="毛利" class="form-control salesProfits">
+##            </div>
+##        </div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>保保网PV</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="保保网PV" class="form-control bbwNew">
+##            </div>
+##        </div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>保保网UV</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="保保网UV" class="form-control bbwStart">
+##            </div>
+##        </div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>保保app新增用户</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="保保app新增用户" class="form-control bbappNew">
+##            </div>
+##        </div>
+##        <div class="form-group col-sm-12">
+##            <label class="col-md-3 control-label"><span class="text-danger">*</span>保保app启动用户</label>
+##            <div class="col-md-9">
+                <input type="hidden" placeholder="保保app启动用户" class="form-control bbappStart">
+##            </div>
+##        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><span class="text-danger">*</span>行家app新增用户</label>
+            <div class="col-md-9">
+                <input type="text" placeholder="行家app新增用户" class="form-control hjappNew">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><span class="text-danger">*</span>行家app启动用户</label>
+            <div class="col-md-9">
+                <input type="text" placeholder="行家app启动用户" class="form-control hjappStart">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><span class="text-danger">*</span>行家网PV</label>
+            <div class="col-md-9">
+                <input type="text" placeholder="行家网PV" class="form-control hjwPv">
+            </div>
+        </div>
+
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><span class="text-danger">*</span>行家网UV</label>
+            <div class="col-md-9">
+                <input type="text" placeholder="行家网UV" class="form-control hjwUv">
+            </div>
+        </div>
+
+	</div>
+</div>

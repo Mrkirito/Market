@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.SalesTicketOrderMapper" >
+  	<select id="getMeetTicketCountList" resultType="com.hangjia.bxj.vo.SalesTicketOrderStaticsVo">
+  	  	  <![CDATA[
+  		SELECT b.activity_name AS activityName,b.fid as basicId,v.surplusTicketsNum,b.peoples AS totalTicketsNum,b.address,b.begin_time AS beginTime ,b.end_time as endTime FROM (
+			SELECT basic_id,count(1) AS surplusTicketsNum FROM sales_ticket_document where state!=1 GROUP BY basic_id
+		) v INNER JOIN sales_ticket_basic b ON v.basic_id=b.fid where b.state=1 order by  b.begin_time
+		      ]]>
+  	</select>
+  	
+  	<select id="getSalesTicketDetailCount" parameterType="com.hangjia.bxj.query.ticket.SalesTicketQuery" resultType="int">
+  			SELECT count(*) FROM sales_ticket_order a
+			INNER JOIN sales_ticket_sit b ON a.sit_id = b.fid
+			INNER JOIN sales_ticket_basic m ON a.basic_id = m.fid
+			INNER JOIN sales_ticket_salesman k ON a.channel_id=k.fid
+			WHERE a.state = 1 AND m.state = 1
+			<include refid="where" />
+  	</select>
+  	<select id="getSalesTicketDetails" parameterType="com.hangjia.bxj.query.ticket.SalesTicketQuery" resultType="com.hangjia.bxj.vo.SalesTicketOrderStaticsVo">
+			SELECT
+				a.fid as orderId,
+				a.basic_id AS basicId,
+				a.num AS totalNum,
+				(CASE WHEN a.num=a.attend_num THEN 1 ELSE 2 END) AS attendState,
+				(a.num-a.attend_num) AS exitAttend,
+				a.money AS totalMoney,
+				a.payment AS payType,
+				a.actual AS actualNum,
+				a.free AS presentNum,
+				a.pay_time AS payTime,
+				a.tel as customerTel,
+				m.activity_name AS activityName,
+				k.name AS salesmanName
+			FROM sales_ticket_order a
+			INNER JOIN sales_ticket_basic m ON a.basic_id = m.fid
+			INNER JOIN sales_ticket_salesman k ON a.channel_id=k.fid
+			WHERE a.state = 1 AND m.state = 1
+			<include refid="where" />
+			ORDER BY a.pay_time DESC  
+			limit #{pageFirstItem},#{pageSize}
+  	</select>
+  	<select id="getSalesTicketTotal" parameterType="com.hangjia.bxj.query.ticket.SalesTicketQuery" resultType="com.hangjia.bxj.vo.SalesTicketOrderStaticsVo">
+		SELECT
+			a.basic_id as basicId,
+			a.payment as payType,
+			SUM(a.money) AS totalMoney,
+			SUM(a.free) AS presentNum,
+			SUM(a.actual) AS actualNum,
+			SUM(a.num) AS totalNum
+		FROM sales_ticket_order a
+		INNER JOIN sales_ticket_basic c ON a.basic_id=c.fid
+		WHERE a.state = 1 AND c.state=1 <include refid="where" />
+		GROUP BY a.basic_id ,a.payment ORDER BY c.begin_time
+  	</select>
+
+  	<select id="getSaleMansList" resultType="java.util.Map" parameterType="java.lang.String">
+	  	SELECT a.fid, a.name FROM sales_ticket_salesman a INNER JOIN sales_ticket_salesman_admin_rel b ON a.fid = b.salesman_id WHERE a.state = 1 AND b.state=1 AND b.user_code=#{userCode}
+  	</select>
+  	
+   	<select id="getBasicList" resultType="com.hangjia.bxj.vo.SalesTicketOrderStaticsVo" >
+	  	SELECT activity_name as activityName,fid as basicId FROM sales_ticket_basic WHERE state=1
+  	</select>
+	<sql id="where">
+		<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+			AND DATE(a.pay_time) <![CDATA[>=]]> DATE(#{startTime}) AND DATE(a.pay_time) <![CDATA[<=]]> DATE(#{endTime})
+		</if>
+		<if test="channelId != null and channelId != ''">
+			AND a.channel_id=#{channelId}
+		</if>
+		<if test="basicId != null and basicId != ''">
+			AND a.basic_id=#{basicId}
+		</if>
+		<if test="payType != null and payType != ''">
+			AND a.payment=#{payType}
+		</if>
+		<if test="customerTel != null and customerTel != ''">
+			AND a.tel=#{customerTel}
+		</if>
+		<if test="attendState != null and attendState==1">
+			AND a.num=a.attend_num
+		</if>
+		<if test="attendState != null and attendState==2">
+			AND a.num>a.attend_num
+		</if>
+		<if test="orderId != null and orderId != ''">
+			AND a.fid=#{orderId}
+		</if>
+	</sql>  
+	<sql id="where2">
+		<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+			AND DATE(c.pay_time) <![CDATA[>=]]> DATE(#{startTime}) AND DATE(c.pay_time) <![CDATA[<=]]> DATE(#{endTime})
+		</if>
+		<if test="channelId != null and channelId != ''">
+			AND c.channel_id=#{channelId}
+		</if>
+		<if test="basicId != null and basicId != ''">
+			AND a.basic_id=#{basicId}
+		</if>
+		<if test="userPhone != null and userPhone != ''">
+			AND a.user_phone like CONCAT('%',#{userPhone},'%' ) 
+		</if>
+		<if test="userName != null and userName != ''">
+			AND a.user_name like CONCAT('%',#{userName},'%' )
+		</if>
+		<if test="orderId != null and orderId != ''">
+			AND a.order_id=#{orderId}
+		</if>	
+		<if test="attendState != null and attendState==2">
+			AND (a.user_phone is null OR a.user_phone='')
+		</if>
+		<if test="attendState != null and attendState==1">
+			AND (a.user_phone is not null AND a.user_phone!='')
+		</if>
+		<if test="state != null  and state != ''">
+			AND a.state=#{state}
+		</if>
+		<if test="buyTel != null  and buyTel != ''">
+			AND c.tel=#{buyTel}
+		</if>
+	</sql>  
+	<select id="queryAttendPeoplesCount" resultType="int" parameterType="com.hangjia.bxj.query.ticket.SalesTicketQuery">
+		SELECT count(*)
+		FROM sales_ticket_order_detail a
+		INNER JOIN sales_ticket_document b ON a.doc_id = b.fid 
+		INNER JOIN sales_ticket_order c ON a.order_id=c.fid
+		INNER JOIN sales_ticket_salesman k ON c.channel_id=k.fid
+		INNER JOIN sales_ticket_basic m ON a.basic_id = m.fid
+<!-- 		INNER JOIN sales_ticket_sit n ON c.sit_id= n.fid -->
+		WHERE c.state=1 and m.state=1 <include refid="where2" />
+	</select>	
+	<select id="queryAttendPeoples" resultType="com.hangjia.bxj.vo.SalesTicketOrderAttendPeoplesVo" parameterType="com.hangjia.bxj.query.ticket.SalesTicketQuery">
+		SELECT
+			a.fid,
+			a.order_id as orderId,
+			a.basic_id as basicId,
+            a.company as company,
+            a.business_hall as businessHall,
+			a.user_name as userName,
+			a.user_phone as userPhone,
+			a.state as state,
+			b.floor as floor,
+			b.area as area,
+			b.rows as rows,
+			b.number as number,
+			c.pay_time as payTime,
+			c.tel,
+			k.name  as manName,
+			m.activity_name as activityName<!-- ,
+			n.sit_name as sitName,
+			n.price -->
+		FROM sales_ticket_order_detail a
+		INNER JOIN sales_ticket_document b ON a.doc_id = b.fid 
+		INNER JOIN sales_ticket_order c ON a.order_id=c.fid
+		INNER JOIN sales_ticket_salesman k ON c.channel_id=k.fid
+		INNER JOIN sales_ticket_basic m ON a.basic_id = m.fid
+<!-- 		INNER JOIN sales_ticket_sit n ON c.sit_id= n.fid -->
+		WHERE c.state=1 and m.state=1 <include refid="where2" />	ORDER BY c.pay_time DESC limit #{pageFirstItem},#{pageSize}
+	</select>	
+	<select id="getAttendPeopleByFid" parameterType="java.lang.Long" resultType="com.hangjia.bxj.vo.SalesTicketOrderAttendPeoplesVo">
+		SELECT
+			a.fid,
+			a.user_name as userName,
+			a.user_phone as userPhone,
+			a.order_id as orderId,
+			a.company,
+			a.business_hall as businessHall,
+			b.floor as floor,
+			b.area as area,
+			b.rows as rows,
+			b.number as number,
+			a.basic_id as basicId,
+			m.activity_name as activityName,
+			m.address,
+			m.begin_time as beginTime, 
+			m.end_time as endTime
+		FROM sales_ticket_order_detail a
+		INNER JOIN sales_ticket_document b ON a.doc_id = b.fid
+		INNER JOIN sales_ticket_basic m ON a.basic_id = m.fid
+		WHERE a.fid=#{fid}
+	</select>
+	<update id="updateAttendPeoples" parameterType="com.hangjia.bxj.vo.SalesTicketOrderAttendPeoplesVo" >
+	    update sales_ticket_order_detail
+	    <set >
+	      <if test="userName != null" >
+	        user_name = #{userName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="userPhone != null" >
+	        user_phone = #{userPhone,jdbcType=VARCHAR},
+	      </if>
+	      <if test="company != null" >
+	        company = #{company,jdbcType=VARCHAR},
+	      </if>
+	      <if test="businessHall != null" >
+	        business_hall = #{businessHall,jdbcType=VARCHAR},
+	      </if>
+	    </set>
+	    where fid = #{fid}
+  </update>
+  <sql id="where3">
+		<if test="state != null">
+			AND a.state=#{state}
+		</if>
+		<if test="basicId != null">
+			AND a.basic_id=#{basicId}
+		</if>
+		<if test="start != null and end != null">
+			AND a.ticket_no<![CDATA[>=]]>#{start} and a.ticket_no<![CDATA[<=]]>#{end}
+		</if>
+		<if test="floor != null and floor != ''">
+			AND a.floor=#{floor}
+		</if>	
+		<if test="area != null and area != ''">
+			AND a.area=#{area}
+		</if>	
+		<if test="rows != null and rows != ''">
+			AND a.rows=#{rows}
+		</if>	
+		<if test="number != null and number != ''">
+			AND a.number=#{number}
+		</if>							
+  </sql>
+  <select id="getLockSalesTicketDocumentsCount" parameterType="com.hangjia.bxj.query.ticket.SalesTicketDocumentQuery"  resultType="int">
+	SELECT count(1)
+	FROM sales_ticket_document a
+	INNER JOIN sales_ticket_basic b ON a.basic_id = b.fid
+	WHERE b.state = 1 <include refid="where3" />
+  </select>
+  <select id="getLockSalesTicketDocuments" parameterType="com.hangjia.bxj.query.ticket.SalesTicketDocumentQuery"  resultType="com.hangjia.bxj.model.SalesTicketDocument">
+	SELECT a.fid,a.basic_id as basicId, a.sit_id as sitId, a.state, a.floor, a.area, a.rows, a.number, a.ticket_no as ticketNo, a.sales_time as salesTime,b.activity_name as activityName FROM sales_ticket_document a
+	INNER JOIN sales_ticket_basic b ON a.basic_id = b.fid
+	WHERE b.state = 1 <include refid="where3" /> ORDER BY a.ticket_no
+	limit #{pageFirstItem},#{pageSize}
+  </select>
+  <update id="updateLockSalesTicketDocuments" parameterType="com.hangjia.bxj.query.ticket.SalesTicketDocumentQuery">
+  	update sales_ticket_document set state=4 where state in (3,0) AND ticket_no<![CDATA[>=]]>#{start} and ticket_no<![CDATA[<=]]>#{end} AND version=1 AND basic_id=#{basicId}
+  </update>
+
+	<update id="updateMarchOut">
+		update sales_ticket_order_detail
+		set state = 1, exit_time = now()
+		where basic_id = #{basicId}
+		and state = 2
+	</update>
+	
+	
+	<!-- 导入数据功能  -->
+  <select id="randomShortUUID" resultType="java.lang.String">
+    SELECT UUID_SHORT()
+  </select> 
+	<insert id="insertSalesTicketOrder" parameterType="com.hangjia.bxj.model.SalesTicketOrder" useGeneratedKeys="true" keyProperty="fid">
+    insert into sales_ticket_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="basicId != null" >
+        basic_id,
+      </if>
+      <if test="sitId != null" >
+        sit_id,
+      </if>
+      <if test="salesmanId != null" >
+        salesman_id,
+      </if>
+      <if test="orderno != null" >
+        orderno,
+      </if>
+      <if test="pipeno != null" >
+        pipeno,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="payment != null" >
+        payment,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="attendNum != null" >
+        attend_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="free != null" >
+        free,
+      </if>
+      <if test="actual != null" >
+        actual,
+      </if> 
+      <if test="inputSource != null" >
+        input_source,
+      </if>      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="basicId != null" >
+        #{basicId,jdbcType=INTEGER},
+      </if>
+      <if test="sitId != null" >
+        #{sitId,jdbcType=INTEGER},
+      </if>
+      <if test="salesmanId != null" >
+        #{salesmanId,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="pipeno != null" >
+        #{pipeno,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attendNum != null" >
+        #{attendNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="free != null" >
+        #{free,jdbcType=VARCHAR},
+      </if>
+      <if test="actual != null" >
+        #{actual,jdbcType=VARCHAR},
+      </if>
+      <if test="inputSource != null" >
+        #{inputSource,jdbcType=INTEGER},
+      </if>           
+    </trim>
+  </insert>
+  <select id="querySalesTicketDocument" resultType="com.hangjia.bxj.model.SalesTicketDocument">
+    select fid,basic_id as basicId, sit_id as sitId, state, floor, area, rows, number, ticket_no as ticketNo, sales_time as salesTime, version from sales_ticket_document where basic_id=#{0} and sit_id=#{1} and state=#{2} ORDER BY ticket_no limit #{3}
+  </select>
+  <update id="updateTicketDocument" parameterType="com.hangjia.bxj.model.SalesTicketDocument">
+	update sales_ticket_document set state=#{state},
+			<if test="salesTime != null">
+				sales_time=#{salesTime},
+			</if>
+			version =version+1
+		where fid = #{fid,jdbcType=BIGINT} AND version=#{version}
+  </update>   
+  <insert id="insertSalesTicketOrderDetail" parameterType="com.hangjia.bxj.model.SalesTicketOrderDetail" >
+    insert into sales_ticket_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="docId != null" >
+        doc_id,
+      </if>
+      <if test="basicId != null" >
+        basic_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="enterTime != null" >
+        enter_time,
+      </if>
+      <if test="exitTime != null" >
+        exit_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="businessHall != null" >
+        business_hall,
+      </if>      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="docId != null" >
+        #{docId,jdbcType=BIGINT},
+      </if>
+      <if test="basicId != null" >
+        #{basicId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="enterTime != null" >
+        #{enterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exitTime != null" >
+        #{exitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="businessHall != null" >
+        #{businessHall,jdbcType=VARCHAR},
+      </if>     
+    </trim>
+  </insert> 
+  <select id="getPhoneCountByMeet" parameterType="com.hangjia.bxj.model.SalesTicketOrder" resultType="int">
+  	select count(*) from sales_ticket_order_detail where basic_id=#{basicId} and user_phone in 
+  	 <foreach item="item" index="index" collection="phones" open="(" separator="," close=")">  
+ 		 #{item}  
+ 	</foreach> 
+  </select>
+  <select id="getSystemHasPhones" parameterType="com.hangjia.bxj.model.SalesTicketOrder" resultType="com.hangjia.bxj.model.SalesTicketOrder">
+  	select user_phone AS tel from sales_ticket_order_detail where basic_id=#{basicId} and user_phone in 
+  	 <foreach item="item" index="index" collection="phones" open="(" separator="," close=")">  
+ 		 #{item}  
+ 	</foreach> 
+  </select>
+  <select id="getSitsByBasicId" resultType="com.hangjia.bxj.model.SalesTicketSit">
+  	SELECT sit_name as sitName,fid,price FROM sales_ticket_sit where basic_id=#{0}
+  </select>
+  
+  <update id="updateOrder" parameterType="java.lang.Long">
+	 UPDATE sales_ticket_order SET attend_num=(SELECT count(*) FROM sales_ticket_order_detail WHERE state = 1 AND order_id=#{fid} AND user_phone IS NOT NULL AND user_phone != '') WHERE fid=#{fid}
+  </update>
+  <select id="getPhonesCount" resultType="int">
+	SELECT count(*) FROM sales_ticket_order_detail where basic_id=#{0} AND user_phone=#{1} AND fid!=#{2}
+  </select>
+  <update id="updateSalesTicketOrderDetail" parameterType="com.hangjia.bxj.vo.SalesTicketOrderAttendPeoplesVo">
+	UPDATE sales_ticket_order_detail set
+	<if test="state==2">
+		state=1,exit_time=NOW()	
+	</if> 
+	<if test="state!=2">
+		state=2,enter_time=NOW()	
+	</if>
+	 WHERE fid=#{fid}
+  </update>
+<insert id="insertSalesTicketIntoLog" parameterType="com.hangjia.bxj.vo.SalesTicketOrderAttendPeoplesVo">
+        insert into sales_ticket_into_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userPhone != null">
+                phone,
+            </if>
+            <if test="basicId != null">
+                basic_id,
+            </if>
+            <if test="sendInfo != null">
+                type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="basicId != null">
+                #{basicId,jdbcType=INTEGER},
+            </if>
+            <if test="sendInfo != null">
+                #{sendInfo,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="getTicketOrderAttendPeoplesVos" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.vo.SalesTicketOrderAttendPeoplesVo2">
+    	SELECT a.tel as buyPhone,
+		  CASE WHEN a.payment=1 THEN '微信'  WHEN a.payment=3 THEN '销售代表' ELSE '支付宝' END as buyType,
+		  b.user_name as userName,
+		  b.user_phone as userPhone,
+		  a.create_time as createTime,
+		  c.floor as floor,
+		  c.area as area,
+		  c.rows as rows,
+		  c.number as number
+		FROM sales_ticket_order a
+		INNER JOIN sales_ticket_order_detail b ON a.fid = b.order_id
+		INNER JOIN sales_ticket_document c ON b.doc_id = c.fid
+		INNER JOIN sales_ticket_salesman d ON a.channel_id=d.fid
+		WHERE a.basic_id =#{fid}  AND a.state =1 order by b.fid
+    </select>
+</mapper>

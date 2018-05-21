@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+       default-autowire="byName">
+
+
+    <bean name="cdnOperateService" class="com.hangjia.bxj.service.impl.CdnOperateServiceImpl" init-method="init">
+        <property name="accessKey" value="${cdn.accessKey}"/>
+        <property name="accessSecret" value="${cdn.accessSecret}"/>
+    </bean>
+
+    <bean name="/CdnOperateService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="cdnOperateService"/>
+        <property name="debug" value="true"/>
+        <property name="sendCollectionType" value="false"/>
+        <property name="serviceInterface" value="com.hangjia.bxj.service.CdnOperateService"/>
+    </bean>
+
+    <bean id="registService" class="com.hangjia.bxj.service.impl.RegistServiceImpl"></bean>
+    <bean name="/RegistService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="registService"/>
+        <property name="debug" value="true"/>
+        <property name="sendCollectionType" value="false"/>
+        <property name="serviceInterface" value="com.hangjia.bxj.service.RegistService"/>
+    </bean>
+
+    <bean id="bxjSupportService" class="com.hangjia.bxj.service.impl.BxjSupportServiceImpl"></bean>
+    <bean name="/BxjSupportService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="bxjSupportService"/>
+        <property name="debug" value="true"/>
+        <property name="sendCollectionType" value="false"/>
+        <property name="serviceInterface" value="com.hangjia.bxj.service.BxjSupportService"/>
+    </bean>
+
+    <bean id="mySupportService" class="com.hangjia.bxj.service.impl.MySupportServiceImpl"></bean>
+    <bean name="/MySupportService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="mySupportService"/>
+        <property name="debug" value="true"/>
+        <property name="sendCollectionType" value="false"/>
+        <property name="serviceInterface" value="com.hangjia.bxj.service.MySupportService"/>
+    </bean>
+
+    <bean id="bxjToolsService" class="com.hangjia.bxj.service.impl.BxjToolsServiceImpl"></bean>
+    <bean name="/BxjToolsService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="bxjToolsService"/>
+        <property name="debug" value="true"/>
+        <property name="sendCollectionType" value="false"/>
+        <property name="serviceInterface" value="com.hangjia.bxj.service.BxjToolsService"/>
+    </bean>
+
+    <bean id="UserCardSupportService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>${occ_client.occ_sso_service_url}/UserCardSupportService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.baobao.sso.service.UserCardSupportService</value>
+        </property>
+        <property name="readTimeout">
+            <value>20000</value>
+        </property>
+    </bean>
+
+    <bean id="UserService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>${occ_client.occ_sso_service_url}/UserService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.baobao.sso.service.UserService</value>
+        </property>
+        <property name="readTimeout">
+            <value>20000</value>
+        </property>
+    </bean>
+
+    <bean id="ChampionUserService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>${champion_client.champion_service_url}/ChampionUserService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.ibaoxianjia.champion.service.ChampionUserService</value>
+        </property>
+        <property name="readTimeout">
+            <value>20000</value>
+        </property>
+    </bean>
+
+    <bean id="studySupportService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>${study_client.study_service_url}/StudySupportService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.ibaoxianjia.study.service.StudySupportService</value>
+        </property>
+        <property name="readTimeout">
+            <value>20000</value>
+        </property>
+        <property name="overloadEnabled" value="true"></property>
+    </bean>
+</beans>

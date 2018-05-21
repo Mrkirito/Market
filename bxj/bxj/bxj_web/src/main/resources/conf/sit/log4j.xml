@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- ===================================================================== -->
+    <!-- ===================================================================== -->
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">  
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern"     
+                value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t:%p] %c - %m%n" />  
+        </layout>  
+
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">  
+            <param name="levelMin" value="DEBUG" />  
+            <param name="levelMax" value="ERROR" />  
+            <param name="AcceptOnMatch" value="true" />  
+        </filter>  
+    </appender> 
+
+    
+    <appender name="PROJECT" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="/var/ftp/log/tomcat/bxj_web/bxj_web.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <!-- 
+        <param name="threshold" value="info"/>
+         -->
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t:%p] %c - %m%n"/>
+        </layout>
+    </appender>
+    
+    <!-- ===================================================================== -->
+    <!-- ===================================================================== -->
+    
+    <root additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="PROJECT"/>
+        
+        <!-- 
+        <appender-ref ref="PROJECT-DEBUG"/>
+        <appender-ref ref="CONSOLE"/>
+         -->
+    </root>
+    
+    <!-- 程序日志，最主要是mybatis代理类的sql和参数 -->
+    <category name="com.hangjia.bxj" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="PROJECT"/>
+    </category>
+    
+    <!-- 控制器调度调试 -->
+    <category name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="PROJECT"/>
+    </category>
+    
+    <!-- jdbc数据源调试 -->
+    <category name="org.springframework.jdbc.datasource" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="PROJECT"/>
+    </category>
+    
+    <!-- jdbc事务调试信息 -->
+    <category name="org.springframework.jdbc.datasource.DataSourceTransactionManager" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="PROJECT"/>
+    </category>
+    
+    <category name="org.apache.velocity" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="PROJECT"/>
+    </category>
+    
+    <!-- 
+    <category name="java.sql" additivity="false">
+        <priority value="INFO" />
+    </category>
+     -->
+     
+</log4j:configuration>

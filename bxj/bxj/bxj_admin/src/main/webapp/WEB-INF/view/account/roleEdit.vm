@@ -1,0 +1,81 @@
+$pageModule.init("app/account/role", "initEdit")
+
+
+<form method="post" enctype="multipart/form-data" id="role-form">
+
+    <input type="hidden" class="selectResourceId">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">角色信息</h3>
+                </div>
+                <div class="panel-body">
+
+                    <input type="hidden" class="id" value="$!role.id">
+                    <input type="hidden" class="parentId" value="0">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">编码</label>
+
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control roleCode" readonly value="$!role.roleCode">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">名称</label>
+
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control roleName" value="$!role.roleName">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-1">备注</label>
+
+                                <div class="col-md-11">
+                                    <textarea type="password" class="form-control memo">$!role.memo</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">权限信息</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-6">
+					##                        <h3 style="margin-top: 0;">资源权限</h3>
+                        <div class="resource-tree tree-border" style="height: 500px; overflow-y: auto;"></div>
+                    </div>
+                    <div class="col-sm-6">
+					##                        <h3 style="margin-top: 0;">按钮权限</h3>
+                        <div class="function-tree tree-border" style="height: 500px; overflow-y: auto;"></div>
+                    </div>
+                </div>
+                <div class="panel-footer text-center">
+                    <button class="btn btn-info submit-btn" type="button">保存</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<textarea class="hidden resourceIdList">$!resourceIdList</textarea>
+<textarea class="hidden funcMap">$!funcMap</textarea>

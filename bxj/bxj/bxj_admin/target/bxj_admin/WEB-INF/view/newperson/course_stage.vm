@@ -1,0 +1,105 @@
+$pageModule.init("app/newperson/courseStage", "list")
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">课程阶段名称&nbsp;</label>
+                                <input type="text" class="form-control stageName">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">启用状态&nbsp;</label>
+                                <select class="form-control enableStatus">
+                                    <option value="" checked>全部</option>
+                                    <option value="1">启用</option>
+                                    <option value="0">禁用</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data-list">
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<div class="headline-banner-tpl hidden stage_info">
+    <input type="hidden" id="id">
+    <div class="form-body">
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">课程阶段名称</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control stageName" placeholder="请输入课程阶段名称">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">课程阶段描述</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control description" placeholder="请输入课程阶段描述">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">课程阶段icon</label>
+            <div class="col-md-9">
+                <div class="">
+                    <div class="uploadImg">
+                        <li style="display: inline-block; margin-right: 3px;">
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl iconUrl">
+    		            <a class="btn btn-primary remove-img">删除</a>
+    		            </span></li>
+                        <a class="btn btn-primary infos-images">上传课程阶段icon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">排序</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control sort"
+                       onkeyup="this.value=this.value.replace(/\D/g,'')"
+                       onafterpaste="this.value=this.value.replace(/\D/g,'')"
+                       placeholder="请输入课程阶段排序">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">banner类型</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control bannerType"
+                       onkeyup="this.value=this.value.replace(/\D/g,'')"
+                       onafterpaste="this.value=this.value.replace(/\D/g,'')"
+                       placeholder="请输入课程banner类型">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">启用状态</label>
+            <div class="input-group col-md-9">
+                <select class="form-control enableStatus">
+                    <option disabled='disabled' selected>请选择</option>
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

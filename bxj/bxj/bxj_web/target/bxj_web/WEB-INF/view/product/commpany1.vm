@@ -1,0 +1,246 @@
+<div id="plan_fjx_list" class="popup-layer" style="display:none;">
+	<form class="popup-form-layer handler-host">
+		<header class="popup-layer-title">附加险</header>
+		<ul class="popup-layer-ul">
+			#if($product.fid==636)
+			<li id="zyyl">
+				<dl>
+					<input type="hidden" name="bxnx" value="62" data-text="保一年" class="factor">
+			 		<input type="hidden" name="jfnx" value="63" data-text="1年交" class="factor">
+					<input type="hidden" name="factor5" value="88" class="factor">
+			 		<input class="change checked" type="hidden" data-cpjc="健享人生A" name="pid" data-jbbe="1000" value="439">
+					<dt>
+						<input class="checkbox-single" disabled="disabled" checked="checked" data-proid="zyyl" type="checkbox"> 
+						<label class="checked">健享人生A</label>
+					</dt>
+					<dd style="">
+						<label class="layer-left-w">份数</label> 
+						<select class="demo_price factor" name="be">
+							<option value="1">1</option>
+							<option value="2" selected="selected">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+						</select>
+						<i class="icon">份</i>
+					</dd>
+				</dl>
+			</li>
+			<li id="ywsh">
+			 <dl>
+				<input type="hidden" name="bxnx" value="62" data-text="保一年" class="factor">
+			 	<input type="hidden" name="jfnx" value="63" data-text="1年交" class="factor">
+			 	<input class="change checked" type="hidden" data-cpjc="意外伤害2013" name="pid" data-jbbe="10000" value="440">
+				<dt>
+					<input class="checkbox-single" disabled="disabled" checked="checked" type="checkbox" data-proid="ywsh">
+					<label class="checked">意外伤害2013</label>
+				</dt>
+				<dd class="job">
+					<label class="layer-left-w">职业类别</label>
+					<select name="factor5" class="factor">
+							<option value="79">一类</option>
+							<option value="67">二类</option>
+							<option value="68">三类</option>
+							<option value="75">四类</option>
+							<option value="73">五类</option>
+							<option value="65">六类</option>
+					</select>
+					<span class="arrowr"></span>
+				</dd>
+				<dd>
+					<label class="layer-left-w" for="ywshBe">保额</label>
+					<input id="ywshBe" placeholder="请输入保额"  value="100000" class="demo_price factor" name="be">
+					<i class="icon">元</i>
+					<span class="error-tips" style="display:none;"></span>
+				</dd>
+			 </dl>
+			</li>			
+			<li id="ywyl">
+				<dl>
+					<input type="hidden" name="bxnx" value="62" data-text="保一年" class="factor">
+				 	<input type="hidden" name="jfnx" value="63" data-text="1年交" class="factor">
+				 	<input type="hidden" name="factor6" value="1" class="factor">
+				 	<input class="change checked" type="hidden" data-cpjc="意外医疗A" name="pid" data-jbbe="1000" value="637">
+					<dt>
+						<input class="checkbox-single" disabled="disabled" checked="checked" data-proid="ywyl" type="checkbox"> 
+						<label class="checked">意外医疗A</label>
+					</dt>
+					<dd class="job" style="">
+						<label class="layer-left-w">职业类别</label>
+						<select name="factor5" class="factor">
+							<option value="79">一类</option>
+							<option value="67">二类</option>
+							<option value="68">三类</option>
+							<option value="75">四类</option>
+							<option value="73">五类</option>
+							<option value="65">六类</option>
+						</select>
+						<span class="arrowr"></span>
+					</dd>
+					<dd style="">
+						<label class="layer-left-w">保额</label> 
+						<input type="tel"  placeholder="请输入保额" value="10000" class="demo_price factor" name="be">
+						<i class="icon">元</i>
+						<span class="error-tips" style="display:none;"></span>
+					</dd>
+				</dl>
+			</li>				
+			#else
+			<li id="zyrjt">
+				<dl>
+					<dt>
+						<input class="checkbox-single" data-proid="zyrjt" type="checkbox"> 
+						<label>住院日津贴</label>
+					</dt>					
+					<dd style="display:none;">
+						<input class="radio_box checked change" id="t61" type="radio"  data-jfnx="63" data-bxnx="90" data-cpjc="住院日额07" name="zyrjt_pid" value="61" checked="checked">
+						<label class="mrg-right-2" for="t61">516住院日额</label>						
+						<input class="radio_box change" id="t250" type="radio" data-jfnx="63" data-bxnx="62" data-cpjc="住院日额520" name="zyrjt_pid" value="250">
+						<label class="mrg-right-2" for="t250">520意外住院</label>						
+					</dd>
+					#if($product.tbnljs>=18)
+					<dd id="job" style="display:none;">
+						<label class="layer-left-w">职业类别</label>
+						<select name="factor5" class="factor">
+							<option value="79">一类</option>
+							<option value="67">二类</option>
+							<option value="68">三类</option>
+							<option value="75">四类</option>
+							<option value="73">五类</option>
+							<option value="65">六类</option>
+						</select>
+						<span class="arrowr"></span>
+					</dd>
+					#end
+					<dd style="display: none;">
+						<label class="layer-left-w">份数</label> 
+						<select class="factor" name="be">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5" selected="selected">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+						</select>
+						<i class="icon">份</i>
+					</dd>
+				</dl>
+			</li>
+			<li id="zyyl">
+				<dl>
+					<dt>
+						<input class="checkbox-single" data-proid="zyyl" type="checkbox"> 
+						<label>住院医疗</label>
+					</dt>					
+					<dd style="display: none;">							
+							<input class="radio_box change checked" type="radio" id="t56" data-jfnx="63" data-bxnx="62" data-cpjc="健享人生A" name="zyyl_pid" value="56" checked="checked">
+							<label class="mrg-right-2" for="t56">健享A,无社保</label>
+							<input class="radio_box change" type="radio" id="t57" data-jfnx="63" data-bxnx="62" data-cpjc="健享人生B" name="zyyl_pid" value="57">
+							<label class="mrg-right-2" for="t57">健享B,有社保</label>							
+							<br>							
+							<input class="radio_box change" type="radio" id="t58" data-jfnx="63" data-bxnx="62" data-cpjc="住院费用A" name="zyyl_pid" value="58">
+							<label class="mrg-right-2" for="t58">住院A,无社保</label>							
+							<input class="radio_box change" type="radio" id="t59" data-jfnx="63" data-bxnx="62" data-cpjc="住院费用B" name="zyyl_pid" value="59">
+							<label class="mrg-right-2" for="t59">住院B,有社保</label>
+					</dd>
+					<dd style="display: none;">
+						<label class="layer-left-w">可选部分</label>
+						<input id="hasAdd" type="radio" name="factor5" value="88" checked="">
+						<label class="mrg-right-1" for="hasAdd">有</label>
+						<input id="noAdd" type="radio" name="factor5" value="89">
+						<label class="mrg-right-1" for="noAdd">无</label>
+					</dd>
+					<dd style="display: none;">
+						<label class="layer-left-w">份数</label> 
+						<select class="factor" name="be">
+							<option value="1">1</option>
+							<option value="2" selected="selected">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+						</select>
+						<i class="icon">份</i>
+					</dd>
+				</dl>
+			</li>
+			<li id="ywyl">
+				<dl>
+					<dt>
+						<input class="checkbox-single" data-proid="ywyl" type="checkbox"> 
+						<label>意外医疗</label>
+					</dt>
+					<dd style="display: none;">
+						<input class="radio_box change checked" id="t62" type="radio" data-jfnx="63" data-bxnx="62" data-cpjc="意外医疗A" name="ywyl_pid" value="62" checked="checked">
+						<label class="mrg-right-2" for="t62">意外A,无社保</label>						
+						<input class="radio_box change" id="t67" type="radio" data-jfnx="63" data-bxnx="62" data-cpjc="意外医疗B" name="ywyl_pid" value="67">
+						<label class="mrg-right-2" for="t67">意外B,有社保</label>
+					</dd>
+					#if($product.tbnljs>=18)
+					<dd id="job" style="display:none;">
+						<label class="layer-left-w">职业类别</label>
+						<select name="factor5" class="factor">
+							<option value="79">一类</option>
+							<option value="67">二类</option>
+							<option value="68">三类</option>
+							<option value="75">四类</option>
+							<option value="73">五类</option>
+							<option value="65">六类</option>
+						</select>
+						<span class="arrowr"></span>
+					</dd>
+					#end
+					<dd style="display: none;">
+						<label class="layer-left-w">保额</label> 
+						<input type="tel"  placeholder="请输入保额" value="10000" class="demo_price factor" name="be">
+						<i class="icon">元</i>
+						<span class="error-tips" style="display:none;"></span>
+					</dd>
+				</dl>
+			</li>
+			#end			
+		</ul>
+		<div class="popup-layer-btn">
+			<span class="popup-layer-cancel-btn">取消</span><span class="popup-layer-ok-btn" data-table="2">确定</span>
+		</div>
+	</form>
+</div>
+<div id="plan_zx_list" class="popup-layer" style="display:none">
+	<form class="popup-form-layer handler-host">
+		<div class="popup-layer-title" id="popup_title">$!product.cpjc</div>
+		<ul class="popup-layer-ul" id="zx_ul" data-pid="$!product.fid" data-jbbe="$!product.jbbe" data-calflag="" data-cpjc="$!product.cpjc" data-table="0">
+		</ul>
+		<div class="popup-layer-btn">
+			<span class="popup-layer-cancel-btn">取消</span>
+			<span class="popup-layer-ok-btn" data-table="0">确定</span>
+		</div>
+	</form>
+</div>

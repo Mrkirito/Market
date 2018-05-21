@@ -1,0 +1,40 @@
+#set($header_params = {"title":"免费赠送", "css":["index/css/style.css", "free/css/free.css"]})
+#bxj_header($header_params)
+
+#if(!$request.getParameter('hd'))
+<header class="head">
+	<a class="header_left" href="plan/index.page"></a>
+    <h1>免费赠送</h1>
+</header>
+#end
+
+<div class="container">
+<div class="bjr_content">
+	#if(!$request.getParameter('hd'))
+	#foreach($i in $list)
+	<a href="free/getFreeInsuranceDetails1.page?shareios=1&pid=$i.id">
+		<div class="bjr_ct">
+			<div class="bjr_ct_img">
+				<img src="$static_path/free/${i.id}.jpg">
+			</div>
+		</div>
+	</a>
+	#end
+	
+	#else
+	
+	#foreach($i in $list)
+	<a href="free/getFreeInsuranceDetails1.page?shareios=1&pid=$i.id&hd=1">
+		<div class="bjr_ct">
+			<div class="bjr_ct_img">
+				<img src="$static_path/free/${i.id}.jpg">
+			</div>
+		</div>
+	</a>
+	#end
+	
+	#end
+</div>
+</div>
+#set( $footer_params = [])
+#bxj_footer($footer_params)

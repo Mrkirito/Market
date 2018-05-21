@@ -1,0 +1,30 @@
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+#if($!navigation.isShow())
+<div id="page-title">
+    <div class="row">
+        <ol class="breadcrumb">
+            #if($navigation.crumbList)
+                #foreach($crumb in $navigation.crumbList)
+                    <li class="#if($crumb.current) active #end">
+                        #if($crumb.uri)
+                            <a href="$!social_path/$crumb.uri">$crumb.name</a>
+                        #else
+                            $crumb.name
+                        #end
+
+                    </li>
+                #end
+            #end
+            #*<li><a href="pages-blank.html#">Home</a></li>
+            <li><a href="pages-blank.html#">Library</a></li>
+            <li class="active">Data</li>*#
+        </ol>
+        <!--Searchbox-->
+        <div class="searchbox page-toolbar">
+            <div class="top-toolbar btn-group page-toolbar-list">
+            </div>
+        </div>
+    </div>
+</div>
+#end

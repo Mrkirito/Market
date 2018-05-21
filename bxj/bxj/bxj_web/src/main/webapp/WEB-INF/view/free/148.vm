@@ -1,0 +1,108 @@
+#set($header_params = {"title":"$model.name", "css":["index/css/style.css", "free/css/free.css", "free/css/free148.css"]})
+#bxj_header($header_params)
+
+<style>
+body {
+	background-color: #5999f1;
+}
+</style>
+
+#if(!$request.getParameter('hd'))
+<header class="head">
+	<a class="header_left" href="javascript:history.go(-1);"></a>
+    <h1>$model.name</h1>
+    <a class="header_right" href="javascript:;"></a>
+</header>
+
+<div class="morebutton">
+    <div>
+        <a href="plan/index.page" class="syico">首页</a>
+        <a href="javacript:void(0);" class="fenxico">分享</a>
+    </div>
+</div>
+#end
+<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+<div class="container">
+	<div class="content">
+	
+		<!--顶部图片-->
+        <div class="div_top_img">
+            <img src="$static_path/free/148/top_img_02.png" alt="">
+            <img src="$static_path/free/148/top_img_03.png" alt="">
+            <img src="$static_path/free/148/top_img_04.png" alt="">
+            <img src="$static_path/free/148/top_img_05.png" alt="">
+        </div>
+
+        <!--input框内容-->
+        <div class="div_yl">
+            <div class="div_yl_over">
+                <p><input class="div_self_ipt" type="text" id="name" name="name" placeholder="请输入您的姓名"></p>
+                <p><input class="div_self_ipt" type="tel" id="phone" name="phone" placeholder="请输入您的手机号码" maxlength="11"></p>
+                <p><input class="div_self_ipt" type="text" id="idcard" name="idcard" placeholder="请输入您的身份证号" maxlength="18"></p>
+                <input class="btn_self" type="button" id="div_submit" value="免费领取">
+                <input type="hidden" value="${shareId}" id="shareId">
+				<input type="hidden" value="$request.getParameter('pid')" id="pid">
+            </div>
+        </div>
+
+        <!--产品详细-->
+        <div class="div_detail">
+            <img src="$static_path/free/148/ba_img_03.png" alt="">
+            <div class="div_detail_left">
+                <p class="div_detail_p div_de_bdbtm">保障期间</p>
+                <p class="div_detail_p div_de_bdbtm">保障年龄</p>
+                <p class="div_detail_p div_de_bdbtm">保障责任</p>
+                <p class="div_detail_p div_de_left">保额</p>
+            </div>
+            <div class="div_detail_right">
+                <p class="div_detail_p div_de_bdbtm">一个月</p>
+                <p class="div_detail_p div_de_bdbtm">18-55岁</p>
+                <p class="div_detail_p div_de_bdbtm">意外住院保障</p>
+                <p class="div_detail_p div_de_right">意外住院补贴50元/天</p>
+            </div>
+        </div>
+
+        <!--文字说明-->
+        <div class="div_btm">
+            <img class="div_bg_img" src="$static_path/free/148/ba_img_05.png" alt="">
+            <img class="div_btm_img" src="$static_path/free/148/ba_img_09.png" alt="">
+            
+            <div class="div_btm_over">
+                <p>保险责任</p>
+               	住院补贴保险金<br>
+				若被保险人于本合同保险期间内因遭受意外伤害事故，经医院医生诊断必须住院治疗，我们将按本合同所载的单日住院补贴金额乘以实际住院天数给付住院补贴保险金。
+            </div>
+        </div>
+	</div>
+</div>
+
+#set( $footer_params = ["index/js/layer.m.js", "index/js/Messager.js", "index/js/ajax.js", "free/js/mfree.js?v=201603078", "index/js/share.js?v=201603078"])
+#bxj_footer($footer_params)
+
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$model.shareTitle',
+                desc: '$!model.shareDesc',
+                imgUrl: '$static_path/free/share_${model.id}.jpg',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+	var s = {
+		title: '$model.shareTitle',
+		desc: '$!model.shareDesc',
+		image: '$static_path/free/share_${model.id}.jpg',
+		location: '$bxj_path/free/getFreeInsuranceDetails.page?shareId=${shareId}&pid=$request.getParameter("pid")&hd=1'
+	};
+	
+	setShareInfo(s);
+	
+</script>

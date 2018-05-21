@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.znb.cms.dao.mapper.OrderPaidMapper" >
+  <resultMap id="BaseResultMap" type="com.znb.cms.model.mapper.OrderPaid" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="insurance_name" property="insuranceName" jdbcType="VARCHAR" />
+    <result column="begin_date" property="beginDate" jdbcType="VARCHAR" />
+    <result column="begin_time" property="beginTime" jdbcType="VARCHAR" />
+    <result column="end_date" property="endDate" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="duration" property="duration" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="CHAR" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="employee_ids" property="employeeIds" jdbcType="VARCHAR" />
+    <result column="insurance_id" property="insuranceId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="isurant_id" property="isurantId" jdbcType="INTEGER" />
+    <result column="insure_id" property="insureId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="transfer_account_name" property="transferAccountName" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="policy_number" property="policyNumber" jdbcType="VARCHAR" />
+    <result column="policy_url" property="policyUrl" jdbcType="VARCHAR" />
+    <result column="cancel_reason" property="cancelReason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, insurance_name, begin_date, begin_time, end_date, end_time, duration, order_no, 
+    order_state, amount, price, is_delete, create_time, employee_ids, insurance_id, user_id, 
+    isurant_id, insure_id, update_time, pay_time, transfer_account_name, pid, policy_number, 
+    policy_url, cancel_reason
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dt_order_paid
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from dt_order_paid
+    where id > 0;
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dt_order_paid
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteAll">
+    delete from dt_order_paid
+    where id > 0
+  </delete>
+  <insert id="insert" parameterType="com.znb.cms.model.mapper.OrderPaid" >
+    insert into dt_order_paid (id, insurance_name, begin_date, 
+      begin_time, end_date, end_time, 
+      duration, order_no, order_state, 
+      amount, price, is_delete, 
+      create_time, employee_ids, insurance_id, 
+      user_id, isurant_id, insure_id, 
+      update_time, pay_time, transfer_account_name, 
+      pid, policy_number, policy_url, 
+      cancel_reason)
+    values (#{id,jdbcType=INTEGER}, #{insuranceName,jdbcType=VARCHAR}, #{beginDate,jdbcType=VARCHAR}, 
+      #{beginTime,jdbcType=VARCHAR}, #{endDate,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, 
+      #{duration,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{orderState,jdbcType=CHAR}, 
+      #{amount,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{isDelete,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{employeeIds,jdbcType=VARCHAR}, #{insuranceId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{isurantId,jdbcType=INTEGER}, #{insureId,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{transferAccountName,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=INTEGER}, #{policyNumber,jdbcType=VARCHAR}, #{policyUrl,jdbcType=VARCHAR}, 
+      #{cancelReason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.znb.cms.model.mapper.OrderPaid" >
+    insert into dt_order_paid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="insuranceName != null" >
+        insurance_name,
+      </if>
+      <if test="beginDate != null" >
+        begin_date,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="duration != null" >
+        duration,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="employeeIds != null" >
+        employee_ids,
+      </if>
+      <if test="insuranceId != null" >
+        insurance_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="isurantId != null" >
+        isurant_id,
+      </if>
+      <if test="insureId != null" >
+        insure_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="transferAccountName != null" >
+        transfer_account_name,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="policyNumber != null" >
+        policy_number,
+      </if>
+      <if test="policyUrl != null" >
+        policy_url,
+      </if>
+      <if test="cancelReason != null" >
+        cancel_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceName != null" >
+        #{insuranceName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null" >
+        #{beginDate,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null" >
+        #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=CHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeIds != null" >
+        #{employeeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceId != null" >
+        #{insuranceId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isurantId != null" >
+        #{isurantId,jdbcType=INTEGER},
+      </if>
+      <if test="insureId != null" >
+        #{insureId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transferAccountName != null" >
+        #{transferAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="policyNumber != null" >
+        #{policyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="policyUrl != null" >
+        #{policyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelReason != null" >
+        #{cancelReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.znb.cms.model.mapper.OrderPaid" >
+    update dt_order_paid
+    <set >
+      <if test="insuranceName != null" >
+        insurance_name = #{insuranceName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null" >
+        begin_date = #{beginDate,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null" >
+        duration = #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=CHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeIds != null" >
+        employee_ids = #{employeeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceId != null" >
+        insurance_id = #{insuranceId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isurantId != null" >
+        isurant_id = #{isurantId,jdbcType=INTEGER},
+      </if>
+      <if test="insureId != null" >
+        insure_id = #{insureId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transferAccountName != null" >
+        transfer_account_name = #{transferAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="policyNumber != null" >
+        policy_number = #{policyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="policyUrl != null" >
+        policy_url = #{policyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelReason != null" >
+        cancel_reason = #{cancelReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.znb.cms.model.mapper.OrderPaid" >
+    update dt_order_paid
+    set insurance_name = #{insuranceName,jdbcType=VARCHAR},
+      begin_date = #{beginDate,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=VARCHAR},
+      end_date = #{endDate,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      order_state = #{orderState,jdbcType=CHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      is_delete = #{isDelete,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      employee_ids = #{employeeIds,jdbcType=VARCHAR},
+      insurance_id = #{insuranceId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      isurant_id = #{isurantId,jdbcType=INTEGER},
+      insure_id = #{insureId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      transfer_account_name = #{transferAccountName,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      policy_number = #{policyNumber,jdbcType=VARCHAR},
+      policy_url = #{policyUrl,jdbcType=VARCHAR},
+      cancel_reason = #{cancelReason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.PlanProductZhjzMapper" >
+  <sql id="Base_Column_List" >
+    fid, pid, age, sex, year, min, middle, max
+  </sql>
+  <select id="selectByPlanProductZhjz" resultType="com.hangjia.bxj.model.PlanProductZhjz" parameterType="com.hangjia.bxj.model.PlanProductZhjz" >
+    select <include refid="Base_Column_List" /> from plan_product_zhjz where pid = #{pid} and age=#{age} and sex=#{sex} order by year
+  </select>
+</mapper>

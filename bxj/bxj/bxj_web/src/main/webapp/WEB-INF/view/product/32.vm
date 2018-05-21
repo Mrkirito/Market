@@ -1,0 +1,131 @@
+		
+		<ul class="common-info-ul">
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>平安福</em>
+					</span>
+					<span class="creatDes-add-btn" data-layer="mainLayer" data-enable="#btnAddon,#btnAddMore"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddon" data-layer="fjx-layer" data-title="附加险" data-products="['zyjt', 'zyyl', 'ywyl']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>险种组合</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddMore" data-layer="zhx-layer" data-title="险种组合" data-products="['xinli', 'xinsheng', 'xinxiang', 'ankang', 'anxiang', 'xingfuA']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加险种</em>
+					</span>
+				</div>
+			</li>
+			
+		</ul>
+		
+		#parse("product/product.pa.vm")
+	    <script>
+	    	$(function() {
+		    	bxj.PlanBook.init({
+		    		title: '平安福',
+		    		gs: 'PingAn',
+		    		autoRefresh: true,
+		    		BeiBaoRen: {
+						age: {
+							min: 18,
+							max: 55,
+						}
+					}
+		    	});
+	    	});
+	    </script>
+    
+    
+    	#set($footer = '
+		
+	<div id="mainLayer" class="popup-layer" style="display: none" data-product="paf">
+	    <form class="popup-form-layer">
+	        <div class="popup-layer-title">平安福</div>
+	        <ul class="popup-layer-ul">
+	            <li data-commons>
+	                <label class="info-name" for="paf-jfnx">缴费期间</label>
+	                <select id="paf-jfnx" class="factor" name="jfnx" text-name="jfnx">
+	                    <option value="9">10年</option>
+	                    <option value="10">15年</option>
+	                    <option selected value="11">20年</option>
+	                    <option value="12">30年</option>
+	                </select>
+	                <span class="arrowr"></span>
+	            </li>
+	            <li data-calc="paf">
+	                <label class="info-name" for="paf-be">平安福保额</label>
+	                <input value="200000" pattern="[0-9]*" data-vali="min" data-min="150000" data-min-msg="平安福保额不得低于15万" placeholder="15万以上" name="be" maxlength="7" id="paf-be">
+	                <i class="icon">元</i>
+	                <input type="hidden" name="pid" value="32">
+	                <input type="hidden" name="bxnx" value="6">
+	            </li>
+	            <li data-calc="paf-zj">
+	                <label class="info-name" for="paf-zhongjibe">平安福重疾</label>
+	                <input value="150000" pattern="[0-9]*" data-vali="between-maxRef" data-min="120000" data-min-msg="重疾保额不得低于12万" data-max="#paf-be" data-max-msg="重疾保额不得高于主险保额" placeholder="12万以上" id="paf-zhongjibe" name="be">
+	                <i class="icon">元</i>
+	                <input type="hidden" name="pid" value="35">
+	                <input type="hidden" name="bxnx" value="6">
+	            </li>
+	            <li data-calc="paf-yiwai">
+	                <label class="info-name" for="paf-yiwai">长期意外</label>
+	                <input value="200000" pattern="[0-9]*" data-vali="min" data-min="150000" data-min-msg="长期意外保额不得低于15万" placeholder="15万以上" id="paf-yiwaibe" name="be">
+	                <i class="icon">元</i>
+	                <input type="hidden" name="pid" value="36">
+	                <input type="hidden" name="bxnx" value="144">
+	            </li>
+	            <li  data-calc="paf-hmc">
+	            	<dl>
+	                    <dt>
+	                        <input id="paf-hmc" type="checkbox" class="checkbox-single" checked disabled>
+	                        <label class="disabled">被保人豁免（豁免C加强）</label>
+	                    </dt>
+	                    <dd style="display: none;">
+	                    	<input type="hidden" name="pid" value="46">
+			                <input type="hidden" name="bxnx" value="6">
+	                    </dd>
+	                </dl>
+	                
+	            </li>
+	            <li data-calc="paf-tbrhm" data-toubaoren>
+	                <dl>
+	                    <dt>
+	                        <input id="paf-hm" class="checkbox-single" type="checkbox" data-enhance="tbrhm">
+	                        <label for="paf-hm">投保人豁免<em class="notes">（非本人可附加）</em></label>
+	                    </dt>
+	                    <dd>
+	                        <input id="paf-hmB" class="radio_box" name="pid" type="radio" value="246" checked>
+	                        <label class="mrg-right-2" for="paf-hmB">豁免B加强</label>
+	                        <input id="paf-hmA" class="radio_box" name="pid" type="radio" value="245">
+	                        <label for="paf-hmA">豁免A14</label>
+	                        <input type="hidden" name="bxnx" value="6">
+	                    </dd>
+	                </dl>
+	            </li>
+	        </ul>
+	        <div class="popup-layer-btn">
+	            <span class="popup-layer-cancel-btn" data-cancel>取消</span><span class="popup-layer-ok-btn" data-ok>确定</span>
+	        </div>
+	    </form>
+	</div>
+	')
+		

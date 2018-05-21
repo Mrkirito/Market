@@ -1,0 +1,225 @@
+#*================================================== 页面 头尾 宏定义 ================================================*#
+#macro(bxj_header $params)
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+    #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+    #set( $nowNanoTime = ${DateUtility.getNanoTimeStamp()})
+    
+    <title>$params.title</title>
+    
+    #if(!$params.baseTag!="false")
+    <base href="$bxj_path/">
+    #end
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta http-equiv="pragma" content="no-cache">
+    <!-- HTTP 1.0 -->
+    <meta http-equiv="cache-control" content="no-cache">
+    <!-- Prevent caching at the proxy server -->
+    <meta http-equiv="expires" content="0">
+    
+    <script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js"></script>
+    
+    <script>
+        window.bxj_path='$bxj_path';
+        window.static_path='$static_path';
+    </script>
+    
+    #foreach($js_list in $params.js)
+    <script src="$static_path/$js_list"></script>
+    #end
+    
+##    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="$static_path/public/css/public_red.css?v=20160322"/>
+    
+##    <link rel="stylesheet" type="text/css" href="$static_path/public/css/animate.css"/>
+    #foreach($css_list in $params.css)
+        <link rel="stylesheet" type="text/css" href="$static_path/$css_list"/>
+    #end
+    
+</head>
+<body>
+
+#end
+
+#macro(bxj_header_html $params)
+	#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+		<header class="head">
+		  	<a class="header_left" href="javascript:history.back(-1);"></a>
+		    <h1>$params.title</h1>
+		    #if($params.isShare==1)
+		    	<span class="header_span"><span class="company_name">公司</span><img src="$static_path/index/images/down_arrow.png" width="13" class="header_span_img"/></span>
+		    #elseif($params.isShare==2)
+		    	<a class="header_right" href="javascript:void(0);"></a>
+		    #else
+			    <a class="header_right" href="javascript:void(0);" style="display:none;"></a>	    
+		    #end
+		</header>
+		#if($params.isShare==2)
+			<div class="morebutton">
+			    <div>
+			    	<!--<a href="plan/index.page" class="syico">首页</a>-->
+			        <a href="javacript:void(0);" class="fenxico">分享</a>
+			    </div>
+			</div>
+		#end
+	#end	
+#end
+#macro(bxj_footer_html $params)
+#if(!$request.getParameter('hf')||$request.getParameter('hf')=='')
+<footer class="footer">
+	<div class="footer_div #if($params==1)checked#end" onclick="javascript:window.location.href='$bxj_path/plan/index.page';">
+        <div>
+    	    <span class="footer_icon footicon01"></span>
+            <span class="foonter_text">展业</span>
+        </div>
+    </div>
+    <div class="footer_div #if($params==2)checked#end" onclick="javascript:window.location.href='$bxj_path/planUserCard/study.page';">
+    	<div>
+            <span class="footer_icon footicon02"></span>
+            <span class="foonter_text">学习</span>
+        </div>
+    </div>
+    <div class="footer_div #if($params==3)checked#end" onclick="javascript:window.location.href='$bxj_path/customer/myCustomers.page';">
+        <div>
+    	    <span class="footer_icon footicon03"></span>
+            <span class="foonter_text">客户管理</span>
+        </div>
+    </div>
+    <div class="footer_div #if($params==4)checked#end" onclick="javascript:window.location.href='$bxj_path/planUserCard/me.page';">
+        <div>
+    	    <span class="footer_icon footicon04"></span>
+            <span class="foonter_text">我</span>
+        </div>
+    </div>
+</footer>
+#end
+#end
+
+#*================================================== 页面尾宏定义 ================================================*#
+#macro(bxj_footer $params)
+    
+    <script src="$static_path/public/js/bootstrap-3.3.5.min.js"></script>
+    <script src="$static_path/public/js/public.js?v=20160323"></script>
+    #foreach($pjs in $params)
+    <script src="$static_path/$pjs"></script>
+    #end
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+</body>
+</html>
+#end
+
+#macro(bxj_header2 $params)
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+    #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+    #set( $nowNanoTime = ${DateUtility.getNanoTimeStamp()})
+    
+    <title>$params.title</title>
+    
+    #if(!$params.baseTag!="false")
+    <base href="$bxj_path/">
+    #end
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta http-equiv="pragma" content="no-cache">
+    <!-- HTTP 1.0 -->
+    <meta http-equiv="cache-control" content="no-cache">
+    <!-- Prevent caching at the proxy server -->
+    <meta http-equiv="expires" content="0">
+    
+    <script src="$static_path/public/js/jquery-1.11.3.min.js"></script>
+    <script src="$static_path/bxj_two/public/js/flexible.js"></script>
+    
+    <script>
+        window.bxj_path='$bxj_path';
+        window.static_path='$static_path';
+    </script>
+    
+    #foreach($js_list in $params.js)
+    <script src="$static_path/$js_list"></script>
+    #end
+    
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_two/public/css/public.css?v=20160312"/>
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_two/static/css/style.css?v=20160330"/>
+    
+    #foreach($css_list in $params.css)
+        <link rel="stylesheet" type="text/css" href="$static_path/$css_list"/>
+    #end
+    
+</head>
+<body>
+#end
+
+
+#macro(bxj_header3 $params)
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+    #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+    #set( $nowNanoTime = ${DateUtility.getNanoTimeStamp()})
+    
+    <title>$params.title</title>
+    
+    #if(!$params.baseTag!="false")
+    <base href="$bxj_path/">
+    #end
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta http-equiv="pragma" content="no-cache">
+    <!-- HTTP 1.0 -->
+    <meta http-equiv="cache-control" content="no-cache">
+    <!-- Prevent caching at the proxy server -->
+    <meta http-equiv="expires" content="0">
+    
+    <script src="$static_path/public/js/jquery-1.11.3.min.js"></script>
+    <script src="$static_path/bxj_two/public/js/flexible.js"></script>
+    
+    <script>
+        window.bxj_path='$bxj_path';
+        window.static_path='$static_path';
+    </script>
+    
+    #foreach($js_list in $params.js)
+    <script src="$static_path/$js_list"></script>
+    #end
+    
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_two/public/css/public.css?v=20160312"/>
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_two/static/css/style.css?v=20160312"/>
+    
+    #foreach($css_list in $params.css)
+        <link rel="stylesheet" type="text/css" href="$static_path/$css_list"/>
+    #end
+    
+</head>
+<body>
+#end

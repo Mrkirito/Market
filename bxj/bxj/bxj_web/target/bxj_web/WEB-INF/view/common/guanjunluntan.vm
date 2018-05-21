@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<title>冠军论坛</title>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+    #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta name="keywords" content="计划书">
+	<meta name="description" content="计划书">
+	 
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/championforum/css/forum_index.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/mobilebone.css">
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="mask" style="display: none;"><i class="loading"></i></div>
+	<section id="forum_index"  class="page out" data-title="冠军论坛">
+		<!--导航 开始-->
+		<header class="head">
+		  	<a class="header_left" href="javascript:;" data-rel="back"></a>
+		    <h1>冠军论坛</h1>
+		    <!-- <a class="header_right_font" href="javascript:;">编辑</a> -->
+		</header>
+		<div class="header_heightblock"></div>
+		<!--导航 结束-->
+		<div class="container container_forum">
+				<a  href="#&amp;HefeiMeeting" data-reload="">
+					<div class="forum_block">
+						<h1>合肥会议<span class="new_tips">正在进行</span><span class="join_num">参会人数:7000人</span></h1>
+						<div class="forum_main">
+							<div class="imgblock">
+								<img class="headImg" src="$static_path/bxj_three/static/championforum/images/hefei/hefei_bg.jpg" />
+							</div>
+							<p class="time"><span class="greyfont">时间：</span>2016年4月20-21日</p>
+							<hr class="dotted" />
+							<p class="name"><span class="greyfont">讲师：</span><span class="Teachername">王妮</span>、<span class="Teachername">何文常</span>、<span class="Teachername">辛志娜</span>、<span class="Teachername">邓万琴</span>、<span class="Teachername">吕宣慧</span></p>
+						</div>
+					</div>
+				</a>
+				<a  href="#&amp;ChangshaMeeting" data-reload="">
+					<div class="forum_block">
+						<h1>长沙会议<span class="join_num">参会人数:3000人</span></h1>
+						<div class="forum_main">
+							<div class="imgblock">
+								<img class="headImg" src="$static_path/bxj_three/static/championforum/images/changsha_bg.jpg" />
+							</div>
+							<p class="time"><span class="greyfont">时间：</span>2016年4月9-10日</p>
+							<hr class="dotted" />
+							<p class="name"><span class="greyfont">讲师：</span><span class="Teachername">冯跃</span>、<span class="Teachername">王妮</span>、<span class="Teachername">吕启彪</span>、<span class="Teachername">朱旭东</span>、<span class="Teachername">吴学文</span></p>
+						</div>
+					</div>
+				</a>
+		</div>
+	</section>
+	<section id="ChangshaMeeting" class="forum_list page out" data-title="长沙会议"  data-rel="auto">
+		<!--导航 开始-->
+		<header class="head">
+		  	<a class="header_left" href="#forum_index" data-rel="back"></a>
+		    <h1>长沙会议</h1>
+		    <!-- <a class="header_right_font" href="javascript:;">编辑</a> -->
+		</header>
+		<div class="header_heightblock"></div>
+		<!--导航 结束-->
+		<div class="container container_forum_list" >
+			<ul>
+				<a data-reload=""  href="$static_path/bxj_three/static/championforum/fy_details.html">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/changsha_fy.jpg" />
+						</div>
+						<div class="informblock">
+							<h1>如何发掘和培养主管人才</h1>
+							<span class="name">冯跃</span>
+						</div>
+					</li>
+				</a>
+				<a data-reload="" href="$static_path/bxj_three/static/championforum/wn_details.html">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/changsha_wn.jpg" />
+						</div>
+						<div class="informblock">
+							<h1>解密打造 90 后 MDRT 团队的成功法则</h1>
+							<span class="name">王妮</span>
+						</div>
+					</li>
+				</a>
+				<a  data-reload=""  href="$static_path/bxj_three/static/championforum/lqb_details.html">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/changsha_lqb.jpg" />
+						</div>
+						<div class="informblock">
+							<h1>如何从顶尖销售高手华丽转身实现卓越的组织发展</h1>
+							<span class="name">吕启彪</span>
+						</div>
+					</li>
+				</a>
+				<a  data-reload=""  href="$static_path/bxj_three/static/championforum/zxd_details.html">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/changsha_zxd.png" />
+						</div>
+						<div class="informblock">
+							<h1>快速增员及其育成系统的搭建</h1>
+							<span class="name">朱旭东</span>
+						</div>
+					</li>
+				</a>
+				<!-- <a details" data-reload=""  href="$static_path/bxj_three/static/championforum/http://mp.weixin.qq.com/s?__biz=MzA4NTg5NzA1Ng==&mid=404667516&idx=5&sn=93720f8a00a8437d9567d58ddc700a75#rd">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/changsha_wxw.jpg" />
+						</div>
+						<div class="informblock">
+							<h1>如何有效地招募、培训、筛选和激励冠军营销团队</h1>
+							<span class="name">吴学文</span>
+						</div>
+					</li>
+				</a> -->
+			</ul>
+		</div>
+	</section>
+	<section id="HefeiMeeting" class="forum_list page out" data-title="合肥会议"  data-rel="auto">
+		<!--导航 开始-->
+		<header class="head">
+		  	<a class="header_left" href="#forum_index" data-rel="back"></a>
+		    <h1>合肥会议</h1>
+		    <!-- <a class="header_right_font" href="javascript:;">编辑</a> -->
+		</header>
+		<div class="header_heightblock"></div>
+		<!--导航 结束-->
+		<div class="container container_forum_list" >
+			<ul>
+				<a data-reload=""  href="$static_path/bxj_three/static/championforum/hefei_details/wn_details.html">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/hefei/wn.jpg" />
+						</div>
+						<div class="informblock">
+							<h1>解密打造 90 后 MDRT 团队的成功法则</h1>
+							<span class="name">王妮</span>
+						</div>
+					</li>
+				</a>
+				<a data-reload=""  href="$static_path/bxj_three/static/championforum/hefei_details/hwc_details.html">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/hefei/hwc.jpg" />
+						</div>
+						<div class="informblock">
+							<h1>运用综合金融开拓工具协助寿险事业飞得更高</h1>
+							<span class="name">何文常</span>
+						</div>
+					</li>
+				</a>
+				<a data-reload=""  href="$static_path/bxj_three/static/championforum/hefei_details/xzn_details.html">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/hefei/xzn.jpg" />
+						</div>
+						<div class="informblock">
+							<h1>复制成功的力量协助你成为百万百件业务精英</h1>
+							<span class="name">辛志娜</span>
+						</div>
+					</li>
+				</a>
+				<a data-reload=""  href="$static_path/bxj_three/static/championforum/hefei_details/dwq_details.html">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/hefei/dwq.jpg" />
+						</div>
+						<div class="informblock">
+							<h1>一天签单108张平安福的秘诀</h1>
+							<span class="name">邓万琴</span>
+						</div>
+					</li>
+				</a>
+				<!-- <a data-reload=""  href="$static_path/bxj_three/static/championforum/#">
+					<li>
+						<div class="imgblock">
+							<img src="$static_path/bxj_three/static/championforum/images/hefei/lxh.jpg" />
+						</div>
+						<div class="informblock">
+							<h1>如何利用各种营销工具提升绩效</h1>
+							<span class="name">吕宣慧</span>
+						</div>
+					</li>
+				</a> -->
+			</ul>
+		</div>
+	</section>
+	<section id="details"  class="page out" data-title="课件详情">
+		<!--导航 开始-->
+		<header class="head">
+		  	<a class="header_left" href="#ChangshaMeeting" data-rel="back"></a>
+		    <h1>课件详情</h1>
+		    <!-- <a class="header_right_font" href="javascript:;">编辑</a> -->
+		</header>
+		<div class="header_heightblock"></div>
+		<!--导航 结束-->
+		<div class="container container_forumiframe"  style="position:relative;">
+
+		</div>
+	</section>
+	<section id="hefei_details"  class="page out" data-title="课件详情">
+		<!--导航 开始-->
+		<header class="head">
+		  	<a class="header_left" href="#HefeiMeeting" data-rel="back"></a>
+		    <h1>课件详情</h1>
+		    <!-- <a class="header_right_font" href="javascript:;">编辑</a> -->
+		</header>
+		<div class="header_heightblock"></div>
+		<!--导航 结束-->
+		<div class="container container_forumiframe"  style="position:relative;">
+
+		</div>
+	</section>
+</body>
+</html>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/mobilebone.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script>
+FastClick.attach(document.body);
+function jumpUrl(obj){
+	var isOnLoad = true;
+	var Url = obj.name;
+	var dom = '<iframe src="" style="width: 100%; height: 100%;"></iframe>';
+	//$('.mask').show();
+	$('.container_forumiframe iframe').remove();
+	$('.container_forumiframe').append(dom);
+	$('.container_forumiframe iframe').attr('src',Url);
+	$('.container_forumiframe iframe').load(function() {
+		isOnLoad = false;// 加载完成
+		$('.mask').hide();
+	});
+}
+</script>

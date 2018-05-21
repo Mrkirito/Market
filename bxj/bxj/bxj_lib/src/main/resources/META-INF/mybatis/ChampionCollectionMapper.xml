@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionCollection" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="video_id" property="videoId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="is_collection" property="isCollection" jdbcType="BIT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="cancel_at" property="cancelAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, video_id, user_id, is_collection, create_at, cancel_at
+  </sql>
+  
+  <sql id="Public_Query_Conditions" >
+  	<where>
+  		<if test="fid != null" >
+	        and fid = #{fid,jdbcType=BIGINT}
+	    </if>
+  		<if test="userId != null" >
+	        and user_id = #{userId,jdbcType=BIGINT}
+	    </if>
+	    <if test="videoId != null" >
+	        and video_id = #{videoId,jdbcType=INTEGER}
+	    </if>
+	    <if test="isCollection != null" >
+	        and is_collection = #{isCollection,jdbcType=INTEGER}
+	    </if>
+  	</where>
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_collection
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.model.ChampionCollection" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_collection
+  	<include refid="Public_Query_Conditions" />
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_collection
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionCollection" >
+    insert into champion_collection (fid, video_id, user_id, 
+      is_collection, create_at, cancel_at
+      )
+    values (#{fid,jdbcType=BIGINT}, #{videoId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{isCollection,jdbcType=BIT}, #{createAt,jdbcType=TIMESTAMP}, #{cancelAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionCollection" >
+    insert into champion_collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="isCollection != null" >
+        is_collection,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="cancelAt != null" >
+        cancel_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="isCollection != null" >
+        #{isCollection,jdbcType=BIT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelAt != null" >
+        #{cancelAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionCollection" >
+    update champion_collection
+    <set >
+      <if test="videoId != null" >
+        video_id = #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="isCollection != null" >
+        is_collection = #{isCollection,jdbcType=BIT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelAt != null" >
+        cancel_at = #{cancelAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionCollection" >
+    update champion_collection
+    set video_id = #{videoId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      is_collection = #{isCollection,jdbcType=BIT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      cancel_at = #{cancelAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectCountBy" resultType="java.lang.Integer" parameterType="java.util.Map">
+    SELECT COUNT(*) FROM champion_collection
+    WHERE user_id = #{userId,jdbcType=BIGINT} AND video_id = #{videoId,jdbcType=BIGINT}
+  </select>
+
+  <update id="updateCollectionBy" parameterType="java.util.Map" >
+    update champion_collection
+    set
+    is_collection = #{isCollection,jdbcType=BIT},
+    cancel_at = STR_TO_DATE(#{cancelAt},'%Y-%m-%d %H:%i:%s')
+    where video_id = #{videoId,jdbcType=BIGINT} and user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <update id="cancelList" parameterType="java.util.Map" >
+    update champion_collection
+    set
+    is_collection = 0,
+    cancel_at = now()
+    WHERE fid in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </update>
+  
+  <update id="cancelVedioList" parameterType="java.util.Map" >
+    update champion_collection
+    set
+    is_collection = 0,
+    cancel_at = now()
+    WHERE  user_id = #{userId,jdbcType=BIGINT} and video_id in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </update>
+</mapper>

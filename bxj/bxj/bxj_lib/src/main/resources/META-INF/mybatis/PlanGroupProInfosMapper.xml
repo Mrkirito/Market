@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.PlanGroupProInfosMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.PlanGroupProInfos" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, phone, gname, ctime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan_group_pro_infos
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from plan_group_pro_infos
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.PlanGroupProInfos" >
+    insert into plan_group_pro_infos (fid, phone, gname, 
+      ctime)
+    values (#{fid,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{gname,jdbcType=VARCHAR}, 
+      #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.PlanGroupProInfos" >
+    insert into plan_group_pro_infos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.PlanGroupProInfos" >
+    update plan_group_pro_infos
+    <set >
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null" >
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.PlanGroupProInfos" >
+    update plan_group_pro_infos
+    set phone = #{phone,jdbcType=VARCHAR},
+      gname = #{gname,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <select id="getQueryCount" parameterType="com.hangjia.bxj.query.ProductQuery" resultType="int">
+    select count(*) from plan_group_pro_infos  WHERE ctime BETWEEN #{begin} AND #{end}
+  </select>
+  <select id="getQueryData" parameterType="com.hangjia.bxj.query.ProductQuery" resultType="com.hangjia.bxj.model.PlanGroupProInfos">
+	select gname,phone,ctime from plan_group_pro_infos WHERE ctime BETWEEN #{begin} AND #{end} ORDER BY ctime desc LIMIT #{pageFirstItem},#{pageSize}
+  </select>  
+</mapper>

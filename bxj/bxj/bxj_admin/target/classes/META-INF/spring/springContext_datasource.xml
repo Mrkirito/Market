@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		 				   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+		 				   
+	 <bean id="bxj_dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName">
+			<value>${bxj.datasource.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${bxj.datasource.url}</value>
+		</property>
+		<property name="username">
+			<value>${bxj.datasource.username}</value>
+		</property>
+		<property name="password">
+			<value>${bxj.datasource.password}</value>
+		</property>
+		<property name="maxActive" >
+			<value>${bxj.datasource.maxActive}</value>
+		</property>
+		<property name="maxIdle" >
+			<value>${bxj.datasource.maxIdle}</value>
+		</property>
+		<property name="maxWait" >
+			<value>${bxj.datasource.maxWait}</value>
+		</property>
+		
+		<property name="testWhileIdle" >
+			<value>${bxj.datasource.testWhileIdle}</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis" >
+			<value>${bxj.datasource.timeBetweenEvictionRunsMillis}</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis" >
+			<value>${bxj.datasource.minEvictableIdleTimeMillis}</value>
+		</property>
+		<property name="validationQuery" >
+			<value>${bxj.datasource.validationQuery}</value>
+		</property>
+		
+	 </bean>
+
+
+	<bean id="ucenter_dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName">
+			<value>${ucenter.datasource.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${ucenter.datasource.url}</value>
+		</property>
+		<property name="username">
+			<value>${ucenter.datasource.username}</value>
+		</property>
+		<property name="password">
+			<value>${ucenter.datasource.password}</value>
+		</property>
+		<property name="maxActive" >
+			<value>${ucenter.datasource.maxActive}</value>
+		</property>
+		<property name="maxIdle" >
+			<value>${ucenter.datasource.maxIdle}</value>
+		</property>
+		<property name="maxWait" >
+			<value>${ucenter.datasource.maxWait}</value>
+		</property>
+
+		<property name="testWhileIdle" >
+			<value>${ucenter.datasource.testWhileIdle}</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis" >
+			<value>${ucenter.datasource.timeBetweenEvictionRunsMillis}</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis" >
+			<value>${ucenter.datasource.minEvictableIdleTimeMillis}</value>
+		</property>
+		<property name="validationQuery" >
+			<value>${ucenter.datasource.validationQuery}</value>
+		</property>
+
+	</bean>
+	
+	
+	<bean id="qibao_dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName">
+			<value>${qibao.datasource.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${qibao.datasource.url}</value>
+		</property>
+		<property name="username">
+			<value>${qibao.datasource.username}</value>
+		</property>
+		<property name="password">
+			<value>${qibao.datasource.password}</value>
+		</property>
+		<property name="maxActive" >
+			<value>${qibao.datasource.maxActive}</value>
+		</property>
+		<property name="maxIdle" >
+			<value>${qibao.datasource.maxIdle}</value>
+		</property>
+		<property name="maxWait" >
+			<value>${qibao.datasource.maxWait}</value>
+		</property>
+
+		<property name="testWhileIdle" >
+			<value>${qibao.datasource.testWhileIdle}</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis" >
+			<value>${qibao.datasource.timeBetweenEvictionRunsMillis}</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis" >
+			<value>${qibao.datasource.minEvictableIdleTimeMillis}</value>
+		</property>
+		<property name="validationQuery" >
+			<value>${qibao.datasource.validationQuery}</value>
+		</property>
+
+	</bean>
+	
+	
+	<bean id="core_dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName">
+			<value>${core.datasource.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${core.datasource.url}</value>
+		</property>
+		<property name="username">
+			<value>${core.datasource.username}</value>
+		</property>
+		<property name="password">
+			<value>${core.datasource.password}</value>
+		</property>
+		<property name="maxActive" >
+			<value>${core.datasource.maxActive}</value>
+		</property>
+		<property name="maxIdle" >
+			<value>${core.datasource.maxIdle}</value>
+		</property>
+		<property name="maxWait" >
+			<value>${core.datasource.maxWait}</value>
+		</property>
+
+		<property name="testWhileIdle" >
+			<value>${core.datasource.testWhileIdle}</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis" >
+			<value>${core.datasource.timeBetweenEvictionRunsMillis}</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis" >
+			<value>${core.datasource.minEvictableIdleTimeMillis}</value>
+		</property>
+		<property name="validationQuery" >
+			<value>${core.datasource.validationQuery}</value>
+		</property>
+
+	</bean>
+
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="bxj_dataSource"/>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager" />
+
+</beans>

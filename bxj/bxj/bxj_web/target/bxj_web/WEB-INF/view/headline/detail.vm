@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<title>新闻详情</title>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta name="keywords" content="计划书">
+	<meta name="description" content="计划书">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/headlines/css/detail.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+</head>
+<body>
+	<!--导航 开始-->
+	<header class="head">
+		
+	  	<a class="header_left" href="$bxj_path/headline/list.page"></a>
+	    <h1>新闻详情</h1>
+	    <a class="header_right_shareicon" ></a>
+	</header>
+	<div class="header_heightblock"></div>
+	<!--导航 结束-->
+	<div class="container container_forum" >
+		<div class="hd clearfix">
+			<div class="teacher">
+				<h2>$!news.title</h2>
+				<h3><span class="time">$!date.format('yyyy-MM-dd',$!news.onlineTime)</span></h3>
+			</div>
+		</div>
+		<div class="mypoint nopoint header_right_shareicon"><!--分享后将nopoint去除即可 -->
+			<p>分享后，您的观点将显示在这里</p>
+		</div>
+		<div class="main_block">
+			<p>$!news.newsContent</p>
+		</div>
+		#if($!news.isDisplayReprint == 1)
+		<div class="slogan_block">
+			<p>$!news.reprintContent</p>
+		</div>
+		#end
+
+	</div>
+	<input type="hidden" id="id" value="$!news.id"/>
+	<a href="javascript:;" class="top_icon" id="fixnav"></a><!-- 回到顶部按钮 -->
+	<!-- 弹出框 -->
+	<div class="grey_block ">
+		<div class="share_popblock pop_Upblock">
+			<span class="close_icon"></span>
+			<p>分享带上您的观点!</p>
+			<textarea placeholder="请输入您的观点，最多输入70字，不输入则不会出现您的观点。" maxlength="70" id="shareContext"></textarea>
+			<span class="share_title">分享到</span>
+			<div class="share_main">
+				<div class="share_div checked" data-id="1">
+					<span class="checked_icon"></span>
+					<a class="share_icon01"></a>
+					<span>微信好友</span>
+				</div>
+				<div class="share_div" data-id="2">
+					<span class="checked_icon"></span>
+					<a class="share_icon02"></a>
+					<span>朋友圈</span>
+				</div>
+				<div class="share_div" data-id="3">
+					<span class="checked_icon"></span>
+					<a class="share_icon03"></a>
+					<span>微信收藏</span>
+				</div>
+				<div class="share_div" data-id="4">
+					<span class="checked_icon"></span>
+					<a class="share_icon04"></a>
+					<span>新浪微博</span>
+				</div>
+				<div class="share_div" data-id="5">
+					<span class="checked_icon"></span>
+					<a class="share_icon05"></a>
+					<span>QQ空间</span>
+				</div>
+				<div class="share_div" data-id="6">
+					<span class="checked_icon"></span>
+					<a class="share_icon06"></a>
+					<span>QQ</span>
+				</div>
+			</div>
+			<a class="share_button">确认分享</a>
+		</div>
+	</div>
+	<!-- 弹出框 结束-->
+	<input type="hidden" value="$bxj_path" id="path">
+</body>
+</html>
+
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script>
+FastClick.attach(document.body);//快速点击绑定
+$(function(){
+	$('.share_div').click(function(){
+		$(this).addClass('checked').siblings('.share_div').removeClass('checked');
+	})
+	$('.close_icon').click(function(){
+		$('.grey_block').removeClass('show');
+	})
+	$('.share_button').on('click',function(){
+		var shareContext = $('#shareContext').val();
+		var id = $!news.id;
+		//1.$.ajax带json数据的异步请求
+        jQuery.ajax({  
+            url:'$bxj_path/headline/share.do?',// 跳转到 action  
+            data:{  
+                 newsId : id,  
+                 shareContext : shareContext
+            },  
+            type:'post',  
+            cache:false,  
+            dataType:'json',  
+            success:function(data) {  
+                if(data != "fail" ){  
+					var type = "";
+					$('.share_div').each(function(){
+						if($(this).hasClass("checked")){
+							type = $(this).data("id");
+							return false;
+						}
+					})
+                    var title = '$!news.title';
+                    var desc = '我正在保险家看保险头条新闻，快来一起了解最新的保险圈大事件！';
+                    var image = !'$!news.imgUrl' ? '$static_path/bxj_three/static/headlines/image/default_news_img.jpg' : '$!news.fileUrl';
+                    var location = '$bxj_path/headline/share.page?id='+data;
+					if(isHjbIos()){
+						newsShare(title, desc, image, location, type);
+					} else {
+						window.share.newsShare(title,desc,image,location,type);
+					}
+					$('.grey_block').removeClass("show");
+                }else{  
+					
+                }  
+             },  
+             error : function() {  
+             }  
+        });
+	})
+	
+})
+
+function newsShare(title, desc, image, location, type) {
+    if(isHjbIos()) {
+    	window.location.href = "hjb_wv://newsShare(" + title + "||" + desc + "||" + image + "||" + location + "||" + type + ")";   		 
+    }else{
+    	window.hjb_wv.UmShare(title, desc, link, imgUrl);
+    }
+}
+
+function isHjbIos(){
+	var browser = {
+		versions : function() {
+			var u = navigator.userAgent, app = navigator.appVersion;
+			return {
+				trident : u.indexOf('Trident') > -1,
+				presto : u.indexOf('Presto') > -1,
+				webKit : u.indexOf('AppleWebKit') > -1,
+				gecko : u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,
+				mobile : !!u.match(/AppleWebKit.*Mobile.*/)|| !!u.match(/AppleWebKit/),
+				ios : !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+				android : u.indexOf('Android') > -1|| u.indexOf('Linux') > -1,
+				iPhone : u.indexOf('iPhone') > -1|| u.indexOf('Mac') > -1,
+				iPad : u.indexOf('iPad') > -1,
+				webApp : u.indexOf('Safari') == -1
+			};
+		}(),
+		language : (navigator.browserLanguage || navigator.language).toLowerCase()
+	}
+	var and = browser.versions.android;
+	var ios = browser.versions.ios;
+	if (and) {
+		return false;
+	} else if (ios) {
+		return true;
+	}
+}
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" src="$static_path/bxj_three/public/js/2.3-2.4.js"></script>

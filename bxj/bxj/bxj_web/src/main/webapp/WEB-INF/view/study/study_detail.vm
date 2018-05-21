@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<title>学习详情</title>
+	<meta name="keywords" content="学习详情">
+	<meta name="description" content="学习详情">
+	
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/study/css/detail.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	
+	<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+	<div id="studyTitleID">
+		<!--导航 开始-->
+		<header class="head">
+		  	<a class="header_left" href="javascript:goback()"></a>
+		    <h1>学习详情</h1>
+		    <a class="header_right_shareicon" onclick="onShare()" ></a>
+		</header>
+		<div class="header_heightblock"></div>
+	</div>
+#end
+	<!--导航 结束-->
+	<div class="container container_forum" >
+		<div class="hd clearfix">
+			<div class="teacher">
+				<h2>$!study.title</h2>
+				<h3><span class="time">$!date.format('yyyy-MM-dd',$!study.onlineTime)</span></h3>
+			</div>
+		</div>
+		<!--个人名片信息模块，APP外显示，APP内隐藏 -->
+		<div class="namecard_block" id="myPhotoID">
+			<span class="name"><span>$!user.name</span> 分享</span>
+			<span class="namecard" onclick="window.location.href='$bxj_path/planUserCard/$!user.fid/shareUserCard.page?hd=1'" >查看微名片</span>
+		</div>
+		<!-- 名片模块结束 -->
+		<div class="mypoint nopoint" id="pointTextID" ><!--分享后将nopoint去除即可 -->
+			<p>分享后，您的观点将显示在这里</p>
+		</div>
+			#if($!studyshare.shareContext && $!studyshare.shareContext.length() > 0)
+                <div class="mypoint" id="mypointID">
+                  <p><strong >TA的观点：</strong>$!studyshare.shareContext</p>
+                </div>
+			#end
+
+		<div class="main_block">
+			 	<p>$!study.studyContent</p>
+		</div>
+		
+		#if($!study.isDisplayReprint == 1)
+		<div class="slogan_block">
+			<p>$!study.reprintContent</p>
+		</div>
+		#end
+	</div>
+	<div id="down_id"> <a class="share_block" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster"></a> </div><!-- 底部下载导航层 -->
+	<a href="javascript:;" class="top_icon" id="fixnav"></a><!-- 回到顶部按钮 -->
+	<!-- 弹出框 -->
+	<div class="grey_block ">
+		<div class="share_popblock pop_Upblock">
+			<span class="close_icon"></span>
+			<p>分享带上您的观点!</p>
+			<textarea placeholder="请输入您的观点，最多输入70字，不输入则不会出现您的观点。" maxlength="70" id="shareContext" ></textarea>
+			<span class="share_title">分享到</span>
+			<div class="share_main">
+				<div class="share_div checked" data-id="1">
+					<span class="checked_icon"></span>
+					<a class="share_icon01"></a>
+					<span>微信好友</span>
+				</div>
+				<div class="share_div" data-id="2">
+					<span class="checked_icon"></span>
+					<a class="share_icon02"></a>
+					<span>朋友圈</span>
+				</div>
+				<div class="share_div" data-id="3">
+					<span class="checked_icon"></span>
+					<a class="share_icon03"></a>
+					<span>微信收藏</span>
+				</div>
+				<div class="share_div" data-id="4">
+					<span class="checked_icon"></span>
+					<a class="share_icon04"></a>
+					<span>新浪微博</span>
+				</div>
+				<div class="share_div" data-id="5">
+					<span class="checked_icon"></span>
+					<a class="share_icon05"></a>
+					<span>QQ空间</span>
+				</div>
+				<div class="share_div" data-id="6">
+					<span class="checked_icon"></span>
+					<a class="share_icon06"></a>
+					<span>QQ</span>
+				</div>
+			</div>
+			<a class="share_button" onclick="shareStudyInfo()" >确认分享</a>
+		</div>
+	</div>
+	<!-- 弹出框 结束-->
+</body>
+</html>
+
+<script>
+$(function(){
+	$('.share_div').click(function(){
+		$(this).addClass('checked').siblings('.share_div').removeClass('checked');
+	})
+	$('.close_icon').click(function(){
+		$('.grey_block').removeClass('show');
+	})
+	$('.header_right_shareicon').click(function(){
+		$('.grey_block').addClass('show');
+	})
+})
+
+//点击文字 启动分享 
+ 
+</script>
+
+<script>
+
+   loadInfo();
+  
+    //分享后 不显示下载 
+    function loadInfo(){
+      var shareValue='$!shareVal';
+      if(shareValue=="shareVal"){
+         $("#down_id").show(); //分享在app外 显示下载链接
+         $("#myPhotoID").show(); //个人名片 显示 网页
+         $('#pointTextID').hide(); //隐藏 分享提示文字  
+         $('#studyTitleID').hide(); //隐藏 头
+           $('#mypointID').show(); // guan点 显示
+       }else{
+         $("#down_id").hide(); //在app内 隐藏下载链接 
+         $("#myPhotoID").hide(); //个人名片 隐藏 app内
+         $('#studyTitleID').show(); //显示 头
+          $('#mypointID').hide(); //隐藏 头 
+       }         
+    }
+    
+    
+    //点击分享  $('.header_right_shareicon').click(function(){})
+   function onShare(){
+      var shareValue='$!shareVal';
+      $('.grey_block').show();
+      if(shareValue!="shareVal"){ //在app内 
+	        jQuery.get("${bxj_path}/study/login.do", null, function(data) {
+				if(data == "1"){ 
+					$('.grey_block').addClass('show');
+					return;
+				};
+	            if("string" == typeof data) data = eval("("+data+")");
+	            if(data.ssotype) {
+	                window.location.href = decodeURIComponent(data.redirectUrl) + "?tmp=&goBack=1";
+	            }
+	        });
+        }
+	 }
+
+  function shareStudyInfo(){
+		var shareContext = $('#shareContext').val();
+		if(shareContext.length > 70){
+			alert("最多输入70字");
+		} else {
+
+			var id = null;
+			#if($!study.id)
+                id = $!study.id;
+			#end
+			//1.$.ajax带json数据的异步请求
+            jQuery.ajax({  
+                url:'$bxj_path/study/share.do?',// 跳转到 action  
+                data:{  
+                     studyId : id,  
+                     shareContext : shareContext
+                },  
+                type:'post',  
+                cache:false,  
+                dataType:'json',  
+                success:function(data) {  
+                    if(data != "fail" ){  
+						var type = "";
+						$('.share_div').each(function(){
+							if($(this).hasClass("checked")){
+								type = $(this).data("id");
+								return false;
+							}
+						})
+                        var title = '$!study.title';
+                        var desc = '我正在保险家学习保险知识，快来一起学习哦！';
+                        var image = '$static_path/bxj_three/static/study/image/study_share.jpg';                        
+                        var location = '$bxj_path/study/detailShare.page?id='+data;
+                     
+						if(isHjbIos()){
+							newsShare(title, desc, image, location, type);
+						} else {
+							window.share.newsShare(title,desc,image,location,type);
+						}
+						$('.grey_block').removeClass("show");
+                    }else{  
+						alert("分享失败");
+                    }  
+                 },  
+                 error : function() {  
+                 }  
+            });
+		}
+		
+	}
+	
+
+function newsShare(title, desc, image, location, type) {
+	
+    if(isHjbIos()) {
+    	window.location.href = "hjb_wv://newsShare(" + title + "||" + desc + "||" + image + "||" + location + "||" + type + ")";   		 
+    }else{
+    	window.hjb_wv.UmShare(title, desc, link, imgUrl);
+    }
+}
+
+function isHjbIos(){
+			var browser = {
+				versions : function() {
+					var u = navigator.userAgent, app = navigator.appVersion;
+					return {
+						trident : u.indexOf('Trident') > -1,
+						presto : u.indexOf('Presto') > -1,
+						webKit : u.indexOf('AppleWebKit') > -1,
+						gecko : u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,
+						mobile : !!u.match(/AppleWebKit.*Mobile.*/)|| !!u.match(/AppleWebKit/),
+						ios : !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+						android : u.indexOf('Android') > -1|| u.indexOf('Linux') > -1,
+						iPhone : u.indexOf('iPhone') > -1|| u.indexOf('Mac') > -1,
+						iPad : u.indexOf('iPad') > -1,
+						webApp : u.indexOf('Safari') == -1
+					};
+				}(),
+				language : (navigator.browserLanguage || navigator.language).toLowerCase()
+			}
+			var and = browser.versions.android;
+			var ios = browser.versions.ios;
+			if (and) {
+				return false;
+			} else if (ios) {
+				return true;
+			}
+}
+
+
+function goback(){
+    if(isHjbIos()) {
+    	window.location.href = "hjb_wv://goback('yes')";   		 
+    }else{
+    	window.hjb_wv.GoBack();
+    }
+ }
+
+
+  </script>
+
+  
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script>
+   //二次分享
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title : '$!study.title',
+				desc : '我正在保险家学习保险知识，快来一起学习哦！',
+				imgUrl : '$static_path/bxj_three/static/study/image/study_share.jpg',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+
+  </script>
+  
+  
+<script type="text/javascript" src="$static_path/bxj_three/public/js/2.3-2.4-study.js"></script>

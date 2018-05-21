@@ -1,0 +1,66 @@
+		<div class="common_info">
+		<h1 class="assured_info_title tbxz_title">投保选择</h1>
+		<ul class="common-info-ul">
+            <div class="main_insure_product_div" data-pid="253" data-jbbe="1" data-cpjc="智悦人生" data-table="7">
+			<input type="hidden" name="bxnx" value="6" class="factor" data-text="终身">
+			<li class="info-item main_line_height">
+				<label class="info-name">缴费期限</label> 
+		         	<select class="factor" name="jfnx" disabled="disabled">
+				        <option value="9">10年交</option>
+			        </select>
+			        <span class="arrowr"></span>
+			</li>
+			<li class="info-item main_line_height">
+					<label class="info-name">保费</label> 	        
+					<input type="tel" value="6000" disabled="disabled" class="demo_price factor" name="singlebf" maxlength="15"/>
+					<i class="icon">元</i>
+			</li>
+			<li class="info-item main_line_height">
+					<label class="info-name">保额</label> 	        
+					<input type="tel" value="120000" disabled="disabled" class="demo_price factor" name="be" maxlength="15"/>
+					<i class="icon">元</i>
+			</li>
+			<li class="info-item main_line_height">
+					<label class="info-name">重疾保额</label> 	        
+					<input type="tel" value="80000" disabled="disabled" class="demo_price factor" name="zjbe" maxlength="15"/>
+					<i class="icon">元</i>
+			</li>
+			</div>
+			<li class="main_item li_table_0" style="display:none">
+					<div class="creatDes_header">
+							<span class="createDes-title">
+								<em>智悦人生</em>
+								<em class="price"></em>
+							</span>
+						</div>
+						<table class="createDes-table">
+							<thead>
+								<tr>
+									<td>险种</td>
+									<td>保额</td>
+									<td>保费</td>
+									<td>保障期限</td>
+									<td>缴费期限</td>
+								</tr>
+							</thead>
+							<tbody>
+							<tr>
+                				<td>智悦人生</td>
+                 				<td>120000</td>                 
+                 				<td>6000</td>
+                 				<td>终身</td>       
+                 				<td>10年交</td>
+                    		</tr>
+                            <tr id="zjtq">
+                				<td>重疾提前给付</td>
+                 				<td>80000 </td>                 
+                 				<td>从账户扣</td>
+                 				<td>终身</td>       
+                 				<td>-</td>
+                    		</tr>
+							</tbody>
+				</table>
+			</li>
+			#parse("product/addfjx.vm")			
+		</ul>
+		</div>

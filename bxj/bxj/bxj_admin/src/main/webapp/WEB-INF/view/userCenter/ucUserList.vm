@@ -1,0 +1,91 @@
+$pageModule.init("app/userCenter/ucUserList", "list")
+<style>
+    th, td {
+        white-space: nowrap;
+    }
+
+    div.dataTables_wrapper {
+        /*width: 900px;*/
+        margin: 0 auto;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default search">
+            <div class="panel-heading">
+                <h3 class="panel-title">查询条件</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row form ">
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="userName">用户名称: </label>
+                        <input type="text" placeholder="用户名称" id="userName" name="username" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="mobile">用户手机号: </label>
+                        <input type="text" placeholder="手机号" id="mobile" name="mobile" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="realName">用户真实姓名: </label>
+                        <input type="text" placeholder="真实姓名" id="realName" name="realname" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div style="text-align: center;">
+                    <button class="btn btn-primary search-data">查询</button>
+                    <button class="btn btn-default reset-data">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="data-list" style=""></div>
+
+<div class="user-edit-tpl hidden">
+    <input type="hidden" class="id">
+    <div class="row">
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">用户名</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control username">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">昵称</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control nickname">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">密码</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="password" class="form-control passwd">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">手机号</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control mobile">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+$pageModule.init("app/activity/teachersDay", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">手机号码&nbsp;</label>
+                                <input type="text" class="form-control phone">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">落款人&nbsp;</label>
+                                <input type="text" class="form-control signedName">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">感恩卡类型&nbsp;</label>
+                                <select class="form-control oweType">
+                                    <option value="" checked>所有</option>
+                                    <option value="1">普通感恩卡</option>
+                                    <option value="2">内定感恩卡</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="data-list">
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+
+<div class="headline-banner-tpl hidden">
+    <div class="form-body">
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">幸运礼金金额</label>
+            <div class="input-group col-sm-6">
+                <input type="text" class="form-control amount" placeholder="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部 结束-->
+

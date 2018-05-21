@@ -1,0 +1,334 @@
+#set($admin_path = ${configuration.getProperty("urlPath", "bxj_path")})
+#set($bxj_path = ${configuration.getProperty("urlPath", "bxjweb_root")})
+
+<link href="$admin_path/res/media/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css"/>
+<style>
+.field-name {
+	font-size: larger;
+	width: 90px;
+}
+div .form-group {
+	padding-left: 0px;
+}
+</style>
+
+<div class="page-container row-fluid">
+    <div class="page-content">
+        <div class="container-fluid">
+        	<div class="col-sm-12">
+				<div class="panel panel-default search">
+                    <div class="panel-heading">
+						<h3 class="panel-title">#if($model != '') 修改 #else 创建 #end Banner</h3>
+					</div>
+            		<div class="panel-body">
+						<form action="banner/saveOrUpdate.jhtml" id="typeForm" method="post" onsubmit="return check()" enctype="multipart/form-data">
+							<input name="id" value="$!model.id" type="hidden">
+							<table class="form-group  col-sm-12">
+								<tr>
+									<td class="field-name" title="Banner图片上暂时不会显示此标题，但是当点击 Banner 跳转到新页面时，会在顶部标题栏中显示此标题，必填。">标题<span style="color: red;">*</span></td>
+									<td>
+										<div class="form-group col-sm-6">
+											<input type="text" class="form-control" name="forwardTitle" required value="$!model.forwardTitle">
+										</div>
+										<div class="form-group col-sm-6">
+											<select class="form-control" name="showType" id="sel_showType">
+												#parse('banner/showTypeOptions.vm')
+											</select>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name" title="">跳转类型<span style="color: red;">*</span></td>
+									<td>
+										<div class="form-group col-sm-6">
+											<select class="form-control form_sel_forwardType" name="forwardType" id="sel_forwardType" required>
+												<option value="">请选择</option>
+											##由js生成
+											</select>
+											<input type="hidden" name="forwardType">
+										</div>
+										
+										<div class="form-group col-sm-6" style="padding-right: 0px;">
+											<input id="in_args" class="form-control" disabled placeholder="跳转参数，需选择跳转类型后确定">
+										</div>
+										
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name" title="预览自动生成的链接地址，如有发现不正确，立即通知管理员。">链接地址<span style="color: red;">*</span></td>
+									<td>
+										<input required type="text" class="form-control" name="pageUrl" readonly id="in_pageUrl" value="$!model.pageUrl">
+									</td>
+								</tr>
+								<tr>
+									<td style="vertical-align: top;" class="field-name" title="版本区间，指定哪些版本需要显示此 banner。区间规则为前包含而后不包含，如 2 - 3.1，即 （3 > 版本 >= 2）。有些功能必须限制版本，此时输入框是灰色的。否则如留空，表示不限。">版本区间</td>
+									<td>
+										
+										<div class="form-group col-sm-6">
+											<label class="control-label">最小版本号（含）</label>
+											<input class="form-control" name="minVersion" id="in_minVersion" min="0">
+										</div>
+										
+										<div class="form-group col-sm-6" style="padding-right: 0px;">
+											<label class="control-label">最大版本号（不包含）</label>
+											<input class="form-control" name="maxVersion" id="in_maxVersion" min="0">
+										</div>
+										
+									</td>
+								</tr>
+								
+								<tr>
+									<td class="field-name" title="选择一张漂亮的图片最重要啦！不同位置的 banner 的图片尺寸是不同的，首页展业宝：750*130、首页豆腐块：250*265、冠军说：750*130、学习：750*250，单位均为像素。如果尺寸不符合要求则无法上传。">封面图片#if($model != '')#else<span style="color: red;">*</span>#end</td>
+									<td><input type="file" accept="image/*" class="form-control" name="image" id="file_image" required></td>
+								</tr>
+								<tr>
+									<td class="field-name"></td>
+									<td id="preview_img_container"></td>
+								</tr>
+								
+								<tr>
+									<td class="field-name" style="vertical-align: top;">发布控制</td>
+									<td>
+										<div class="form-group col-sm-4" title="如需立即上线请留空。否则请选择一个在当前时间之后的时间。到达设定时间后自动上线。设置在当前时间之前则毫无意义。双击日期控件可清除。">
+											<label class="control-label">上线时间</label>
+											<input name="onlineTime" class="form-control" id="form_in_onlineTime" ondblclick="this.value=''" readonly value="$!date.format('yyyy-MM-dd HH:mm', $model.onlineTime)">
+										</div>
+										
+										<div class="form-group col-sm-4" title="如需长期上线请留空。否则请选择一个在当前时间及上线时间（如果已选）之后的时间。到达设定时间后自动下线。设置在当前时间或上线时间（如果已选）之前则毫无意义。">
+											<label class="control-label">下线时间</label>
+											<input name="offlineTime" class="form-control" id="form_in_offlineTime" ondblclick="this.value=''" readonly value="$!date.format('yyyy-MM-dd HH:mm', $model.offlineTime)">
+										</div>
+										
+										<div class="form-group col-sm-4" style="padding-right: 0px;" title="如需长期上线请留空。否则请选择一个在当前时间及上线时间（如果已选）之后的时间。到达设定时间后自动下线。设置在当前时间或上线时间（如果已选）之前则毫无意义。">
+											<label class="control-label">排序权重（升序）0~255之间</label>
+											<input name="sort" class="form-control" value="100" max="255" min="0" required type="number" id="in_sort">
+										</div>
+									</td>
+								</tr>
+								
+								<tr>
+									<td colspan="2">
+										<span class='label label-table label-info' style="width: 100%;max-width: 100%;">左侧参数名后带红色*的为必填项，其他为可选项。移动鼠标到左侧参数名处可查看各参数的提示信息。<i></i></span>
+									</td>
+								</tr>
+								
+								<tr>
+									<td colspan="2" style="text-align: right;">
+										<button class="btn btn-primary" type="submit" style="margin-top: 10px;width: 100px">提交</button>
+									</td>
+								</tr>
+								
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<datalist id="_dl_forwardType_args_">
+
+</datalist>
+<script type="text/javascript" src="$admin_path/res/media/js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="$admin_path/res/media/datetimepicker/jquery.datetimepicker.js"></script>
+
+<script>
+	var bxjPath = '${bxj_path}';
+</script>
+
+<script type="text/javascript" src="$admin_path/res/media/js/app/banner/forwardType.js"></script>
+<script>
+
+	(function() {
+													var sType = '$!model.showType' || '$request.getParameter("showType")';
+													if (sType) {
+														$('#sel_showType').val(sType);
+													}
+	
+	
+	})();
+	
+	
+	
+	initForwardOptions('#sel_forwardType').on('change', function() {
+		var val = $(this).val(), obj = forwardTypies[val], arg = $('#in_args');
+		arg.removeAttr('list');
+		
+		if (!obj) {
+			arg.attr('disabled', '').attr('placeholder', '跳转参数，需选择跳转类型后确定');
+			$('#in_minVersion').val('').attr('readonly', '');
+			$('#in_maxVersion').val('').attr('readonly', '');
+			$('#in_pageUrl').val('');
+			return;
+		}
+		
+		arg.val('');
+		
+		if (obj.tips) {
+			
+			var placeholder = '请填写：' + obj.tips;
+			
+			if (obj.dataType == 'number') {
+				placeholder += '，由纯数字组成';
+			}
+			
+			// 初始化 datalist
+			if (obj.getDatas) {
+				
+				var opts = obj.getDatas(), datalist = $('#_dl_forwardType_args_').empty();
+				for (var i = 0; i < opts.length; i++) {
+					var item = opts[i];
+					$('<option>').val(item.value).html(item.name).appendTo(datalist);	
+				}
+				arg.attr('list', '_dl_forwardType_args_');
+				
+				placeholder += '，双击可选择';
+			}
+			
+			placeholder += '。';
+			
+			arg.removeAttr('disabled').attr('placeholder', placeholder).focus().attr('required', '');
+			
+			if (obj.required != false) {
+				arg.attr('required', '');
+			} else {
+				arg.removeAttr('required');
+			}
+			
+			$('#in_pageUrl').val('');
+		} else {
+			arg.attr('disabled', '').attr('placeholder', '无参数，无需填写').removeAttr('required');
+			$('#in_pageUrl').val(obj.getForwardUrl());
+		}
+		
+		if (obj.minVersion) {
+			$('#in_minVersion').val(obj.minVersion).attr('readonly', '');
+		} else {
+			$('#in_minVersion').val('').removeAttr('readonly');
+		}
+		
+		if (obj.maxVersion) {
+			$('#in_maxVersion').val(obj.maxVersion).attr('readonly', '');
+		} else {
+			$('#in_maxVersion').val('').removeAttr('readonly');
+		}
+		
+	});
+	
+	$('#in_args').on('blur', function() {
+		var obj = forwardTypies[$('#sel_forwardType').val()];
+		
+		var arg = this.value;
+		
+		if (!arg) {
+			if (obj.required != false) {
+				$(this).focus();
+				return;
+			}
+		} else {
+			if (obj.dataType == 'number') {
+				var intArg = parseInt(arg);
+				if (intArg != arg || intArg <= 0) {
+					$('#in_pageUrl').val(url);
+					$(this).focus();
+					alert('请填写正整数参数值。');
+					return;
+				}
+			}
+		}
+		
+		var url = obj.getForwardUrl(arg);
+		
+		if (url) {
+			$('#in_pageUrl').val(url);
+		}
+		
+	});
+	
+	function preview(file) {
+	
+		$('#form_preview_img[r]').remove();
+		
+		if (file.files) {
+			if (file.files[0]) {
+				$('#form_preview_img').remove();
+				var imgSize = imageSize[$('#sel_showType').val()];
+				var img = $('<img r id="form_preview_img" width="' + imgSize.width + '" height="' + imgSize.height + '">').appendTo('#preview_img_container');
+				var reader = new FileReader();
+				reader.onload=function(evt) {
+					img.attr('src', evt.target.result);
+				};
+				
+				reader.readAsDataURL(file.files[0]);
+					
+			}
+		}
+	}
+	
+	$('#file_image').on('change', function() {
+		preview(this);
+	});
+	
+	$('#sel_showType').on('change', function() {
+		preview($('#file_image')[0]);
+	});
+	
+	
+	$('#form_in_onlineTime,#form_in_offlineTime').datetimepicker({
+		lang:'ch',
+		timepicker: true,
+		format:'Y-m-d H:i',
+		step:5,
+		formatDate:'Y-m-d H:i',
+		showButtonPanel:true,
+		validateOnBlur: false
+	});
+	
+	function check() {
+	
+	}
+	
+</script>
+
+#if($model != '')
+<script>
+	(function() {
+		var imgSize = imageSize[$('#sel_showType').val()];
+		$('<img id="form_preview_img" width="' + imgSize.width + '" height="' + imgSize.height + '">').attr('src', '$model.imageUrl').appendTo('#preview_img_container');
+		
+		$('#file_image').removeAttr('required');
+		
+		
+		var pageUrl = '$model.pageUrl';
+		
+		for (var i in forwardTypies) {
+			var obj = forwardTypies[i];
+			
+			if (obj.parse) {
+				var result = obj.parse.call(obj, pageUrl);
+				if (result) {
+					if (result.match) {
+						$('#sel_forwardType').val(i).trigger('change');
+						if (result.arg) {
+							$('#in_args').val(result.arg).removeAttr('disabled').trigger('blur');
+						}
+						return;
+					}
+				}
+			}
+			
+		}
+		
+		if (pageUrl.startWith('http://') || pageUrl.startWith('https://')) {
+			$('#sel_forwardType').val('links').trigger('change');
+			$('#in_args').val(pageUrl).removeAttr('disabled').trigger('blur');
+		}
+		
+	})();
+	
+	$('#in_minVersion').val('$!model.minVersion');
+	$('#in_maxVersion').val('$!model.maxVersion');
+	$('#in_sort').val('$!model.sort');
+	$('#sel_showType option:not(:selected)').remove();
+</script>
+#end

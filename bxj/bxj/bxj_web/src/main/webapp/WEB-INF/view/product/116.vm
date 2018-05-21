@@ -1,0 +1,55 @@
+		<ul class="common-info-ul">
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>乐享福</em>
+					</span>
+					<span class="creatDes-add-btn" data-layer="mainLayer" data-enable="#btnAddon,#btnAddMore"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddon" data-layer="fjx-layer" data-title="附加险" data-products="['zyjt', 'zyyl', 'ywyl']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>险种组合</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddMore" data-layer="zhx-layer" data-title="险种组合" data-products="['xinli', 'xinsheng', 'xinxiang', 'ankang', 'anxiang', 'xingfuA']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加险种</em>
+					</span>
+				</div>
+			</li>
+			
+		</ul>
+		
+		#parse("product/product.pa.vm")
+	    <script>
+	    	$(function() {
+		    	bxj.PlanBook.init({
+		    		title: '乐享福AB',
+		    		gs: 'PingAn',
+		    		autoRefresh: true,
+		    		BeiBaoRen: {
+						age: {
+							min: 18,
+							max: 55,
+						}
+					}
+		    	});
+	    	});
+	    </script>

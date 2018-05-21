@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.account.RoleMapper">
+
+    <sql id="role_colums">
+      a.id as "id",
+      a.role_code as "roleCode",
+      a.role_name as "roleName",
+      a.memo as "memo",
+      a.parent_id as "parentId",
+      a.status as "status",
+      a.create_time as "createTime",
+      a.create_name as "createName",
+      a.update_time as "updateTime",
+      a.update_name as "updateName",
+      b.role_name as "parentName"
+    </sql>
+
+    <sql id="role_where">
+        <where>
+            <if test="status == null">and a.status = 1</if>
+            <if test="status != null">and a.status = #{status}</if>
+            <if test="parentId != null">and a.parent_id = #{parentId}</if>
+            <if test="roleCode != null and roleCode != ''">and a.role_code = #{roleCode}</if>
+            <if test="roleName != null and roleName != ''">and a.role_name like concat('%', #{roleName}, '%')</if>
+
+            <if test="roleIdList != null and roleIdList.length > 0">
+                and a.id in (
+                <foreach collection="roleIdList" item="roleId" separator=",">
+                    #{roleId}
+                </foreach>
+                )
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryPageCount" parameterType="com.hangjia.bxj.query.account.RoleQuery" resultType="int">
+        SELECT count(1)
+        from bxj_sys_uic_role a
+        left join bxj_sys_uic_role b on a.parent_id = b.id
+        <include refid="role_where" />
+    </select>
+
+    <select id="queryPageData" parameterType="com.hangjia.bxj.query.account.RoleQuery" resultType="com.hangjia.bxj.model.account.RoleDO">
+        SELECT
+        <include refid="role_colums"/>
+        from bxj_sys_uic_role a
+        left join bxj_sys_uic_role b on a.parent_id = b.id
+        <include refid="role_where"/>
+        limit ${pageFirstItem}, ${pageSize}
+    </select>
+
+
+    <select id="queryRoleList" parameterType="com.hangjia.bxj.query.account.RoleQuery" resultType="com.hangjia.bxj.model.account.RoleDO">
+        SELECT
+        <include refid="role_colums"/>
+        from bxj_sys_uic_role a
+        left join bxj_sys_uic_role b on a.parent_id = b.id
+        <include refid="role_where"/>
+    </select>
+
+
+    <insert id="addRole" parameterType="com.hangjia.bxj.model.account.RoleDO" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into bxj_sys_uic_role (
+            role_code, role_name, memo, parent_id,
+            create_time, create_name, update_time, update_name
+        ) values (
+            #{roleCode}, #{roleName}, #{memo}, #{parentId},
+             now(), #{createName}, now(), #{updateName}
+        )
+    </insert>
+
+    <update id="updateRole" parameterType="com.hangjia.bxj.model.account.RoleDO">
+      update bxj_sys_uic_role
+        SET
+            role_name = #{roleName},
+            memo = #{memo},
+            parent_id = #{parentId},
+            update_time = now(),
+            update_name = #{updateName}
+        where id = #{id}
+    </update>
+
+    <update id="deleteRole" parameterType="map">
+        update bxj_sys_uic_role set status = #{status} where id in (
+        <foreach collection="idList" item="id" separator=",">
+            #{id}
+        </foreach>
+        ) or parent_id in (
+        <foreach collection="idList" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </update>
+
+    <select id="queryResurceIdList" parameterType="com.hangjia.bxj.query.account.RoleQuery" resultType="long">
+        select resource_id from bxj_sys_uic_role_resource where
+        role_id = #{roleId}
+        <if test="status != null">and status = #{status}</if>
+    </select>
+
+    <delete id="deleteRoleResource" parameterType="long">
+        delete from bxj_sys_uic_role_resource where role_id = #{value}
+    </delete>
+
+    <insert id="saveRoleResource" parameterType="map">
+        insert into bxj_sys_uic_role_resource (role_id, resource_id)
+        values (#{roleId}, #{resourceId})
+    </insert>
+
+    <select id="existsUserRole" parameterType="map" resultType="int">
+        select count(1) from bxj_sys_uic_user_role a where a.role_id = #{roleId}
+        and a.user_id = #{userId}
+    </select>
+
+    <insert id="saveRoleUser" parameterType="map">
+        insert into bxj_sys_uic_user_role (role_id, user_id)
+        values (#{roleId}, #{userId})
+    </insert>
+
+    <delete id="deleteRoleUser" parameterType="map">
+        delete from bxj_sys_uic_user_role where role_id = #{roleId}
+        and user_id = #{userId}
+    </delete>
+
+    <select id="queryUserRoleTree" parameterType="long" resultType="com.hangjia.bxj.model.account.RoleDO">
+        SELECT
+        <include refid="role_colums"/>
+        from bxj_sys_uic_role a
+        left join bxj_sys_uic_role b on a.parent_id = b.id
+        where a.status =1
+        and exists (
+        select 1 from bxj_sys_uic_user_role c
+        where c.role_id = a.id
+        and c.status =1
+        and c.user_id = #{value}
+        )
+    </select>
+
+    <select id="queryRoleById" parameterType="long" resultType="com.hangjia.bxj.model.account.RoleDO">
+        SELECT
+        <include refid="role_colums"/>
+        from bxj_sys_uic_role a
+        left join bxj_sys_uic_role b on a.parent_id = b.id
+        where a.status =1
+        and a.id = #{value}
+    </select>
+
+    <select id="queryFunctionIdList" parameterType="long" resultType="long">
+        select func_id from bxj_sys_uic_role_function
+        where
+        role_id = #{value}
+        and status = 1
+    </select>
+
+    <delete id="deleteUserRole" parameterType="long">
+        delete from bxj_sys_uic_user_role where user_id = #{value}
+    </delete>
+
+    <delete id="deleteRoleFuntion" parameterType="long">
+        delete from bxj_sys_uic_role_function
+        where role_id = #{value}
+    </delete>
+
+    <insert id="saveRoleFunction" parameterType="map">
+        insert into bxj_sys_uic_role_function (
+          role_id, func_id
+        ) values (
+          #{roleId}, #{funcId}
+        )
+    </insert>
+
+
+    <select id="queryRoleBlockList" parameterType="long" resultType="long">
+      select a.block_id from bxj_sys_uic_role_block a where a.role_id = #{value}
+    </select>
+
+    <delete id="deleteRoleBlock" parameterType="long">
+        delete from bxj_sys_uic_role_block
+        where role_id = #{value}
+    </delete>
+
+    <insert id="saveRoleBlock" parameterType="map">
+        insert into bxj_sys_uic_role_block (
+        role_id, block_id, create_time, update_time
+        ) values (
+        #{roleId}, #{blockId}, now(), now()
+        )
+    </insert>
+
+    <select id="queryRoleIdByCode" parameterType="String" resultType="long">
+        select id from bxj_sys_uic_role
+        where
+        role_code = #{value}
+        and status = 1
+    </select>
+
+    <select id="queryUserRoleBlockList" parameterType="long" resultType="long">
+        SELECT DISTINCT a.block_id
+        FROM bxj_sys_uic_role_block a
+          LEFT JOIN bxj_sys_uic_user_role b ON a.role_id = b.role_id
+        WHERE b.user_id = #{value}
+    </select>
+
+    <select id="queryRoleUsedCount" parameterType="list" resultType="int">
+        SELECT count(1) from bxj_sys_uic_user_role a where a.role_id  in (
+          <foreach collection="list" item="id" separator=",">
+              #{id}
+          </foreach>
+        ) and a.status = 1
+    </select>
+</mapper>

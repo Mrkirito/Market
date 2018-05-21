@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<base href="$bxj_path/">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>粗错啦</title>
+		<link rel="stylesheet" type="text/css" href="$static_path/public/css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="$static_path/index/css/style.css"/>
+	</head>
+	
+	<body style="background:#3373ca;">
+		#if(!$request.getParameter('hd'))
+		<!--导航 开始-->
+		<header class="head">
+		  	<a class="header_left" href="javascript:history.go(-1);"></a>
+		    <h1>粗错啦</h1>
+		</header>
+		<!--导航 结束-->
+		#end
+		<!--内容 开始-->
+		<div class="container container_error">
+			<img src="$static_path/index/images/error_bg.png" width="30%"/>
+		    <p class="error_p">$!msg</p>
+		    <a class="error_button" href="javascript:history.go(-1);">返回上一页面</a>
+		</div>
+		<!--内容 结束-->
+	
+	</body>
+	
+</html>

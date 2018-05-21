@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.InvitationDao">
+
+	<insert id="savePreview" parameterType="com.hangjia.bxj.model.InvitationPreview" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			invitation_preview(
+				user_id,
+				invite_id,
+				name,
+				date_at,
+				address,
+				contact_name,
+				contact_mobile,
+				text,
+				lng,
+				lat,
+				model_type,
+				guestname,
+				map_img_url,
+				os,
+				versionCode,
+				versionName,
+				osVersion,
+				modify_at,
+				floor_room
+			)
+		VALUES
+			(
+				#{userId, javaType=java.lang.Integer, jdbcType=INTEGER},
+				#{inviteId, javaType=java.lang.Long, jdbcType=BIGINT},
+				#{name, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{dateAt, javaType=java.util.Date, jdbcType=TIMESTAMP},
+				#{address, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{contactName, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{contactMobile, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{text, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{lng, javaType=java.lang.Double, jdbcType=DOUBLE},
+				#{lat, javaType=java.lang.Double, jdbcType=DOUBLE},
+				#{modelType, javaType=java.lang.Integer, jdbcType=INTEGER},
+				#{guestName, javaType=java.lang.String, jdbcType=INTEGER},
+				#{mapImgUrl, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{os, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{versionCode, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{versionName, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{osVersion, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{modifyAt, javaType=java.util.Date, jdbcType=TIMESTAMP},
+			    #{floorRoom, javaType=java.lang.String, jdbcType=VARCHAR}
+			)
+	</insert>
+	
+	<insert id="save" parameterType="com.hangjia.bxj.model.Invitation" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			invitation(
+				user_id,
+				name,
+				date_at,
+				address,
+				contact_name,
+				contact_mobile,
+				text,
+				lng,
+				lat,
+				model_type,
+				guestname,
+				map_img_url,
+				os,
+				versionCode,
+				versionName,
+				osVersion,
+				modify_at,
+				floor_room
+			)
+		VALUES
+			(
+				#{userId, javaType=java.lang.Integer, jdbcType=INTEGER},
+				#{name, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{dateAt, javaType=java.util.Date, jdbcType=TIMESTAMP},
+				#{address, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{contactName, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{contactMobile, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{text, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{lng, javaType=java.lang.Double, jdbcType=DOUBLE},
+				#{lat, javaType=java.lang.Double, jdbcType=DOUBLE},
+				#{modelType, javaType=java.lang.Integer, jdbcType=INTEGER},
+				#{guestName, javaType=java.lang.String, jdbcType=INTEGER},
+				#{mapImgUrl, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{os, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{versionCode, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{versionName, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{osVersion, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{modifyAt, javaType=java.util.Date, jdbcType=TIMESTAMP},
+			    #{floorRoom, javaType=java.lang.String, jdbcType=VARCHAR}
+			)
+	</insert>
+	
+	<update id="updatePreview" parameterType="com.hangjia.bxj.model.InvitationPreview">
+		UPDATE
+			invitation_preview
+		SET
+			`name` = #{name, javaType=java.lang.String, jdbcType=VARCHAR},
+			date_at = #{dateAt, javaType=java.util.Date, jdbcType=TIMESTAMP},
+			address = #{address, javaType=java.lang.String, jdbcType=VARCHAR},
+			contact_name = #{contactName, javaType=java.lang.String, jdbcType=VARCHAR},
+			contact_mobile = #{contactMobile, javaType=java.lang.String, jdbcType=VARCHAR},
+			`text` = #{text, javaType=java.lang.String, jdbcType=VARCHAR},
+			lng = #{lng, javaType=java.lang.Double, jdbcType=DOUBLE},
+			guestname=#{guestName, javaType=java.lang.String, jdbcType=INTEGER},
+			model_type=#{modelType, javaType=java.lang.Integer, jdbcType=INTEGER},
+			lat = #{lat, javaType=java.lang.Double, jdbcType=DOUBLE},
+			map_img_url = #{mapImgUrl, javaType=java.lang.String, jdbcType=VARCHAR},
+			floor_room = #{floorRoom, javaType=java.lang.String, jdbcType=VARCHAR}
+			
+		WHERE
+			id = #{id, javaType=java.lang.Long, jdbcType=BIGINT}
+		AND
+			user_id = #{userId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+	<update id="update" parameterType="com.hangjia.bxj.model.Invitation">
+		UPDATE
+			invitation
+		SET
+			`name` = #{name, javaType=java.lang.String, jdbcType=VARCHAR},
+			date_at = #{dateAt, javaType=java.util.Date, jdbcType=TIMESTAMP},
+			address = #{address, javaType=java.lang.String, jdbcType=VARCHAR},
+			contact_name = #{contactName, javaType=java.lang.String, jdbcType=VARCHAR},
+			contact_mobile = #{contactMobile, javaType=java.lang.String, jdbcType=VARCHAR},
+			`text` = #{text, javaType=java.lang.String, jdbcType=VARCHAR},
+			lng = #{lng, javaType=java.lang.Double, jdbcType=DOUBLE},
+			guestname=#{guestName, javaType=java.lang.String, jdbcType=INTEGER},
+			model_type=#{modelType, javaType=java.lang.Integer, jdbcType=INTEGER},
+			lat = #{lat, javaType=java.lang.Double, jdbcType=DOUBLE},
+			map_img_url = #{mapImgUrl, javaType=java.lang.String, jdbcType=VARCHAR},
+			floor_room = #{floorRoom, javaType=java.lang.String, jdbcType=VARCHAR}
+			
+		WHERE
+			id = #{id, javaType=java.lang.Long, jdbcType=BIGINT}
+		AND
+			user_id = #{userId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM
+			invitation
+		WHERE
+			id = #{0, javaType=java.lang.Long, jdbcType=BIGINT}
+		AND
+			user_id = #{1, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+	<select id="list" resultType="com.hangjia.bxj.model.Invitation">
+		SELECT
+			id,
+			user_id AS userId,
+			`name`,
+			date_at AS dateAt,
+			address,
+			contact_name AS contactName,
+			contact_mobile AS contactMobile,
+			`text`,
+			create_at AS createAt,
+			lng,
+			lat
+		FROM
+			invitation
+		WHERE
+			user_id = #{0, javaType=java.lang.Integer, jdbcType=INTEGER}
+			AND
+			`status` = 0
+		ORDER BY
+			id DESC
+	</select>
+	<select id="get" resultType="com.hangjia.bxj.model.Invitation">
+		SELECT
+			id,
+			user_id AS userId,
+			`name`,
+			date_at AS dateAt,
+			address,
+			contact_name AS contactName,
+			contact_mobile AS contactMobile,
+			`text`,
+			create_at AS createAt,
+			lng,
+			lat,
+			model_type AS modelType,
+			guestname AS guestName
+		FROM
+			invitation
+		WHERE
+			id =#{id} 
+	</select>	
+	<select id="listSimple" resultType="com.hangjia.bxj.model.InvitationSimple">
+		SELECT
+			i.id,
+			i.`name`,
+			<!-- 
+			(
+			SELECT 
+				COUNT(*) 
+			FROM 
+				invitation_log l 
+			WHERE l.invitation_id = i.id
+			) joinCount
+			 -->
+			i.date_at dateAt
+		FROM
+			invitation i
+		WHERE
+			i.user_id = #{0, javaType=java.lang.Integer, jdbcType=INTEGER}
+			AND
+			i.`status` = 0
+		ORDER BY
+			i.id DESC
+	</select>
+	
+	<select id="getUserInvitation" resultType="com.hangjia.bxj.model.Invitation">
+		SELECT
+			id,
+			user_id AS userId,
+			`name`,
+			date_at AS dateAt,
+			address,
+			contact_name AS contactName,
+			contact_mobile AS contactMobile,
+			`text`,
+			create_at AS createAt,
+			lng,
+			lat
+		FROM
+			invitation
+		WHERE
+			id = #{0, javaType=java.lang.Long, jdbcType=BIGINT}
+			AND
+			user_id = #{1, javaType=java.lang.Integer, jdbcType=INTEGER}
+			AND
+			`status` = 0
+		ORDER BY
+			id DESC
+		LIMIT 1
+	</select>
+	
+	<resultMap type="com.hangjia.bxj.model.InvitationDetails" id="InvitationDetails">
+		<result property="dateAt" column="date_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+		<result property="address" column="address" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<collection property="appointments" ofType="com.hangjia.bxj.model.InvitationAppointment">
+			<result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+			<result property="mobile" column="mobile" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		</collection>
+	</resultMap>
+	
+	<select id="details" resultMap="InvitationDetails">
+		SELECT
+			i.date_at,
+			i.address,
+			l.`name`,
+			l.mobile
+		FROM
+			invitation i
+		LEFT JOIN
+			invitation_log l
+		ON
+			i.id = l.invitation_id
+		WHERE
+			i.id = #{0, javaType=java.lang.Long, jdbcType=BIGINT}
+			AND i.user_id = #{1, javaType=java.lang.Integer, jdbcType=INTEGER}
+			AND
+			i.`status` = 0
+	</select>
+	<insert id="saveInvitationAppointment" parameterType="com.hangjia.bxj.model.InvitationAppointment" >
+	    insert into invitation_log(
+	        invitation_id,
+	        name,
+	        mobile
+	    values(
+	        #{invitationId,jdbcType=BIGINT},
+	        #{name,jdbcType=VARCHAR},
+	        #{mobile,jdbcType=VARCHAR}
+	    )
+  </insert>
+  
+  	<select id="count" parameterType="java.lang.Integer" resultType="int" >
+  		SELECT
+			COUNT(*)
+		FROM
+			invitation
+		WHERE
+			user_id = #{0, javaType=java.lang.Integer, jdbcType=INTEGER}
+		FOR UPDATE
+  	</select>
+  	
+  	<select id="listpage" resultType="com.hangjia.bxj.model.Invitation" parameterType="java.util.Map" >
+		SELECT
+			id,
+			user_id AS userId,
+			`name`,
+			date_at AS dateAt,
+			address,
+			contact_name AS contactName,
+			contact_mobile AS contactMobile,
+			`text`,
+			create_at AS createAt,
+			lng,
+			lat,
+			model_type AS modelType,
+			guestname AS guestName,
+			map_img_url AS mapImgUrl,
+			modify_at AS modifyAt,
+			floor_room AS floorRoom
+		FROM
+			invitation
+		WHERE `status` = 0
+		  <if test="userId != null " >
+			AND user_id = #{userId, javaType=java.lang.Integer, jdbcType=INTEGER}						
+		  </if>
+		  <if test="modelType != null " >
+            AND  model_type= #{modelType, jdbcType=INTEGER}
+          </if>
+		
+		 <if test="descId != null " >
+		     ORDER BY  id DESC
+		 </if>
+		 <if test="descModify != null " >
+		     ORDER BY modify_at DESC
+		 </if>
+			
+	   <if test="start != null and end != null" >
+           limit #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+       </if>
+	</select>
+	
+	<select id="listcount"  resultType="int" parameterType="java.util.Map" >
+  		SELECT
+			COUNT(*)
+		FROM
+			invitation
+		WHERE `status` = 0
+		 <if test="userId != null " >
+			AND user_id = #{userId, javaType=java.lang.Integer, jdbcType=INTEGER}
+		 </if>	
+		 <if test="modelType != null " >
+            AND  model_type= #{modelType, jdbcType=INTEGER}
+         </if>
+  	</select>
+  	
+  	<select id="isExist"  resultType="int" parameterType="java.util.Map" >
+  		SELECT
+			COUNT(*)
+		FROM
+			invitation
+		WHERE `status` = 0
+		 <if test="id != null " >
+			AND id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+		 </if>
+		 <if test="userId != null " >
+			AND user_id = #{userId, javaType=java.lang.Integer, jdbcType=INTEGER}
+		 </if>	
+		 <if test="name != null " >
+            AND  name= #{name, jdbcType=VARCHAR}
+          </if>
+  	</select>
+  	
+  	<!-- 查询单个 -->
+  	<select id="selectOne"  resultType="com.hangjia.bxj.model.Invitation" parameterType="java.util.Map" >
+  		SELECT
+			id,user_id AS userId,`name`,
+			date_at AS dateAt,
+			address,
+			contact_name AS contactName,
+			contact_mobile AS contactMobile,
+			`text`,
+			create_at AS createAt,lng,lat,
+			model_type AS modelType,
+			guestname AS guestName,
+			map_img_url AS mapImgUrl,
+			browse_Num AS browseNum,
+			floor_room AS floorRoom
+		FROM
+			invitation
+		WHERE `status` = 0
+		 <if test="id != null " >
+			AND id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+		 </if>
+		 <if test="userId != null " >
+			AND user_id = #{userId, javaType=java.lang.Integer, jdbcType=INTEGER}
+		 </if>	
+		 <if test="name != null " >
+            AND  name= #{name, jdbcType=VARCHAR}
+          </if>
+  	</select>
+  	
+  	<update id="deleteInvite" parameterType="com.hangjia.bxj.model.Invitation">
+		UPDATE invitation
+		 SET 
+		 status = #{status,jdbcType=BIT} 
+		 WHERE 
+		  id = #{id, javaType=java.lang.Long, jdbcType=BIGINT}
+	</update>
+	
+	<update id="updateInviteCount" parameterType="com.hangjia.bxj.model.Invitation">
+	UPDATE invitation
+	 SET 
+		browse_Num = #{browseNum, javaType=java.lang.Integer, jdbcType=INTEGER},
+        browse_time = #{browseTime, javaType=java.util.Date, jdbcType=TIMESTAMP}
+	 WHERE 
+		  id = #{id, javaType=java.lang.Long, jdbcType=BIGINT}
+	
+	</update>
+	<select id="queryPreviewById" parameterType="Long" resultType="com.hangjia.bxj.model.InvitationPreview">
+		SELECT
+			id as "id",
+			user_id as "userId",
+			name as "name",
+			date_at as "dateAt",
+			address as "address",
+			contact_name as "contactName",
+			contact_mobile as "contactMobile",
+			text as "text",
+			create_at as "createAt",
+			lng as "lng",
+			lat as "lat",
+			model_type as "modelType",
+			guestname as "guestName",
+			map_img_url as "mapImgUrl",
+			modify_at as "modifyAt",
+			floor_room as "floorRoom"
+		FROM
+			invitation_preview
+		WHERE 
+			id = #{id}
+	</select>
+	<select id="queryPreviewByInviteId" parameterType="Long" resultType="com.hangjia.bxj.model.InvitationPreview">
+		SELECT
+			id as "id",
+			user_id as "userId",
+			name as "name",
+			date_at as "dateAt",
+			address as "address",
+			contact_name as "contactName",
+			contact_mobile as "contactMobile",
+			text as "text",
+			create_at as "createAt",
+			lng as "lng",
+			lat as "lat",
+			model_type as "modelType",
+			guestname as "guestName",
+			map_img_url as "mapImgUrl",
+			modify_at as "modifyAt",
+			floor_room as "floorRoom"
+		FROM
+			invitation_preview
+		WHERE 
+			invite_id = #{inviteId}
+		LIMIT 1
+	</select>
+	
+	<select id="queryInviteGenerate" parameterType="com.hangjia.bxj.vo.InviteVo" resultType="com.hangjia.bxj.vo.InviteVo">
+		SELECT date(create_at) as date,count(id) AS count FROM invitation
+		<if	test="startDate!=null and endDate!=null">
+			where create_at between #{startDate} and #{endDate}
+		</if>
+		 group by date(create_at) order by date(create_at) desc
+	</select>
+	<select id="queryInviteUser" parameterType="com.hangjia.bxj.vo.InviteVo" resultType="com.hangjia.bxj.vo.InviteVo">
+		SELECT date(create_at) as date,count(DISTINCT user_id) as count FROM `invitation` 		
+		<if	test="startDate!=null and endDate!=null">
+			where create_at between #{startDate} and #{endDate}
+		</if>
+		group by date(create_at) order by date(create_at) desc
+	</select>
+	<select id="queryInviteShare" parameterType="com.hangjia.bxj.vo.InviteVo" resultType="com.hangjia.bxj.vo.InviteVo">
+		SELECT date(copycreate_at) as date,count(*) as count FROM invitation_copy 		
+			<if	test="startDate!=null and endDate!=null">
+				where copycreate_at between #{startDate} and #{endDate}
+			</if>
+		GROUP BY date(copycreate_at) order by date(copycreate_at) desc
+	</select>
+</mapper>

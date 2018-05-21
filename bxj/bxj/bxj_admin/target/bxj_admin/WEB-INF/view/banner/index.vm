@@ -1,0 +1,197 @@
+$pageModule.init("app/banner/banner", "list")
+
+#set($bxjweb_path = ${configuration.getProperty("urlPath","bxjweb_path")})
+#set($admin_path = ${configuration.getProperty("urlPath", "bxj_path")})
+#set($bxj_path = ${configuration.getProperty("urlPath", "bxjweb_root")})
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                        	<form id="form_query-params">
+                        	<div class="row">
+	                            <div class="form-group  col-sm-3">
+	                                <label class="control-label">位置&nbsp;</label>
+	                                <select class="form-control" name="showType" id="sel_showType">
+	                                    #parse('banner/showTypeOptions.vm')
+	                                </select>
+	                            </div>
+	                            
+	                            <div class="form-group  col-sm-3">
+	                                <label class="control-label">ID&nbsp;</label>
+	                                <input placeholder="id 精确搜索" type="text" class="form-control" name="id">
+	                            </div>
+	                            <div class="form-group  col-sm-3">
+	                                <label class="control-label">标题&nbsp;</label>
+	                                <input placeholder="标题模糊匹配" type="text" class="form-control" name="forwardTitle">
+	                            </div>
+	                            <div class="form-group  col-sm-3">
+	                                <label class="control-label">跳转类型&nbsp;</label>
+	                                <select class="form-control" name="forwardType" id="sel_forwardType">
+	                                	<option value="">请选择</option>
+	                                </select>
+	                            </div>
+                            </div>
+                            <div class="row">
+                            	<div class="form-group  col-sm-3">
+	                                <label class="control-label">状态</label>
+	                                <select class="form-control" name="statusMessage">
+	                                	<option value="">请选择</option>
+	                                    <option value="onlined">上线</option>
+	                                    <option value="awaitOnline">未上线</option>
+	                                    <option value="offlined">下线</option>
+	                                </select>
+	                            </div>
+	                            
+	                            <div class="form-group  col-sm-3">
+	                                <select class="control-label" name="onlineTimeRule">
+	                                    <option value="">上线时间（相等）</option>
+	                                    <option value="lte">上线时间（早于）</option>
+	                                    <option value="gte">上线时间（晚于）</option>
+	                                </select>
+	                                <input type="text" class="form-control" id="onlineTime" name="onlineTime">
+	                            </div>
+	                            
+	                            <div class="form-group  col-sm-3">
+	                                <select class="control-label" name="offlineTimeRule">
+	                                    <option value="">下线时间（相等）</option>
+	                                    <option value="lte">下线时间（早于）</option>
+	                                    <option value="gte">下线时间（晚于）</option>
+	                                </select>
+	                                <input type="text" class="form-control" id="offlineTime" name="offlineTime">
+	                            </div>
+	                            
+	                            <div class="form-group  col-sm-3">
+	                                <label class="control-label">显示</label>
+	                                <select class="form-control" name="display">
+	                                	<option value="">不限</option>
+	                                    <option value="1" selected>正常</option>
+	                                    <option value="0">回收站</option>
+	                                </select>
+	                            </div>
+	                            
+                            </div>
+                            </form>
+                            
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary" id="search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			<div id="data-list"></div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<!--底部 结束-->
+
+<div class="hidden" id="banner-form">
+    <div class="form-body">
+    	<form action="banner/create.json" method="post">
+    	
+	    	<div class="form-group col-sm-12">
+				<label class="col-md-3 control-label" title="跳转页面的标题栏文字内容，必填。">标题<span style="color: red;">*</span></label>
+				<div class="col-md-9">
+					<input type="text" class="form-control" name="title">
+				</div>
+			</div>
+			
+			<div class="form-group col-sm-12">
+				<label class="col-md-3 control-label" title="排序值，越小越靠前，默认为0，最小为0，值相等时，新增的记录在前。必填。">banner位<span style="color: red;">*</span></label>
+				<div class="col-md-3">
+					<select class="form-control" name="showType">
+						#parse('banner/showTypeOptions.vm')
+					</select>
+				</div>
+				<div class="col-md-6">
+					<input type="number" name="sort" min="0" class="form-control" value="0">
+				</div>
+	        </div>
+	        
+	        <div class="form-group col-sm-12">
+				<label class="col-md-3 control-label" title="选择跳转类型，并填写必要的参数（ID或URL），选择跳转类型后确认，必填。">跳转地址<span style="color: red;">*</span></label>
+	    		<div class="col-md-3">
+	                <select class="form-control form_sel_forwardType" name="forwardType">
+						#parse('banner/forwardTypeOptions.vm')
+					</select>
+	            </div>
+	            <div class="col-md-6">
+	                <input name="" class="form-control">
+	            </div>
+	        </div>
+	        
+	        <div class="col-sm-12">
+				<label class="col-md-3 control-label" title="选择一张漂亮的图片最重要啦！不同位置的 banner 的图片尺寸是不同的，首页展业宝：750*130、首页豆腐块：250*265、冠军说：750*130、学习：750*250，单位均为像素。如果尺寸不符合要求则无法上传。">封面图片<span style="color: red;">*</span></label>
+				<div class="col-md-9">
+					<input type="file" name="image" accept="image/*" class="form_in_image" onchange="preview(this)">
+				</div>
+	        </div>
+	        <div class="form-group col-sm-12">
+				<label class="col-md-3 control-label"></label>
+				<div class="col-md-9" style="text-align: left;">
+					<img src="" class="form_preview_img" width="375" height="65">
+				</div>
+	        </div>
+	        
+	        <div class="form-group col-sm-12">
+				<label class="col-md-3 control-label" title="限制此条记录在哪些版本中显示，可单独限制最高或最低版本，也可同时限制最高和最低版本形成版本区间。若无需限制请留空。">版本控制</label>
+	    		<div class="col-md-4">
+	                <input name="minVersion" class="form-control" placeholder="允许显示此条记录的最低版本号">
+	            </div>
+	            <div class="col-md-1">
+	                -
+	            </div>
+	            <div class="col-md-4">
+	                <input name="maxVersion" class="form-control" placeholder="允许显示此条记录的最高版本号">
+	            </div>
+	        </div>
+	        
+	        <div class="form-group col-sm-12">
+				<label class="col-md-3 control-label" title="如需立即上线请留空。否则请选择一个在当前时间之后的时间。到达设定时间后自动上线。设置在当前时间之前则毫无意义。">上线时间</label>
+	    		<div class="col-md-9">
+	                <input name="onlineTime" class="form-control" id="form_in_onlineTime">
+	            </div>
+	        </div>
+	        
+	        <div class="form-group col-sm-12">
+				<label class="col-md-3 control-label" title="如需长期上线请留空。否则请选择一个在当前时间及上线时间（如果已选）之后的时间。到达设定时间后自动下线。设置在当前时间或上线时间（如果已选）之前则毫无意义。">上线时间</label>
+	    		<div class="col-md-9">
+	                <input name="offlineTime" class="form-control" id="form_in_offlineTime">
+	            </div>
+	        </div>
+	        
+	        <div class="col-sm-12">
+				<span class='label label-table label-info' style="width: 100%;max-width: 100%;">左侧参数名后带红色*的为必填项，其他为可选项。移动鼠标到左侧参数名处可查看各参数的提示信息。<i></i></span>
+	        </div>
+	        
+    	</form>
+	</div>
+	
+	<script type="text/javascript">
+		var bxjPath = '$bxj_path';
+		(function() {
+													var sType = '$!model.showType' || location.hash.substring(1);
+													if (sType) {
+														document.getElementById('sel_showType').value=sType;
+													}
+												})();
+		var preview;
+		
+	</script>
+	<script type="text/javascript" src="$admin_path/res/media/js/app/banner/forwardType.js"></script>
+	
+</div>

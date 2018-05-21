@@ -1,0 +1,22 @@
+<!--头部分页及查询-->
+<div class="row-fluid">
+    <div class="span6">
+        <div id="DataTables_Table_0_length" class="dataTables_length">
+            <label>
+                <select name="size" aria-controls="DataTables_Table_0" value="$bean.size">
+                    <option value="1" #if (1==$bean.size) selected #end>1</option>
+                    <option value="2" #if (2==$bean.size) selected #end>2</option>
+                    <option value="3" #if (3==$bean.size) selected #end>3</option>
+                    <option value="4" #if (4==$bean.size) selected #end>4</option>
+                    <option value="10" #if (10==$bean.size) selected #end>10</option>
+                </select> 条每页
+            </label>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="dataTables_filter" id="DataTables_Table_0_filter">
+            <label>Search: <input type="text" aria-controls="DataTables_Table_0"></label>
+        </div>
+    </div>
+    <input type="hidden" name="index" value="$bean.index">
+</div>

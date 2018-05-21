@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		#set($static_path = ${configuration.getProperty("urlPath","static_path")})
+    	#set($bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="format-detection" content="telephone=no">
+		<title>$!mainRel.planProductMain.cpjc</title>
+		<meta name="keywords" content="计划书">
+		<meta name="description" content="计划书">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css?v=100">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/planbook_finish/css/planbook_finish.css?v=20161124">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/planbook_finish/css/rangeslider.css">
+		<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js?v=92"></script>
+		<script src="$static_path/bxj_three/public/js/flexible.js?v=92"></script>
+        <script src="$static_path/bxj_three/static/planbook_finish/js/rangeslider.min.js"></script>		
+		<script>var bxj_path = '$bxj_path', static_path = '$static_path';</script>
+		<script src="$static_path/bxj_three/public/js/public.js?v=92"></script>
+		<!--[if lt IE 9]>
+		    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+		<![endif]-->
+		<script src="$static_path/index/js/share.js?v=92"></script>
+		<script src="$static_path/bxj_three/static/planbook_finish/js/final.js?v=172"></script>
+        <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+        <script>
+        	var _share = {title: '$!mainRel.planProductMain.cpjc'+'计划书演示',desc: '$!userCard.name 为您设计的专属保险计划书，请查阅！保险——让生活更美好',image: '$static_path/$!mainRel.planProductMain.img',location: '$bxj_path/plan/detail${plan.fid}.page?share=1&hd=1&customerId=$!customerId'};
+            var weixin = new WeiXinBridge(true);
+            weixin.config({
+                url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+                api: [weixin.Share.api.all],
+                success: function() {
+                    weixin.share({
+                        title: _share.title,
+                        desc: _share.desc,
+                        imgUrl: _share.image,
+                        link: location.href.split('#')[0]
+                    });
+                }
+            });
+            #if($hasBonus)
+            var _profit= eval('$!profitJson'),_profit_age=$!plan.age,_profit_index=0;
+            #end
+			setShareInfo(_share);
+			var _date='$!date.format('yyyy-M-d',$!plan.ctime)';
+		</script>
+	</head>
+<!--导航 结束-->
+<div class="greyDiv" id="greyDiv" style="display:none"></div>
+<div class="show_block" id="show_product_infos" style="display:none;">
+	<h1></h1>
+	<div class="main_div" id="main_div">
+	</div>
+	<span class="show_block_button">确定</span>
+</div>
+#if($hasVoice)
+<audio id="bgMusic" src="$static_path/$!voice.voiceUrl"></audio>
+<div class="mubtn"></div>
+#end
+<body>
+	<!--导航 开始-->
+	#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+		<header class="head">
+			<a class="header_left" href="javascript:history.back(-1);"></a>
+			<h1>$!mainRel.planProductMain.cpjc</h1>
+			<a href="javacript:void(0);" class="header_right_shareicon"></a>
+		</header>
+		<div class="header_heightblock"></div>
+	#end
+	<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+	<!--导航 结束-->
+	<!-- 信封蒙层 -->
+	#if($intell==false)
+	<div class="cover_block">
+		<div class="cover_div">
+			<div class="top_block">
+				<p class="Cyear tb-rl date_p"></p>
+				<p class="Cdate tb-rl date_p"></p>
+				<p class="tb-rl name_p">$!mainRel.planProductMain.cpjc</p>
+				#if($hasCover)
+					#foreach($cv in $covers)
+						<p class="tb-rl text_p">$!cv</p>
+					#end
+				#else
+				<p class="tb-rl text_p">是保障</p>
+				<p class="tb-rl text_p">也是投资</p>
+				<p class="tb-rl text_p">更是永不止息的爱</p>
+				#end
+			</div>
+			<div class="bottom_block">
+				<p class="addressee">敬呈<span> #if($!plan.author!='')  $!plan.author #else 投保人 #end</span></p>
+				<span class="open_button">亲启</span>
+				<p class="sender"><span>#if($cardFlag) $!userCard.name #end</span>敬上</p>
+			</div>
+		</div>
+		<p class="number_p">5</p>
+	</div>
+	#end
+	<!-- 信封蒙层 结束-->
+	#parse("plan/final_${mainRel.planProductMain.genpage}.vm")	
+	<div class="result_block ul_block">
+			<ul>
+				<li class="" onclick="javascript:window.location.href='$bxj_path/plan/product_info.page?pid=$!plan.pid&hd=$!request.getParameter('hd')';">
+					<span class="product_span">产品详情</span>
+				</li>
+			</ul>
+		</div>
+		#if($intell==false)
+		<div class="result_block comment_block">
+			<form id="customerPlanInfos">
+			<div>亲，<span>$!userCard.name</span>为您做的计划书还满意吗？</div>
+			#if($appearKonw)
+			<a class="comment_button customer_click knowmore greybutton" data-flag="1">$!userCard.name会尽快和您联系</a>			
+			#else
+			<a class="comment_button customer_click knowmore" data-flag="1" data-username="$!userCard.name">详细了解</a>			
+			#end
+			#if($appearThink)
+			<a class="comment_button customer_click later greybutton" data-flag="2">感谢您的评价</a>
+			#else
+			<a class="comment_button customer_click later" data-flag="2">再考虑一下</a>			
+            #end
+            <input type="hidden" name="customerId" value="$!customerId" />
+            <input type="hidden" name="bookId" value="$!plan.fid" />
+            <input type="hidden" name="readStatus" value="1" />
+            <input type="hidden" name="flag" value="1" />
+            <input type="hidden" name="name" value="$!plan.author" />
+            <input type="hidden" name="userId" value="$!plan.userId" />
+            <input type="hidden" name="bookName" value="$!mainRel.planProductMain.cpjc" />
+            <input type="hidden" name="date" value="$!date.format('M月d日',$!plan.ctime)" />
+            </form>
+		</div>
+		#end
+		<p class="notice_p">演示数据仅供参考，具体请以实际为准。</p>
+	</div>
+	<input type="hidden" id="sharepara" value="$!request.getParameter('share')"/>
+	#if($intell==false)
+	#if($cardFlag)
+	<div class="author_block">
+		<div class="headimg_block">
+			#if($userCard.photo)
+				<img src="$!userCard.photo" />
+			#else
+				<img src="$static_path/bxj_three/static/namecard_share/image/headimg_bg.png">
+			#end		
+		</div>
+		<div class="name_block">
+			<span>$!userCard.name</span>
+		</div>
+		<a class="telphone_block" data-href="tel:$!userCard.phone">
+			<span>$!userCard.phone</span>
+		</a>
+		<div class="namecard_block" data-href="$bxj_path/planUserCard/$userCard.fid/shareUserCard.page">
+			<span>查看名片</span>
+		</div>
+	</div>	
+	#else
+		#if(!$request.getParameter('share')||$request.getParameter('share')=='')
+		<div class="no_author_block">
+		<div class="headimg_block">
+		</div>
+		<div class="name_block">
+			<span>您还没有名片！</span>
+		</div>
+		<!--<div class="button_block" onclick="window.locaton.href='$bxj_path/planUserCard/$userCard.fid/shareUserCard.page';">创建名片</div>-->
+		</div>
+		#end
+	#end
+	#end
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+	 })();
+</script>
+	</body>	
+</html>

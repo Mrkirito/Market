@@ -1,0 +1,10 @@
+##<script type="text/javascript">
+##    window.location.href = "http://admin.hangjia.com";
+##</script>
+
+<a href="http://admin.hangjia.com" target="_blank" style="font-size:16px;color:green;">全屏查阅</a>
+
+<iframe src="http://admin.hangjia.com" width="1600" height="800" scrolling="yes">
+
+
+</iframe>

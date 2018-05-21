@@ -1,0 +1,143 @@
+#set($header_params = {"title":"$model.name", "css":["index/css/style.css", "free/css/free.css", "free/css/free10.css"]})
+#bxj_header($header_params)
+
+<div class="greyDiv" style="display: none;z-index: 999"></div>
+<!--input框内容-->
+<div class="div_yl" style="display:none;">
+        
+         <div class="div_yl_over">
+         <img class="close" onclick="closel()" src="$static_path/free/10/close_icon.png">
+             <p class="div_yl_over_p p01"><input class="div_self_ipt" id="name" name="name" type="text" placeholder="请输入您的姓名"/></p>
+             <p class="div_yl_over_p"><input class="div_self_ipt" id="phone" name="phone" maxlength="11" type="tel" placeholder="请输入您的手机号码" /></p>
+             <p class="div_yl_over_p"><input class="div_self_ipt"  id="idcard" name="idcard" maxlength="18" type="text" placeholder="请输入您的身份证号" /></p>
+             <input type="hidden" value="${shareId}" id="shareId">
+				<input type="hidden" value="$request.getParameter('pid')" id="pid">
+             <input class="btn_self" type="button" value="立即领取" id="div_submit" /><br/>
+         </div>
+</div>
+
+#if(!$request.getParameter('hd'))
+<!-- 导航 开始 -->
+<header class="head">
+	<a class="header_left" href="javascript:history.go(-1);"></a>
+    <h1>$model.name</h1>
+    <a class="header_right" href="javascript:;"></a>
+</header>
+
+<div class="morebutton">
+    <div>
+        <a href="plan/index.page" class="syico">首页</a>
+        <a href="javacript:void(0);" class="fenxico">分享</a>
+    </div>
+</div>
+#end
+<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+<div class="container">
+	
+
+	<div class="content">
+		<div class="div_top_img">
+			<img src="$static_path/free/10/top_img_02.png">
+			<img src="$static_path/free/10/top_img_03.png">
+			<img src="$static_path/free/10/top_img_04_02.png">
+			<img src="$static_path/free/10/top_img_06.png">
+		</div>
+		
+		<div class="pro_details">
+			<div class="table_div">
+				<table>
+					<tbody>
+						<tr>
+							<td class="title">保障期间</td>
+							<td>1年</td>
+						</tr>
+						<tr>
+							<td class="title">保障年龄</td>
+							<td>18-80岁</td>
+						</tr>
+						<tr>
+							<td class="title">保障责任</td>
+							<td>民航意外</td>
+						</tr>
+						<tr>
+							<td class="title">保额</td>
+							<td>100万</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				
+				<div style="text-align: center;margin-top: 10px;margin-bottom: 5px;">
+					<a href="javascript:open();">
+				 		<img src="$static_path/free/151/asb-bt.png" width="166">
+				 	</a>
+				</div>
+			</div>
+		</div>
+	
+		<div class="div_btm">
+            <!--背景小图-->
+            <!--<div class="div_btm_img">-->
+            <img class="div_img_balloon" src="$static_path/free/10/bg_img_02.png" alt="">
+            <img class="div_bg_img" src="$static_path/free/10/bg_img_06.png" alt="">
+            <img class="div_btm_img" src="$static_path/free/10/bg_img_10.png" alt="">
+            <!--</div>-->
+            <div class="div_btm_over">
+                <p>保险责任</p>
+                保障被保险人以乘客身份踏入民航班机的舱门起至抵达目的地走出民航班机的舱门止发生的意外身故、残疾。遭受意外伤害身故的，一次性给付身故保险金100万元；残疾的，根据残疾程度给付，最高100万元。
+                <br>国家法定假日期间，产品承保时间会相应的顺延，具体承保时间请以承保短信为准！
+            </div>
+        </div>
+	</div>
+</div>
+
+#set( $footer_params = ["index/js/layer.m.js", "index/js/Messager.js", "index/js/ajax.js", "free/js/mfree.js?v=201603078", "index/js/share.js?v=201603078"])
+#bxj_footer($footer_params)
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$model.shareTitle',
+                desc: '$!model.shareDesc',
+                imgUrl: '$static_path/free/share_${model.id}.jpg',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+	var s = {
+		title: '$model.shareTitle',
+		desc: '$!model.shareDesc',
+		image: '$static_path/free/share_${model.id}.jpg',
+		location: '$bxj_path/free/getFreeInsuranceDetails.page?shareId=${shareId}&pid=$request.getParameter("pid")&hd=1'
+	};
+	
+	setShareInfo(s);
+	
+</script>
+
+<script>
+	$(".greyDiv").css("height",$("html").height());	
+	var top1 = ($(window).height() - $(".div_yl_over").height())/2;   
+    var left = ($(window).width() - $(".div_yl_over").width())/2;   
+	function open() {
+		var scrollTop = $(document).scrollTop();   
+	    var scrollLeft = $(document).scrollLeft(); 
+		$("body").css("overflow","hidden");
+		$(".div_yl_over").css( { position : 'absolute', 'top' : top1 + scrollTop} );
+		$(".div_yl").show();
+		$(".greyDiv").show();
+	}
+	
+	function closel() {
+		$("body").css("overflow","auto");
+		$(".div_yl").hide();
+		$(".greyDiv").hide();
+	}
+	
+</script>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.KnowledgeDao">
+
+	<!-- 知识 学习版块 -->
+	
+	<resultMap type="com.hangjia.bxj.model.Knowledge" id="Knowledge">
+		<id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="imageURL" column="image_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="title" column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="text" column="text" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="tags" column="tags" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="location" column="location" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+		<result property="weight" column="weight" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="BIT" />
+		
+		<result property="studyTypeID" column="study_typeid" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="typeName" column="type_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="isRead" column="is_read" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<!-- 查询“知识”条目 提供app接口-->
+	<select id="list" resultMap="Knowledge">
+	SELECT
+		id,
+		image_url,
+		title,
+		text,
+		tags,
+		location
+	FROM
+		knowledge
+	WHERE
+		`status` = 0 and  location!='noSet'
+	ORDER BY
+		weight DESC, id DESC,modify_at desc
+	LIMIT #{0, javaType=int, jdbcType=INTEGER}, #{1, javaType=int, jdbcType=INTEGER}
+	</select>
+	
+	<!-- 查询总数 -->
+	<select id="total" resultType="int" parameterType="java.util.Map" >
+	SELECT
+		COUNT(id)
+	FROM
+		knowledge kn
+	WHERE
+		kn.`status` = 0 
+		<if test="noSet != null">
+		   AND  kn.location!='noSet'
+		</if>
+		<if test="isRead != null"> <!--学习 未读数量 -->
+		  AND  is_read=#{isRead, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="selknowByPK" resultMap="Knowledge" parameterType="java.lang.Integer">
+	SELECT
+		id,
+		image_url,
+		title,
+		text,
+		tags,
+		location,
+		weight
+	FROM
+		knowledge
+	WHERE
+		`status` = 0
+	AND id = #{id,jdbcType=INTEGER}
+	
+	</select>
+	
+	<!-- 后台 -->
+	<select id="konwlist" resultMap="Knowledge" parameterType="java.util.Map"> 
+	SELECT
+		id,
+		image_url,
+		title,
+		text,
+		tags,
+		location,
+		create_at,
+		weight
+	FROM
+		knowledge
+	WHERE
+		`status` = 0
+	    <if test="text != null">
+            AND text like CONCAT(CONCAT('%', #{text}), '%')
+        </if>
+		<if test="isRead != null">
+		  AND   is_read=#{isRead, jdbcType=INTEGER}
+		</if>
+	ORDER BY
+		weight DESC, id DESC
+	 <if test="start != null and pageSize != null">
+      LIMIT #{start},#{pageSize}
+     </if>
+	</select>
+	
+   <insert id="insert" parameterType="com.hangjia.bxj.model.Knowledge" >
+    insert into knowledge (title, image_url, 
+      text, tags, location, create_at,
+      weight
+      )
+    values (#{title,jdbcType=VARCHAR}, #{imageURL,jdbcType=VARCHAR}, 
+      #{text,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{weight,jdbcType=INTEGER}
+      )
+  </insert>
+	
+	<update id="updateByPKSelective" parameterType="com.hangjia.bxj.model.Knowledge" >
+     update  knowledge 
+    <set >
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageURL != null" >
+        image_url = #{imageURL,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        modify_at=now(),
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+       <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="isRead != null">
+		  is_read=#{isRead, jdbcType=INTEGER},
+	  </if>
+    </set>
+     where id = #{id,jdbcType=INTEGER}
+   </update>
+   
+   <!-- 知识列表 -->
+     <resultMap id="KnowledgeList" type="com.hangjia.bxj.model.Knowledge" extends="Knowledge" >
+		<!-- 图片集合 -->
+		<collection property="imgResults" ofType="com.hangjia.bxj.model.KonwImg"  resultMap="imgResultMap" columnPrefix="stuimg_"/>
+	</resultMap>
+	
+	<!-- 图片 -->
+	 <resultMap type="com.hangjia.bxj.model.KonwImg" id="imgResultMap">
+	     <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+         <result column="status" property="status" jdbcType="TINYINT" />
+         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+   <!-- 查询所有知识列表 -->
+   <select id="listAll" resultMap="KnowledgeList" parameterType="java.util.Map">
+		 SELECT
+			kn.id,
+			text,
+			kn.create_at AS createAt,
+			location,
+			is_read,
+	    img.image_url AS stuimg_image_url,
+	    stutype.type_name AS typeName
+		FROM
+			knowledge kn
+	  LEFT JOIN study_konw_img img ON  img.knowID=kn.id
+	  LEFT JOIN study_type stutype ON stutype.id=kn.study_typeid
+		WHERE
+			kn.`status` = 0 and  kn.location!='noSet'
+		<if test="isRead != null">
+		  AND   is_read=#{isRead, jdbcType=INTEGER}
+		</if>
+		ORDER BY
+			kn.weight DESC, kn.id DESC, kn.modify_at desc
+	  
+      <if test="start != null and end != null" >
+           LIMIT #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+       </if>
+	</select>
+	
+   
+</mapper>

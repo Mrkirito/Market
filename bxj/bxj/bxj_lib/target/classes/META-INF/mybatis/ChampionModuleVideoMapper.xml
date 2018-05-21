@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionModuleVideoMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionModuleVideo" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="module_id" property="moduleId" jdbcType="BIGINT" />
+    <result column="video_id" property="videoId" jdbcType="BIGINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, module_id, video_id, sort, create_user, create_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_module_video
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_module_video
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionModuleVideo" >
+    insert into champion_module_video (fid, module_id, video_id, 
+      sort, create_user, create_at
+      )
+    values (#{fid,jdbcType=BIGINT}, #{moduleId,jdbcType=BIGINT}, #{videoId,jdbcType=BIGINT}, 
+      #{sort,jdbcType=INTEGER}, #{createUser,jdbcType=BIGINT}, #{createAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionModuleVideo" >
+    insert into champion_module_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="moduleId != null" >
+        module_id,
+      </if>
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="moduleId != null" >
+        #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionModuleVideo" >
+    update champion_module_video
+    <set >
+      <if test="moduleId != null" >
+        module_id = #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null" >
+        video_id = #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionModuleVideo" >
+    update champion_module_video
+    set module_id = #{moduleId,jdbcType=BIGINT},
+      video_id = #{videoId,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

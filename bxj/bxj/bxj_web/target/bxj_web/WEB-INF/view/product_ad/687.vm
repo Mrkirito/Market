@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		#set($static_path = ${configuration.getProperty("urlPath","static_path")})
+    	#set($bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="format-detection" content="telephone=no">
+		<title>$!product.cpjc计划书演示</title>
+		<meta name="keywords" content="计划书">
+		<meta name="description" content="计划书">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css?v=100">		
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/product_ad/css/edmond.css?v=161">
+		<script type="text/javascript" src="$static_path/bxj_three/public/js/flexible.js"></script>
+	</head>
+	<body>
+	#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+		<header class="head">
+			<a class="header_left" href="javascript:history.back(-1);"></a>
+			<h1>$!product.cpjc计划书演示</h1>
+			<a href="javacript:void(0);" class="header_right_shareicon fenxico"></a>
+		</header>
+		<div class="header_heightblock"></div>
+	#end
+    <div class="container container_edmond">
+		<div class="img01"></div>
+		<div class="img02">
+            <dl class="case">
+                <dt>案例：</dt>
+                <dd>
+					周女士，30岁，某公司员工，已参加社会医疗保险。希望再补充高性价比，保障全面的保障计划。周女士选择购买了平安万福安康保障套餐，首年保费人民币11604元。
+                </dd>
+            </dl>
+        </div>
+		<div class="img03">
+        </div>
+        <div class="img04">
+			#if(!$request.getParameter('share')||$request.getParameter('share')=='')
+            <div class="link">
+                <a class="link-security">详细保障利益</a>
+                <a class="link-more">想要更多险种组合？猛戳</a>
+			</div>
+			#else
+            <div class="link share">
+                <a class="link-security">详细保障利益</a>
+			</div>
+			#end
+        </div>	
+	</div>
+	#**<div class="container container_laobaoCard">
+		<div class="img01"></div>
+		<div class="img02">
+			<a class="words_a">参考话术</a>
+			#if(!$request.getParameter('share')||$request.getParameter('share')=='')<a class="group_a">想要更多险种组合？猛戳</a>#end
+		</div>
+	</div>*#
+    <!-- security -->
+    <div class="security-box">
+
+        <div class="security">
+            
+            <div class="security-title">保障详情</div>        
+            
+            <div class="security-content">
+
+                <div class="security-show">
+                
+                    <div class="security-item">
+                        
+                        <div class="security-name">
+                            <span>不怕意外</span>
+                        </div>
+                        
+                        <div class="security-list">
+                            <ul>
+                                <li>自驾车、公共交通意外给付保障<span>100+100=200万元</span></li>
+                                <li>公共交通意外给付保障<span>100+100=200万元</span></li>
+                                <li>航空意外给付保障<span>100+100=200万元</span></li>
+                                <li>意外保障（意外身故）<span>75万元</span></li>
+                                <li>意外伤残保障<span>3.5-35万元</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+
+                    <div class="security-item">
+                        
+                        <div class="security-name">
+                            <span>无惧重疾</span>
+                        </div>
+                        
+                        <div class="security-list">
+                            <ul>
+                                <li>身价保障（疾病身故）<span>32.8万元</span></li>
+                                <li>重大健康疾病保障<span>29万元</span></li>
+                                <li>轻度重疾保障<span>58000元</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+
+                    <div class="security-item">
+                        
+                        <div class="security-name">
+                            <span>安心住院</span>
+                        </div>
+                        
+                        <div class="security-list">
+                            <ul>
+                                <li>住院医疗保障<span>20万元/年</span></li>
+                                <li>按床位费、膳食费、治疗费、检查检测费、手术费、护理费、救护车使用费、药品费</li>
+                                <li>其中药品费限额<span>10万元/年</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+
+                    <div class="security-item">
+                        
+                        <div class="security-name">
+                            <span>特殊门诊</span>
+                        </div>
+                        
+                        <div class="security-list">
+                            <ul>
+                                <li>特殊门诊医疗<span>8万元/年</span></li>
+                                <li>门诊肾透析</li>
+                                <li>门诊癌症电疗，放化疗</li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+
+                    <div class="security-item">
+                        
+                        <div class="security-name">
+                            <span>补充养老</span>
+                        </div>
+                        
+                        <div class="security-list">
+                            <ul>
+                                <li>豁免免费保障  <span>1487元/年</span></li>
+                                <li>补充养老保障（满期生存金+平安福现金价值）</li>
+                                <li>70岁  <span>229836元</span></li>
+                                <li>80岁  <span>262351元</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+                <div class="security-btn">
+                    <span class="btn">关闭</span>
+                </div>
+
+            </div>
+        
+        </div>
+
+    </div>
+    <!-- security end -->
+	
+	#if($request.getParameter('share'))
+    <div class="pop download-pop">
+        <div class="left">
+            <bdo></bdo>
+            <div class="download-infor">
+                <b>下载保险家</b>
+                <span>直达客户 直达专家</span>
+            </div>
+        </div> 
+        <div class="right">
+            <a class="download-btn"  href="http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster">立即体验</a>
+        </div> 
+    </div>
+	#else
+    <div class="pop make">
+        <a class="gotoplanbook" href="$bxj_path/plan/make${fid}.page?hasad=1&hd=$request.getParameter('hd')">马上去做计划书</a>
+    </div>
+    <!-- spicilegium -->
+    <div class="spicilegium">
+        <div class="security-title">信息搜集</div>
+        <div class="spicilegium-content">
+            <p>请留下您的联系方式与想组合的险种<br/>保险家客服会在一周内联系您~</p>
+            <ul>
+				<form id="form">
+                <li>
+                    <label>险种组合</label>
+                    <div class="input-text">
+                        <input type="text" placeholder="请输入险种组合" name="gname"/>
+                    </div>
+                </li>
+                <li>
+                    <label>联系方式</label>
+                    <div class="input-text">
+                        <input placeholder="请输入手机号" value="$!userCard.phone" name="phone" type="tel" maxlength="11" />
+                    </div>
+                </li>
+                </form>
+            </ul>
+            <div class="spicilegium-btn">
+                <a class="btn button_cancel">取消</a>
+                <a class="btn button_submit">提交</a>
+            </div>
+        </div>            
+    </div>
+	#end
+    <!-- masks -->
+    <div class="masks"></div>
+</body>
+</html>
+<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js?v=98"></script>
+<script src="$static_path/bxj_three/public/js/public.js?v=92"></script>
+<script type="text/javascript" src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script>var bxj_path = '$bxj_path', static_path = '$static_path',zxPid='$!product.fid';</script>
+<!--[if lt IE 9]>
+<script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+<![endif]-->
+<script src="$static_path/index/js/share.js?v=92"></script>
+<script src="$static_path/bxj_three/static/product_ad/js/laobaoCard.js?v=12"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var _share = {
+		title : '平安万福安康组合',
+		desc : '帝皇级的保障，为您提供真正的保护伞，守住人生风险',
+		image : '$static_path/bxj_three/static/product_ad/image/edmond/687.png',
+		location : '$bxj_path/plan/detail/ad/${fid}.page?share=1&hd=1'
+	};
+	var weixin = new WeiXinBridge(true);
+	weixin.config({
+		url : 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+		api : [ weixin.Share.api.all ],
+		success : function() {
+			weixin.share({
+				title : _share.title,
+				desc : _share.desc,
+				imgUrl : _share.image,
+				link : location.href.split('#')[0]
+			});
+		}
+	});
+	setShareInfo(_share);
+	
+$(function(){
+    var securityLink = $('.link-security'),
+        securityBox  = $('.security-box'),
+        securityBtn  = $('.security-btn'),
+
+        moreLink     = $('.link-more'),
+        spicilegium  = $('.spicilegium'),
+        cancelBtn    = $('.button_cancel'),
+        mask = $('.masks');
+    
+    // 详细保障利益 
+    securityLink.on('click', function(){
+        mask.fadeIn();
+        securityBox.fadeIn();
+    });
+
+    securityBtn.on('click', function(){
+        mask.fadeOut();
+        securityBox.fadeOut();
+    });
+
+    // 信息搜集
+    moreLink.on('click', function(){
+        mask.fadeIn();
+        spicilegium.fadeIn();
+    });
+
+    cancelBtn.on('click', function(){
+        mask.fadeOut();
+        spicilegium.fadeOut();
+    });
+
+    //快速点击绑定
+    FastClick.attach(document.body);
+});
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+	 })();
+</script>

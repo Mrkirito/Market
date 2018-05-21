@@ -1,0 +1,100 @@
+#set($header_params = {"title":"计划书", "css":["index/css/study.css"]})
+#bxj_header($header_params)
+<div class="container">
+    <div class="part1">
+        <!--头图像 logo图 start-->
+            
+<div id="headImage">                <a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032725&amp;idx=1&amp;sn=75df30e6f7f9fc5f41d26995ecd8745e#rd
+" ><img src="$!static_path/study/images/bg_01.jpg" style="width:100%;"></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032725&amp;idx=2&amp;sn=54acd4ff1270dc96122e39eaed4ef86d#rd
+" ><img src="$!static_path/study/images/bg_02.jpg" style="width:100%;"></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032725&amp;idx=3&amp;sn=0a8866ca70367df66f4c1f5db393e361#rd
+" ><img src="$!static_path/study/images/bg_03.jpg" style="width:100%;"></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032725&amp;idx=4&amp;sn=4f4aef08c6b42919414447f0947e7b7d#rd
+" ><img src="$!static_path/study/images/bg_04.jpg" style="width:100%;"></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032725&amp;idx=5&amp;sn=294c4cf8d1d7a8f1c4cdf6ed3d9c90be#rd
+" ><img src="$!static_path/study/images/bg_05.jpg" style="width:100%;"></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032816&amp;idx=1&amp;sn=97021858a22564ad2e13e46a8f9e1d19#rd
+" ><img src="$!static_path/study/images/bg_06.jpg" style="width:100%;"></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032816&amp;idx=2&amp;sn=4e0e36cebf8b08f3dd30ec0b4e3b1a49#rd
+" ><img src="$!static_path/study/images/bg_07.jpg" style="width:100%;"></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032816&amp;idx=3&amp;sn=0e9ee1ee3eb88fededff2314f8e442f8#rd
+" ><img src="$!static_path/study/images/bg_08.jpg" style="width:100%;"></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032816&amp;idx=4&amp;sn=03039bb67185a9149da9d7b82a5ba60a#rd
+" ><img src="$!static_path/study/images/bg_09.jpg" style="width:100%;"></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTYyODk1OA==&amp;mid=412032816&amp;idx=5&amp;sn=20eff016706a6ebe3bce52d800e6daf0#rd
+" ><img src="$!static_path/study/images/bg_10.jpg" style="width:100%;"></a>
+            </div>
+    </div>
+</div>
+#bxj_footer($footer_params)
+<!--底部 结束-->
+<script>
+    //表格居中
+    var disease=document.getElementsByClassName("disease");
+    var lastTable=document.getElementById("lastTable");
+    var cost=document.getElementsByClassName("cost");
+    var detail=document.getElementsByClassName("details");
+    var risk=document.getElementsByClassName("risk");
+    var firstline_word=document.getElementsByClassName("firstline_word");
+    var secondline_word=document.getElementsByClassName("secondline_word");
+    var thirdline_word=document.getElementsByClassName("thirdline_word");
+    var secondCorses_word=document.getElementsByClassName("secondCorses_word");
+    var title=document.getElementsByClassName("title");
+    var details=document.getElementsByClassName("details");
+    var part1=document.getElementsByClassName("part1");
+    var lookMore=document.getElementsByClassName("lookMore");
+    for(i=0;i<disease.length-1;i++){
+        cost[i+1].style.height=disease[i+1].offsetHeight+"px";
+        detail[i].style.marginLeft=-detail[i].offsetWidth/2 + "px";
+        detail[i].style.marginTop=-detail[i].offsetHeight/2 + "px";
+    }
+    for(i=0;i<risk.length;i++){
+        risk[i].style.marginTop=-risk[i].offsetHeight/2 + "px";
+    }
+    //改变链接字体
+    for(i=0;i<lookMore.length;i++){
+        lookMore[i].style.fontSize="26px";//字体大小
+        lookMore[i].style.fontFamily="微软雅黑";//字体类型
+        lookMore[i].style.color="#fff";//字体颜色
+    }
+    //改变主题背景色
+    //part1[0].style.background="#47b5fc";
+
+    for(i=0;i<firstline_word.length;i++){
+        firstline_word[i].style.fontSize="12px";//字体大小
+        firstline_word[i].style.fontFamily="Hiragino Sans GB";//字体类型
+        firstline_word[i].style.color="#000";//字体颜色
+    }
+    //改变第二列字体
+    for(i=0;i<secondline_word.length;i++){
+        secondline_word[i].style.fontSize="11px";//字体大小
+        secondline_word[i].style.fontFamily="Hiragino Sans GB";//字体类型
+        secondline_word[i].style.color="#666666";//字体颜色
+    }
+    //改变第三列字体
+    for(i=0;i<secondline_word.length;i++){
+        thirdline_word[i].style.fontSize="12px";//字体大小
+        thirdline_word[i].style.fontFamily="Hiragino Sans GB";//字体类型
+        thirdline_word[i].style.color="#000";//字体颜色
+    }
+    //改变提示语字体
+    for(i=0;i<secondCorses_word.length;i++){
+        secondCorses_word[i].style.fontSize="13px";//字体大小
+        secondCorses_word[i].style.fontFamily="Hiragino Sans GB";//字体类型
+        secondCorses_word[i].style.color="#FFF";//字体颜色
+    }
+    //改变案例标题字体
+    for(i=0;i<title.length;i++){
+        title[i].style.fontSize="12px";//字体大小
+        title[i].style.fontFamily="Hiragino Sans GB";//字体类型
+        title[i].style.color="#000";//字体颜色
+    }
+    //改变案例内容字体
+    for(i=0;i<details.length;i++){
+        details[i].style.fontSize="12px";//字体大小
+        details[i].style.fontFamily="Hiragino Sans GB";//字体类型
+        details[i].style.color="#666666";//字体颜色
+    }
+</script>
+<!--底部 结束-->

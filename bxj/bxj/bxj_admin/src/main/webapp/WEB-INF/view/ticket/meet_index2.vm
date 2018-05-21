@@ -1,0 +1,95 @@
+$pageModule.init("app/ticket/ticket22", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>支付时间&nbsp;</label>
+								<input type="text" class="form-control reportTime" value="">
+								<input type="hidden" class="startTime" value=""/>
+                                <input type="hidden" class="endTime" value=""/>
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>会议名称&nbsp;</label>
+								<select class="form-control" name="basicId">
+                                    <option value="">请选择</option>
+									#foreach($s in $surplusTickets)
+                                        <option value="$!s.basicId">$!s.activityName</option>
+									#end
+                                </select>
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>参会状态&nbsp;</label>
+								<select class="form-control" name="attendState">
+                                    <option value="">请选择</option>
+                                    <option value="1">已全填写</option>
+									<option value="2">待补填</option>
+                                </select>
+                            </div>
+							#if($salemans.size()>1)
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>销售人员&nbsp;</label>
+    								<select class="form-control channelId">
+                                        <option value="">请选择</option>
+    									#foreach($man in $salemans)
+                                            <option value="$!man.fid">$!man.name</option>
+    									#end
+                                    </select>
+                            </div>
+							#else
+								#foreach($man in $salemans)
+									<input class="channelId" type="hidden" value="$!man.fid" /> 
+								#end
+							#end	
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>支付方式&nbsp;</label>
+								<select class="form-control" name="payType">
+                                    <option value="">请选择</option>
+                                    <option value="1">微信支付</option>
+									<option value="2">支付宝支付</option>
+									<option value="3">线下支付</option>
+                                </select>
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>购买人电话&nbsp;</label>
+								<input type="text" class="form-control" name="customerTel">
+							</div>
+							<!--
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>支付订单号&nbsp;</label>
+								<input type="text" class="form-control" name="orderNo">
+							</div>-->
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>订单ID&nbsp;</label>
+								<input type="text" class="form-control" name="orderId">
+							</div>
+							<div class="form-group col-md-1 col-xs-12">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+																				<div class="form-group col-md-1 col-xs-12">
+								 <button class="btn btn-primary clear-action">清空</button>
+													</div>
+						</div>
+						<!--
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                            </div>
+                        </div>
+						-->
+                    </div>
+                </div>
+            </div>
+			<div class="data-list2"></div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+</div>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.znb.cms.dao.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.znb.cms.model.mapper.Employee" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="card_type_id" property="cardTypeId" jdbcType="INTEGER" />
+    <result column="cardNo" property="cardno" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="vocation" property="vocation" jdbcType="INTEGER" />
+    <result column="isurant_id" property="isurantId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, card_type_id, cardNo, gender, birthday, vocation, isurant_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dt_employee
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dt_employee
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.znb.cms.model.mapper.Employee" >
+    insert into dt_employee (id, name, card_type_id, 
+      cardNo, gender, birthday, 
+      vocation, isurant_id)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{cardTypeId,jdbcType=INTEGER}, 
+      #{cardno,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{vocation,jdbcType=INTEGER}, #{isurantId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.znb.cms.model.mapper.Employee" >
+    insert into dt_employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="cardTypeId != null" >
+        card_type_id,
+      </if>
+      <if test="cardno != null" >
+        cardNo,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="vocation != null" >
+        vocation,
+      </if>
+      <if test="isurantId != null" >
+        isurant_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTypeId != null" >
+        #{cardTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="cardno != null" >
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="vocation != null" >
+        #{vocation,jdbcType=INTEGER},
+      </if>
+      <if test="isurantId != null" >
+        #{isurantId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.znb.cms.model.mapper.Employee" >
+    update dt_employee
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTypeId != null" >
+        card_type_id = #{cardTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="cardno != null" >
+        cardNo = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="vocation != null" >
+        vocation = #{vocation,jdbcType=INTEGER},
+      </if>
+      <if test="isurantId != null" >
+        isurant_id = #{isurantId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.znb.cms.model.mapper.Employee" >
+    update dt_employee
+    set name = #{name,jdbcType=VARCHAR},
+      card_type_id = #{cardTypeId,jdbcType=INTEGER},
+      cardNo = #{cardno,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      vocation = #{vocation,jdbcType=INTEGER},
+      isurant_id = #{isurantId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="selectOrderEmployee" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select <include refid="Base_Column_List" /> from dt_employee where 1 = 1 
+ 	<if test="employeeIds != null and employeeIds.length>0">
+		and id in
+		<foreach collection="employeeIds" item="employeeId" open="(" close=")" separator=",">
+            #{employeeId}
+        </foreach>
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.usst.market.mapper.TeacherToolMapper">
+	<!-- 更新竞赛名称 -->
+	<update id="updateCompetitionNameByPrimaryKey" parameterType="cn.usst.market.po.Competition">
+		update competition
+		set name = #{name,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 更新竞赛的isLock属性 -->
+	<update id="updateCompetitionIsLockByPrimaryKey" parameterType="cn.usst.market.po.Competition">
+		update competition
+		set isLock = #{isLock,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 查找竞赛每季度时间 -->
+	<select id="findQuarterTimeByCompetitionId" parameterType="java.lang.Integer" resultType="cn.usst.market.po.CompetitionQuarterTime">
+		select competition_quarter_time.* from competition_quarter_time
+		where competition_quarter_time.competition_id=#{value}
+	</select>
+	
+	<!-- 每季度是否可以过期提交 -->
+	<update id="updateAllowSubmitByCompetitionId" parameterType="cn.usst.market.po.CompetitionQuarterTime">
+		update competition_quarter_time
+		set is_allow_overdue_submit = #{isAllowOverdueSubmit,jdbcType=VARCHAR}
+		where competition_id = #{competitionId,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 更新竞赛中每个队伍的人数 -->
+	<update id="updateCompetitionMemberByPrimaryKey" parameterType="cn.usst.market.po.Competition">
+		update competition
+		set member = #{member,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- resultMap的定义 -->
+	<resultMap type="cn.usst.market.po.TeacherQueryVo" id="companyListMap">
+		<id column="id" />
+		<result column="memberCount" property="memberCount" />
+		<!-- 多个书的信息,使用collection映射 association映射到单个pojo中 collection映射到集合中 -->
+		<association property="company" javaType="cn.usst.market.po.Company">
+			<result column="id" property="id" />
+			<result column="serial_number" property="serialNumber" />
+			<result column="name" property="name" />
+			<result column="license" property="license" />
+			<result column="competition_id" property="competitionId" />
+			<result column="people_number" property="peopleNumber" />
+		</association>
+	</resultMap>
+
+	<!-- 教员工具箱 -->
+	<!-- 根据竞赛ID找公司集合 -->
+	<select id="findCompanyListByCompetitionId" parameterType="java.lang.Integer"
+		resultMap="companyListMap">
+		SELECT company.*,count(company_id) as memberCount
+		from (select company.* from company
+		where company.competition_id=#{value})as company
+		LEFT JOIN member
+		on company.id=member.company_id
+		group by company.id
+	</select>
+
+	<!-- <select id="findCompanyListByCompetitionId" parameterType="java.lang.Integer" 
+		resultType="cn.usst.market.po.Company"> select company.* from company where 
+		competition_id=#{value} </select> -->
+
+	<!-- 更新团队人数 -->
+	<update id="updateCompanyPeopleNumberByCompetitionId"
+		parameterType="cn.usst.market.po.Company">
+		update company
+		set people_number = #{peopleNumber,jdbcType=INTEGER}
+		where competition_id = #{competitionId,jdbcType=INTEGER}
+
+	</update>
+
+	<!-- 批次注册，根据竞赛ID找公司和成员 -->
+	<resultMap type="cn.usst.market.po.TeacherQueryVo" id="companyAndMemberListMap">
+		<id column="id" />
+		<!-- <result column="memberCount" property="memberCount"/> -->
+		<association property="company" javaType="cn.usst.market.po.Company">
+			<result column="id" property="id" />
+			<result column="serial_number" property="serialNumber" />
+			<result column="name" property="name" />
+			<result column="license" property="license" />
+			<result column="competition_id" property="competitionId" />
+			<result column="people_number" property="peopleNumber" />
+		</association>
+		<collection property="memberList" ofType="cn.usst.market.po.Member">
+			<result column="memId" property="id" />
+			<result column="memName" property="name" />
+			<result column="memEmail" property="email" />
+			<result column="memAge" property="age" />
+			<result column="memGender" property="gender" />
+		</collection>
+	</resultMap>
+	<select id="findCompanyAndMemberListByCompetitionId"
+		parameterType="java.lang.Integer" resultMap="companyAndMemberListMap">
+		SELECT company.*,member.id as memID,member.name as memName,member.email as
+		memEmail,member.age as memAge,member.gender as memGender
+		from (select company.* from company
+		where company.competition_id=#{value})as company
+		LEFT JOIN member
+		on company.id=member.company_id
+		ORDER BY id,memID
+	</select>
+
+	<select id="deleteMemberById" parameterType="java.lang.Integer">
+		delete from member where id=#{value}
+	</select>
+
+	<select id="moveMemberToCompanyById" parameterType="cn.usst.market.po.Member">
+		update member
+		set company_id = #{companyId,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.InvitationCopyDao">
+
+	<insert id="save" parameterType="com.hangjia.bxj.model.InvitationCopy" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			invitation_copy(
+				copyuser_id,
+				copyid,
+				copymodel_type,
+				copyname,
+				copyguestname,
+				copydate_at,
+				copyaddress,
+				copycontact_name,
+				copycontact_mobile,
+				copytext,
+				copylng,
+				copylat,
+				map_img_url,
+				os,
+				versionCode,
+				versionName,
+				osVersion,
+				copyfloor_room
+			)
+		VALUES
+			(
+				#{userId, javaType=java.lang.Integer, jdbcType=INTEGER},
+				#{copyid, javaType=java.lang.Integer, jdbcType=INTEGER},
+				#{modelType, javaType=java.lang.Integer, jdbcType=INTEGER},
+				#{name, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{guestName, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{dateAt, javaType=java.util.Date, jdbcType=TIMESTAMP},
+				#{address, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{contactName, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{contactMobile, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{text, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{lng, javaType=java.lang.Double, jdbcType=DOUBLE},
+				#{lat, javaType=java.lang.Double, jdbcType=DOUBLE},
+				#{mapImgUrl, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{os, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{versionCode, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{versionName, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{osVersion, javaType=java.lang.String, jdbcType=VARCHAR},
+				#{floorRoom, javaType=java.lang.String, jdbcType=VARCHAR}
+			)
+	</insert>
+	
+	<select id="getInviteCopy" resultType="com.hangjia.bxj.model.InvitationCopy"  parameterType="com.hangjia.bxj.model.InvitationCopy" >
+		SELECT
+			fid,
+			copyid,
+			copyuser_id AS userId,
+			copyname AS name,
+			copydate_at AS dateAt,
+			copyaddress AS address, 
+			copycontact_name AS contactName,
+			copycontact_mobile AS contactMobile,
+			copytext AS text, 
+			copycreate_at AS createAt,
+			copylng AS lng,
+			copylat AS lat,
+			copymodel_type AS modelType,
+			copyguestname AS guestName,
+			map_img_url AS mapImgUrl,
+			copyfloor_room AS floorRoom
+		FROM
+			invitation_copy
+		WHERE
+			`status` = 0
+		  <if test="copyid != null " >
+		     AND
+              copyid= #{copyid, javaType=java.lang.Integer, jdbcType=INTEGER}
+          </if>
+		   ORDER BY fid DESC
+		   limit 1
+	</select>
+	
+	<select id="selInviteShareByID" resultType="com.hangjia.bxj.model.InvitationCopy"  parameterType="java.util.Map" >
+		SELECT
+			fid,
+			copyuser_id AS userId,
+			copyname AS name,
+			copydate_at AS dateAt,
+			copyaddress AS address, 
+			copycontact_name AS contactName,
+			copycontact_mobile AS contactMobile,
+			copytext AS text, 
+			copycreate_at AS createAt,
+			copylng AS lng,
+			copylat AS lat,
+			copymodel_type AS modelType,
+			copyguestname AS guestName,
+			map_img_url AS mapImgUrl,
+			copyfloor_room AS floorRoom,
+			browse_Num AS browseNum
+		FROM
+			invitation_copy
+		WHERE
+			fid = #{fid, javaType=java.lang.Integer, jdbcType=INTEGER}
+			 AND
+			`status` = 0
+		ORDER BY
+			fid DESC
+	</select>
+	
+	<!-- 查询单个分享邀请函数据 -->
+	<select id="getInviteCopyOne" resultType="com.hangjia.bxj.model.InvitationCopy"  parameterType="com.hangjia.bxj.model.InvitationCopy" >
+		SELECT
+			fid,
+			copyid,
+			copyuser_id AS userId,
+			copyname AS name,
+			copydate_at AS dateAt,
+			copyaddress AS address, 
+			copycontact_name AS contactName,
+			copycontact_mobile AS contactMobile,
+			copytext AS text, 
+			copycreate_at AS createAt,
+			copylng AS lng,
+			copylat AS lat,
+			copymodel_type AS modelType,
+			copyguestname AS guestName,
+			map_img_url AS mapImgUrl,
+			browse_Num AS browseNum,
+			copyfloor_room AS floorRoom
+		FROM
+			invitation_copy
+		WHERE
+			`status` = 0 and fid=#{fid, javaType=java.lang.Long, jdbcType=BIGINT}
+	</select>
+	<!-- 更新浏览次数 -->
+	<update id="updateInviteCopyCount" parameterType="com.hangjia.bxj.model.InvitationCopy">
+	UPDATE invitation_copy
+	 SET 
+		browse_Num = #{browseNum, javaType=java.lang.Integer, jdbcType=INTEGER},
+        browse_time = #{browseTime, javaType=java.util.Date, jdbcType=TIMESTAMP}
+	 WHERE 
+		  fid = #{fid, javaType=java.lang.Long, jdbcType=BIGINT}
+	
+	</update>
+</mapper>

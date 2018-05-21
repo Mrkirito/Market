@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.study.Study3CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.study.Study3Comment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="study_id" property="studyId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="is_display" property="isDisplay" jdbcType="CHAR" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, study_id, user_id, content, is_display, create_at, update_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from study3_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from study3_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.study.Study3Comment" >
+    insert into study3_comment (id, study_id, user_id, 
+      content, is_display, create_at, 
+      update_at)
+    values (#{id,jdbcType=BIGINT}, #{studyId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{isDisplay,jdbcType=CHAR}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{updateAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.study.Study3Comment" >
+    insert into study3_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="studyId != null" >
+        study_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="studyId != null" >
+        #{studyId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=CHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.study.Study3Comment" >
+    update study3_comment
+    <set >
+      <if test="studyId != null" >
+        study_id = #{studyId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=CHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.study.Study3Comment" >
+    update study3_comment
+    set study_id = #{studyId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      is_display = #{isDisplay,jdbcType=CHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      update_at = #{updateAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions" >
+    <where>
+
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询总条数 -->
+  <select id="selectByCount" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    count(*)
+    FROM study3_comment t1, study3_articles t2
+    WHERE t1.study_id = t2.id and t1.is_display = 'true'
+    <if test="articleTitle != null" >
+      and t2.title like CONCAT(CONCAT('%', #{articleTitle}), '%')
+    </if>
+    <if test="content != null" >
+      and t1.content like CONCAT(CONCAT('%', #{content}), '%')
+    </if>
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    SELECT t1.*, t2.title
+    FROM study3_comment t1, study3_articles t2
+    WHERE t1.study_id = t2.id and t1.is_display = 'true'
+    <if test="articleTitle != null" >
+      and t2.title like CONCAT(CONCAT('%', #{articleTitle}), '%')
+    </if>
+    <if test="content != null" >
+      and t1.content like CONCAT(CONCAT('%', #{content}), '%')
+    </if>
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+
+  <!-- 删除评论 -->
+  <update id="updateDisableById" parameterType="java.lang.Long" >
+    update study3_comment
+    set is_display = 'false'
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

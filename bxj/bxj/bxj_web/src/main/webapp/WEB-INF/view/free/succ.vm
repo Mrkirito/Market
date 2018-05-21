@@ -1,0 +1,17 @@
+#set($header_params = {"title":"投保完成", "css":["index/css/style.css", "free/css/freesucc.css"]})
+#bxj_header($header_params)
+#if(!$request.getParameter('hd')))
+<header class="head">
+	<a class="header_left" href="javascript:history.go(-1);"></a>
+    <h1>投保完成</h1>
+</header>
+#end
+<div class="container"> 
+  <p class="tbimg1"><img src="http://m.hangjia.com/static_2015_06/images/mfreeproduct/tbcg_img1.png" alt=""></p>  
+  <p class="tbtxt1">领取成功</p>
+  <p class="tbtxt2">订单已生成，保单将在3个工作日内向您发送保单信息<br>如若未收到短信，则投保未成功</p>
+  <a href="javascript:history.go(-1);" class="tbBtn1">完成</a>
+</div>
+
+#set( $footer_params = [])
+#bxj_footer($footer_params)

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ControlAppStoreDao">
+	<select  id="selectAppStore" resultType="com.hangjia.bxj.model.BxjResponse" >
+		select id, content from bxj_response 
+	</select>
+
+	<select  id="selectAppStoreById" resultType="com.hangjia.bxj.model.BxjResponse" >
+		select id, content from bxj_response
+		where id = #{id}
+	</select>
+</mapper>

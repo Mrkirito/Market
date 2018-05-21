@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.tjgl.KmhStatisticsDataMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.tjgl.KmhStatisticsData" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="data_time" property="dataTime" jdbcType="TIMESTAMP" />
+    <result column="browse_count" property="browseCount" jdbcType="INTEGER" />
+    <result column="share_count" property="shareCount" jdbcType="INTEGER" />
+    <result column="browse_count_uv" property="browseCountUv" jdbcType="INTEGER" />
+    <result column="share_count_uv" property="shareCountUv" jdbcType="INTEGER" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, data_time, browse_count, share_count, browse_count_uv, share_count_uv, create_name, create_time, update_name,
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_app_kmh_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_app_kmh_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.tjgl.KmhStatisticsData" >
+    insert into bxj_app_kmh_data (id, data_time, browse_count, 
+      share_count,browse_count_uv,
+      share_count_uv, create_name, create_time,
+      update_name, update_time)
+    values (#{id,jdbcType=BIGINT}, #{dataTime,jdbcType=TIMESTAMP}, #{browseCount,jdbcType=INTEGER}, 
+      #{shareCount,jdbcType=INTEGER}, #{browseCountUv,jdbcType=INTEGER},
+      #{shareCountUv,jdbcType=INTEGER}, #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.tjgl.KmhStatisticsData" >
+    insert into bxj_app_kmh_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dataTime != null" >
+        data_time,
+      </if>
+      <if test="browseCount != null" >
+        browse_count,
+      </if>
+      <if test="shareCount != null" >
+        share_count,
+      </if>
+      <if test="browseCountUv != null" >
+        browse_count_uv,
+      </if>
+      <if test="shareCountUv != null" >
+        share_count_uv,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dataTime != null" >
+        #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="browseCount != null" >
+        #{browseCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="browseCountUv != null" >
+        #{browseCountUv,jdbcType=INTEGER},
+      </if>
+      <if test="shareCountUv != null" >
+        #{shareCountUv,jdbcType=INTEGER},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.tjgl.KmhStatisticsData" >
+    update bxj_app_kmh_data
+    <set >
+      <if test="dataTime != null" >
+        data_time = #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="browseCount != null" >
+        browse_count = #{browseCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        share_count = #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="browseCountUv != null" >
+        browse_count_uv = #{browseCountUv,jdbcType=INTEGER},
+      </if>
+      <if test="shareCountUv != null" >
+        share_count_uv = #{shareCountUv,jdbcType=INTEGER},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.tjgl.KmhStatisticsData" >
+    update bxj_app_kmh_data
+    set data_time = #{dataTime,jdbcType=TIMESTAMP},
+      browse_count = #{browseCount,jdbcType=INTEGER},
+      share_count = #{shareCount,jdbcType=INTEGER},
+      browse_count_uv = #{browseCountUv,jdbcType=INTEGER},
+      share_count_uv = #{shareCountUv,jdbcType=INTEGER},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getAllBxjAppKmhDatas" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM bxj_app_kmh_data ORDER BY data_time
+  </select>
+
+  <!--查询条件-->
+  <sql id="Public_Query_Conditions">
+    <where>
+      <if test="startTime != null and endTime != null">
+        AND
+        DATE(data_time) <![CDATA[>=]]> DATE(#{startTime})
+        AND
+        DATE(data_time) <![CDATA[<=]]> DATE(#{endTime})
+      </if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+  <!-- 查询总条数 -->
+  <select id="selectByCount" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    SELECT
+    COUNT(*)
+    FROM bxj_app_kmh_data
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Base_Column_List" />
+    FROM bxj_app_kmh_data
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas"/>
+    <include refid="Public_Page" />
+  </select>
+
+  <!-- 查询总条数 -->
+  <select id="selectCountByQuery" resultType="int" parameterType="com.hangjia.bxj.query.tjgl.KmhStatisticsDataQuery" >
+    select
+    count(*)
+    FROM bxj_app_kmh_data
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectPageByQuery" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.query.tjgl.KmhStatisticsDataQuery" >
+    select
+    <include refid="Base_Column_List" />
+    FROM bxj_app_kmh_data
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas"/>
+    <include refid="Public_Page" />
+  </select>
+
+
+  <!-- 查询 -->
+  <select id="queryKmhDataPage" parameterType="com.hangjia.bxj.query.report.ProductDataReportQuery" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from bxj_app_kmh_data
+    <include refid="Public_Admin_Query_Conditions" />
+    <include refid="Public_Admin_Order_Datas" />
+    <!-- <include refid="Public_Admin_Page" /> -->
+  </select>
+  <!--**************************** extend admin begin here *******************************-->
+  <!-- 查询条件 -->
+  <sql id="Public_Admin_Query_Conditions">
+    <where>
+      <if test="id != null">
+        and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="queryMonth != null and queryMonth != ''">
+        and date_format(data_time,'%Y%m') = #{queryMonth,jdbcType=VARCHAR}
+      </if>
+      <if test="dataDate != null and dataDate != ''">
+        and date_format(data_time,'%Y-%m-%d') = date_format(#{dataDate,jdbcType=VARCHAR},'%Y-%m-%d')
+      </if>
+
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Admin_Order_Datas">
+    <if test="orderBy != null and orderBy != ''">
+      order by ${orderBy}
+    </if>
+  </sql>
+</mapper>

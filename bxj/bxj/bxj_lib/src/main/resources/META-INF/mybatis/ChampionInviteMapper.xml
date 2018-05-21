@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionInviteMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionInvite" >
+    <constructor >
+      <idArg column="fid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="invite_user" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="be_invited_user" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="invite_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="invite_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="accept_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+
+  <resultMap type="java.util.Map" id="champiconInvite">
+    <result property="invite_user" javaType="java.lang.Long" jdbcType="INTEGER"/>
+    <result property="mobile" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result property="num"  javaType="java.lang.Integer" jdbcType="INTEGER"/>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    fid, invite_user, be_invited_user, invite_status, invite_at, accept_at
+  </sql>
+  <sql id="Public_Query_Conditions" >
+  	<where>
+  		<if test="fid != null" >
+	        and fid = #{fid,jdbcType=BIGINT}
+	    </if>
+  		<if test="inviteUser != null" >
+	        and invite_user = #{inviteUser,jdbcType=BIGINT}
+	    </if>
+	    <if test="beInvitedUser != null" >
+	        and be_invited_user = #{beInvitedUser,jdbcType=BIGINT}
+	    </if>
+        <if test="inviteStatus != null" >
+          and invite_status = #{inviteStatus,jdbcType=INTEGER}
+        </if>
+      <if test="inviteUser != null" >
+        and invite_user = #{inviteUser,jdbcType=INTEGER}
+      </if>
+  	</where>
+  </sql>
+   <!-- 查询邀请人数量 -->
+  <select id="selectCountInvite" resultType="java.lang.Integer" parameterType="com.hangjia.bxj.model.ChampionInvite">
+     SELECT COUNT(*) FROM champion_invite
+     <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 查询邀请并下载成功数量 -->
+  <select id="selectCountDownInvite" resultType="java.lang.Long" parameterType="java.util.Map">
+  select count(DISTINCT t0.be_invited_user) from champion_invite t0 INNER JOIN boss_ucenter.uc_user_login_log t1 on t0.be_invited_user=t1.user_id where 1=1
+    <if test="inviteUser != null" >
+      and t0.invite_user = #{inviteUser,jdbcType=BIGINT}
+    </if>
+    <if test="startTime != null" >
+      and t0.accept_at  <![CDATA[>=]]>  #{startTime,jdbcType=VARCHAR}
+    </if>
+    <if test="endTime != null" >
+      and t0.accept_at  <![CDATA[<=]]>  #{endTime,jdbcType=VARCHAR}
+    </if>
+
+    and t1.type in (0,1)
+  </select>
+
+  <select id="selectByPaginatorCount" resultType="Integer" parameterType="com.baobao.framework.page.Paginator">
+    SELECT
+    count(*)
+    FROM
+   (  select t0.invite_user,count(DISTINCT t0.be_invited_user) as num from champion_invite t0 INNER JOIN
+    boss_ucenter.uc_user_login_log t1 on t0.be_invited_user=t1.user_id
+    where 1=1
+    <if test="params.startTime != null" >
+      and t0.accept_at  <![CDATA[>=]]>  #{params.startTime,jdbcType=VARCHAR}
+    </if>
+    <if test="params.endTime != null" >
+      and t0.accept_at  <![CDATA[<=]]>  #{params.endTime,jdbcType=VARCHAR}
+    </if>
+    and t1.type in (0,1)
+    GROUP BY t0.invite_user) as cc
+  </select>
+
+  <select id="selectPaginateInvite" resultMap="champiconInvite" parameterType="com.baobao.framework.page.Paginator">
+    select t0.invite_user,t2.mobile,count(DISTINCT t0.be_invited_user) as num from champion_invite t0 INNER JOIN
+    boss_ucenter.uc_user_login_log t1 on t0.be_invited_user=t1.user_id
+    left JOIN boss_ucenter.uc_user t2 on t0.invite_user = t2.id
+    where 1=1
+    <if test="params.startTime != null" >
+      and t0.accept_at  <![CDATA[>=]]>  #{params.startTime,jdbcType=VARCHAR}
+    </if>
+    <if test="params.endTime != null" >
+      and t0.accept_at  <![CDATA[<=]]>  #{params.endTime,jdbcType=VARCHAR}
+    </if>
+    and t1.type in (0,1)
+    GROUP BY t0.invite_user
+    order by num desc
+    LIMIT #{offset},#{itemsPerPage}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_invite
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+    
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.model.ChampionInvite" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_invite
+    <include refid="Public_Query_Conditions" />
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_invite
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionInvite" >
+    insert into champion_invite (fid, invite_user, be_invited_user, 
+      invite_status, invite_at, accept_at
+      )
+    values (#{fid,jdbcType=BIGINT}, #{inviteUser,jdbcType=BIGINT}, #{beInvitedUser,jdbcType=BIGINT}, 
+      #{inviteStatus,jdbcType=INTEGER}, #{inviteAt,jdbcType=TIMESTAMP}, #{acceptAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionInvite" >
+    insert into champion_invite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="inviteUser != null" >
+        invite_user,
+      </if>
+      <if test="beInvitedUser != null" >
+        be_invited_user,
+      </if>
+      <if test="inviteStatus != null" >
+        invite_status,
+      </if>
+      <if test="inviteAt != null" >
+        invite_at,
+      </if>
+      <if test="acceptAt != null" >
+        accept_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="inviteUser != null" >
+        #{inviteUser,jdbcType=BIGINT},
+      </if>
+      <if test="beInvitedUser != null" >
+        #{beInvitedUser,jdbcType=BIGINT},
+      </if>
+      <if test="inviteStatus != null" >
+        #{inviteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="inviteAt != null" >
+        #{inviteAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptAt != null" >
+        #{acceptAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionInvite" >
+    update champion_invite
+    <set >
+      <if test="inviteUser != null" >
+        invite_user = #{inviteUser,jdbcType=BIGINT},
+      </if>
+      <if test="beInvitedUser != null" >
+        be_invited_user = #{beInvitedUser,jdbcType=BIGINT},
+      </if>
+      <if test="inviteStatus != null" >
+        invite_status = #{inviteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="inviteAt != null" >
+        invite_at = #{inviteAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptAt != null" >
+        accept_at = #{acceptAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionInvite" >
+    update champion_invite
+    set invite_user = #{inviteUser,jdbcType=BIGINT},
+      be_invited_user = #{beInvitedUser,jdbcType=BIGINT},
+      invite_status = #{inviteStatus,jdbcType=INTEGER},
+      invite_at = #{inviteAt,jdbcType=TIMESTAMP},
+      accept_at = #{acceptAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 统计邀请 对象 -->
+  <resultMap type="com.hangjia.bxj.vo.VideoInviteCountVo" id="inviteCountObj">
+    <result column="invite_user" property="inviteUserId" javaType="java.lang.Long" jdbcType="INTEGER"/>
+    <result column="accept_at" property="inviteAt" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+    <result column="inviteNum" property="inviteNum"  javaType="java.lang.Integer" jdbcType="INTEGER"/>
+    
+    <result column="mobile" property="mobile"  javaType="java.lang.String" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+  <!-- 统计 查询所有邀请总数 -->
+  <select id="selTotal" resultType="java.lang.Integer" parameterType="com.hangjia.bxj.vo.VideoInviteCountVo">
+     SELECT count(be_invited_user) FROM champion_invite 
+     where invite_status=2 
+     <if test="inviteAt != null"> AND TO_DAYS(accept_at)=TO_DAYS(#{inviteAt})</if>
+  </select>
+  <!-- 统计 分页 查询 每个id 邀请 数量 -->
+  <select id="selGroupUserTotal" resultType="java.lang.Integer" parameterType="com.hangjia.bxj.vo.VideoInviteCountVo">
+    SELECT   COUNT(invite.inviteNum) AS inviteNum  FROM  (SELECT invite_user AS inviteNum 
+             FROM `champion_invite` where invite_status=2
+          <if test="inviteAt != null"> AND TO_DAYS(accept_at)=TO_DAYS(#{inviteAt})</if>
+              group by invite_user) AS invite
+       
+  </select>
+  
+  <!-- 统计 查询所有邀请 信息 -->
+   <select id="selInviteInfo" resultMap="inviteCountObj" parameterType="com.hangjia.bxj.vo.VideoInviteCountVo">
+      SELECT invite_user ,accept_at , COUNT(invite_user) AS inviteNum FROM `champion_invite` 
+      where invite_status=2 
+      <if test="inviteAt != null"> AND TO_DAYS(accept_at)=TO_DAYS(#{inviteAt})</if>
+      GROUP BY invite_user
+      ORDER BY accept_at DESC
+      LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  <!-- 查询用户手机号 -->
+   <select id="selUserInfo" resultMap="inviteCountObj" parameterType="com.hangjia.bxj.vo.VideoInviteCountVo">
+        SELECT mobile AS mobile FROM boss_ucenter.`uc_user`  where is_del=0
+        <if test="inviteAt != null"> AND id=#{inviteUserId} </if>
+  </select>
+  
+</mapper>

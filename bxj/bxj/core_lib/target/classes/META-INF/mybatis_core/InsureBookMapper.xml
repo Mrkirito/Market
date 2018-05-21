@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.core.cms.dao.mapper.InsureBookMapper">
+    <resultMap id="BaseResultMap" type="com.core.cms.model.mapper.InsureBook">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="firm_name" property="firmName" jdbcType="VARCHAR"/>
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR"/>
+        <result column="customer_phone" property="customerPhone" jdbcType="VARCHAR"/>
+        <result column="customer_mark" property="customerMark" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="deal_state" property="dealState" jdbcType="INTEGER"/>
+        <result column="deal_msg" property="dealMsg" jdbcType="VARCHAR"/>
+        <result column="customer_ip" property="customerIp" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <!--增加-->
+    <insert id="insert" parameterType="com.core.cms.model.mapper.InsureBook">
+        INSERT t_c_booking_insure
+        <set>
+            product_name = #{productName,jdbcType=VARCHAR},
+            product_id = #{productId,jdbcType=INTEGER},
+            firm_name = #{firmName,jdbcType=VARCHAR},
+            customer_name = #{customerName,jdbcType=VARCHAR},
+            customer_phone = #{customerPhone,jdbcType=VARCHAR},
+            customer_mark = #{customerMark,jdbcType=VARCHAR},
+            user_id = #{userId,jdbcType=BIGINT},
+            deal_state = #{dealState,jdbcType=VARCHAR},
+            deal_msg = #{dealMsg,jdbcType=VARCHAR},
+            customer_ip = #{customerIp,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+        </set>
+    </insert>
+    <!--删除-->
+    <delete id="delByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_c_booking_insure
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <!--修改-->
+    <update id="update" parameterType="com.core.cms.model.mapper.InsureBook">
+        UPDATE t_c_booking_insure
+        <set>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="firmName != null">
+                firm_name = #{firmName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerPhone != null">
+                customer_phone = #{customerPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="customerMark != null">
+                customer_mark = #{customerMark,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="dealState != null">
+                deal_state = #{dealState,jdbcType=VARCHAR},
+            </if>
+            <if test="dealMsg != null">
+                deal_msg = #{dealMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="customerIp != null">
+                customer_ip = #{customerIp,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE id=#{id,jdbcType=INTEGER}
+    </update>
+    <!--按条件查询-->
+    <select id="selectInsureBook" parameterType="com.core.cms.model.mapper.InsureBook" resultMap="BaseResultMap">
+        SELECT
+          id,product_name,product_id,firm_name,customer_name,customer_phone,customer_mark,user_id,deal_msg,customer_ip,create_time,update_time
+        FROM t_c_booking_insure
+        <where>
+            <if test="productName != null">
+                product_name LIKE CONCAT('%',#{productName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId,jdbcType=INTEGER}
+            </if>
+            <if test="firmName != null">
+                and firm_name like CONCAT('%',#{firmName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="customerName != null">
+                and customer_name like CONCAT('%',#{customerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="customerPhone != null">
+                and customer_phone = #{customerPhone,jdbcType=VARCHAR}
+            </if>
+            <if test="customerMark != null">
+                and customer_mark = #{customerMark,jdbcType=VARCHAR}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId,jdbcType=BIGINT}
+            </if>
+            <if test="dealState != null">
+                and deal_state = #{dealState,jdbcType=VARCHAR}
+            </if>
+            <if test="dealMsg != null">
+                and deal_msg = #{dealMsg,jdbcType=VARCHAR}
+            </if>
+            <if test="customerIp != null">
+                and customer_ip = #{customerIp,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        limit #{pageFirstItem},#{pageSize}
+    </select>
+    <!--根据id查询-->
+    <select id="selectByprimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        id,product_name,product_id,firm_name,customer_name,customer_phone,customer_mark,user_id,deal_msg,customer_ip,create_time,update_time
+        FROM t_c_booking_insure
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+    <!--查询总数目-->
+    <select id="selectCount" parameterType="com.core.cms.model.mapper.InsureBook" resultType="java.lang.Integer">
+        SELECT
+          count(1)
+        FROM t_c_booking_insure
+        <where>
+            <if test="productName != null">
+                product_name LIKE CONCAT('%',#{productName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId,jdbcType=INTEGER}
+            </if>
+            <if test="firmName != null">
+                and firm_name like CONCAT('%',#{firmName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="customerName != null">
+                and customer_name like CONCAT('%',#{customerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="customerPhone != null">
+                and customer_phone = #{customerPhone,jdbcType=VARCHAR}
+            </if>
+            <if test="customerMark != null">
+                and customer_mark = #{customerMark,jdbcType=VARCHAR}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId,jdbcType=BIGINT}
+            </if>
+            <if test="dealState != null">
+                and deal_state = #{dealState,jdbcType=VARCHAR}
+            </if>
+            <if test="dealMsg != null">
+                and deal_msg = #{dealMsg,jdbcType=VARCHAR}
+            </if>
+            <if test="customerIp != null">
+                and customer_ip = #{customerIp,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>

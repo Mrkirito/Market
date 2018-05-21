@@ -1,0 +1,58 @@
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-pid="757" data-jbbe="1000000" data-cpjc="e生保(2017)" data-table="0">
+		<input type="hidden" name="bxnx" value="62" class="factor" data-text="保1年" />
+        <input type="hidden" name="jfnx" value="63" class="factor" data-text="1年交" />
+        <li class="info-item main_line_height">
+            <label class="info-name">有无社保</label>
+            <select class="factor" name="lqnl">
+                <option value="13">无社保</option>
+                <option value="14">有社保</option>
+            </select>
+            <span class="arrowr"></span>
+        </li>
+        <li class="info-item main_line_height">
+            <label class="info-name">保额</label>
+            <select class="factor" name="factor5">
+                <option value="79">100万</option>
+                <option value="67">300万</option>
+			</select>
+            <span class="arrowr"></span>
+		</li>
+        <input type="hidden"  value="1000000" class="demo_price factor" name="be"  maxlength="15"/>
+	</div>
+	<li class="main_item li_table_0" style="display:none">
+		<div class="creatDes_header">
+			<span class="createDes-title">
+				<em>e生保(2017)</em>
+				<em class="price"></em>
+			</span>
+			<span class="createDes-btn">
+				<a class="main_edit_btn" data-table="0">修改</a>
+			</span>
+		</div>
+		<table class="createDes-table">
+		<thead>
+			<tr>
+				<td>险种</td>
+				<td>保额</td>
+				<td>保费</td>
+				<td>保障期限</td>
+				<td>缴费期限</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		</table>
+	</li>
+	#parse("product/addzx.vm")
+	</ul>
+</div>
+<script>
+    $("select[name=factor5]").on('change',function(){
+        var opts = resultMap.get(757);
+        var v = $(this).val() == 79 ? 1000000 : 3000000;
+        opts.be = v;
+        opts.jbbe = v;
+    });
+</script>

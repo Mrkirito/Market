@@ -1,0 +1,562 @@
+body{
+    padding:0px;
+    margin:0px;
+    height: 74px;
+    /*border-bottom:5px solid black;*/
+    background: #eee;
+}
+ul{
+    list-style: none;
+    padding:0px;
+}
+a:hover{
+    text-decoration: none;
+}
+.split{
+    clear: left;
+}
+#head{
+    width: 100%;
+    height: 74px;
+    background: #1e485d;
+    color: white;
+    position: relative;
+    
+}
+#head-left{
+    padding:15px 0px 0px 30px;
+    float: left;
+}
+#head-left img{
+    width: 45px;
+    height: 45px;
+}
+#head-title{
+    display: block;
+    font-size: 26px;
+    margin:-39px 0px 0px 70px;
+}
+#head-right{
+    position: absolute;
+    left: 1140px;
+    margin-top: 14px;
+    padding: 8px 0px 0px 8px;
+    /*    border:1px solid black;*/
+    height: 60px;
+    width: 55px;
+}
+#head-right a,#head-right2 a{
+    color: white;
+}
+#head-right .fa{
+   
+    font-size: 30px;
+}
+#head-right:hover div{
+    
+    border: 1px solid rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 2px #aaa;
+    opacity: 1;
+    transition: all 0.5s ease;
+    transform: translate(0px,0px);
+    visibility: visible;
+    z-index: 999;
+}
+#head-right div{
+    background: white;
+    padding-left: 10px;
+    width: 190px;
+    height: 200px;
+    position: absolute;
+    top: 59px;
+    margin-left: -80px;
+    transform: translate(0px,10px);
+    opacity: 0;
+    color:#333;
+    visibility: hidden;
+}
+
+#head-right2{
+    position: absolute;
+    /* border:1px solid red; */
+    top:19px;
+    left:1200px;
+    
+    font-size: 26px;
+    /* margin:12px 0 0 20px; */
+}
+#container{
+    background: #eee;
+}
+ 
+    #introduce{
+        margin:10px auto;
+        height: 100px;
+        font-weight: bold;
+        /* border:1px solid black; */
+        width:1200px;
+    }
+    .content_1 .content_left{
+        font-size: 23px;
+    }
+    .content_1 .content_right{
+        font-size: 23px;
+    }
+    .content_left{
+        color:#1e485d;
+        float: left;
+        width: 180px;
+        text-align: right;
+        font-size: 16px;
+    }
+    .content_right{
+        float:left;
+    }
+    #to_index{
+        font-size: 17px;
+       /*  text-align: right;
+       padding-right: 10px; */
+       position: absolute;
+       top:95px;
+       left: 1090px;
+    }
+    /**********************************************/
+    #main{
+        border:1px solid transparent; 
+        margin:auto;
+        margin-top: 20px;
+        width:1200px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 4px #bbb;
+        background: white;
+    }
+    #main_title{
+        margin-left: 30px;
+        color:#666;
+    }
+
+    .nav1{
+        /* margin: 20px auto; */
+        position: absolute;
+        left: 300px;
+        top:18px;
+        width: 560px;
+        height: 50px;
+        text-align: center;
+        /* background-color: #f65f57; */
+        background-color:#1e485d;
+        font:bold 0/50px Arial;
+        border-radius: 10px;
+        }
+    .nav1 li{}
+
+    /*删除第一项和最后一项导航分隔线*/
+    .nav1 li:last-child{background:none;}
+    .nav1 ul{
+
+    }
+    .nav1 li{
+        list-style: none;
+        height: 50px;
+        padding-right: 16px;
+        font-size: 14px;
+        font-family: "Microsoft Yahei UI";
+        background:linear-gradient(to bottom,#dd2926,#a82724,#dd2926) no-repeat right / 1px 15px;
+        display: inline-block;
+        text-shadow: 2px 2px 4px #000;
+        transition: all 0.2s ease-in;
+    }
+    .nav1 li a{
+        text-decoration: none;
+        display: inline-block;
+        color: #eee;
+        margin-left: 15px;
+        transition: all 0.2s ease-in;
+        font-family: "Microsoft Yahei";  
+    }
+    .nav1 li a:hover{
+        transform:rotate(10deg);
+    }
+    /*********************************************/
+    li{
+        overflow: hidden;
+    }
+    #tab{
+        margin:10px auto;
+        background: white;
+        width:1200px;
+        height: 100px;
+        box-shadow: 3px 3px 6px #bbb;
+        border-radius: 5px;
+    }
+    #tab ul{
+        padding-top: 5px;
+    }
+    #tab ul li{
+        float: left;
+        /* border:1px solid red; */
+        /* margin-top: 10px; */
+        width: 295px;
+        height: 45px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    #tab ul li a:hover{
+        background: #eee;
+    }
+    #tab ul li a span{
+        color: red;
+        font-size: 19px;
+
+    }
+    #tab ul li div{
+        /* border:2px solid yellow; */
+        width: 220px;
+        height: 40px;
+        line-height: 40px;
+        text-indent: 15px;
+    }
+    #tab ul li a{
+        display: block;
+        transition: all 0.3s ease-in-out;
+             
+    }
+    /*********************************************/
+    #competition_title{
+        font-weight: bold;
+        color: #555;
+    }
+    #competition_title li{
+        float: left;
+        /* margin-top:10px; */
+        /*border:1px solid red;*/
+        padding-left: 1%;
+
+    }
+    #competition_title li:nth-of-type(1){
+        width:3%
+    }
+    #competition_title li:nth-of-type(2){
+        
+        width:20%
+    }
+    #competition_title li:nth-of-type(3){
+        
+        width:10%
+    }
+    #competition_title li:nth-of-type(4){
+        
+        width:10%;
+    }
+    #competition_title li:nth-of-type(5){
+        
+        width:15%;
+    }
+    #competition_title li:nth-of-type(6){
+        
+        width:13%;
+    }
+    #competition_title li:nth-of-type(7){
+        
+        width:8%;
+    }
+    #competition_title li:nth-of-type(8){
+        
+        width:8%;
+    }
+    #competition_title li:nth-of-type(9){
+        
+        width:8%;
+    }
+    #competition_title{
+        /* border: 1px solid black; */
+        height: 35px;
+        line-height: 35px;
+        width: 95%;
+        margin: auto;
+        font-family: "Microsoft YaHei";  
+    }
+
+
+    /**************************************************/
+    .competition_nav{
+        border-top: 1px solid black;
+        height: 35px;
+        line-height: 35px;
+        width: 95%;
+        margin: auto;
+        font-family: "Microsoft YaHei";
+    }
+    .competition_nav a:hover{
+        color: blue;
+    }
+    #main ul:nth-last-of-type(1){
+        border-top:1px solid black;
+        border-bottom:1px solid black;
+    }
+    .competition_nav:hover{
+        background: #ccc;
+        color:white;
+        cursor: pointer;
+    }
+    .competition_nav li{
+        float: left;
+        padding-left: 1%;
+        font-weight: 400;
+    }
+    .competition_nav li:nth-of-type(1){
+        width:3%
+    }
+    .competition_nav li:nth-of-type(2){
+        width:20%
+    }
+    .competition_nav li:nth-of-type(3){
+        text-indent: 20%;
+        width:10%
+    }
+    .competition_nav li:nth-of-type(4){
+        text-indent: 1.5%;
+        width:10%;
+    }
+    .competition_nav li:nth-of-type(5){
+        width:15%;
+    }
+    .competition_nav li:nth-of-type(6){
+        text-indent: 35%;
+        width:13%;
+    }
+    .competition_nav li:nth-of-type(7){
+        text-indent: 15%;
+        width:8%;
+    } 
+    .competition_nav li:nth-of-type(8){
+        text-indent: 15%;
+        width:8%;
+    }
+    .competition_nav li:nth-of-type(9){
+        text-indent: 15%;
+        width:8%;
+    }
+/* @media  only screen and (max-width: 1059px){
+ } */
+
+ /* @media  only screen and (min-width: 1090px){
+ 
+    #introduce{
+        margin:10px auto;
+        height: 100px;
+        font-weight: bold;
+        border:1px solid black;
+        width:95%;
+    }
+    .content_1 .content_left{
+        font-size: 23px;
+    }
+    .content_1 .content_right{
+        font-size: 23px;
+    }
+    .content_left{
+        color:#1e485d;
+        float: left;
+        width: 180px;
+        text-align: right;
+        font-size: 16px;
+    }
+    .content_right{
+        float:left;
+    }
+    ********************************************
+    #main{
+        border:1px solid transparent;
+        margin:auto;
+        width:95%;
+        border-radius: 5px;
+        box-shadow: 2px 2px 4px #999;
+        background: white;
+    }
+    #main_title{
+        margin-left: 30px;
+        color:#666;
+    }
+ 
+    .nav1{
+        margin: 20px auto;
+        position: absolute;
+        left: 300px;
+        top:18px;
+        width: 560px;
+        height: 50px;
+        text-align: center;
+        background-color: #f65f57;
+        background-color:#1e485d;
+        font:bold 0/50px Arial;
+        border-radius: 10px;
+        }
+    .nav1 li{}
+ 
+    删除第一项和最后一项导航分隔线
+    .nav1 li:last-child{background:none;}
+    .nav1 ul{
+ 
+    }
+    .nav1 li{
+        list-style: none;
+        height: 50px;
+        padding-right: 16px;
+        font-size: 14px;
+        font-family: "Microsoft Yahei UI";
+        background:linear-gradient(to bottom,#dd2926,#a82724,#dd2926) no-repeat right / 1px 15px;
+        display: inline-block;
+        text-shadow: 2px 2px 4px #000;
+        transition: all 0.2s ease-in;
+    }
+    .nav1 li a{
+        text-decoration: none;
+        display: inline-block;
+        color: #eee;
+        margin-left: 15px;
+        transition: all 0.2s ease-in;
+        font-family: "Microsoft Yahei";  
+    }
+    .nav1 li a:hover{
+        transform:rotate(10deg);
+    }
+    *******************************************
+    li{
+        overflow: hidden;
+    }
+    #tab{
+        margin:10px auto;
+        background: white;
+        width:95%;
+        height: 100px;
+    }
+    #tab ul li{
+        float: left;
+        border:1px solid red;
+        margin-top: 10px;
+        width: 25%;
+        height: 35px;
+        line-height: 35px;
+        overflow: hidden;
+    }
+    #tab ul li a{
+        text-indent: 30px;
+          
+    }
+    *******************************************
+    #competition_title{
+        font-weight: bold;
+    }
+    #competition_title li{
+        float: left;
+        margin-top:10px;
+        border:1px solid red;
+        padding-left: 1%;
+ 
+    }
+    #competition_title li:nth-of-type(1){
+        width:3%
+    }
+    #competition_title li:nth-of-type(2){
+        
+        width:20%
+    }
+    #competition_title li:nth-of-type(3){
+        
+        width:10%
+    }
+    #competition_title li:nth-of-type(4){
+        
+        width:10%;
+    }
+    #competition_title li:nth-of-type(5){
+        
+        width:15%;
+    }
+    #competition_title li:nth-of-type(6){
+        
+        width:13%;
+    }
+    #competition_title li:nth-of-type(7){
+        
+        width:8%;
+    }
+    #competition_title li:nth-of-type(8){
+        
+        width:8%;
+    }
+    #competition_title li:nth-of-type(9){
+        
+        width:8%;
+    }
+    #competition_title{
+        border: 1px solid black;
+        height: 35px;
+        line-height: 35px;
+        width: 95%;
+        margin: auto;
+        font-family: "Microsoft YaHei";  
+    }
+ 
+ 
+    ************************************************
+    .competition_nav{
+        border-top: 1px solid black;
+        height: 35px;
+        line-height: 35px;
+        width: 95%;
+        margin: auto;
+        font-family: "Microsoft YaHei";
+    }
+    .competition_nav a:hover{
+        color: blue;
+    }
+    #main ul:nth-last-of-type(1){
+        border-top:1px solid black;
+        border-bottom:1px solid black;
+    }
+    .competition_nav:hover{
+        background: #ccc;
+        color:white;
+        cursor: pointer;
+    }
+    .competition_nav li{
+        float: left;
+        padding-left: 1%;
+    }
+    .competition_nav li:nth-of-type(1){
+        width:3%
+    }
+    .competition_nav li:nth-of-type(2){
+        width:20%
+    }
+    .competition_nav li:nth-of-type(3){
+        text-indent: 2%;
+        width:10%
+    }
+    .competition_nav li:nth-of-type(4){
+        text-indent: 1.5%;
+        width:10%;
+    }
+    .competition_nav li:nth-of-type(5){
+        width:15%;
+    }
+    .competition_nav li:nth-of-type(6){
+        text-indent: 4%;
+        width:13%;
+    }
+    .competition_nav li:nth-of-type(7){
+        text-indent: 1%;
+        width:8%;
+    } 
+    .competition_nav li:nth-of-type(8){
+        text-indent: 1%;
+        width:8%;
+    }
+    .competition_nav li:nth-of-type(9){
+        text-indent: 1%;
+        width:8%;
+    }
+ }  */
+

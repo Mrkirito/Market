@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.PerformanceReportMapper">
+
+	<resultMap type="PerformanceReport" id="PerformanceReportMap">
+		<id column="id" />
+		<association property="companyMarketShare" javaType="CompanyMarketShare">
+	  		<result column="id" property="id"/>
+	  		<result column="practical_share" property="practicalShare"/>
+	  		<result column="practical_need" property="practicalNeed"/>
+	  		<result column="practical_sale" property="practicalSale"/>
+	  		<result column="practical_stockoun" property="practicalStockoun"/>
+	  		<result column="practical_stock" property="practicalStock"/>
+	  		<result column="perfect_share" property="perfectShare"/>
+	  		<result column="perfect_need" property="perfectNeed"/>
+	  		<result column="perfect_sale" property="perfectSale"/>
+	  		<result column="perfect_stockoun" property="perfectStockoun"/>
+	  		<result column="perfect_stock" property="perfectStock"/>
+	  		<result column="business_share" property="businessShare"/>
+	  		<result column="business_need" property="businessNeed"/>
+	  		<result column="business_sale" property="businessSale"/>
+	  		<result column="business_stockoun" property="businessStockoun"/>
+	  		<result column="business_stock" property="businessStock"/>
+	  		<result column="company_id" property="companyId"/>
+	  		<result column="quarter" property="quarter"/>
+	 		</association>
+		<association property="company" javaType="Company">
+			<result column="company_name" property="name"/>			
+		</association>
+	</resultMap>
+
+	<resultMap type="PerformanceReport" id="ProductReportMap">
+		<id column="id" />
+		<association property="productMarketShare" javaType="ProductMarketShare">
+			<result column="id" property="id"/>
+			<result column="competition_id" property="competitionId"/>
+			<result column="company_id" property="companyId"/>
+			<result column="product_id" property="productId"/>
+			<result column="quarter" property="quarter"/>
+			<result column="product_type" property="productType"/>
+			<result column="market_share" property="marketShare"/>
+			<result column="singapore_need" property="singaporeNeed"/>
+			<result column="singapore_sale" property="singaporeSale"/>
+			<result column="hongkong_need" property="hongkongNeed"/>
+			<result column="hongkong_sale" property="hongkongSale"/>
+			<result column="moscow_need" property="moscowNeed"/>
+			<result column="moscow_sale" property="moscowSale"/>
+			<result column="newdelhi_need" property="newdelhiNeed"/>
+			<result column="newdelhi_sale" property="newdelhiSale"/>
+			<result column="online_need" property="onlineNeed"/>
+			<result column="online_sale" property="onlineSale"/>
+			<result column="stockoun" property="stockoun"/>
+			<result column="stock" property="stock"/>
+		</association>
+		
+		<association property="company" javaType="Company">
+			<result column="company_name" property="name"/>
+		</association>
+		
+		<association property="companyProduct" javaType="CompanyProduct">
+			<result column="company_product_name" property="name"/>
+		</association>
+	</resultMap>
+  <select id="findCompanyMarketShareByCompetetionId" resultMap="PerformanceReportMap">
+  	SELECT company_market_share.*,company.name company_name
+	FROM company_market_share,company
+	WHERE competition_id = #{0}
+	and company.id = company_market_share.company_id
+	and quarter = #{1}
+  </select>
+  
+  <select id="findCompanyProductMarketShareByCompetionId" resultMap="ProductReportMap">
+  	SELECT
+	product_market_share.*,
+	company.`name` AS company_name,
+	company_product.`name` AS company_product_name
+	FROM
+	company ,
+	product_market_share ,
+	company_product
+	WHERE
+	company.id = product_market_share.company_id AND
+	company.competition_id = #{0} AND
+	product_market_share.product_id = company_product.id AND
+	product_market_share.`quarter` = #{1}
+	ORDER BY
+	company_name ASC
+
+  </select>
+  
+  <select id="findCompanyMarketShareByCompanyId" resultType="CompanyMarketShare">
+  	SELECT * from 
+	company_market_share
+	WHERE company_id = #{0}
+	and quarter = #{1}
+  </select>
+  
+  <select id="findCompanyInvestmentByCompanyId" resultType="CompanyInvestment">
+  	SELECT * from 
+	company_investment
+	WHERE company_id = #{0}
+	and quarter = #{1}
+  </select>
+  
+  <select id="findCompanyLoanByCompanyIdQuarter" resultType="CompanyLoan">
+  	SELECT *
+	FROM company_loan
+	WHERE company_id = #{0}
+	AND quarter = #{1}
+  </select>
+</mapper>

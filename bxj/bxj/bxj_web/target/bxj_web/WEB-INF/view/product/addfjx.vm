@@ -1,0 +1,35 @@
+<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>			
+					</span>
+					<span class="creatDes-add-btn"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+<li class="main_item li_table_2" style="display:none">
+	<div class="creatDes_header">
+		<span class="createDes-title ">
+			<em>附加险</em> 
+			<em class="price"></em>
+		</span> 
+		<span class="createDes-btn"> 
+			<a class="main_edit_btn" data-table="2">修改</a>
+		</span>
+	</div>
+	<table class="createDes-table">
+		<thead>
+			<tr>
+				<td>险种</td>
+				<td>保额/份数</td>
+				<td>保费</td>
+				<td>保障期限</td>
+				<td>缴费期限</td>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</li>

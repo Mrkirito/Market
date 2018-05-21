@@ -1,0 +1,301 @@
+
+#set($header_params = {"title":"编辑客户资料", "css":["index/css/style.css", "index/css/eimage.css"]})
+#bxj_header($header_params)
+
+<!--导航 开始-->
+<header class="head">
+  	<a class="header_left" href="javascript:history.go(-1);"></a>
+    <h1>编辑客户资料</h1>
+    <a class="header_right_font" href="javascript:trySubmit();">完成</a>
+</header>
+<!--导航 结束-->
+
+<!--内容 开始-->
+<div class="container container_editinform">
+	<form action="customer/updateMyCustomer.do" id="editinfom_form" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+	<ul class="inform-ul">
+    	<div class="head_div">
+    		<input type="hidden" id="deleteImage" name="deleteImage" value="false">
+    		<input type="hidden" name="id" value="$model.id">
+    		#if($model.imageUrl!="")
+    		<img id="head-icon" width="64" height="64" src="$static_path/upload/c/$model.id/images/$model.imageUrl" data-bak="$static_path/index/images/head_bg.png" data-name="$!model.imageUrl"/>
+    		#elseif($model.sex==1)
+    		<img id="head-icon" width="64" height="64" src="$static_path/index/images/head_bg02.png" data-bak="$static_path/index/images/head_bg02.png" data-name="$!model.imageUrl"/>
+    		#else
+    		<img id="head-icon" width="64" height="64" src="$static_path/index/images/head_bg.png" data-bak="$static_path/index/images/head_bg.png" data-name="$!model.imageUrl"/>
+    		#end
+        </div>
+    	<li>
+            <dd>
+            	<input type="text" name="name" placeholder="请输入客户称呼" required maxlength="50" value="$!model.name" autocomplete="on" id="txtName"/>
+            </dd>
+        </li>
+        
+        <li>
+            <dd>
+            
+            	#if($model.sex==1)
+            	<label class="gender_span" for="male">
+                    <input type="radio" name="sex" id="male" value="2" class="radioclass sex">
+                </label>
+                <span>男</span>
+                <label class="gender_span margin-left checked" for="female">
+                    <input type="radio" checked="checked" name="sex" id="female" value="1" class="radioclass sex">
+                </label>
+                <span>女</span>
+            	#else
+            	<label class="gender_span checked" for="male">
+                    <input type="radio" checked="checked" name="sex" id="male" value="2" class="radioclass sex">
+                </label>
+                <span>男</span>
+                <label class="gender_span margin-left" for="female">
+                    <input type="radio" name="sex" id="female" value="1" class="radioclass sex">
+                </label>
+                <span>女</span>
+            	#end
+            </dd>
+        </li>
+        
+        <li>
+            <dd>
+            	<input id="mobileCode" type="tel" name="mobile" placeholder="请输入客户的手机号码" maxlength="11" value="$!model.mobile" autocomplete="on"/>
+            </dd>
+        </li>
+        <li>
+            <dd>
+            	<input id="dateBirth" name="birthday" type="date" placeholder="请填写出生日期" required min="1900-01-01" max="$!maxBirthday" class="dateselector" value="$!model.birthdayEN"/>
+            </dd>
+        </li>
+        <li>
+        	<dt>
+            	<span>详细地址</span>
+            </dt>
+            <dd>
+            	<input type="text" name="address" value="$!model.address" placeholder="请填写详细住址" autocomplete="on" maxlength="128"/>
+            </dd>
+            <div class="clear"></div>
+        </li>
+        
+        <li>
+        	<dt>
+            	<span>电子邮箱</span>
+            </dt>
+            <dd>
+            	<input type="email" name="email" id="txtEmail" value="$!model.email" maxlength="64" placeholder="请填写电子邮箱" autocomplete="on"/>
+            </dd>
+            <div class="clear"></div>
+        </li>
+        
+        <li>
+        	<dt>
+            	<span>备注</span>
+            </dt>
+            <dd>
+            	<input type="text" name="remark" value="$!model.remark" maxlength="128" placeholder="请填写备注" autocomplete="on"/>
+            </dd>
+            <div class="clear"></div>
+        </li>
+    </ul>
+    </form>
+    <button onclick="deleteCustomer()">删除该客户</button>
+</div>
+<!--内容 结束-->
+
+<div id="ChangeHead_Div" class="ChangeHead_Div" style="position:absolute; top:0; display:none;width:100%;">
+	<input type="file" id="file" accept="image/*" style="display: none;">
+	<img src="http://m.hangjia.com/static_2015_06/images/planbook/mbao2_img18.png" width="30" height="30" style="position:absolute; right:10px; top:10px; z-index:999;" onclick="javascript:hiddenHead();" >
+    <div class="resource_lazy hide"></div>
+    <div class="pic_edit">
+        <div id="clipArea"></div>
+        <div class="Button_Area">
+        <button id="leftButton" class="imgbutton">左转</button>
+        <button id="clipBtn" class="imgbutton">选取图片</button>
+        <button id="rightButton" class="imgbutton">右转</button>
+        </div>
+        <canvas id="myCanvas" style="display:none"></canvas>
+    </div>
+    <img src="" fileName="" id="hit" style="display:none;z-index: 9">
+    <div id="cover"></div>
+</div>
+
+#set( $footer_params = ["index/js/Messager.js", "index/js/iscroll-zoom.js", "index/js/jquery.photoClip.js", "index/js/layer.m.js", "index/js/ajax.js"])
+#bxj_footer($footer_params)
+
+<script>
+$(function(){
+	$('.gender_span').click(function(){
+		$('.gender_span').removeClass('checked');
+		$(this).addClass('checked');
+	});	
+	var InputDate = document.getElementById('dateBirth');
+	if (InputDate.value) {
+		InputDate.removeAttribute('placeholder');
+	} else {
+		InputDate.setAttribute('placeholder','请填写出生日期');
+	}
+	InputDate.onfocus = function(){
+		this.removeAttribute('placeholder');
+	};
+	InputDate.onblur = function(){
+		if(this.value == '') this.setAttribute('placeholder','请填写出生日期');
+	};
+	
+})
+$('#head-icon').on('click', function () {//图片上传按钮
+	$('#file').click();
+	$('#ChangeHead_Div').show();
+});
+
+function hiddenHead() {
+	document.getElementById("file").files = [];
+	$('#ChangeHead_Div').hide();
+}
+
+var body_width = $('body').width();
+var body_height = $('body').height();
+$("#clipArea").photoClip({
+	width: body_width * 0.8125,
+	height: body_width * 0.8125,
+	file: "#file",
+	view: "#hit",
+	ok: "#clipBtn",
+	LeftButton: "#leftButton",
+	RightButton: "#rightButton",
+	loadStart: function () {
+		$('.lazy_tip span').text('');
+		$('.lazy_cover,.lazy_tip').show();
+	},
+	loadComplete: function () {
+		$('.lazy_cover,.lazy_tip').hide();
+	},
+	clipFinish: function (dataURL) {
+		$('#hit').attr('src', dataURL);
+		saveImageInfo();
+	}
+}).click(function() {
+	$('#file').click();
+});
+
+function saveImageInfo() {
+	var filename = $('#hit').attr('fileName');
+	var img_data = $('#hit').attr('src');
+	$('.ChangeHead_Div').hide();
+	$('#head-icon').attr('src', img_data);
+	$('#photo').attr('value',img_data);
+	render(img_data);
+}
+
+var dataurl;
+// 渲染 Image 缩放尺寸
+function render(src) {
+	// Image 缩放尺寸
+	var MAX_HEIGHT = 256; 
+	// 创建一个 Image 对象
+	var image = new Image();
+	// 绑定 load 事件处理器，加载完成后执行
+	image.onload = function() {
+		// 获取 canvas DOM 对象
+		var canvas = document.getElementById("myCanvas");
+		// 如果高度超标
+		if (image.height > MAX_HEIGHT) {
+			// 宽度等比例缩放 *=
+			image.width *= MAX_HEIGHT / image.height;
+			image.height = MAX_HEIGHT;
+		}
+		// 获取 canvas的 2d 环境对象,
+		// 可以理解Context是管理员，canvas是房子
+		var ctx = canvas.getContext("2d");
+		// canvas清屏
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		canvas.width = image.width; // 重置canvas宽高
+		canvas.height = image.height;
+		// 将图像绘制到canvas上
+		ctx.drawImage(image, 0, 0, image.width, image.height);
+		// !!! 注意，image 没有加入到 dom之中
+		dataurl = canvas.toDataURL("image/jpeg");
+		
+		dataurl = dataurl.split(',')[1];
+		
+		dataurl = window.atob(dataurl);
+		var ia = new Uint8Array(dataurl.length);
+		for (var i = 0; i < dataurl.length; i++) {
+		    ia[i] = dataurl.charCodeAt(i);
+		};
+
+		// canvas.toDataURL 返回的默认格式就是 image/png
+		var blob = new Blob([ia], {type:"image/png"});
+		dataurl = blob;
+	};
+	
+	image.src = src;
+}
+
+function deleteCustomer() {
+	Messager._confirm({
+		msg: '您确认删除客户 [${model.name}] 吗？删除后客户资料将无法恢复',
+		okBtn: {
+			text: '确认删除',
+			click: function() {
+				location='customer/deleteMyCustomer.do?customerId=$model.id';
+			}
+		},
+		cancelBtn: {
+			text: '我再想想'
+		}
+	})
+}
+
+function valid(eles) {
+	for (var i = 0; i < eles.length; i++) {
+		var e = eles[i];
+		
+		var obj = document.getElementById(e.id);
+		var stat = obj.validity;
+		
+		if (!stat.valid) {
+			Messager.toast(e.msg);
+			return false;
+		}
+	}
+	return true;
+}
+
+function trySubmit() {
+	
+	if (!valid([{id: 'txtName', msg: '请输入客户名称'}])) {
+		return;
+	}
+	
+	var mobile = document.getElementById('mobileCode');
+	if (mobile.value != '') {
+		var reg = /^0?(13|15|18|14|17)[0-9]{9}$/;
+	    if (!reg.test(mobile.value)) {
+	    	Messager.toast("请输入11位大陆手机号");
+	    	return;
+	    }
+	}
+	
+	var email = document.getElementById('txtEmail');
+	if (email.value != '') {
+		var reEmail=/^(?:\w+\.?)*\w+@([\w\-]+\.){1,2}[a-zA-Z]{2,3}$/;
+		if (!reEmail.test(email.value)) {
+			Messager.toast('邮箱格式不正确哦');
+			return;
+		}
+	}
+	
+	//document.getElementById('editinfom_form').submit();
+	var form = document.getElementById('editinfom_form');
+	
+	ajaxUpload(form, {
+		onData: function(formData) {
+			var f = document.getElementById("file").files;
+			if (f) {
+				formData.append("file", dataurl);
+			}
+		}
+	});
+	
+}
+
+</script>

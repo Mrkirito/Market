@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.ucenter.dao.AccountOrderMapper" >
+  
+  <sql id="account_profit_where">
+	  <where>
+	  		a.type = 1
+	  		<if test="userName != null and userName != ''">AND b.username = #{userName}</if>
+	  		<if test="nickName != null and nickName != ''">AND c.name = #{nickName}</if>
+	  		<if test="orderNo != null and orderNo != ''">AND a.order_no = #{orderNo}</if>
+			<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+				AND DATE(a.create_time) <![CDATA[>=]]> DATE(#{startTime})
+				AND DATE(a.create_time) <![CDATA[<=]]> DATE(#{endTime})
+	  		</if>
+	  </where>
+  </sql>
+  <select id="queryProfitDataCount" parameterType="com.hangjia.bxj.ucenter.query.ProfitQuery" resultType="int">
+  	SELECT
+  		COUNT(1)
+  	FROM
+  	<choose>
+  		<when test="dimension != null and (dimension == 1 or dimension == 2 or dimension == 3)">
+  			(
+  			SELECT COUNT(1) FROM
+		  	uc_user_account_log a
+			LEFT JOIN uc_user b ON a.user_id = b.id
+			LEFT JOIN uc_user_card c ON a.user_id = c.fid
+		  	<include refid="account_profit_where" />
+			<if test="dimension != null and dimension == 1">
+			GROUP BY
+				a.user_id
+			</if>
+			<if test="dimension != null and dimension == 2">
+			GROUP BY
+				DATE(a.create_time)
+			</if>
+			<if test="dimension != null and dimension == 3">
+			GROUP BY
+				a.user_id,
+				DATE(a.create_time)
+			</if>
+			) d
+  		</when>
+  		<otherwise>
+  			(
+  			SELECT COUNT(1) FROM
+		  	uc_user_account_log a
+			LEFT JOIN uc_user b ON a.user_id = b.id
+			LEFT JOIN uc_user_card c ON a.user_id = c.fid
+			<include refid="account_profit_where" />
+			GROUP BY
+				a.id
+			) c
+  		</otherwise>
+  	</choose>
+
+  </select>
+  
+  <select id="queryProfitDataPage" parameterType="com.hangjia.bxj.ucenter.query.ProfitQuery" 
+  		resultType="com.hangjia.bxj.ucenter.model.Profit">
+	SELECT
+	  		a.user_id as "userId",
+	  		b.username as "userName",
+			c.name as "nickName"
+	  	<if test="dimension != null and dimension == 4">
+	  		,a.order_no as "orderNo"
+	  	</if>
+	  	<if test="dimension != null and dimension != 4">
+	  		,sum(a.amount) as "amount"
+	  	</if>
+	  	<if test="dimension != null and dimension == 4">
+	  		,a.amount as "amount"
+	  	</if>
+	  	<if test="dimension != null and (dimension == 2 or dimension == 3)">
+	  		,DATE(a.create_time) as "createTime"
+	  	</if>
+	  	<if test="dimension != null and dimension == 4">
+	  		,a.create_time as "createTime"
+	  	</if>
+	  	<if test="dimension != null and (dimension == 1 or dimension == 3 or dimension == 4)">
+	  		,d.usable_amount as "usableAmount"
+	  	</if>
+	FROM
+		uc_user_account_log a
+	LEFT JOIN uc_user b ON a.user_id = b.id
+	LEFT JOIN uc_user_card c ON a.user_id = c.fid
+	LEFT JOIN uc_user_account d ON a.user_id = d.user_id
+	<include refid="account_profit_where"/>
+	<if test="dimension != null and dimension == 1">
+	GROUP BY
+		a.user_id
+	</if>
+	<if test="dimension != null and dimension == 2">
+	GROUP BY
+		DATE(a.create_time)
+	</if>
+	<if test="dimension != null and dimension == 3">
+	GROUP BY
+		a.user_id,
+		DATE(a.create_time)
+	</if>
+	<if test="dimension != null and dimension == 4">
+	GROUP BY
+		a.id
+	</if>
+    ORDER BY 
+    	a.create_time DESC
+    	<if test="orderBy != null and orderBy != ''">
+    	,#{orderBy}
+    	</if>
+    limit ${pageFirstItem}, ${pageSize}
+  </select>
+  
+  <select id="queryUserByUserId" parameterType="java.util.List" resultType="com.hangjia.bxj.ucenter.model.UcUser">
+  	SELECT
+  		a.id as "id",
+  		b.name as "nickName",
+  		a.mobile as "userName"
+  	FROM
+	  	uc_user a
+  	LEFT JOIN uc_user_card b
+  	ON a.id = b.fid
+	<if test="list != null and list.size() > 0">
+	WHERE
+		a.id IN (
+		<foreach collection="list" item="id" separator=",">
+			#{id}
+		</foreach>
+		)
+	</if>
+  </select>
+  
+  <select id="queryUserIds" parameterType="com.hangjia.bxj.query.order.RewardQuery" resultType="Long">
+  	SELECT
+  		a.id
+  	FROM
+  		uc_user a
+  	LEFT JOIN uc_user_card b
+  	ON a.id = b.fid
+  	<where>
+  		<if test="userName != null and userName != ''">a.mobile = #{userName}</if>
+  		<if test="nickName != null and nickName != ''">AND b.name = #{nickName}</if>
+  	</where>
+  </select>
+  
+  
+  <sql id="account_cash_where">
+	  <where>
+	  		<if test="userId != null">AND a.user_id = #{userId}</if>
+	  		<if test="bankName != null and bankName != ''">AND b.bank_name = #{bankName}</if>
+	  		<if test="bankUserName != null and bankUserName != ''">AND b.bank_user_name = #{bankUserName}</if>
+	  		<if test="bankCityName != null and bankCityName != ''">AND (b.bank_province = #{bankCityName} or b.bank_city = #{bankCityName} or b.bank_county = #{bankCityName})</if>
+	  		<if test="auditStatus != null">AND a.audit_status = #{auditStatus}</if>
+			<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+				AND DATE(a.create_time) <![CDATA[>=]]> DATE(#{startTime})
+				AND DATE(a.create_time) <![CDATA[<=]]> DATE(#{endTime})
+	  		</if>
+	  </where>
+  </sql>
+  <select id="queryCashDataCount" parameterType="com.hangjia.bxj.ucenter.query.CashQuery" resultType="int">
+  	SELECT
+  		COUNT(1)
+  	FROM
+  	<choose>
+  		<when test="dimension != null and (dimension == 1 or dimension == 2 or dimension == 3)">
+  			(
+  			SELECT COUNT(1) FROM
+		  	uc_user_cash a
+			LEFT JOIN uc_user_bank_card b ON a.bank_card_id = b.id
+		  	<include refid="account_cash_where" />
+			<if test="dimension != null and dimension == 1">
+			GROUP BY
+				a.user_id
+			</if>
+			<if test="dimension != null and dimension == 2">
+			GROUP BY
+				DATE(a.create_time)
+			</if>
+			<if test="dimension != null and dimension == 3">
+			GROUP BY
+				a.user_id,
+				DATE(a.create_time)
+			</if>
+			) d
+  		</when>
+  		<otherwise>
+  			(
+  			SELECT COUNT(1) FROM
+				uc_user_cash a
+			LEFT JOIN uc_user_bank_card b ON a.bank_card_id = b.id
+			<include refid="account_cash_where" />
+			GROUP BY
+				a.id
+			) c
+  		</otherwise>
+  	</choose>
+
+  </select>
+  
+  <select id="queryCashDataPage" parameterType="com.hangjia.bxj.ucenter.query.CashQuery" 
+  		resultType="com.hangjia.bxj.ucenter.model.Cash">
+	SELECT
+	  		a.user_id as "userId"
+	  	<if test="dimension != null and dimension == 4">
+	  		,a.id as "id"
+	  		,a.order_no as "orderNo"
+	  		,b.bank_no as "bankNo"
+	  		,a.audit_status as "auditStatus"
+	  		,a.audit_time as "auditTime"
+	  		,a.audit_reason as "auditReason"
+	  		,b.bank_name as "bankName"
+	  		,b.bank_province as "bankProvince"
+	  		,b.bank_city as "bankCity"
+	  		,b.bank_county as "bankCounty"
+	  		,b.bank_branch_name as "bankBranchName"
+	  		,b.bank_user_name as "bankUserName"
+	  	</if>
+	  	<if test="dimension != null and dimension != 4">
+	  		,sum(a.sum_amount) as "sumAmount"
+	  		,sum(a.expected_amount) as "expectedAmount"
+	  		,sum(a.fee) as "fee"
+	  	</if>
+	  	<if test="dimension != null and dimension == 4">
+	  		,a.sum_amount as "sumAmount"
+	  		,a.expected_amount as "expectedAmount"
+	  		,a.fee as "fee"
+	  	</if>
+	  	<if test="dimension != null and (dimension == 2 or dimension == 3)">
+	  		,DATE(a.create_time) as "createTime"
+	  	</if>
+	  	<if test="dimension != null and dimension == 4">
+	  		,a.create_time as "createTime"
+	  	</if>
+	FROM
+		uc_user_cash a
+	LEFT JOIN uc_user_bank_card b ON a.bank_card_id = b.id
+	<include refid="account_cash_where"/>
+	<if test="dimension != null and dimension == 1">
+	GROUP BY
+		a.user_id
+	</if>
+	<if test="dimension != null and dimension == 2">
+	GROUP BY
+		DATE(a.create_time)
+	</if>
+	<if test="dimension != null and dimension == 3">
+	GROUP BY
+		a.user_id,
+		DATE(a.create_time)
+	</if>
+	<if test="dimension != null and dimension == 4">
+	GROUP BY
+		a.id
+	</if>
+    ORDER BY 
+    	a.create_time DESC
+    	<if test="orderBy != null and orderBy != ''">
+    	,#{orderBy}
+    	</if>
+    limit ${pageFirstItem}, ${pageSize}
+  </select>
+  
+  <update id="updateCashStatus" parameterType="com.hangjia.bxj.ucenter.model.Cash">
+    UPDATE uc_user_cash
+    <set >
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="auditReason != null" >
+        audit_reason = #{auditReason,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+        update_time = #{auditTime,jdbcType=TIMESTAMP}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionLecturerMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionLecturer" >
+    <constructor >
+      <arg column="fid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_user" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modify_user" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionLecturer" >
+    insert into champion_lecturer (fid, name, title, 
+      description, create_user, create_at, 
+      modify_user, modify_at)
+    values (#{fid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{createUser,jdbcType=BIGINT}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=BIGINT}, #{modifyAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionLecturer" >
+    insert into champion_lecturer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyUser != null" >
+        modify_user,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

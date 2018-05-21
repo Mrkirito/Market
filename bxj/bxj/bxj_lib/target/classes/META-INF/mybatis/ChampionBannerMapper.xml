@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionBannerMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionBanner" >
+    <constructor >
+      <idArg column="fid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="channel_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="is_display" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="page_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="image_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sort" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="online_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="offline_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="create_user" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="create_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modify_user" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, channel_id, is_display, title, page_url, image_url, sort, online_time, offline_time, 
+    create_user, modify_at, create_at, modify_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_banner
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_banner
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionBanner" >
+    insert into champion_banner (fid, channel_id, is_display, 
+      title, page_url, image_url, 
+      sort, online_time, offline_time, 
+      create_user, modify_at, create_at, 
+      modify_user)
+    values (#{fid,jdbcType=BIGINT}, #{channelId,jdbcType=BIGINT}, #{isDisplay,jdbcType=BIT}, 
+      #{title,jdbcType=VARCHAR}, #{pageUrl,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{onlineTime,jdbcType=TIMESTAMP}, #{offlineTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=BIGINT}, #{modifyAt,jdbcType=TIMESTAMP}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionBanner" >
+    insert into champion_banner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="pageUrl != null" >
+        page_url,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+      <if test="offlineTime != null" >
+        offline_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyUser != null" >
+        modify_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlineTime != null" >
+        #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionBanner" >
+    update champion_banner
+    <set >
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        page_url = #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlineTime != null" >
+        offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionBanner" >
+    update champion_banner
+    set channel_id = #{channelId,jdbcType=BIGINT},
+      is_display = #{isDisplay,jdbcType=BIT},
+      title = #{title,jdbcType=VARCHAR},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+
+  <select id="getBannsersByChannel" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from champion_banner
+    where channel_id = #{channelId,jdbcType=BIGINT} AND is_display=1 and position = 1
+    <if test="date != null and date !=''">
+      and offline_time&gt;STR_TO_DATE(#{date},'%Y-%m-%d %H:%i:%s') and online_time&lt;STR_TO_DATE(#{date},'%Y-%m-%d %H:%i:%s')
+    </if>
+    ORDER BY sort LIMIT 10
+  </select>
+</mapper>

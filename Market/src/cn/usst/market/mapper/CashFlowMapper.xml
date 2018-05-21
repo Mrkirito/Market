@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.CashFlowMapper">
+
+<!-- 第一季度现金流表 -->
+<select id="selectProductByCompanyIdAndQuarter" resultType="cn.usst.market.po.CompanyProduct">
+	select * from company_product where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateCashFlowYanfa">
+	update cash_flow set yanfa_pay=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<select id="selectPhyCompanyMarket" resultType="cn.usst.market.po.CompanyMarket">
+	select * from company_market where is_phy=1 and company_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectOpenByMarketId" resultType="Integer">
+	select ifnull(sum(open),0) as open from market_info2 where id=#{0}
+</select>
+
+<update id="updateCashFlowPhyMarket">
+	update cash_flow set salescenter_pay=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<select id="selectWebCompanyMarket" resultType="cn.usst.market.po.CompanyMarket">
+	select * from company_market where is_phy=0 and company_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectWebOpenByMarketId" resultType="Integer">
+	select ifnull(sum(web_open),0) as web_open from market_info where id=#{0}
+</select>
+
+<update id="updateCashFlowWebMarket">
+	update cash_flow set salescenter_web_pay=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<select id="selectCapacity" resultType="Integer">
+	select ifnull(sum(capacity_add),0) as capacity_add from company_capacity where company_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectInvestByCapacity" resultType="Integer">
+	select ifnull(sum(invest),0) as invest from capacity_info where number=#{0}
+</select>
+
+<update id="updateCashFlowCapacity">
+	update cash_flow set gongchang_pay=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<select id="selectCunru" resultType="Integer"> 
+	select ifnull(sum(cunru),0) from fixed_deposit where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateCashFlowCunkuanPay" >
+	update cash_flow set cunkuan_regular_pay=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateCashFlowLixi">
+	update cash_flow set lixi_get=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<!-- 第一季度利润表 -->
+<update id="updateIncomeStatementYanfa">
+	update income_statement set yanfa=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateIncomeStatementPhyMarket">
+	update income_statement set salescenter_cost=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateIncomeStatementWebMarket">
+	update income_statement set salescenter_web_cost=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateIncomStatementLixi">
+	update income_statement set lixi_income=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+<!--第一季度资产负债表  -->
+<select id="selectStockPrice" resultType="Integer">
+	select ifnull(sum(total_price),0) as total_price from company_stock where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateBalanceSheetCunKuan">
+	update balance_sheet set cunkuan=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateBalanceSheetZiChan">
+	update balance_sheet set zichan=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateBalanceSheetGuBen">
+	update balance_sheet set guben=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateBalanceSheetLiuCun">
+	update balance_sheet set liucun=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateBalanceSheetHuoBi">
+	update balance_sheet set huobi=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<!--第二季度现金  -->
+<select id="selectPrice" resultType="Integer" >
+	select ifnull(sum(price),0) as price from product_price where product_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectDemandNum2" resultType="Integer">
+	select ifnull(sum(demand_num_two),0) as demand_num_two from company_product where id=#{0}
+</select>
+
+<select id="selectDemandNum3" resultType="Integer">
+	select ifnull(sum(demand_num_three),0) as demand_num_three from company_product where id=#{0}
+</select>
+
+<update id="updateCashFlowShouRu" >
+	update cash_flow set xiaoshou_get=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<select id="selectTiQu" resultType="Integer">
+	select ifnull(sum(tiqu),0) as tiqu from fixed_deposit where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateCashFlowTiqu">
+	update cash_flow set cunkuan_regular_get=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<select id="selectCunKuanLast" resultType="Integer">
+	select ifnull(sum(cunkuan_last),0) as cunkuan_last from fixed_deposit where company_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectYouJi" resultType="Integer">
+	select ifnull(sum(youji),0) as  youji from product_price where product_id=#{0}
+</select>
+
+<update id="updateCashFlowYouJi">
+	update cash_flow set fankuan_pay=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<select id="selectReport" resultType="Integer">
+	select ifnull(sum(buy_report),0) as buy_report from company_report where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateCashFlowDiaoYan">
+	update cash_flow set diaoyan_pay=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<update id="updateCashFlowHuoYun">
+	update cash_flow set huoyun_pay =#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+ 
+<select id="selectSaleSalary" resultType="Integer">
+	select ifnull(sum(salary_total),0) as salary_total from sales_salary where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateCashFlowSalerPay">
+	update cash_flow set saler_pay =#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<select id="selectRent" resultType="Integer">
+	select ifnull(sum(rent),0) as rent from market_info2 where id=#{0}
+</select>
+
+<select id="selectWebRent" resultType="Integer">
+	select ifnull(sum(web_rent),0) as web_rent from market_info where id=#{0}
+</select>
+
+<select id="selectProductMedia" resultType="cn.usst.market.po.CompanyMedia">
+	select * from company_media where product_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectMediaCost" resultType="Integer">
+	select ifnull(sum(cost),0) as cost from media_info where id=#{0}
+</select>
+
+<update id="updateCashFlowMediaCost">
+	update cash_flow set guanggao_pay=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<select id="selectKucunNum2" resultType="Integer">
+	select ifnull(sum(inventory_max_two),0) as inventory_max_two from company_product where id=#{0}
+</select>
+
+<select id="selectKucunNum3" resultType="Integer">
+	select ifnull(sum(inventory_max_three),0) as inventory_max_three from company_product where id=#{0}
+</select>
+
+<update id="updateCashFlowKuCun">
+	update cash_flow set kucun_pay=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<!--第二季度利润  -->
+<update id="updateIncomeShouRu" >
+	update income_statement set yingye_income=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<update id="updateIncomeHuoYun" >
+	update income_statement set huoyun=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<update id="updateIncomeDiaoYan" >
+	update income_statement set baogao=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<update id="updateIncomeYouJi" >
+	update income_statement set fankuan=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<update id="updateIncomeGuangGao" >
+	update income_statement set guanggao=#{0} where company_id=#{1} and quarter=#{2} 
+</update>
+
+<select id="selectCashFlow" resultType="cn.usst.market.po.CashFlow">
+	select * from cash_flow where company_id=#{0} and quarter=#{1} 
+</select>
+
+<select id="selectHuoBiLast" resultType="cn.usst.market.po.BalanceSheet">
+	select * from balance_sheet_result where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateCashFlowResult">
+	update cash_flow_result set lixi_get=#{0},yanfa_pay=#{1},guanggao_pay=#{2},saler_pay=#{3},salescenter_pay=#{4},salescenter_web_pay=#{5},diaoyan_pay=#{6},
+	gongchang_pay=#{7},cunkuan_regular_get=#{8},cunkuan_regular_pay=#{9} where company_id=#{10} and quarter=#{11}
+</update>
+
+<select id="selectCashFlowResult" resultType="cn.usst.market.po.CashFlow">
+	select * from cash_flow_result where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateIncomeResult">
+	update income_statement_result set lixi_income=#{0},yanfa=#{1},guanggao=#{2},saler_cost=#{3},salescenter_cost=#{4},salescenter_web_cost=#{5},baogao=#{6}
+	 where company_id=#{7} and quarter=#{8}
+</update>
+
+<select id="selectIncomeStatementResult" resultType="cn.usst.market.po.IncomeStatement">
+	select * from income_statement_result where company_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectBalanceSheetResult" resultType="cn.usst.market.po.BalanceSheet">
+	select * from balance_sheet_result where company_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectBalanceSheet" resultType="cn.usst.market.po.BalanceSheet">
+	select * from balance_sheet where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateBalanceSheetResult">
+	update balance_sheet_result set cunkuan=#{0},zichan=#{1},guben=#{2} where company_id=#{3} and quarter=#{4}
+</update>
+
+<update id="updateBalanceSheetResult2">
+	update balance_sheet_result set huobi=#{0},liucun=#{1} ,cunhuo=#{2} where company_id=#{3} and quarter=#{4}
+</update>
+
+<insert id="insertStock">
+  	insert into company_stock (company_id,quarter,stock_type,owner,stock_number,stock_price,total_price)values(
+  	#{0},#{1},#{2},#{3},#{4},#{5},#{6})
+</insert>
+  
+<select id="showPrice" resultType="cn.usst.market.po.ProductPrice">
+	select * from product_price where product_id=#{0} and quarter=#{1}
+</select>
+
+<select id="showReport" resultType="cn.usst.market.po.CompanyReport">
+	select * from company_report where company_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateIncomeYingYe">
+	update income_statement set yingye_cost=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateIncomeSaler">
+	update income_statement set saler_cost=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<update id="updateIncomeKuCun">
+	update income_statement set kucun=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<select id="showCapacity" resultType="cn.usst.market.po.CompanyCapacity">
+	select * from company_capacity where company_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectProductCost" resultType="Integer">
+	select ifnull(sum(cost),0) as cost from company_product where id=#{0}
+</select>
+
+<update id="updateCashFlowShengChan" >
+	update cash_flow set shengchan_pay=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<select id="selectSaleResult" resultType="Integer">
+	select ifnull(sum(singapore_sale+hongkong_sale+moscow_sale+newdelhi_sale),0) as sale from product_market_share where product_id=#{0} and quarter=#{1}
+</select>
+
+<select id="selectKuCunResult" resultType="Integer">
+	select ifnull(sum(stock),0) as stock from product_market_share where product_id=#{0} and quarter=#{1}
+</select>
+
+<update id="updateCashFlowResult2">
+	update cash_flow_result set xiaoshou_get=#{0},fankuan_pay=#{1},shengchan_pay=#{2},huoyun_pay=#{3},kucun_pay=#{4} where company_id=#{5} and quarter=#{6}
+</update>
+
+<insert id="insertCashFlowResult">
+	insert into cash_flow_result(company_id,quarter,xiaoshou_get,lixi_get,jishu_get,qita_get,fankuan_pay,shengchan_pay,yanfa_pay,guanggao_pay,saler_pay,salescenter_pay,salescenter_web_pay,diaoyan_pay,huoyun_pay,kucun_pay,netmarket_pay,
+	tax_pay,lixi_pay,jishu_pay,qita_pay,gongchang_pay,daikuan_normal_get,daikuan_emergy_get,cunkuan_regular_get,daikuan_normal_pay,daikuan_emergy_pay,cunkuan_regular_pay,yu_e)values(#{0},#{1},0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+</insert>
+
+<insert id="insertIncomeResult">
+	insert into income_statement_result(company_id,quarter,yingye_income,lixi_income,yingye_cost,fankuan,yanfa,guanggao,saler_cost,salescenter_cost,salescenter_web_cost,baogao,huoyun,kucun,excess_capacity,zhejiu,netmarket_cost,
+	lixi_cost,tech_income,qita_income,tech_cost,qita_cost,tax_cost)values(#{0},#{1},0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+</insert>
+
+<update id="updateIncomeResult2">
+	update income_statement_result set yingye_income=#{0},yingye_cost=#{1},fankuan=#{2},huoyun=#{3},kucun=#{4}  where company_id=#{5} and quarter=#{6}
+</update>
+
+<insert id="insertBalanceResult">
+	insert into balance_sheet_result(company_id,quarter,huobi,cunkuan,lixi_collection,cunhuo,zichan,daikuan_emergency,lixi_pay,daikuan_normal,guben,liucun)values(#{0},#{1},0,0,0,0,0,0,0,0,0,0)
+</insert>
+
+<update id="updateBalanceSheetCunHuo">
+	update balance_sheet set cunhuo=#{0} where company_id=#{1} and quarter=#{2}
+</update>
+
+<!-- 产品定价 -->
+  
+	<select id="selectProductPrice2" resultType="cn.usst.market.po.ProductPrice">
+		select product_id as productId,company_id as companyId,price,youji,quarter,is_sale as isSale
+		from product_price
+		where product_id=#{0} and quarter=#{1}
+	</select>
+
+	<insert id="insertProductPrice2">
+		insert into product_price(product_id,company_id,quarter,price,youji,is_sale)values(#{0},#{1},#{2},0,0,1)
+	</insert>
+	
+	<select id="selectCompanyProduct" resultType="cn.usst.market.po.CompanyProduct">
+	select * from company_product where id=#{0}
+</select>
+
+	<select	id="selectProductDemand" resultType="Integer">
+		select ifnull(sum(demand),0) as demand  from company_product_demand where product_id=#{0} and quarter=#{1}
+	</select>
+	
+	<select id="selectProductKuCun" resultType="Integer">
+		select ifnull(sum(inventory),0) as inventory from company_product_inventory where product_id=#{0} and quarter=#{1}
+	</select>
+
+	<select id="showCashFlowResult" resultType="cn.usst.market.po.CashFlow">
+		select * from cash_flow_result where company_id=#{0} and quarter=#{1}
+	</select>
+	
+	<select id="showBalanceSheetResult" resultType="cn.usst.market.po.BalanceSheet">
+		select * from balance_sheet_result where company_id=#{0} and quarter=#{1}
+	</select>
+	
+	<select id="showIncomeStatementResult" resultType="cn.usst.market.po.IncomeStatement">
+		select * from income_statement_result where company_id=#{0} and quarter=#{1}
+	</select>
+	
+	<update id="updateIncomeStatementTax">
+		update income_statement set tax_cost=#{0} where company_id=#{1} and quarter=#{2} 
+	</update>
+	
+	<update id="updateIncomeStatementResultTax">
+		update income_statement_result set tax_cost=#{0} where company_id=#{1} and quarter=#{2} 
+	</update>
+	
+	<update id="updateBalanceSheetResult3">
+		update balance_sheet_result set capital_reserve=#{0} where company_id=#{1} and quarter=#{2} 
+	</update>
+	
+	<update id="updateBalanceSheet3">
+		update balance_sheet set capital_reserve=#{0} where company_id=#{1} and quarter=#{2} 
+	</update>
+	
+	<update id="updateCashFlowJiChu">
+		update cash_flow set yu_e=#{0} where company_id=#{1} and quarter=#{2} 
+	</update>
+	
+	<update id="updateCashFlowResultJiChu">
+		update cash_flow_result set yu_e=#{0} where company_id=#{1} and quarter=#{2} 
+	</update>
+	
+	
+	<select id="selectDemand" resultType="cn.usst.market.po.CompanyProductDemand">
+		select * from company_product_demand where product_id=#{0} and quarter=#{1}
+	</select>
+	
+	<select id="selectInventory" resultType="cn.usst.market.po.CompanyProductInventory">
+		select * from company_product_inventory where product_id=#{0} and quarter=#{1}
+	</select>
+	
+	<update id="updateCashFlowLoan">
+		update cash_flow set daikuan_emergy_get=#{2},daikuan_emergy_pay=#{3} where company_id=#{0} and quarter=#{1}
+	</update>
+	
+	<update id="updateBalanceSheetLoan">
+		update balance_sheet set daikuan_emergency=#{2},lixi_pay=#{3} where company_id=#{0} and quarter=#{1}
+	</update>
+	
+	<update id="updateCashResultLoan">
+		update cash_flow_result set daikuan_emergy_get=#{2},daikuan_emergy_pay=#{3} where company_id=#{0} and quarter=#{1}
+	</update>
+	
+	<update id="updateBalanceSheetResultLoan">
+		update balance_sheet set daikuan_emergency=#{2},lixi_pay=#{3} where company_id=#{0} and quarter=#{1}
+	</update>
+	
+	<select id="selectDecision" resultType="Integer">
+		select ifnull(sum(money),0) as money from company_decision where company_id=#{0}
+	</select>
+	
+	<!--0215  -->
+	<delete id="deleteAllCompanyDecision">
+		delete from company_decision where company_id=#{0}
+	</delete>
+	
+	<!--0408  -->
+	<select id="selectMarketOpen" resultType="cn.usst.market.po.MarketOpenedPo">
+		select * from market_opened where company_id=#{0}
+	</select>
+	
+	<select id="selectMarketWebOpen" resultType="cn.usst.market.po.MarketWebOpened">
+		select * from market_webopened where companyId=#{0} and quarter=#{1}
+	</select>
+	
+</mapper>

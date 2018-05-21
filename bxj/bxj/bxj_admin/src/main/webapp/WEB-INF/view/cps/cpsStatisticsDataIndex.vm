@@ -1,0 +1,110 @@
+$pageModule.init("app/report/cpsDataReport", "list")
+
+<div class="row">
+    <div id="cpsA" style="width: 100%; min-height:300px;"></div>
+</div>
+<div class="row">
+    <div id="cpsB" style="width: 100%; min-height:300px;"></div>
+</div>
+
+<!-- 查询 -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default search">
+            <div class="panel-heading">
+                <h3 class="panel-title">查询条件</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row form ">
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label for="userCode">日期: </label>
+                        <input type="text" class="form-control reportTime" >
+                        <input type="hidden" class="startTime"/>
+                        <input type="hidden" class="endTime"/>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label>&nbsp;</label>
+                        <div class="control">
+                            <button class="btn btn-primary search-data">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 列表 -->
+<div class="data-list" style=""></div>
+<div class="data_info hidden">
+    <div class="form-body">
+		<form id="form">
+            <input type="hidden" name="id">
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>数据日期</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control dataTime" name="dataTime" placeholder="请选择数据日期">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>保险家用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planPv is_number" name="bxjCount" placeholder="请输入保险家用户数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>保险师用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planUv is_number" name="bxsCount" placeholder="请输入保险师用户数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>保险助手用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planMakePopulation is_number" name="bxzsCount" placeholder="请输入保险助手用户数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>保险人用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planMakeCount is_number" name="bxrCount" placeholder="请输入保险人用户数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>随身保典用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planUv is_number" name="ssbdCount" placeholder="请输入随身保典用户数">
+            </div>
+        </div>		
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>聚米用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control studyPv is_number" name="jmCount" placeholder="请输入聚米用户数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>纪家保险用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control studyUv is_number" name="jjbxCount" placeholder="请输入纪家保险用户数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>保险大咖用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control studyNewUv is_number" name="bxdkCount" placeholder="请输入保险大咖用户数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>i云保用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control  is_number" name="iybCount" placeholder="请输入i云保用户数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>保险问问用户数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control  is_number" name="bxwwCount" placeholder="请输入保险问问用户数">
+            </div>
+        </div>
+		</form>
+    </div>
+</div>

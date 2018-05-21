@@ -1,0 +1,40 @@
+<header class="head">
+	<a class="header_left" href="javascript:;history.back(-1)"></a>
+	<h1>邀请函</h1>
+</header>
+
+<div class="container container_invention_list">
+	<div class="view_block">
+			<ul>
+				<li class="clear">
+					<span class="left_span">酒会时间</span>
+					<span class="right_span">$!date.format('yyyy年M月d日（E）H点mm分', $!model.dateAt)</span>
+				</li>
+				<li class="clear">
+					<span class="left_span">地点</span>
+					<span class="right_span">$!model.address</span>
+				</li>
+				#if ($model.appointments.empty)
+				<li class="clear">暂无客户报名</li>
+				#else
+				<li class="clear">报名客户名单</li>
+				#foreach($i in $model.appointments)
+				<li class="clear">
+					<span class="name_span">$!i.name</span>
+					<span class="tel_span">$!i.mobile</span>
+					<a class="phone_icon" href="tel:$!i.mobile"></a>
+				</li>
+				#end
+				#end
+				
+			</ul>
+		</div>
+</div>
+
+<script>
+	(function() {
+		HeadHeight = $('header').height();
+		FooterHeight = $('footer').height();
+		$('.container').css({'max-height': Wheight - FooterHeight - HeadHeight,'margin-top':HeadHeight});
+	})();
+</script>

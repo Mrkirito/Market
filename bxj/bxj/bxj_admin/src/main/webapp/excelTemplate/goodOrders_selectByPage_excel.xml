@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<export-root name="订单详细列表">
+    <export-fields >
+        <export-field name="excelIndex" title="序号"/>
+        <export-field name="id" title="订单主键"/>
+        <export-field name="userId" title="购买人ID"/>
+        <export-field name="goodsName" title="商品名称"/>
+        <export-field name="createTime" title="订单时间" type="Date" dateFormat="yyyy-MM-dd HH:mm:ss"/>
+        <export-field name="orderId" title="订单号"/>
+        <export-field name="payType" title="支付类型"/>
+        <export-field name="quantity" title="购买数量" type="Integer"/>
+        <export-field name="goodsMoney" title="商品金额(元)" type="BigDecimal"/>
+        <export-field name="expressMoney" title="物流金额(元)" type="BigDecimal"/>
+        <export-field name="discountMoeny" title="折扣金额(元)" type="BigDecimal"/>
+        <export-field name="totalMoney" title="总金额(元)" type="BigDecimal"/>
+        <export-field name="shopOrdersDetail.id" title="订单详细主键"/>
+        <export-field name="shopOrdersDetail.name" title="收货人姓名"/>
+        <export-field name="shopOrdersDetail.phone" title="收货人手机号"/>
+        <export-field name="shopOrdersDetail.area" title="地区"/>
+        <export-field name="shopOrdersDetail.address" title="详细地址"/>
+        <export-field name="shopOrdersDetail.expressCompany" title="快递公司"/>
+        <export-field name="shopOrdersDetail.expressNo" title="快递单号"/>
+    </export-fields>
+</export-root>

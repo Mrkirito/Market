@@ -1,0 +1,156 @@
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-pid="687" data-jbbe="10000" data-cpjc="平安平安福终身寿险" style="display:none" data-table="0">
+		<li class="li_product">
+			<dl>
+				<dt>
+					<input class="checkbox-single" type="checkbox" checked disabled> 
+					<label>平安福</label>
+				</dt>
+				<dd>
+					<label class="layer-left-w">缴费年限</label> 
+					<select class="factor" name="jfnx">
+						<option value="12">30年交</option>
+						<option value="11">20年交</option>
+						<option value="10">15年交</option>
+						<option value="9">10年交</option>
+					</select>
+					<span class="arrowr"></span>
+				</dd>
+				<dd>
+					<label class="layer-left-w">保额</label> 
+					<input type="tel"  placeholder="请输入保额" data-pid="687" data-bxnx="6" data-min="200000" data-bxnxtext="终身" data-jbbe="$!product.jbbe" data-cpjc="平安福" class="demo_price factor" value="200000" name="be" maxlength="15">
+					<i class="icon">元</i>
+					<span class="error-tips" style="display:none;"></span>
+				</dd>
+				<dd>
+					<label class="layer-left-w">重疾</label> 
+					<input type="tel"  placeholder="请输入保额" data-pid="688" data-bxnx="6" data-min="150000" data-bxnxtext="终身" data-jbbe="$!product.jbbe" data-cpjc="重疾15" class="demo_price factor" value="150000" name="be" maxlength="15">
+					<i class="icon">元</i>
+					<span class="error-tips" style="display:none;"></span>
+				</dd>
+				<dd>
+					<label class="layer-left-w">意外</label> 
+					<input type="tel"  placeholder="请输入保额" data-pid="689" data-bxnx="144" data-min="200000" data-bxnxtext="至70岁" data-jbbe="$!product.jbbe" data-cpjc="意外13" class="demo_price factor" value="200000" name="be" maxlength="15">
+					<i class="icon">元</i>
+					<span class="error-tips" style="display:none;"></span>
+				</dd>
+			</dl>
+        	<dl>
+                <dt>
+                    <input id="paf-hmc" type="checkbox" class="checkbox-single" value="0" data-bxnx="6" data-bxnxtext="终身" data-jbbe="1000" name="be" data-pid="690" data-cpjc="豁免C" checked disabled>
+                    <label class="disabled">被保人豁免（豁免C加强）</label>
+                </dt>
+            </dl>
+		</li>
+		<li class="li_product baiwan">
+			<dl>
+				<dt>
+					<input class="checkbox-single" type="checkbox" checked disabled> 
+					<label>百万任我行</label>
+				</dt>
+				<dd>
+					<label class="layer-left-w">缴费年限</label> 
+					<input type="text" value="10年交" maxlength="15" name="jfnx" class="disabled" readonly data-id="26">
+				</dd>
+				<dd>
+        			<label class="layer-left-w">保障期限</label>
+        			<select class="factor" name="bxnx">
+        				<option value="23">30年</option>
+						<option value="22">20年</option>
+        			</select>
+        			<span class="arrowr"></span>
+				</dd>
+				<dd>
+					<label class="layer-left-w">份数</label> 
+					<input type="tel" value="1" data-pid="694" data-jbbe="1" data-cpjc="百万任我行" class="demo_price factor disabled" name="be" maxlength="15" readonly>
+					<i class="icon">份</i>
+                </dd>
+			</dl>
+        </li>
+		<li class="li_product ankang">
+			<input type="hidden" name="bxnx" value="1年" class="factor" data-id="90" />
+			<input type="hidden" name="jfnx" value="1年交" class="factor" data-id="63" />
+			<dl>
+				<dt>
+					<input class="checkbox-single" type="checkbox" checked disabled> 
+					<label>安康A</label>
+				</dt>
+				<dd>
+					<label class="layer-left-w">份数</label> 
+					<input type="tel" value="1" data-pid="695" data-jbbe="1" data-cpjc="安康A" class="demo_price factor disabled" name="be" maxlength="15" readonly>
+					<i class="icon">份</i>
+				</dd>
+			</dl>
+        </li>
+	</div>
+	<li class="main_item li_table_0">
+		<div class="creatDes_header">
+				<span class="createDes-title">
+					<em>万福安康组合</em>
+					<em class="price">首年保费：8316.98</em>
+				</span>
+				<span class="createDes-btn">
+					<a class="main_edit_btn">修改</a>
+				</span>
+		</div>
+		<table class="createDes-table">
+			<thead>
+				<tr>
+					<td>险种</td>
+					<td>保额/份数</td>
+					<td>保费</td>
+					<td>保障期</td>
+					<td>缴费期</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>平安福</td>
+					<td>200000</td>
+					<td>2860</td>
+					<td>终身</td>
+					<td>30年</td>
+				</tr>
+				<tr>
+					<td>重疾15</td>
+					<td>150000</td>
+					<td>1230</td>
+					<td>终身</td>
+					<td>30年</td>
+				</tr>
+				<tr>
+					<td>意外13</td>
+					<td>200000</td>
+					<td>780</td>
+					<td>至70岁</td>
+					<td>30年</td>
+				</tr>
+				<tr>
+					<td>豁免C加强</td>
+					<td>-</td>
+					<td>98.98</td>
+					<td>-</td>
+					<td>29年</td>
+				</tr>
+				<tr>
+					<td>百万任我行</td>
+					<td>1份</td>
+					<td>1470</td>
+					<td>30年</td>
+					<td>10年交</td>
+				</tr>
+				<tr>
+    				<td>安康A</td>
+    				<td>1份</td>
+    				<td>1878</td>
+    				<td>1年</td>
+    				<td>1年</td>
+				</tr>
+			</tbody>
+		</table>
+	</li>
+	</ul>
+	
+</div>

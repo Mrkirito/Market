@@ -1,0 +1,120 @@
+## 生成菜单
+#macro (generateMenu $menuList,$sysList )
+	#foreach($sysResult in $sysList)
+		<li class="">
+			<a>
+			<i class="fa fa-youtube-play"></i>
+			<span class="menu-title">${sysResult.navName}</span>
+			<i class="arrow"></i>
+			</a>																			
+			<ul class="collapse #if($sysResult.isActive()) in #end" aria-expanded="false">
+		#foreach($menu in $menuList)
+			#if($sysResult.navCode == $menu.navCode)
+				#set($hasChild = false)
+				#if($menu.children && $menu.children.size() > 0)
+					#set($hasChild = true)
+				#end
+				#if($menu.resourceUrl)
+					#if($menu.isStartHttp())
+						## 如果是http开头说明是外部系统链接 不要封装
+						#set($resourceUrl = $menu.resourceUrl)
+					#else
+						#set($resourceUrl = $social_path + $menu.resourceUrl)
+					#end
+				#end
+				<li class="#if($menu.isActive()) #if($hasChild) active #else active-link #end #end">
+					<a href="#generateMenuUrl($menu)" >
+						#if($menu.resourceIcon)
+							<i class="$menu.resourceIcon"></i>
+						#end
+						<span class="menu-title">$menu.resourceName</span>
+							#if($hasChild)
+								<i class="arrow"></i>
+							#end
+						</a>
+						#if($hasChild)
+							## 渲染子菜单
+							#generateSubMenu($menu, $menu.children)
+						#end
+				</li>
+			#end
+		#end
+		</ul>
+		</li>
+	#end
+#end
+
+## 生成子菜单
+#macro ( generateSubMenu $menu $children )
+
+<ul class="collapse #if($menu.isActive()) in #end">
+
+    #foreach($subMenu in $children)
+        #set($hasChild = false)
+        #if($subMenu.children && $subMenu.children.size() > 0)
+            #set($hasChild = true)
+        #end
+
+        #if($subMenu.resourceUrl)
+            #if($subMenu.isStartHttp())
+            ## 如果是http开头说明是外部系统链接 不要封装
+                #set($resourceUrl = $subMenu.resourceUrl)
+            #else
+                #set($resourceUrl = $social_path + $menu.resourceUrl)
+            #end
+        #end
+
+
+        <li class="#if($subMenu.isActive()) #if($hasChild) active #else active-link #end  #end">
+            <a href="#generateMenuUrl($subMenu)">
+                $subMenu.resourceName
+                #if($hasChild)
+                    <i class="arrow"></i>
+                #end
+            </a>
+
+            #if($hasChild)
+                #generateSubMenu($subMenu, $subMenu.children)
+            #end
+        </li>
+    #end
+
+</ul>
+
+#end
+
+
+#macro ( generateMenuUrl $menu )
+
+    #if($menu.resourceUrl)
+        #if($menu.isStartHttp())
+        ## 如果是http开头说明是外部系统链接 不要封装
+            #set($resourceUrl = $menu.resourceUrl)
+        #else
+            #set($resourceUrl = $social_path + $menu.resourceUrl)
+        #end
+    #end
+
+    #if(!$resourceUrl)
+        #set($resourceUrl = "#")
+    #end
+
+    $resourceUrl
+#end
+
+
+
+<!--Menu-->
+<!--================================-->
+<div id="mainnav-menu-wrap">
+    <div class="nano">
+        <div class="nano-content">
+            <ul id="mainnav-menu" class="list-group">
+				#generateMenu($menuList,$sysList)
+				
+            </ul>
+        </div>
+    </div>
+</div>
+<!--================================-->
+<!--End menu-->

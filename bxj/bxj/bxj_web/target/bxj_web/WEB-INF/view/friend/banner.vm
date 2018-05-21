@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    #set( $static_path = ${configuration.getProperty("urlPath","static_path_v3")})
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>朋友圈神器</title>
+    <link rel="stylesheet" type="text/css" href="$static_path/V3.0/activity/css/friends/friends.css">
+    <link rel="stylesheet" type="text/css" href="$static_path/V3.0/public/css/public.css">
+    <script src="$static_path/V3.0/public/js/flexible.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container container_friends">
+    <div class="img01"></div>
+    <div class="img02"></div>
+    <div class="img03"></div>
+</div>
+</body>
+</html>
+<script src="$static_path/V3.0/public/js/jquery.min.js"></script>
+<script src="$static_path/V3.0/public/js/public.js"></script>
+<script src="$static_path/V3.0/public/js/fastclick.js"></script>
+<script>
+    //快速点击绑定
+    FastClick.attach(document.body);
+    $('.topback_icon').on('click',function(){
+        $('.container').animate({scrollTop:0},1000);
+        return false;
+    })
+</script>
+

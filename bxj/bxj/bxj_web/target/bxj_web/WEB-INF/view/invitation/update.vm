@@ -1,0 +1,115 @@
+#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+<header class="head">
+	<a class="header_left" href="javascript:;history.back(-1)"></a>
+	<h1>修改邀请函</h1>
+	<a class="header_right_font" href="javascript:void(0);" id="delInvitInUp">删除</a>
+</header>
+
+<div class="container container_invention">
+	<div class="crate_new">
+		<form id="updateInvitationForm">
+			<ul>
+				<li class="clear">
+					<span class="left_span">邀请函名称</span>
+					<span class="right_span add_search"><input type="text" placeholder="请输入邀请函名称" name="name" value="$!model.name" maxlength="20"></span>
+					<input type="hidden" name="id" value="$!model.id">
+				</li>
+				<li class="clear">
+					<span class="left_span">酒会时间</span>
+					<span class="right_span">
+						<input id="inv_dateAt" placeholder="请选择酒会时间" name="dateAt" value="$!date.format('yyyy-MM-dd HH:mm', $!model.dateAt)">
+					</span>
+				</li>
+				<li class="clear">
+					<span class="left_span">地点</span>
+					<span class="right_span add_search">
+						<input type="text" placeholder="请输入详细地址" id="tipinput" name="address" autocomplete="off" value="$!model.address" maxlength="200">
+						<a class="search_icon" id="addr_search">
+							<span>搜索</span>
+						</a>
+					</span>
+					<input id="geoLng" name="lng" readonly="readonly" type="hidden" value="$!model.lng">
+					<input id="geoLat" name="lat" readonly="readonly" type="hidden" value="$!model.lat">
+				</li>
+				<li class="clear">
+					<span class="left_span">联系人</span>
+					<span class="right_span add_search"><input type="text" placeholder="请输入联系人姓名" name="contactName" value="$!model.contactName" maxlength="16"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">联系方式</span>
+					<span class="right_span add_search"><input type="tel" placeholder="请输入联系方式" name="contactMobile" maxlength="11" value="$!model.contactMobile"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">邀请函正文</span>
+					<span class="right_span"><textarea placeholder="请填写不超过80字的正文" maxlength="80" rows="3" name="text">$!model.text</textarea></span>
+				</li>
+				<li class="clear noborder">
+					<span class="right_span clear new_row">
+						<div class="map_block" id="map_container">
+						</div>
+					</span>
+				</li>
+			</ul>
+			</form>
+			
+			<button class="preview" id="preview_update">预览</button>
+			<button id="updateBtn">保存修改</button>
+	</div>
+</div>
+
+<script>
+	(function() {
+		HeadHeight = $('header').height();
+		FooterHeight = $('footer').height();
+		$('.container').css({'max-height': Wheight - FooterHeight - HeadHeight,'margin-top':HeadHeight});
+		
+		new Invitation({
+			currentAddr: '$!model.address',
+			form: '#updateInvitationForm',
+			enhanceDate: '#inv_dateAt',
+			previewButton: '#preview_update',
+			initMap: {
+				mapId: 'map_container',
+				addressInput: 'tipinput',
+				lng: '#geoLng',
+				lat: '#geoLat',
+				searchButton: '#addr_search',
+				location: {
+					lat: '$!model.lat',
+					lng: '$!model.lng'
+				}
+			},
+			updateUrl: '$bxj_path/invitation/update.do',
+			updateButton: '#updateBtn',
+			nameExist: function(params) {
+				var f = false;
+				$('.list_block ul li a h1').each(function() {
+			    	if ($(this).html() == params.name) {
+			    		var id = $(this).siblings('input[name=id]').val();
+			    		if (id != params.id) {
+			    			f = true;
+			    			return false;
+			    		}
+			    	}
+			    });
+					
+				return f;
+			},
+			updateSuccess: function(params) {
+				$('.list_block ul li a input[name=id][value=' + params.id + ']').siblings('h1').html(params.name).siblings('p.dateAt').html(params.dateAtCN);
+				history.back(-1);
+			}
+		});
+		
+		$('#delInvitInUp').click(function() {
+			var e = $('.list_block ul li a input[type=hidden][value=$model.id]');
+			if (e.length) {
+				doDeleteInvit('$model.id', '$model.name', e, function() {
+					history.back(-1);
+				});
+			}
+		})
+	})();
+		
+</script>

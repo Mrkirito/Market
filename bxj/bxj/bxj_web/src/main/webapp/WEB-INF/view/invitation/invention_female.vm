@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+ #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+  #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title id="titleID">$invitevo.name</title>
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/invention_share/css/invention_share.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="container container_female">
+		<div class="bg_block">
+			<!-- 正文模块-->
+			<div class="main_block">
+				<!-- 头部正文 -->
+				<div class="main_text">
+					<h2>尊敬的<span id="guestnameID">$invitevo.guestName</span>：</h2>
+					<p id="textvalID">$invitevo.text</p>
+				</div>
+				<!-- 头部正文 结束 -->
+				<!-- 信息模块 -->
+				<div class="list_block">
+					<span class="invent_title">时<span style="visibility: hidden">占占</span>间：</span>
+					<span class="invent_text"  id="dataAtID">$invitevo.dateAtCN</span>
+					<span class="invent_title" >地<span style="visibility: hidden">占占</span>点：</span>
+					<span class="invent_text" id="addressvalID">$invitevo.address</span>
+					<span class="invent_title" >联&nbsp;&nbsp;系&nbsp;人：</span>
+					<span class="invent_text" id="contactNameID">$invitevo.contactName</span>
+					<span class="invent_title">联系方式：</span>
+					<span class="invent_text" id="contactmoileID">$invitevo.contactMobile</span>
+				</div>				
+				<input type="hidden" id="lngID" value="$invitevo.lng" />
+				<input type="hidden" id="latID" value="$invitevo.lat"/>
+				<!-- 信息模块 结束 -->
+				<!-- 地图模块 -->
+				<div class="map_block" id="imgMapFemaID"></div>
+				<!-- 按钮 -->
+			<div id="letmeID"><a class="button_a" onclick="letMeGo()"></a> </div>
+			</div>
+			<!-- 正文模块 结束-->
+
+		</div>
+	</div>
+</body>
+</html>
+ 
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=imgMapFemaID"></script>
+<script>
+	FastClick.attach(document.body);//快速点击绑定
+	
+	loadImgMap();
+	
+	//带我去 
+	function letMeGo(){
+		var lng=$("#lngID").val();
+		var lat=$("#latID").val(); //${bxj_path}
+		var url ='${bxj_path}/map/navigation.page?lng=' + lng + '&lat=' + lat+'&titleName='+$("#titleID").html();
+		if (true) { // 加上 1 表示没 网页列 头
+			url += '&hd=' + 1;
+		}
+		window.location.href=url;
+	}
+	
+	//地图加载 
+	function loadImgMap(){
+		
+		var lng=parseFloat($("#lngID").val());
+		var lat=parseFloat($("#latID").val());
+		if(lat==0&lng==0){
+		   $('#imgMapFemaID').hide();
+		   $('#letmeID').hide();
+		   return;
+		}
+		
+		var newmap = new AMap.Map("imgMapFemaID", {
+	       //  resizeEnable: true,
+	        zoom: 10,
+	        center: [lng,lat]
+		  
+    	}); 
+    	//  map.setZoom(10);
+    	  marker = new AMap.Marker({
+            map: newmap,
+            position: [lng, lat]
+        }); 
+        window["imgMapFemaID"] = newmap;
+	}
+</script>
+
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$invitevo.name',
+                desc: '$invitevo.text',
+                imgUrl: '$static_path/bxj_three/static/invitation/female.png',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+  </script>

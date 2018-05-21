@@ -1,0 +1,115 @@
+<!--头部 开始-->
+$pageModule.init("app/qixi/orders", "list")
+
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-md-3 col-xs-12">
+                                <label>商品&nbsp;</label><br>
+                                <input type="hidden" class="goodsSelect" id="goodsId" />
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>支付方式&nbsp;</label>
+                                <select class="form-control payType">
+                                    <option value="">请选择</option>
+                                    <option value="WX">微信</option>
+                                    <option value="ALIPAY">支付宝</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>支付状态&nbsp;</label>
+                                <select class="form-control status">
+                                    <option value="">请选择</option>
+                                    <option value="5">支付成功</option>
+                                    <option value="1">待支付</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>收货人</label>
+                                <input placeholder="收货人" type="text" class="form-control name">
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>收货人手机号</label>
+                                <input placeholder="收货人手机号" type="text" class="form-control phone">
+                            </div>
+                            <div class="form-group col-md-3 col-xs-12">
+                                <label>快递单号</label>
+                                <input placeholder="快递单号" type="text" class="form-control expressNo">
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>下单时间</label>
+                                <div class="input-group" style="width:100%">
+                                    <input type="text" class="form-control sOnlineTime datetimepicker-icon createTime1" placeholder="" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-1 col-xs-1" style="width:35px">
+                                <label>&nbsp;</label>
+                                <div class="input-group">
+                                    ~
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>&nbsp;</label>
+                                <div class="input-group" style="width:100%">
+                                    <input type="text" class="form-control sOnlineTime datetimepicker-icon createTime2" placeholder="" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>填写地址时间</label>
+                                <div class="input-group" style="width:100%">
+                                    <input type="text" class="form-control sOnlineTime datetimepicker-icon addressTime1" placeholder="" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-1 col-xs-1" style="width:35px">
+                                <label>&nbsp;</label>
+                                <div class="input-group">
+                                    ~
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>&nbsp;</label>
+                                <div class="input-group" style="width:100%">
+                                    <input type="text" class="form-control sOnlineTime datetimepicker-icon addressTime2" placeholder="" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="data-list">
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+</div>
+
+<!--add update 修改 -->
+<div class="hidden" id="dialog">
+    <div class="form-body">
+        <div class="circleTextclass">
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">快递单号</label>
+
+                <div class="input-group col-md-9">
+                    <input type="hidden" id="id">
+                    <input type="text" class="form-control" id="expressNoAdd" placeholder="快递单号">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

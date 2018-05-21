@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.tjgl.AppDataPushStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.tjgl.AppDataPushStatistics" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="data_time" property="dataTime" jdbcType="TIMESTAMP" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="sub_category" property="subCategory" jdbcType="VARCHAR" />
+    <result column="ios_push_success_count" property="iosPushSuccessCount" jdbcType="BIGINT" />
+    <result column="ios_click_count" property="iosClickCount" jdbcType="BIGINT" />
+    <result column="ios_click_rate" property="iosClickRate" jdbcType="DECIMAL" />
+    <result column="android_push_success_count" property="androidPushSuccessCount" jdbcType="BIGINT" />
+    <result column="android_click_count" property="androidClickCount" jdbcType="BIGINT" />
+    <result column="android_click_rate" property="androidClickRate" jdbcType="DECIMAL" />
+    <result column="push_success_count" property="pushSuccessCount" jdbcType="BIGINT" />
+    <result column="click_count" property="clickCount" jdbcType="BIGINT" />
+    <result column="click_rate" property="clickRate" jdbcType="DECIMAL" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, data_time, content, category, sub_category, ios_push_success_count, ios_click_count, 
+    ios_click_rate, android_push_success_count, android_click_count, android_click_rate, 
+    push_success_count, click_count, click_rate, create_name, create_time, update_name, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_app_data_push_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_app_data_push_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.tjgl.AppDataPushStatistics" >
+    insert into bxj_app_data_push_statistics (id, data_time, content, 
+      category, sub_category, ios_push_success_count, 
+      ios_click_count, ios_click_rate, android_push_success_count, 
+      android_click_count, android_click_rate, push_success_count, 
+      click_count, click_rate, create_name, 
+      create_time, update_name, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{dataTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{subCategory,jdbcType=VARCHAR}, #{iosPushSuccessCount,jdbcType=BIGINT}, 
+      #{iosClickCount,jdbcType=BIGINT}, #{iosClickRate,jdbcType=DECIMAL}, #{androidPushSuccessCount,jdbcType=BIGINT}, 
+      #{androidClickCount,jdbcType=BIGINT}, #{androidClickRate,jdbcType=DECIMAL}, #{pushSuccessCount,jdbcType=BIGINT}, 
+      #{clickCount,jdbcType=BIGINT}, #{clickRate,jdbcType=DECIMAL}, #{createName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.tjgl.AppDataPushStatistics" >
+    insert into bxj_app_data_push_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dataTime != null" >
+        data_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="subCategory != null" >
+        sub_category,
+      </if>
+      <if test="iosPushSuccessCount != null" >
+        ios_push_success_count,
+      </if>
+      <if test="iosClickCount != null" >
+        ios_click_count,
+      </if>
+      <if test="iosClickRate != null" >
+        ios_click_rate,
+      </if>
+      <if test="androidPushSuccessCount != null" >
+        android_push_success_count,
+      </if>
+      <if test="androidClickCount != null" >
+        android_click_count,
+      </if>
+      <if test="androidClickRate != null" >
+        android_click_rate,
+      </if>
+      <if test="pushSuccessCount != null" >
+        push_success_count,
+      </if>
+      <if test="clickCount != null" >
+        click_count,
+      </if>
+      <if test="clickRate != null" >
+        click_rate,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dataTime != null" >
+        #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="subCategory != null" >
+        #{subCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="iosPushSuccessCount != null" >
+        #{iosPushSuccessCount,jdbcType=BIGINT},
+      </if>
+      <if test="iosClickCount != null" >
+        #{iosClickCount,jdbcType=BIGINT},
+      </if>
+      <if test="iosClickRate != null" >
+        #{iosClickRate,jdbcType=DECIMAL},
+      </if>
+      <if test="androidPushSuccessCount != null" >
+        #{androidPushSuccessCount,jdbcType=BIGINT},
+      </if>
+      <if test="androidClickCount != null" >
+        #{androidClickCount,jdbcType=BIGINT},
+      </if>
+      <if test="androidClickRate != null" >
+        #{androidClickRate,jdbcType=DECIMAL},
+      </if>
+      <if test="pushSuccessCount != null" >
+        #{pushSuccessCount,jdbcType=BIGINT},
+      </if>
+      <if test="clickCount != null" >
+        #{clickCount,jdbcType=BIGINT},
+      </if>
+      <if test="clickRate != null" >
+        #{clickRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.tjgl.AppDataPushStatistics" >
+    update bxj_app_data_push_statistics
+    <set >
+      <if test="dataTime != null" >
+        data_time = #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="subCategory != null" >
+        sub_category = #{subCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="iosPushSuccessCount != null" >
+        ios_push_success_count = #{iosPushSuccessCount,jdbcType=BIGINT},
+      </if>
+      <if test="iosClickCount != null" >
+        ios_click_count = #{iosClickCount,jdbcType=BIGINT},
+      </if>
+      <if test="iosClickRate != null" >
+        ios_click_rate = #{iosClickRate,jdbcType=DECIMAL},
+      </if>
+      <if test="androidPushSuccessCount != null" >
+        android_push_success_count = #{androidPushSuccessCount,jdbcType=BIGINT},
+      </if>
+      <if test="androidClickCount != null" >
+        android_click_count = #{androidClickCount,jdbcType=BIGINT},
+      </if>
+      <if test="androidClickRate != null" >
+        android_click_rate = #{androidClickRate,jdbcType=DECIMAL},
+      </if>
+      <if test="pushSuccessCount != null" >
+        push_success_count = #{pushSuccessCount,jdbcType=BIGINT},
+      </if>
+      <if test="clickCount != null" >
+        click_count = #{clickCount,jdbcType=BIGINT},
+      </if>
+      <if test="clickRate != null" >
+        click_rate = #{clickRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.tjgl.AppDataPushStatistics" >
+    update bxj_app_data_push_statistics
+    set data_time = #{dataTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      sub_category = #{subCategory,jdbcType=VARCHAR},
+      ios_push_success_count = #{iosPushSuccessCount,jdbcType=BIGINT},
+      ios_click_count = #{iosClickCount,jdbcType=BIGINT},
+      ios_click_rate = #{iosClickRate,jdbcType=DECIMAL},
+      android_push_success_count = #{androidPushSuccessCount,jdbcType=BIGINT},
+      android_click_count = #{androidClickCount,jdbcType=BIGINT},
+      android_click_rate = #{androidClickRate,jdbcType=DECIMAL},
+      push_success_count = #{pushSuccessCount,jdbcType=BIGINT},
+      click_count = #{clickCount,jdbcType=BIGINT},
+      click_rate = #{clickRate,jdbcType=DECIMAL},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+<!--#########################################################################-->
+
+  <!--查询条件-->
+  <sql id="Public_Query_Conditions">
+    <where>
+      <if test="startTime != null and endTime != null">
+        AND
+        DATE(data_time) <![CDATA[>=]]> DATE(#{startTime})
+        AND
+        DATE(data_time) <![CDATA[<=]]> DATE(#{endTime})
+      </if>
+    </where>
+  </sql>
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+  <!-- 查询总条数 -->
+  <select id="selectByCount" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    SELECT
+    COUNT(*)
+    FROM bxj_app_data_push_statistics
+    <include refid="Public_Query_Conditions" />
+  </select>
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Base_Column_List" />
+    FROM bxj_app_data_push_statistics
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas"/>
+    <include refid="Public_Page" />
+  </select>
+  <!-- 查询总条数 -->
+  <select id="selectCountByQuery" resultType="int" parameterType="com.hangjia.bxj.query.tjgl.AppDataPushStatisticsQuery" >
+    select
+    count(*)
+    FROM bxj_app_data_push_statistics
+    <include refid="Public_Query_Conditions" />
+  </select>
+  <!-- 分页查询 -->
+  <select id="selectPageByQuery" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.query.tjgl.AppDataPushStatisticsQuery" >
+    select
+    <include refid="Base_Column_List" />
+    FROM bxj_app_data_push_statistics
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas"/>
+    <include refid="Public_Page" />
+  </select>
+
+  <select id="getAppDataPushStatisticsByDate" resultType="int" parameterType="java.lang.String" >
+    select count(*) from bxj_app_data_push_statistics where date_format(data_time,'%Y%m%d') = #{date}
+  </select>
+
+  <select id="selectByCategory" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from bxj_app_data_push_statistics
+    where category = #{avgVal,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAvgByAllData" resultMap="BaseResultMap">
+    SELECT
+      TRUNCATE(AVG(ios_push_success_count),0) ios_push_success_count,
+      TRUNCATE(AVG(ios_click_count),0) ios_click_count,
+      TRUNCATE(AVG(ios_click_rate),2) ios_click_rate,
+      TRUNCATE(AVG(android_push_success_count),0) android_push_success_count,
+      TRUNCATE(AVG(android_click_count),0) android_click_count,
+      TRUNCATE(AVG(android_click_rate),2) android_click_rate,
+      TRUNCATE(AVG(push_success_count),0) push_success_count,
+      TRUNCATE(AVG(click_count),0) click_count,
+      TRUNCATE(AVG(click_rate),2) click_rate
+    FROM `bxj_app_data_push_statistics`
+  </select>
+
+  <select id="getEveryDaySumRate" resultMap="BaseResultMap">
+    SELECT DATE(data_time) data_time,
+        SUM(ios_click_rate) ios_click_rate,
+        SUM(android_click_rate) android_click_rate,
+        SUM(click_rate) click_rate
+   FROM `bxj_app_data_push_statistics`
+   GROUP BY DATE(data_time)
+
+  </select>
+
+  <select id="getAmPushData" resultMap="BaseResultMap">
+    SELECT * FROM ( SELECT CASE
+    WHEN DATE_FORMAT(data_time,'%H') <![CDATA[<]]> 12 THEN data_time
+    END AS data_time ,ios_click_rate,android_click_rate,click_rate
+    FROM bxj_app_data_push_statistics) s
+    WHERE s.data_time IS NOT NULL
+    ORDER BY s.data_time
+  </select>
+  <select id="getPmPushData" resultMap="BaseResultMap">
+    SELECT * FROM ( SELECT CASE
+    WHEN DATE_FORMAT(data_time,'%H') <![CDATA[>=]]> 12 THEN data_time
+    END AS data_time ,ios_click_rate,android_click_rate,click_rate
+    FROM bxj_app_data_push_statistics) s
+    WHERE s.data_time IS NOT NULL
+    ORDER BY s.data_time
+  </select>
+
+</mapper>

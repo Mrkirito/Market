@@ -1,0 +1,284 @@
+$pageModule.init("app/ticket/ticket33", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>订单ID&nbsp;</label>
+								<input type="text" class="form-control" name="searchOrderId" value="$!orderId">
+							</div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>支付时间&nbsp;</label>
+								<input type="text" class="form-control reportTime" value="">
+								<input type="hidden" class="startTime" value=""/>
+                                <input type="hidden" class="endTime" value=""/>
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>会议名称&nbsp;</label>
+								<select class="form-control" name="basicId">
+                                    <option value="">请选择</option>
+									#foreach($s in $surplusTickets)
+                                        <option value="$!s.basicId">$!s.activityName</option>
+									#end
+                                </select>
+                            </div>
+							#if($salemans.size()>1)
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>销售人员&nbsp;</label>
+    								<select class="form-control channelId">
+                                        <option value="">请选择</option>
+    									#foreach($man in $salemans)
+                                            <option value="$!man.fid">$!man.name</option>
+    									#end
+                                    </select>
+                            </div>
+							#else
+								#foreach($man in $salemans)
+									<input class="channelId" type="hidden" value="$!man.fid" /> 
+								#end
+							#end	
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>参会人姓名&nbsp;</label>
+								<input type="text" class="form-control" name="userName">
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>参会人电话&nbsp;</label>
+								<input type="text" class="form-control" name="userPhone">
+							</div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>购买人电话&nbsp;</label>
+								<input type="text" class="form-control" name="buyTel">
+							</div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>填写状态&nbsp;</label>
+								<select class="form-control" name="attendState">
+                                    <option value="">请选择</option>
+                                    <option value="1">已全填写</option>
+									<option value="2">待补填</option>
+                                </select>
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>参会人员状态&nbsp;</label>
+								<select class="form-control" name="state">
+                                    <option value="">请选择</option>
+                                    <option value="2">已入场</option>
+									<option value="1">待入场</option>
+                                </select>
+                            </div>
+							<div class="form-group col-md-1 col-xs-12">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+																				<div class="form-group col-md-1 col-xs-12">
+								 <button class="btn btn-primary clear-action">清空</button>
+													</div>
+						</div>
+						<!--
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                            </div>
+                        </div>
+						-->
+                    </div>
+                </div>
+            </div>
+			<div class="data-list2"></div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+</div>
+<div class="video-tpl hidden">
+	<form id="form">
+	<input type="hidden" name="fid" />
+	<input type="hidden" name="orderId" />
+	<input type="hidden" name="basicId" />
+    <div class="form-body">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">会议名称</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="activityName" readonly >
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">座位</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="sit" readonly >
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">参会人姓名</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="userName">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">参会人电话</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="userPhone">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">参会人公司</label>
+			<div class="col-md-9">
+					<select name="company" class="form-control" >
+                                        <option value="">请选择公司</option>
+										<option value="平安">平安</option>
+                                        <option value="阳光">阳光</option>
+                                        <option value="太平">太平</option>
+                                        <option value="太平洋">太平洋</option>
+                                        <option value="同方全球">同方全球</option>
+                                        <option value="泰康">泰康</option>
+                                        <option value="国寿">国寿</option>
+                                        <option value="新华">新华</option>
+                                        <option value="华夏">华夏</option>
+                                        <option value="人保寿">人保寿</option>
+                                        <option value="中英人寿">中英人寿</option>
+                                        <option value="中荷">中荷</option>
+                                        <option value="人保健康">人保健康</option>
+                                        <option value="民生">民生</option>
+                                        <option value="富德生命">富德生命</option>
+                                        <option value="国华">国华</option>
+                                        <option value="信泰">信泰</option>
+                                        <option value="华泰">华泰</option>
+                                        <option value="中宏">中宏</option>
+                                        <option value="利安人寿">利安人寿</option>
+                                        <option value="英大">英大</option>
+                                        <option value="北大方正">北大方正</option>
+                                        <option value="东吴人寿">东吴人寿</option>
+                                        <option value="光大永明">光大永明</option>
+                                        <option value="君龙人寿">君龙人寿</option>
+                                        <option value="昆仑健康">昆仑健康</option>
+                                        <option value="信诚人寿">信诚人寿</option>
+                                        <option value="中韩人寿">中韩人寿</option>
+                                        <option value="工银安盛">工银安盛</option>
+                                        <option value="中意人寿">中意人寿</option>
+                                        <option value="幸福人寿">幸福人寿</option>
+                                        <option value="长城人寿">长城人寿</option>
+                                        <option value="百年人寿">百年人寿</option>
+                                        <option value="陆家嘴国泰">陆家嘴国泰</option>
+                                        <option value="友邦">友邦</option>
+                                        <option value="合众人寿">合众人寿</option>
+                                        <option value="中德安联">中德安联</option>
+                                        <option value="农银人寿">农银人寿</option>
+                                        <option value="珠江人寿">珠江人寿</option>
+                                        <option value="复星保德信">复星保德信</option>
+                                        <option value="大都会人寿">大都会人寿</option>
+                                        <option value="天安人寿">天安人寿</option>
+                                        <option value="恒安标准">恒安标准</option>
+                                        <option value="其他">其他</option>																				
+									</select>	
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">参会人营业区</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="businessHall">				
+			</div>
+		</div>		
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">是否要发送短信</label>
+			<div class="col-md-9">
+				<select class="form-control" name="sendInfo">
+					<option value="1">是</option>
+					<option value="2">否</option>
+                </select>
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="headline-banner-tpl hidden clearMeet">
+    <div class="form-body">
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">会议名称</label>
+            <div class="input-group col-md-9">
+                <select class="form-control basicId">
+                    <option disabled='disabled' selected>请选择</option>
+					#foreach($s in $surplusTickets)
+                        <option value="$!s.basicId">$!s.activityName</option>
+					#end
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+	
+
+
+<div class="orders_price_list" style="display: none;">
+    <div class="page-toolbar" style="float: right; margin-top: -20px; margin-bottom: 10px;">
+        <div class="btn-group page-toolbar-list orders_price_toolbar"></div>
+    </div>
+
+    <!-- 查询 -->
+    <div class="search" style="margin-bottom: 15px;">
+        <div class="search-condition">
+			<!--
+            <div class="col-sm-3 condition-row">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">会议</label>
+                    <div class="col-md-8">
+                        <div class="">
+								<select class="form-control doc_basicId">
+                                    <option value="">请选择</option>
+									#foreach($s in $surplusTickets)
+                                        <option value="$!s.fid">$!s.activityName</option>
+									#end
+                                </select>                           
+                        </div>
+                    </div>
+                </div>
+			</div>-->
+			<div class="col-sm-3 condition-row">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">原座位</label>
+                    <div class="col-md-8">
+                        <div class="">
+							<input type="text" class="old_sit" disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 condition-row">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">票源</label>
+                    <div class="col-md-8">
+                        <div class="">
+    								<select class="form-control doc_state">
+										<option value="4">锁定</option>
+										<option value="3">回源票</option>
+                                        <option value="0">待售</option>
+    								</select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 condition-row">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">排</label>
+                    <div class="col-md-8">
+                        <div class="">
+                            <input type="input" class="form-control doc_rows" placeholder="请输入排" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-buttons">
+            <div class="btn-group">
+                <a href="javascript:void(0);" class="btn btn-default search-money">查询</a>
+            </div>
+        </div>
+    </div>
+    <div class='sit_document_list'>
+    </div>
+</div>

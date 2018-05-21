@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.znb.cms.dao.mapper.InsureMapper" >
+  <resultMap id="BaseResultMap" type="com.znb.cms.model.mapper.Insure" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="instit_code" property="institCode" jdbcType="VARCHAR" />
+    <result column="license" property="license" jdbcType="VARCHAR" />
+    <result column="receipt_type" property="receiptType" jdbcType="VARCHAR" />
+    <result column="linkman" property="linkman" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="tax_reg_number" property="taxRegNumber" jdbcType="VARCHAR" />
+    <result column="tax_reg_address" property="taxRegAddress" jdbcType="VARCHAR" />
+    <result column="tax_reg_tel" property="taxRegTel" jdbcType="VARCHAR" />
+    <result column="tax_bank_account" property="taxBankAccount" jdbcType="VARCHAR" />
+    <result column="tax_bank_name" property="taxBankName" jdbcType="VARCHAR" />
+    <result column="mailing_address" property="mailingAddress" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, company_name, instit_code, license, receipt_type, linkman, telephone, province, 
+    city, area, user_id, tax_reg_number, tax_reg_address, tax_reg_tel, tax_bank_account, 
+    tax_bank_name, mailing_address, email, img_url, legal_person, message
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dt_insure
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dt_insure
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.znb.cms.model.mapper.Insure" >
+    insert into dt_insure (id, company_name, instit_code, 
+      license, receipt_type, linkman, 
+      telephone, province, city, 
+      area, user_id, tax_reg_number, 
+      tax_reg_address, tax_reg_tel, tax_bank_account, 
+      tax_bank_name, mailing_address, email, 
+      img_url, legal_person, message
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{institCode,jdbcType=VARCHAR}, 
+      #{license,jdbcType=VARCHAR}, #{receiptType,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{taxRegNumber,jdbcType=VARCHAR}, 
+      #{taxRegAddress,jdbcType=VARCHAR}, #{taxRegTel,jdbcType=VARCHAR}, #{taxBankAccount,jdbcType=VARCHAR}, 
+      #{taxBankName,jdbcType=VARCHAR}, #{mailingAddress,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{legalPerson,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.znb.cms.model.mapper.Insure" >
+    insert into dt_insure
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="institCode != null" >
+        instit_code,
+      </if>
+      <if test="license != null" >
+        license,
+      </if>
+      <if test="receiptType != null" >
+        receipt_type,
+      </if>
+      <if test="linkman != null" >
+        linkman,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="taxRegNumber != null" >
+        tax_reg_number,
+      </if>
+      <if test="taxRegAddress != null" >
+        tax_reg_address,
+      </if>
+      <if test="taxRegTel != null" >
+        tax_reg_tel,
+      </if>
+      <if test="taxBankAccount != null" >
+        tax_bank_account,
+      </if>
+      <if test="taxBankName != null" >
+        tax_bank_name,
+      </if>
+      <if test="mailingAddress != null" >
+        mailing_address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+      <if test="legalPerson != null" >
+        legal_person,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="institCode != null" >
+        #{institCode,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null" >
+        #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptType != null" >
+        #{receiptType,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="taxRegNumber != null" >
+        #{taxRegNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegAddress != null" >
+        #{taxRegAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegTel != null" >
+        #{taxRegTel,jdbcType=VARCHAR},
+      </if>
+      <if test="taxBankAccount != null" >
+        #{taxBankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="taxBankName != null" >
+        #{taxBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="mailingAddress != null" >
+        #{mailingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null" >
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.znb.cms.model.mapper.Insure" >
+    update dt_insure
+    <set >
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="institCode != null" >
+        instit_code = #{institCode,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null" >
+        license = #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptType != null" >
+        receipt_type = #{receiptType,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="taxRegNumber != null" >
+        tax_reg_number = #{taxRegNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegAddress != null" >
+        tax_reg_address = #{taxRegAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegTel != null" >
+        tax_reg_tel = #{taxRegTel,jdbcType=VARCHAR},
+      </if>
+      <if test="taxBankAccount != null" >
+        tax_bank_account = #{taxBankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="taxBankName != null" >
+        tax_bank_name = #{taxBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="mailingAddress != null" >
+        mailing_address = #{mailingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null" >
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.znb.cms.model.mapper.Insure" >
+    update dt_insure
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      instit_code = #{institCode,jdbcType=VARCHAR},
+      license = #{license,jdbcType=VARCHAR},
+      receipt_type = #{receiptType,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      tax_reg_number = #{taxRegNumber,jdbcType=VARCHAR},
+      tax_reg_address = #{taxRegAddress,jdbcType=VARCHAR},
+      tax_reg_tel = #{taxRegTel,jdbcType=VARCHAR},
+      tax_bank_account = #{taxBankAccount,jdbcType=VARCHAR},
+      tax_bank_name = #{taxBankName,jdbcType=VARCHAR},
+      mailing_address = #{mailingAddress,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

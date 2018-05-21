@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.prize.EggPrizeMapper" >
+
+	<insert id="batchSaveEggPrize" parameterType="java.util.List">
+	  insert into champion_egg_prize
+	  	  (
+	      name,
+	      amount,
+	      total_num,
+	      usable_num,
+	      probability,
+	      amount_limit,
+	      type,
+	      level,
+	      max_count,
+	      is_enable,
+	      prize_img,
+	      context_img,
+	      create_by,
+	      create_time
+	      )
+	  VALUES
+      <foreach collection="list" item="eggPrize" index="index" separator="," > 
+      	  (
+          #{eggPrize.name},
+          #{eggPrize.amount},
+          #{eggPrize.totalNum},
+          #{eggPrize.totalNum},
+          #{eggPrize.probability},
+          #{eggPrize.amountLimit},
+          #{eggPrize.type},
+          #{eggPrize.level},
+          #{eggPrize.maxCount},
+          0,
+      	  #{eggPrize.prizeImg},
+          #{eggPrize.contextImg},
+          #{eggPrize.createName},
+          now()
+          )
+      </foreach>
+	</insert>
+	
+	<select id="queryEggDataCount" parameterType="com.hangjia.bxj.query.prize.EggPrizeQuery" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			champion_egg_prize a
+		<include refid="egg_prize_where"/>
+	</select>
+	
+	<select id="queryEggDataPage" parameterType="com.hangjia.bxj.query.prize.EggPrizeQuery" resultType="com.hangjia.bxj.model.prize.EggPrizeDO">
+		SELECT
+			a.id as "id",
+			a.name as "name",
+			a.amount as "amount",
+			a.total_num as "totalNum",
+			a.usable_num as "usableNum",
+			a.used_num as "usedNum",
+			a.probability as "probability",
+			a.amount_limit as "amountLimit",
+			a.max_count as "maxCount",
+			a.type as "type",
+			a.unit as "unit",
+			a.level as "level",
+			a.is_enable as "isEnable",
+			a.prize_img as "prizeImg",
+			a.context_img as "contextImg",
+			a.create_by as "createName",
+			a.create_time as "createTime",
+			a.modify_by as "updateName",
+			a.update_time as "updateTime",
+			a.version as "version"
+		FROM
+			champion_egg_prize a
+		<include refid="egg_prize_where"/>
+	    ORDER BY 
+	    a.is_enable DESC,
+    	a.create_time DESC
+    	<if test="orderBy != null and orderBy != ''">
+    	,#{orderBy}
+    	</if>
+    	LIMIT ${pageFirstItem}, ${pageSize}
+	</select>
+	
+	<select id="queryAllEggPrizes" parameterType="com.hangjia.bxj.query.prize.EggPrizeQuery" resultType="com.hangjia.bxj.model.prize.EggPrizeDO">
+		SELECT
+			a.id as "id",
+			a.name as "name"
+		FROM
+			champion_egg_prize a
+		WHERE
+			a.is_enable = 1
+			<if test="name != null and name != ''">
+			AND	a.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+	</select>
+	<sql id="egg_prize_where">
+		<where>
+			<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+				AND DATE(a.create_time) <![CDATA[>=]]> DATE(#{startTime})
+				AND DATE(a.create_time) <![CDATA[<=]]> DATE(#{endTime})
+	  		</if>
+	  		<if test="isEnable != null">AND a.is_enable = #{isEnable}</if>
+	  		<if test="name != null and name != ''">AND a.name = #{name}</if>
+		</where>
+	</sql>
+	
+	<select id="isExistHundredPercent" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			champion_egg_prize a
+		WHERE
+			a.is_enable = 1
+		AND	a.probability = 100
+	</select>
+	
+	<update id="updateEggPrizeEnable" parameterType="com.hangjia.bxj.model.prize.EggPrizeDO">
+	    UPDATE champion_egg_prize
+	    <set>
+	        is_enable = #{isEnable,jdbcType=INTEGER},
+	        update_time = #{updateTime,jdbcType=TIMESTAMP},
+	        modify_by = #{updateName,jdbcType=VARCHAR}
+	    </set>
+	    WHERE id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="updatePrize" parameterType="com.hangjia.bxj.model.prize.EggPrizeDO">
+	    UPDATE champion_egg_prize
+	    SET
+	        total_num = #{totalNum,jdbcType=INTEGER},
+	        usable_num = #{usableNum,jdbcType=INTEGER},
+	        probability = #{probability,jdbcType=DECIMAL},
+	        amount_limit = #{amountLimit,jdbcType=DECIMAL},
+	        level = #{level,jdbcType=INTEGER},
+	        version = #{version,jdbcType=BIGINT} + 1,
+	        update_time = #{updateTime,jdbcType=TIMESTAMP},
+	        modify_by = #{updateName,jdbcType=VARCHAR}
+	    WHERE 
+	    	id = #{id,jdbcType=BIGINT}
+	    AND
+	    	version = #{version,jdbcType=BIGINT}
+	</update>
+	
+	<!-- 砸蛋奖品增量 start -->
+	<select id="queryEggInDataCount" parameterType="com.hangjia.bxj.query.prize.EggPrizeInQuery" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			champion_egg_prize_increment a
+		LEFT JOIN
+			champion_egg_prize b
+		ON	a.prize_id = b.id
+		<include refid="egg_prize_in_where"/>
+	</select>
+	
+	<select id="queryEggInDataPage" parameterType="com.hangjia.bxj.query.prize.EggPrizeInQuery" resultType="com.hangjia.bxj.model.prize.EggPrizeInDO">
+		SELECT
+			a.id as "id",
+			a.prize_id as "prizeId",
+			a.increment_num as "incrementNum",
+			a.amount_limit as "amountLimit",
+			a.status as "status",
+			a.create_by as "createName",
+			a.create_time as "createTime",
+			a.modify_by as "updateName",
+			a.update_time as "updateTime",
+			b.name as "name"
+		FROM
+			champion_egg_prize_increment a
+		LEFT JOIN
+			champion_egg_prize b
+		ON	a.prize_id = b.id
+		<include refid="egg_prize_in_where"/>
+	    ORDER BY 
+	    a.status DESC,
+    	a.create_time DESC
+    	<if test="orderBy != null and orderBy != ''">
+    	,#{orderBy}
+    	</if>
+    	LIMIT ${pageFirstItem}, ${pageSize}
+	</select>
+	
+	<sql id="egg_prize_in_where">
+		<where>
+			<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+				AND DATE(a.create_time) <![CDATA[>=]]> DATE(#{startTime})
+				AND DATE(a.create_time) <![CDATA[<=]]> DATE(#{endTime})
+	  		</if>
+	  		<if test="status != null">AND a.status = #{status}</if>
+	  		<if test="name != null and name != ''">AND b.name = #{name}</if>
+		</where>
+	</sql>
+	
+	<delete id="deletePrizeIn" parameterType="java.util.Map">
+		DELETE
+		FROM
+			champion_egg_prize_increment
+		WHERE
+			id = #{id}
+		AND
+			update_time = #{updateTime}
+	</delete>
+	
+	<insert id="batchSaveEggPrizeIn" parameterType="java.util.List">
+	  insert into champion_egg_prize_increment
+	  	  (
+	      prize_id,
+	      increment_num,
+	      amount_limit,
+	      status,
+	      create_by,
+	      create_time
+	      )
+	  VALUES
+      <foreach collection="list" item="eggPrizeIn" index="index" separator="," > 
+      	  (
+          #{eggPrizeIn.prizeId},
+          #{eggPrizeIn.incrementNum},
+          #{eggPrizeIn.amountLimit},
+          1,
+          #{eggPrizeIn.createName},
+          now()
+          )
+      </foreach>
+	</insert>
+</mapper>

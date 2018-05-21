@@ -1,0 +1,71 @@
+	<div id="plan_zx_list" class="popup-layer" style="display:none">
+	<form class="popup-form-layer handler-host">
+	        <header class="popup-layer-title">险种组合</header>
+	        <ul class="popup-layer-ul">
+	        	#foreach($zx in $zxs)
+	            <li id="product_li_$!zx.fid" data-pid="$!zx.fid" data-jbbe='$!zx.jbbe' data-cpjc="$!zx.cpjc" data-table="2">
+	                <dl>
+	                    <dt>
+	                        <input id="t$!zx.fid" class="checkbox-single" type="checkbox">
+	                        <label for="t$!zx.fid">$!zx.cpjc</label>
+	                    </dt>
+						#foreach($pc in $zx.productConstants)
+						#if($pc.hide!=0)
+					 	<dd style="display:none;">
+							<label class="layer-left-w">$!pc.name</label> 
+						#if($pc.inputType==2)
+							<select class="select_type factor" name="$!pc.columnField">
+							 	#foreach($p in $pc.children)
+									<option value="$!p.fid">$!p.name</option>
+							 	#end
+							</select>
+						#else
+							<input type="tel" readonly="readonly" placeholder="$!pc.placeholder" #if($pc.inputType!=4)class="demo_price factor"#end name="$!pc.columnField" />
+							<span class="error-tips" style="display:none;"></span>
+						#end		        
+						</dd>
+						#else
+							<input type="hidden" name="$!pc.columnField" value="$pc.children.get(0).fid" data-text="$pc.children.get(0).name"/>
+						#end
+						#end
+	                </dl>
+	            </li>
+	            #end
+	        </ul>
+	        <div class="popup-layer-btn">
+	            <span class="popup-layer-cancel-btn">取消</span><span class="popup-layer-ok-btn">确定</span>
+	        </div>
+	  </form>    
+	</div>
+#foreach($zx in $zxs)	
+<div class="popup-layer product_div_$!zx.fid" style="display:none" data-pid="$!zx.fid" data-jbbe="$!zx.jbbe" data-cpjc="$!zx.cpjc" data-table="0">
+	<form class="popup-form-layer handler-host">
+		<div class="popup-layer-title">$!zx.cpjc</div>
+		<ul class="popup-layer-ul">
+						#foreach($pc in $zx.productConstants)
+						#if($pc.hide!=0)
+					 	<li>
+							<label class="info-name">$!pc.name</label> 
+						#if($pc.inputType==2)
+							<select class="select_type factor" name="$!pc.columnField">
+							 	#foreach($p in $pc.children)
+									<option value="$!p.fid">$!p.name</option>
+							 	#end
+							</select>
+						#else
+							<input type="tel" readonly="readonly" placeholder="$!pc.placeholder" #if($pc.inputType!=4)class="demo_price factor"#end name="$!pc.columnField" />
+							<span class="error-tips" style="display:none;"></span>
+						#end		        
+						</li>
+						#else
+							<input type="hidden" name="$!pc.columnField" value="$pc.children.get(0).fid" data-text="$pc.children.get(0).name"/>
+						#end
+						#end
+		</ul>
+		<div class="popup-layer-btn">
+			<span class="popup-layer-cancel-btn">取消</span>
+			<span class="popup-layer-ok-btn" data-table="0">确定</span>
+		</div>
+	</form>
+</div>
+#end

@@ -1,0 +1,169 @@
+<!--头部 开始-->
+$pageModule.init("app/app/headlineNews", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-md-3 col-xs-12">
+                                <label>新闻标题&nbsp;</label>
+                                <input placeholder="新闻标题" type="text" class="form-control stitle">
+                            </div>
+                            <div class="form-group col-md-3 col-xs-12">
+                                <label>审核状态&nbsp;</label>
+                                <select class="form-control sAuditStatus">
+                                    <option value="">请选择</option>
+                                    <option value="0">待审核</option>
+                                    <option value="2">审核通过</option>
+                					<option value="1">审核不通过</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3 col-xs-12">
+                    			<label>发布时间</label>
+                    			<div class="input-group">
+                    				<input type="text" class="form-control sOnlineTime" placeholder="">
+                    			</div>
+                            </div>
+                            <div class="form-group col-md-3 col-xs-12">
+                    			<label>下线时间</label>
+                    			<div class="input-group">
+                    				<input type="text" class="form-control sOfflineTime" placeholder="">
+                    			</div>
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			</div>
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<!--底部 结束-->
+
+<script>
+//    jQuery(document).ready(function() {
+//        App.init();
+//        TableManaged.init();
+//    });
+</script>
+<div class="news-detail hidden">
+	<div class="newsDetail">
+    </div>
+</div>
+<div class="headline-news-tpl hidden">
+    <div class="form-body">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">news标题</label>
+			<div class="input-group col-md-9">
+				<input type="text" class="form-control" id="title" placeholder="标题不超过18字">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">图片</label>
+			<div class="input-group col-md-9">
+            <div class="col-sm-6">
+                <div class="">
+				    <div class="uploadImg">
+						<li style="display: inline-block; margin-right: 3px;" >
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+    		            <a class="btn btn-primary remove-img">删除</a>
+    		            </span></li>
+						<a class="btn btn-primary infos-images">上传图片</a>
+						<p class="text-danger">注意：图片尺寸限制：220 x 170</p>
+                	</div>
+                </div>
+            </div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">news内容</label>
+			<div class="input-group col-md-9">
+				 <div id="newsContent"></div>
+			</div>
+		</div>
+       
+		#*<div class="form-group">
+			<label>跳转页面url</label>
+			<div class="input-group col-sm-6">
+				<input type="text" class="form-control pageUrl" placeholder="">
+			</div>
+		</div>*#
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">发布时间</label>
+			<div class="input-group col-md-9">
+				<input type="text" class="form-control onlineTime" placeholder="">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">无限期</label>
+			<div class="input-group">
+                <input type="checkBox" class="timeBox" placeholder="">&nbsp; (2030-12-31)</input>
+			</div>
+		</div>
+		<div class="form-group timeFlag col-sm-12">
+			<label class="col-md-3 control-label">下线时间</label>
+			<div class="input-group col-md-9">
+				<input type="text" class="form-control offlineTime" placeholder="">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">是否显示标签</label>
+			<div class="input-group col-md-9">
+                <select class="form-control isDisplayTag">
+                    <option disabled='disabled' value="0" selected>请选择</option>
+                    <option value="1">是</option>
+                    <option value="2">否</option>
+                </select>
+			</div>
+		</div>
+		<div class="form-group tagType col-sm-12">
+			<label class="col-md-3 control-label">标签内容</label>
+			<div class="input-group col-md-9">
+				<input type="text" class="form-control tagContent" placeholder="最多2个字">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">是否显示转载</label>
+			<div class="input-group col-md-9">
+                <select class="form-control isDisplayReprint ">
+                    <option disabled='disabled' value="0" selected>请选择</option>
+                    <option value="1">是</option>
+                    <option value="2">否</option>
+                </select>
+			</div>
+		</div>
+		<div class="form-group reprintType col-sm-12">
+			<label class="col-md-3 control-label">转载说明内容</label>
+			<div class="input-group col-md-9">
+				<input type="text" class="form-control reprintContent" value='保险家原创出品,转载请注明"源自保险家"'>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">虚拟点击次数</label>
+			<div class="input-group col-md-9">
+				<input type="text" class="form-control virtualHitCount">
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	#set($layout="layout/default3.vm")
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<base href="$bxj_path/">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>excel</title>
+		<link rel="stylesheet" type="text/css" href="$static_path/public/css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="$static_path/index/css/style.css"/>
+	</head>
+	
+	<body>
+		<!--内容 开始-->
+		<div class="container container_plan">
+	<div class="plan_block inform">
+    	<div class="title">
+        	<img src="$static_path/index/images/title_icon01.png" width="12" height="13">
+        	<span>【$!product.cpjc】费率表上传</span>
+        </div>
+        <form id="insure_info" method="post"  action="$bxj_path/product/excel.json" enctype="multipart/form-data" accept-charset="utf-8">
+        <input type="hidden" name="pfid" value="$!pfid" />
+        <div class="plan_block_div">
+        	<dt>
+        		<span class="dt_span">变量个数：</span>
+            </dt>
+            <dd>
+               <input name="counts" type="tel" value="1" />个
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt>
+        		<span class="dt_span">SHEET函数：</span>
+            </dt>
+            <dd>
+               <select class="age_select" name="contro">            	
+	    			<option value="bnxn">保障期限</option>
+	    			<option value="lqnl">领取年龄</option>
+            	</select>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt>
+        		<span class="dt_span">是否重建因子关系：</span>
+            </dt>
+            <dd>
+               <select class="age_select" name="rel">            	
+	    			<option value="1">是</option>
+	    			<option value="0">否</option>
+            	</select>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt><span class="dt_span">保额录入框：</span></dt>
+            <dd>
+            <select class="age_select" name="beId">
+            	#foreach($input in $inputs)
+	    			<option value="$!input.fid">$!input.name|#if($input.inputType==4)只读#else可录#end|默认值$!input.defaultValue) </option>
+    			#end
+            </select>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt><span class="dt_span">缴费期限(jfnx)：</span></dt>
+            <dd>
+            <select class="age_select select_change" data-flag="jfnx"  name="jfnxId">
+            	<option value="-999">默认</option>
+            	#foreach($s in $selects)
+            		#if($s.columnField=='jfnx')
+	    			<option value="$!s.fid">$!s.name</option>
+	    			#end
+    			#end
+            </select>
+            </dd>
+        </div>
+        <div class="plan_block_div" style="display:none;">
+        	<dt><span class="dt_span" id="jfnx_child"></span></dt>
+            <dd>
+            <select class="age_select" id="jfnx_child_select" name="jfnx" >
+            </select>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt><span class="dt_span">保险期限(bxnx)：</span></dt>
+            <dd>
+            <select class="age_select select_change" data-flag="bxnx" name="bxnxId">
+            	<option value="-999">默认</option>
+            	#foreach($s in $selects)
+            		#if($s.columnField=='bxnx')
+	    			<option value="$!s.fid">$!s.name</option>
+	    			#end
+    			#end
+            </select>
+            </dd>
+        </div>
+        <div class="plan_block_div" style="display:none;">
+        	<dt><span class="dt_span" id="bxnx_child"></span></dt>
+            <dd>
+            <select class="age_select" id="bxnx_child_select" name="bxnx" >
+            </select>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt><span class="dt_span">领取年龄(lqnl)：</span></dt>
+            <dd>
+            <select class="age_select select_change" data-flag="lqnl" name="lqnlId">
+            	<option value="-999">默认</option>
+            	#foreach($s in $selects)
+            		#if($s.columnField=='lqnl')
+	    			<option value="$!s.fid">$!s.name</option>
+	    			#end
+    			#end
+            </select>
+            </dd>
+        </div>
+        <div class="plan_block_div" style="display:none;">
+        	<dt><span class="dt_span" id="lqnl_child"></span></dt>
+            <dd>
+            <select class="age_select" id="lqnl_child_select" name="lqnl" >
+            </select>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt><span class="dt_span">其他因子(factor5)：</span></dt>
+            <dd>
+            <select class="age_select select_change" data-flag="factor5" name="factor5Id">
+            	<option value="-999">默认</option>
+            	#foreach($s in $selects)
+            		#if($s.columnField=='factor5')
+	    			<option value="$!s.fid">$!s.name</option>
+	    			#end
+    			#end
+            </select>
+            </dd>
+        </div>
+        <div class="plan_block_div" style="display:none;">
+        	<dt><span class="dt_span" id="factor5_child"></span></dt>
+            <dd>
+            <select class="age_select" id="factor5_child_select" name="factor5" >
+            </select>
+            </dd>
+        </div>
+        <div class="plan_block_div">
+        	<dt><span class="dt_span">上传文件</span></dt>
+            <dd>
+				<input type="file" name="file" />
+            </dd>
+        </div>
+        </form>
+        <p class="button Urlbutton" onclick="javascript:trySubmit();">导入费率表</p>
+    </div>
+    </div>
+	</body>	
+</html>
+<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="$static_path/public/js/public.js"></script>
+<script type="text/javascript" src="$static_path/index/js/layer.m.js"></script>
+<script type="text/javascript" src="$static_path/index/js/ajax.js"></script>
+<script type="text/javascript">
+	var select=$!selectsjson;
+	function change($this){
+		var fid=$this.val();
+		var flag=$this.data('flag');
+		if(fid>0){
+		for(var k=0;k<select.length;k++){
+			var o=select[k];
+			if(o.fid==fid){			
+				$("#"+flag+"_child").text(o.name).parent().parent().show();
+				var childrens=o.children;
+				var dom='<option value="-999">默认</option>';
+				for(var i=0;i<childrens.length;i++){
+					var child=childrens[i];
+					dom+='<option value="'+child.fid+'">'+child.name+'</option>';		
+				}
+				$("#"+flag+"_child_select").attr('name',o.columnField).html(dom);
+			}
+		}
+		}else{
+			$("#"+flag+"_child").parent().parent().hide();
+		}
+	}
+	$("select.select_change").change(function(){
+		change($(this));
+	});	
+	function trySubmit() {
+		var form=document.getElementById('insure_info');//.submit();
+		ajaxUpload(form,{
+			onSuccess:function(data){
+				console.log(data.result);
+				alert(data.result);
+			}
+		});	
+	}	
+</script>

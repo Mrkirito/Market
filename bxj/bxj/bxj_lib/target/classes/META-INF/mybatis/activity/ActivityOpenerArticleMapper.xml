@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.activity.ActivityOpenerArticleMapper">
+    <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.activity.ActivityOpenerArticle">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="type_id" property="typeId" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="subtitle" property="subtitle" jdbcType="VARCHAR"/>
+        <result column="icon_url" property="iconUrl" jdbcType="VARCHAR"/>
+        <result column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="article_source" property="articleSource" jdbcType="VARCHAR"/>
+        <result column="publish_date" property="publishDate" jdbcType="TIMESTAMP"/>
+        <result column="browse_count_real" property="browseCountReal" jdbcType="INTEGER"/>
+        <result column="browse_count_virtual" property="browseCountVirtual" jdbcType="INTEGER"/>
+        <result column="share_count_real" property="shareCountReal" jdbcType="INTEGER"/>
+        <result column="share_count_virtual" property="shareCountVirtual" jdbcType="INTEGER"/>
+        <result column="make_count_real" property="makeCountReal" jdbcType="INTEGER"/>
+        <result column="make_count_virtual" property="makeCountVirtual" jdbcType="INTEGER"/>
+        <result column="show_new_status" property="showNewStatus" jdbcType="INTEGER"/>
+        <result column="show_hot_status" property="showHotStatus" jdbcType="INTEGER"/>
+        <result column="show_status" property="showStatus" jdbcType="INTEGER"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.hangjia.bxj.model.activity.ActivityOpenerArticle"
+               extends="BaseResultMap">
+        <result column="article_content" property="articleContent" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, type_id, title, subtitle, icon_url, product_id, article_source, publish_date, 
+    browse_count_real, browse_count_virtual, share_count_real, share_count_virtual, make_count_real, 
+    make_count_virtual, show_new_status, show_hot_status, show_status, sort, create_time, 
+    update_time
+  </sql>
+    <sql id="Blob_Column_List">
+    article_content
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from activity_opener_article
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from activity_opener_article
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hangjia.bxj.model.activity.ActivityOpenerArticle">
+    insert into activity_opener_article (id, type_id, title, 
+      subtitle, icon_url, product_id, 
+      article_source, publish_date, browse_count_real, 
+      browse_count_virtual, share_count_real, share_count_virtual, 
+      make_count_real, make_count_virtual, show_new_status, 
+      show_hot_status, show_status, sort, 
+      create_time, update_time, article_content
+      )
+    values (#{id,jdbcType=BIGINT}, #{typeId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, #{productId,jdbcType=BIGINT}, 
+      #{articleSource,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, #{browseCountReal,jdbcType=INTEGER}, 
+      #{browseCountVirtual,jdbcType=INTEGER}, #{shareCountReal,jdbcType=INTEGER}, #{shareCountVirtual,jdbcType=INTEGER}, 
+      #{makeCountReal,jdbcType=INTEGER}, #{makeCountVirtual,jdbcType=INTEGER}, #{showNewStatus,jdbcType=INTEGER}, 
+      #{showHotStatus,jdbcType=INTEGER}, #{showStatus,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{articleContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.hangjia.bxj.model.activity.ActivityOpenerArticle">
+        insert into activity_opener_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="typeId != null">
+                type_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="subtitle != null">
+                subtitle,
+            </if>
+            <if test="iconUrl != null">
+                icon_url,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="articleSource != null">
+                article_source,
+            </if>
+            <if test="publishDate != null">
+                publish_date,
+            </if>
+            <if test="browseCountReal != null">
+                browse_count_real,
+            </if>
+            <if test="browseCountVirtual != null">
+                browse_count_virtual,
+            </if>
+            <if test="shareCountReal != null">
+                share_count_real,
+            </if>
+            <if test="shareCountVirtual != null">
+                share_count_virtual,
+            </if>
+            <if test="makeCountReal != null">
+                make_count_real,
+            </if>
+            <if test="makeCountVirtual != null">
+                make_count_virtual,
+            </if>
+            <if test="showNewStatus != null">
+                show_new_status,
+            </if>
+            <if test="showHotStatus != null">
+                show_hot_status,
+            </if>
+            <if test="showStatus != null">
+                show_status,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="articleContent != null">
+                article_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="typeId != null">
+                #{typeId,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="subtitle != null">
+                #{subtitle,jdbcType=VARCHAR},
+            </if>
+            <if test="iconUrl != null">
+                #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="articleSource != null">
+                #{articleSource,jdbcType=VARCHAR},
+            </if>
+            <if test="publishDate != null">
+                #{publishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="browseCountReal != null">
+                #{browseCountReal,jdbcType=INTEGER},
+            </if>
+            <if test="browseCountVirtual != null">
+                #{browseCountVirtual,jdbcType=INTEGER},
+            </if>
+            <if test="shareCountReal != null">
+                #{shareCountReal,jdbcType=INTEGER},
+            </if>
+            <if test="shareCountVirtual != null">
+                #{shareCountVirtual,jdbcType=INTEGER},
+            </if>
+            <if test="makeCountReal != null">
+                #{makeCountReal,jdbcType=INTEGER},
+            </if>
+            <if test="makeCountVirtual != null">
+                #{makeCountVirtual,jdbcType=INTEGER},
+            </if>
+            <if test="showNewStatus != null">
+                #{showNewStatus,jdbcType=INTEGER},
+            </if>
+            <if test="showHotStatus != null">
+                #{showHotStatus,jdbcType=INTEGER},
+            </if>
+            <if test="showStatus != null">
+                #{showStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleContent != null">
+                #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.activity.ActivityOpenerArticle">
+        update activity_opener_article
+        <set>
+            <if test="typeId != null">
+                type_id = #{typeId,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="subtitle != null">
+                subtitle = #{subtitle,jdbcType=VARCHAR},
+            </if>
+            <if test="iconUrl != null">
+                icon_url = #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="articleSource != null">
+                article_source = #{articleSource,jdbcType=VARCHAR},
+            </if>
+            <if test="publishDate != null">
+                publish_date = #{publishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="browseCountReal != null">
+                browse_count_real = #{browseCountReal,jdbcType=INTEGER},
+            </if>
+            <if test="browseCountVirtual != null">
+                browse_count_virtual = #{browseCountVirtual,jdbcType=INTEGER},
+            </if>
+            <if test="shareCountReal != null">
+                share_count_real = #{shareCountReal,jdbcType=INTEGER},
+            </if>
+            <if test="shareCountVirtual != null">
+                share_count_virtual = #{shareCountVirtual,jdbcType=INTEGER},
+            </if>
+            <if test="makeCountReal != null">
+                make_count_real = #{makeCountReal,jdbcType=INTEGER},
+            </if>
+            <if test="makeCountVirtual != null">
+                make_count_virtual = #{makeCountVirtual,jdbcType=INTEGER},
+            </if>
+            <if test="showNewStatus != null">
+                show_new_status = #{showNewStatus,jdbcType=INTEGER},
+            </if>
+            <if test="showHotStatus != null">
+                show_hot_status = #{showHotStatus,jdbcType=INTEGER},
+            </if>
+            <if test="showStatus != null">
+                show_status = #{showStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleContent != null">
+                article_content = #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hangjia.bxj.model.activity.ActivityOpenerArticle">
+    update activity_opener_article
+    set type_id = #{typeId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=BIGINT},
+      article_source = #{articleSource,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      browse_count_real = #{browseCountReal,jdbcType=INTEGER},
+      browse_count_virtual = #{browseCountVirtual,jdbcType=INTEGER},
+      share_count_real = #{shareCountReal,jdbcType=INTEGER},
+      share_count_virtual = #{shareCountVirtual,jdbcType=INTEGER},
+      make_count_real = #{makeCountReal,jdbcType=INTEGER},
+      make_count_virtual = #{makeCountVirtual,jdbcType=INTEGER},
+      show_new_status = #{showNewStatus,jdbcType=INTEGER},
+      show_hot_status = #{showHotStatus,jdbcType=INTEGER},
+      show_status = #{showStatus,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.activity.ActivityOpenerArticle">
+    update activity_opener_article
+    set type_id = #{typeId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=BIGINT},
+      article_source = #{articleSource,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      browse_count_real = #{browseCountReal,jdbcType=INTEGER},
+      browse_count_virtual = #{browseCountVirtual,jdbcType=INTEGER},
+      share_count_real = #{shareCountReal,jdbcType=INTEGER},
+      share_count_virtual = #{shareCountVirtual,jdbcType=INTEGER},
+      make_count_real = #{makeCountReal,jdbcType=INTEGER},
+      make_count_virtual = #{makeCountVirtual,jdbcType=INTEGER},
+      show_new_status = #{showNewStatus,jdbcType=INTEGER},
+      show_hot_status = #{showHotStatus,jdbcType=INTEGER},
+      show_status = #{showStatus,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <!--**************************** extend begin here *******************************-->
+    <!-- 查询条件 -->
+    <sql id="Public_Query_Conditions">
+        <where>
+            <if test="title != null and title != ''">
+                and title like CONCAT('%',#{title,jdbcType=VARCHAR},'%' )
+            </if>
+            <if test="typeId != null">
+                and type_id = #{typeId,jdbcType=BIGINT}
+            </if>
+            <if test="showStatus != null">
+                and show_status = #{showStatus,jdbcType=INTEGER}
+            </if>
+            <if test="publishDate != null and publishDate !=''">
+                and date_format(publish_date,'%Y-%m-%d') = date_format(#{publishDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            </if>
+        </where>
+    </sql>
+
+    <!-- 排序 -->
+    <sql id="Public_Order_Datas">
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+    </sql>
+
+    <!-- 分页 -->
+    <sql id="Public_Page">
+        <if test="pageFirstItem != null and pageSize != null">
+            LIMIT #{pageFirstItem}, #{pageSize}
+        </if>
+    </sql>
+
+    <select id="queryOpenerDataPage" parameterType="com.hangjia.bxj.query.activity.OpenerArticleQuery"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from activity_opener_article
+        <include refid="Public_Query_Conditions"/>
+        <include refid="Public_Order_Datas"/>
+        <include refid="Public_Page"/>
+    </select>
+
+    <select id="queryOpenerDataCount" parameterType="com.hangjia.bxj.query.activity.OpenerArticleQuery"
+            resultType="java.lang.Integer">
+        select
+        count(*)
+        from activity_opener_article
+        <include refid="Public_Query_Conditions"/>
+    </select>
+</mapper>

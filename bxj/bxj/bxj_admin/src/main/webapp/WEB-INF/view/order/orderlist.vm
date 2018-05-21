@@ -1,0 +1,281 @@
+$pageModule.init("app/order/orderlist","list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">订单信息</h3>
+                        </div>
+                        <div class="panel-body">
+                        <form id="queryForm">
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>投保人企业名称</label>
+                                <input type="text" class="form-control" name="insure.companyName">
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>被保人企业名称</label>
+                                <input type="text" class="form-control" name="isurant.companyName">
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>订单号</label>
+                                <input type="text" class="form-control" name="orderNo">
+                            </div>
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label >创建日期</label>
+                                <input type="text" id="beginDate" class="form-control form-date" name="createTimeTemp">
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+								<label>订单状态</label>
+								<select class="form-control" name="orderState">
+									<option value="">请选择</option>
+									<option value="2">待审核</option>
+									<option value="3">待支付</option>
+									<option value="4">已取消</option>
+									<option value="5">已承保</option>
+									<option value="6">已生效</option>
+									<option value="7">已失效</option>
+								</select>
+							</div>
+                        </form>
+                            <div class="form-group col-md-1 col-xs-12 group-box">
+                                <button class="btn btn-primary search-action group-item">查询</button>
+                            </div>
+                            <div class="form-group col-md-1 col-xs-12 group-box">
+                                <button class="btn btn-primary clear-action group-item">清空</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product_info">
+                <div class="page-toolbar" style="float: right; margin-top: -20px; margin-bottom: 10px;">
+                    <div class="btn-group page-toolbar-list product_info_tbars"></div>
+                </div>
+                <div class="data-list"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--basic 编辑-->
+<div class="video-tpl hidden">
+    <form id="editForm">
+        <input type="hidden" name="id" />
+		<input type="hidden" name="insure.id" />
+		<input type="hidden" name="isurant.id" />
+		<div class="form-group col-md-4 col-xs-12" >
+				<label>订单编号</label>
+				<input type="text" width="100px" class="form-control" name="orderNo" disabled >
+        </div>
+		<div class="form-group col-md-4 col-xs-12">
+				<label>订单状态</label>
+                <select class="form-control" id="orderState" name="orderState">
+					<option value="">请选择</option>
+					<option value="2">待审核</option>
+					<option value="3">待支付</option>
+					<option value="4">已取消</option>
+					<option value="5">已承保</option>
+					<option value="6">已生效</option>
+					<option value="7">已失效</option>
+				</select>
+            </div>
+		<div class="form-group col-md-4 col-xs-12" name="policyNumberDiv">
+				<label>保单号</label>
+                <input type="text" width="100px" class="form-control" name="policyNumber" >
+         </div>
+		 <div class="form-group col-md-4 col-xs-12">
+				<label>创建时间</label>
+				<input type="text" width="100px" class="form-control form-createTime" name="createTime" disabled>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>修改时间</label>
+				<input type="text" width="100px" class="form-control form-updateTime" name="updateTime" disabled>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>会员账号</label>
+				<input type="text" width="100px" class="form-control" name="userInfoName" disabled>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>产品名称</label>
+				<input type="text" width="100px" class="form-control" name="insuranceName" disabled>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>员工人数</label>
+				<input type="text" width="100px" class="form-control" name="employeeId" disabled>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>订单总价</label>
+				<input type="text" width="100px" class="form-control" name="price" disabled>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>保障期限</label>
+				<input type="text" width="100px" class="form-control" name="duration" disabled>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>保额</label>
+				<input type="text" width="100px" class="form-control" name="amount" disabled>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>是否上传保单</label>
+				<input type="text" width="100px" class="form-control" name="policyUrl" disabled>
+            </div>
+        <div class="form-body">
+			<div class="form-group col-md-4 col-xs-12">
+				<label>起保日期</label>
+				<input type="text" width="100px" class="form-control form-begindate" name="beginDate">
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>终止日期</label>
+                <input type="text" width="100px" class="form-control form-enddate" name="endDate">
+            </div>
+			<div class="form-group col-md-4 col-xs-12" name="cancelReasonDiv">
+				<label>取消原因</label>
+                <input type="text" width="100px" class="form-control" id="cancelReason" name="cancelReason" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12" name="refundTimeDiv">
+				<label>取消时间</label>
+                <input type="text" width="100px" class="form-control form-refundTime" id="refundTime" name="refundTime" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>是否允许生效</label>
+				<select class="form-control" name="takeEffect">
+					<option value="0">否</option>
+                    <option value="1">是</option>
+				</select>
+            </div>
+			
+			
+			<div class="form-group col-md-12 col-xs-12">
+				<label>投保人信息</label>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>企业名称</label>
+                <input type="text" width="100px" class="form-control" name="insure.companyName" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>营业执照</label><br>
+				<img type="text" width="100px" height="93px" name="insure.imgUrl">
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>统一社会信用代码</label>
+                <input type="text" width="100px" class="form-control" name="insure.institCode" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>法人</label>
+                <input type="text" width="100px" class="form-control" name="insure.legalPerson" >
+            </div>
+            
+            <!--
+            <div class="form-group col-md-4 col-xs-12">
+				<label>发票类型</label>
+                <select class="form-control" name="insure.receiptType">
+					<option value="">无需发票</option>
+					<option value="1">增值税普通发票（电子发票）</option>
+					<option value="2">增值税普通发票（纸质发票）</option>
+					<option value="3">增值税专用发票（纸质发票）</option>
+				</select>
+            </div>
+            -->
+            
+			<div class="form-group col-md-4 col-xs-12">
+				<label>联系人</label>
+                <input type="text" width="100px" class="form-control" name="insure.linkman" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>联系手机</label>
+                <input type="text" width="100px" class="form-control" name="insure.telephone" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>电子邮箱</label>
+                <input type="text" width="100px" class="form-control" name="insure.email" >
+            </div>
+			<div  data-toggle="distpicker">
+			<div class="form-group col-md-4 col-xs-12" >
+				<label>省</label>
+				<select class="form-control" data-province="" name="insure.province"></select>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>市</label>
+                <select class="form-control" data-city="" name="insure.city"></select>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>区</label>
+               <select class="form-control" data-district="" name="insure.area"></select>
+            </div>
+			</div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>办公地址</label>
+                <input type="text" width="100px" class="form-control" name="insure.mailingAddress" >
+            </div>
+			<div class="form-group col-md-12 col-xs-12">
+				<label>被投保人信息</label>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>企业名称</label>
+                <input type="text" width="100px" class="form-control" name="isurant.companyName" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>营业执照</label><br>
+				<img type="text" width="100px" height="93px"  id="isurantImgUrl" name="isurant.imgUrl">
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>统一社会信用代码</label>
+                <input type="text" width="100px" class="form-control" name="isurant.institCode" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>法人</label>
+                <input type="text" width="100px" class="form-control" name="isurant.legalPerson" >
+            </div >
+			<div name="insureFaPiaoDiv">
+			<div class="form-group col-md-12 col-xs-12">
+				<label>发票信息</label>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>发票类型</label>
+				<select class="form-control" id="receiptType" name="insure.receiptType">
+                    <option value="3">增值税专用发票</option>
+				</select>
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>税务登记号</label>
+                <input type="text" width="100px" class="form-control" name="insure.taxRegNumber" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>税务登记地址</label>
+                <input type="text" width="100px" class="form-control" name="insure.taxRegAddress" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>税务登记联系电话</label>
+                <input type="text" width="100px" class="form-control" name="insure.taxRegTel" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>税务开户行名称</label>
+                <input type="text" width="100px" class="form-control" name="insure.taxBankName" >
+            </div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label>税务开户行地址</label>
+                <input type="text" width="100px" class="form-control" name="insure.taxBankAccount" >
+            </div>
+			</div>
+			<div class="form-group col-md-12 col-xs-12">
+				<label>员工信息</label>
+            </div>
+            <div id="list-employee" name="list-employee"  class="data-list-employee"></div>
+        </div>
+    </form>
+</div>
+<!--订单信息保单导入-->
+<div class="order_policy_import hidden">
+    <form id="order_policy_import_form" method="post" action="order/importSinglePolicy.json" enctype="multipart/form-data" accept-charset="utf-8">
+		<div class="form-group col-sm-12">
+			<label class="col-md-4 control-label">PDF文件&nbsp;</label>
+			<div class="col-md-9">
+				<input type="file" class="form-control" name="file" accept=".pdf" id="file"/>
+				<input type="hidden" name="id" id="id"/>
+			</div>
+        </div>
+    </form>
+</div>

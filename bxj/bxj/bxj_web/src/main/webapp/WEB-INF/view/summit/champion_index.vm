@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/championforum/css/forum_index.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+    <title>冠军论坛</title>
+</head>
+<body>
+	<div class="mask" style="display: none;"><i class="loading"></i></div>
+	<section id="forum_index"  class="page out" data-title="冠军论坛">
+		<!--导航 开始  -->
+		<header class="head" style="display: none;" >
+		  	<a class="header_left" data-rel="back" href="javascript:history.back()" ></a>
+		</header>
+		<div class="header_heightblock" style="display: none;" ></div>
+		<!--导航 结束  -->
+		<div class="container container_forum">
+				<div id="showSummitID">
+				
+				</div>
+		</div>
+	  </section>
+	   
+</body>
+</html>
+
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script>
+FastClick.attach(document.body);
+function jumpUrl(obj){
+	var isOnLoad = true;
+	var Url = obj.name;
+	var dom = '<iframe src="" style="width: 100%; height: 100%;"></iframe>';
+	//$('.mask').show();
+	$('.container_forumiframe iframe').remove();
+	$('.container_forumiframe').append(dom);
+	$('.container_forumiframe iframe').attr('src',Url);
+	$('.container_forumiframe iframe').load(function() {
+		isOnLoad = false;// 加载完成
+		$('.mask').hide();
+	});
+}
+// 峰会讲师页面
+function onloadSummitClass(summitid){
+   window.location.href="$bxj_path/summit/listTeachers.page?summitId="+summitid;
+}
+
+ var page = 1, hasNext = false, doing = false;
+
+ var totalheight = 0;  
+// 绑定滚动事件，快到底时加载下一页评论 .container
+	$('.container').bind("scroll", function() {
+	    totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+		if ($(document).height() <= totalheight) {  // 说明滚动条已达底部  
+			if (hasNext) {
+			    if(!doing){
+			       getSummits();
+			     }
+			}else{
+			     //$(".shows_end").css("display","block"); //已显示 
+			 }
+		};
+	});
+
+var summitStr=""; //显示文本字符串
+
+function getSummits() {
+		doing = true;
+		jQuery.ajax({
+			url: 'getSummitlist.json',
+			data: {
+				page: page
+			},
+			success: function(json) {
+				var r = json, list = r.model;
+				for (var i = 0; i < list.length; i++) {
+					var summit = list[i];
+					   summitStr+="<a  href='javascript:onloadSummitClass("+summit.id+")' >";
+					   summitStr+="<div class='forum_block'>"; 
+					   summitStr+="<h1>"+summit.name+"";
+					   if(summit.display=='ing'){
+						   summitStr+="<span class='new_tips'>正在进行</span>";
+						}
+					  summitStr+="<span class='join_num'>参会人数:"+summit.totalJoins+"</span></h1>";
+					  summitStr+="<div class='forum_main'><div class='imgblock'><img class='headImg' src='"+summit.imgFileUrl+"'/></div>"  
+					  summitStr+="<p class='time'><span class='greyfont'>时间：</span>"+summit.beginAtCN+"-"+summit.endAtCN+"</p>";
+					  summitStr+="<p class='name'><span class='greyfont'>讲师：</span><span class='Teachername'>"+summit.teacherNames+"</span></p>";	
+					  summitStr+="</div></div></a>";	
+				}
+				//加载 峰会
+				$("#showSummitID").html(summitStr);
+				page++;
+				hasNext = r.hasNext;
+			},
+			complete: function() {
+				doing = false;
+			}
+		});
+	}
+getSummits(); //加载峰会 
+
+</script>
+
+<script>
+<!-- 百度统计 -->
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>

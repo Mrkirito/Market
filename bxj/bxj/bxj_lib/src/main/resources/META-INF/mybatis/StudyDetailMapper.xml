@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.StudyDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.StudyDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="page_url" property="pageUrl" jdbcType="VARCHAR" />
+    <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+    <result column="online_time" property="onlineTime" jdbcType="TIMESTAMP" />
+    <result column="offline_time" property="offlineTime" jdbcType="TIMESTAMP" />
+    <result column="is_false" property="isFalse" jdbcType="BIT" />
+    <result column="is_display_tag" property="isDisplayTag" jdbcType="BIT" />
+    <result column="tag_content" property="tagContent" jdbcType="VARCHAR" />
+    <result column="hit_count" property="hitCount" jdbcType="BIGINT" />
+    <result column="virtual_hit_count" property="virtualHitCount" jdbcType="BIGINT" />
+    <result column="is_display_reprint" property="isDisplayReprint" jdbcType="BIT" />
+    <result column="reprint_content" property="reprintContent" jdbcType="VARCHAR" />
+    <result column="study_type" property="studyType" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+      
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="knowID" property="knowID" jdbcType="INTEGER" />
+    <!-- 类型 -->
+    <result property="studyTypeID" column="study_typeid" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+	<result property="typeName" column="type_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hangjia.bxj.model.StudyDetail" extends="BaseResultMap" >
+    <result column="study_content" property="studyContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, img_url, page_url, audit_status, online_time, offline_time, is_false, 
+    is_display_tag, tag_content, virtual_hit_count,CASE is_false WHEN 1 THEN virtual_hit_count ELSE hit_count END AS hit_count, is_display_reprint, reprint_content, 
+    study_type, sort, create_by, create_time, update_by, update_time ,knowID
+  </sql>
+  <sql id="Blob_Column_List" >
+    study_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from study_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from study_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.StudyDetail" >
+    insert into study_detail (id, title, img_url, 
+      page_url, audit_status, online_time, 
+      offline_time, is_false, is_display_tag, 
+      tag_content, hit_count, virtual_hit_count, 
+      is_display_reprint, reprint_content, study_type, 
+      sort, create_by, create_time, 
+      update_by, update_time, study_content,knowID
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{pageUrl,jdbcType=VARCHAR}, #{auditStatus,jdbcType=INTEGER}, #{onlineTime,jdbcType=TIMESTAMP}, 
+      #{offlineTime,jdbcType=TIMESTAMP}, #{isFalse,jdbcType=BIT}, #{isDisplayTag,jdbcType=BIT}, 
+      #{tagContent,jdbcType=VARCHAR}, #{hitCount,jdbcType=BIGINT}, #{virtualHitCount,jdbcType=BIGINT}, 
+      #{isDisplayReprint,jdbcType=BIT}, #{reprintContent,jdbcType=VARCHAR}, #{studyType,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{studyContent,jdbcType=LONGVARCHAR},
+      #{knowID,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.StudyDetail" useGeneratedKeys="true" keyProperty="id" > 
+    insert into study_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+      <if test="pageUrl != null" >
+        page_url,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+      <if test="offlineTime != null" >
+        offline_time,
+      </if>
+      <if test="isFalse != null" >
+        is_false,
+      </if>
+      <if test="isDisplayTag != null" >
+        is_display_tag,
+      </if>
+      <if test="tagContent != null" >
+        tag_content,
+      </if>
+      <if test="hitCount != null" >
+        hit_count,
+      </if>
+      <if test="virtualHitCount != null" >
+        virtual_hit_count,
+      </if>
+      <if test="isDisplayReprint != null" >
+        is_display_reprint,
+      </if>
+      <if test="reprintContent != null" >
+        reprint_content,
+      </if>
+      <if test="studyType != null" >
+        study_type,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="studyContent != null" >
+        study_content,
+      </if>
+       <if test="knowID != null" >
+        knowID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlineTime != null" >
+        #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFalse != null" >
+        #{isFalse,jdbcType=BIT},
+      </if>
+      <if test="isDisplayTag != null" >
+        #{isDisplayTag,jdbcType=BIT},
+      </if>
+      <if test="tagContent != null" >
+        #{tagContent,jdbcType=VARCHAR},
+      </if>
+      <if test="hitCount != null" >
+        #{hitCount,jdbcType=BIGINT},
+      </if>
+      <if test="virtualHitCount != null" >
+        #{virtualHitCount,jdbcType=BIGINT},
+      </if>
+      <if test="isDisplayReprint != null" >
+        #{isDisplayReprint,jdbcType=BIT},
+      </if>
+      <if test="reprintContent != null" >
+        #{reprintContent,jdbcType=VARCHAR},
+      </if>
+      <if test="studyType != null" >
+        #{studyType,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studyContent != null" >
+        #{studyContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="knowID != null" >
+       #{knowID,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.StudyDetail" >
+    update study_detail
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        page_url = #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlineTime != null" >
+        offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFalse != null" >
+        is_false = #{isFalse,jdbcType=BIT},
+      </if>
+      <if test="isDisplayTag != null" >
+        is_display_tag = #{isDisplayTag,jdbcType=BIT},
+      </if>
+      <if test="tagContent != null" >
+        tag_content = #{tagContent,jdbcType=VARCHAR},
+      </if>
+      <if test="hitCount != null" >
+        hit_count = #{hitCount,jdbcType=BIGINT},
+      </if>
+      <if test="virtualHitCount != null" >
+        virtual_hit_count = #{virtualHitCount,jdbcType=BIGINT},
+      </if>
+      <if test="isDisplayReprint != null" >
+        is_display_reprint = #{isDisplayReprint,jdbcType=BIT},
+      </if>
+      <if test="reprintContent != null" >
+        reprint_content = #{reprintContent,jdbcType=VARCHAR},
+      </if>
+      <if test="studyType != null" >
+        study_type = #{studyType,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studyContent != null" >
+        study_content = #{studyContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="knowID != null" >
+       knowID= #{knowID,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hangjia.bxj.model.StudyDetail" >
+    update study_detail
+    set title = #{title,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      is_false = #{isFalse,jdbcType=BIT},
+      is_display_tag = #{isDisplayTag,jdbcType=BIT},
+      tag_content = #{tagContent,jdbcType=VARCHAR},
+      hit_count = #{hitCount,jdbcType=BIGINT},
+      virtual_hit_count = #{virtualHitCount,jdbcType=BIGINT},
+      is_display_reprint = #{isDisplayReprint,jdbcType=BIT},
+      reprint_content = #{reprintContent,jdbcType=VARCHAR},
+      study_type = #{studyType,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      knowID= #{knowID,jdbcType=INTEGER},
+      study_content = #{studyContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.StudyDetail" >
+    update study_detail
+    set title = #{title,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      is_false = #{isFalse,jdbcType=BIT},
+      is_display_tag = #{isDisplayTag,jdbcType=BIT},
+      tag_content = #{tagContent,jdbcType=VARCHAR},
+      hit_count = #{hitCount,jdbcType=BIGINT},
+      virtual_hit_count = #{virtualHitCount,jdbcType=BIGINT},
+      is_display_reprint = #{isDisplayReprint,jdbcType=BIT},
+      reprint_content = #{reprintContent,jdbcType=VARCHAR},
+      study_type = #{studyType,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      knowID= #{knowID,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--   	AND (CURDATE() BETWEEN a.online_time AND a.offline_time) -->
+   <select id="queryList" parameterType="java.util.Map"  resultMap="ResultMapWithBLOBs" >
+  	SELECT
+  		a.id,
+  		a.title,
+  		a.img_url,
+  		a.online_time,
+  		a.is_display_tag,
+  		a.tag_content,
+  		CASE is_false WHEN 1 THEN virtual_hit_count ELSE hit_count END AS hit_count
+  	FROM
+  		study_detail a 
+  	WHERE
+  		a.audit_status = 2
+     AND
+        a.status = 0
+        
+     <if test="studyType != null">
+       AND a.study_type = #{studyType}
+     </if>
+  		
+  	ORDER BY
+  		a.sort,
+    	a.update_time DESC,
+    	a.create_time DESC
+	 <if test="start != null and end != null">
+      limit #{start},#{end}
+    </if>
+  </select>
+  
+  <!-- select total -->
+  <select id="queryCount" parameterType="java.util.Map"  resultType="int" >
+  	SELECT
+  	  count(a.id)	
+  	FROM
+  		study_detail a 
+  	WHERE
+  		a.audit_status = 2
+     AND
+        a.status = 0
+        
+     <if test="studyType != null">
+       AND a.study_type = #{studyType}
+     </if>
+  </select>
+  
+  
+   <update id="updateCount" parameterType="java.lang.Long">
+    UPDATE study_detail
+    SET
+        hit_count = 
+	CASE   
+        WHEN  
+        	ISNULL(hit_count) THEN 1 
+        ELSE 
+        	hit_count + 1 
+    END   
+    WHERE 
+    	id = #{id,jdbcType=BIGINT}
+  </update>
+  
+    <!-- console -->
+  <sql id="headline_study_where">
+   
+  	<if test="title != null">AND title like CONCAT(CONCAT('%', #{title}), '%')</if>
+  	<if test="auditStatus != null">AND audit_status = #{auditStatus}</if>
+  	<if test="onlineTime != null">AND online_time <![CDATA[>=]]> #{onlineTime}</if>
+  	<if test="offlineTime != null">AND offline_time <![CDATA[<=]]> #{offlineTime}</if>
+   
+  </sql>
+  
+  <!-- 后台 -->
+   <select id="queryPageData" parameterType="com.hangjia.bxj.query.app.StudyDetailQuery" resultMap="ResultMapWithBLOBs">
+  	SELECT
+  	<include refid="Base_Column_List" /> ,<include refid="Blob_Column_List" />
+    FROM study_detail
+     where  status=0
+    <include refid="headline_study_where"/>
+    ORDER BY 
+    	study_type DESC,
+    	sort,
+    	update_time DESC,
+    	create_time DESC
+    	<if test="orderBy != null">
+    	,#{orderBy}
+    	</if>
+      
+       LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionRewardVideoMapper" >
+  <sql id="account_reward_where">
+	  <where>
+	  		a.status in (2,5)
+	  		<if test="orderId != null and orderId != ''">AND a.order_id = #{orderId}</if>
+			<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+				AND DATE(a.create_time) <![CDATA[>=]]> DATE(#{startTime})
+				AND DATE(a.create_time) <![CDATA[<=]]> DATE(#{endTime})
+	  		</if>
+	  		<if test="videoName != null and videoName != ''">AND b.title like CONCAT(CONCAT('%', #{videoName}), '%')</if>
+			<if test="userIds != null and userIds.size() > 0">
+				AND a.user_id IN (
+				<foreach collection="userIds" item="userId" separator=",">
+					#{userId}
+				</foreach>
+				)
+			</if>
+			<if test="videoName != null and videoName != ''">AND b.title like CONCAT(CONCAT('%', #{videoName}), '%')</if>
+	  </where>
+  </sql>
+  <select id="queryRewardPageDataCount" parameterType="com.hangjia.bxj.query.order.RewardQuery" resultType="int">
+  	SELECT
+  		COUNT(1)
+  	FROM
+  	<choose>
+  		<when test="dimension != null and (dimension == 1 or dimension == 2 or dimension == 3)">
+  			(
+  			SELECT COUNT(1) FROM
+		  	champion_reward_video a
+		  	LEFT JOIN champion_video b
+		  	ON a.video_id = b.fid
+		  	<include refid="account_reward_where" />
+			<if test="dimension != null and dimension == 1">
+			GROUP BY
+				a.user_id
+			</if>
+			<if test="dimension != null and dimension == 2">
+			GROUP BY
+				DATE(a.create_time)
+			</if>
+			<if test="dimension != null and dimension == 3">
+			GROUP BY
+				a.user_id,
+				DATE(a.create_time)
+			</if>
+			) c
+  		</when>
+  		<otherwise>
+		  	champion_reward_video a
+		  	LEFT JOIN champion_video b
+		  	ON a.video_id = b.fid
+		  	<include refid="account_reward_where" />
+  		</otherwise>
+  	</choose>
+
+  </select>
+  
+  <select id="queryRewardPageData" parameterType="com.hangjia.bxj.query.order.RewardQuery" 
+  		resultType="com.hangjia.bxj.model.order.Reward">
+	SELECT
+	  		a.user_id as "userId"
+	  	<if test="dimension != null and dimension == 4">
+	  		,a.order_id as "orderId"
+	  	</if>
+	  	<if test="dimension != null and dimension != 4">
+	  		,sum(a.money) as "money"
+	  	</if>
+	  	<if test="dimension != null and dimension == 4">
+	  		,a.money as "money"
+	  	</if>
+	  	<if test="dimension != null and (dimension == 2 or dimension == 3)">
+	  		,DATE(a.create_time) as "createTime"
+	  	</if>
+	  	<if test="dimension != null and dimension == 4">
+	  		,a.create_time as "createTime"
+	  	</if>
+	  	<if test="dimension != null and (dimension == 0 or dimension == 2)">
+	  		,count(DISTINCT a.user_id) as "userSum"
+	  	</if>
+	  	,b.title as "videoName"
+	FROM
+		champion_reward_video a
+		LEFT JOIN champion_video b
+	  	ON a.video_id = b.fid
+	<include refid="account_reward_where"/>
+	<if test="dimension != null and dimension == 1">
+	GROUP BY
+		a.user_id
+	</if>
+	<if test="dimension != null and dimension == 2">
+	GROUP BY
+		DATE(a.create_time)
+	</if>
+	<if test="dimension != null and dimension == 3">
+	GROUP BY
+		a.user_id,
+		DATE(a.create_time)
+	</if>
+    ORDER BY 
+    	a.create_time DESC
+    	<if test="orderBy != null and orderBy != ''">
+    	,#{orderBy}
+    	</if>
+    limit ${pageFirstItem}, ${pageSize}
+  </select>
+</mapper>

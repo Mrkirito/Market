@@ -1,0 +1,402 @@
+$pageModule.init("app/activity/vote", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">参赛用户&nbsp;</label>
+                                <input type="text" class="form-control realname">
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">手机号码&nbsp;</label>
+                                <input type="text" class="form-control mobile">
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">报名日期&nbsp;</label>
+                                <input type="text" class="form-control signDate">
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">审核日期&nbsp;</label>
+                                <input type="text" class="form-control authDate">
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">报名状态&nbsp;</label>
+                                <select class="form-control step">
+                                    <option value="" checked>请选择</option>
+                                    <option value="1">报名参赛</option>
+                                    <option value="2">完善资料</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">参选类型&nbsp;</label>
+                                <select class="form-control signType">
+                                    <option value="" checked>请选择</option>
+                                    <option value="0">中国保险家候选外勤</option>
+                                    <option value="1">中国青年保险家候选外勤</option>
+                                    <option value="2">中国保险家候选内勤</option>
+                                    <option value="3">中国青年保险家候选内勤</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">审核状态&nbsp;</label>
+                                <select class="form-control status">
+                                    <option value="" checked>请选择</option>
+                                    <option value="0">待审核</option>
+                                    <option value="1">审核通过</option>
+                                    <option value="2">审核拒绝</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data-list">
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+
+<div class="headline-banner-tpl hidden viewWin">
+    <div class="form-body">
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">用户ID</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label userId"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">参赛用户名</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label realname"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">手机号码</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label mobile"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">身份证号</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label idCard"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">微信号</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label weixinId"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">报名编号</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label signCode"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">报名日期</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label createTime"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">省份</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label province"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">所属公司</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label company"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label jobLbl">职位</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label job"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label jobYearLbl">工作年限</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label jobYear"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">参赛类型</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label signType"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">个人荣誉</label>
+            <div class="col-md-9">
+                <label class="col-md-6 control-label myDes"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">参赛头像</label>
+            <div class="col-md-9">
+                <div class="photoPic">
+                    <a href="javascript:void(0)" rel="lightbox" class="picHref">
+                        <img style="height: 100px;width: 150px;" src="" data-url="" data-id="" class="picUrl">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">个人风采照1</label>
+            <div class="col-md-9">
+                <div class="pic1">
+                    <a href="javascript:void(0)" rel="lightbox" class="picHref">
+                        <img style="height: 100px;width: 150px;" src="" data-url="" data-id="" class="picUrl">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">个人风采照2</label>
+            <div class="col-md-9">
+                <div class="pic2">
+                    <a href="javascript:void(0)" rel="lightbox" class="picHref">
+                        <img style="height: 100px;width: 150px;" src="" data-url="" data-id="" class="picUrl">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12 salary">
+            <label class="col-md-3 control-label">税前年薪</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label yearSalary"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12 income">
+            <label class="col-md-3 control-label">收入证明</label>
+            <div class="col-md-9">
+                <div class="incomePic">
+                    <a href="javascript:void(0)" rel="lightbox" class="picHref">
+                        <img style="height: 100px;width: 150px;" src="" data-url="" data-id="" class="picUrl">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12 card">
+            <label class="col-md-3 control-label">个人名片</label>
+            <div class="col-md-9">
+                <div class="userCardPic">
+                    <a href="javascript:void(0)" rel="lightbox" class="picHref">
+                        <img style="height: 100px;width: 150px;" src="" data-url="" data-id="" class="picUrl">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12 position">
+            <label class="col-md-3 control-label">职务证明</label>
+            <div class="col-md-9">
+                <div class="positionPic">
+                    <a href="javascript:void(0)" rel="lightbox" class="picHref">
+                        <img style="height: 100px;width: 150px;" src="" data-url="" data-id="" class="picUrl">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="headline-banner-tpl hidden updateWin">
+    <div class="form-body">
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">用户ID</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label userId"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">参赛用户名</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control realname" placeholder="">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">手机号码</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label mobile"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">身份证号</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label idCard"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">微信号</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label weixinId"></label>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">报名日期</label>
+            <div class="input-group col-md-9">
+                <label class="col-md-6 control-label createTime"></label>
+            </div>
+        </div>
+    ##        <div class="form-group col-sm-12">
+    ##            <label class="col-md-3 control-label">报名编号</label>
+    ##            <div class="input-group col-md-9">
+    ##                <input type="text" class="form-control signCode" placeholder="">
+    ##            </div>
+    ##        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">省份</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control province" placeholder="">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">所属公司</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control company" placeholder="">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label jobLbl">职位</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control job" placeholder="">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label jobYearLbl">工作年限</label>
+            <div class="input-group col-md-9">
+                <div class="input-group">
+                    <input type="text" placeholder="" value='' class="form-control input-sm jobYear">
+                    <div class="input-group-addon">年</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">参赛类型</label>
+            <div class="input-group col-md-9">
+                <select class="form-control signType">
+                    <option disabled='disabled' selected>请选择</option>
+                    <option value="0">中国保险家候选外勤</option>
+                    <option value="1">中国青年保险家候选外勤</option>
+                    <option value="2">中国保险家候选内勤</option>
+                    <option value="3">中国青年保险家候选内勤</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+        <label class="col-md-3 control-label">个人荣誉</label>
+        <div class="col-md-9">
+            <textarea rows="3" cols="70" placeholder="请输入个人荣誉" class="myDes"></textarea>
+        </div>
+    </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">参赛头像</label>
+            <div class="col-md-9">
+                <div class="">
+                    <div class="uploadImg">
+                        <li style="display: inline-block; margin-right: 3px;">
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl photoPic">
+    		            <a class="btn btn-primary remove-img">删除</a>
+    		            </span></li>
+                        <a class="btn btn-primary infos-images">上传参赛头像</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">个人风采照1</label>
+            <div class="col-md-9">
+                <div class="">
+                    <div class="uploadImg">
+                        <li style="display: inline-block; margin-right: 3px;">
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl pic1">
+    		            <a class="btn btn-primary remove-img">删除</a>
+    		            </span></li>
+                        <a class="btn btn-primary infos-images">上传风采照1</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">个人风采照2</label>
+            <div class="col-md-9">
+                <div class="">
+                    <div class="uploadImg">
+                        <li style="display: inline-block; margin-right: 3px;">
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl pic2">
+    		            <a class="btn btn-primary remove-img">删除</a>
+    		            </span></li>
+                        <a class="btn btn-primary infos-images">上传风采照2</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-sm-12 salary">
+        <label class="col-md-3 control-label">税前年薪</label>
+        <div class="input-group col-md-9">
+            <div class="input-group">
+                <input type="text" placeholder="" value='' class="form-control input-sm yearSalary">
+                <div class="input-group-addon">万元</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-sm-12 income">
+        <label class="col-md-3 control-label">收入证明</label>
+        <div class="col-md-9">
+            <div class="incomePic">
+                <a href="javascript:void(0)" rel="lightbox" class="picHref">
+                    <img style="height: 100px;width: 150px;" src="" data-url="" data-id="" class="picUrl">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-sm-12 card">
+        <label class="col-md-3 control-label">个人名片</label>
+        <div class="col-md-9">
+            <div class="userCardPic">
+                <a href="javascript:void(0)" rel="lightbox" class="picHref">
+                    <img style="height: 100px;width: 150px;" src="" data-url="" data-id="" class="picUrl">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-sm-12 position">
+        <label class="col-md-3 control-label">职务证明</label>
+        <div class="col-md-9">
+            <div class="positionPic">
+                <a href="javascript:void(0)" rel="lightbox" class="picHref">
+                    <img style="height: 100px;width: 150px;" src="" data-url="" data-id="" class="picUrl">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部 结束-->
+

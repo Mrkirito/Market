@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.ChampionUserVocherLogMapper">
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionUserVocherLog">
+    <constructor>
+      <idArg column="fid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="vocher_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="video_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="count" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    fid, user_id, vocher_id, video_id, count, type, create_at
+  </sql>
+  <sql id="Public_Query_Conditions" >
+  	<where>
+  		<if test="fid != null" >
+	        and fid = #{fid,jdbcType=BIGINT}
+	    </if>
+  		<if test="userId != null" >
+	        and user_id = #{userId,jdbcType=BIGINT}
+	    </if>
+	    <if test="vocherId != null" >
+	        and vocher_id = #{vocherId,jdbcType=INTEGER}
+	    </if>
+	    <if test="videoId != null" >
+	        and video_id = #{videoId,jdbcType=INTEGER}
+	    </if>
+	    <if test="type != null" >
+	        and type = #{type,jdbcType=INTEGER}
+	    </if>
+        <if test="createAt != null" >
+          and DATE_FORMAT(create_at, '%Y-%m-%d') = DATE_FORMAT(#{createAt,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+        </if>
+  	</where>
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from champion_user_vocher_log
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectBySelective" parameterType="com.hangjia.bxj.model.ChampionUserVocherLog" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from champion_user_vocher_log
+    <include refid="Public_Query_Conditions" />
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from champion_user_vocher_log
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionUserVocherLog">
+    insert into champion_user_vocher_log (user_id, vocher_id, 
+      video_id, count, type, 
+      create_at)
+    values (#{userId,jdbcType=BIGINT}, #{vocherId,jdbcType=BIGINT}, 
+      #{videoId,jdbcType=BIGINT}, #{count,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionUserVocherLog">
+    insert into champion_user_vocher_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="vocherId != null">
+        vocher_id,
+      </if>
+      <if test="videoId != null">
+        video_id,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="vocherId != null">
+        #{vocherId,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null">
+        #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionUserVocherLog">
+    update champion_user_vocher_log
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="vocherId != null">
+        vocher_id = #{vocherId,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null">
+        video_id = #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionUserVocherLog">
+    update champion_user_vocher_log
+    set user_id = #{userId,jdbcType=BIGINT},
+      vocher_id = #{vocherId,jdbcType=BIGINT},
+      video_id = #{videoId,jdbcType=BIGINT},
+      count = #{count,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+
+  <!-- 用户是否已观看此视频 -->
+  <select id="getWatchedCoumt" parameterType="com.hangjia.bxj.model.ChampionUserVocherLog"  resultType="int">
+    SELECT COUNT(*) FROM champion_user_vocher_log
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 按type查询总个数 -->
+  <select id="geInviteVourcherCoumt" parameterType="com.hangjia.bxj.model.ChampionUserVocherLog"  resultType="int">
+    SELECT IFNULL(SUM(count), 0) FROM champion_user_vocher_log
+    <include refid="Public_Query_Conditions" />
+  </select>
+  
+  
+  <resultMap type="com.hangjia.bxj.vo.VideoInviteCountVo" id="videoCountObj">
+    <result column="videotitle" property="videotitle"  javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result column="videoId" property="videoId" javaType="java.lang.Long" jdbcType="INTEGER"/>
+    <result column="videVocherNum" property="videVocherNum" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+    <result column="create_at" property="createAt" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+    
+  </resultMap>
+  
+  <!--统计 所有用户用券 总数  -->
+  <select id="selVourcherTotal" parameterType="com.hangjia.bxj.vo.VideoInviteCountVo"  resultType="int">
+   SELECT  count(video_id)  FROM `champion_user_vocher_log` log join champion_video vd on vd.fid=video_id
+    where type=2 
+     <if test="createAt != null"> AND TO_DAYS(log.create_at)=TO_DAYS(#{createAt})   </if>
+  </select>
+  
+   <!--统计 每个用户用券数  -->
+  <select id="selVDVourcherNum" parameterType="com.hangjia.bxj.vo.VideoInviteCountVo"  resultType="int">
+    SELECT COUNT(vdinfo.fid) AS videVocherNum from (SELECT vd.fid  FROM  champion_video vd JOIN champion_user_vocher_log log on vd.fid=log.video_id
+      WHERE
+       <if test="createAt != null"> TO_DAYS(log.create_at)=TO_DAYS(#{createAt})  AND </if> 
+       type=2 group by video_id) vdinfo
+       
+  </select>
+  
+   <!--统计 所有用户用券 信息  -->
+  <select id="selVourcherList" parameterType="com.hangjia.bxj.vo.VideoInviteCountVo"  resultMap="videoCountObj" >
+   SELECT count(showlog.video_id) as videVocherNum,  showlog.video_id AS videoId,showlog.create_at, showvd.title AS videotitle FROM champion_user_vocher_log showlog ,champion_video showvd 
+    WHERE showvd.fid=showlog.video_id  AND  showlog.type=2  
+    <if test="createAt != null">AND  TO_DAYS(showlog.create_at)=TO_DAYS(#{createAt})   </if>
+    group by showlog.video_id
+    LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  
+  <select id="queryPageData" parameterType="com.hangjia.bxj.query.app.LookVideoQuery" resultType="com.hangjia.bxj.vo.LookVideoVo">
+	SELECT
+		d.lookNum,
+		d.lookTime,
+		d.userId,
+		d.mobile,
+		e.vocherNum
+	FROM
+		(
+			SELECT
+				count(a.fid) lookNum,
+				DATE_FORMAT(a.play_time, '%Y-%m-%d') lookTime,
+				a.user_id userId,
+				b.mobile mobile
+			FROM
+				champion_play_video_log a
+			LEFT JOIN boss_ucenter.uc_user b ON a.user_id = b.id
+			<include refid="look_video_where"/>
+			GROUP BY
+				a.user_id,
+				DATE_FORMAT(a.play_time, '%Y-%m-%d')
+			ORDER BY
+				a.play_time DESC
+		) d
+	LEFT JOIN (
+		SELECT
+			count(c.fid) vocherNum,
+			c.user_id userId,
+			DATE_FORMAT(c.create_at, '%Y-%m-%d') vocherTime
+		FROM
+			champion_user_vocher_log c
+		WHERE
+			c.video_id IS NOT NULL
+		GROUP BY
+			c.user_id,
+			DATE_FORMAT(c.create_at, '%Y-%m-%d')
+		ORDER BY
+			c.create_at DESC
+	) e 
+	ON 
+		d.userId = e.userId
+	AND 
+		d.lookTIme = e.vocherTime
+	LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  
+  <select id="queryPageDataCount" parameterType="com.hangjia.bxj.query.app.LookVideoQuery" resultType="int">
+	SELECT
+		count(1)
+	FROM
+		(
+			SELECT
+				a.user_id
+			FROM
+				champion_play_video_log a
+			<if test="mobile != null and mobile != ''">
+			LEFT JOIN boss_ucenter.uc_user b ON a.user_id = b.id
+			</if>
+			<include refid="look_video_where"/>
+			GROUP BY
+				a.user_id,
+				DATE_FORMAT(a.play_time, '%Y-%m-%d')
+		) b
+  </select>
+  
+  <sql id="look_video_where">
+  	<where>
+  		<if test="lookStartTime != null">AND DATE_FORMAT(a.play_time, '%Y-%m-%d') <![CDATA[>=]]> DATE_FORMAT(#{lookStartTime}, '%Y-%m-%d')</if>
+  		<if test="lookEndTime != null">AND DATE_FORMAT(a.play_time, '%Y-%m-%d') <![CDATA[<=]]> DATE_FORMAT(#{lookEndTime}, '%Y-%m-%d')</if>
+  		<if test="mobile != null and mobile != ''">AND b.mobile = #{mobile}</if>
+  	</where>
+  </sql>
+  
+  <select id="queryPageDetailData" parameterType="com.hangjia.bxj.query.app.LookVideoQuery" resultType="com.hangjia.bxj.vo.LookVideoDetailVo">
+	SELECT
+		a.user_id userId,
+		DATE_FORMAT(a.play_time, '%Y-%m-%d') playTime,
+		b.fid,
+		b.title
+	FROM
+		champion_play_video_log a
+	LEFT JOIN champion_video b ON a.video_id = b.fid
+	WHERE a.user_id = #{userId}
+	AND DATE_FORMAT(a.play_time, '%Y-%m-%d') = DATE_FORMAT(#{playTime}, '%Y-%m-%d')
+	<if test="title != null and title != ''">
+	AND b.title like CONCAT(CONCAT('%', #{title}), '%')
+	</if>
+	LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  
+  <select id="queryPageDetailDataCount" parameterType="com.hangjia.bxj.query.app.LookVideoQuery" resultType="int">
+  	SELECT
+  		count(1)
+  	FROM
+  		champion_play_video_log a
+  	<if test="title != null and title != ''">
+  	LEFT JOIN champion_video b ON a.video_id = b.fid
+  	</if>
+	WHERE a.user_id = #{userId}
+	AND DATE_FORMAT(a.play_time, '%Y-%m-%d') = DATE_FORMAT(#{playTime}, '%Y-%m-%d')
+	<if test="title != null and title != ''">
+	AND b.title like CONCAT(CONCAT('%', #{title}), '%')
+	</if>
+  </select>
+</mapper>

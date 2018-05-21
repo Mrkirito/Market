@@ -1,0 +1,175 @@
+<div id="plan_fjx_list" class="popup-layer" style="display:none">
+	<form class="popup-form-layer handler-host">
+		<header class="popup-layer-title">附加险</header>
+		<ul class="popup-layer-ul">
+			<li class="li_product next_">
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input type="hidden" name="jfnx" value="63" class="factor" data-text="1年交" />				
+				<input class="change checked" type="hidden" data-cpjc="个人意外" name="pid" data-jbbe="1000" value="195">
+				<dl>
+					<dt>
+						<input class="checkbox-single" type="checkbox"> 
+						<label>附加个人（2014）意外伤害</label>
+					</dt>
+					<dd style="display: none;" class="zylb">
+						<label class="layer-left-w">职业类别</label> 
+						<select class="factor" name="factor5">
+							<option value="79">一类</option>
+							<option value="67">二类</option>
+							<option value="68">三类</option>
+							<option value="75">四类</option>
+							<option value="73">五类</option>
+							<option value="65">六类</option>
+						</select>
+						<span class="arrowr"></span>
+					</dd>
+					<dd style="display: none;">
+						<label class="layer-left-w">保额</label> 
+						<input type="tel"  placeholder="请输入保额" class="demo_price factor" data-min="50000" value="" name="be">
+						<i class="icon">元</i>
+						<span class="error-tips" style="display:none;"></span>
+					</dd>
+				</dl>
+			</li>
+			<li class="li_product">
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input type="hidden" name="jfnx" value="63" class="factor" data-text="1年交" />							
+				<dl>
+					<dt>
+						<input class="checkbox-single" type="checkbox"> 
+						<label>附加（2014）意外伤害医疗</label>
+						<!--
+						<input class="checkbox-single" disabled="disabled" type="checkbox"> 
+						<label class="disabled_label">附加（2014）意外伤害医疗</label>
+						-->
+					</dt>
+					<dd style="display: none;">							
+						<input class="radio_box change checked" type="radio" id="t193" data-cpjc="意外医疗A" data-jbbe="1000" name="pid" value="193">
+						<label class="mrg-right-2" for="t193">A,无社保</label>
+						<input class="radio_box change" type="radio" id="t194" data-cpjc="意外医疗B" data-jbbe="1000" name="pid" value="194">
+						<label class="mrg-right-2" for="t194">B,有社保</label>							
+					</dd>
+					<dd style="display: none;" class="zylb">
+						<label class="layer-left-w">职业类别</label> 
+						<select class="factor" name="factor5">
+							<option value="79">一类</option>
+							<option value="67">二类</option>
+							<option value="68">三类</option>
+							<option value="75">四类</option>
+							<option value="73">五类</option>
+							<option value="65">六类</option>
+						</select>
+						<span class="arrowr"></span>
+					</dd>
+					<dd style="display: none;">
+						<label class="layer-left-w">保额</label> 
+						<input type="tel"  placeholder="请输入保额" class="demo_price factor" value="" name="be">
+						<i class="icon">元</i>
+						<span class="error-tips" style="display:none;"></span>
+					</dd>
+				</dl>
+			</li>
+			<li class="li_product">				
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input type="hidden" name="jfnx" value="63" class="factor" data-text="1年交" />				
+				<dl>
+					<dt>
+						<input class="checkbox-single" type="checkbox"> 
+						<label>附加住院费用医疗</label>
+					</dt>
+					<dd style="display: none;">							
+						<input class="radio_box change checked" type="radio" id="t197"  data-cpjc="住院费用A" data-jbbe="10000" name="pid" value="197">
+						<label class="laber_enter" for="t197">附加住院费用A（无社保）</label>
+						<input class="radio_box change" type="radio" id="t198"  data-cpjc="住院费用B" data-jbbe="10000" name="pid" value="198">
+						<label class="laber_enter" for="t198">附加住院费用B（有社保）</label>
+						<input class="radio_box change" type="radio" id="t196"  data-cpjc="住院费用2007" data-jbbe="10000" name="pid" value="196">
+						<label class="" for="t196">住院费用医疗（2007）</label>
+					</dd>
+					<dd style="display: none;">
+						<label class="layer-left-w">区域选择</label> 
+						<select class="factor" name="factor5">
+							<option value="80">全国通用</option>
+							<option value="69">新疆、黑龙江</option>
+						</select>
+						<span class="arrowr"></span>
+					</dd>
+					<dd style="display: none;">
+						<label class="layer-left-w">保额</label> 
+						<input type="tel"  placeholder="请输入保额" value="" class="demo_price factor" name="be">
+						<i class="icon">元</i>
+						<span class="error-tips" style="display:none;"></span>
+					</dd>
+				</dl>
+			</li>
+			<li class="li_product">
+				<input class="change checked" type="hidden"  data-cpjc="住院补贴" name="pid" data-jbbe="1" value="192">
+				<input type="hidden" name="bxnx" value="62" class="factor" data-text="保一年" />
+				<input type="hidden" name="jfnx" value="63" class="factor" data-text="1年交" />				
+				<dl>
+					<dt>
+						<input class="checkbox-single" type="checkbox"> 
+						<label>住院补贴医疗</label>
+					</dt>
+					<dd style="display: none;">
+						<label class="layer-left-w">区域选择</label> 
+						<select class="factor" name="factor5">
+							<option value="80">全国通用</option>
+							<option value="69">新疆、黑龙江</option>
+						</select>
+						<span class="arrowr"></span>
+					</dd>
+					<dd style="display: none;">
+						<label class="layer-left-w">份数</label> 
+						<select class="factor demo_price" name="be">
+							<option value="1">1份</option>
+							<option value="2">2份</option>
+							<option value="3">3份</option>
+							<option value="4">4份</option>
+							<option value="5">5份</option>
+						</select>
+						<span class="arrowr"></span>
+					</dd>
+				</dl>
+			</li>
+			<li class="li_product">
+				<input type="hidden" name="bxnx" value="6" class="factor" data-text="终身" />
+				<input class="change checked" type="hidden"  data-cpjc="09重疾" name="pid" data-jbbe="10000" value="191">
+				<dl>
+					<dt>
+						<input class="checkbox-single" type="checkbox"> 
+						<label>附加09终身重大疾病</label>
+					</dt>
+					<dd style="display: none;">
+						<label class="layer-left-w">缴费年限</label> 
+						<select class="factor" name="jfnx">
+							<option value="11">20年交</option>
+							<option value="9">10年交</option>
+							<option value="8">5年交</option>
+						</select>
+						<span class="arrowr"></span>
+					</dd>
+					<dd style="display: none;">
+						<label class="layer-left-w">保额</label> 
+						<input type="tel"  placeholder="请输入保额" class="demo_price factor" value="" name="be">
+						<i class="icon">元</i>
+						<span class="error-tips" style="display:none;"></span>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+		<div class="popup-layer-btn">
+			<span class="popup-layer-cancel-btn">取消</span><span class="popup-layer-ok-btn" data-table="2">确定</span>
+		</div>
+	</form>
+</div>
+<div id="plan_zx_list" class="popup-layer" style="display:none">
+	<form class="popup-form-layer handler-host">
+		<div class="popup-layer-title" id="popup_title">$!product.cpjc</div>
+		<ul class="popup-layer-ul" id="zx_ul" data-pid="$!product.fid" data-jbbe="$!product.jbbe" data-calflag="" data-cpjc="$!product.cpjc" data-table="0">
+		</ul>
+		<div class="popup-layer-btn">
+			<span class="popup-layer-cancel-btn">取消</span>
+			<span class="popup-layer-ok-btn" data-table="0">确定</span>
+		</div>
+	</form>
+</div>

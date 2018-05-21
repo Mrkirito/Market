@@ -1,0 +1,75 @@
+#scalender_Year_Month *{margin:0px;padding:0px;}
+#scalender_Year_Month .clear{clear: both;}
+#scalender_Year_Month {width:140px; font-size:14px;line-height:14px; border:1px solid lavender; padding:10px; padding-top:5px;padding-right:5px; padding-left: 5px; position:absolute; background-color:white; padding-bottom: 15px;}
+#scalender_Year_Month .title{height:35px; display: block;}
+#scalender_Year_Month .title li.middle{width:65px; position:relative; overflow:visible;}
+#scalender_Year_Month .title li.middle select{margin-top:-3px; height: 24px;
+    -webkit-appearance: none;
+    width: 45px;
+    text-align: center;
+    padding: 2px 5px;
+    border-radius: 0;
+}
+
+#scalender_Year_Month .title li.middle .year_list{width:100px; position:absolute; background-color:lightgrey; left:-20px}
+#scalender_Year_Month .title li.middle .year_list li {background-color:transparent; text-align:center; width:45px; height: 20px;}
+#scalender_Year_Month .title li.middle .year_list ul{clear: both;}
+
+#scalender_Year_Month .title li, #scalender_Year_Month .body li{background-color:lavender;list-style:none; width:30px; height:30px; overflow:hidden; margin-top:5px;margin-right:5px; float:left; display:inline; cursor:pointer}
+#scalender_Year_Month .title li.cur, #scalender_Year_Month .body li.cur{background-color:tomato;}
+#scalender_Year_Month .title li.over, #scalender_Year_Month .body li.over{background-color:lightblue;}
+
+#scalender_Year_Month .title li .inner, #scalender_Year_Month .body li .inner{padding-top:8px; text-align:center;}
+
+#scalender_Year_Month .bottom{ height: 16px; padding-top: 5px; text-align: center }
+#scalender_Year_Month .bottom button.clear{   background-color: gainsboro; border: 1px solid; font-size: 12px;}
+
+#scalender_Year_Month .title{
+    background-color: #ddd;
+}
+#scalender_Year_Month .title li {
+    margin: 2px;
+    background-color: #ddd;
+}
+
+#scalender_Year_Month .bottom button.clear {
+    cursor: pointer;
+    padding: 4px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+#scalender_Year_Month .bottom button.clear:hover {
+    color: #ff7044;
+    background-color: #f5f5f5;
+}
+
+/*.scalender-icon {
+    background-image: url("img/date-trigger.png");
+    background-position: top right;
+    background-repeat: no-repeat;
+    border: 1px solid #C2C2C2;
+    padding-right: 20px!important;
+    height: 23px;
+}*/
+
+#scalender_Year_Month {
+    box-sizing: content-box;
+}
+
+#scalender_Year_Month .body li {
+    background-color: #fff;
+}
+#scalender_Year_Month .body li.over {
+    background-color: #DDDDDD;
+}
+
+#scalender_Year_Month .title li.cur, #scalender_Year_Month .body li.cur {
+    background-color: #0044cc;
+    color: #fff;
+}
+
+#scalender_Year_Month .bottom {
+    /*padding-top: 0px;*/
+}

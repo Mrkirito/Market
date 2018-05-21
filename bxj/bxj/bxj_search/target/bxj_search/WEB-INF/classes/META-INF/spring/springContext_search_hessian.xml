@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+       default-autowire="byName">
+
+    <bean id="championSupportService" class="com.hangjia.champion.service.impl.ChampionSupportServiceImpl">
+        <property name="videoSolrServer">
+            <bean class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+                <constructor-arg value="${search.solr.server.url}video"/>
+                <property name="soTimeout" value="3000"/>
+                <property name="connectionTimeout" value="1000"/>
+                <property name="defaultMaxConnectionsPerHost" value="1000"/>
+                <property name="maxTotalConnections" value="10"/>
+                <property name="followRedirects" value="false"/>
+                <property name="allowCompression" value="true"/>
+                <property name="maxRetries" value="1"/>
+                <property name="parser">
+                    <bean class="org.apache.solr.client.solrj.impl.XMLResponseParser"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean name="/ChampionSupportService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <!-- 需要导出的目标bean-->
+        <property name="service" ref="championSupportService"/>
+        <property name="debug" value="true"/>
+        <property name="sendCollectionType" value="false"/>
+        <!-- Hessian服务的接口-->
+        <property name="serviceInterface" value="com.hangjia.champion.service.ChampionSupportService"/>
+    </bean>
+
+</beans>

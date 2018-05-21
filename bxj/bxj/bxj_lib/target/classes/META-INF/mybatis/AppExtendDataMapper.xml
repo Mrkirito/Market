@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.AppExtendDataMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.AppExtendData" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="channel_num" property="channelNum" jdbcType="INTEGER" />
+    <result column="every_num" property="everyNum" jdbcType="INTEGER" />
+    <result column="classroom_num" property="classroomNum" jdbcType="INTEGER" />
+    <result column="line_num" property="lineNum" jdbcType="INTEGER" />
+    <result column="activity_num" property="activityNum" jdbcType="INTEGER" />
+    <result column="total_num" property="totalNum" jdbcType="INTEGER" />
+    <result column="data_time" property="dataTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, channel_num, every_num, classroom_num, line_num, activity_num, total_num, data_time, 
+    status, create_name, create_time, update_name, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_app_extend_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_app_extend_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.AppExtendData" >
+    insert into bxj_app_extend_data (id, channel_num, every_num, 
+      classroom_num, line_num, activity_num, 
+      total_num, data_time, status, 
+      create_name, create_time, update_name, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{channelNum,jdbcType=INTEGER}, #{everyNum,jdbcType=INTEGER}, 
+      #{classroomNum,jdbcType=INTEGER}, #{lineNum,jdbcType=INTEGER}, #{activityNum,jdbcType=INTEGER}, 
+      #{totalNum,jdbcType=INTEGER}, #{dataTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.AppExtendData" >
+    insert into bxj_app_extend_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelNum != null" >
+        channel_num,
+      </if>
+      <if test="everyNum != null" >
+        every_num,
+      </if>
+      <if test="classroomNum != null" >
+        classroom_num,
+      </if>
+      <if test="lineNum != null" >
+        line_num,
+      </if>
+      <if test="activityNum != null" >
+        activity_num,
+      </if>
+      <if test="totalNum != null" >
+        total_num,
+      </if>
+      <if test="dataTime != null" >
+        data_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="channelNum != null" >
+        #{channelNum,jdbcType=INTEGER},
+      </if>
+      <if test="everyNum != null" >
+        #{everyNum,jdbcType=INTEGER},
+      </if>
+      <if test="classroomNum != null" >
+        #{classroomNum,jdbcType=INTEGER},
+      </if>
+      <if test="lineNum != null" >
+        #{lineNum,jdbcType=INTEGER},
+      </if>
+      <if test="activityNum != null" >
+        #{activityNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalNum != null" >
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="dataTime != null" >
+        #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.AppExtendData" >
+    update bxj_app_extend_data
+    <set >
+      <if test="channelNum != null" >
+        channel_num = #{channelNum,jdbcType=INTEGER},
+      </if>
+      <if test="everyNum != null" >
+        every_num = #{everyNum,jdbcType=INTEGER},
+      </if>
+      <if test="classroomNum != null" >
+        classroom_num = #{classroomNum,jdbcType=INTEGER},
+      </if>
+      <if test="lineNum != null" >
+        line_num = #{lineNum,jdbcType=INTEGER},
+      </if>
+      <if test="activityNum != null" >
+        activity_num = #{activityNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalNum != null" >
+        total_num = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="dataTime != null" >
+        data_time = #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.AppExtendData" >
+    update bxj_app_extend_data
+    set channel_num = #{channelNum,jdbcType=INTEGER},
+      every_num = #{everyNum,jdbcType=INTEGER},
+      classroom_num = #{classroomNum,jdbcType=INTEGER},
+      line_num = #{lineNum,jdbcType=INTEGER},
+      activity_num = #{activityNum,jdbcType=INTEGER},
+      total_num = #{totalNum,jdbcType=INTEGER},
+      data_time = #{dataTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="where">
+		<where>
+			<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+				AND
+					DATE(data_time) <![CDATA[>=]]> DATE(#{startTime})
+				AND
+					DATE(data_time) <![CDATA[<=]]> DATE(#{endTime})
+			</if>
+		</where>
+  </sql>
+  <select id="queryCount" resultType="int" parameterType="com.hangjia.bxj.model.AppExtendData">
+  	SELECT count(1) FROM bxj_app_extend_data <include refid="where" />
+  </select>
+  <select id="queryData" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.model.AppExtendData">
+  	SELECT  <include refid="Base_Column_List" /> FROM bxj_app_extend_data <include refid="where" /> ORDER BY data_time desc  limit #{pageFirstItem},#{pageSize}
+  </select>  
+  <select id="queryEchartsData"  resultMap="BaseResultMap" parameterType="com.hangjia.bxj.model.AppExtendData">
+	SELECT <include refid="Base_Column_List" /> FROM bxj_app_extend_data ORDER BY data_time
+  </select>
+  <select id="existDataByDay" parameterType="com.hangjia.bxj.model.AppExtendData" resultType="int">
+		SELECT COUNT(1)
+		FROM bxj_app_extend_data
+		WHERE DATE(data_time) = DATE(#{dataTime})
+		<if test="id != null">
+			AND id != #{id}
+		</if>
+ </select>
+ 
+ <select id="queryAllData" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	SELECT  <include refid="Base_Column_List" /> FROM bxj_app_extend_data where DATE_FORMAT(data_time,'%Y%m')=#{date} ORDER BY data_time
+  </select>  
+</mapper>

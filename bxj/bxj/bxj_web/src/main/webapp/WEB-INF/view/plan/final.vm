@@ -1,0 +1,371 @@
+#set($header_params = {"title":"计划书", "css":["index/css/style.css?v=20160322","bxj_two/static/css/final2.css?v=20160324518"]})
+#bxj_header($header_params)
+
+#if($hasInvitation)
+	<script id="amap_script" src="http://webapi.amap.com/maps?v=1.3&key=ae45ce6b854a4e99f3ac8b95abf545c9&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder,AMap.Geolocation"></script>
+#end
+
+<!--导航 开始-->
+#set($bxj_header_params = {"title":"计划书", "isShare":2})
+#bxj_header_html($bxj_header_params)
+<!--导航 结束-->
+<div class="greyDiv" id="greyDiv" style="display:none"></div>
+<div class="show_block" id="show_product_infos" style="display:none;">
+	<h1></h1>
+	<div class="main_div" id="main_div">
+	</div>
+	<span class="show_block_button">确定</span>
+</div>
+<!-- 开场动画 -->
+#if($plan.kchs==5)
+<div class="cartoon">
+    <p class="button_p">
+        <a class="cartoon_button"><span>
+            #if($!plan.author!='')
+                $!plan.author
+            #else
+                尊敬的投保人
+            #end
+          </span>收
+        </a>
+    </p>
+</div>
+#elseif($plan.kchs==1)
+<div class="cartoon">
+        <div class="letter_paper">
+            <h1 class="red_font">最稳健的家庭资产配置</h1>
+            <h2 class="grey_font">标准普尔资产配置</h2>
+            <ul class="grey_font">
+                <li>
+                    <p><span class="fontsize20">10%</span>【流动账户】<span class="red_font">短期消费</span></p>
+                </li>
+                <li>
+                    <p><span class="fontsize20">20%</span>【杠杆账户】<span class="red_font">意外、重疾保障</span></p>
+                </li>
+                <li>
+                    <p><span class="fontsize20">30%</span>【投资账户】<span class="red_font">投资股票、房产等</span></p>
+                </li>
+            </ul>
+        </div>
+        <div class="letter_cover">
+            <dl>
+                <dt>40%</dt>
+                <dd>
+                    <p>【安全账户】<span class="red_font">理财保险等</span></p>
+                    <p>要点：保本升值用于养老、教育</p>
+                </dd>
+            	<span class="letter_arrow"></span>
+                <div class="clear"></div>
+            </dl>
+            
+            <ul>
+                <li>
+                    <p>让【安全账户】活起来</p>
+                    <p>年化收益可达<span class="yellow_font fontsize28">0%</span></p>
+                    <p>目前银行利率1.5%</p>
+                    <p>随时灵活取出的</p>
+                    <p>现金流理财方案</p>
+                </li>
+            </ul>
+            <p class="button_p">
+       <a class="cartoon_button"><span>
+            #if($!plan.author!='')
+                $!plan.author
+            #else
+                尊敬的投保人
+            #end
+          </span>收
+        </a>
+
+            </p>
+        </div>
+</div>
+#elseif($plan.kchs==2)
+ <div class="cartoon1 pension">
+ 	<p class="button_p">
+       <a class="cartoon_button"><span>
+            #if($!plan.author!='')
+                $!plan.author
+            #else
+                尊敬的投保人
+            #end
+          </span>收
+        </a>
+
+    </p>
+ </div>    
+#elseif($plan.kchs==3)
+ <div class="cartoon1 media">
+ 	<p class="button_p">
+       <a class="cartoon_button"><span>
+            #if($!plan.author!='')
+                $!plan.author
+            #else
+                尊敬的投保人
+            #end
+          </span>收
+        </a>
+
+    </p>
+ </div>    
+#elseif($plan.kchs==4)
+ <div class="cartoon1 accident">
+ 	<p class="button_p">
+       <a class="cartoon_button"><span>
+            #if($!plan.author!='')
+                $!plan.author
+            #else
+                尊敬的投保人收
+            #end
+          </span>收
+        </a>
+
+    </p>
+ </div>    
+#end
+#if($hasVoice)
+<audio id="bgMusic" src="$!voice.videoUrl"></audio>
+<div class="mubtn"></div>
+#end
+<!-- 开场动画 结束-->
+<!--内容 开始-->
+<!--3.8二期需求 -->
+<div class="greyblock"></div>
+<!-- 弹出框 -->
+<!-- 弹出框 结束-->
+#if($hasInvitation)
+<div class="invent_block">
+    <div class="invent_close_icon"></div>
+    <h1>尊敬的<span>#if($!plan.author!='')$!plan.author#else贵宾#end</span></h1>
+    <p class="intro_block">$!invitation.text</p>
+    <dl>
+        <dt>酒会时间:</dt><dd>$!invitation.dateAtCN</dd>
+        <dt>地点：</dt><dd>$!invitation.address</dd>
+        <dt>联系人：</dt><dd>$!invitation.contactName</dd>
+        <dt>联系方式：</dt><dd>$!invitation.contactMobile</dd>
+    </dl>
+    <div class="img_block" id="map_img_block"></div>
+    <button class="navigation_button" id="map_follow_my">带我去</button>
+</div>
+<div class="invent_button_block">
+    <div class="gift_bg">
+        <div class="gift_cover"></div>
+    </div>
+    <button class="invetn_button">
+        <img src="$static_path/bxj_two/static/image/invent_button_icon.png">
+        <span>您有一份邀请函</span>
+    </button>
+</div>
+<div class="grevCover"></div>
+#end
+<!--3.8二期需求 结束-->
+<div class="container container_final">
+    <div class="banner bottom_line">
+    	<img src="$static_path/$!mainRel.planProductMain.img" width="100%"/>
+    </div>
+    <div class="final_div">
+    	<span class="final_span">性别：<span id="sex_span">#if($plan.sex==1)男#else女#end</span></span>
+        <span class="final_span">年龄：<span id="age_span">$plan.age</span>岁</span>
+    </div>
+    <div class="final_inform">
+    	<div class="final_div01"></div>
+        <div class="final_div02">
+        	<p><span class="final_span" id="totail_span">$!plan.bf</span>元/年</p>
+        </div>
+        <div class="final_div02">
+        	<p><span class="final_span">$!mainRel.jfnxConstant.name</span></p>
+        	<!--<p>交<span class="final_span">$!mainRel.jfnxConstant.value</span>年</p>-->
+        </div>
+        <div class="final_div02">
+        	<p><span class="final_span">$!mainRel.bxnxConstant.name</span></p>
+        </div>
+    	<p class="detail_view"><span class="arrwo_bg "></span></p>
+        <table class="detail_table" style="display:table;">
+            <tr>
+                <th>险种名称</th>
+                <th>保额/份数</th>
+                <th>保费</th>
+                <th>保障期限</th>
+                <th>交费期间</th>
+            </tr>
+            #foreach($rel in $rels)
+             <tr>
+                <td>$!rel.planProductMain.cpjc</td>
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.be</td> #end
+                <td>$!rel.bf</td>
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.bxnxConstant.name</td> #end
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.jfnxConstant.name</td> #end
+            </tr>
+            #end
+        </table>
+    </div>
+    #if($mainRel.planProductMain.qyMark==0)
+    <div class="img-div">
+        <img src="$static_path/index/images/final-bg01.jpg" width="100%"/>
+        <p class="img-title">获得<span class="yellow-span">$!qyCounts</span>项保障</p>
+        <dl class="final_dl">
+        		#foreach($qy in $qys)
+		            <dt><img src="$static_path/$!qy.img" width="100%"/></dt>
+	    	        <dd><p class="final_p font-h4">${velocityCount}.&nbsp;$!qy.des</p></dd>
+	    	        <img src="$static_path/index/images/final-line.jpg" width="100%"/>
+        		#end       		
+        </dl>
+    </div>
+    #else
+    <div class="img-div-type02">
+    	<img src="$static_path/index/images/final-bg01.jpg" width="100%"/>
+    	#foreach($qy in $qys)
+    	<div class="infom_div">
+    		$!qy.head1
+    		$!qy.head2
+    		$!qy.head3
+    	</div>
+    	#end
+    </div>
+    #end
+    <div class="namecard-div">
+    	<img src="$static_path/index/images/final-bg03.jpg" width="100%" />
+        <div class="namecard-button-div">
+        	<img src="$static_path/index/images/final-img001.png" width="9" class="left-top"/>
+            <img src="$static_path/index/images/final-img001.png" width="9" class="right-top"/>
+        	<img src="$static_path/index/images/final-img001.png" width="9" class="left-bottom"/>
+            <img src="$static_path/index/images/final-img001.png" width="9" class="right-bottom"/>
+            <ul>
+            	<li class="borderbottom pop_up_des">
+                    <a class="button-span"><span class="button01">保险公司不赔的情况</span></a>
+                </li>
+                <li class="borderbottom pop_up_des">
+                    <a class="button-span "><span class="button02">产品特色</span></a>
+                </li>
+                <li class="borderbottom pop_up_des">
+                	<a class="button-span"><span class="button03">案例说明</span></a>
+                </li>
+                <li>
+                    <a class="button-span" href="$bxj_path/plan/pdf.page?tk=$!mainRel.planProductMain.tk"><span class="button04">产品条款</span></a>
+                </li>
+            </ul>
+        	
+        </div>
+        #if($hasCustomerId)
+            <div class="namecard-button-div font-h5 pV20">
+                <img src="$static_path/index/images/final-img001.png" width="9" class="left-top"/>
+                <img src="$static_path/index/images/final-img001.png" width="9" class="right-top"/>
+                <img src="$static_path/index/images/final-img001.png" width="9" class="left-bottom"/>
+                <img src="$static_path/index/images/final-img001.png" width="9" class="right-bottom"/>
+                <p class="inform_p">亲，
+                    #if($cardFlag)
+                        $!userCard.name
+                    #end
+                    为您做的计划书还满意吗？</br>给个好评呗！</p>
+                #if($hasAgree)
+                    <button class="zan_button _grey" style="background: rgb(129, 129, 129);">感谢您的好评！</button>
+                #else
+                    <button class="zan_button">好评！</button>
+                    <form id="customerPlanInfos">
+                        <input type="hidden" name="customerId" value="$!customerId" />
+                        <input type="hidden" name="bookId" value="$!plan.fid" />
+                        <input type="hidden" name="readStatus" value="1" />
+                    </form>
+                #end
+            </div>
+        #end
+
+
+        #if($cardFlag)
+            <div class="namecard">
+                <ul>
+                    <li><h1>$!userCard.name&nbsp;</h1></li>
+                    <li><h2>$!userCard.job&nbsp;</h2></li>
+                    <li class="icon-li icon-li01"><span>$!userCard.phone&nbsp;</span></li>
+                    <li class="icon-li icon-li02"><span>$!userCard.company&nbsp;</span></li>
+                    <li class="icon-li icon-li03"><span>$!userCard.area $!userCard.department $!userCard.address&nbsp;</span></li>
+                </ul>
+                <div class="headicon-div">
+                    <span class="head-icon">
+		                 #if($userCard.photo)
+		   					 <img src="$static_path$!userCard.photo" id="portrait"/>
+						 #else
+		   					<img src="$static_path/index/images/head-icon.jpg" id="portrait"/>
+						 #end
+                    </span>
+                </div>
+            </div>
+        #else
+            <div class="namecard nonamecard">
+                <img src="$static_path/index/images/final-img001.png" width="9" class="left-top"/>
+                <img src="$static_path/index/images/final-img001.png" width="9" class="right-top"/>
+                <span class="head-icon">
+                    <img src="$static_path/index/images/nonamecard-icon.jpg"/>
+                </span>
+                <p>您还没有名片</p>
+                <button type="button" onclick="javascript:window.location.href='$bxj_path/planUserCard/userCard.page';">去创建名片</button>
+            </div>
+        #end
+        <p class="notice_p">演示数据仅供参考，具体请以实际为准。</p>
+    </div>
+</div>
+
+<!--内容 结束-->
+<!--底部 结束-->
+#set( $footer_params = ["layer_mobile/layer/layer.m/layer.m.js","index/js/final.js?v=20160420","index/js/share.js?v=201603078","public/js/loader.js","index/js/Messager.js"])
+#bxj_footer($footer_params)
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$!mainRel.planProductMain.cpjc',
+                desc: '$!mainRel.planProductMain.cpms',
+                imgUrl: '$static_path/$!mainRel.planProductMain.img',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+	
+	var mc= '$!mainRel.planProductMain.mc';
+	var cpts= '$!mainRel.planProductMain.cpts';
+	var bbrqy= '$!mainRel.planProductMain.bbrqy';
+	var s = {
+		title: '$!mainRel.planProductMain.cpjc',
+		desc: '$!mainRel.planProductMain.cpms',
+		image: '$static_path/$!mainRel.planProductMain.img',
+		location: '$bxj_path/plan/detail${plan.fid}.page?share=1&hd=1&customerId=$!customerId'
+	};	
+	setShareInfo(s);
+	#if($hasInvitation)
+	var lng= $!invitation.lng;
+	var lat= $!invitation.lat;
+	Loader.loadJs('amap_script','http://webapi.amap.com/maps?v=1.3&key=ae45ce6b854a4e99f3ac8b95abf545c9&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder',
+		function(){
+			var newMap = new AMap.Map("map_img_block", {resizeEnable: true,level: 15,center: [lng,lat]});
+	    	new AMap.Marker({map: newMap,position: [lng, lat]});
+		},
+		function() {
+			Messager.toast('加载地图组件失败，请尝试点击返回键重新加载，如果多次失败，请稍等片刻', 3);
+		}
+	);
+    $("#map_follow_my").on('click',function(){
+    	if(lng&&lat){    	
+    		window.location.href=bxj_path+'/map/navigation.page?lng='+ lng + '&lat='+lat;
+    	}else{
+    	 	Messager.toast('定位您的位置失败,请刷新页面再试');
+    	}
+    });	
+	#end
+	#if($hasVoice)
+	    var music = document.getElementById("bgMusic");
+        $("div.mubtn").click(function(){
+            if(music.paused){
+                music.play();
+                $(".mubtn").removeClass("mubtn2");
+            }else{
+                music.pause();
+                $(".mubtn").addClass("mubtn2");
+            }
+        });
+    #end   
+</script>

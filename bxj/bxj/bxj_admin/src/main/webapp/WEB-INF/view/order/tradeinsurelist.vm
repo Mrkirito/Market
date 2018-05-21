@@ -1,0 +1,362 @@
+$pageModule.init("app/order/tradeinsurelist","list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">订单信息</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form id="queryForm">
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>被保人名称</label>
+                                    <input type="text" class="form-control" name="recognizeeName">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>投保人名称</label>
+                                    <input type="text" class="form-control" name="realName">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>会员账号ID</label>
+                                    <input type="text" class="form-control" name="memberId">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>产品名称</label>
+                                    <input type="text" class="form-control" name="productName">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>订单号</label>
+                                    <input type="text" class="form-control" name="tradeId">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>保单号</label>
+                                    <input type="text" class="form-control" name="policyNumber">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>订单状态</label>
+                                    <select class="form-control" name="statusId">
+                                        <option value="">请选择</option>
+                                        <option value="1">待支付</option>
+                                        <option value="2">处理中</option>
+                                        <option value="4">已承保</option>
+                                        <option value="5">已取消</option>
+                                        <option value="6">已失效</option>
+                                        <option value="9">已生效</option>
+                                        <option value="10">未提交</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>渠道来源</label>
+                                    <select class="form-control" name="sourceId">
+                                        <option value="-999">请选择</option>
+                                        #foreach($source in $sources)
+                                            <option value="$!source.fid">$!source.name</option>
+                                        #end
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>订单创建时间</label>
+                                    <input type="text" class="form-control form-date" name="createTimeTemp">
+                                </div>
+                                <div class="form-group col-md-2 col-xs-12">
+                                    <label>保障开始时间</label>
+                                    <input type="text" class="form-control form-date" name="insureBeginDateTemp">
+                                </div>
+                            </form>
+                            <div class="form-group col-md-1 col-xs-12 group-box">
+                                <button class="btn btn-primary search-action group-item">查询</button>
+                            </div>
+                            <div class="form-group col-md-1 col-xs-12 group-box">
+                                <button class="btn btn-primary clear-action group-item">清空</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product_info">
+                <div class="page-toolbar" style="float: right; margin-top: -20px; margin-bottom: 10px;">
+                    <div class="btn-group page-toolbar-list product_info_tbars"></div>
+                </div>
+                <div class="data-list"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--basic 编辑-->
+<div class="video-tpl hidden">
+    <form id="editForm">
+        <input type="hidden" name="fid"/>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>订单编号</label>
+            <input type="text" width="100px" class="form-control" name="tradeId" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>订单状态</label>
+            <select class="form-control" id="orderState" name="statusId">
+                <option value="">请选择</option>
+                <option value="1">待支付</option>
+                <option value="2">处理中</option>
+                <option value="4">已承保</option>
+                <option value="5">已取消</option>
+                <option value="6">已失效</option>
+                <option value="9">已生效</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>保单号</label>
+            <input type="text" width="100px" class="form-control" name="policyNumber">
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>取消原因</label>
+            <input type="text" width="100px" class="form-control" name="refuseReason">
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>保障开始日期</label>
+            <input type="text" width="100px" class="form-control form-begindate" name="insureBeginDateTemp">
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>保障结束日期</label>
+            <input type="text" width="100px" class="form-control form-enddate" name="insureEndDateTemp">
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>创建时间</label>
+            <input type="text" width="100px" class="form-control" name="createTime" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>修改时间</label>
+            <input type="text" width="100px" class="form-control" name="modifiedTime" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>会员账号</label>
+            <input type="text" width="100px" class="form-control" name="memberId" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>产品名称</label>
+            <input type="text" width="100px" class="form-control" name="productName" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>保障期限</label>
+            <input type="text" width="100px" class="form-control" name="duration" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>保额</label>
+            <input type="text" width="100px" class="form-control" name="marketAmount" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>购买份数</label>
+            <input type="text" width="100px" class="form-control" name="buyNumber" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>交费期限</label>
+            <input type="text" width="100px" class="form-control" name="tradeduration" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>订单总价</label>
+            <input type="text" width="100px" class="form-control" name="totalAmount" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>实际支付金额</label>
+            <input type="text" width="100px" class="form-control" name="totalAmount" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>返利金额</label>
+            <input type="text" width="100px" class="form-control" name="fanliAmount" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>订单来源</label>
+            <input type="text" width="100px" class="form-control" name="sourceId" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>是否上传保单</label>
+            <input type="text" width="100px" class="form-control" name="insureFileUrls" disabled>
+        </div>
+
+        <!-- 投保人信息 -->
+        <div class="form-group col-md-12 col-xs-12">
+            <label>投保人信息</label>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>投保人姓名</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.realName" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>证件类型</label><br>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.identityName" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>证件号码</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.identityCard" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>生日</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.birthday" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>性别</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.sex" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>手机号码</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.mobileCode" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>电子邮箱</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.mail" disabled>
+        </div>
+
+        <div class="form-group col-md-4 col-xs-12">
+            <label>是否有社保</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.isSecurity" disabled>
+        </div>
+
+        <div class="form-group col-md-4 col-xs-12">
+            <label>年收入</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.yearEarnings" disabled>
+        </div>
+
+        <div class="form-group col-md-4 col-xs-12">
+            <label>公司</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.companyName" disabled>
+        </div>
+
+        <div class="form-group col-md-4 col-xs-12">
+            <label>职业</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.job3Name" disabled>
+        </div>
+
+        <div data-toggle="distpicker">
+            <div class="form-group col-md-4 col-xs-12">
+                <label>省</label>
+                <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.state" disabled>
+            </div>
+            <div class="form-group col-md-4 col-xs-12">
+                <label>市</label>
+                <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.city" disabled>
+            </div>
+            <div class="form-group col-md-4 col-xs-12">
+                <label>区</label>
+                <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.town" disabled>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4 col-xs-12">
+            <label>邮编</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.zipcode" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>详细地址</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.address" disabled>
+        </div>
+
+
+        <!-- 被保人信息   -->
+        <div class="form-group col-md-12 col-xs-12">
+            <label>被保人信息</label>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>投保人姓名</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.realName" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>证件类型</label><br>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.identityName" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>证件号码</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.identityCard" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>证件有效期</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.identityStopDate" disabled>
+        </div>
+
+        <div class="form-group col-md-4 col-xs-12">
+            <label>生日</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.birthday" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>性别</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.sex" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>职业</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.job3Name" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>手机号码</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.mobileCode" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>电子邮箱</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.mail" disabled>
+        </div>
+
+        <div class="form-group col-md-4 col-xs-12">
+            <label>身高</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.weight" disabled>
+        </div>
+
+        <div class="form-group col-md-4 col-xs-12">
+            <label>体重</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.height" disabled>
+        </div>
+
+        <div data-toggle="distpicker">
+            <div class="form-group col-md-4 col-xs-12">
+                <label>省</label>
+                <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.state" disabled>
+            </div>
+            <div class="form-group col-md-4 col-xs-12">
+                <label>市</label>
+                <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.city" disabled>
+            </div>
+            <div class="form-group col-md-4 col-xs-12">
+                <label>区</label>
+                <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.town" disabled>
+            </div>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>详细地址</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredIsurent.address" disabled>
+        </div>
+
+
+        <div class="form-group col-md-12 col-xs-12">
+            <label>续期交费信息</label>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>开户行所在地</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.bankCityName" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>开户行</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.xqBankName" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>开户名</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.xqName" disabled>
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label>银行卡号</label>
+            <input type="text" width="100px" class="form-control" name="tradeAssuredInsure.xqBankNo" disabled>
+        </div>
+</div>
+</form>
+</div>
+<!--订单信息保单导入-->
+<div class="order_policy_import hidden">
+    <form id="order_policy_import_form" method="post" action="tradeinsure/importSinglePolicy.json"
+          enctype="multipart/form-data" accept-charset="utf-8">
+        <div class="form-group col-sm-12">
+            <label class="col-md-4 control-label">PDF文件&nbsp;</label>
+            <div class="col-md-9">
+                <input type="file" class="form-control" name="file" accept=".pdf" id="file"/>
+                <input type="hidden" name="id" id="id"/>
+            </div>
+        </div>
+    </form>
+</div>

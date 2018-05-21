@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.znb.cms.dao.mapper.CompensationMapper" >
+  <resultMap id="BaseResultMap" type="com.znb.cms.model.mapper.Compensation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="injured_name" property="injuredName" jdbcType="VARCHAR" />
+    <result column="injured_card" property="injuredCard" jdbcType="VARCHAR" />
+    <result column="entry_time" property="entryTime" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="INTEGER" />
+    <result column="accident_time" property="accidentTime" jdbcType="VARCHAR" />
+    <result column="accident_address" property="accidentAddress" jdbcType="VARCHAR" />
+    <result column="injured_position" property="injuredPosition" jdbcType="VARCHAR" />
+    <result column="injured_degree" property="injuredDegree" jdbcType="VARCHAR" />
+    <result column="accident_detail" property="accidentDetail" jdbcType="VARCHAR" />
+    <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+    <result column="link_phone" property="linkPhone" jdbcType="VARCHAR" />
+    <result column="link_email" property="linkEmail" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, injured_name, injured_card, entry_time, salary, accident_time, accident_address, 
+    injured_position, injured_degree, accident_detail, link_name, link_phone, link_email, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dt_compensation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dt_compensation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.znb.cms.model.mapper.Compensation" >
+    insert into dt_compensation (id, injured_name, injured_card, 
+      entry_time, salary, accident_time, 
+      accident_address, injured_position, injured_degree, 
+      accident_detail, link_name, link_phone, 
+      link_email, create_time)
+    values (#{id,jdbcType=INTEGER}, #{injuredName,jdbcType=VARCHAR}, #{injuredCard,jdbcType=VARCHAR}, 
+      #{entryTime,jdbcType=VARCHAR}, #{salary,jdbcType=INTEGER}, #{accidentTime,jdbcType=VARCHAR}, 
+      #{accidentAddress,jdbcType=VARCHAR}, #{injuredPosition,jdbcType=VARCHAR}, #{injuredDegree,jdbcType=VARCHAR}, 
+      #{accidentDetail,jdbcType=VARCHAR}, #{linkName,jdbcType=VARCHAR}, #{linkPhone,jdbcType=VARCHAR}, 
+      #{linkEmail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.znb.cms.model.mapper.Compensation" >
+    insert into dt_compensation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="injuredName != null" >
+        injured_name,
+      </if>
+      <if test="injuredCard != null" >
+        injured_card,
+      </if>
+      <if test="entryTime != null" >
+        entry_time,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="accidentTime != null" >
+        accident_time,
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address,
+      </if>
+      <if test="injuredPosition != null" >
+        injured_position,
+      </if>
+      <if test="injuredDegree != null" >
+        injured_degree,
+      </if>
+      <if test="accidentDetail != null" >
+        accident_detail,
+      </if>
+      <if test="linkName != null" >
+        link_name,
+      </if>
+      <if test="linkPhone != null" >
+        link_phone,
+      </if>
+      <if test="linkEmail != null" >
+        link_email,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="injuredName != null" >
+        #{injuredName,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredCard != null" >
+        #{injuredCard,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null" >
+        #{entryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="accidentTime != null" >
+        #{accidentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredPosition != null" >
+        #{injuredPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredDegree != null" >
+        #{injuredDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDetail != null" >
+        #{accidentDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="linkName != null" >
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkEmail != null" >
+        #{linkEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.znb.cms.model.mapper.Compensation" >
+    update dt_compensation
+    <set >
+      <if test="injuredName != null" >
+        injured_name = #{injuredName,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredCard != null" >
+        injured_card = #{injuredCard,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null" >
+        entry_time = #{entryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="accidentTime != null" >
+        accident_time = #{accidentTime,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredPosition != null" >
+        injured_position = #{injuredPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredDegree != null" >
+        injured_degree = #{injuredDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDetail != null" >
+        accident_detail = #{accidentDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="linkName != null" >
+        link_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        link_phone = #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="linkEmail != null" >
+        link_email = #{linkEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.znb.cms.model.mapper.Compensation" >
+    update dt_compensation
+    set injured_name = #{injuredName,jdbcType=VARCHAR},
+      injured_card = #{injuredCard,jdbcType=VARCHAR},
+      entry_time = #{entryTime,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=INTEGER},
+      accident_time = #{accidentTime,jdbcType=VARCHAR},
+      accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      injured_position = #{injuredPosition,jdbcType=VARCHAR},
+      injured_degree = #{injuredDegree,jdbcType=VARCHAR},
+      accident_detail = #{accidentDetail,jdbcType=VARCHAR},
+      link_name = #{linkName,jdbcType=VARCHAR},
+      link_phone = #{linkPhone,jdbcType=VARCHAR},
+      link_email = #{linkEmail,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="getCompensationList" parameterType="com.znb.cms.model.mapper.Compensation" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from dt_compensation
+   	 where 1=1 
+   	 <if test="injuredName != null" >
+        and injured_name = #{injuredName,jdbcType=VARCHAR}
+      </if>
+      <if test="injuredCard != null" >
+        and injured_card = #{injuredCard,jdbcType=VARCHAR}
+      </if>
+      <if test="entryTime != null" >
+        and entry_time = #{entryTime,jdbcType=VARCHAR}
+      </if>
+      <if test="salary != null" >
+        and salary = #{salary,jdbcType=INTEGER}
+      </if>
+      <if test="accidentTime != null" >
+        and accident_time = #{accidentTime,jdbcType=VARCHAR}
+      </if>
+      <if test="accidentAddress != null" >
+        and accident_address = #{accidentAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="injuredPosition != null" >
+        and injured_position = #{injuredPosition,jdbcType=VARCHAR}
+      </if>
+      <if test="injuredDegree != null" >
+        and injured_degree = #{injuredDegree,jdbcType=VARCHAR}
+      </if>
+      <if test="accidentDetail != null" >
+        and accident_detail = #{accidentDetail,jdbcType=VARCHAR}
+      </if>
+      <if test="linkName != null" >
+        and link_name = #{linkName,jdbcType=VARCHAR}
+      </if>
+      <if test="linkPhone != null" >
+        and link_phone = #{linkPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="linkEmail != null" >
+        and link_email = #{linkEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      limit #{pageFirstItem},#{pageSize}
+  </select>
+  
+   <select id="selectCount" resultType="java.lang.Integer" parameterType="com.znb.cms.model.mapper.Compensation" >
+    select 
+   	count(1)
+    from dt_compensation
+     where 1=1 
+   	 <if test="injuredName != null" >
+        and injured_name = #{injuredName,jdbcType=VARCHAR}
+      </if>
+      <if test="injuredCard != null" >
+        and injured_card = #{injuredCard,jdbcType=VARCHAR}
+      </if>
+      <if test="entryTime != null" >
+        and entry_time = #{entryTime,jdbcType=VARCHAR}
+      </if>
+      <if test="salary != null" >
+        and salary = #{salary,jdbcType=INTEGER}
+      </if>
+      <if test="accidentTime != null" >
+        and accident_time = #{accidentTime,jdbcType=VARCHAR}
+      </if>
+      <if test="accidentAddress != null" >
+        and accident_address = #{accidentAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="injuredPosition != null" >
+        and injured_position = #{injuredPosition,jdbcType=VARCHAR}
+      </if>
+      <if test="injuredDegree != null" >
+        and injured_degree = #{injuredDegree,jdbcType=VARCHAR}
+      </if>
+      <if test="accidentDetail != null" >
+        and accident_detail = #{accidentDetail,jdbcType=VARCHAR}
+      </if>
+      <if test="linkName != null" >
+        and link_name = #{linkName,jdbcType=VARCHAR}
+      </if>
+      <if test="linkPhone != null" >
+        and link_phone = #{linkPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="linkEmail != null" >
+        and link_email = #{linkEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+  </select>
+</mapper>

@@ -1,0 +1,278 @@
+$pageModule.setTitle("资源权限")
+
+$pageModule.init("app/right/resource", "list")
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <div id="portlet-config" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"></button>
+                <h3>portlet Settings</h3>
+            </div>
+            <div class="modal-body">
+                <p>Here will be a configuration form</p>
+            </div>
+        </div>
+        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row form ">
+            
+                                <input type="hidden" class="parentId" value="0">
+                                <input type="hidden" class="navCode" value="">
+                                <input type="hidden" class="resourceType" value="">
+            
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="resourceCode" >编码: </label>
+                                    <input type="text" placeholder="编码" id="resourceCode" class="form-control resourceCode">
+                                </div>
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="resourceName" >名称: </label>
+                                    <input type="text" placeholder="名称" id="resourceName" class="form-control resourceName">
+                                </div>
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="status" >状态: </label>
+                                    <select class="status form-control" placeholder="状态" id="status">
+                                        <option value="1">正常</option>
+                                        <option value="0">已禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-data">查询</button>
+            ##                    <button class="btn btn-default reset-data">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-toolbar" style="float: right; margin-top: -20px; margin-bottom: 10px;">
+                        <div class="btn-group page-toolbar-list resource-toolbar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">资源权限</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="page-column">
+                                <div class="column-left" style="padding-right: 5px;">
+                                    <div class="resource-tree tree-border" ></div>
+                                </div>
+                                <div class="column-right">
+                                    <div class=" data-list" style="padding: 0 15px;"></div>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<div class="edit-tmpl" style="display: none;">
+    <input type="hidden" class="id">
+    <input type="hidden" class="parentId">
+    <div class="row">
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">编码</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control resourceCode">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">名称</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control resourceName">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 13px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">图标</label>
+                <div class="col-md-9">
+                    <div class=" ">
+                        <div class="input-group">
+
+                            <span class="input-group-addon resourceIcon-i">
+                                <i class=""></i>
+                            </span>
+                            <input type="text" class="form-control resourceIcon" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">父菜单</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control parentName" style="cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 13px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">所属系统</label>
+                <div class="col-md-9">
+                    <input type="hidden" class=" navCode">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">url</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control resourceUrl">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="col-sm-6 form-group" style="margin-bottom: 5px;">
+                <label class="col-md-6 control-label" style="padding-left: 0;">是否菜单</label>
+                <div class="col-md-4" style="margin-top: 5px;">
+                    <div class="" style="height: 20px;">
+                        <input type="checkbox" class="form-control menuShow" value="1">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 form-group" style="margin-bottom: 5px;">
+                <label class="col-md-6 control-label">权限控制</label>
+                <div class="col-md-4" style="margin-top: 5px;">
+                    <div class="" style="height: 20px;">
+                        <input type="checkbox" class="form-control permissionControl" value="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">排序</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control sort" style="width: 70px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="func-list-tmpl" style="display: none;">
+
+    <div class="search" style="margin-bottom: 15px;">
+        <div class="search-condition">
+            <div class="col-sm-6 condition-row">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">编码</label>
+                    <div class="col-md-8">
+                        <div class="">
+                            <input type="text" class="form-control funcCode">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 condition-row">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">名称</label>
+                    <div class="col-md-8">
+                        <div class="">
+                            <input type="text" class="form-control funcName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 condition-row">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">状态</label>
+                    <div class="col-md-8">
+                        <div class="">
+                            <select class="status form-control">
+                                <option value="1">有效</option>
+                                <option value="0">无效</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-buttons">
+            <div class="btn-group">
+                <a href="javascript:void(0);" class="btn btn-default search-function">
+                     查询</a>
+            </div>
+        </div>
+    </div>
+    <div class="page-toolbar" style="float: right; margin-top: -20px; margin-bottom: 10px;">
+        <div class="btn-group page-toolbar-list function-toolbar"></div>
+    </div>
+    <div class='function-list'>
+    </div>
+</div>
+
+
+<div class="edit-func-tmpl" style="display: none;">
+    <input type="hidden" class="id">
+    <input type="hidden" class="resourceCode">
+    <div class="row">
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">编码</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control funcCode">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">名称</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control funcName">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" style="margin-bottom: 3px;">
+            <div class="form-group">
+                <label class="col-md-3 control-label">排序</label>
+                <div class="col-md-9">
+                    <div class="">
+                        <input type="text" class="form-control sort" style="width: 70px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

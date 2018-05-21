@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.HeadlineBannerMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.HeadlineBanner" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="page_url" property="pageUrl" jdbcType="VARCHAR" />
+    <result column="is_display" property="isDisplay" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="online_time" property="onlineTime" jdbcType="TIMESTAMP" />
+    <result column="offline_time" property="offlineTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_by" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, image_url, page_url, is_display, sort, online_time, offline_time, create_by, 
+    create_at, modify_by, modify_at
+  </sql>
+  <sql id="Public_Page">
+    <if test="startIndex != null and pageSize != null">
+      limit #{startIndex},#{pageSize}
+    </if>
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from headline_banner
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from headline_banner
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.HeadlineBanner" >
+    insert into headline_banner (id, title, image_url, 
+      page_url, is_display, sort, 
+      online_time, offline_time, create_by, 
+      create_at, modify_by, modify_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{pageUrl,jdbcType=VARCHAR}, #{isDisplay,jdbcType=BIT}, #{sort,jdbcType=INTEGER}, 
+      #{onlineTime,jdbcType=TIMESTAMP}, #{offlineTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.HeadlineBanner" >
+    insert into headline_banner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="pageUrl != null" >
+        page_url,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+      <if test="offlineTime != null" >
+        offline_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyBy != null" >
+        modify_by,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlineTime != null" >
+        #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.HeadlineBanner" >
+    update headline_banner
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        page_url = #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offlineTime != null" >
+        offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        modify_by = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.HeadlineBanner" >
+    update headline_banner
+    set title = #{title,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      is_display = #{isDisplay,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_by = #{modifyBy,jdbcType=VARCHAR},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="queryPageData" parameterType="com.hangjia.bxj.query.app.HeadlineBannerQuery" resultMap="BaseResultMap">
+  	SELECT
+  	<include refid="Base_Column_List" />
+    FROM headline_banner
+    WHERE
+    	status = 1
+    ORDER BY 
+    	sort,
+    	modify_at DESC,
+    	create_at DESC
+    	<if test="orderBy != null">
+    	,#{orderBy}
+    	</if>
+    LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  
+  <select id="queryPageDataCount" parameterType="com.hangjia.bxj.query.app.HeadlineBannerQuery" resultType="int">
+  	SELECT
+  		COUNT(1)
+  	FROM
+  		headline_banner
+	WHERE
+    	status = 1
+  </select>
+  
+   <select id="querySort" parameterType="com.hangjia.bxj.query.app.HeadlineBannerQuery" resultType="int">
+  	SELECT
+  		a.sort
+  	FROM
+  		headline_banner a 
+  	WHERE
+  	<if test="upOrDown == 1">
+  		a.sort <![CDATA[<=]]> #{sort}
+  	</if>
+  	<if test="upOrDown == 2">
+  		a.sort <![CDATA[>=]]> #{sort}
+  	</if>
+  	and a.status = 1
+  	and a.id != #{id}
+  	ORDER BY
+  		a.sort <if test="upOrDown == 1"> DESC </if>
+  	LIMIT 1
+  </select>
+  
+   <select id="queryBannerList" parameterType="com.hangjia.bxj.model.Headline" resultMap="BaseResultMap">
+  	SELECT
+  		a.id,
+  		a.title,
+  		a.image_url,
+  		a.page_url
+  	FROM
+  		headline_banner a 
+  	WHERE
+  		a.is_display = 1
+  	AND
+  		a.status = 1
+  	AND
+  		(CURDATE() BETWEEN a.online_time AND a.offline_time)
+  	ORDER BY
+  		a.sort
+	<include refid="Public_Page" />
+  </select>
+</mapper>

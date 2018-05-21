@@ -1,0 +1,91 @@
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-pid="789" data-jbbe="$!product.jbbe" data-cpjc="国寿福至尊版" data-table="0" style="display:none">
+		<input type="hidden" name="bxnx" value="6" class="factor" data-text="终身" />
+		<li class="info-item main_line_height">
+			<label class="info-name">缴费期限</label>
+			<select class="factor" onchange="SingleProduct._checkBoxChange()" name="jfnx" id="select-jfnx">
+	            <option value="21">1年</option>
+	            <option value="8">5年</option>
+	            <option value="9">10年</option>
+	            <option value="10">15年</option>
+	            <option value="11">20年</option>
+	            <option value="12">30年</option>
+			</select>
+			<span class="arrowr"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">保额</label>
+			<input type="tel" placeholder="请输入保额" value="200000" class="demo_price factor one" name="be" maxlength="15"/>
+			<i class="icon">元</i>
+			<span class="error-tips" style="display:none;"></span>
+		</li>
+		<li class="_tb_hm_li">
+			<input type="hidden" name="pid" value="796" data-zxpid="789" data-jbbe="10000" data-cpjc="提前给付重疾">
+			<input type="hidden" name="bxnx" value="6">
+			<dl>
+				<dt>
+					<input type="checkbox" id="zj_796" disabled="disabled" checked  class="checkbox-single _tb_hm">
+					<label for="zj_796" class="grey_span checked">提前给付重疾</label>
+				</dt>
+			</dl>
+		</li>
+		<li class="info-item main_line_height two">
+			<input class="checkbox-single _tb_cqyw" id="zj_794" type="checkbox"> 
+			<label class="info-name">长期意外</label>
+			<dd class="single_li_dd" style="display: none">
+            <input type="hidden" data-zxpid="789" data-pid="794" data-jbbe="$!product.jbbe" data-cpjc="长期意外" name="pid"/>
+			<input type="tel" placeholder="请输入保额" class="demo_price factor two" id="cq-ywbe" name="cqywbe" maxlength="15"/>
+			<i class="icon">元</i>
+			<span class="error-tips" style="display:none;"></span>
+            </dd>
+		</li>
+		<li class="_tb_qzhm_li" style="display:none">
+			<input type="hidden" name="pid" value="795" data-zxpid="789" data-jbbe="100" data-cpjc="轻症豁免">
+			<input type="hidden" name="bxnx" value="6">
+			<dl>
+				<dt>
+					<input type="checkbox" id="zj_795" class="checkbox-single _tb_qzhm">
+					<label for="zj_795" class="info-name">轻症豁免</label>
+				</dt>
+			</dl>
+		</li>
+	</div>
+	<li class="main_item" >
+		<div class="creatDes_header">
+				<span class="createDes-title verticalmiddle">
+						<em>$!product.cpjc</em>			
+					</span>
+					<span class="creatDes-add-btn"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+		</div>
+	</li>
+	<li class="main_item li_table_0" style="display:none">
+		<div class="creatDes_header">
+			<span class="createDes-title">
+				<em>国寿福至尊版</em>
+				<em class="price"></em>
+			</span>
+			<span class="createDes-btn">
+				<a class="main_edit_btn" data-table="0">修改</a>
+			</span>
+		</div>
+		<table class="createDes-table">
+		<thead>
+			<tr>
+				<td>险种</td>
+				<td>保额</td>
+				<td>保费</td>
+				<td>保障期限</td>
+				<td>缴费期限</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		</table>
+	</li>
+	#parse("product/addzx.vm")
+	</ul>
+</div>

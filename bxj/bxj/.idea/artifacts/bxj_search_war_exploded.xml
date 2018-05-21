@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="bxj_search:war exploded">
+    <output-path>$PROJECT_DIR$/bxj_search/target/bxj_search</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="bxj_search" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/bxj_search/target/bxj_search/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="bxj_search/web/Web" />
+    </root>
+  </artifact>
+</component>

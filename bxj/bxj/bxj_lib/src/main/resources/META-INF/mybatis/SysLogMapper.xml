@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.log.SysLogMapper">
+
+	<sql id="log_column">
+		a.id as "id",
+		a.operation_name as "operationName",
+		a.operation_method as "operationMethod",
+		a.operation_remark as "operationRemark",
+		a.operation_ip as "operationIp",
+		a.create_time as "createTime",
+		a.create_name as "createName",
+		a.update_time as "updateTime",
+		a.update_name as "updateName"
+	</sql>
+
+	<sql id="log_where_list">
+		<where>
+			<if test="null != createTime">AND DATE(a.create_time) <![CDATA[=]]> DATE(#{createTime})</if>
+			<if test="null != operationName and operationName != ''">AND a.operation_name like CONCAT(CONCAT('%', #{operationName}), '%')</if>
+			<if test="null != operationIp and operationIp != ''">AND a.operation_ip like CONCAT(CONCAT('%', #{operationIp}), '%')</if>
+			<if test="null != operationMethod and operationMethod != ''">AND a.operation_method like CONCAT(CONCAT('%', #{operationMethod}), '%')</if>
+			<if test="null != operationRemark and operationRemark != ''">AND a.operation_remark like CONCAT(CONCAT('%', #{operationRemark}), '%')</if>
+		</where>
+	</sql>
+	<insert id="addLog" parameterType="com.hangjia.bxj.model.log.SysLogDO">
+		insert into bxj_sys_operation_log (
+		operation_name, operation_method, operation_remark, operation_ip, create_time,
+		create_name, update_time, update_name
+		) values (
+		#{operationName}, #{operationMethod}, #{operationRemark}, #{operationIp}, now(),
+		#{createName}, #{updateTime}, #{updateName}
+		)
+	</insert>
+	<select id="queryPageData" parameterType="com.hangjia.bxj.query.log.SysLogQuery"
+		resultType="com.hangjia.bxj.model.log.SysLogDO">
+		SELECT
+		<include refid="log_column" />
+		FROM
+			bxj_sys_operation_log a
+		<include refid="log_where_list" />
+		ORDER BY
+		create_time DESC
+		<if test="orderBy != null and orderBy != ''">
+			,#{orderBy}
+		</if>
+		LIMIT #{pageFirstItem},#{pageSize}
+	</select>
+
+	<select id="queryPageDataCount" parameterType="com.hangjia.bxj.query.log.SysLogQuery"
+		resultType="int">
+		SELECT
+		COUNT(1)
+		FROM
+		bxj_sys_operation_log a
+		<include refid="log_where_list" />
+	</select>
+</mapper>

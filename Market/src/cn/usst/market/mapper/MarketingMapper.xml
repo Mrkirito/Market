@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.MarketingMapper">
+    <select id="selectByCompetitionId" resultType="cn.usst.market.po.BrandOfRival">
+		select
+		company.name as companyName,company_product.name as brandName
+		,company.id as companyId,company_product.detail
+		from company LEFT JOIN
+		company_product on
+		company.id=company_product.company_id
+		where
+		company.competition_id=#{0} and company_product.quarter=#{1}
+	</select>
+
+    <select id="selectProductDetail" resultType="cn.usst.market.po.ProductInfo">
+		select detail,title from
+		product_info
+		where id=#{detailId}
+	</select>
+
+    <select id="selectProductDetail1" resultType="cn.usst.market.po.BrandOfRival">
+		select company.name
+		as companyName,company_product.name as brandName
+		,company.id as
+		companyId,company_product.detail
+		from company LEFT JOIN company_product
+		on
+		company.id=company_product.company_id
+		where
+		company.competition_id=#{comId} and company.name=#{comName}
+	</select>
+
+    <select id="selectAdByCompanyIdAndQuarter" resultType="cn.usst.market.po.CompanyAd">
+		select
+		ca.company_id as companyId,ca.product_id as productId,ca.product_name
+		as productName,ca.quarter,
+		ca.advertise_name as adName,ca.advertise_id as adId
+		from company_advertise ca
+		where company_id=#{comId} and
+		quarter=#{quarter}
+	</select>
+
+    <select id="selectAdByProductIdAndAdName" resultType="cn.usst.market.po.AdPojo">
+		select
+		id,quarter,company_id as companyId,product_id as
+		productId,product_name as productName
+		,advertise_name as
+		advertiseName,advertise_id as advertiseId
+		from company_advertise
+		where
+		product_id=#{proId} and advertise_name=#{adName}
+	</select>
+
+    <select id="selectAdDetailById" resultType="java.lang.String">
+		select detail from
+		advertise_info
+		where id=#{id}
+	</select>
+
+    <select id="selectBrandProfitByCompanyId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.Profit">
+		select company_id as companyId,product_id as
+		productId,singapore_sale as singaporeSale,
+		hongkong_sale as hongkongSale,moscow_sale as moscowSale,
+		newdelhi_sale as newdelhiSale,online_sale as onlineSale,
+		singapore_need as singaporeNeed,hongkong_need as hongkongNeed,
+		moscow_need as moscowNeed,newdelhi_need as newdelhiNeed,online_need as onlineNeed
+		from product_market_share where
+		company_id=#{0} and quarter=#{1}
+	</select>
+
+    <select id="selectMarketShareByCompetitionId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.MarketShare">
+		select company_id as companyId,product_id as
+		productId,product_type as productType,
+		market_share as marketShare,singapore_sale as singaporeSale,
+		hongkong_sale as hongkongSale,moscow_sale as moscowSale,
+		newdelhi_sale as newdelhiSale,online_sale as onlineSale,
+		singapore_need as singaporeNeed,hongkong_need as hongkongNeed,
+		moscow_need as moscowNeed,newdelhi_need as newdelhiNeed,online_need as onlineNeed
+		from product_market_share
+		where competition_id=#{0} and quarter=#{1}
+	</select>
+
+    <select id="selectCompanyName" resultType="java.lang.String">
+		select name from
+		company
+		where id=#{companyId}
+	</select>
+
+    <select id="selectProductName" resultType="java.lang.String">
+		select name from
+		company_product
+		where id=#{productId}
+	</select>
+
+    <select id="selectProductName1" resultType="java.lang.String">
+		select name from
+		company_product
+		where company_id=#{0} and id=#{1}
+	</select>
+
+    <select id="selectProductPrice" resultType="cn.usst.market.po.ProductPrice">
+		select
+		pp.company_id as companyId,pp.product_id as productId,pp.price,pp.youji,pp.quarter
+		from
+		product_price pp left join company c on c.id=pp.company_id
+		where
+		c.competition_id=#{0} and pp.quarter=#{1}
+	</select>
+
+    <!-- 查询产品售价 -->
+    <select id="selectProductPrice1" resultType="java.lang.String">
+		select price from
+		product_price
+		where product_id=#{0} and quarter=#{1}
+	</select>
+
+    <select id="selectProductPrice2" resultType="cn.usst.market.po.ProductPrice">
+		select company_id as companyId,product_id as productId,price,youji,quarter,is_sale as isSale
+		from product_price
+		where company_id=#{0} and quarter=#{1}
+	</select>
+
+    <select id="selectCostOfProduction" resultType="java.lang.Integer">
+		select cost
+		from company_product
+		where company_id=#{0} and name=#{1}
+	</select>
+
+    <select id="selectAdDetailByCompetitionId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.AdDetail">
+		select ca.company_id as companyId,ca.product_id as
+		productId,ca.product_name
+		as productName,ca.advertise_id as advertiseId
+		from company_advertise
+		ca
+		LEFT JOIN company c on c.id=ca.company_id
+		where c.competition_id=#{0} and ca.quarter=#{1}
+	</select>
+
+    <select id="selectMediaInfo" resultType="cn.usst.market.po.MediaInfo">
+		select * from media_info
+	</select>
+
+    <select id="selectMainMedia" resultType="cn.usst.market.po.MainMedia">
+		select
+		mi.detail,cm.product_id as productId,cm.num
+		from media_info mi
+		LEFT JOIN company_media cm on mi.id=cm.media_id
+		where
+		cm.company_id=#{companyId}
+	</select>
+
+    <select id="selectAllAdInfo" resultType="cn.usst.market.po.CheckResult">
+		select product_name as
+		productName,advertise_name as advertiseName from
+		company_advertise
+		where company_id=#{0} and quarter=#{1}
+	</select>
+
+
+    <select id="selectPriceAndSale" resultType="cn.usst.market.po.PriceSale">
+		select company_id as
+		companyId,product_id as productId,price,youji,is_sale as isSale
+		from product_price
+		where
+		company_id=#{0} and quarter=#{1}
+	</select>
+
+
+    <select id="selectNumOfMediaAd" resultType="cn.usst.market.po.MediaAdNum">
+		select media_id as
+		mediaId,num
+		from company_media
+		where product_id=#{0} and quarter=#{1}
+	</select>
+
+    <select id="selectMediaCostByMediaId" resultType="java.lang.Integer">
+		select cost
+		from media_info
+		where id=#{mediaId}
+	</select>
+
+    <!-- 查询邮寄返款 -->
+    <select id="selectPostOffice" resultType="java.lang.String">
+		select youji
+		from
+		product_price
+		where product_id=#{0} and quarter=#{1}
+	</select>
+
+    <select id="selectCompetitionIdByCompanyId" resultType="java.lang.Integer">
+		select
+		competition_id
+		from company
+		where id=#{companyId}
+	</select>
+
+    <select id="selectProductByCompanyIdAndQuarter" resultType="cn.usst.market.po.CompanyProduct">
+		select *
+		from company_product
+		where company_id=#{0} and quarter=#{1}
+	</select>
+
+    <delete id="deleteAdByIdAndName">
+		delete from company_advertise
+		where product_id=#{0} and advertise_name=#{1}
+	</delete>
+
+    <select id="selectCompanyProductDemand" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.CompanyProductDemand">
+		select * from company_product_demand where product_id=#{0} and quarter=#{1}
+	</select>
+
+    <update id="updateProductPrice" parameterType="java.lang.Integer">
+		update product_price set is_sale=#{1} where product_id=#{0} and quarter=#{2}
+	</update>
+
+
+    <!-- //操作最终决策表 -->
+    <select id="selectFinalCheckByProductId" parameterType="java.lang.Integer"
+            resultType="java.lang.Integer">
+		select count(*) from final_check where productId=#{0} and quarter=#{1}
+	</select>
+
+    <update id="updateFinalCheckPriceAndSale">
+		update final_check set sale=#{2} where companyId=#{0} and productId=#{1} and quarter=#{3}
+	</update>
+
+    <update id="updateFinalCheckPrice">
+		update final_check set price=#{1} where productId=#{0}
+	</update>
+
+    <update id="updateFinalCheckSalesSalary">
+		update final_check set salesSalary=#{1} where companyInt=#{0} and quarter=#{2}
+	</update>
+
+    <update id="updateFinalCheckWorksSalary">
+
+		update final_check set worksSalary=#{1} where companyId=#{0} and quarter=#{2}
+	</update>
+    <update id="updateFinalCheckIsPhy">
+		update final_check set isPhy=#{1} where companyId=#{0} and quarter=#{2}
+	</update>
+
+    <update id="updateFinalCheckCapacity">
+		update final_check set capacityNow=#{1} where companyId=#{0} and quarter=#{2}
+	</update>
+
+    <insert id="addFinalCheck" >
+		insert into final_check(companyId,productId,sale,quarter) values(#{0},#{1},#{2},#{3})
+	</insert>
+
+    <insert id="addFinalCheckPrice">
+		insert into final_check(productId,price,quarter) values(#{0},#{1},#{2})
+	</insert>
+</mapper>

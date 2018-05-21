@@ -1,0 +1,144 @@
+//全局变量
+//global int i=0;
+/*伪代码
+rule "RF001"//非意外险短期出险件，等待期后不久出险&重大疾病
+    when
+        保单实体类(疾病名称.indexOf("*重大疾病")!=-1 && 出险日期-承保日期＜短期N天) or
+        保单实体类(疾病名称.indexOf("*重大疾病")!=-1 && 出险日期-承保日期-等待期N天＜等待期后不久/N天)
+    then
+        System.out.println("短期出险件，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+/*rule "RF001"
+when
+$res : RulePackageResponseDTO();
+$context : ClaimRuleExecutionContextImpl();
+$request : ClaimServiceRequestDTO() from $context.claimServiceRequestDTO;
+$accidentDate: Date() from $request.accident.accidentDate;
+$inceptionDate : Date() from $request.policy.inceptionDate;
+eval(getBetweenDays($inceptionDate, $accidentDate) < getLongValue($context.getConfigParameters().get("RF0001test001")) || getBetweenDays($inceptionDate, $accidentDate) - getCurrentWaitingPeriod($context) < getLongValue($context.getConfigParameters().get("RF0001test002")))
+then
+List<ClinicDTO> clinics = $request.getClinics();
+for(ClinicDTO clinic : clinics) {
+    Boolean flag = judgeWhetherContainTag(clinic , ".*重大疾病");
+    if(flag) {
+        RuleResponseMessageDTO message = new RuleResponseMessageDTO();
+        message.setType("1");
+        message.setOutputText("领款人不等于被保险人或投保人，在理赔审核通过前，请通过调查去证实索赔损失的真实性。");
+        message.setFiredRuleCode(drools.getRule().getName());
+        $res.addToClinicHierarchy(clinic.getMedicalNum(), message);
+        update($res)
+    }
+}
+end*/
+
+/*伪代码
+rule "RF002"//非意外险短期出险件，等待期后不久出险&非重大疾病是慢性病
+    when
+        保单实体类(疾病名称.indexOf("*慢性病")!=-1 && 出险日期-承保日期＜短期N天) or
+        保单实体类(疾病名称.indexOf("*慢性病")!=-1 && 出险日期-承保日期-等待期N天＜等待期后不久/N天)
+    then
+        System.out.println("短期出险件，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF003"//非意外险短期出险件，等待期后不久出险&非重大疾病是慢性病
+    when
+        保单实体类(疾病名称.indexOf("*慢性病")==-1 && 疾病名称.indexOf("*重大疾病")==-1 && 疾病名称.indexOf("纯外伤诊断ICD")==-1 && 出险日期-承保日期＜短期N天) or
+        保单实体类(疾病名称.indexOf("*慢性病")==-1 && 疾病名称.indexOf("*重大疾病")==-1 && 疾病名称.indexOf("纯外伤诊断ICD")==-1 && 出险日期-承保日期-等待期N天＜等待期后不久/N天)
+    then
+        System.out.println("短期出险件，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF004"//意外险种-短期出险件
+    when
+        保单实体类(疾病名称.indexOf("纯外伤诊断ICD")!=-1 && 出险日期-承保日期＜短期N天)
+    then
+           System.out.println("短期出险件，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF005"//医务人员自有保单
+    when
+        保单实体类(职业行业分类编码归类.indexOf("医务人员")!=-1)
+    then
+           System.out.println("医务人员就诊，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF006"//保险代理人自有保单
+    when
+        保单实体类(保险代理人!=null)
+    then
+           System.out.println("保险代理人就诊，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF007"//保险代理人自有保单
+    when
+        保单实体类(住院天数＝出院日期－入院时间 && 日额津贴金额*住院天数>总费用)
+    then
+           System.out.println("有高额日额津贴保险，住院时间和住院费用不合理，在理赔审核通前，请通过调查去证实索赔损失的真实性过");
+end*/
+
+/*伪代码
+rule "RF008"//保险代理人自有保单
+    when
+        保单实体类(通用名=标签/根据规则配置标签 || 对码后存在*诊疗项目 || 其他任一诊断未被打上*诊疗项目标签)
+    then
+           System.out.println("医学治疗和检查与疾病无相关性，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF009"//医学治疗和检查条目过多
+    when
+        object:保单实体类(医院收费项目类别.indexOf("药")==-1 && 医院收费项目名称中检查项目的总费用＞治疗项目的总费用)
+    then
+        i++;
+        update(object);
+        if(i>N){
+            System.out.println("医学治疗和检查条目过多，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+        }
+
+end*/
+
+/*伪代码
+rule "RF010"//重大疾病诊断后经过很长时间再来申请理赔
+    when
+        保单实体类(理赔接收日期-出险日期＞N天 && 出险日期<就诊日期)
+    then
+           System.out.println("重大疾病诊断后经过很长时间再来申请理赔，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF011"//重大疾病首次理赔申请
+    when
+        保单实体类(就诊记录.equals("重大疾病") && 输出次数为0)
+    then
+           System.out.println("该用户为重大疾病首次理赔申请，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF012"//被保险人身故经过很长时间(>2年）再申请理赔
+    when
+        保单实体类(理赔接收日期-死亡时间＞N天)
+    then
+           System.out.println("被保险人身故经过很长时间再申请理赔，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF013"//被保险人身故后立即提出理赔申请
+    when
+        保单实体类(理赔接收日期-死亡时间<N天)
+    then
+           System.out.println("被保险人身故经过很长时间再申请理赔，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/
+
+/*伪代码
+rule "RF014"//死亡发生在可抗辩期（2年内死亡）
+    when
+        保单实体类(治疗结果.equals("死亡") && 死亡时间－承保日期＜N天) or
+        保单实体类(出险原因.equals("身故") && 死亡时间－承保日期＜N天)
+    then
+           System.out.println("被保险人身故经过很长时间再申请理赔，在理赔审核通过前，请通过调查去证实索赔损失的真实性");
+end*/

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+ #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+ #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+ #set( $template = "template" + $!invitevo.modelType)
+ #set( $templateCss = "template" + $!invitevo.modelType + ".css")
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title id="titleID">$!invitevo.name</title>
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/invention_share/css/$template/$templateCss?v=12">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<!--<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/invention_share/css/index.css">-->
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="container container_convene_share">
+		<!-- Swiper -->
+	    <div class="swiper-container page-wheel">
+
+	        <div class="swiper-wrapper">
+								
+	            <!-- page-one -->
+	            <div class="swiper-slide page-one">
+
+	                <i class="swiper-index-to arrow_01 animated twinkling slide-affix"></i>
+					<input type="hidden" class="previewType" value="$!type" />
+	                <div class="headline slide-affix">
+						#if($!invitevo.name.length() > 10)
+							<p class="small">$!invitevo.name</p>
+						#else
+							<p class="large">$!invitevo.name</p>
+						#end
+	                </div>
+					
+					<div class="invitation-name slide-affix"></div>
+
+	                <div class="invitation-time slide-affix">
+						<ul>
+							<li #if($!invitevo.modelType == 6)class="index_icon_01"#end><span>时间：$!invitevo.dateAtCN</span></li>
+							<li #if($!invitevo.modelType == 6)class="index_icon_02"#end><span>地点：$!invitevo.address</span></li>
+						</ul>
+	                </div>
+
+	            </div>
+	            <!-- page-one end -->
+
+				<!-- page-two -->
+	            <div class="swiper-slide page-two">
+
+	                <i class="swiper-index-to arrow_02 animated twinkling slide-affix"></i>
+
+	                <div class="invitation-content">
+	                	<div class="invitation-content-title slide-affix"></div>
+						<span class="slide-affix">尊敬的#if($!invitevo.guestName && $!invitevo.guestName != "")$!invitevo.guestName#else贵宾#end：</span>
+						<p class="slide-affix">$!invitevo.text</p>
+
+						<div class="inscribe slide-affix">
+							#if($!invitevo.contactName && $!invitevo.contactName != "")
+								<span>$!invitevo.contactName</span>
+							#end
+							<p>$!invitevo.createAtCN</p>
+						</div>
+	                </div>
+
+	            </div>
+	            <!-- page-two end -->
+
+	            <!-- page-three -->
+	            <div class="swiper-slide page-three">
+					
+					<div class="invitation-sign slide-affix"></div>
+					
+					<div class="invitation-address">
+    					<ul class="invitation-add slide-affix">
+                          <li class="clearfix">
+                            <span>联系方式：</span>
+                            <P class="icon_01">$!invitevo.contactMobile</P>
+                          </li>
+                          <li class="clearfix">
+                            <span>会议时间：</span>
+                            <P class="icon_02">$!invitevo.dateAtCN</P>
+                          </li>
+                          <li class="clearfix">
+                            <span>会议地点：</span>
+                            <P class="icon_03">$!invitevo.address</P>
+                          </li>
+                        </ul>    					
+						<!--<div class="invitation-site invitation-add slide-affix">
+							<P class="icon_01">联系方式：$!invitevo.contactMobile</P>
+							<P class="icon_02">会议时间：$!invitevo.dateAtCN</P>
+							<P class="icon_03">会议地点：$!invitevo.address</P>
+						</div>
+						-->
+        				<input type="hidden" id="lngID" value="$!invitevo.lng" />
+        				<input type="hidden" id="latID" value="$!invitevo.lat"/>
+						<div class="invitation-map-box slide-affix">
+							<div class="invitation-map" id="imgMapFemaID">
+							</div>
+
+							<div class="invitation-satnav" id="letmeID">
+								<a class="btn" onclick="letMeGo()"></a>
+							</div>
+						</div>
+					<div class="invitation-address">
+
+	            </div>
+	            <!-- page-four end -->
+
+	        </div>
+
+	        <!-- Add Pagination --
+	        <div class="swiper-pagination"></div>
+	        -->
+
+	    </div>
+
+	</div>
+</body>
+</html>
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/static/invention_share/js/swiper.min.js"></script>
+<script src="$static_path/bxj_three/static/invention_share/js/swiper.extend.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=imgMapFemaID"></script>
+
+<script>
+	// 页面滑块调用
+    var swiperPage = SwiperExtend(
+        // Swiper选择器
+        '.page-wheel',
+        // Swiper参数
+        {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            direction: 'vertical',
+        },
+        // 拓展参数
+        {
+            slides: '.page-wheel > .swiper-wrapper > .swiper-slide'
+        }
+    );
+
+    // 箭头滑块
+    var swiperArrow = $('.swiper-index-to');
+    swiperArrow.on('click', function(){
+        swiperPage.slideNext();
+    });
+
+</script>
+
+<script>
+	FastClick.attach(document.body);//快速点击绑定
+	
+	loadImgMap();
+	
+	//带我去 
+	function letMeGo(){
+		if($(".previewType").val() == 2){
+			var lng=$("#lngID").val();
+    		var lat=$("#latID").val(); //${bxj_path}
+    		var url ='${bxj_path}/map/navigation.page?lng=' + lng + '&lat=' + lat+'&titleName='+$("#titleID").html();
+    		if (true) { // 加上 1 表示没 网页列 头
+    			url += '&hd=' + 1;
+    		}
+    		window.location.href=url;
+		} else {
+			_inform('分享后才能使用');
+		}
+		
+	}
+	
+	//地图加载 
+	function loadImgMap(){
+		if(!$("#lngID").val() || !$("#latID").val()){
+			$('#imgMapFemaID').hide();
+		    $('#letmeID').hide();
+			return;
+		}
+		var lng=parseFloat($("#lngID").val());
+		var lat=parseFloat($("#latID").val());
+		if(lat==0&lng==0){
+		   $('#imgMapFemaID').hide();
+		   $('#letmeID').hide();
+		   return;
+		}
+		
+		var newmap = new AMap.Map("imgMapFemaID", {
+	       //  resizeEnable: true,
+	        zoom: 10,
+	        center: [lng,lat]
+		  	//center: [116.39,39.9]
+    	}); 
+    	//  map.setZoom(10);
+    	  marker = new AMap.Marker({
+            map: newmap,
+            position: [lng, lat]
+        }); 
+        window["imgMapFemaID"] = newmap;
+	}
+	
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+	
+})();
+
+ onloadAddNum();
+ 
+//加载 浏览次数 
+function onloadAddNum(){
+  var inviteId='$!inviteId';
+  var type='$!type';
+  
+  if(type==2){ //查看分享页面 
+    jQuery.ajax({
+			url: '${bxj_path}/invitePage/addInviteNum.json?inviteId=' + inviteId,
+			data: {
+				//inviteId: inviteId
+			},
+			success: function() {
+			}
+			
+			});
+     }
+
+ }
+
+	 
+</script>
+
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$invitevo.name',
+                desc: '$invitevo.text',
+                imgUrl: '$invitevo.shareImgUrl',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+  </script>

@@ -1,0 +1,204 @@
+		<ul class="common-info-ul">
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>世纪天使</em>
+					</span>
+					<span class="creatDes-add-btn" data-layer="mainLayer" data-enable="#btnAddon,#btnAddMore"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddon" data-layer="fjx-layer" data-title="附加险" data-products="['zyjt', 'zyyl', 'ywyl']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>险种组合</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddMore" data-layer="zhx-layer" data-title="险种组合" data-products="['xinli', 'xinsheng', 'xinxiang']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加险种</em>
+					</span>
+				</div>
+			</li>
+			
+		</ul>
+		
+		#parse("product/product.pa.vm")
+	    <script>
+	    	$(function() {
+		    	bxj.PlanBook.init({
+		    		title: '世纪天使',
+		    		gs: 'PingAn',
+		    		autoRefresh: true,
+		    		BeiBaoRen: {
+						age: {
+							min: 0,
+							max: 17,
+							defaults: 0
+						}
+					}
+		    	});
+	    	});
+	    	
+	    	function changeJFNX(data) {
+	    		data.jfnx = bxj.PlanBook.calcJfnxId(data.jfnx);
+	    	}
+	    </script>
+	    
+	    #set($footer = '
+		
+	<div id="mainLayer" class="popup-layer" style="display: none" data-product="shijitianshi">
+	    <form class="popup-form-layer">
+	        <div class="popup-layer-title">世纪天使</div>
+	        <ul class="popup-layer-ul">
+	            <li data-commons>
+	                <label class="info-name" for="shouhuxing-jfnx">缴费期间</label>
+	                <select id="shouhuxing-jfnx" class="factor" name="jfnx" text-name="shouhuxing-jfnx" data-jfnx="[&quot;to18&quot;,20,15,10]" data-defaults="20">
+	                </select>
+	                <span class="arrowr"></span>
+	                <input type="hidden" name="bxnx" value="6">
+	            </li>
+	            <li data-calc="shijitianshi">
+	                <label class="info-name" for="shouhuxing-be">保额</label>
+	                <input value="25000" pattern="[0-9]*" data-vali="min" data-min="10000" data-min-msg="保额不得低于1万" placeholder="1万以上" name="be" maxlength="7" id="shouhuxing-be">
+	                <i class="icon">元</i>
+	                <input type="hidden" name="pid" value="218">
+	            </li>
+	            <li data-calc="shouhuxing-zj">
+	            	<dl>
+	                    <dt>
+	                        <input id="shouhuxing-sezjcb" class="checkbox-single" type="checkbox">
+	                        <label for="shouhuxing-sezjcb">少儿重疾</label>
+	                    </dt>
+	                    <dd>
+	                        <label class="info-name" for="shouhuxing-zj-be">保额</label>
+			                <input value="200000" class="factor" pattern="[0-9]*" data-vali="min" data-min="10000" data-min-msg="重疾保额不得低于1万" placeholder="1万以上" id="shouhuxing-zj-be" name="be">
+			                <i class="icon">元</i>
+			                <input type="hidden" name="pid" value="219">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="shouhuxing-gz">
+	            	<dl>
+	                    <dt>
+	                        <input id="shouhuxing-gzcb" class="checkbox-single" type="checkbox">
+	                        <label for="shouhuxing-gzcb">高中教育金</label>
+	                    </dt>
+	                    <dd id="shouhuxing-gz-data">
+	                        <label class="info-name" for="shouhuxing-gz-jfnx">缴费期间</label>
+			                <select id="shouhuxing-gz-jfnx" class="factor" name="jfnx" text-name="shouhuxing-gz-jfnx" data-jfnx="[&quot;to15&quot;,5]">
+			                </select>
+	                    </dd>
+	                    <dd>
+	                        <label class="info-name" for="shouhuxing-gz-be">保额</label>
+			                <input value="50000" class="factor" pattern="[0-9]*" data-vali="min" data-min="10000" data-min-msg="保额不得低于1万" placeholder="1万以上" id="shouhuxing-gz-be" name="be">
+			                <i class="icon">元</i>
+			                <input type="hidden" name="pid" value="223">
+			                <input type="hidden" name="bxnx" value="154">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="shouhuxing-gz-hm" data-ref="#shouhuxing-gz-data" data-param-fn="changeJFNX" data-dura="shouhuxing-gz-hm" style="display: none;">
+	            	<input type="hidden" name="pid" value="234" id="shx-gz-hm-v">
+	            </li>
+	            
+	            <li data-calc="shouhuxing-dx">
+	            	<dl>
+	                    <dt>
+	                        <input id="shouhuxing-dxcb" class="checkbox-single" type="checkbox">
+	                        <label for="shouhuxing-dxcb">大学教育金</label>
+	                    </dt>
+	                    <dd id="shouhuxing-dx-data">
+	                        <label class="info-name" for="shouhuxing-dx-jfnx">缴费期间</label>
+			                <select id="shouhuxing-dx-jfnx" class="factor" name="jfnx" text-name="shouhuxing-dx-jfnx" data-jfnx="[&quot;to15&quot;,5]">
+			                </select>
+	                    </dd>
+	                    <dd>
+	                        <label class="info-name" for="shouhuxing-dx-be">保额</label>
+			                <input value="50000" class="factor" pattern="[0-9]*" data-vali="min" data-min="10000" data-min-msg="保额不得低于1万" placeholder="1万以上" id="shouhuxing-dx-be" name="be">
+			                <i class="icon">元</i>
+			                <input type="hidden" name="pid" value="222">
+			                <input type="hidden" name="bxnx" value="155">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="shouhuxing-dx-hm" data-ref="#shouhuxing-dx-data" data-param-fn="changeJFNX" style="display: none;">
+	            	<input type="hidden" name="pid" value="234" id="shx-dx-hm-v">
+	            </li>
+	            
+	            <li data-calc="shouhuxing-zj-hm" data-param-fn="changeJFNX">
+	            	<dl>
+	                    <dt>
+	                        <input type="checkbox" id="shouhuxing-zjhmcb" class="checkbox-single">
+	                        <label for="shouhuxing-zjhmcb">附加重疾豁免</label>
+	                    </dt>
+	                    <dd data-hide>
+	                    	<input type="hidden" name="pid" value="234">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="shouhuxing-tbrhm-dx" data-toubaoren data-ref="#shouhuxing-tbrhm,#shouhuxing-dx-data" data-param-fn="changeJFNX" style="display: none;">
+	            	<input type="hidden" name="bxnx" value="6" id="shouhuxing-btrhm-dx-id">
+	            </li>
+	            
+	            <li data-calc="shouhuxing-tbrhm-gz" data-toubaoren data-ref="#shouhuxing-tbrhm,#shouhuxing-gz-data" data-param-fn="changeJFNX" style="display: none;">
+	            	<input type="hidden" name="bxnx" value="6" id="shouhuxing-btrhm-gz-id">
+	            </li>
+	            
+	            <li data-calc="shouhuxing-tbrhm" data-toubaoren data-param-fn="changeJFNX" id="shouhuxing-tbrhm">
+	                <dl>
+	                    <dt>
+	                        <input id="shouhuxing-hm" class="checkbox-single" type="checkbox">
+	                        <label for="shouhuxing-hm">投保人豁免<em class="notes">（非本人可附加）</em></label>
+	                    </dt>
+	                    <dd>
+	                        <input id="paf-hmA" class="radio_box" name="pid" type="radio" value="245">
+	                        <label for="paf-hmA">豁免A(1124)</label>
+	                        
+	                        <input id="paf-hmB" class="radio_box" name="pid" type="radio" value="251" checked>
+	                        <label class="mrg-right-2" for="paf-hmB">豁免B(1125)</label>
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="shouhuxing-tbrhm-s" data-toubaoren s data-ref="#shouhuxing-tbrhm" data-param-fn="changeJFNX">
+	            	
+	                <dl>
+	                    <dt>
+	                        <input id="shouhuxing-hm-s" class="checkbox-single" type="checkbox">
+	                        <label for="shouhuxing-hm-s">投保人双豁免</label>
+	                    </dt>
+	                    <dd>
+	                    	<label class="info-name" for="shuanghuomian-age">配偶年龄</label>
+			                <select class="factor" name="age" id="shuanghuomian-age">
+			                </select>
+	                    </dd>
+	                </dl>
+	                
+	            </li>
+	            
+	        </ul>
+	        <div class="popup-layer-btn">
+	            <span class="popup-layer-cancel-btn" data-cancel>取消</span><span class="popup-layer-ok-btn" data-ok>确定</span>
+	        </div>
+	    </form>
+	</div>
+	')

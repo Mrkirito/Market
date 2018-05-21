@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.BxjVersionInfoMapper">
+    <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.BxjVersionInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="app_type" jdbcType="VARCHAR" property="appType"/>
+        <result column="version_number" jdbcType="INTEGER" property="versionNumber"/>
+        <result column="version_code" jdbcType="VARCHAR" property="versionCode"/>
+        <result column="download_url" jdbcType="VARCHAR" property="downloadUrl"/>
+        <result column="tips_context" jdbcType="VARCHAR" property="tipsContext"/>
+        <result column="update_method" jdbcType="INTEGER" property="updateMethod"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, app_type, version_number, version_code, download_url, tips_context, update_method, 
+    status, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bxj_version_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bxj_version_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hangjia.bxj.model.BxjVersionInfo">
+    insert into bxj_version_info (id, app_type, version_number, 
+      version_code, download_url, tips_context, 
+      update_method, status, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{appType,jdbcType=VARCHAR}, #{versionNumber,jdbcType=INTEGER}, 
+      #{versionCode,jdbcType=VARCHAR}, #{downloadUrl,jdbcType=VARCHAR}, #{tipsContext,jdbcType=VARCHAR}, 
+      #{updateMethod,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hangjia.bxj.model.BxjVersionInfo">
+        insert into bxj_version_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="appType != null">
+                app_type,
+            </if>
+            <if test="versionNumber != null">
+                version_number,
+            </if>
+            <if test="versionCode != null">
+                version_code,
+            </if>
+            <if test="downloadUrl != null">
+                download_url,
+            </if>
+            <if test="tipsContext != null">
+                tips_context,
+            </if>
+            <if test="updateMethod != null">
+                update_method,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="appType != null">
+                #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="versionNumber != null">
+                #{versionNumber,jdbcType=INTEGER},
+            </if>
+            <if test="versionCode != null">
+                #{versionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="downloadUrl != null">
+                #{downloadUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="tipsContext != null">
+                #{tipsContext,jdbcType=VARCHAR},
+            </if>
+            <if test="updateMethod != null">
+                #{updateMethod,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.BxjVersionInfo">
+        update bxj_version_info
+        <set>
+            <if test="appType != null">
+                app_type = #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="versionNumber != null">
+                version_number = #{versionNumber,jdbcType=INTEGER},
+            </if>
+            <if test="versionCode != null">
+                version_code = #{versionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="downloadUrl != null">
+                download_url = #{downloadUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="tipsContext != null">
+                tips_context = #{tipsContext,jdbcType=VARCHAR},
+            </if>
+            <if test="updateMethod != null">
+                update_method = #{updateMethod,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.BxjVersionInfo">
+    update bxj_version_info
+    set app_type = #{appType,jdbcType=VARCHAR},
+      version_number = #{versionNumber,jdbcType=INTEGER},
+      version_code = #{versionCode,jdbcType=VARCHAR},
+      download_url = #{downloadUrl,jdbcType=VARCHAR},
+      tips_context = #{tipsContext,jdbcType=VARCHAR},
+      update_method = #{updateMethod,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--**************************** extend begin here *******************************-->
+    <!-- 查询条件 -->
+    <sql id="Public_Query_Conditions">
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="appType != null">
+                and app_type = #{appType,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="versionNumber != null">
+                and version_number &gt; #{versionNumber,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 排序 -->
+    <sql id="Public_Order_Datas">
+        <if test="orderDatas != null and orderDatas != ''">
+            order by
+            <foreach collection="orderDatas" item="orderData" separator=",">
+                ${orderData.field} ${orderData.direction}
+            </foreach>
+        </if>
+    </sql>
+
+    <!-- 分页 -->
+    <sql id="Public_Page">
+        <if test="startIndex != null and pageSize != null">
+            limit #{startIndex},#{pageSize}
+        </if>
+    </sql>
+
+    <!-- 查询 -->
+    <select id="selectBySelective" parameterType="com.hangjia.bxj.model.BxjVersionInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bxj_version_info
+        <include refid="Public_Query_Conditions"/>
+        <include refid="Public_Order_Datas"/>
+    </select>
+</mapper>

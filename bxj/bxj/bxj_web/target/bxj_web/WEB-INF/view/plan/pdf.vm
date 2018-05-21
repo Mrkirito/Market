@@ -1,0 +1,10 @@
+﻿#set($header_params = {"title":"计划书", "css":["index/css/style.css"]})
+#bxj_header($header_params)
+<!--导航 开始-->
+#set($bxj_header_params = {"title":"产品条款", "isShare":5})
+#bxj_header_html($bxj_header_params)
+<div class="container">
+	<iframe width="100%" height="100%" src="$static_path/pdfjs/web/viewer.html?file=../../$!tk"></iframe>
+</div>
+#set( $footer_params = [])
+#bxj_footer($footer_params)

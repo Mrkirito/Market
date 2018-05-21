@@ -1,0 +1,33 @@
+<!-- Mainly scripts -->
+<script>
+    var serverHost = "$!social_path";
+	var public_path = "$!public_path";
+</script>
+
+<script src="res/media/js/lib/require.js" type="text/javascript"></script>
+<script src="res/media/js/lib/config.js" type="text/javascript"></script>
+
+
+#if($pageModule.name)
+<script type="text/javascript">
+    require(["bootstrap", "app/nifty", 'app/main', "$pageModule.name"], function (_, _, _, module) {
+//        defaultModule.init();
+        #if($pageModule.method)
+            if(module && module.${pageModule.method}) {
+//                var config = {};
+//                #if($pageModule.config)
+//                   config = $!stringEscapeUtil.unescapeHtml($pageModule.config.toJsonString());
+//                #end
+//                module.${pageModule.method}(config);
+				module.${pageModule.method}();
+            }
+        #end
+    });
+</script>
+#else
+<script type="text/javascript">
+    require(["bootstrap", "app/nifty", 'app/main'], function (_, _, defaultModule) {
+//        defaultModule.init();
+    });
+</script>
+#end

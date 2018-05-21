@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>头条</title>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/headlines/css/list.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/swiper-3.3.1.min.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+</head>
+
+<body>
+	<!--导航 开始-->
+	<header class="head">
+	  	<a class="header_left goBack" href="javascript:goback()"></a>
+	    <h1>头条</h1>
+	</header>
+	<div class="header_heightblock"></div>
+	<!--导航 结束-->
+    <div class="container container_headlines">
+    	<div class="banner swiper-container">
+			<div class="swiper-wrapper">
+				#if($!banners && $!banners.size() > 0)
+    				#foreach($banner in $banners)
+    				<div class="swiper-slide">
+    					<a href="$!banner.pageUrl"><img src="$!banner.fileUrl"></a>
+    				</div>
+    				#end
+				#end
+			</div>
+			<div class="swiper-pagination"></div>
+   		</div>
+		#if($!upNews && $!upNews.size() > 0)
+   		<div class="main_block title_block">
+			#foreach($upNew in $upNews)
+                <div class="jump" data-id="$!upNew.id">
+       			<span class="tips">时事快讯</span>
+    			<ul>
+					#if($!upNew.imgUrl && $!upNew.imgUrl != "")
+    				<li class="img">
+    					<div class="img_block">
+    						<img src="$!upNew.fileUrl" />
+    					</div>
+						#if($!upNew.isDisplayTag == 1)
+							<span class="tip">$!upNew.tagContent</span>
+						#end
+    					<div class="text_block">
+    						<h3>$!upNew.title</h3>
+    						<span class="time">$!upNew.timeContext</span>
+    						<span class="viewnum">$!upNew.totalHitCount</span>
+    					</div>
+    				</li>
+					#else
+    				<li class="text">
+						#if($!upNew.isDisplayTag == 1)
+							<span class="tip">$!upNew.tagContent</span>
+						#end
+    					<div class="text_block">
+    						<h3>$!upNew.title</h3>
+    						<span class="time">$!upNew.timeContext</span>
+    						<span class="viewnum">$!upNew.totalHitCount</span>
+    					</div>
+    				</li>
+					#end
+    			</ul>
+				</div>
+			#end
+   		</div>
+		#end
+   		<div class="main_block">
+			<ul>
+			#if($!news && $!news.size() > 0)
+				<div class="pageNews">
+				#foreach($new in $news)
+					<div class="jump" data-id="$!new.id">
+					#if($!new.imgUrl && $!new.imgUrl != "")
+    				<li class="img">
+    					<div class="img_block">
+    						<img src="$!new.fileUrl" />
+    					</div>
+						#if($!new.isDisplayTag == 1)
+							<span class="tip">$!new.tagContent</span>
+						#end
+    					<div class="text_block">
+    						<h3>$!new.title</h3>
+    						<span class="time">$!new.timeContext</span>
+    						<span class="viewnum">$!new.totalHitCount</span>
+    					</div>
+    				</li>
+					#else
+    				<li class="text">
+						#if($!new.isDisplayTag == 1)
+							<span class="tip">$!new.tagContent</span>
+						#end
+    					<div class="text_block">
+    						<h3>$!new.title</h3>
+    						<span class="time">$!new.timeContext</span>
+    						<span class="viewnum">$!new.totalHitCount</span>
+    					</div>
+    				</li>
+					#end
+					</div>
+				#end
+				</div>
+			#end
+			</ul>
+   		</div>
+    </div>
+</body>
+</html>
+
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script src="$static_path/bxj_three/public/js/swiper-3.3.1.jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/2.3-2.4.js"></script>
+<script>
+FastClick.attach(document.body);//快速点击绑定<script>
+var mySwiper = new Swiper('.swiper-container',{
+autoplay : 5000,
+speed:300,
+pagination : '.swiper-pagination',
+loop:true
+})
+// 跳转页面
+$(".jump").on("click",function(){
+	var id = $(this).data("id");
+	jQuery.ajax({
+		type:"POST",
+		url: "$bxj_path/headline/updateHit.do",
+		data:{
+			id:id
+		},
+    	dataType: "json",
+    	success: function (data) {
+			
+		}
+	});
+	window.location.href="${configuration.getProperty("urlPath","bxj_path")}/headline/detail.page?id="+id;
+})
+
+$(function() {
+	$('div.container').scroll(ScrollNew);
+});
+
+var scroller = true;
+var pageNum = 2;
+var pageSize=10;
+
+function ScrollNew(){
+	var bot = 20;
+	if(($('.container').scrollTop()+ bot) >= ($('.pageNews').height() - $('.container').height())&& scroller){
+		queryPros();
+	}
+}
+function queryPros(){
+	var ulDom=$('.pageNews');
+	ulDom.append('<li class="query_loading">加载中...</li>');
+	scroller = false;
+	jQuery.ajax({
+		type:"POST",
+		url: "$bxj_path/headline/list.do",
+		data:{
+			currPage:pageNum,
+			pageSize:pageSize
+		},
+    	dataType: "json",
+    	success: function (data) {
+    		var news=data.list;
+    		if(news && news.length>0){
+    			var dom = "";
+    			for (var int = 0; int < news.length; int++) {
+    				var data = news[int];
+    				var context = '<div class="jump" data-id="' + data.id + '">';
+    				var img = "";
+    				var tag = "";
+    				if(!!data.imgUrl){
+    					img = '<li class="img">' + 
+    						  '<div class="img_block">' +
+    						  '<img src="' + data.fileUrl + '" />' +
+    						  '</div>';
+    					if(data.isDisplayTag == 1){
+    						tag = '<span class="tip">' +
+    						      data.tagContent +
+    						      '</span>'
+    					}
+    					tag = tag + 
+						      '<div class="text_block">' +
+						      '<h3>' + data.title + '</h3>' +
+						      '<span class="time">' + data.timeContext + '</span>' +
+						      '<span class="viewnum">' + data.totalHitCount + '</span>' +
+						      '</div></li></div>';
+    				} else {
+    					img = '<li class="text">'
+    					if(data.isDisplayTag == 1){
+    						tag = '<span class="tip">' +
+    						      data.tagContent +
+    						      '</span>'
+    					}
+    					tag = tag + 
+						      '<div class="text_block">' +
+						      '<h3>' + data.title + '</h3>' +
+						      '<span class="time">' + data.timeContext + '</span>' +
+						      '<span class="viewnum">' + data.totalHitCount + '</span>' +
+						      '</div></li></div>';
+    				}
+    				context = context + img + tag;
+    				dom += context;
+    			}	
+    			ulDom.append(dom).find('li.query_loading').remove();
+				if (news.length == pageSize) {
+					scroller = true;
+					pageNum++;
+				}else{					
+					ulDom.append('<li class="query_loading waiting">持续更新中，记得常回来看哦</li>');
+				}
+			// 跳转页面
+            $(".jump").on("click",function(){
+            	var id = $(this).data("id");
+            	jQuery.ajax({
+            		type:"POST",
+            		url: "$bxj_path/headline/updateHit.do",
+            		data:{
+            			id:id
+            		},
+                	dataType: "json",
+                	success: function (data) {
+            			
+            		}
+            	});
+            	window.location.href="${configuration.getProperty("urlPath","bxj_path")}/headline/detail.page?id="+id;
+            })
+    		}else{
+    			ulDom.find('li.query_loading').remove();
+    			ulDom.append('<li class="query_loading waiting">持续更新中，记得常回来看哦</li>');
+    		}
+    		if(ulDom.children().size()==0){
+    			ulDom.append('<li class="query_loading" id="query_loading">没有检索到相关内容哦~</li>');
+    		}
+    	},
+    	error:function(e){
+    		ulDom.find('li.query_loading').remove();
+			ulDom.append('<li class="query_loading" id="query_loading">没有检索到相关内容哦~</li>');
+		}
+	});
+}
+
+ function goback(){
+    if(isHjbIos()) {
+    	window.location.href = "hjb_wv://goback('yes')";   		 
+    }else{
+    	window.hjb_wv.GoBack();
+    }
+ }
+ 
+ function isHjbIos(){
+	var browser = {
+		versions : function() {
+			var u = navigator.userAgent, app = navigator.appVersion;
+			return {
+				trident : u.indexOf('Trident') > -1,
+				presto : u.indexOf('Presto') > -1,
+				webKit : u.indexOf('AppleWebKit') > -1,
+				gecko : u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,
+				mobile : !!u.match(/AppleWebKit.*Mobile.*/)|| !!u.match(/AppleWebKit/),
+				ios : !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+				android : u.indexOf('Android') > -1|| u.indexOf('Linux') > -1,
+				iPhone : u.indexOf('iPhone') > -1|| u.indexOf('Mac') > -1,
+				iPad : u.indexOf('iPad') > -1,
+				webApp : u.indexOf('Safari') == -1
+			};
+		}(),
+		language : (navigator.browserLanguage || navigator.language).toLowerCase()
+	}
+	var and = browser.versions.android;
+	var ios = browser.versions.ios;
+	if (and) {
+		return false;
+	} else if (ios) {
+		return true;
+	}
+}
+
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+	
+})();
+</script>

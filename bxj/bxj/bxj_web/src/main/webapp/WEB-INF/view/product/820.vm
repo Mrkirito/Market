@@ -1,0 +1,25 @@
+<div class="common_info">
+    <h1 class="assured_info_title tbxz_title">投保选择</h1>
+    <ul class="common-info-ul">
+        <div class="main_insure_product_div" data-pid="$!product.fid" data-jbbe="$!product.jbbe" data-cpjc="$!product.cpjc" data-table="0">
+            <input type="hidden" name="bxnx" value="126" class="factor" data-text="至80岁" />
+            <li class="info-item main_line_height">
+                <label class="info-name">缴费期限</label>
+                <select class="factor" name="jfnx">
+                    <option value="8">5年交</option>
+                    <option value="9">10年交</option>
+                    <option value="10">15年交</option>
+                    <option value="11">20年交</option>
+                    <option value="12">30年交</option>
+                </select>
+                <span class="arrowr"></span>
+            </li>
+            <li class="info-item main_line_height">
+                <label class="info-name">保额</label>
+                <input type="tel" placeholder="请输入保额" value="" class="demo_price factor" name="be" maxlength="15"/>
+                <i class="icon">元</i>
+                <span class="error-tips" style="display:none;"></span>
+            </li>
+        </div>
+    </ul>
+</div>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<export-root name="用户数据统计列表">
+    <export-fields >
+        <export-field name="createTime" title="时间" type="Date" dateFormat="yyyy-MM-dd"/>
+        <export-field name="newSumDay" title="新增用户总数"/>
+        <export-field name="newIosNum" title="ios新增用户"/>
+        <export-field name="newAndroidNum" title="安卓新增用户"/>
+        <export-field name="activeSumDay" title="启动用户总数"/>
+        <export-field name="activeIosNum" title="ios启动用户"/>
+        <export-field name="activeAndroidNum" title="安卓启动用户"/>
+        <export-field name="activeSum" title="累计启动用户"/>
+    </export-fields>
+</export-root>

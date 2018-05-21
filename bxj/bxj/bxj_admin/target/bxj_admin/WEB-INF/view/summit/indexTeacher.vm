@@ -1,0 +1,159 @@
+$pageModule.init("app/summit/summitClass", "list")
+
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                        	<form id="form_query-params">
+                        	<div class="row">
+	                            
+	                            <div class="form-group  col-sm-3">
+	                                <label class="control-label">峰会名称&nbsp;</label>
+	                                <input placeholder="名称模糊匹配" type="text" class="form-control lookName">
+	                            </div>
+	                            
+	                             <div class="form-group  col-sm-3">
+	                                <label class="control-label">ID&nbsp;</label>
+	                                <input placeholder="峰会讲师 id " type="text" class="form-control sid" name="id">
+	                            </div>
+	                            <div class="form-group  col-sm-3">
+	                                <label class="control-label">标题&nbsp;</label>
+	                                <input placeholder="标题模糊匹配" type="text" class="form-control lookText">
+	                            </div>
+	                            
+							    <div class="form-group  col-sm-3">
+									   <label class="control-label">状态： </label>
+										<select class="form-control display" >
+										    <option value="">请选择</option>
+											<option value="true">已上线</option>											
+											<option value="ing">正在进行</option>
+											<option value="false">已下线</option>
+										</select>
+									 
+								  </div>
+                            </div>
+                            </form>
+                            
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary" id="search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			<div id="data-list"></div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!-- 新增峰会讲师  修改 开始 -->
+<div class="page-ChampTeacher hidden">
+        <div class="container-fluid">
+        	<div class="col-sm-12">
+				<div class="panel panel-default search">
+            		<div class="panel-body">
+						<table class="form-group  col-sm-12">
+						      <tr>
+								 	<div class="form-group col-sm-12">
+										<label class="col-md-3 control-label">讲师图片<span style="color: red;">*</span>:</label>
+										<div class="input-group col-md-9">
+							             <div class="col-sm-6">
+							                <div class="">
+											    <div class="uploadImg">
+													<li style="display: inline-block; margin-right: 3px;" >
+							    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+							    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+							    		            <a class="btn btn-primary remove-img">删除</a>
+							    		            </span></li>
+													<a class="btn btn-primary infos-images">上传图片</a>
+													<!-- <p class="text-danger">注意：图片尺寸限制：100 x 100</p> -->
+							                	</div>
+							                </div>
+							             </div>
+										</div>
+									</div>
+								</tr>
+						        <tr>
+									<td class="field-name">峰会名称:</td>
+									<td><span  class="form-control" readOnly id="sname"></td>
+								</tr>
+								 <tr>
+									<td class="field-name">讲师姓名:<span style="color: red;">*</span></td>
+									<td><input name="name" placeholder="讲师姓名，必填。" type="text" class="form-control teachername" required></td>
+								</tr>
+								<tr>
+									<td class="field-name">课堂标题:<span style="color: red;">*</span></td>
+									<td><input name="name" placeholder="讲师演讲的标题，必填。" type="text" class="form-control title" required></td>
+								</tr>
+								<tr>
+									<td class="field-name">排序:<span style="color: red;">*</span></td>
+									<td>
+										<input type="number" class="form-control sort"  value="10">
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name" title="前端显示真实点击数与虚拟点击数之和">真实点击数:</td>
+									<td>
+										<input type="number" readOnly  class="form-control clikReal">
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name">虚拟点击数:<span style="color: red;">*</span></td>
+									<td>
+										<input type="number" class="form-control cliksham" value="5000">
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name" title="上线跟随峰会上线,下线则不显示在前端">状态：</td>
+									<td>
+										<select class="form-control sdisplayTeacher" >
+											<option value="true">上线</option>
+											<option value="ing">正在进行</option>
+											<option value="false">下线</option>
+										</select>
+									</td>
+								</tr>
+								
+								
+							</table>
+							 
+							<table>
+							 <tr>  <br/><br/> </tr>
+							    <tr>
+								 	<div class="form-group col-sm-12">
+										<label class="col-md-3 control-label">ppt图片<span style="color: red;">*</span>:</label>
+										<div class="input-group col-md-9">
+							             <div class="col-sm-6">
+							                <div >
+							                 <div class="uploadImgPPT" style="width: 1000px;">
+							                   	<li style="display: inline-block; margin-right: 3px;" >
+												 <a class="btn btn-primary infos-imagesPPT" title="上传多张图片请拖动滚动条到底部，查看图片是否上传成功">上传ppt图片</a>
+							                	 <div class="addimgText" style="width: 1350px;text-align:center">
+    		            
+    		                                     </div>
+    		                                    </li>
+    		                                   </div>
+							                </div>
+							             </div>
+										</div>
+									</div>
+								</tr>
+							</table>
+					</div>
+				</div>
+            </div>
+		</div>
+	</div>
+<!-- 新增 峰会讲师 结束 -->

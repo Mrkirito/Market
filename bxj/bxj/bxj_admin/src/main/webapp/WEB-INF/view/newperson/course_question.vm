@@ -1,0 +1,139 @@
+$pageModule.init("app/newperson/courseQuestion", "list")
+
+#set($show_path = ${configuration.getProperty("urlPath","show_path")})
+<input type="hidden" id="show_path" value="$show_path">
+
+<!-- 查询 -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default search">
+            <div class="panel-heading">
+                <h3 class="panel-title">查询条件</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row form ">
+                    <div class="form-group col-md-3 col-xs-12">
+                        <label>课程&nbsp;</label><br>
+                        <input type="hidden" class="courseIdSelect" id="courseIdSelect" />
+                    </div>
+
+					<div class="form-group col-xs-12 col-md-3">
+                        <label for="userCode">标题: </label>
+                        <input type="text" placeholder="标题" id="questionTitle" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-3">
+                        <label>&nbsp;</label>
+                        <div class="control">
+                            <button class="btn btn-primary search-data">查询</button>
+                            <button class="btn btn-default reset-data">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 列表 -->
+<div class="data-list" style=""></div>
+
+<!-- 添加、编辑 -->
+<div class="hidden" id="dialog">
+    <div class="form-body">
+        <div class="circleTextclass">
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">课程</label>
+                <div class="input-group col-md-8">
+                    <input type="hidden" id="id">
+                    <input type="text" class="form-control courseId">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">标题</label>
+                <div class="input-group col-md-8">
+                    <textarea class="form-control questionTitle" cols ="50" rows = "5"></textarea>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">题目类型</label>
+                <div class="input-group col-md-8">
+                    <select class="form-control questionType">
+                        <option value="">请选择</option>
+                        <option value="1">单选题</option>
+                        <option value="2">多选题</option>
+                        <option value="3">判断题</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-sm-12 correctAnswerDiv1">
+                <label class="col-md-3 control-label">正确答案</label>
+                <div class="input-group col-md-8" style="text-align: left; font-size: 20px">
+                    <input type="radio" name="correctAnswer1" value="A" style="width: 30px; margin-left:20px;">选项一
+                    <input type="radio" name="correctAnswer1" value="B" style="width: 30px; margin-left:20px;">选项二
+                    <input type="radio" name="correctAnswer1" value="C" style="width: 30px; margin-left:20px;">选项三
+                    <input type="radio" name="correctAnswer1" value="D" style="width: 30px; margin-left:20px;">选项四
+                </div>
+            </div>
+            <div class="form-group col-sm-12 correctAnswerDiv2" style="display: none">
+                <label class="col-md-3 control-label">正确答案</label>
+                <div class="input-group col-md-8" style="text-align: left; font-size: 20px">
+                    <input type="checkbox" name="correctAnswer2" value="A" style="width: 30px; margin-left:20px;">选项一
+                    <input type="checkbox" name="correctAnswer2" value="B" style="width: 30px; margin-left:20px;">选项二
+                    <input type="checkbox" name="correctAnswer2" value="C" style="width: 30px; margin-left:20px;">选项三
+                    <input type="checkbox" name="correctAnswer2" value="D" style="width: 30px; margin-left:20px;">选项四
+                    <input type="checkbox" name="correctAnswer2" value="E" style="width: 30px; margin-left:20px;">选项五
+                    <input type="checkbox" name="correctAnswer2" value="F" style="width: 30px; margin-left:20px;">选项六
+                </div>
+            </div>
+            <div class="form-group col-sm-12 correctAnswerDiv3" style="display: none">
+                <label class="col-md-3 control-label">正确答案</label>
+                <div class="input-group col-md-8" style="text-align: left; font-size: 20px">
+                    <input type="radio" name="correctAnswer3" value="A" style="width: 30px; margin-left:20px;">选项一
+                    <input type="radio" name="correctAnswer3" value="B" style="width: 30px; margin-left:20px;">选项二
+                </div>
+            </div>
+            <div class="form-group col-sm-12 answerdiv1">
+                <label class="col-md-3 control-label">选项一</label>
+                <div class="input-group col-md-8">
+                    <input type="text" class="form-control questionAnswer1" placeholder="选项一">
+                </div>
+            </div>
+            <div class="form-group col-sm-12 answerdiv2">
+                <label class="col-md-3 control-label">选项二</label>
+                <div class="input-group col-md-8">
+                    <input type="text" class="form-control questionAnswer2" placeholder="选项二">
+                </div>
+            </div>
+            <div class="form-group col-sm-12 answerdiv3">
+                <label class="col-md-3 control-label">选项三</label>
+                <div class="input-group col-md-8">
+                    <input type="text" class="form-control questionAnswer3" placeholder="选项三">
+                </div>
+            </div>
+            <div class="form-group col-sm-12 answerdiv4">
+                <label class="col-md-3 control-label">选项四</label>
+                <div class="input-group col-md-8">
+                    <input type="text" class="form-control questionAnswer4" placeholder="选项四">
+                </div>
+            </div>
+            <div class="form-group col-sm-12 answerdiv5" style="display: none">
+                <label class="col-md-3 control-label">选项五</label>
+                <div class="input-group col-md-8">
+                    <input type="text" class="form-control questionAnswer5" placeholder="选项五">
+                </div>
+            </div>
+            <div class="form-group col-sm-12 answerdiv6" style="display: none">
+                <label class="col-md-3 control-label">选项六</label>
+                <div class="input-group col-md-8">
+                    <input type="text" class="form-control questionAnswer6" placeholder="选项六">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">排序</label>
+                <div class="input-group col-md-8">
+                    <input type="text" class="form-control sort" placeholder="排序" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

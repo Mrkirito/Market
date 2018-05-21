@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		#set($static_path = ${configuration.getProperty("urlPath","static_path")})
+    	#set($bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="format-detection" content="telephone=no">
+		<title>$!product.cpjc计划书演示</title>
+		<meta name="keywords" content="计划书">
+		<meta name="description" content="计划书">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/css/style.css?v=71">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css?v=71">
+		<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js?v=71"></script>
+		<script src="$static_path/bxj_three/public/js/flexible.js?v=71"></script>
+		<script>var bxj_path = '$bxj_path', static_path = '$static_path',zxPid='$!product.fid';</script>
+		<script src="$static_path/bxj_three/static/js/core.js?v=71"></script>
+		<script src="$static_path/bxj_three/static/js/book4.js?v=71"></script>
+		<!--[if lt IE 9]>
+		    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+		<header class="head"><a class="header_left" href="javascript:history.back(-1);"></a><h1>$!product.cpjc计划书演示</h1></header>
+		<div class="header_heightblock"></div>
+		#end
+		<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+		<div class="common_info totail_price wrp ">
+			<span class="title">首年总保费：</span>
+			<span class="price">0</span>
+		</div>
+		<div class="container container_demotype01">
+			<form id="form">
+			<input type="hidden" name="name" value="$!product.name" />
+			<input type="hidden" name="pid" value="$product.fid">
+			<input type="hidden" name="bf" value="0"/>
+			<input type="hidden" name="userId" value="$!userId"/>
+			<input type="hidden" name="voiceId" value="" />
+			<input type="hidden" name="customerId" value="" />
+			<div class="common_info">
+				<h1 class="assured_info_title bbr_title">被保险人信息</h1>
+				<ul class="common-info-ul">
+					<li class="info-item">
+						<label class="info-name">性别</label>
+						<input type="radio" name="sex" id="bbrmale" checked="checked" value="1" />
+						<label for="bbrmale" class="inputRadio_label">男</label>
+						<input type="radio" name="sex" id="bbrfemale" value="0"/>
+						<label for="bbrfemale" class="inputRadio_label">女</label>
+					</li>
+					<li class="info-item">
+						<label class="info-name">年龄</label>
+						<select name="age" value="$!product.hmstate" class="factor">
+            				#foreach($age in $product.ages)
+            					<option #if($age==$product.hmstate)selected="selected"#end>$age</option>
+            				#end
+                		</select>
+						<span class="arrowr"></span>		
+					</li>
+				</ul>
+			</div>
+			<!-- 被保人信息结束 -->
+			#if($product.tbrinfo==1)
+			<div class="common_info">
+				<h1 class="assured_info_title tbr_title">投保险人信息</h1>
+				<ul class="common-info-ul">
+					<li class="info-item">
+			            <input class="checkbox-single" type="checkbox" autocomplete="off">
+			    	    <label class="info-name">设置投保人</label>
+			    	</li>
+					<li class="info-item" style="display: ;">
+						<label class="info-name">性别</label>
+						<input type="radio" name="tbrsex" id="tbrmale" checked="checked" />
+						<label for="tbrmale" class="inputRadio_label">男</label>
+						<input type="radio" name="tbrsex" id="tbrfemale"/>
+						<label for="tbrfemale" class="inputRadio_label">女</label>
+					</li>
+					<li class="info-item" style="display: ;">
+						<label class="info-name">年龄</label>
+						<input class="demo_tbr_age" placeholder="输入投保人年龄" />						
+					</li>
+				</ul>
+			</div>
+			#end
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-table="0">
+		<input type="hidden" name="bxnx" value="6" class="factor" data-text="终身" />
+		<li class="info-item main_line_height">
+			<label class="info-name">缴费期限</label>
+			<select class="factor" name="jfnx">
+				<option value="12">30年交</option>
+				<option value="11">20年交</option>
+				<option value="10">15年交</option>
+				<option value="9">10年交</option>
+				<option value="8">5年交</option>
+				<option value="19">3年交</option>
+				<option value="7">趸交</option>
+			</select>
+			<span class="arrowr"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">福星高照</label>
+			<input type="tel" placeholder="请输入保额" value="" class="demo_price factor zx_input" data-cpjc="福星高照" data-pid="185" data-jbbe="10000.00"  name="be" maxlength="15"/>
+			<i class="icon">元</i>
+			<span class="error-tips" style="display:none;"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">福相随</label>
+			<input type="tel" placeholder="请输入保额" value="" class="demo_price factor fjx_input" data-cpjc="福相随" data-pid="184" data-jbbe="10000.00"  name="be" maxlength="15"/>
+			<i class="icon">元</i>
+			<span class="error-tips" style="display:none;"></span>
+		</li>
+	</div>
+	<li class="main_item li_table_0" style="display:none">
+		<div class="creatDes_header">
+			<span class="createDes-title">
+				<em>福星高照</em>
+				<em class="price"></em>
+			</span>
+			<span class="createDes-btn">
+				<a class="main_edit_btn" data-table="0">修改</a>
+			</span>
+		</div>
+		<table class="createDes-table">
+		<thead>
+			<tr>
+				<td>险种</td>
+				<td>保额</td>
+				<td>保费</td>
+				<td>保障期限</td>
+				<td>缴费期限</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		</table>
+	</li>
+	</ul>
+</div>
+<!-- 投保选择结束-->
+			<div class="common_info">
+				<h1 class="assured_info_title bbr_title">会说话的计划书</h1>
+				<span class="new-tips"></span>
+				<span class="creatDes-add-btn02"> 
+						<em class="add_icon01"></em>
+						<em class="add_font">添加语音</em>
+					</span>
+				<ul class="common-info-ul" style="display:none;">
+					<li class="info-item">
+						<label class="left_label"></label>
+						<label class="right_label"><span></span></label>
+					</li>
+				</ul>
+			</div>
+			<!-- 语音计划书结束 -->
+			<div class="common_info">
+				<h1 class="assured_info_title bbr_title">收件人信息</h1>
+				<!--<a class="listimport">从客户列表导入</a>-->
+				<ul class="common-info-ul">
+					<li class="info-item">
+						<label class="info-name">姓名</label>
+						<input type="text" class="demo_name factor" name="author" placeholder="输入姓名可生成封面" />
+					</li>
+				</ul>
+			</div>
+			<!-- 收件人信息结束 -->
+		</form>	
+		<div class="btn" id="submit_btn"><a href="javascript:;" class="planform-form-submit">生成计划书演示</a></div>
+	</div>
+	<div class="greyDiv"style="display:none;"></div>
+	<div class="showDiv" id="insures_popup_dialog_6" style="display:none;">
+			<h1></h1>
+		    <div class="scroll-div">
+				<p class="inform_txt" id="hasCustomerName"></p>
+		    	<div style="clear:both"></div>
+		    </div>
+			<a class="cancel_button">新建客户</a>
+		    <a class="sure_button">添加为老客户</a>
+	</div>
+	<div class="showDiv" id="insures_popup_dialog_7" style="display:none;">
+			<h1>请选择添加到那位客户</h1>
+		    <div class="scroll-div">
+		        <ul class="choose_user"></ul>
+		        <div style="clear:both"></div>
+		    </div>
+			<a class="single_button">确认添加</a>
+	</div>
+	</body>	
+</html>

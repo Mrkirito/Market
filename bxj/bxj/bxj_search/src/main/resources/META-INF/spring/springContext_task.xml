@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!--  索引 更新 任务 -->
+    <task:scheduled-tasks>
+        <task:scheduled ref="championSupportService" method="updateVideoIndexAll" cron="20 0/10 * * * ?"/>
+        <!-- 每隔 3天 凌晨 1点 执行部分索引重建、初始化10秒中后执行一次-->
+    </task:scheduled-tasks>
+
+</beans>

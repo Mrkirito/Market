@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.PlanProductMainMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.PlanProductMain" >
+    <id column="FID" property="fid" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="CPJC" property="cpjc" jdbcType="VARCHAR" />
+    <result column="CPTYPE" property="cptype" jdbcType="INTEGER" />
+    <result column="GS" property="gs" jdbcType="INTEGER" />
+    <result column="SXJ" property="sxj" jdbcType="INTEGER" />
+    <result column="PX" property="px" jdbcType="INTEGER" />
+    <result column="CREATER" property="creater" jdbcType="INTEGER" />
+    <result column="CTIME" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="UPTIME" property="uptime" jdbcType="TIMESTAMP" />
+    <result column="IMG" property="img" jdbcType="VARCHAR" />
+    <result column="JBBE" property="jbbe" jdbcType="DECIMAL" />
+    <result column="TBNLKS" property="tbnlks" jdbcType="INTEGER" />
+    <result column="TBNLJS" property="tbnljs" jdbcType="INTEGER" />
+    <result column="XZ" property="xz" jdbcType="INTEGER" />
+    <result column="TK" property="tk" jdbcType="VARCHAR" />
+    <result column="CDMC" property="cdmc" jdbcType="INTEGER" />
+    <result column="CPLX" property="cplx" jdbcType="INTEGER" />
+    <result column="groupids" property="groupids" jdbcType="VARCHAR" />
+    <result column="bjmb" property="bjmb" jdbcType="INTEGER" />
+    <result column="hmstate" property="hmstate" jdbcType="INTEGER" />
+    <result column="cplb" property="cplb" jdbcType="VARCHAR" />
+    <result column="cpms" property="cpms" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="calflag" property="calflag" jdbcType="INTEGER" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+    <result column="zxflag" property="zxflag" jdbcType="INTEGER" />
+    <result column="qy_mark" property="qyMark" jdbcType="INTEGER" />
+    <result column="control" property="control" jdbcType="INTEGER" />
+    <result column="tbrinfo" property="tbrinfo" jdbcType="INTEGER" />
+    <result column="img2" property="img2" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hangjia.bxj.model.PlanProductMainWithBLOBs" extends="BaseResultMap" >
+    <result column="BBRQY" property="bbrqy" jdbcType="LONGVARCHAR" />
+    <result column="TBRQY" property="tbrqy" jdbcType="LONGVARCHAR" />
+    <result column="MC" property="mc" jdbcType="LONGVARCHAR" />
+    <result column="CPTS" property="cpts" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FID, NAME, CPJC, CPTYPE, GS, SXJ, PX, CREATER, CTIME, UPTIME, IMG, JBBE, TBNLKS, 
+    TBNLJS, XZ, TK, CDMC, CPLX, groupids, bjmb, hmstate, cplb, cpms, link, calflag, group_name, 
+    zxflag, qy_mark, control, tbrinfo,img2
+  </sql>
+  <sql id="Blob_Column_List" >
+    BBRQY, TBRQY, MC, CPTS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from plan_product_main
+    where FID = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from plan_product_main
+    where FID = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.PlanProductMainWithBLOBs" >
+    insert into plan_product_main (FID, NAME, CPJC, 
+      CPTYPE, GS, SXJ, PX, 
+      CREATER, CTIME, UPTIME, 
+      IMG, JBBE, TBNLKS, 
+      TBNLJS, XZ, TK, CDMC, 
+      CPLX, groupids, bjmb, 
+      hmstate, cplb, cpms, 
+      link, calflag, group_name, 
+      zxflag, qy_mark, control, 
+      tbrinfo, BBRQY, TBRQY, 
+      MC, CPTS)
+    values (#{fid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{cpjc,jdbcType=VARCHAR}, 
+      #{cptype,jdbcType=INTEGER}, #{gs,jdbcType=INTEGER}, #{sxj,jdbcType=INTEGER}, #{px,jdbcType=INTEGER}, 
+      #{creater,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP}, #{uptime,jdbcType=TIMESTAMP}, 
+      #{img,jdbcType=VARCHAR}, #{jbbe,jdbcType=DECIMAL}, #{tbnlks,jdbcType=INTEGER}, 
+      #{tbnljs,jdbcType=INTEGER}, #{xz,jdbcType=INTEGER}, #{tk,jdbcType=VARCHAR}, #{cdmc,jdbcType=INTEGER}, 
+      #{cplx,jdbcType=INTEGER}, #{groupids,jdbcType=VARCHAR}, #{bjmb,jdbcType=INTEGER}, 
+      #{hmstate,jdbcType=INTEGER}, #{cplb,jdbcType=VARCHAR}, #{cpms,jdbcType=VARCHAR}, 
+      #{link,jdbcType=VARCHAR}, #{calflag,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, 
+      #{zxflag,jdbcType=INTEGER}, #{qyMark,jdbcType=INTEGER}, #{control,jdbcType=INTEGER}, 
+      #{tbrinfo,jdbcType=INTEGER}, #{bbrqy,jdbcType=LONGVARCHAR}, #{tbrqy,jdbcType=LONGVARCHAR}, 
+      #{mc,jdbcType=LONGVARCHAR}, #{cpts,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.PlanProductMainWithBLOBs" useGeneratedKeys="true" keyProperty="fid">
+    insert into plan_product_main
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="cpjc != null" >
+        CPJC,
+      </if>
+      <if test="cptype != null" >
+        CPTYPE,
+      </if>
+      <if test="gs != null" >
+        GS,
+      </if>
+      <if test="sxj != null" >
+        SXJ,
+      </if>
+      <if test="px != null" >
+        PX,
+      </if>
+      <if test="creater != null" >
+        CREATER,
+      </if>
+      <if test="ctime != null" >
+        CTIME,
+      </if>
+      <if test="uptime != null" >
+        UPTIME,
+      </if>
+      <if test="img != null" >
+        IMG,
+      </if>
+      <if test="jbbe != null" >
+        JBBE,
+      </if>
+      <if test="tbnlks != null" >
+        TBNLKS,
+      </if>
+      <if test="tbnljs != null" >
+        TBNLJS,
+      </if>
+      <if test="xz != null" >
+        XZ,
+      </if>
+      <if test="tk != null" >
+        TK,
+      </if>
+      <if test="cdmc != null" >
+        CDMC,
+      </if>
+      <if test="cplx != null" >
+        CPLX,
+      </if>
+      <if test="groupids != null" >
+        groupids,
+      </if>
+      <if test="bjmb != null" >
+        bjmb,
+      </if>
+      <if test="hmstate != null" >
+        hmstate,
+      </if>
+      <if test="cplb != null" >
+        cplb,
+      </if>
+      <if test="cpms != null" >
+        cpms,
+      </if>
+      <if test="link != null" >
+        link,
+      </if>
+      <if test="calflag != null" >
+        calflag,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+      <if test="zxflag != null" >
+        zxflag,
+      </if>
+      <if test="qyMark != null" >
+        qy_mark,
+      </if>
+      <if test="control != null" >
+        control,
+      </if>
+      <if test="tbrinfo != null" >
+        tbrinfo,
+      </if>
+      <if test="bbrqy != null" >
+        BBRQY,
+      </if>
+      <if test="tbrqy != null" >
+        TBRQY,
+      </if>
+      <if test="mc != null" >
+        MC,
+      </if>
+      <if test="cpts != null" >
+        CPTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cpjc != null" >
+        #{cpjc,jdbcType=VARCHAR},
+      </if>
+      <if test="cptype != null" >
+        #{cptype,jdbcType=INTEGER},
+      </if>
+      <if test="gs != null" >
+        #{gs,jdbcType=INTEGER},
+      </if>
+      <if test="sxj != null" >
+        #{sxj,jdbcType=INTEGER},
+      </if>
+      <if test="px != null" >
+        #{px,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uptime != null" >
+        #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="jbbe != null" >
+        #{jbbe,jdbcType=DECIMAL},
+      </if>
+      <if test="tbnlks != null" >
+        #{tbnlks,jdbcType=INTEGER},
+      </if>
+      <if test="tbnljs != null" >
+        #{tbnljs,jdbcType=INTEGER},
+      </if>
+      <if test="xz != null" >
+        #{xz,jdbcType=INTEGER},
+      </if>
+      <if test="tk != null" >
+        #{tk,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmc != null" >
+        #{cdmc,jdbcType=INTEGER},
+      </if>
+      <if test="cplx != null" >
+        #{cplx,jdbcType=INTEGER},
+      </if>
+      <if test="groupids != null" >
+        #{groupids,jdbcType=VARCHAR},
+      </if>
+      <if test="bjmb != null" >
+        #{bjmb,jdbcType=INTEGER},
+      </if>
+      <if test="hmstate != null" >
+        #{hmstate,jdbcType=INTEGER},
+      </if>
+      <if test="cplb != null" >
+        #{cplb,jdbcType=VARCHAR},
+      </if>
+      <if test="cpms != null" >
+        #{cpms,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="calflag != null" >
+        #{calflag,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="zxflag != null" >
+        #{zxflag,jdbcType=INTEGER},
+      </if>
+      <if test="qyMark != null" >
+        #{qyMark,jdbcType=INTEGER},
+      </if>
+      <if test="control != null" >
+        #{control,jdbcType=INTEGER},
+      </if>
+      <if test="tbrinfo != null" >
+        #{tbrinfo,jdbcType=INTEGER},
+      </if>
+      <if test="bbrqy != null" >
+        #{bbrqy,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tbrqy != null" >
+        #{tbrqy,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mc != null" >
+        #{mc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cpts != null" >
+        #{cpts,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.PlanProductMainWithBLOBs" >
+    update plan_product_main
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cpjc != null" >
+        CPJC = #{cpjc,jdbcType=VARCHAR},
+      </if>
+      <if test="cptype != null" >
+        CPTYPE = #{cptype,jdbcType=INTEGER},
+      </if>
+      <if test="gs != null" >
+        GS = #{gs,jdbcType=INTEGER},
+      </if>
+      <if test="sxj != null" >
+        SXJ = #{sxj,jdbcType=INTEGER},
+      </if>
+      <if test="px != null" >
+        PX = #{px,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        CREATER = #{creater,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        CTIME = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uptime != null" >
+        UPTIME = #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="img != null" >
+        IMG = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="jbbe != null" >
+        JBBE = #{jbbe,jdbcType=DECIMAL},
+      </if>
+      <if test="tbnlks != null" >
+        TBNLKS = #{tbnlks,jdbcType=INTEGER},
+      </if>
+      <if test="tbnljs != null" >
+        TBNLJS = #{tbnljs,jdbcType=INTEGER},
+      </if>
+      <if test="xz != null" >
+        XZ = #{xz,jdbcType=INTEGER},
+      </if>
+      <if test="tk != null" >
+        TK = #{tk,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmc != null" >
+        CDMC = #{cdmc,jdbcType=INTEGER},
+      </if>
+      <if test="cplx != null" >
+        CPLX = #{cplx,jdbcType=INTEGER},
+      </if>
+      <if test="groupids != null" >
+        groupids = #{groupids,jdbcType=VARCHAR},
+      </if>
+      <if test="bjmb != null" >
+        bjmb = #{bjmb,jdbcType=INTEGER},
+      </if>
+      <if test="hmstate != null" >
+        hmstate = #{hmstate,jdbcType=INTEGER},
+      </if>
+      <if test="cplb != null" >
+        cplb = #{cplb,jdbcType=VARCHAR},
+      </if>
+      <if test="cpms != null" >
+        cpms = #{cpms,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="calflag != null" >
+        calflag = #{calflag,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null" >
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="zxflag != null" >
+        zxflag = #{zxflag,jdbcType=INTEGER},
+      </if>
+      <if test="qyMark != null" >
+        qy_mark = #{qyMark,jdbcType=INTEGER},
+      </if>
+      <if test="control != null" >
+        control = #{control,jdbcType=INTEGER},
+      </if>
+      <if test="tbrinfo != null" >
+        tbrinfo = #{tbrinfo,jdbcType=INTEGER},
+      </if>
+      <if test="bbrqy != null" >
+        BBRQY = #{bbrqy,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tbrqy != null" >
+        TBRQY = #{tbrqy,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mc != null" >
+        MC = #{mc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cpts != null" >
+        CPTS = #{cpts,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where FID = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hangjia.bxj.model.PlanProductMainWithBLOBs" >
+    update plan_product_main
+    set NAME = #{name,jdbcType=VARCHAR},
+      CPJC = #{cpjc,jdbcType=VARCHAR},
+      CPTYPE = #{cptype,jdbcType=INTEGER},
+      GS = #{gs,jdbcType=INTEGER},
+      SXJ = #{sxj,jdbcType=INTEGER},
+      PX = #{px,jdbcType=INTEGER},
+      CREATER = #{creater,jdbcType=INTEGER},
+      CTIME = #{ctime,jdbcType=TIMESTAMP},
+      UPTIME = #{uptime,jdbcType=TIMESTAMP},
+      IMG = #{img,jdbcType=VARCHAR},
+      JBBE = #{jbbe,jdbcType=DECIMAL},
+      TBNLKS = #{tbnlks,jdbcType=INTEGER},
+      TBNLJS = #{tbnljs,jdbcType=INTEGER},
+      XZ = #{xz,jdbcType=INTEGER},
+      TK = #{tk,jdbcType=VARCHAR},
+      CDMC = #{cdmc,jdbcType=INTEGER},
+      CPLX = #{cplx,jdbcType=INTEGER},
+      groupids = #{groupids,jdbcType=VARCHAR},
+      bjmb = #{bjmb,jdbcType=INTEGER},
+      hmstate = #{hmstate,jdbcType=INTEGER},
+      cplb = #{cplb,jdbcType=VARCHAR},
+      cpms = #{cpms,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      calflag = #{calflag,jdbcType=INTEGER},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      zxflag = #{zxflag,jdbcType=INTEGER},
+      qy_mark = #{qyMark,jdbcType=INTEGER},
+      control = #{control,jdbcType=INTEGER},
+      tbrinfo = #{tbrinfo,jdbcType=INTEGER},
+      BBRQY = #{bbrqy,jdbcType=LONGVARCHAR},
+      TBRQY = #{tbrqy,jdbcType=LONGVARCHAR},
+      MC = #{mc,jdbcType=LONGVARCHAR},
+      CPTS = #{cpts,jdbcType=LONGVARCHAR}
+    where FID = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.PlanProductMain" >
+    update plan_product_main
+    set NAME = #{name,jdbcType=VARCHAR},
+      CPJC = #{cpjc,jdbcType=VARCHAR},
+      CPTYPE = #{cptype,jdbcType=INTEGER},
+      GS = #{gs,jdbcType=INTEGER},
+      SXJ = #{sxj,jdbcType=INTEGER},
+      PX = #{px,jdbcType=INTEGER},
+      CREATER = #{creater,jdbcType=INTEGER},
+      CTIME = #{ctime,jdbcType=TIMESTAMP},
+      UPTIME = #{uptime,jdbcType=TIMESTAMP},
+      IMG = #{img,jdbcType=VARCHAR},
+      JBBE = #{jbbe,jdbcType=DECIMAL},
+      TBNLKS = #{tbnlks,jdbcType=INTEGER},
+      TBNLJS = #{tbnljs,jdbcType=INTEGER},
+      XZ = #{xz,jdbcType=INTEGER},
+      TK = #{tk,jdbcType=VARCHAR},
+      CDMC = #{cdmc,jdbcType=INTEGER},
+      CPLX = #{cplx,jdbcType=INTEGER},
+      groupids = #{groupids,jdbcType=VARCHAR},
+      bjmb = #{bjmb,jdbcType=INTEGER},
+      hmstate = #{hmstate,jdbcType=INTEGER},
+      cplb = #{cplb,jdbcType=VARCHAR},
+      cpms = #{cpms,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      calflag = #{calflag,jdbcType=INTEGER},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      zxflag = #{zxflag,jdbcType=INTEGER},
+      qy_mark = #{qyMark,jdbcType=INTEGER},
+      control = #{control,jdbcType=INTEGER},
+      tbrinfo = #{tbrinfo,jdbcType=INTEGER}
+    where FID = #{fid,jdbcType=INTEGER}
+  </update>
+  <select id="queryPageDataCount" parameterType="com.hangjia.bxj.query.ProductQuery" resultType="int">
+   	select count(*) from plan_product_main where 1=1
+	<if test="name!=null and name!=''">
+		AND
+		CASE
+			zxflag
+		WHEN 4
+		THEN group_name like CONCAT('%',#{name},'%')
+		ELSE
+		 cpjc like CONCAT('%',#{name},'%')
+		END
+	</if>	
+	<if test="gs!=null and gs!=''">
+		AND gs=#{gs,jdbcType=INTEGER}
+	</if>
+	<if test="sxj!=null and sxj!=''">
+		AND sxj=#{sxj,jdbcType=INTEGER}
+	</if>
+	<if test="xz!=null and xz!=''">
+		AND xz=#{xz,jdbcType=INTEGER}
+	</if>	
+  </select>
+  <select id="queryPageData" parameterType="com.hangjia.bxj.query.ProductQuery" resultType="com.hangjia.bxj.model.PlanProductMain">
+   	select <include refid="Base_Column_List" /> from plan_product_main where 1=1
+	<if test="name!=null and name!=''">
+		AND
+		CASE
+			zxflag
+		WHEN 4
+		THEN group_name like CONCAT('%',#{name},'%')
+		ELSE
+		 cpjc like CONCAT('%',#{name},'%')
+		END
+	</if>	
+	<if test="gs!=null and gs!=''">
+		AND gs=#{gs}
+	</if>
+	<if test="sxj!=null and sxj!=''">
+		AND sxj=#{sxj}
+	</if>
+	<if test="xz!=null and xz!=''">
+		AND xz=#{xz}
+	</if>	
+	LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  <select id="queryPlanBookStatisticsCount" parameterType="com.hangjia.bxj.query.ProductQuery" resultType="int">
+    select count(*) from (SELECT DATE_FORMAT(ctime,'%y-%m-%d') as date,count(*) as bookNum FROM plan_book WHERE CTIME BETWEEN #{begin} AND #{end} GROUP BY date ) z
+  </select>
+  <select id="queryPlanBookStatistics" parameterType="com.hangjia.bxj.query.ProductQuery" resultType="com.hangjia.bxj.query.ProductQuery">
+	SELECT DATE_FORMAT(ctime,'%y-%m-%d') as date,count(*) as bookNum FROM plan_book WHERE CTIME BETWEEN #{begin} AND #{end} GROUP BY date ORDER BY date  LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  <select id="queryUserStatistics" parameterType="com.hangjia.bxj.query.ProductQuery" resultType="com.hangjia.bxj.query.ProductQuery">
+	SELECT b.d as date,count(*) as userNum FROM (SELECT distinct user_id , DATE_FORMAT(ctime,'%y-%m-%d') d  FROM plan_book WHERE CTIME BETWEEN #{begin} AND #{end}) b GROUP BY b.d  LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+  <select id="querySingleProductRules" parameterType="int" resultType="com.hangjia.bxj.query.ProductQuery">      
+      SELECT CONCAT('"',c.a,'_',c.JFNX,'"') AS bookNum,c.SEX as gs FROM (SELECT pid,SEX,max(age) a,JFNX FROM plan_product_fl WHERE pid=#{fid} and bf!=0 GROUP BY pid,JFNX,SEX) c ORDER by c.SEX DESC
+      <!-- SELECT CONCAT('"',c.SEX,'_',c.a,'_',c.JFNX,'"') AS bookNum FROM (SELECT pid,SEX,max(age) a,JFNX FROM plan_product_fl WHERE pid=#{fid} GROUP BY pid,JFNX,SEX) c --> 
+  </select>
+  <select id="queryMultipProductRulesByLqnl" parameterType="int" resultType="com.hangjia.bxj.query.ProductQuery">      
+ <!--  	  SELECT CONCAT('"',c.SEX,'_',c.a,'_',c.JFNX,'"') AS bookNum,c.lqnl AS bq FROM (
+		SELECT pid,SEX,max(age)a,JFNX,lqnl FROM plan_product_fl WHERE pid=#{fid} GROUP BY pid,JFNX,SEX,lqnl
+	  ) c ORDER BY c.lqnl,c.sex -->
+SELECT CONCAT('"',c.a,'_',c.JFNX,'"') AS bookNum,c.lqnl AS bq,c.sex AS gs FROM (SELECT pid,SEX,max(age)a,JFNX,lqnl FROM plan_product_fl WHERE pid=#{fid} and bf!=0 GROUP BY pid,JFNX,SEX,lqnl) c ORDER BY c.lqnl,c.sex
+  </select>  
+  <select id="queryMultipProductRulesByBxnx" parameterType="int" resultType="com.hangjia.bxj.query.ProductQuery">      
+SELECT CONCAT('"',c.a,'_',c.JFNX,'"') AS bookNum,c.bxnx AS bq,c.sex AS gs FROM (SELECT pid,SEX,max(age)a,JFNX,bxnx FROM plan_product_fl WHERE pid=#{fid} and bf!=0 GROUP BY pid,JFNX,SEX,bxnx) c ORDER BY c.bxnx,c.sex  
+  </select>
+</mapper>

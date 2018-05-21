@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.SalesTicketBasicMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.SalesTicketBasic" >
+    <id column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+    <result column="descripe" property="descripe" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="sales_time" property="salesTime" jdbcType="TIMESTAMP" />
+    <result column="over_time" property="overTime" jdbcType="TIMESTAMP" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="peoples" property="peoples" jdbcType="INTEGER" />
+    <result column="mim_num" property="mimNum" jdbcType="INTEGER" />
+    <result column="max_num" property="maxNum" jdbcType="INTEGER" />
+    <result column="underway" property="underway" jdbcType="INTEGER" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="prensent_num" property="prensentNum" jdbcType="INTEGER" />
+    <result column="salesman_tel" property="salesmanTel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, activity_name, descripe, address, state, begin_time, end_time, sales_time, over_time, 
+    img_url, peoples, mim_num, max_num, underway, note, create_time, update_time, prensent_num, 
+    salesman_tel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sales_ticket_basic
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sales_ticket_basic
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.SalesTicketBasic" >
+    insert into sales_ticket_basic (fid, activity_name, descripe, 
+      address, state, begin_time, 
+      end_time, sales_time, over_time, 
+      img_url, peoples, mim_num, 
+      max_num, underway, note, 
+      create_time, update_time, prensent_num, 
+      salesman_tel)
+    values (#{fid,jdbcType=INTEGER}, #{activityName,jdbcType=VARCHAR}, #{descripe,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{salesTime,jdbcType=TIMESTAMP}, #{overTime,jdbcType=TIMESTAMP}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{peoples,jdbcType=INTEGER}, #{mimNum,jdbcType=INTEGER}, 
+      #{maxNum,jdbcType=INTEGER}, #{underway,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{prensentNum,jdbcType=INTEGER}, 
+      #{salesmanTel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.SalesTicketBasic" >
+    insert into sales_ticket_basic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="descripe != null" >
+        descripe,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="salesTime != null" >
+        sales_time,
+      </if>
+      <if test="overTime != null" >
+        over_time,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+      <if test="peoples != null" >
+        peoples,
+      </if>
+      <if test="mimNum != null" >
+        mim_num,
+      </if>
+      <if test="maxNum != null" >
+        max_num,
+      </if>
+      <if test="underway != null" >
+        underway,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="prensentNum != null" >
+        prensent_num,
+      </if>
+      <if test="salesmanTel != null" >
+        salesman_tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="descripe != null" >
+        #{descripe,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesTime != null" >
+        #{salesTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overTime != null" >
+        #{overTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="peoples != null" >
+        #{peoples,jdbcType=INTEGER},
+      </if>
+      <if test="mimNum != null" >
+        #{mimNum,jdbcType=INTEGER},
+      </if>
+      <if test="maxNum != null" >
+        #{maxNum,jdbcType=INTEGER},
+      </if>
+      <if test="underway != null" >
+        #{underway,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prensentNum != null" >
+        #{prensentNum,jdbcType=INTEGER},
+      </if>
+      <if test="salesmanTel != null" >
+        #{salesmanTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.SalesTicketBasic" >
+    update sales_ticket_basic
+    <set >
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="descripe != null" >
+        descripe = #{descripe,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesTime != null" >
+        sales_time = #{salesTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overTime != null" >
+        over_time = #{overTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="peoples != null" >
+        peoples = #{peoples,jdbcType=INTEGER},
+      </if>
+      <if test="mimNum != null" >
+        mim_num = #{mimNum,jdbcType=INTEGER},
+      </if>
+      <if test="maxNum != null" >
+        max_num = #{maxNum,jdbcType=INTEGER},
+      </if>
+      <if test="underway != null" >
+        underway = #{underway,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prensentNum != null" >
+        prensent_num = #{prensentNum,jdbcType=INTEGER},
+      </if>
+      <if test="salesmanTel != null" >
+        salesman_tel = #{salesmanTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.SalesTicketBasic" >
+    update sales_ticket_basic
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      descripe = #{descripe,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      sales_time = #{salesTime,jdbcType=TIMESTAMP},
+      over_time = #{overTime,jdbcType=TIMESTAMP},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      peoples = #{peoples,jdbcType=INTEGER},
+      mim_num = #{mimNum,jdbcType=INTEGER},
+      max_num = #{maxNum,jdbcType=INTEGER},
+      underway = #{underway,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      prensent_num = #{prensentNum,jdbcType=INTEGER},
+      salesman_tel = #{salesmanTel,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <select id="querySalesTicketBasics" resultMap="BaseResultMap">
+ 	select <include refid="Base_Column_List" /> from sales_ticket_basic where state=1 order by begin_time
+  </select>
+  <select id="querySelectSalesTicketBasics" resultMap="BaseResultMap">
+	  SELECT <include refid="Base_Column_List" /> FROM sales_ticket_basic WHERE state=1 AND 
+	  <![CDATA[ NOW()<=end_time ]]>
+	  ORDER BY begin_time
+  </select>
+</mapper>

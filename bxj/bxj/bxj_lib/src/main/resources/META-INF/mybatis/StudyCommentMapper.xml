@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.StudyCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.StudyComment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_nick" property="userNick" jdbcType="VARCHAR" />
+    <result column="study_id" property="studyId" jdbcType="BIGINT" />
+    <result column="comment_context" property="commentContext" jdbcType="VARCHAR" />
+    <result column="support_Num" property="supportNum" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_nick, study_id, comment_context, support_Num, status, audit_status, 
+    create_by, create_time, update_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from study_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.StudyComment" >
+    insert into study_comment (id, user_id, user_nick, 
+      study_id, comment_context, support_Num, 
+      status, audit_status, create_by, 
+      create_time, update_by, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userNick,jdbcType=VARCHAR}, 
+      #{studyId,jdbcType=BIGINT}, #{commentContext,jdbcType=VARCHAR}, #{supportNum,jdbcType=BIGINT}, 
+      #{status,jdbcType=TINYINT}, #{auditStatus,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.StudyComment" >
+    insert into study_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userNick != null" >
+        user_nick,
+      </if>
+      <if test="studyId != null" >
+        study_id,
+      </if>
+      <if test="commentContext != null" >
+        comment_context,
+      </if>
+      <if test="supportNum != null" >
+        support_Num,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userNick != null" >
+        #{userNick,jdbcType=VARCHAR},
+      </if>
+      <if test="studyId != null" >
+        #{studyId,jdbcType=BIGINT},
+      </if>
+      <if test="commentContext != null" >
+        #{commentContext,jdbcType=VARCHAR},
+      </if>
+      <if test="supportNum != null" >
+        #{supportNum,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.StudyComment" >
+    update study_comment
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userNick != null" >
+        user_nick = #{userNick,jdbcType=VARCHAR},
+      </if>
+      <if test="studyId != null" >
+        study_id = #{studyId,jdbcType=BIGINT},
+      </if>
+      <if test="commentContext != null" >
+        comment_context = #{commentContext,jdbcType=VARCHAR},
+      </if>
+      <if test="supportNum != null" >
+        support_Num = #{supportNum,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.StudyComment" >
+    update study_comment
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_nick = #{userNick,jdbcType=VARCHAR},
+      study_id = #{studyId,jdbcType=BIGINT},
+      comment_context = #{commentContext,jdbcType=VARCHAR},
+      support_Num = #{supportNum,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 点赞总数更新 -->
+  <update id="updateSupportNum" parameterType="java.lang.Long">
+     update study_comment set support_Num=support_Num+1
+     where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 查询所有评论  java.util.Map-->
+   <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_comment
+    where  status=0 
+    <if test="start != null and end != null" >
+        LIMIT #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+    </if>
+  </select>
+  
+  <!-- 查询所有评论条数 -->
+  <select id="selectCount" resultType="int" >
+    select  count(id) from study_comment  where  status=0      
+  </select>
+  
+  
+</mapper>

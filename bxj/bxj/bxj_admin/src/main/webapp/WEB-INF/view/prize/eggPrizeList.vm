@@ -1,0 +1,117 @@
+$pageModule.init("app/prize/eggPrizeList", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">创建日期&nbsp;</label>
+								<input type="text" class="form-control createTime">
+								<input type="hidden" class="startTime"/>
+                                <input type="hidden" class="endTime"/>
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">奖品名称&nbsp;</label>
+								<input type="text" class="form-control name">
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">启用状态&nbsp;</label>
+								<select class="form-control isEnable">
+                                    <option value="">请选择</option>
+                                    <option value="1">启用</option>
+									<option value="0">不启用</option>
+                                </select>
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<!--底部 结束-->
+<div class="add-total-tpl hidden">
+    <div class="form-body">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">奖品名称</label>
+			<div class="col-md-3">
+                <input type="text" class="form-control name" disabled >
+			</div>
+			<label class="col-md-3 control-label">奖品价值</label>
+			<div class="col-md-3">
+                <input type="text" class="form-control amount" disabled >
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">奖品总数</label>
+			<div class="col-md-3">
+                <input type="text" class="form-control totalNum" disabled >
+			</div>
+			<label class="col-md-3 control-label">可用奖品数</label>
+			<div class="col-md-3">
+                <input type="text" class="form-control usableNum" disabled >
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-sm-3 control-label" for="demo-is-inputsmall">奖品类型</label>
+            <div class="col-sm-6">
+                <select class="form-control type" disabled>
+                    <option disabled='disabled' selected value="">请选择</option>
+                    <option value="1">自动发放</option>
+					<option value="2">手动激活-充值</option>
+					<option value="3">手动激活-收货</option>
+                </select>
+            </div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>奖品概率</label>
+			<div class="col-md-3">
+                <div class="input-group">
+                    <input type="text" placeholder="中奖率" class="form-control input-sm probability">
+    				<div class="input-group-addon">%</div>
+                </div>
+			</div>
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>增加的奖品数</label>
+			<div class="col-md-3">
+                <input type="text" placeholder="增加的奖品数" value="0" class="form-control addTotalNum">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>限制金额</label>
+			<div class="col-md-3">
+                <input type="text" placeholder="限制金额" class="form-control amountLimit">
+			</div>
+			<label class="col-md-3 control-label"><span class="text-danger">*</span>奖品等级</label>
+			<div class="col-md-3">
+                <select class="form-control level">
+                    <option disabled='disabled' selected value="">请选择</option>
+                    <option value="5">1</option>
+    				<option value="4">2</option>
+					<option value="3">3</option>
+					<option value="2">4</option>
+					<option value="1">5</option>
+                </select>
+			</div>
+		</div>
+	</div>
+</div>

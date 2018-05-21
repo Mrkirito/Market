@@ -1,0 +1,68 @@
+$pageModule.init("app/account/roleAccount", "list")
+<style>
+    th, td {
+        white-space: nowrap;
+    }
+
+    div.dataTables_wrapper {
+        /*width: 900px;*/
+        margin: 0 auto;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel search">
+            <div class="panel-heading">
+                <h3 class="panel-title">角色信息</h3>
+            </div>
+
+            <div class="panel-body">
+                <input type="hidden" class="id" value="$!role.id">
+
+				#if(!$role)
+                    <div class="red" style="text-align: center"><h4>角色不存在或已被删除</h4></div>
+				#else
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">编码</label>
+
+                                <div class="col-md-10">
+                                    <span class="form-control"  style="min-height: 34px;" >$!role.roleCode</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">名称</label>
+
+                                <div class="col-md-10">
+                                    <span class="form-control"  style="min-height: 34px;">$!role.roleName</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-1">备注</label>
+
+                                <div class="col-md-11">
+                                    <span class="form-control" style="min-height: 34px;">$!role.memo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				#end
+            </div>
+        </div>
+    </div>
+</div>
+
+#if($role)
+<div class="data-list" style=""></div>
+#end
+

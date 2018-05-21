@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.shop.dao.ShopGoodsPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.shop.model.ShopGoodsPrice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="min_count" property="minCount" jdbcType="INTEGER" />
+    <result column="max_count" property="maxCount" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_uesr" property="updateUesr" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, goods_id, min_count, max_count, price, description, create_time, create_user, 
+    update_time, update_uesr
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_goods_price
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from shop_goods_price
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.shop.model.ShopGoodsPrice" >
+    insert into shop_goods_price (id, goods_id, min_count, 
+      max_count, price, description, 
+      create_time, create_user, update_time, 
+      update_uesr)
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{minCount,jdbcType=INTEGER}, 
+      #{maxCount,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUesr,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.shop.model.ShopGoodsPrice" >
+    insert into shop_goods_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="minCount != null" >
+        min_count,
+      </if>
+      <if test="maxCount != null" >
+        max_count,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUesr != null" >
+        update_uesr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="minCount != null" >
+        #{minCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxCount != null" >
+        #{maxCount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUesr != null" >
+        #{updateUesr,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.shop.model.ShopGoodsPrice" >
+    update shop_goods_price
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="minCount != null" >
+        min_count = #{minCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxCount != null" >
+        max_count = #{maxCount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUesr != null" >
+        update_uesr = #{updateUesr,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.shop.model.ShopGoodsPrice" >
+    update shop_goods_price
+    set goods_id = #{goodsId,jdbcType=BIGINT},
+      min_count = #{minCount,jdbcType=INTEGER},
+      max_count = #{maxCount,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_uesr = #{updateUesr,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions" >
+    <where>
+      <if test="goodsId != null" >
+        and goods_id = #{goodsId,jdbcType=BIGINT}
+      </if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询总条数 -->
+  <select id="selectByCount" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    count(*)
+    from shop_goods_price
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Base_Column_List" />
+    from shop_goods_price
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+
+  <!-- 查询总条数 -->
+  <select id="selectCountByGoodsId" resultType="int" parameterType="com.hangjia.bxj.shop.query.ShopGoodsPriceQuery" >
+    select
+    count(*)
+    from shop_goods_price
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectPageByGoodsId" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.shop.query.ShopGoodsPriceQuery" >
+    select
+    <include refid="Base_Column_List" />
+    from shop_goods_price
+    <include refid="Public_Query_Conditions" />
+    order by min_count
+    <include refid="Public_Page" />
+  </select>
+</mapper>

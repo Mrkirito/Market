@@ -1,0 +1,151 @@
+#set($header_params = {"title":"邀请函", 
+"css":["index/css/style.css?v=20160312", "bxj_two/static/css/invention.css?v=20160312", "public/css/animate.css", "public/css/mobilebone.css", "public/css/mobiscroll-2.17.1.min.css"],
+"js": ["public/js/mobilebone.js", "public/js/loader.js?v=20160312", "invit/invit.js?v=20160322"],
+"baseTag": "false"})
+
+#bxj_header2($header_params)
+
+<style>
+.amap-logo {
+	display: none !important;
+}
+.amap-copyright {
+	display: none !important;
+}
+</style>
+
+<header class="head">
+	<a class="header_left" href="javascript:;history.back(-1)"></a>
+	<h1>邀请函</h1>
+	<a class="header_right_font" href="javascript:;">编辑</a>
+</header>
+
+<div id="invit_index" class="page in">
+
+	##下面2个容器只显示其中1个，用js控制
+	##没有邀请函时显示的空容器
+	<div id="emptyContainer" class="container container_invention_list" style="display: none;">
+		<div class="blk_wrap">
+			<img src="$static_path/bxj_two/static/image/blank_page.png" />
+		</div>
+		<p class="blk_txt">呀！没有任何邀请函呢！点【新建邀请函】开始制作你的第一份邀请函吧！</p>
+	</div>
+		
+	##有邀请函时显示列表容器
+	<div id="listContainer" class="container container_invention_list" style="display: none;">
+		<div class="list_block">
+			<ul id="invitList">
+				#foreach($i in $list)
+				<li>
+					##<a class="linkInvAction" href="$bxj_path/invitation/details.page?id=$i.id" other-href="$bxj_path/invitation/update.page?id=$i.id" data-reload data-ajax="true">
+					<a class="linkInvAction" href="$bxj_path/invitation/update.page?id=$i.id" data-reload data-ajax="true">	
+						<h1>$!i.name</h1>
+						##<p>参加人数<span>$!i.joinCount</span>人</p>
+						<p class="dateAt">$!i.dateAtCN</p>
+						<input type="hidden" name="id" value="$i.id">
+					</a>
+				</li>
+				#end
+			</ul>
+		</div>
+		
+	</div>
+	
+	##固定在底部的新建按钮，始终显示
+	<a href="$bxj_path/invitation/create.page" class="creat_btn" data-reload onclick="canCreate()">新建邀请函</a>
+</div>
+<script id="amap_script" src="http://webapi.amap.com/maps?v=1.3&amp;key=ae45ce6b854a4e99f3ac8b95abf545c9&amp;plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder,AMap.Geolocation"></script>
+#set( $footer_params = ["layer_mobile/layer/layer.m/layer.m.js", "index/js/Messager.js?v=20160312", "public/js/mobiscroll-2.17.1.min.js", "index/js/ajax.js?v=20160312"])
+#bxj_footer($footer_params)
+
+<script>
+
+##选择显示哪个容器，列表还是空。
+function choseContainerShow() {
+	var size = $('#invitList li').length;
+	if (size > 0) {
+		$('#listContainer').show();
+		$('#emptyContainer').hide();
+		$('.header_right_font').show();
+	} else {
+		$('#listContainer').hide();
+		$('#emptyContainer').show();
+		$('.header_right_font').hide();
+		_key = 1;
+		resolveToolAction();
+	}
+};
+
+choseContainerShow();
+
+var dom = $('<div class="del_icon"><img class="del_img" src="$static_path/bxj_two/static/image/del_icon.jpg"/></div>');
+var _key = 0;//用于判断是否点击编辑按钮 0未点击，1点击
+
+function resolveToolAction(e) {
+	if(_key == 0){
+		$(e).html('完成');
+		$('.linkInvAction').append(dom).children('p,h1').addClass('left_padding');
+		_key = 1;
+		//toggleAction();
+	}
+	else if(_key == 1){
+		$(e).html('编辑');
+		$('.del_icon').remove();
+		$('.linkInvAction').children('p,h1').removeClass('left_padding');
+		_key = 0;
+		//toggleAction();
+	}
+}
+$('.header_right_font').click(function() {
+	resolveToolAction(this);
+});
+
+function toggleAction() {
+	$('.linkInvAction').each(function() {
+		var $this = $(this);
+		var href = $this.attr('href');
+		$this.attr('href', $this.attr('other-href'));
+		$this.attr('other-href', href);
+	});
+}
+
+//删除按钮
+$('div').on('click','.del_icon',function(event) {
+	event.preventDefault();
+	event.stopPropagation();
+	var $this = $(this);
+	doDeleteInvit($this.siblings('input[type=hidden]').val(), $this.siblings('h1').html(), $this);
+});
+
+Mobilebone.evalScript = true;
+
+function doDeleteInvit(id, name, e, succ) {
+	Messager.confirm('删除【' + name + '】吗？</br>对于过期的邀请函，建议您及时删除。删除邀请函，并不影响您的客户再次接收和查阅。', function() {
+		ajaxTodo({
+			url: '$bxj_path/invitation/delete.do',
+			type: 'post',
+			data: {id: id},
+			onSuccess: function() {
+				$(e).parent().parent().remove();
+				if (succ) {
+					succ();
+				}
+				choseContainerShow();
+			}
+		});
+	});
+};
+
+function canCreate(e) {
+	
+	var size = $('#invitList li').length;
+	if (size >= 3) {
+		var e = window.event || arguments[0];
+		e.preventDefault();
+		e.stopPropagation();
+		Messager.toast('邀请函不能超过三条哦</br>请整理后再新建~');
+	}
+	
+}
+
+</script>

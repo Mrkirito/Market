@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.shop.ShopOrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.shop.ShopOrders" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="pay_order_id" property="payOrderId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+    <result column="total_weight" property="totalWeight" jdbcType="DECIMAL" />
+    <result column="goods_money" property="goodsMoney" jdbcType="DECIMAL" />
+    <result column="express_money" property="expressMoney" jdbcType="DECIMAL" />
+    <result column="discount_moeny" property="discountMoeny" jdbcType="DECIMAL" />
+    <result column="total_money" property="totalMoney" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <association property="shopOrdersDetail" column="orderId" javaType="com.hangjia.bxj.model.shop.ShopOrdersDetail">
+      <id column="detailId" property="id" jdbcType="BIGINT" />
+      <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+      <result column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="phone" property="phone" jdbcType="VARCHAR" />
+      <result column="area" property="area" jdbcType="VARCHAR" />
+      <result column="address" property="address" jdbcType="VARCHAR" />
+      <result column="express_company" property="expressCompany" jdbcType="VARCHAR" />
+      <result column="express_no" property="expressNo" jdbcType="VARCHAR" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </association>
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_id, pay_order_id, user_id, goods_id, quantity, pay_type, total_weight, 
+    goods_money, express_money, discount_moeny, total_money, status, version, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_orders
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from shop_orders
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.shop.ShopOrders" >
+    insert into shop_orders (id, order_id, pay_order_id, 
+      user_id, goods_id, quantity, 
+      pay_type, total_weight, goods_money, 
+      express_money, discount_moeny, total_money, 
+      status, version, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{payOrderId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{quantity,jdbcType=INTEGER}, 
+      #{payType,jdbcType=VARCHAR}, #{totalWeight,jdbcType=DECIMAL}, #{goodsMoney,jdbcType=DECIMAL}, 
+      #{expressMoney,jdbcType=DECIMAL}, #{discountMoeny,jdbcType=DECIMAL}, #{totalMoney,jdbcType=DECIMAL}, 
+      #{status,jdbcType=INTEGER}, #{version,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.shop.ShopOrders" >
+    insert into shop_orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="payOrderId != null" >
+        pay_order_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="totalWeight != null" >
+        total_weight,
+      </if>
+      <if test="goodsMoney != null" >
+        goods_money,
+      </if>
+      <if test="expressMoney != null" >
+        express_money,
+      </if>
+      <if test="discountMoeny != null" >
+        discount_moeny,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="payOrderId != null" >
+        #{payOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalWeight != null" >
+        #{totalWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMoney != null" >
+        #{goodsMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expressMoney != null" >
+        #{expressMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="discountMoeny != null" >
+        #{discountMoeny,jdbcType=DECIMAL},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.shop.ShopOrders" >
+    update shop_orders
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="payOrderId != null" >
+        pay_order_id = #{payOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalWeight != null" >
+        total_weight = #{totalWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMoney != null" >
+        goods_money = #{goodsMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expressMoney != null" >
+        express_money = #{expressMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="discountMoeny != null" >
+        discount_moeny = #{discountMoeny,jdbcType=DECIMAL},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.shop.ShopOrders" >
+    update shop_orders
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      pay_order_id = #{payOrderId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      goods_id = #{goodsId,jdbcType=BIGINT},
+      quantity = #{quantity,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      total_weight = #{totalWeight,jdbcType=DECIMAL},
+      goods_money = #{goodsMoney,jdbcType=DECIMAL},
+      express_money = #{expressMoney,jdbcType=DECIMAL},
+      discount_moeny = #{discountMoeny,jdbcType=DECIMAL},
+      total_money = #{totalMoney,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      version = #{version,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+
+<sql id="Base_Orders_details_List">
+    shop_orders.id,
+    shop_orders.order_id,
+    shop_orders.pay_order_id,
+    shop_orders.user_id,
+    (SELECT title FROM shop_goods WHERE id = shop_orders.goods_id) AS goods_name,
+    shop_orders.goods_id,
+    shop_orders.quantity,
+    shop_orders.pay_type,
+    shop_orders.total_weight,
+    shop_orders.goods_money,
+    shop_orders.express_money,
+    shop_orders.discount_moeny,
+    shop_orders.total_money,
+    shop_orders.status,
+    shop_orders.version,
+    shop_orders.create_time,
+    shop_orders.update_time,
+    shop_orders_detail.id as detailId,
+    shop_orders_detail.order_id,
+    shop_orders_detail.user_id,
+    shop_orders_detail.goods_id,
+    shop_orders_detail.name,
+    shop_orders_detail.phone,
+    shop_orders_detail.area,
+    shop_orders_detail.address,
+    shop_orders_detail.express_company,
+    shop_orders_detail.express_no,
+    shop_orders_detail.create_time,
+    shop_orders_detail.update_time
+  </sql>
+
+<!--  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Orders_details_List" />
+    from shop_orders,shop_orders_detail
+    where shop_orders.order_id = shop_orders_detail.order_id   AND shop_orders.id = #{id,jdbcType=BIGINT}
+  </select>-->
+
+  <!--查询条件-->
+  <sql id="Public_Query_Conditions">
+    <where>
+      <if test="goodsId != null">
+        AND shop_orders.goods_id = #{goodsId,jdbcType=BIGINT}
+      </if>
+      <!--<if test="status != null">
+        AND shop_orders.`status`= #{status,jdbcType=INTEGER}
+      </if>-->
+      AND shop_orders.`status`= 5
+      <if test="orderId !=null and orderId !=''"> AND shop_orders.order_id = #{orderId}</if>
+      <if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+        AND DATE(shop_orders_detail.create_time) <![CDATA[>=]]> DATE(#{startTime,jdbcType=TIMESTAMP})
+        AND DATE(shop_orders_detail.create_time) <![CDATA[<=]]> DATE(#{endTime,jdbcType=TIMESTAMP})
+      </if>
+      <if test="name !=null and name !=''"> AND shop_orders_detail.name LIKE  CONCAT(CONCAT('%', #{name}), '%')</if>
+      <if test="phone !=null and phone !=''"> AND shop_orders_detail.phone = #{phone}</if>
+      <if test="payType !=null and payType !=''"> AND shop_orders.pay_type = #{payType}</if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询总条数 -->
+  <select id="selectByCount" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    SELECT
+    COUNT(*)
+    FROM shop_orders LEFT JOIN shop_orders_detail ON shop_orders.`order_id` = shop_orders_detail.`order_id`
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Base_Orders_details_List" />
+    FROM shop_orders LEFT JOIN shop_orders_detail ON shop_orders.`order_id` = shop_orders_detail.`order_id`
+    JOIN (SELECT id FROM shop_orders <include refid="Public_Order_Datas" />)aa ON shop_orders.id = aa.id
+    <include refid="Public_Query_Conditions" />
+
+    <include refid="Public_Page" />
+  </select>
+
+  <!-- 查询总条数 -->
+  <select id="selectCountByQuery" resultType="int" parameterType="com.hangjia.bxj.query.shop.ShopOrdersQuery" >
+    select
+    count(*)
+    FROM shop_orders LEFT JOIN shop_orders_detail ON shop_orders.`order_id` = shop_orders_detail.`order_id`
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectPageByQuery" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.query.shop.ShopOrdersQuery" >
+    select
+    <include refid="Base_Orders_details_List" />
+    FROM shop_orders LEFT JOIN shop_orders_detail ON shop_orders.`order_id` = shop_orders_detail.`order_id`
+    JOIN (SELECT id FROM shop_orders <include refid="Public_Order_Datas" />)aa ON shop_orders.id = aa.id
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Page" />
+  </select>
+
+<select id="getShopOrderListCount" parameterType="com.hangjia.bxj.query.shop.ShopOrdersQuery" resultType="int">
+	SELECT count(*) FROM shop_orders m 
+	INNER JOIN shop_orders_detail n ON m.order_id = n.order_id 
+	INNER JOIN shop_goods k ON n.goods_id = k.id
+	<include refid="getShopOrderListWhere" />
+</select>
+<select id="getShopOrderList" parameterType="com.hangjia.bxj.query.shop.ShopOrdersQuery" resultType="com.hangjia.bxj.model.shop.ShopOrdersDetail">
+	SELECT
+		k.`name` AS goodsName,
+		k.id AS goodsId,
+		k.unit,
+		n.id,
+		n.name,
+		n.phone,
+		n.area,
+		n.address,
+		n.express_company AS expressCompany,
+		n.express_no AS expressNo,
+		n.quantity,
+		n.total_weight AS totalWeight,
+		n.goods_money AS goodsMoney,
+		n.express_money AS expressMoney,
+		n.discount_moeny AS discountMoeny,
+		n.total_money AS totalMoney,
+		n.remark,
+		m.order_id AS orderId,
+		m.id AS shopOrderId,
+		m.user_id as userId,
+		m.pay_order_id AS payOrderId,
+		m.pay_type AS payType,
+		m.create_time AS createTime 
+	FROM shop_orders m
+	INNER JOIN shop_orders_detail n ON m.order_id = n.order_id
+	INNER JOIN shop_goods k ON n.goods_id = k.id
+	<include refid="getShopOrderListWhere" />
+	<if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>    
+	</select>
+	<select id="getSumShopOrder" parameterType="com.hangjia.bxj.query.shop.ShopOrdersQuery" resultType="com.hangjia.bxj.model.shop.ShopOrdersDetail">
+		SELECT
+			sum(n.quantity) AS quantity,
+			sum(n.total_weight) AS totalWeight,
+			sum(n.goods_money) AS goodsMoney,
+			sum(n.express_money) AS expressMoney,
+			sum(n.discount_moeny) AS discountMoeny,
+			sum(n.total_money) AS totalMoney
+		FROM shop_orders m
+		INNER JOIN shop_orders_detail n ON m.order_id = n.order_id
+		INNER JOIN shop_goods k ON n.goods_id = k.id
+		<include refid="getShopOrderListWhere" />
+	</select>	
+  <sql id="getShopOrderListWhere">
+    <where>
+      AND m.`status`= 5
+      <if test="goodsId != null">
+        AND n.goods_id = #{goodsId}
+      </if>
+      <if test="orderId !=null and orderId !=''"> 
+      	AND m.order_id = #{orderId}
+      </if>
+      <if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+        AND DATE(m.create_time) <![CDATA[>=]]> DATE(#{startTime,jdbcType=TIMESTAMP})
+        AND DATE(m.create_time) <![CDATA[<=]]> DATE(#{endTime,jdbcType=TIMESTAMP})
+      </if>
+      <if test="name !=null and name !=''"> 
+      	AND n.name LIKE  CONCAT(CONCAT('%', #{name}), '%')
+      </if>
+      <if test="phone !=null and phone !=''"> 
+      	AND n.phone = #{phone}
+      </if>
+      <if test="payType !=null and payType !=''"> 
+      	AND m.pay_type = #{payType}
+      </if>
+    </where>
+  </sql>
+</mapper>

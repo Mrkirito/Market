@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.study_core.StudyCoreManagerDao" >
+
+	<select id="listSimpleArticleTypies" resultType="com.hangjia.bxj.model.study_core.ArticleType">
+		SELECT
+			id,
+			`name`
+		FROM
+			data_study3_type
+		ORDER BY sort, id
+	</select>
+	
+	<update id="updateArticle" parameterType="com.hangjia.bxj.model.study_core.ArticleCreateArgs">
+		UPDATE
+			data_study3_articles
+		SET
+			title = #{title, javaType=java.lang.String, jdbcType=VARCHAR},
+			display_style = #{displayStyle, javaType=java.lang.String, jdbcType=VARCHAR},
+			display_type = #{displayType, javaType=java.lang.String, jdbcType=VARCHAR},
+			type_id = #{typeId, javaType=java.lang.Integer, jdbcType=INTEGER},
+			sort = #{sort, javaType=java.lang.Integer, jdbcType=TINYINT},
+			classify = #{classify, javaType=java.lang.String, jdbcType=VARCHAR},
+			classify1 = #{classify1, javaType=java.lang.String, jdbcType=VARCHAR},
+			classify2 = #{classify2, javaType=java.lang.String, jdbcType=VARCHAR},
+			tags = #{tags, javaType=java.lang.String, jdbcType=VARCHAR},
+			click_times_sham = #{clickTimesSham, javaType=java.lang.Integer, jdbcType=INTEGER},
+			publish_at = #{publishAt, javaType=java.util.Date, jdbcType=TIMESTAMP}
+		WHERE
+			id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+	<insert id="saveArticle" parameterType="com.hangjia.bxj.model.study_core.ArticleCreateArgs" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO data_study3_articles (
+			title,
+			display_style,
+			display_type,
+			type_id,
+			classify,
+			classify1,
+			classify2,
+			tags,
+			sort,
+			click_times_sham,
+			publish_at
+		) VALUES (
+			#{title, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{displayStyle, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{displayType, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{typeId, javaType=java.lang.Integer, jdbcType=INTEGER},
+			#{classify, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{classify1, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{classify2, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{tags, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{sort, javaType=java.lang.Integer, jdbcType=TINYINT},
+			#{clickTimesSham, javaType=java.lang.Integer, jdbcType=INTEGER},
+			#{publishAt, javaType=java.util.Date, jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	<update id="updateArticleDetails" parameterType="com.hangjia.bxj.model.study_core.ArticleCreateArgs">
+		UPDATE
+			data_study3_details
+		SET
+			content = #{content, javaType=java.lang.String, jdbcType=VARCHAR},
+			source_info = #{sourceInfo, javaType=java.lang.String, jdbcType=VARCHAR},
+			share_text = #{shareText, javaType=java.lang.String, jdbcType=VARCHAR},
+			share_image = #{shareImage, javaType=java.lang.String, jdbcType=VARCHAR},
+			can_comment = '${canComment}',
+			show_comment = '${showComment}'
+		WHERE
+			id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+
+	<update id="updateArticleScore" parameterType="com.hangjia.bxj.model.study_core.ArticleCreateArgs">
+		UPDATE
+		data_study3_articles
+		SET
+		num1 = #{num1, javaType=java.lang.Integer, jdbcType=INTEGER},
+		num2 = #{num2, javaType=java.lang.Integer, jdbcType=INTEGER},
+		num3 = #{num3, javaType=java.lang.Integer, jdbcType=INTEGER},
+		score = #{score, javaType=java.lang.Integer, jdbcType=INTEGER}
+		WHERE
+		id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+	<insert id="saveArticleDetails" parameterType="com.hangjia.bxj.model.study_core.ArticleCreateArgs">
+		<!-- 详情表使用文章表主键，因此需要指定ID -->
+		INSERT INTO data_study3_details (
+			id,
+			content,
+			source_info,
+			share_text,
+			share_image,
+			can_comment,
+			show_comment
+		) VALUES (
+			#{id, javaType=java.lang.Integer, jdbcType=INTEGER},
+			#{content, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{sourceInfo, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{shareText, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{shareImage, javaType=java.lang.String, jdbcType=VARCHAR},
+			'${canComment}',
+			'${showComment}'
+		)
+	</insert>
+	
+	<update id="deleteArticleImages">
+		DELETE FROM
+			data_study3_images
+		WHERE
+			study_id = #{articleId, javaType=java.lang.Integer, jdbcType=INTEGER}
+		AND
+			image_type = 'IMG_NORMAL'
+	</update>
+
+	<update id="deleteTopicImage">
+		DELETE FROM
+			data_study3_images
+		WHERE
+			study_id = #{articleId, javaType=java.lang.Integer, jdbcType=INTEGER}
+		AND
+			image_type = 'IMG_TOPIC'
+	</update>
+
+	<insert id="saveArticleImages">
+	
+		INSERT INTO data_study3_images (
+			study_id,
+			image_url
+		) VALUES
+	
+		<foreach collection="images" item="url" separator=",">
+		(#{articleId, javaType=java.lang.Integer, jdbcType=INTEGER}, #{url, javaType=java.lang.String, jdbcType=VARCHAR})
+		</foreach>
+
+	</insert>
+
+	<insert id="saveTopicBannerImage">
+		INSERT INTO data_study3_images (
+		study_id,
+		image_url,
+		image_type
+		) VALUES
+		(#{articleId, javaType=java.lang.Integer, jdbcType=INTEGER}, #{bannerImage, javaType=java.lang.String, jdbcType=VARCHAR}, 'IMG_TOPIC')
+	</insert>
+	
+	<delete id="deleteArticleRefTypies">
+		DELETE FROM
+			data_study3_article_type_relate
+		WHERE
+			article_id = #{articleId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</delete>
+	
+	<insert id="saveRefTypies">
+	
+		INSERT INTO data_study3_article_type_relate (
+			article_id,
+			type_id
+		) VALUES
+	
+		<foreach collection="typies" item="type" separator=",">
+		(#{articleId, javaType=java.lang.Integer, jdbcType=INTEGER}, #{type, javaType=java.lang.Integer, jdbcType=INTEGER})
+		</foreach>
+		
+	</insert>
+	
+	<!-- 文章分页查询 开始 -->
+	
+	<!-- 查询总数量 -->
+	<select id="articlesCount" parameterType="com.hangjia.bxj.query.study_core.ArticleManagerQuery" resultType="int">
+		SELECT
+			COUNT(DISTINCT a.id)
+		<include refid="criteriaQuerySQL"/>
+	</select>
+	
+	<!-- 查询文章记录，用于列表显示 -->
+	<select id="listArticles" parameterType="com.hangjia.bxj.query.study_core.ArticleManagerQuery" resultType="com.hangjia.bxj.model.study_core.ArticleRow">
+		SELECT
+			a.id,
+			a.title,
+			a.click_times_real clickTimesReal,
+			a.publish_at publishAt,
+			a.create_at createAt,
+			a.update_at updateAt,
+			a.display,
+			a.classify,
+			a.classify1,
+			a.classify2,
+	  		a.tags,
+			a.num1,
+			a.num2,
+			a.num3,
+			a.score,
+			a.sort,
+			a.display_type displayType,
+			
+			(
+			SELECT
+				COUNT(*)
+			FROM
+				study3_comment c
+			WHERE
+				c.study_id = a.id
+			) AS commentCount
+			
+			<include refid="criteriaQuerySQL"/>
+		GROUP  by a.id
+		<if test="sortAs != null">
+			ORDER BY ${sortAs}
+		</if>
+		
+		LIMIT #{pageFirstItem}, #{pageSize}
+	</select>
+	
+	<sql id="criteriaQuerySQL">
+		FROM
+			data_study3_articles a left JOIN data_study3_article_type_relate b on a.id=b.article_id
+		WHERE 1=1
+			
+			<choose>
+				<when test="id != null">
+				AND a.id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+				</when>
+				<otherwise>
+					<if test="display != null">
+					AND
+						a.display = #{display, javaType=java.lang.String, jdbcType=VARCHAR}
+					</if>
+					
+					<if test="typeId != null">
+					AND
+						b.type_id = #{typeId, javaType=java.lang.Integer, jdbcType=INTEGER}
+					</if>
+					
+					<if test="displayType != null">
+						<if test="displayType != ''">
+						AND
+							a.display_type = #{displayType, javaType=java.lang.String, jdbcType=VARCHAR}
+						</if>
+					</if>
+					<if test="classify != null">
+						AND
+						a.classify = #{classify, javaType=java.lang.String, jdbcType=VARCHAR}
+					</if>
+					<if test="classify1 != null">
+						AND
+						a.classify1 = #{classify1, javaType=java.lang.String, jdbcType=VARCHAR}
+					</if>
+					<if test="classify2 != null">
+						AND
+						a.classify2 = #{classify2, javaType=java.lang.String, jdbcType=VARCHAR}
+					</if>
+					
+					<if test="title != null">
+					AND a.title LIKE CONCAT('%', '${title}', '%')
+					</if>
+				</otherwise>
+			</choose>
+			
+	</sql>
+	<!-- 文章分页查询 结束 -->
+	
+	<update id="updateDisplayStatus">
+		UPDATE
+			data_study3_articles
+		SET
+			display = <choose><when test="display">'true'</when><otherwise>'false'</otherwise></choose>
+		WHERE
+			id = #{articleId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+	<select id="findArticleToUpdate" resultType="com.hangjia.bxj.model.study_core.ArticleUpdateArgs">
+	SELECT
+		a.id,
+		a.title,
+		a.type_id typeId,
+		a.display_type displayType,
+		a.publish_at publishAt,
+		a.classify,
+		a.classify1,
+		a.classify2,
+		a.click_times_sham clickTimesSham,
+		a.sort,
+		a.display_style displayStyle,
+		d.source_info sourceInfo,
+		d.show_comment showComment,
+		d.can_comment canComment,
+		d.share_text shareText,
+		d.share_image shareImage,
+		d.content,
+		(
+		SELECT
+			GROUP_CONCAT(tr.type_id)
+		FROM
+			data_study3_article_type_relate tr
+		WHERE
+			tr.article_id = a.id
+		) AS refTypies,
+		(
+		SELECT
+			GROUP_CONCAT(img.image_url)
+		FROM
+			(
+			SELECT
+				i.image_url
+			FROM
+				data_study3_images i
+			WHERE
+				i.study_id = #{articleId, javaType=java.lang.Integer, jdbcType=INTEGER}
+			AND
+				i.is_display = 'true'
+			AND
+				i.image_type = 'IMG_NORMAL'
+			ORDER BY i.create_at DESC
+			LIMIT 3
+			) img
+	
+		) AS images,
+		(
+		SELECT
+			img.image_url
+		FROM
+		data_study3_images img
+		WHERE
+		img.study_id = a.id
+		AND
+		img.is_display = 'true'
+		AND
+		img.image_type = 'IMG_TOPIC'
+		ORDER  by id
+		limit 0,1
+		) AS bannerImage
+	FROM
+		data_study3_articles a
+	LEFT JOIN 
+		data_study3_details d
+	ON
+		a.id = d.id
+	WHERE
+		a.id = #{articleId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</select>
+	
+</mapper>

@@ -1,0 +1,69 @@
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-pid="705" data-jbbe="$!product.jbbe" data-cpjc="全能宝贝A" data-table="0">
+		<input type="hidden" name="bxnx" value="102" class="factor" data-text="30年" />
+		<li class="info-item main_line_height">
+			<label class="info-name">缴费期限</label>
+			<select class="factor" name="jfnx">
+				<option value="10">15年交</option>
+				<option value="9">10年交</option>
+				<option value="8">5年交</option>
+				<option value="19">3年交</option>
+				<option value="7">趸交</option>
+			</select>
+			<span class="arrowr"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">保额</label>
+			<select class="demo_price factor" name="be">
+				<option value="100000">1份</option>
+				<option value="200000">2份</option>
+			</select>
+			<span class="error-tips" style="display:none;"></span>
+		</li>
+	</div>
+	<li class="main_item li_table_0" style="display:none">
+		<div class="creatDes_header">
+			<span class="createDes-title">
+				<em>全能宝贝A</em>
+				<em class="price"></em>
+			</span>
+			<span class="createDes-btn">
+				<a class="main_edit_btn" data-table="0">修改</a>
+			</span>
+		</div>
+		<table class="createDes-table">
+		<thead>
+			<tr>
+				<td>险种</td>
+				<td>保额</td>
+				<td>保费</td>
+				<td>保障期限</td>
+				<td>缴费期限</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		</table>
+	</li>
+	#parse("product/addzx.vm")
+	</ul>
+</div>
+	
+<script >
+$(function(){
+	$('select[name=age]').on('change',function(){
+		var age = $('select[name=age]').val();
+		if(age < 10){
+			$("select[name=be] option[value=300000]").remove();
+			$("select[name=be] option[value=400000]").remove();
+			$("select[name=be] option[value=500000]").remove();
+		} else if(age >= 10 && age <= 17){
+			$("select[name=be]").append("<option value='300000'>3份</option>");
+			$("select[name=be]").append("<option value='400000'>4份</option>");
+			$("select[name=be]").append("<option value='500000'>5份</option>");
+		}
+		
+	})
+});
+</script>

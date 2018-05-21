@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionVoucherMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionVoucher" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="invalid_time" property="invalidTime" jdbcType="TIMESTAMP" />
+    <result column="invite_count" property="inviteCount" jdbcType="INTEGER" />
+    <result column="regist_count" property="registCount" jdbcType="INTEGER" />
+    <result column="share_count" property="shareCount" jdbcType="INTEGER" />
+    <result column="login_count" property="loginCount" jdbcType="INTEGER" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_user" property="modifyUser" jdbcType="BIGINT" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, name, invalid_time, invite_count, regist_count, share_count, login_count, create_user, 
+    create_at, modify_user, modify_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_voucher
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_voucher
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionVoucher" >
+    insert into champion_voucher (fid, name, invalid_time, 
+      invite_count, regist_count, share_count, 
+      login_count, create_user, create_at, 
+      modify_user, modify_at)
+    values (#{fid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{invalidTime,jdbcType=TIMESTAMP}, 
+      #{inviteCount,jdbcType=INTEGER}, #{registCount,jdbcType=INTEGER}, #{shareCount,jdbcType=INTEGER}, 
+      #{loginCount,jdbcType=INTEGER}, #{createUser,jdbcType=BIGINT}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=BIGINT}, #{modifyAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionVoucher" >
+    insert into champion_voucher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="invalidTime != null" >
+        invalid_time,
+      </if>
+      <if test="inviteCount != null" >
+        invite_count,
+      </if>
+      <if test="registCount != null" >
+        regist_count,
+      </if>
+      <if test="shareCount != null" >
+        share_count,
+      </if>
+      <if test="loginCount != null" >
+        login_count,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyUser != null" >
+        modify_user,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidTime != null" >
+        #{invalidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inviteCount != null" >
+        #{inviteCount,jdbcType=INTEGER},
+      </if>
+      <if test="registCount != null" >
+        #{registCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="loginCount != null" >
+        #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionVoucher" >
+    update champion_voucher
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidTime != null" >
+        invalid_time = #{invalidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inviteCount != null" >
+        invite_count = #{inviteCount,jdbcType=INTEGER},
+      </if>
+      <if test="registCount != null" >
+        regist_count = #{registCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        share_count = #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="loginCount != null" >
+        login_count = #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionVoucher" >
+    update champion_voucher
+    set name = #{name,jdbcType=VARCHAR},
+      invalid_time = #{invalidTime,jdbcType=TIMESTAMP},
+      invite_count = #{inviteCount,jdbcType=INTEGER},
+      regist_count = #{registCount,jdbcType=INTEGER},
+      share_count = #{shareCount,jdbcType=INTEGER},
+      login_count = #{loginCount,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,126 @@
+$pageModule.init("app/report/productDataReport_1.1", "list")
+<!-- BEGIN CONTAINER -->
+        <div class="row">
+            <div id="newUser1" style="width: 100%; min-height:300px;"></div>
+        </div>
+		        <div class="row">
+            <div id="newUser2" style="width: 100%; min-height:300px;"></div>
+        </div>
+		        <div class="row">
+            <div id="newUser3" style="width: 100%; min-height:300px;"></div>
+        </div>
+
+        <div class="row">
+            <div id="xrt" style="width: 100%; min-height:300px;"></div>
+        </div>
+        <div class="row">
+            <div id="test" style="width: 100%; min-height:300px;"></div>
+        </div>
+        <div class="row">
+            <div id="clearance" style="width: 100%; min-height:300px;"></div>
+        </div>
+        <div class="row">
+            <div id="share" style="width: 100%; min-height:300px;"></div>
+        </div>
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="col-sm-12">
+                <div class="panel panel-default search">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">查询条件</h3>
+                    </div>
+                    <div class="panel-body">
+                        <!-- BEGIN PAGE HEADER-->
+                        <div class="form-group col-sm-3">
+                            <label class="control-label pad-btm">统计时间&nbsp;</label>
+							<input type="text" class="form-control reportTime" value="$queryMonth">
+                        </div>
+                        <div style="text-align: center;">
+                            <button class="btn btn-primary search-action">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data-list">
+            </div>
+        </div>
+		
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+</div>
+</div>
+
+<div class="data_info hidden">
+    <div class="form-body">
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">数据日期</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control dataDate" placeholder="请选择数据日期">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">计划书PV</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planPv" placeholder="请输入计划书PV">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">计划书UV</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planUv" placeholder="请输入计划书UV">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">计划书制作人数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planMakePopulation" placeholder="请输入计划书制作人数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">计划书制作数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planMakeCount" placeholder="请输入计划书制作数">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">学习PV</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control studyPv" placeholder="请输入学习PV">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">学习UV</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control studyUv" placeholder="请输入学习UV">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">学习新内容PV</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control studyNewUv" placeholder="请输入学习新内容PV">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">朋友圈助手PV</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control friendPv" placeholder="请输入朋友圈PV">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">朋友圈助手UV</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control friendUv" placeholder="请输入朋友圈助手UV">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label">朋友圈助手分享数</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control friendShareCount" placeholder="请输入朋友圈助手分享数">
+            </div>
+        </div>
+    </div>
+</div>

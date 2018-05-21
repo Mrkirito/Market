@@ -1,0 +1,53 @@
+<style>
+.field-name {
+	font-size: larger;
+	width: 90px;
+}
+div .form-group {
+	padding-left: 0px;
+}
+</style>
+<div class="page-container row-fluid">
+    <div class="page-content">
+        <div class="container-fluid">
+        	<div class="col-sm-12">
+				<div class="panel panel-default search">
+                    <div class="panel-heading">
+						<h3 class="panel-title">#if($model != '') 修改 #else 创建 #end【学习】分类</h3>
+					</div>
+            		<div class="panel-body">
+						<form action="studyType/saveOrUpdate.jhtml" id="typeForm" method="post">
+							<input name="id" value="$!model.id" type="hidden">
+							<table class="form-group  col-sm-12">
+								<tr>
+									<td class="field-name">分类名称：</td>
+									<td><input name="name" placeholder="分类名称，必填。展示用。" type="text" class="form-control" value="$!model.name"></td>
+								</tr>
+								<tr>
+									<td class="field-name">排序权重：</td>
+									<td>
+		                                <input name="sort" placeholder="排序权重值，升序。越小越优先显示。" type="text" class="form-control" id="in_publishAt" #if($model != '') value="$model.sort" #else value="100" #end">
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name">是否显示：</td>
+									<td>
+										<select class="form-control" name="display">
+											<option value="false">暂不显示</option>
+			                                <option value="true" #if($!model.display)selected #end>显示</option>
+			                            </select>
+									</td>
+								</tr>
+								<tr>
+									<td class="field-name"></td>
+									<td style="text-align: right;">
+									    <button class="btn btn-primary" type="submit" style="margin-top: 10px;width: 100px">提交</button></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+	                            
+            </div>
+		</div>
+	</div>

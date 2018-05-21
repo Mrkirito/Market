@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.newperson.dao.NewPersonCourseMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.newperson.model.NewPersonCourse" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="course_type_id" property="courseTypeId" jdbcType="BIGINT" />
+    <result column="course_title" property="courseTitle" jdbcType="VARCHAR" />
+    <result column="course_subtitle" property="courseSubtitle" jdbcType="VARCHAR" />
+    <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="suggest_study_time" property="suggestStudyTime" jdbcType="VARCHAR" />
+    <result column="study_person" property="studyPerson" jdbcType="BIGINT" />
+    <result column="virtual_study_person" property="virtualStudyPerson" jdbcType="BIGINT" />
+    <result column="test_person" property="testPerson" jdbcType="BIGINT" />
+    <result column="virtual_test_person" property="virtualTestPerson" jdbcType="BIGINT" />
+    <result column="pass_person" property="passPerson" jdbcType="BIGINT" />
+    <result column="virtual_pass_person" property="virtualPassPerson" jdbcType="BIGINT" />
+    <result column="difficulty_star" property="difficultyStar" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="enable_status" property="enableStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, course_type_id, course_title, course_subtitle, icon_url, suggest_study_time, 
+    study_person, virtual_study_person, test_person, virtual_test_person, pass_person, 
+    virtual_pass_person, difficulty_star, sort, enable_status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from study_new_person_course
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from study_new_person_course
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourse" >
+    insert into study_new_person_course (id, course_type_id, course_title, 
+      course_subtitle, icon_url, suggest_study_time, 
+      study_person, virtual_study_person, test_person, 
+      virtual_test_person, pass_person, virtual_pass_person, 
+      difficulty_star, sort, enable_status, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{courseTypeId,jdbcType=BIGINT}, #{courseTitle,jdbcType=VARCHAR}, 
+      #{courseSubtitle,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, #{suggestStudyTime,jdbcType=VARCHAR}, 
+      #{studyPerson,jdbcType=BIGINT}, #{virtualStudyPerson,jdbcType=BIGINT}, #{testPerson,jdbcType=BIGINT}, 
+      #{virtualTestPerson,jdbcType=BIGINT}, #{passPerson,jdbcType=BIGINT}, #{virtualPassPerson,jdbcType=BIGINT}, 
+      #{difficultyStar,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{enableStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourse" >
+    insert into study_new_person_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseTypeId != null" >
+        course_type_id,
+      </if>
+      <if test="courseTitle != null" >
+        course_title,
+      </if>
+      <if test="courseSubtitle != null" >
+        course_subtitle,
+      </if>
+      <if test="iconUrl != null" >
+        icon_url,
+      </if>
+      <if test="suggestStudyTime != null" >
+        suggest_study_time,
+      </if>
+      <if test="studyPerson != null" >
+        study_person,
+      </if>
+      <if test="virtualStudyPerson != null" >
+        virtual_study_person,
+      </if>
+      <if test="testPerson != null" >
+        test_person,
+      </if>
+      <if test="virtualTestPerson != null" >
+        virtual_test_person,
+      </if>
+      <if test="passPerson != null" >
+        pass_person,
+      </if>
+      <if test="virtualPassPerson != null" >
+        virtual_pass_person,
+      </if>
+      <if test="difficultyStar != null" >
+        difficulty_star,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="enableStatus != null" >
+        enable_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="courseTypeId != null" >
+        #{courseTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="courseTitle != null" >
+        #{courseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="courseSubtitle != null" >
+        #{courseSubtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestStudyTime != null" >
+        #{suggestStudyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="studyPerson != null" >
+        #{studyPerson,jdbcType=BIGINT},
+      </if>
+      <if test="virtualStudyPerson != null" >
+        #{virtualStudyPerson,jdbcType=BIGINT},
+      </if>
+      <if test="testPerson != null" >
+        #{testPerson,jdbcType=BIGINT},
+      </if>
+      <if test="virtualTestPerson != null" >
+        #{virtualTestPerson,jdbcType=BIGINT},
+      </if>
+      <if test="passPerson != null" >
+        #{passPerson,jdbcType=BIGINT},
+      </if>
+      <if test="virtualPassPerson != null" >
+        #{virtualPassPerson,jdbcType=BIGINT},
+      </if>
+      <if test="difficultyStar != null" >
+        #{difficultyStar,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null" >
+        #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourse" >
+    update study_new_person_course
+    <set >
+      <if test="courseTypeId != null" >
+        course_type_id = #{courseTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="courseTitle != null" >
+        course_title = #{courseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="courseSubtitle != null" >
+        course_subtitle = #{courseSubtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        icon_url = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestStudyTime != null" >
+        suggest_study_time = #{suggestStudyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="studyPerson != null" >
+        study_person = #{studyPerson,jdbcType=BIGINT},
+      </if>
+      <if test="virtualStudyPerson != null" >
+        virtual_study_person = #{virtualStudyPerson,jdbcType=BIGINT},
+      </if>
+      <if test="testPerson != null" >
+        test_person = #{testPerson,jdbcType=BIGINT},
+      </if>
+      <if test="virtualTestPerson != null" >
+        virtual_test_person = #{virtualTestPerson,jdbcType=BIGINT},
+      </if>
+      <if test="passPerson != null" >
+        pass_person = #{passPerson,jdbcType=BIGINT},
+      </if>
+      <if test="virtualPassPerson != null" >
+        virtual_pass_person = #{virtualPassPerson,jdbcType=BIGINT},
+      </if>
+      <if test="difficultyStar != null" >
+        difficulty_star = #{difficultyStar,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null" >
+        enable_status = #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourse" >
+    update study_new_person_course
+    set course_type_id = #{courseTypeId,jdbcType=BIGINT},
+      course_title = #{courseTitle,jdbcType=VARCHAR},
+      course_subtitle = #{courseSubtitle,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      suggest_study_time = #{suggestStudyTime,jdbcType=VARCHAR},
+      study_person = #{studyPerson,jdbcType=BIGINT},
+      virtual_study_person = #{virtualStudyPerson,jdbcType=BIGINT},
+      test_person = #{testPerson,jdbcType=BIGINT},
+      virtual_test_person = #{virtualTestPerson,jdbcType=BIGINT},
+      pass_person = #{passPerson,jdbcType=BIGINT},
+      virtual_pass_person = #{virtualPassPerson,jdbcType=BIGINT},
+      difficulty_star = #{difficultyStar,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      enable_status = #{enableStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <sql id="Column_List" >
+    t1.id, t1.course_type_id, t1.course_title, t1.course_subtitle, t1.icon_url, t1.suggest_study_time,
+    t1.study_person+t1.virtual_study_person AS study_person, t1.test_person+t1.virtual_test_person AS test_person,
+    t1.pass_person+t1.virtual_pass_person AS pass_person, t1.difficulty_star, t1.sort, t1.enable_status, t1.create_time, t1.update_time,
+    t2.name AS courseTypeName
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions" >
+    <where>
+
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询总条数 -->
+  <select id="selectByCount" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    count(*)
+    from study_new_person_course
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Base_Column_List" />
+    from study_new_person_course
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+
+  <!-- 查询总条数 -->
+  <select id="selectCountByQuery" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    count(*)
+    FROM study_new_person_course t1, study_new_person_course_type t2
+    WHERE t1.course_type_id = t2.id
+    <if test="courseTypeId != null" >
+      and t1.course_type_id = #{courseTypeId,jdbcType=BIGINT}
+    </if>
+    <if test="courseTitle != null and courseTitle != ''" >
+      and t1.course_title like CONCAT('%', #{courseTitle,jdbcType=VARCHAR}, '%')
+    </if>
+  </select>
+
+  <!-- 查询 -->
+  <select id="selectPageByQuery" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Column_List" />
+    FROM study_new_person_course t1, study_new_person_course_type t2
+    WHERE t1.course_type_id = t2.id
+    <if test="courseTypeId != null" >
+      and t1.course_type_id = #{courseTypeId,jdbcType=BIGINT}
+    </if>
+    <if test="courseTitle != null and courseTitle != ''" >
+      and t1.course_title like CONCAT('%', #{courseTitle,jdbcType=VARCHAR}, '%')
+    </if>
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+</mapper>

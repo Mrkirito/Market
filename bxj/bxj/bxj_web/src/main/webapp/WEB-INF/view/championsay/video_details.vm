@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+   	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="format-detection" content="telephone=no">
+		<title>冠军说</title>
+		<meta name="keywords" content="冠军说">
+		<meta name="description" content="冠军说">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/championsay/css/video_details.css">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+		<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+		<!--[if lt IE 9]>
+            <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+	<div class="container container_championsay">
+		<!-- 视频模块开始 -->
+		<!-- 信息提示框 -->
+		<div class="grey_text_block" style="display: none;">
+			<div class="text_block">
+				<p>确认使用<span>$video.voucherCount</span>张视频券？</p>
+				<a class="cancel_a button">取消</a>
+				<a class="sure_a button">确定</a>
+			</div>
+		</div>
+		<!-- 提示信息与按钮 -->
+		#if ("1"==$authority.status)
+            <div class="remind_block_type01">
+                <p class="remind_text">会员可用劵观看</p>
+                <a id="login" class="remind_button button">会员登录</a>
+            </div>
+		#elseif("2"==$authority.status)
+            <div class="remind_block_type02">
+                <p class="remind_text01">观影券不足，邀请好友可获赠券观看</p>
+                <a id="invite" class="remind_button button" onclick="invite()">邀请好友</a>
+                <!-- <p class="remind_text02">您也可以<a>N元购买单片</a></p> -->
+            </div>
+		#elseif("3"==$authority.status)
+            <div class="remind_block_type01">
+                <p class="remind_text">您剩余<span class="orange_text">$authority.hasVouchers</span>张视频券，可用券观看</p>
+                <a class="remind_button button" id="useTicket">使用$video.voucherCount张券观看</a>
+            </div>
+		#else
+			<div style="display: none" id="hasWatched"></div>
+		#end
+
+		<!-- 错误提示-->
+		<div class="error_block" style="display: none;">
+			<span class="warning_icon"></span>
+			<p>视频丢失在三次元空间</p>
+			<p>小编正在努力找回...</p>
+		</div>
+		<!-- 视频模块 -->
+		<div class="video_block">
+			<div id="player" class="player" style="width: 100%; height:100%;">
+				<script type="text/javascript" src="$static_path/bxj_three/static/championsay/js/sewise.player.min.js"></script>
+			</div>
+			<!-- 返回按钮 -->
+			<span class="back_button button" onclick="goback()"></span>
+			<span class="play_button button" style="display: none;"></span>
+		</div>
+        <a class="show_a" style="display: inline-block;background:rgba(0,0,0,0); width: 100%; height: 5.6rem;position: absolute;top: 0; left:0; z-index: 1;"></a>
+		<div class="menu_block">
+			<p class="play_num">
+				<span>
+				#if($video.playCount <= 10000)
+                    <label id="playCount">$video.playCount</label>
+				#elseif($video.playCount > 10000 && $video.playCount <= 100000000)
+					#set($playCount1 = $video.playCount+"")
+					#set($length1=$playCount1.length())
+					#set($length2=($length1) - 4)
+					#set($playCount2 = $playCount1.substring(0, $length2))
+					#set($length3=($length1) - 3)
+					#set($playCount3 = $playCount1.substring($length2, $length3))
+					#if("0"==$playCount3)
+						$playCount2万次播放
+					#else
+						$playCount2.$playCount3万次播放
+					#end
+				#elseif($video.playCount > 100000000)
+					#set($playCount1 = $video.playCount+"")
+					#set($length1=$playCount1.length())
+					#set($length2=($length1) - 8)
+					#set($playCount2 = $playCount1.substring(0, $length2))
+					#set($length3=($length1) - 7)
+					#set($playCount3 = $playCount1.substring($length2, $length3))
+					#if("0"==$playCount3)
+						$playCount2亿次播放
+					#else
+						$playCount2.$playCount3亿次播放
+					#end
+				#end
+				</span>
+			</p>
+			<div class="table_div share" onclick="share()">
+				<span class="icon"></span>
+				<span class="text">分享</span>
+			</div>
+			<a class="line"></a>
+			<div class="table_div collect">
+				#if ("true"==$isCollection)
+					<span class="icon checked"></span>
+				#else
+					<span class="icon"></span>
+				#end
+				<span class="text">收藏</span>
+			</div>
+			
+		</div>
+		<!-- 视频模块结束-->
+		<!-- 信息模块 -->
+		<div class="inform_block">
+			<h1>$video.title</h1>
+			<p>$video.description</p>
+		</div>
+		<!-- 信息模块结束 -->
+	</div>
+</body>
+</html>
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script src="$static_path/bxj_three/public/js/share.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+	FastClick.attach(document.body);//快速点击绑定
+	var flag = true;
+	//视频载入
+	$('.sure_a').on('click', function(){
+        if($('#hasWatched').length > 0) {
+            event.preventDefault();
+            videoInit();
+		} else {
+            if(flag) {
+				flag = false;
+                jQuery.post("${bxj_path}/champion/video/do_useVoucher.do", {videoId: $video.fid}, function (data) {
+                    redirect(data);
+                    event.preventDefault();
+                    videoInit();
+                });
+            }
+        }
+	});
+
+    var setuped = false;
+	function videoInit() {
+        $('.grey_text_block').removeClass('showUp');
+        $('.remind_block_type01').hide();
+        var URL = "$video.videoUrl";
+        var Title = "视频";
+        if (setuped) {
+            SewisePlayer.doPlay();
+        } else {
+            SewisePlayer.setup({
+                server: "vod",
+                type: "mp4",
+                videourl: URL,
+                skin: "vodFoream",
+                autostart: "false",
+                claritybutton: "disable",
+                title: Title,
+                lang: 'zh_CN'
+            });
+            setuped = true;
+            try {
+                //SewisePlayer.toPlay('http://7xsvvn.com1.z0.glb.clouddn.com/hsl150test', 'neurocam wearable camera', 0, true);
+            } catch (e) {
+                isFlash = true;
+            }
+            $('video').attr('poster','$video.coverImageUrl');
+        }
+    }
+
+    $('.show_a').click(function(){
+        SewisePlayer.doPlay();
+        $(this).hide();
+		if($('#playCount').length > 0) $('#playCount').html(Number($('#playCount').html())+1);
+        jQuery.post("${bxj_path}/champion/video/do_playVideo.do", {videoId: $video.fid}, function(data) {
+            redirect(data);
+		});
+    })
+
+	//信息提示框打开效果
+	$('#useTicket').on('click',function(){
+		event.preventDefault();
+		$('.grey_text_block').addClass('showUp');
+        $('.grey_text_block').show();
+	})
+	$('.cancel_a').on('click',function(){
+		event.preventDefault();
+		$('.grey_text_block').removeClass('showUp');
+	})
+
+	//收藏变色
+	$('.collect').on('click',function(){
+		var type = (true==$(this).children('.icon').hasClass('checked')? 0 : 1);
+        jQuery.post("${bxj_path}/champion/video/do_collection.do", {videoId: $video.fid, type: type}, function(data) {
+            redirect(data);
+            var message = type==0?"取消成功":"收藏成功";
+            _inform(message);
+        });
+        $(this).children('.icon').toggleClass('checked');
+	})
+
+	$(function() {
+		if($('#hasWatched').length > 0) {
+            $('.sure_a').click();
+		}
+
+        /** 登录 **/
+        if($('#login').length > 0) {
+            $('#login').click(function() {
+                jQuery.post("${bxj_path}/champion/video/do_login.do", {videoId: $video.fid}, function(data) {
+                    redirect(data);
+                });
+            })
+        }
+    })
+
+    var sh1 = setInterval(function () {
+        if($('.controlbar-btns-fullscreen').length>0) {
+            $('.controlbar-btns-fullscreen').attr('href', 'javascript:full()');
+            clearInterval(sh1);
+        }
+    }, 10);
+
+    var sh2 = setInterval(function () {
+        if($('.controlbar-btns-normalscreen').length>0) {
+            $('.controlbar-btns-normalscreen').attr('href', 'javascript:normal()');
+            clearInterval(sh2);
+        }
+    }, 10);
+
+	function pauseChampionVideo() {
+        SewisePlayer.doPause();
+	}
+
+	function playChampionVideo() {
+        SewisePlayer.doPlay();
+	}
+
+	/**andorid 全屏**/
+    function full() {
+		var time = SewisePlayer.playTime();
+        window.hjb_wv.fillScreen(time, '$video.videoUrl');
+    }
+	/**adnroid退出全屏**/
+    function normal(time) {
+        SewisePlayer.doSeek(time);
+        SewisePlayer.doPlay();
+		$('.controlbar-btns-fullscreen').show();
+        $('.controlbar-btns-normalscreen').hide();
+    }
+
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '讲师$video.lecturerName邀你一起来学习保险课件！',
+                desc: '保险行业神话级的金牌讲师视频都在保险家，与讲师一起共同进步的才是真伙伴！',
+                imgUrl: '$video.coverImageUrl',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+
+    /**分享**/
+	function share() {
+        if(setuped) SewisePlayer.doPause();
+        var videoInfo = {
+            title: '讲师$video.lecturerName邀你一起来学习保险课件！',
+            desc: '保险行业神话级的金牌讲师视频都在保险家，与讲师一起共同进步的才是真伙伴！',
+            image: '$video.coverImageUrl',
+            location: "${bxj_path}/champion/video/toShare.page?title=$video.title&lecturerName=$video.lecturerName&coverImageUrl=$video.coverImageUrl"
+        };
+        setShareInfo(videoInfo);
+        app_share(videoInfo.title,videoInfo.desc,videoInfo.image,videoInfo.location);
+        /**分享次数**/
+        jQuery.post("${bxj_path}/champion/video/shareVideo.do", {fid: $video.fid}, function(data) {});
+	}
+
+
+	/**邀请**/
+	function invite() {
+		/**邀请url**/
+		/*var url = "${bxj_path}/champion/video/toRegist.page?inviteUserId=$authority.userId";
+        var inviteInfo = {
+            title: '200位金牌讲师，专享视频券！',
+            desc: '中国保险业讲师协会200位金牌讲师视频都在保险家，小伙伴们快来领券！',
+            image: '$static_path/bxj_three/static/championsay/images/invite.png',
+            location: url
+        };
+        setShareInfo(inviteInfo);
+        app_share(inviteInfo.title,inviteInfo.desc,inviteInfo.image,inviteInfo.location);*/
+		window.location.href = '${bxj_path}/myInvite/toMyInviteVoucher.page';
+	}
+
+    /**跳转控制**/
+    function redirect(data) {
+        if("string" == typeof data) data = eval("("+data+")");
+        if(data.ssotype) {
+            var url = decodeURIComponent(data.redirectUrl);
+            if(null==getCookie('tgc') ||  ''==getCookie('tgc')){
+                url += "?flag=$video.fid&goBack=1";
+            } else {
+                var type = (true==$(this).children('.icon').hasClass('checked')? 0 : 1);
+                url += "?flag=videoId_$video.fid"+"_type_"+type;
+            }
+            window.location.href = url;
+        }
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+</script>
+
+<!--百度统计-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>

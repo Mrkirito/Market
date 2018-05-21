@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>邀请好友</title>
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/inventfriend/css/inventfriend_inapp.css?v=1.0.0">
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+    <script src="$static_path/bxj_three/public/js/flexible.js"></script>
+    <!--[if lt IE 9]>
+	<script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+#if($hd==1 || "1"==$hd)
+#else
+<header class="head">
+    <a class="header_left" href="javascript:history.back();"></a>
+    <h1 id="header-title">邀请好友</h1>
+</header>
+<div class="header_heightblock"></div>
+#end
+<div class="container container_inventfriend">
+    <div class="head_block">
+        <!-- banner -->
+        <div class="banner_block"></div>
+        <!-- banner end -->
+        <!-- ticket-->
+        <div class="ticket_block">
+            <div class="left_block">
+                <h2>已邀请好友</h2>
+                <p><span id="friendID" class="num"></span>人</p>
+            </div>
+            <div class="right_block">
+                <h2>已获得视频券</h2>
+                <p><span id="voucheID" class="num"></span>张</p>
+            </div>
+        </div>
+        <!-- ticket end-->
+        <!-- button -->
+        <a class="button_a" onclick="inviteFriend()">邀请好友</a>
+        <!-- button end-->
+        <!-- 二维码-->
+        <div id="qrCode" class="erweima">
+        </div>
+        <!-- 二维码结束-->
+    </div>
+    <div class="foot_block">
+        <div class="rule_block">
+            <span class="rule_title"></span>
+            <p>1.每邀请1位好友注册，可获得3张视频券。每日登录还可获得1张视频券。</p>
+            <p>2.视频券可观看中国保险行业协会独家授权的金牌讲师视频。</p>
+            <p>3.活动中如果发现通过作弊手段获得奖励的，将取消奖励。</p>
+            <p>4.被邀请的好友从2016年4月27日后注册，邀请人可获得奖励。</p>
+        </div>
+    </div>
+</div>
+<!-- 点击二维码全屏 -->
+<div class="overlay box-login">
+    <div id="section" class="section">
+
+    </div>
+</div>
+</body>
+</html>
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script src="$static_path/bxj_three/public/js/share.js"></script>
+<script src="$static_path/public/js/qrcode.js"></script>
+<script>
+    FastClick.attach(document.body);//快速点击绑定
+    // 点击二维码全屏
+    $(function(){
+        $('.erweima').on('click',function(event){
+            if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+            $('.box-login').fadeIn(200);
+
+            var move = function(e) {
+                if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+                e.preventDefault && e.preventDefault();
+                e.returnValue = false;
+                e.stopPropagation && e.stopPropagation();
+                return false;
+            }
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
+
+            //禁止滚动
+            function addliste() {
+                if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+                window.addEventListener('touchmove', move);
+            }
+        });
+
+
+        /*$('.box-login .section').on('click',function(e){
+            e.stopPropagation();
+        })*/
+        $('.overlay').on('click',function(event){
+            if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+            $('.overlay').fadeOut(200,function(){
+                $(this).removeAttr('style');
+            });
+            var move = function(e) {
+                if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+                e.preventDefault && e.preventDefault();
+                e.returnValue = false;
+                e.stopPropagation && e.stopPropagation();
+                return false;
+            }
+            document.documentElement.style.overflow = 'visible';
+            document.body.style.overflow = 'visible';
+
+            function addliste() {
+                if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+                window.addEventListener('touchmove', move);
+            }
+        });
+    })
+
+    /**邀请好友 **/
+    function inviteFriend() {
+        /**邀请url**/
+        var url = "${bxj_path}/champion/video/toRegist.page?inviteUserId=$userId";
+        var inviteInfo = {
+            title: '200位金牌讲师，专享视频券！',
+            desc: '中国保险业讲师协会200位金牌讲师视频都在保险家，小伙伴们快来领券！',
+            image: '$static_path/bxj_three/static/championsay/images/invite.png',
+            location: url
+        };
+        setShareInfo(inviteInfo);
+        app_share(inviteInfo.title,inviteInfo.desc,inviteInfo.image,inviteInfo.location);
+    }
+
+    jQuery.browser = jQuery.browser || jQuery.support;
+    // 生成二维码
+    function code(sel) {
+        var _this = $(sel);
+        var height = _this.height();
+        var width = _this.width();
+        _this.qrcode({
+            text: "${bxj_path}/champion/video/toRegist.page?inviteUserId=$userId",
+            height: height,
+            width: width,
+            src: '${bxj_path}/favicon.ico'
+        });
+    }
+
+    code('#qrCode');
+    code('#section');
+    setTimeout(function() {
+        code('#qrCodeLarge');
+    }, 200);
+
+    onloadInviteNum();
+    function onloadInviteNum(){
+        jQuery.post("${bxj_path}/myInvite/qryInviteTotal.json", function(data) {
+            if(data.status==0 && (null!=data.result) && null!=data.result.inviteCount) {
+                $("#friendID").html(data.result.inviteCount);
+            } else {
+                $("#friendID").html(0);
+            }
+            if(data.status==0 && (null!=data.result) && null!=data.result.inviteVourcherCount) {
+                $("#voucheID").html(data.result.inviteVourcherCount);
+            } else {
+                $("#voucheID").html(0);
+            }
+        });
+
+        /*var videoIdVal=$("#videoId").val();
+        jQuery.post("${bxj_path}/myInvite/qryVoucherGetTotal.json", {videoId: videoIdVal}, function(data) {
+            if(data.status==0 && (null!=data.result)) {
+                var count = data.result.getAllcounts-1;
+                count = count<=0?0:count;
+                $("#voucheID").html(count);
+            }else{
+                $("#voucheID").html("0");
+            }
+        });*/
+    }
+</script>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionTagMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionTag" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="is_display" property="isDisplay" jdbcType="BIT" />
+    <result column="tag_url" property="tagUrl" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_user" property="modifyUser" jdbcType="BIGINT" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, name, is_display, tag_url, create_user, create_at, modify_user, modify_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_tag
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_tag
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionTag" >
+    insert into champion_tag (fid, name, is_display, 
+      tag_url, create_user, create_at, 
+      modify_user, modify_at)
+    values (#{fid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{isDisplay,jdbcType=BIT}, 
+      #{tagUrl,jdbcType=VARCHAR}, #{createUser,jdbcType=BIGINT}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=BIGINT}, #{modifyAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionTag" >
+    insert into champion_tag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="tagUrl != null" >
+        tag_url,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyUser != null" >
+        modify_user,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="tagUrl != null" >
+        #{tagUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionTag" >
+    update champion_tag
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="tagUrl != null" >
+        tag_url = #{tagUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionTag" >
+    update champion_tag
+    set name = #{name,jdbcType=VARCHAR},
+      is_display = #{isDisplay,jdbcType=BIT},
+      tag_url = #{tagUrl,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  
+    <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.model.ChampionTag" >
+        select
+        <include refid="Base_Column_List" />
+        from champion_tag
+        <where>
+    		<if test="name != null" >
+        		and name like CONCAT(CONCAT('%', #{name}), '%')
+      		</if>
+        </where>
+    </select>
+</mapper>

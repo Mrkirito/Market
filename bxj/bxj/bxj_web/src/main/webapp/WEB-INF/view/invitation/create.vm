@@ -1,0 +1,105 @@
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<header class="head">
+		<a class="header_left" href="javascript:;history.back(-1)"></a>
+		<h1>新建邀请函</h1>
+	</header>
+
+	<div class="container container_invention">
+		<form id="createInvitationForm">
+			<ul>
+				<li class="clear">
+					<span class="left_span">邀请函名称</span>
+					<span class="right_span add_search"><input type="text" placeholder="请输入邀请函名称" name="name" maxlength="20"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">酒会时间</span>
+					<span class="right_span">
+						<input id="inv_dateAt" placeholder="请选择酒会时间" name="dateAt">
+					</span>
+				</li>
+				<li class="clear">
+					<span class="left_span">地点</span>
+					<span class="right_span add_search">
+						<input type="text" placeholder="请输入详细地址" id="inv_new_addr" name="address" autocomplete="off" maxlength="200">
+						<a class="search_icon" id="addr_search">
+							<span>搜索</span>
+						</a>
+					</span>
+					<input id="geoLng" name="lng" readonly="readonly" type="hidden">
+					<input id="geoLat" name="lat" readonly="readonly" type="hidden">
+				</li>
+				<li class="clear">
+					<span class="left_span">联系人</span>
+					<span class="right_span add_search"><input type="text" placeholder="请输入联系人姓名" name="contactName" maxlength="16"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">联系方式</span>
+					<span class="right_span add_search"><input type="tel" placeholder="请输入联系方式" name="contactMobile" maxlength="11"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span ">邀请函正文</span>
+					<span class="right_span"><textarea placeholder="请填写不超过80字的正文" maxlength="80" rows="3" name="text"></textarea></span>
+				</li>
+				<li class="clear noborder">
+					<span class="right_span clear new_row">
+						<div class="map_block" id="new_map">
+						</div>
+					</span>
+				</li>
+			</ul>
+		</form>
+		<button class="preview" id="preview_new">预览</button>
+		<button id="saveBtn">保存邀请函</button>
+	</div>
+	
+	<script>
+		
+		(function() {
+			HeadHeight = $('header').height();
+			FooterHeight = $('footer').height();
+			$('.container').css({'max-height': Wheight - FooterHeight - HeadHeight,'margin-top':HeadHeight});
+			
+			new Invitation({
+				form: '#createInvitationForm',
+				enhanceDate: '#inv_dateAt',
+				previewButton: '#preview_new',
+				initMap: {
+					mapId: 'new_map',
+					addressInput: 'inv_new_addr',
+					lng: '#geoLng',
+					lat: '#geoLat',
+					searchButton: '#addr_search'
+				},
+				saveUrl: '$bxj_path/invitation/save.do',
+				saveButton: '#saveBtn',
+				nameExist: function(params) {
+					var f = false;
+					$('.list_block ul li a h1').each(function() {
+						if ($(this).html() == params.name) {
+					    	f = true;
+					    	return false;
+					    }
+					});
+					
+					return f;
+				},
+				saveSuccess: function(data) {
+					var list = $('.list_block ul li');
+					var e = 
+						'<li><a class="linkInvAction" href="$bxj_path/invitation/update.page?id=' + data.id + '" data-reload data-ajax="true">' +
+							'<h1>' + data.name + '</h1>' +
+							'<p>' + data.dateAtCN + '</p>' +
+							'<input type="hidden" name="id" value="' + data.id + '">' +
+						'</a></li>';
+					if (list.length > 0) {
+						$(e).insertBefore(list[0]);
+					} else {
+						$(e).appendTo('.list_block ul');
+					}
+					history.back(-1);
+					choseContainerShow();
+				}
+			});
+		})();
+		
+	</script>

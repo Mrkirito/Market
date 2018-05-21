@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<export-root name="订单详细列表">
+    <export-fields >
+        <export-field name="payType" title="支付类型"/>
+        <export-field name="goodsMoney" title="商品金额"/>
+        <export-field name="expressMoney" title="物流金额"/>
+        <export-field name="totalMoney" title="总金额"/>
+        <export-field name="shopOrdersDetail.createTime" title="创建时间" type="Date" dateFormat="yyyy-MM-dd"/>
+        <export-field name="shopOrdersDetail.name" title="姓名"/>
+        <export-field name="shopOrdersDetail.phone" title="手机号"/>
+        <export-field name="shopOrdersDetail.area" title="地区"/>
+        <export-field name="shopOrdersDetail.address" title="详细地址"/>
+    </export-fields>
+</export-root>

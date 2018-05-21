@@ -1,0 +1,191 @@
+		
+		<ul class="common-info-ul">
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>鑫利2017</em>
+					</span>
+					<span class="creatDes-add-btn" data-layer="mainLayer" data-enable="#btnAddon,#btnAddMore"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddon" data-layer="fjx-layer" data-title="附加险" data-products="['zyjt', 'zyyl', 'ywsh', 'ywyl']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>险种组合</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddMore" data-layer="zhx-layer" data-title="险种组合" data-products="['xinsheng', 'xinxiang', 'ankang', 'anxiang', 'xingfuA']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加险种</em>
+					</span>
+				</div>
+			</li>
+			
+		</ul>
+		
+		#parse("product/product.pa.vm")
+		<script>
+			$(function() {
+				bxj.PlanBook.init({
+					gs: 'PingAn',
+					title: '鑫利2017',
+					autoRefresh: true,
+					BeiBaoRen: {
+						age: {
+							min: 0,
+							max: 60,
+							defaults: 30,
+						}
+					},
+					
+					TouBaoRen: {
+						age: {
+							max: 55
+						}
+					}
+					
+				});
+			});
+			
+			function commitMain(l) {
+				bxj.PlanBook.commitLayer(l, {
+					params: function(data) {
+						var e = $('#zhrs-jfnx');
+						data.jfnx = e.val();
+						return {
+							// 缴费期选项框的文字，在生成列表时会用到
+							jfnx: e.find('option:selected').text(),
+							be: parseInt($('#zhrs-be').val(), 10)
+						};
+					}
+				});
+			}
+		</script>
+		
+		#set($footer = '
+		
+	<div id="mainLayer" class="popup-layer" style="display: none" data-product="xinli">
+	    <form class="popup-form-layer">
+	        <div class="popup-layer-title">鑫利2017</div>
+	        <ul class="popup-layer-ul">
+	            <li data-commons>
+	                <label class="info-name" for="xinli-jfnx">缴费期间</label>
+	                <select name="jfnx" id="xinli-jfnx" data-class="factor" text-name="jfnx-xinli">
+	                	<option value="8">5年</option>
+	                	<option value="9">10年</option>
+	                	<option value="10">15年</option>
+	                	<option value="11">20年</option>
+	                	<option value="12" selected>30年</option>
+	                </select>
+	                <span class="arrowr"></span>
+	            </li>
+	            <li data-calc="xinli">
+	                <label class="info-name" for="baoe_xinli">保额</label>
+	                <input value="200000" id="baoe_xinli" data-vali="min" pattern="[0-9]*" data-min="10000" data-min-msg="主险保额不得低于1万" data-name="xinliBe" maxlength="7">
+	                <i class="icon">元</i>
+	                
+	                <input type="hidden" name="pid" value="760">
+	                <input type="hidden" name="bxnx" value="126">
+	            </li>
+				
+				 <li data-calc="xinli-dqsx">
+	                <dl>
+	                    <dt>
+	                        <input id="xinli-dqsx" class="checkbox-single" type="checkbox">
+	                        <label for="xinli-dqsx">定期寿险</label>
+	                    </dt>
+	                    <dd style="display:none">
+	                        <label class="info-name" for="xinli_dqsx">保额</label>
+	                        <input value="20000" class="factor" data-vali="between-maxRef" id="xinli_dqsx" name="be" data-min="1000" data-min-msg="鑫利重疾保额不得低于1千" data-max="#baoe_xinli" data-max-msg="鑫利重疾保额不得高于主险保额" pattern="[0-9]*" data-name="xinliDqsx" maxlength="7">
+	                        <i class="icon">元</i>
+	                        
+	                        <input type="hidden" name="pid" value="781">
+	                        <input type="hidden" name="bxnx" value="126">
+	                    </dd>
+	                </dl>
+	            </li>
+				
+	            <li data-calc="xinli-zj">
+	                <dl>
+	                    <dt>
+	                        <input id="xinli-zjcb" class="checkbox-single" type="checkbox">
+	                        <label for="xinli-zjcb">附加重疾</label>
+	                    </dt>
+	                    <dd>
+	                        <label class="info-name" for="xinli_zj">保额</label>
+	                        <input value="20000" class="factor" data-vali="between-maxRef" id="xinli_zj" name="be" data-min="1000" data-min-msg="鑫利重疾保额不得低于1千" data-max="#baoe_xinli" data-max-msg="鑫利重疾保额不得高于主险保额" pattern="[0-9]*" data-name="xinliZjBe" maxlength="7">
+	                        <i class="icon">元</i>
+	                        
+	                        <input type="hidden" name="pid" value="782">
+	                        <input type="hidden" name="bxnx" value="126">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="xinli-hmc">
+	                <dl>
+	                    <dt>
+	                        <input id="xinli-hmccb" class="checkbox-single" type="checkbox">
+	                        <label for="xinli-hmccb">豁免C</label>
+	                    </dt>
+	                    <dd style="display: none;">
+	                    	<input type="hidden" name="pid" value="233">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="xinli-huomian" data-toubaoren id="xinli-tbrhm">
+	                <dl>
+	                    <dt>
+	                        <input id="xinli_hm" class="checkbox-single" type="checkbox" data-enhance="tbrhm">
+	                        <label for="xinli_hm">投保人豁免<em class="notes">（非本人可附加）</em></label>
+	                    </dt>
+	                    <dd>
+	                        <input id="paf-hmA" class="radio_box" name="pid" type="radio" value="245">
+	                        <label for="paf-hmA">豁免A(1124)</label>
+	                        <input id="paf-hmB" class="radio_box" name="pid" type="radio" value="251" checked>
+	                        <label class="mrg-right-2" for="paf-hmB">豁免B(1125)</label>
+	                        <input type="hidden" name="bxnx" value="6">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="xinli-tbrhm-s" data-toubaoren s data-ref="#xinli-tbrhm">
+	            	
+	                <dl>
+	                    <dt>
+	                        <input id="xinli-hm-s" class="checkbox-single" type="checkbox">
+	                        <label for="xinli-hm-s">投保人双豁免</label>
+	                    </dt>
+	                    <dd>
+	                    	<label class="info-name" for="shuanghuomian-age">配偶年龄</label>
+			                <select class="factor" name="age" id="shuanghuomian-age">
+			                </select>
+			                <span class="arrowr"></span>
+	                    </dd>
+	                </dl>
+	                
+	            </li>
+	            
+	        </ul>
+	        <div class="popup-layer-btn">
+	            <span class="popup-layer-cancel-btn" data-cancel>取消</span><span class="popup-layer-ok-btn" data-ok>确定</span>
+	        </div>
+	    </form>
+	</div>
+		')

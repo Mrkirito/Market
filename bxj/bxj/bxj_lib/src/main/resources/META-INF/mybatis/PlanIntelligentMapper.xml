@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.PlanIntelligentMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.PlanIntelligent" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="age_min" property="ageMin" jdbcType="INTEGER" />
+    <result column="age_max" property="ageMax" jdbcType="INTEGER" />
+    <result column="premium_min" property="premiumMin" jdbcType="INTEGER" />
+    <result column="premium_max" property="premiumMax" jdbcType="INTEGER" />
+    <result column="insure_type" property="insureType" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="jfnx" property="jfnx" jdbcType="INTEGER" />
+    <result column="bxnx" property="bxnx" jdbcType="INTEGER" />
+    <result column="factor5" property="factor5" jdbcType="INTEGER" />
+    <result column="lqnl" property="lqnl" jdbcType="INTEGER" />
+    <result column="bzlq" property="bzlq" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="group" property="group" jdbcType="INTEGER" />
+    <result column="cal_flag" property="calFlag" jdbcType="INTEGER" />
+    <result column="be" property="be" jdbcType="INTEGER" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sex, age_min, age_max, premium_min, premium_max, insure_type, pid, status, jfnx, 
+    bxnx, factor5, lqnl, bzlq, sort, group, cal_flag, be, create_name, create_time, update_name, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan_intelligent
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from plan_intelligent
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.PlanIntelligent" >
+    insert into plan_intelligent (id, sex, age_min, 
+      age_max, premium_min, premium_max, 
+      insure_type, pid, status, 
+      jfnx, bxnx, factor5, 
+      lqnl, bzlq, sort, group, 
+      cal_flag, be, create_name, 
+      create_time, update_name, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{sex,jdbcType=INTEGER}, #{ageMin,jdbcType=INTEGER}, 
+      #{ageMax,jdbcType=INTEGER}, #{premiumMin,jdbcType=INTEGER}, #{premiumMax,jdbcType=INTEGER}, 
+      #{insureType,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{jfnx,jdbcType=INTEGER}, #{bxnx,jdbcType=INTEGER}, #{factor5,jdbcType=INTEGER}, 
+      #{lqnl,jdbcType=INTEGER}, #{bzlq,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{group,jdbcType=INTEGER}, 
+      #{calFlag,jdbcType=INTEGER}, #{be,jdbcType=INTEGER}, #{createName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.PlanIntelligent" >
+    insert into plan_intelligent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="ageMin != null" >
+        age_min,
+      </if>
+      <if test="ageMax != null" >
+        age_max,
+      </if>
+      <if test="premiumMin != null" >
+        premium_min,
+      </if>
+      <if test="premiumMax != null" >
+        premium_max,
+      </if>
+      <if test="insureType != null" >
+        insure_type,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="jfnx != null" >
+        jfnx,
+      </if>
+      <if test="bxnx != null" >
+        bxnx,
+      </if>
+      <if test="factor5 != null" >
+        factor5,
+      </if>
+      <if test="lqnl != null" >
+        lqnl,
+      </if>
+      <if test="bzlq != null" >
+        bzlq,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="group != null" >
+        group,
+      </if>
+      <if test="calFlag != null" >
+        cal_flag,
+      </if>
+      <if test="be != null" >
+        be,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="ageMin != null" >
+        #{ageMin,jdbcType=INTEGER},
+      </if>
+      <if test="ageMax != null" >
+        #{ageMax,jdbcType=INTEGER},
+      </if>
+      <if test="premiumMin != null" >
+        #{premiumMin,jdbcType=INTEGER},
+      </if>
+      <if test="premiumMax != null" >
+        #{premiumMax,jdbcType=INTEGER},
+      </if>
+      <if test="insureType != null" >
+        #{insureType,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="jfnx != null" >
+        #{jfnx,jdbcType=INTEGER},
+      </if>
+      <if test="bxnx != null" >
+        #{bxnx,jdbcType=INTEGER},
+      </if>
+      <if test="factor5 != null" >
+        #{factor5,jdbcType=INTEGER},
+      </if>
+      <if test="lqnl != null" >
+        #{lqnl,jdbcType=INTEGER},
+      </if>
+      <if test="bzlq != null" >
+        #{bzlq,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="group != null" >
+        #{group,jdbcType=INTEGER},
+      </if>
+      <if test="calFlag != null" >
+        #{calFlag,jdbcType=INTEGER},
+      </if>
+      <if test="be != null" >
+        #{be,jdbcType=INTEGER},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.PlanIntelligent" >
+    update plan_intelligent
+    <set >
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="ageMin != null" >
+        age_min = #{ageMin,jdbcType=INTEGER},
+      </if>
+      <if test="ageMax != null" >
+        age_max = #{ageMax,jdbcType=INTEGER},
+      </if>
+      <if test="premiumMin != null" >
+        premium_min = #{premiumMin,jdbcType=INTEGER},
+      </if>
+      <if test="premiumMax != null" >
+        premium_max = #{premiumMax,jdbcType=INTEGER},
+      </if>
+      <if test="insureType != null" >
+        insure_type = #{insureType,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="jfnx != null" >
+        jfnx = #{jfnx,jdbcType=INTEGER},
+      </if>
+      <if test="bxnx != null" >
+        bxnx = #{bxnx,jdbcType=INTEGER},
+      </if>
+      <if test="factor5 != null" >
+        factor5 = #{factor5,jdbcType=INTEGER},
+      </if>
+      <if test="lqnl != null" >
+        lqnl = #{lqnl,jdbcType=INTEGER},
+      </if>
+      <if test="bzlq != null" >
+        bzlq = #{bzlq,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="group != null" >
+        group = #{group,jdbcType=INTEGER},
+      </if>
+      <if test="calFlag != null" >
+        cal_flag = #{calFlag,jdbcType=INTEGER},
+      </if>
+      <if test="be != null" >
+        be = #{be,jdbcType=INTEGER},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.PlanIntelligent" >
+    update plan_intelligent
+    set sex = #{sex,jdbcType=INTEGER},
+      age_min = #{ageMin,jdbcType=INTEGER},
+      age_max = #{ageMax,jdbcType=INTEGER},
+      premium_min = #{premiumMin,jdbcType=INTEGER},
+      premium_max = #{premiumMax,jdbcType=INTEGER},
+      insure_type = #{insureType,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      jfnx = #{jfnx,jdbcType=INTEGER},
+      bxnx = #{bxnx,jdbcType=INTEGER},
+      factor5 = #{factor5,jdbcType=INTEGER},
+      lqnl = #{lqnl,jdbcType=INTEGER},
+      bzlq = #{bzlq,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      group = #{group,jdbcType=INTEGER},
+      cal_flag = #{calFlag,jdbcType=INTEGER},
+      be = #{be,jdbcType=INTEGER},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

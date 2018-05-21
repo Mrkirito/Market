@@ -1,0 +1,1335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.core.cms.dao.mapper.TradeInsureMapper">
+    <resultMap id="BaseResultMap" type="com.core.cms.model.mapper.TradeInsure">
+        <id column="fid" property="fid" jdbcType="INTEGER"/>
+        <result column="order_id" property="orderId" jdbcType="INTEGER"/>
+        <result column="trade_id" property="tradeId" jdbcType="VARCHAR"/>
+        <result column="third_order_id" property="thirdOrderId" jdbcType="VARCHAR"/>
+        <result column="member_id" property="memberId" jdbcType="INTEGER"/>
+        <result column="ftype" property="ftype" jdbcType="INTEGER"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="is_vehicle" property="isVehicle" jdbcType="INTEGER"/>
+        <result column="is_import" property="isImport" jdbcType="INTEGER"/>
+        <result column="is_free" property="isFree" jdbcType="INTEGER"/>
+        <result column="status_id" property="statusId" jdbcType="INTEGER"/>
+        <result column="status_name" property="statusName" jdbcType="VARCHAR"/>
+        <result column="insurance_num" property="insuranceNum" jdbcType="VARCHAR"/>
+        <result column="insure_type" property="insureType" jdbcType="INTEGER"/>
+        <result column="insure_years" property="insureYears" jdbcType="INTEGER"/>
+        <result column="pay_years_type" property="payYearsType" jdbcType="INTEGER"/>
+        <result column="pay_years" property="payYears" jdbcType="INTEGER"/>
+        <result column="market_price" property="marketPrice" jdbcType="DECIMAL"/>
+        <result column="sale_price" property="salePrice" jdbcType="DECIMAL"/>
+        <result column="market_amount" property="marketAmount" jdbcType="DECIMAL"/>
+        <result column="sale_amount" property="saleAmount" jdbcType="DECIMAL"/>
+        <result column="buy_number" property="buyNumber" jdbcType="INTEGER"/>
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="is_subjoin" property="isSubjoin" jdbcType="INTEGER"/>
+        <result column="referrer_id" property="referrerId" jdbcType="INTEGER"/>
+        <result column="referrer_rate" property="referrerRate" jdbcType="DECIMAL"/>
+        <result column="share_id" property="shareId" jdbcType="VARCHAR"/>
+        <result column="source_id" property="sourceId" jdbcType="INTEGER"/>
+        <result column="insure_begin_date" property="insureBeginDate" jdbcType="TIMESTAMP"/>
+        <result column="insure_end_date" property="insureEndDate" jdbcType="TIMESTAMP"/>
+        <result column="refund_status_id" property="refundStatusId" jdbcType="INTEGER"/>
+        <result column="refund_status_name" property="refundStatusName" jdbcType="VARCHAR"/>
+        <result column="refund_id" property="refundId" jdbcType="INTEGER"/>
+        <result column="product_tariff_id" property="productTariffId" jdbcType="INTEGER"/>
+        <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
+        <result column="is_team" property="isTeam" jdbcType="INTEGER"/>
+        <result column="is_claim" property="isClaim" jdbcType="INTEGER"/>
+        <result column="claim_id" property="claimId" jdbcType="VARCHAR"/>
+        <result column="claim_status_id" property="claimStatusId" jdbcType="INTEGER"/>
+        <result column="sign_image_url" property="signImageUrl" jdbcType="VARCHAR"/>
+        <result column="sign_time" property="signTime" jdbcType="TIMESTAMP"/>
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="is_auto_insure" property="isAutoInsure" jdbcType="INTEGER"/>
+        <result column="insure_file_url" property="insureFileUrl" jdbcType="VARCHAR"/>
+        <result column="policy_number" property="policyNumber" jdbcType="VARCHAR"/>
+        <result column="pay_order_id" property="payOrderId" jdbcType="VARCHAR"/>
+        <result column="is_deduct" property="isDeduct" jdbcType="INTEGER"/>
+        <result column="deduct_rate1" property="deductRate1" jdbcType="DECIMAL"/>
+        <result column="deduct_rate2" property="deductRate2" jdbcType="DECIMAL"/>
+        <result column="deduct_rate3" property="deductRate3" jdbcType="DECIMAL"/>
+        <result column="deduct_amount1" property="deductAmount1" jdbcType="DECIMAL"/>
+        <result column="deduct_amount2" property="deductAmount2" jdbcType="DECIMAL"/>
+        <result column="deduct_amount3" property="deductAmount3" jdbcType="DECIMAL"/>
+        <result column="deduct_amount4" property="deductAmount4" jdbcType="DECIMAL"/>
+        <result column="deduct_memo" property="deductMemo" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time1" property="createTime1" jdbcType="TIMESTAMP"/>
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP"/>
+        <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
+        <result column="guarantee_type" property="guaranteeType" jdbcType="INTEGER"/>
+        <result column="pay_type" property="payType" jdbcType="INTEGER"/>
+        <result column="plan_text" property="planText" jdbcType="VARCHAR"/>
+        <result column="effective_date" property="effectiveDate" jdbcType="VARCHAR"/>
+        <result column="guarantee_type_str" property="guaranteeTypeStr" jdbcType="VARCHAR"/>
+        <result column="pay_type_str" property="payTypeStr" jdbcType="VARCHAR"/>
+        <result column="recognizee_name" property="recognizeeName" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="pay_order_no" property="payOrderNo" jdbcType="VARCHAR"/>
+        <result column="pay_end_time" property="payEndTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="pay_state" property="payState" jdbcType="INTEGER"/>
+        <result column="is_renew" property="isRenew" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        fid, order_id, trade_id, third_order_id, member_id, ftype, product_id, product_name,
+        is_vehicle, is_import, is_free, status_id, status_name, insurance_num, insure_type,
+        insure_years, pay_years_type, pay_years, market_price, sale_price, market_amount,
+        sale_amount, buy_number, total_amount, is_subjoin, referrer_id, referrer_rate, share_id,
+        source_id, insure_begin_date, insure_end_date, refund_status_id, refund_status_name,
+        refund_id, product_tariff_id, refuse_reason, is_team, is_claim, claim_id, claim_status_id,
+        sign_image_url, sign_time, interface_code, is_auto_insure, insure_file_url, policy_number,
+        pay_order_id, is_deduct, deduct_rate1, deduct_rate2, deduct_rate3, deduct_amount1,
+        deduct_amount2, deduct_amount3, deduct_amount4, deduct_memo, create_time, pay_time,
+        modified_time, guarantee_type, pay_type, plan_text, effective_date, guarantee_type_str,
+        pay_type_str, recognizee_name, pay_order_no, pay_end_time, pay_way, pay_state, is_renew
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_c_trade_insure
+        where fid = #{fid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM t_c_trade_insure
+        WHERE fid = #{fid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.core.cms.model.mapper.TradeInsure">
+        INSERT INTO t_c_trade_insure (fid, order_id, trade_id,
+                                      third_order_id, member_id, ftype,
+                                      product_id, product_name, is_vehicle,
+                                      is_import, is_free, status_id,
+                                      status_name, insurance_num, insure_type,
+                                      insure_years, pay_years_type, pay_years,
+                                      market_price, sale_price, market_amount,
+                                      sale_amount, buy_number, total_amount,
+                                      is_subjoin, referrer_id, referrer_rate,
+                                      share_id, source_id, insure_begin_date,
+                                      insure_end_date, refund_status_id, refund_status_name,
+                                      refund_id, product_tariff_id, refuse_reason,
+                                      is_team, is_claim, claim_id,
+                                      claim_status_id, sign_image_url, sign_time,
+                                      interface_code, is_auto_insure, insure_file_url,
+                                      policy_number, pay_order_id, is_deduct,
+                                      deduct_rate1, deduct_rate2, deduct_rate3,
+                                      deduct_amount1, deduct_amount2, deduct_amount3,
+                                      deduct_amount4, deduct_memo, create_time,
+                                      pay_time, modified_time, guarantee_type,
+                                      pay_type, plan_text, effective_date,
+                                      guarantee_type_str, pay_type_str, recognizee_name,
+                                      pay_order_no, pay_end_time, pay_way,
+                                      pay_state, is_renew)
+        VALUES (#{fid,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{tradeId,jdbcType=VARCHAR},
+                                         #{thirdOrderId,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER},
+                                         #{ftype,jdbcType=INTEGER},
+                                         #{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR},
+                                         #{isVehicle,jdbcType=INTEGER},
+                                         #{isImport,jdbcType=INTEGER}, #{isFree,jdbcType=INTEGER},
+            #{statusId,jdbcType=INTEGER},
+            #{statusName,jdbcType=VARCHAR}, #{insuranceNum,jdbcType=VARCHAR}, #{insureType,jdbcType=INTEGER},
+            #{insureYears,jdbcType=INTEGER}, #{payYearsType,jdbcType=INTEGER}, #{payYears,jdbcType=INTEGER},
+            #{marketPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, #{marketAmount,jdbcType=DECIMAL},
+            #{saleAmount,jdbcType=DECIMAL}, #{buyNumber,jdbcType=INTEGER}, #{totalAmount,jdbcType=DECIMAL},
+            #{isSubjoin,jdbcType=INTEGER}, #{referrerId,jdbcType=INTEGER}, #{referrerRate,jdbcType=DECIMAL},
+            #{shareId,jdbcType=VARCHAR}, #{sourceId,jdbcType=INTEGER}, #{insureBeginDate,jdbcType=TIMESTAMP},
+            #{insureEndDate,jdbcType=TIMESTAMP}, #{refundStatusId,jdbcType=INTEGER},
+                                                 #{refundStatusName,jdbcType=VARCHAR},
+                                                 #{refundId,jdbcType=INTEGER}, #{productTariffId,jdbcType=INTEGER},
+                                                 #{refuseReason,jdbcType=VARCHAR},
+                                                 #{isTeam,jdbcType=INTEGER}, #{isClaim,jdbcType=INTEGER},
+                                                 #{claimId,jdbcType=VARCHAR},
+                                                 #{claimStatusId,jdbcType=INTEGER}, #{signImageUrl,jdbcType=VARCHAR},
+            #{signTime,jdbcType=TIMESTAMP},
+            #{interfaceCode,jdbcType=VARCHAR}, #{isAutoInsure,jdbcType=INTEGER}, #{insureFileUrl,jdbcType=VARCHAR},
+            #{policyNumber,jdbcType=VARCHAR}, #{payOrderId,jdbcType=VARCHAR}, #{isDeduct,jdbcType=INTEGER},
+            #{deductRate1,jdbcType=DECIMAL}, #{deductRate2,jdbcType=DECIMAL}, #{deductRate3,jdbcType=DECIMAL},
+            #{deductAmount1,jdbcType=DECIMAL}, #{deductAmount2,jdbcType=DECIMAL}, #{deductAmount3,jdbcType=DECIMAL},
+            #{deductAmount4,jdbcType=DECIMAL}, #{deductMemo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+            #{payTime,jdbcType=TIMESTAMP}, #{modifiedTime,jdbcType=TIMESTAMP}, #{guaranteeType,jdbcType=INTEGER},
+            #{payType,jdbcType=INTEGER}, #{planText,jdbcType=VARCHAR}, #{effectiveDate,jdbcType=VARCHAR},
+                                         #{guaranteeTypeStr,jdbcType=VARCHAR}, #{payTypeStr,jdbcType=VARCHAR},
+                                         #{recognizeeName,jdbcType=VARCHAR},
+                                         #{payOrderNo,jdbcType=VARCHAR}, #{payEndTime,jdbcType=TIMESTAMP},
+                                         #{payWay,jdbcType=INTEGER},
+                                         #{payState,jdbcType=INTEGER}, #{isRenew,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.core.cms.model.mapper.TradeInsure">
+        insert into t_c_trade_insure
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fid != null">
+                fid,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="tradeId != null">
+                trade_id,
+            </if>
+            <if test="thirdOrderId != null">
+                third_order_id,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="ftype != null">
+                ftype,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="isVehicle != null">
+                is_vehicle,
+            </if>
+            <if test="isImport != null">
+                is_import,
+            </if>
+            <if test="isFree != null">
+                is_free,
+            </if>
+            <if test="statusId != null">
+                status_id,
+            </if>
+            <if test="statusName != null">
+                status_name,
+            </if>
+            <if test="insuranceNum != null">
+                insurance_num,
+            </if>
+            <if test="insureType != null">
+                insure_type,
+            </if>
+            <if test="insureYears != null">
+                insure_years,
+            </if>
+            <if test="payYearsType != null">
+                pay_years_type,
+            </if>
+            <if test="payYears != null">
+                pay_years,
+            </if>
+            <if test="marketPrice != null">
+                market_price,
+            </if>
+            <if test="salePrice != null">
+                sale_price,
+            </if>
+            <if test="marketAmount != null">
+                market_amount,
+            </if>
+            <if test="saleAmount != null">
+                sale_amount,
+            </if>
+            <if test="buyNumber != null">
+                buy_number,
+            </if>
+            <if test="totalAmount != null">
+                total_amount,
+            </if>
+            <if test="isSubjoin != null">
+                is_subjoin,
+            </if>
+            <if test="referrerId != null">
+                referrer_id,
+            </if>
+            <if test="referrerRate != null">
+                referrer_rate,
+            </if>
+            <if test="shareId != null">
+                share_id,
+            </if>
+            <if test="sourceId != null">
+                source_id,
+            </if>
+            <if test="insureBeginDate != null">
+                insure_begin_date,
+            </if>
+            <if test="insureEndDate != null">
+                insure_end_date,
+            </if>
+            <if test="refundStatusId != null">
+                refund_status_id,
+            </if>
+            <if test="refundStatusName != null">
+                refund_status_name,
+            </if>
+            <if test="refundId != null">
+                refund_id,
+            </if>
+            <if test="productTariffId != null">
+                product_tariff_id,
+            </if>
+            <if test="refuseReason != null">
+                refuse_reason,
+            </if>
+            <if test="isTeam != null">
+                is_team,
+            </if>
+            <if test="isClaim != null">
+                is_claim,
+            </if>
+            <if test="claimId != null">
+                claim_id,
+            </if>
+            <if test="claimStatusId != null">
+                claim_status_id,
+            </if>
+            <if test="signImageUrl != null">
+                sign_image_url,
+            </if>
+            <if test="signTime != null">
+                sign_time,
+            </if>
+            <if test="interfaceCode != null">
+                interface_code,
+            </if>
+            <if test="isAutoInsure != null">
+                is_auto_insure,
+            </if>
+            <if test="insureFileUrl != null">
+                insure_file_url,
+            </if>
+            <if test="policyNumber != null">
+                policy_number,
+            </if>
+            <if test="payOrderId != null">
+                pay_order_id,
+            </if>
+            <if test="isDeduct != null">
+                is_deduct,
+            </if>
+            <if test="deductRate1 != null">
+                deduct_rate1,
+            </if>
+            <if test="deductRate2 != null">
+                deduct_rate2,
+            </if>
+            <if test="deductRate3 != null">
+                deduct_rate3,
+            </if>
+            <if test="deductAmount1 != null">
+                deduct_amount1,
+            </if>
+            <if test="deductAmount2 != null">
+                deduct_amount2,
+            </if>
+            <if test="deductAmount3 != null">
+                deduct_amount3,
+            </if>
+            <if test="deductAmount4 != null">
+                deduct_amount4,
+            </if>
+            <if test="deductMemo != null">
+                deduct_memo,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="modifiedTime != null">
+                modified_time,
+            </if>
+            <if test="guaranteeType != null">
+                guarantee_type,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="planText != null">
+                plan_text,
+            </if>
+            <if test="effectiveDate != null">
+                effective_date,
+            </if>
+            <if test="guaranteeTypeStr != null">
+                guarantee_type_str,
+            </if>
+            <if test="payTypeStr != null">
+                pay_type_str,
+            </if>
+            <if test="recognizeeName != null">
+                recognizee_name,
+            </if>
+            <if test="payOrderNo != null">
+                pay_order_no,
+            </if>
+            <if test="payEndTime != null">
+                pay_end_time,
+            </if>
+            <if test="payWay != null">
+                pay_way,
+            </if>
+            <if test="payState != null">
+                pay_state,
+            </if>
+            <if test="isRenew != null">
+                is_renew,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fid != null">
+                #{fid,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="tradeId != null">
+                #{tradeId,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdOrderId != null">
+                #{thirdOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="ftype != null">
+                #{ftype,jdbcType=INTEGER},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="isVehicle != null">
+                #{isVehicle,jdbcType=INTEGER},
+            </if>
+            <if test="isImport != null">
+                #{isImport,jdbcType=INTEGER},
+            </if>
+            <if test="isFree != null">
+                #{isFree,jdbcType=INTEGER},
+            </if>
+            <if test="statusId != null">
+                #{statusId,jdbcType=INTEGER},
+            </if>
+            <if test="statusName != null">
+                #{statusName,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceNum != null">
+                #{insuranceNum,jdbcType=VARCHAR},
+            </if>
+            <if test="insureType != null">
+                #{insureType,jdbcType=INTEGER},
+            </if>
+            <if test="insureYears != null">
+                #{insureYears,jdbcType=INTEGER},
+            </if>
+            <if test="payYearsType != null">
+                #{payYearsType,jdbcType=INTEGER},
+            </if>
+            <if test="payYears != null">
+                #{payYears,jdbcType=INTEGER},
+            </if>
+            <if test="marketPrice != null">
+                #{marketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="salePrice != null">
+                #{salePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="marketAmount != null">
+                #{marketAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="saleAmount != null">
+                #{saleAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="buyNumber != null">
+                #{buyNumber,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="isSubjoin != null">
+                #{isSubjoin,jdbcType=INTEGER},
+            </if>
+            <if test="referrerId != null">
+                #{referrerId,jdbcType=INTEGER},
+            </if>
+            <if test="referrerRate != null">
+                #{referrerRate,jdbcType=DECIMAL},
+            </if>
+            <if test="shareId != null">
+                #{shareId,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceId != null">
+                #{sourceId,jdbcType=INTEGER},
+            </if>
+            <if test="insureBeginDate != null">
+                #{insureBeginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insureEndDate != null">
+                #{insureEndDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refundStatusId != null">
+                #{refundStatusId,jdbcType=INTEGER},
+            </if>
+            <if test="refundStatusName != null">
+                #{refundStatusName,jdbcType=VARCHAR},
+            </if>
+            <if test="refundId != null">
+                #{refundId,jdbcType=INTEGER},
+            </if>
+            <if test="productTariffId != null">
+                #{productTariffId,jdbcType=INTEGER},
+            </if>
+            <if test="refuseReason != null">
+                #{refuseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isTeam != null">
+                #{isTeam,jdbcType=INTEGER},
+            </if>
+            <if test="isClaim != null">
+                #{isClaim,jdbcType=INTEGER},
+            </if>
+            <if test="claimId != null">
+                #{claimId,jdbcType=VARCHAR},
+            </if>
+            <if test="claimStatusId != null">
+                #{claimStatusId,jdbcType=INTEGER},
+            </if>
+            <if test="signImageUrl != null">
+                #{signImageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="signTime != null">
+                #{signTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="interfaceCode != null">
+                #{interfaceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isAutoInsure != null">
+                #{isAutoInsure,jdbcType=INTEGER},
+            </if>
+            <if test="insureFileUrl != null">
+                #{insureFileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="policyNumber != null">
+                #{policyNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="payOrderId != null">
+                #{payOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeduct != null">
+                #{isDeduct,jdbcType=INTEGER},
+            </if>
+            <if test="deductRate1 != null">
+                #{deductRate1,jdbcType=DECIMAL},
+            </if>
+            <if test="deductRate2 != null">
+                #{deductRate2,jdbcType=DECIMAL},
+            </if>
+            <if test="deductRate3 != null">
+                #{deductRate3,jdbcType=DECIMAL},
+            </if>
+            <if test="deductAmount1 != null">
+                #{deductAmount1,jdbcType=DECIMAL},
+            </if>
+            <if test="deductAmount2 != null">
+                #{deductAmount2,jdbcType=DECIMAL},
+            </if>
+            <if test="deductAmount3 != null">
+                #{deductAmount3,jdbcType=DECIMAL},
+            </if>
+            <if test="deductAmount4 != null">
+                #{deductAmount4,jdbcType=DECIMAL},
+            </if>
+            <if test="deductMemo != null">
+                #{deductMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifiedTime != null">
+                #{modifiedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="guaranteeType != null">
+                #{guaranteeType,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="planText != null">
+                #{planText,jdbcType=VARCHAR},
+            </if>
+            <if test="effectiveDate != null">
+                #{effectiveDate,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeTypeStr != null">
+                #{guaranteeTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="payTypeStr != null">
+                #{payTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="recognizeeName != null">
+                #{recognizeeName,jdbcType=VARCHAR},
+            </if>
+            <if test="payOrderNo != null">
+                #{payOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payEndTime != null">
+                #{payEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payWay != null">
+                #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="payState != null">
+                #{payState,jdbcType=INTEGER},
+            </if>
+            <if test="isRenew != null">
+                #{isRenew,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.core.cms.model.mapper.TradeInsure">
+        update t_c_trade_insure
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="tradeId != null">
+                trade_id = #{tradeId,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdOrderId != null">
+                third_order_id = #{thirdOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="ftype != null">
+                ftype = #{ftype,jdbcType=INTEGER},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="isVehicle != null">
+                is_vehicle = #{isVehicle,jdbcType=INTEGER},
+            </if>
+            <if test="isImport != null">
+                is_import = #{isImport,jdbcType=INTEGER},
+            </if>
+            <if test="isFree != null">
+                is_free = #{isFree,jdbcType=INTEGER},
+            </if>
+            <if test="statusId != null">
+                status_id = #{statusId,jdbcType=INTEGER},
+            </if>
+            <if test="statusName != null">
+                status_name = #{statusName,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceNum != null">
+                insurance_num = #{insuranceNum,jdbcType=VARCHAR},
+            </if>
+            <if test="insureType != null">
+                insure_type = #{insureType,jdbcType=INTEGER},
+            </if>
+            <if test="insureYears != null">
+                insure_years = #{insureYears,jdbcType=INTEGER},
+            </if>
+            <if test="payYearsType != null">
+                pay_years_type = #{payYearsType,jdbcType=INTEGER},
+            </if>
+            <if test="payYears != null">
+                pay_years = #{payYears,jdbcType=INTEGER},
+            </if>
+            <if test="marketPrice != null">
+                market_price = #{marketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="salePrice != null">
+                sale_price = #{salePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="marketAmount != null">
+                market_amount = #{marketAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="saleAmount != null">
+                sale_amount = #{saleAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="buyNumber != null">
+                buy_number = #{buyNumber,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="isSubjoin != null">
+                is_subjoin = #{isSubjoin,jdbcType=INTEGER},
+            </if>
+            <if test="referrerId != null">
+                referrer_id = #{referrerId,jdbcType=INTEGER},
+            </if>
+            <if test="referrerRate != null">
+                referrer_rate = #{referrerRate,jdbcType=DECIMAL},
+            </if>
+            <if test="shareId != null">
+                share_id = #{shareId,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceId != null">
+                source_id = #{sourceId,jdbcType=INTEGER},
+            </if>
+            <if test="insureBeginDate != null">
+                insure_begin_date = #{insureBeginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insureEndDate != null">
+                insure_end_date = #{insureEndDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refundStatusId != null">
+                refund_status_id = #{refundStatusId,jdbcType=INTEGER},
+            </if>
+            <if test="refundStatusName != null">
+                refund_status_name = #{refundStatusName,jdbcType=VARCHAR},
+            </if>
+            <if test="refundId != null">
+                refund_id = #{refundId,jdbcType=INTEGER},
+            </if>
+            <if test="productTariffId != null">
+                product_tariff_id = #{productTariffId,jdbcType=INTEGER},
+            </if>
+            <if test="refuseReason != null">
+                refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isTeam != null">
+                is_team = #{isTeam,jdbcType=INTEGER},
+            </if>
+            <if test="isClaim != null">
+                is_claim = #{isClaim,jdbcType=INTEGER},
+            </if>
+            <if test="claimId != null">
+                claim_id = #{claimId,jdbcType=VARCHAR},
+            </if>
+            <if test="claimStatusId != null">
+                claim_status_id = #{claimStatusId,jdbcType=INTEGER},
+            </if>
+            <if test="signImageUrl != null">
+                sign_image_url = #{signImageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="signTime != null">
+                sign_time = #{signTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="interfaceCode != null">
+                interface_code = #{interfaceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isAutoInsure != null">
+                is_auto_insure = #{isAutoInsure,jdbcType=INTEGER},
+            </if>
+            <if test="insureFileUrl != null">
+                insure_file_url = #{insureFileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="policyNumber != null">
+                policy_number = #{policyNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="payOrderId != null">
+                pay_order_id = #{payOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeduct != null">
+                is_deduct = #{isDeduct,jdbcType=INTEGER},
+            </if>
+            <if test="deductRate1 != null">
+                deduct_rate1 = #{deductRate1,jdbcType=DECIMAL},
+            </if>
+            <if test="deductRate2 != null">
+                deduct_rate2 = #{deductRate2,jdbcType=DECIMAL},
+            </if>
+            <if test="deductRate3 != null">
+                deduct_rate3 = #{deductRate3,jdbcType=DECIMAL},
+            </if>
+            <if test="deductAmount1 != null">
+                deduct_amount1 = #{deductAmount1,jdbcType=DECIMAL},
+            </if>
+            <if test="deductAmount2 != null">
+                deduct_amount2 = #{deductAmount2,jdbcType=DECIMAL},
+            </if>
+            <if test="deductAmount3 != null">
+                deduct_amount3 = #{deductAmount3,jdbcType=DECIMAL},
+            </if>
+            <if test="deductAmount4 != null">
+                deduct_amount4 = #{deductAmount4,jdbcType=DECIMAL},
+            </if>
+            <if test="deductMemo != null">
+                deduct_memo = #{deductMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifiedTime != null">
+                modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="guaranteeType != null">
+                guarantee_type = #{guaranteeType,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="planText != null">
+                plan_text = #{planText,jdbcType=VARCHAR},
+            </if>
+            <if test="effectiveDate != null">
+                effective_date = #{effectiveDate,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeTypeStr != null">
+                guarantee_type_str = #{guaranteeTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="payTypeStr != null">
+                pay_type_str = #{payTypeStr,jdbcType=VARCHAR},
+            </if>
+            <if test="recognizeeName != null">
+                recognizee_name = #{recognizeeName,jdbcType=VARCHAR},
+            </if>
+            <if test="payOrderNo != null">
+                pay_order_no = #{payOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payEndTime != null">
+                pay_end_time = #{payEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payWay != null">
+                pay_way = #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="payState != null">
+                pay_state = #{payState,jdbcType=INTEGER},
+            </if>
+            <if test="isRenew != null">
+                is_renew = #{isRenew,jdbcType=INTEGER},
+            </if>
+        </set>
+        where fid = #{fid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.core.cms.model.mapper.TradeInsure">
+        UPDATE t_c_trade_insure
+        SET order_id           = #{orderId,jdbcType=INTEGER},
+            trade_id           = #{tradeId,jdbcType=VARCHAR},
+            third_order_id     = #{thirdOrderId,jdbcType=VARCHAR},
+            member_id          = #{memberId,jdbcType=INTEGER},
+            ftype              = #{ftype,jdbcType=INTEGER},
+            product_id         = #{productId,jdbcType=INTEGER},
+            product_name       = #{productName,jdbcType=VARCHAR},
+            is_vehicle         = #{isVehicle,jdbcType=INTEGER},
+            is_import          = #{isImport,jdbcType=INTEGER},
+            is_free            = #{isFree,jdbcType=INTEGER},
+            status_id          = #{statusId,jdbcType=INTEGER},
+            status_name        = #{statusName,jdbcType=VARCHAR},
+            insurance_num      = #{insuranceNum,jdbcType=VARCHAR},
+            insure_type        = #{insureType,jdbcType=INTEGER},
+            insure_years       = #{insureYears,jdbcType=INTEGER},
+            pay_years_type     = #{payYearsType,jdbcType=INTEGER},
+            pay_years          = #{payYears,jdbcType=INTEGER},
+            market_price       = #{marketPrice,jdbcType=DECIMAL},
+            sale_price         = #{salePrice,jdbcType=DECIMAL},
+            market_amount      = #{marketAmount,jdbcType=DECIMAL},
+            sale_amount        = #{saleAmount,jdbcType=DECIMAL},
+            buy_number         = #{buyNumber,jdbcType=INTEGER},
+            total_amount       = #{totalAmount,jdbcType=DECIMAL},
+            is_subjoin         = #{isSubjoin,jdbcType=INTEGER},
+            referrer_id        = #{referrerId,jdbcType=INTEGER},
+            referrer_rate      = #{referrerRate,jdbcType=DECIMAL},
+            share_id           = #{shareId,jdbcType=VARCHAR},
+            source_id          = #{sourceId,jdbcType=INTEGER},
+            insure_begin_date  = #{insureBeginDate,jdbcType=TIMESTAMP},
+            insure_end_date    = #{insureEndDate,jdbcType=TIMESTAMP},
+            refund_status_id   = #{refundStatusId,jdbcType=INTEGER},
+            refund_status_name = #{refundStatusName,jdbcType=VARCHAR},
+            refund_id          = #{refundId,jdbcType=INTEGER},
+            product_tariff_id  = #{productTariffId,jdbcType=INTEGER},
+            refuse_reason      = #{refuseReason,jdbcType=VARCHAR},
+            is_team            = #{isTeam,jdbcType=INTEGER},
+            is_claim           = #{isClaim,jdbcType=INTEGER},
+            claim_id           = #{claimId,jdbcType=VARCHAR},
+            claim_status_id    = #{claimStatusId,jdbcType=INTEGER},
+            sign_image_url     = #{signImageUrl,jdbcType=VARCHAR},
+            sign_time          = #{signTime,jdbcType=TIMESTAMP},
+            interface_code     = #{interfaceCode,jdbcType=VARCHAR},
+            is_auto_insure     = #{isAutoInsure,jdbcType=INTEGER},
+            insure_file_url    = #{insureFileUrl,jdbcType=VARCHAR},
+            policy_number      = #{policyNumber,jdbcType=VARCHAR},
+            pay_order_id       = #{payOrderId,jdbcType=VARCHAR},
+            is_deduct          = #{isDeduct,jdbcType=INTEGER},
+            deduct_rate1       = #{deductRate1,jdbcType=DECIMAL},
+            deduct_rate2       = #{deductRate2,jdbcType=DECIMAL},
+            deduct_rate3       = #{deductRate3,jdbcType=DECIMAL},
+            deduct_amount1     = #{deductAmount1,jdbcType=DECIMAL},
+            deduct_amount2     = #{deductAmount2,jdbcType=DECIMAL},
+            deduct_amount3     = #{deductAmount3,jdbcType=DECIMAL},
+            deduct_amount4     = #{deductAmount4,jdbcType=DECIMAL},
+            deduct_memo        = #{deductMemo,jdbcType=VARCHAR},
+            create_time        = #{createTime,jdbcType=TIMESTAMP},
+            pay_time           = #{payTime,jdbcType=TIMESTAMP},
+            modified_time      = #{modifiedTime,jdbcType=TIMESTAMP},
+            guarantee_type     = #{guaranteeType,jdbcType=INTEGER},
+            pay_type           = #{payType,jdbcType=INTEGER},
+            plan_text          = #{planText,jdbcType=VARCHAR},
+            effective_date     = #{effectiveDate,jdbcType=VARCHAR},
+            guarantee_type_str = #{guaranteeTypeStr,jdbcType=VARCHAR},
+            pay_type_str       = #{payTypeStr,jdbcType=VARCHAR},
+            recognizee_name    = #{recognizeeName,jdbcType=VARCHAR},
+            pay_order_no       = #{payOrderNo,jdbcType=VARCHAR},
+            pay_end_time       = #{payEndTime,jdbcType=TIMESTAMP},
+            pay_way            = #{payWay,jdbcType=INTEGER},
+            pay_state          = #{payState,jdbcType=INTEGER},
+            is_renew           = #{isRenew,jdbcType=INTEGER}
+        WHERE fid = #{fid,jdbcType=INTEGER}
+    </update>
+
+
+    <resultMap id="baseTradeInsureMap" type="com.core.cms.model.dto.TradeInsureDto">
+        <id column="fid" property="fid" jdbcType="INTEGER"/>
+        <result column="order_id" property="orderId" jdbcType="INTEGER"/>
+        <result column="trade_id" property="tradeId" jdbcType="VARCHAR"/>
+        <result column="status_id" property="statusId" jdbcType="INTEGER"/>
+        <result column="status_name" property="statusName" jdbcType="VARCHAR"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="member_id" property="memberId" jdbcType="INTEGER"/>
+        <result column="insurance_num" property="insuranceNum" jdbcType="VARCHAR"/>
+        <result column="insure_type" property="insureType" jdbcType="INTEGER"/>
+        <result column="insure_years" property="insureYears" jdbcType="INTEGER"/>
+        <result column="pay_years_type" property="payYearsType" jdbcType="INTEGER"/>
+        <result column="pay_years" property="payYears" jdbcType="INTEGER"/>
+        <result column="market_price" property="marketPrice" jdbcType="DECIMAL"/>
+        <result column="sale_price" property="salePrice" jdbcType="DECIMAL"/>
+        <result column="market_amount" property="marketAmount" jdbcType="DECIMAL"/>
+        <result column="sale_amount" property="saleAmount" jdbcType="DECIMAL"/>
+        <result column="buy_number" property="buyNumber" jdbcType="INTEGER"/>
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="is_subjoin" property="isSubjoin" jdbcType="INTEGER"/>
+        <result column="referrer_id" property="referrerId" jdbcType="INTEGER"/>
+        <result column="referrer_rate" property="referrerRate" jdbcType="DECIMAL"/>
+        <result column="share_id" property="shareId" jdbcType="VARCHAR"/>
+        <result column="source_id" property="sourceId" jdbcType="INTEGER"/>
+        <result column="insure_begin_date" property="insureBeginDate" jdbcType="TIMESTAMP"/>
+        <result column="insure_end_date" property="insureEndDate" jdbcType="TIMESTAMP"/>
+        <result column="refund_status_id" property="refundStatusId" jdbcType="INTEGER"/>
+        <result column="refund_status_name" property="refundStatusName" jdbcType="VARCHAR"/>
+        <result column="refund_id" property="refundId" jdbcType="INTEGER"/>
+        <result column="product_tariff_id" property="productTariffId" jdbcType="INTEGER"/>
+        <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
+        <result column="is_team" property="isTeam" jdbcType="INTEGER"/>
+        <result column="is_claim" property="isClaim" jdbcType="INTEGER"/>
+        <result column="claim_id" property="claimId" jdbcType="VARCHAR"/>
+        <result column="claim_status_id" property="claimStatusId" jdbcType="INTEGER"/>
+        <result column="sign_image_url" property="signImageUrl" jdbcType="VARCHAR"/>
+        <result column="sign_time" property="signTime" jdbcType="TIMESTAMP"/>
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="is_auto_insure" property="isAutoInsure" jdbcType="INTEGER"/>
+        <result column="insure_file_url" property="insureFileUrl" jdbcType="VARCHAR"/>
+        <result column="policy_number" property="policyNumber" jdbcType="VARCHAR"/>
+        <result column="pay_order_id" property="payOrderId" jdbcType="VARCHAR"/>
+        <result column="is_deduct" property="isDeduct" jdbcType="INTEGER"/>
+        <result column="deduct_memo" property="deductMemo" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP"/>
+        <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_type" property="payType" jdbcType="INTEGER"/>
+        <result column="plan_text" property="planText" jdbcType="VARCHAR"/>
+        <result column="effective_date" property="effectiveDate" jdbcType="VARCHAR"/>
+        <result column="guarantee_type_str" property="guaranteeTypeStr" jdbcType="VARCHAR"/>
+        <result column="pay_type_str" property="payTypeStr" jdbcType="VARCHAR"/>
+        <result column="recognizee_name" property="recognizeeName" jdbcType="VARCHAR"/>
+        <association property="tradeAssuredInsure" column="order_id" javaType="com.core.cms.model.mapper.TradeAssured">
+            <id column="tradeAssuredInsure_id" property="id" jdbcType="INTEGER"/>
+            <result column="tradeAssuredInsure_real_name" property="realName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_identity_id" property="identityId" jdbcType="CHAR"/>
+            <result column="tradeAssuredInsure_identity_name" property="identityName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_identity_card" property="identityCard" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_birthday" property="birthday" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_sex" property="sex" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_mobile_code" property="mobileCode" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_mail" property="mail" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_state" property="state" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_city" property="city" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_town" property="town" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_xq_bank_name" property="xqBankName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_xq_name" property="xqName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_xq_bank_no" property="xqBankNo" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_bank_state_name" property="bankStateName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_bank_city_name" property="bankCityName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_career_name" property="careerName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_is_security" property="isSecurity" jdbcType="INTEGER"/>
+
+            <result column="tradeAssuredInsure_year_earnings" property="yearEarnings" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_zipcode" property="zipcode" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_company_name" property="companyName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_job3_name" property="job3Name" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredInsure_address" property="address" jdbcType="VARCHAR"/>
+
+
+        </association>
+        <association property="tradeAssuredIsurent" column="order_id" javaType="com.core.cms.model.mapper.TradeAssured">
+            <id column="tradeAssuredIsurent_id" property="id" jdbcType="INTEGER"/>
+            <result column="tradeAssuredIsurent_real_name" property="realName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_identity_id" property="identityId" jdbcType="CHAR"/>
+            <result column="tradeAssuredIsurent_identity_name" property="identityName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_identity_card" property="identityCard" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_birthday" property="birthday" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_sex" property="sex" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_mobile_code" property="mobileCode" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_mail" property="mail" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_state" property="state" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_city" property="city" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_town" property="town" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_address" property="address" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_career_name" property="careerName" jdbcType="VARCHAR"/>
+
+            <result column="tradeAssuredIsurent_identity_stop_date" property="identityStopDate" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_is_security" property="isSecurity" jdbcType="INTEGER"/>
+            <result column="tradeAssuredIsurent_year_earnings" property="yearEarnings" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_zipcode" property="zipcode" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_company_name" property="companyName" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_job3_name" property="job3Name" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_school_nature" property="schoolNature" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_height" property="height" jdbcType="VARCHAR"/>
+            <result column="tradeAssuredIsurent_weight" property="weight" jdbcType="VARCHAR"/>
+
+        </association>
+    </resultMap>
+
+
+    <select id="getTradeInsureDto" resultMap="baseTradeInsureMap" parameterType="java.lang.String">
+        SELECT
+            ti.fid,
+            ti.refuse_reason,
+            ti.order_id,
+            ti.status_id,
+            ti.insurance_num,
+            ti.create_time,
+            ti.modified_time,
+            ti.member_id,
+            ti.product_name,
+            ti.insure_type,
+            ti.insure_years,
+            ti.market_amount,
+            ti.buy_number,
+            ti.pay_years_type,
+            ti.pay_years,
+            ti.insure_begin_date,
+            ti.insure_end_date,
+            ti.total_amount,
+            ti.source_id,
+            ti.insure_file_url,
+            ti.recognizee_name,
+            ti.policy_number,
+            ti.trade_id,
+            ta.real_name           tradeAssuredInsure_real_name,
+            ta.identity_id         tradeAssuredInsure_identity_id,
+            ta.identity_name       tradeAssuredInsure_identity_name,
+            ta.identity_card       tradeAssuredInsure_identity_card,
+            ta.identity_card       tradeAssuredInsure_identity_card,
+            ta.birthday            tradeAssuredInsure_birthday,
+            ta.sex                 tradeAssuredInsure_sex,
+            ta.career_name         tradeAssuredInsure_career_name,
+            ta.mobile_code         tradeAssuredInsure_mobile_code,
+            ta.mail                tradeAssuredInsure_mail,
+            ta.state               tradeAssuredInsure_state,
+            ta.city                tradeAssuredInsure_city,
+            ta.town                tradeAssuredInsure_town,
+            ta.address             tradeAssuredInsure_address,
+            ta.xq_bank_name        tradeAssuredInsure_xq_bank_name,
+            ta.xq_name             tradeAssuredInsure_xq_name,
+            ta.xq_bank_no          tradeAssuredInsure_xq_bank_no,
+            ta.bank_state_name     tradeAssuredInsure_bank_state_name,
+            ta.bank_city_name      tradeAssuredInsure_bank_city_name,
+            ta.is_security         tradeAssuredInsure_is_security,
+            ta.year_earnings       tradeAssuredInsure_year_earnings,
+            ta.zipcode             tradeAssuredInsure_zipcode,
+            ta.company_name        tradeAssuredInsure_company_name,
+            ta.job1_name           tradeAssuredInsure_job1_name,
+            ta.job2_name           tradeAssuredInsure_job2_name,
+            ta.job3_name           tradeAssuredInsure_job3_name,
+            tab.real_name          tradeAssuredIsurent_real_name,
+            tab.identity_id        tradeAssuredIsurent_identity_id,
+            tab.identity_name      tradeAssuredIsurent_identity_name,
+            tab.identity_card      tradeAssuredIsurent_identity_card,
+            tab.identity_card      tradeAssuredIsurent_identity_card,
+            tab.birthday           tradeAssuredIsurent_birthday,
+            tab.sex                tradeAssuredIsurent_sex,
+            tab.mobile_code        tradeAssuredIsurent_mobile_code,
+            tab.mail               tradeAssuredIsurent_mail,
+            tab.state              tradeAssuredIsurent_state,
+            tab.city               tradeAssuredIsurent_city,
+            tab.town               tradeAssuredIsurent_town,
+            tab.address            tradeAssuredIsurent_address,
+            tab.career_name        tradeAssuredIsurent_career_name,
+            tab.identity_stop_date tradeAssuredIsurent_identity_stop_date,
+            tab.is_security        tradeAssuredIsurent_is_security,
+            tab.year_earnings      tradeAssuredIsurent_year_earnings,
+            tab.zipcode            tradeAssuredIsurent_zipcode,
+            tab.company_name       tradeAssuredIsurent_company_name,
+            tab.school_nature      tradeAssuredIsurent_school_nature,
+            tab.job1_name          tradeAssuredIsurent_job1_name,
+            tab.job2_name          tradeAssuredIsurent_job2_name,
+            tab.job3_name          tradeAssuredIsurent_job3_name,
+            tab.height             tradeAssuredIsurent_height,
+            tab.weight             tradeAssuredIsurent_weight
+        FROM t_c_trade_insure ti LEFT JOIN t_c_trade_assured ta ON ti.trade_id = ta.trade_id AND ta.flag = 1
+            LEFT JOIN t_c_trade_assured tab ON ti.trade_id = tab.trade_id AND tab.flag = 2
+        WHERE ti.status_id != 0 AND ti.trade_id = #{tradeId}
+
+    </select>
+
+
+    <select id="selectCount" resultType="java.lang.Integer" parameterType="com.core.cms.model.mapper.TradeInsure">
+        select
+        count(1)
+        from t_c_trade_insure ti LEFT JOIN t_c_trade_assured ta ON ti.trade_id = ta.trade_id AND ta.flag = 1
+        where status_id != 0
+        <if test="tradeId != null">
+            and ti.trade_id = #{tradeId,jdbcType=INTEGER}
+        </if>
+        <if test="policyNumber != null">
+            and ti.policy_number = #{policyNumber,jdbcType=INTEGER}
+        </if>
+        <if test="statusId != null">
+            and ti.status_id = #{statusId,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            and ti.create_time >= #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createTime != null">
+            and ti.create_time <![CDATA[<=]]> #{createTime1,jdbcType=TIMESTAMP}
+        </if>
+        <if test="recognizeeName != null">
+            and ti.recognizee_name like CONCAT('%',#{recognizeeName},'%')
+        </if>
+        <if test="realName != null">
+            and ta.real_name like CONCAT('%',#{realName},'%')
+        </if>
+        <if test="productName != null">
+            and ti.product_name like CONCAT('%',#{productName},'%')
+        </if>
+        <if test="sourceId != -999">
+            and ti.source_id=#{sourceId}
+        </if>
+        <if test="memberId != null">
+            and ti.member_id = #{memberId,jdbcType=INTEGER}
+        </if>
+        <if test="insureBeginDate != null">
+            and ti.insure_begin_date = #{insureBeginDate,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="getTradeInsureList" parameterType="com.core.cms.model.mapper.TradeInsure" resultMap="BaseResultMap">
+        select
+        ti.order_id,ti.status_id,ti.insurance_num,ti.create_time,ti.modified_time,ti.member_id,ti.product_name,ti.fid,
+        ti.insure_type,ti.insure_years,ti.market_amount,ti.buy_number,ti.pay_years_type,ti.pay_years,
+        ti.insure_begin_date,ti.insure_end_date,ti.total_amount,ti.source_id,ti.insure_file_url,ti.recognizee_name,ti.policy_number,ti.trade_id,ta.real_name
+        from t_c_trade_insure ti LEFT JOIN t_c_trade_assured ta ON ti.trade_id = ta.trade_id AND ta.flag = 1
+        where ti.status_id != 0
+        <if test="tradeId != null">
+            and ti.trade_id = #{tradeId,jdbcType=INTEGER}
+        </if>
+        <if test="policyNumber != null">
+            and ti.policy_number = #{policyNumber,jdbcType=INTEGER}
+        </if>
+        <if test="statusId != null">
+            and ti.status_id = #{statusId,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            and ti.create_time >= #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createTime != null">
+            and ti.create_time <![CDATA[<=]]> #{createTime1,jdbcType=TIMESTAMP}
+        </if>
+        <if test="recognizeeName != null">
+            and ti.recognizee_name like CONCAT('%',#{recognizeeName},'%')
+        </if>
+        <if test="realName != null">
+            and ta.real_name like CONCAT('%',#{realName},'%')
+        </if>
+        <if test="productName != null">
+            and ti.product_name like CONCAT('%',#{productName},'%')
+        </if>
+        <if test="sourceId != -999">
+            and ti.source_id=#{sourceId}
+        </if>
+        <if test="memberId != null">
+            and ti.member_id = #{memberId,jdbcType=INTEGER}
+        </if>
+        <if test="insureBeginDate != null">
+            and ti.insure_begin_date = #{insureBeginDate,jdbcType=TIMESTAMP}
+        </if>
+        order by ti.create_time desc
+        limit #{pageFirstItem},#{pageSize}
+    </select>
+
+
+    <select id="getIsurentMail" parameterType="java.lang.Integer" resultType="com.core.cms.model.mapper.PolicyMail">
+        SELECT
+            tab.mail        mailPolicy,
+            tab.real_name   userName,
+            ti.product_name productName
+        FROM
+            t_c_trade_insure ti
+            LEFT JOIN t_c_trade_assured tab ON ti.order_id = tab.order_id AND tab.flag = 2
+        WHERE ti.fid = #{fid}
+    </select>
+
+
+    <select id="getTradeInsureDtoByFid" resultMap="baseTradeInsureMap" parameterType="java.lang.Integer">
+        SELECT
+            ti.fid,
+            ti.refuse_reason,
+            ti.order_id,
+            ti.status_id,
+            ti.insurance_num,
+            ti.create_time,
+            ti.modified_time,
+            ti.member_id,
+            ti.product_name,
+            ti.insure_type,
+            ti.insure_years,
+            ti.market_amount,
+            ti.buy_number,
+            ti.pay_years_type,
+            ti.pay_years,
+            ti.insure_begin_date,
+            ti.insure_end_date,
+            ti.total_amount,
+            ti.source_id,
+            ti.insure_file_url,
+            ti.recognizee_name,
+            ti.policy_number,
+            ti.trade_id,
+            ta.real_name           tradeAssuredInsure_real_name,
+            ta.identity_id         tradeAssuredInsure_identity_id,
+            ta.identity_name       tradeAssuredInsure_identity_name,
+            ta.identity_card       tradeAssuredInsure_identity_card,
+            ta.identity_card       tradeAssuredInsure_identity_card,
+            ta.birthday            tradeAssuredInsure_birthday,
+            ta.sex                 tradeAssuredInsure_sex,
+            ta.career_name         tradeAssuredInsure_career_name,
+            ta.mobile_code         tradeAssuredInsure_mobile_code,
+            ta.mail                tradeAssuredInsure_mail,
+            ta.state               tradeAssuredInsure_state,
+            ta.city                tradeAssuredInsure_city,
+            ta.town                tradeAssuredInsure_town,
+            ta.address             tradeAssuredInsure_address,
+            ta.xq_bank_name        tradeAssuredInsure_xq_bank_name,
+            ta.xq_name             tradeAssuredInsure_xq_name,
+            ta.xq_bank_no          tradeAssuredInsure_xq_bank_no,
+            ta.bank_state_name     tradeAssuredInsure_bank_state_name,
+            ta.bank_city_name      tradeAssuredInsure_bank_city_name,
+            ta.is_security         tradeAssuredInsure_is_security,
+            ta.year_earnings       tradeAssuredInsure_year_earnings,
+            ta.zipcode             tradeAssuredInsure_zipcode,
+            ta.company_name        tradeAssuredInsure_company_name,
+            ta.job3_name           tradeAssuredInsure_job3_name,
+            tab.real_name          tradeAssuredIsurent_real_name,
+            tab.identity_id        tradeAssuredIsurent_identity_id,
+            tab.identity_name      tradeAssuredIsurent_identity_name,
+            tab.identity_card      tradeAssuredIsurent_identity_card,
+            tab.identity_card      tradeAssuredIsurent_identity_card,
+            tab.birthday           tradeAssuredIsurent_birthday,
+            tab.sex                tradeAssuredIsurent_sex,
+            tab.mobile_code        tradeAssuredIsurent_mobile_code,
+            tab.mail               tradeAssuredIsurent_mail,
+            tab.state              tradeAssuredIsurent_state,
+            tab.city               tradeAssuredIsurent_city,
+            tab.town               tradeAssuredIsurent_town,
+            tab.address            tradeAssuredIsurent_address,
+            tab.career_name        tradeAssuredIsurent_career_name,
+            tab.identity_stop_date tradeAssuredIsurent_identity_stop_date,
+            tab.is_security        tradeAssuredIsurent_is_security,
+            tab.year_earnings      tradeAssuredIsurent_year_earnings,
+            tab.zipcode            tradeAssuredIsurent_zipcode,
+            tab.company_name       tradeAssuredIsurent_company_name,
+            tab.job3_name          tradeAssuredIsurent_job3_name,
+            tab.school_nature      tradeAssuredIsurent_school_nature,
+            tab.height             tradeAssuredIsurent_height,
+            tab.weight             tradeAssuredIsurent_weight
+        FROM t_c_trade_insure ti LEFT JOIN t_c_trade_assured ta ON ti.fid = ta.order_id AND ta.flag = 1
+            LEFT JOIN t_c_trade_assured tab ON ti.fid = tab.order_id AND tab.flag = 2
+        WHERE ti.status_id != 0 AND ti.fid = #{tradeId}
+
+    </select>
+
+    <select id="getTradeInsureDtoByMemberId" resultMap="baseTradeInsureMap" parameterType="java.lang.Integer">
+        SELECT
+            ti.fid,
+            ti.refuse_reason,
+            ti.order_id,
+            ti.status_id,
+            ti.insurance_num,
+            ti.create_time,
+            ti.modified_time,
+            ti.member_id,
+            ti.product_name,
+            ti.insure_type,
+            ti.insure_years,
+            ti.market_amount,
+            ti.buy_number,
+            ti.pay_years_type,
+            ti.pay_years,
+            ti.insure_begin_date,
+            ti.insure_end_date,
+            ti.total_amount,
+            ti.source_id,
+            ti.insure_file_url,
+            ti.recognizee_name,
+            ti.policy_number,
+            ti.trade_id,
+            ta.real_name           tradeAssuredInsure_real_name,
+            ta.identity_id         tradeAssuredInsure_identity_id,
+            ta.identity_name       tradeAssuredInsure_identity_name,
+            ta.identity_card       tradeAssuredInsure_identity_card,
+            ta.identity_card       tradeAssuredInsure_identity_card,
+            ta.birthday            tradeAssuredInsure_birthday,
+            ta.sex                 tradeAssuredInsure_sex,
+            ta.career_name         tradeAssuredInsure_career_name,
+            ta.mobile_code         tradeAssuredInsure_mobile_code,
+            ta.mail                tradeAssuredInsure_mail,
+            ta.state               tradeAssuredInsure_state,
+            ta.city                tradeAssuredInsure_city,
+            ta.town                tradeAssuredInsure_town,
+            ta.address             tradeAssuredInsure_address,
+            ta.xq_bank_name        tradeAssuredInsure_xq_bank_name,
+            ta.xq_name             tradeAssuredInsure_xq_name,
+            ta.xq_bank_no          tradeAssuredInsure_xq_bank_no,
+            ta.bank_state_name     tradeAssuredInsure_bank_state_name,
+            ta.bank_city_name      tradeAssuredInsure_bank_city_name,
+            ta.is_security         tradeAssuredInsure_is_security,
+            ta.year_earnings       tradeAssuredInsure_year_earnings,
+            ta.zipcode             tradeAssuredInsure_zipcode,
+            ta.company_name        tradeAssuredInsure_company_name,
+            ta.job3_name           tradeAssuredInsure_job3_name,
+            tab.real_name          tradeAssuredIsurent_real_name,
+            tab.identity_id        tradeAssuredIsurent_identity_id,
+            tab.identity_name      tradeAssuredIsurent_identity_name,
+            tab.identity_card      tradeAssuredIsurent_identity_card,
+            tab.identity_card      tradeAssuredIsurent_identity_card,
+            tab.birthday           tradeAssuredIsurent_birthday,
+            tab.sex                tradeAssuredIsurent_sex,
+            tab.mobile_code        tradeAssuredIsurent_mobile_code,
+            tab.mail               tradeAssuredIsurent_mail,
+            tab.state              tradeAssuredIsurent_state,
+            tab.city               tradeAssuredIsurent_city,
+            tab.town               tradeAssuredIsurent_town,
+            tab.address            tradeAssuredIsurent_address,
+            tab.career_name        tradeAssuredIsurent_career_name,
+            tab.identity_stop_date tradeAssuredIsurent_identity_stop_date,
+            tab.is_security        tradeAssuredIsurent_is_security,
+            tab.year_earnings      tradeAssuredIsurent_year_earnings,
+            tab.zipcode            tradeAssuredIsurent_zipcode,
+            tab.company_name       tradeAssuredIsurent_company_name,
+            tab.job3_name          tradeAssuredIsurent_job3_name,
+            tab.school_nature      tradeAssuredIsurent_school_nature,
+            tab.height             tradeAssuredIsurent_height,
+            tab.weight             tradeAssuredIsurent_weight
+        FROM t_c_trade_insure ti LEFT JOIN t_c_trade_assured ta ON ti.fid = ta.order_id AND ta.flag = 1
+            LEFT JOIN t_c_trade_assured tab ON ti.fid = tab.order_id AND tab.flag = 2
+        WHERE ti.status_id != 0 AND ti.member_id = #{memberId}
+
+    </select>
+
+</mapper>

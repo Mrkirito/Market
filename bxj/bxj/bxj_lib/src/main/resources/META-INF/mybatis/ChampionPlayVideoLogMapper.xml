@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionPlayVideoLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionPlayVideoLog" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="video_id" property="videoId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="play_time" property="playTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, video_id, user_id, type, amount, play_time
+  </sql>
+  <sql id="Public_Query_Conditions" >
+    <where>
+      <if test="fid != null" >
+        and fid = #{fid,jdbcType=BIGINT}
+      </if>
+      <if test="userId != null" >
+        and user_id = #{userId,jdbcType=BIGINT}
+      </if>
+      <if test="vocherId != null" >
+        and vocher_id = #{vocherId,jdbcType=INTEGER}
+      </if>
+      <if test="videoId != null" >
+        and video_id = #{videoId,jdbcType=INTEGER}
+      </if>
+      <if test="type != null" >
+        and type = #{type,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_play_video_log
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_play_video_log
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionPlayVideoLog" >
+    insert into champion_play_video_log (fid, video_id, user_id, 
+      type, amount, play_time
+      )
+    values (#{fid,jdbcType=BIGINT}, #{videoId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{playTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionPlayVideoLog" >
+    insert into champion_play_video_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="playTime != null" >
+        play_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="playTime != null" >
+        #{playTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionPlayVideoLog" >
+    update champion_play_video_log
+    <set >
+      <if test="videoId != null" >
+        video_id = #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="playTime != null" >
+        play_time = #{playTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionPlayVideoLog" >
+    update champion_play_video_log
+    set video_id = #{videoId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      play_time = #{playTime,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

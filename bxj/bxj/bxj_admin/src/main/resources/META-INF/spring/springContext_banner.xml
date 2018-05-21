@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		 http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="bannerExecutorMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="home" value-ref="homeBannerExecutor"/>
+				<entry key="nav" value-ref="navBannerExecutor"/>
+				<entry key="study" value-ref="studyBannerExecutor"/>
+				<entry key="champion" value-ref="championBannerExecutor"/>
+				<entry key="championVE" value-ref="championVideoEndBannerExecutor"/>
+				<entry key="championVC" value-ref="championVideoCommentBannerExecutor"/>
+				<entry key="friend" value-ref="friendBannerExecutor"/>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+</beans>

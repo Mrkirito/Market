@@ -1,0 +1,25 @@
+
+/* custom */
+table.treetable {
+    border: 1px solid #e7eaec;
+}
+
+table.treetable span {
+    padding: 0;
+}
+
+table.treetable thead {
+    background: #fff;
+}
+table.treetable thead tr th {
+    border: 1px solid #e7eaec;
+    padding: 8px;
+}
+
+table.treetable tbody tr td {
+    padding: 8px;
+}
+
+.table thead tr th {
+    font-weight: 600;
+}

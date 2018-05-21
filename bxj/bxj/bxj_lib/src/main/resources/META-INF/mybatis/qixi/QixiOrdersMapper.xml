@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.qixi.QixiOrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.qixi.QixiOrders" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_id, user_id, goods_id, quantity, pay_type, money, status, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity_qixi_orders
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from activity_qixi_orders
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.qixi.QixiOrders" >
+    insert into activity_qixi_orders (id, order_id, user_id, 
+      goods_id, quantity, pay_type, 
+      money, status, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{goodsId,jdbcType=BIGINT}, #{quantity,jdbcType=INTEGER}, #{payType,jdbcType=VARCHAR}, 
+      #{money,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.qixi.QixiOrders" >
+    insert into activity_qixi_orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.qixi.QixiOrders" >
+    update activity_qixi_orders
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.qixi.QixiOrders" >
+    update activity_qixi_orders
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      goods_id = #{goodsId,jdbcType=BIGINT},
+      quantity = #{quantity,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <!-- 总个数 -->
+  <select id="selectOrdersCount" resultType="int" parameterType="com.hangjia.bxj.query.qixi.OrdersQuery" >
+    SELECT COUNT(*) FROM(
+    SELECT t1.*, t2.name, t2.phone, t2.area, t2.address, t2.express_no expressNo, t2.create_time addressTime
+    FROM activity_qixi_orders t1 LEFT JOIN activity_qixi_orders_detail t2 ON t1.order_id = t2.order_id
+    WHERE 1=1
+    <if test="goodsId != null and goodsId != 0" >
+      AND t1.goods_id = #{goodsId,jdbcType=BIGINT}
+    </if>
+    <if test="payType != null and payType != ''" >
+      AND t1.pay_type = #{payType,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null and status == 5" >
+      AND t1.status = #{status,jdbcType=INTEGER}
+    </if>
+    <if test="status != null and status != 5" >
+      AND t1.status in(1, 3, 4, 6)
+    </if>
+    <if test="name != null and name != ''" >
+      AND t2.name like CONCAT('%', #{name,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="phone != null and phone != ''" >
+      AND t2.phone like CONCAT('%', #{phone,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="expressNo != null and expressNo != ''" >
+      AND t2.express_no like CONCAT('%', #{expressNo,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="createTime1 != null and createTime1 != ''" >
+      AND t1.create_time &gt; STR_TO_DATE(#{createTime1,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    </if>
+    <if test="createTime2 != null and createTime2 != ''" >
+      AND t1.create_time &lt; STR_TO_DATE(#{createTime2,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    </if>
+    <if test="addressTime1 != null and addressTime1 != ''" >
+      AND t2.create_time &gt; STR_TO_DATE(#{addressTime1,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    </if>
+    <if test="addressTime2 != null and addressTime2 != ''" >
+      AND t2.create_time &lt; STR_TO_DATE(#{addressTime2,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    </if>
+    ) v1, activity_qixi_goods t3
+    WHERE v1.goods_id = t3.id
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectOrdersList" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.query.qixi.OrdersQuery" >
+    SELECT v1.*, t3.name goodsName FROM(
+    SELECT t1.*, t2.name, t2.phone, t2.area, t2.address, t2.express_no expressNo, t2.create_time addressTime
+    FROM activity_qixi_orders t1 LEFT JOIN activity_qixi_orders_detail t2 ON t1.order_id = t2.order_id
+    <where>
+    <if test="goodsId != null and goodsId != 0" >
+      AND t1.goods_id = #{goodsId,jdbcType=BIGINT}
+    </if>
+    <if test="payType != null and payType != ''" >
+      AND t1.pay_type = #{payType,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null and status == 5" >
+      AND t1.status = #{status,jdbcType=INTEGER}
+    </if>
+    <if test="status != null and status != 5" >
+      AND t1.status in(1, 3, 4, 6)
+    </if>
+    <if test="name != null and name != ''" >
+      AND t2.name like CONCAT('%', #{name,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="phone != null and phone != ''" >
+      AND t2.phone like CONCAT('%', #{phone,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="expressNo != null and expressNo != ''" >
+      AND t2.express_no like CONCAT('%', #{expressNo,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="createTime1 != null and createTime1 != ''" >
+      AND t1.create_time &gt; STR_TO_DATE(#{createTime1,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    </if>
+    <if test="createTime2 != null and createTime2 != ''" >
+      AND t1.create_time &lt; STR_TO_DATE(#{createTime2,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    </if>
+    <if test="addressTime1 != null and addressTime1 != ''" >
+      AND t2.create_time &gt; STR_TO_DATE(#{addressTime1,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    </if>
+    <if test="addressTime2 != null and addressTime2 != ''" >
+      AND t2.create_time &lt; STR_TO_DATE(#{addressTime2,jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    </if>
+    </where>
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY #{orderBy,jdbcType=VARCHAR}
+    </if>
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+    ) v1, activity_qixi_goods t3
+    WHERE v1.goods_id = t3.id
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY #{orderBy,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

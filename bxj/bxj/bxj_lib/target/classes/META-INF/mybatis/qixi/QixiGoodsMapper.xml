@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.qixi.QixiGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.qixi.QixiGoods" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="is_display" property="isDisplay" jdbcType="BIT" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="price1" property="price1" jdbcType="DECIMAL" />
+    <result column="price2" property="price2" jdbcType="DECIMAL" />
+    <result column="price3" property="price3" jdbcType="DECIMAL" />
+    <result column="sale_count" property="saleCount" jdbcType="INTEGER" />
+    <result column="false_sale_count" property="falseSaleCount" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="discount_desc" property="discountDesc" jdbcType="VARCHAR" />
+    <result column="purchase_process_desc" property="purchaseProcessDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_uesr" property="updateUesr" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, is_display, picture, price1, price2, price3, sale_count, false_sale_count, 
+    description, discount_desc, purchase_process_desc, create_time, create_user, update_time, 
+    update_uesr
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity_qixi_goods
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from activity_qixi_goods
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.qixi.QixiGoods" >
+    insert into activity_qixi_goods (id, name, is_display, 
+      picture, price1, price2, 
+      price3, sale_count, false_sale_count, 
+      description, discount_desc, purchase_process_desc, 
+      create_time, create_user, update_time, 
+      update_uesr)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{isDisplay,jdbcType=BIT}, 
+      #{picture,jdbcType=VARCHAR}, #{price1,jdbcType=DECIMAL}, #{price2,jdbcType=DECIMAL}, 
+      #{price3,jdbcType=DECIMAL}, #{saleCount,jdbcType=INTEGER}, #{falseSaleCount,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{discountDesc,jdbcType=VARCHAR}, #{purchaseProcessDesc,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUesr,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.qixi.QixiGoods" >
+    insert into activity_qixi_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="price1 != null" >
+        price1,
+      </if>
+      <if test="price2 != null" >
+        price2,
+      </if>
+      <if test="price3 != null" >
+        price3,
+      </if>
+      <if test="saleCount != null" >
+        sale_count,
+      </if>
+      <if test="falseSaleCount != null" >
+        false_sale_count,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="discountDesc != null" >
+        discount_desc,
+      </if>
+      <if test="purchaseProcessDesc != null" >
+        purchase_process_desc,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUesr != null" >
+        update_uesr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price1 != null" >
+        #{price1,jdbcType=DECIMAL},
+      </if>
+      <if test="price2 != null" >
+        #{price2,jdbcType=DECIMAL},
+      </if>
+      <if test="price3 != null" >
+        #{price3,jdbcType=DECIMAL},
+      </if>
+      <if test="saleCount != null" >
+        #{saleCount,jdbcType=INTEGER},
+      </if>
+      <if test="falseSaleCount != null" >
+        #{falseSaleCount,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="discountDesc != null" >
+        #{discountDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseProcessDesc != null" >
+        #{purchaseProcessDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUesr != null" >
+        #{updateUesr,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.qixi.QixiGoods" >
+    update activity_qixi_goods
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price1 != null" >
+        price1 = #{price1,jdbcType=DECIMAL},
+      </if>
+      <if test="price2 != null" >
+        price2 = #{price2,jdbcType=DECIMAL},
+      </if>
+      <if test="price3 != null" >
+        price3 = #{price3,jdbcType=DECIMAL},
+      </if>
+      <if test="saleCount != null" >
+        sale_count = #{saleCount,jdbcType=INTEGER},
+      </if>
+      <if test="falseSaleCount != null" >
+        false_sale_count = #{falseSaleCount,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="discountDesc != null" >
+        discount_desc = #{discountDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseProcessDesc != null" >
+        purchase_process_desc = #{purchaseProcessDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUesr != null" >
+        update_uesr = #{updateUesr,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.qixi.QixiGoods" >
+    update activity_qixi_goods
+    set name = #{name,jdbcType=VARCHAR},
+      is_display = #{isDisplay,jdbcType=BIT},
+      picture = #{picture,jdbcType=VARCHAR},
+      price1 = #{price1,jdbcType=DECIMAL},
+      price2 = #{price2,jdbcType=DECIMAL},
+      price3 = #{price3,jdbcType=DECIMAL},
+      sale_count = #{saleCount,jdbcType=INTEGER},
+      false_sale_count = #{falseSaleCount,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      discount_desc = #{discountDesc,jdbcType=VARCHAR},
+      purchase_process_desc = #{purchaseProcessDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_uesr = #{updateUesr,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <!-- 总个数 -->
+  <select id="selectGoodsCount" resultType="int" parameterType="com.hangjia.bxj.model.qixi.QixiGoods" >
+    select count(*) from activity_qixi_goods where is_display = 1
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectGoodsList" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select * from activity_qixi_goods where is_display = 1
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </select>
+</mapper>

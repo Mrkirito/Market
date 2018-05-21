@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.BannerManagerDao" >
+
+	<select id="count" resultType="int">
+		SELECT
+			count(*)
+		FROM
+		
+			<include refid="criteriaQuerySQL"/>
+			
+	</select>
+	
+	<select id="findToUpdate" resultType="com.hangjia.bxj.model.banner.BannerManagerEntity">
+		SELECT
+			${table.idColumnName} as id,
+			${table.titleColumnName} forwardTitle,
+			${table.sortColumnName},
+			${table.imageUrlColumnName} imageUrl,
+			${table.pageUrlColumnName} pageUrl,
+			${table.displayColumnName} display,
+			${table.onlineTimeColumnName} onlineTime,
+			${table.offlineTimeColumnName} offlineTime,
+			${table.minVersionColumnName} minVersion,
+			${table.maxVersionColumnName} maxVersion
+		FROM
+			${table.tableName}
+		WHERE
+			${table.idColumnName} = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</select>
+	
+	<select id="list" resultType="com.hangjia.bxj.model.banner.BannerManagerEntity">
+	
+		SELECT
+			${table.idColumnName} as id,
+			${table.titleColumnName} forwardTitle,
+			${table.sortColumnName},
+			${table.imageUrlColumnName} imageUrl,
+			${table.pageUrlColumnName} pageUrl,
+			${table.displayColumnName} display,
+			${table.onlineTimeColumnName} onlineTime,
+			${table.offlineTimeColumnName} offlineTime,
+			${table.minVersionColumnName} minVersion,
+			${table.maxVersionColumnName} maxVersion
+		FROM
+		
+			<include refid="criteriaQuerySQL"/>
+			
+		<if test="params.orderBy != null">
+			ORDER BY #{params.orderBy}
+		</if>
+		
+		LIMIT #{params.pageFirstItem}, #{params.pageSize}
+	
+	</select>
+	
+	<sql id="criteriaQuerySQL">
+		${table.tableName}
+		
+		<where>
+			1 = 1
+			<if test="table.typeDiscriminateValue != null">
+				AND ${table.typeDiscriminator} = '${table.typeDiscriminateValue}'
+			</if>
+			<choose>
+				<when test="params.id != null">
+					AND ${table.idColumnName} = #{params.id}
+				</when>
+				<otherwise>
+					<if test="params.display != null">
+						AND ${table.displayColumnName} = ${params.display}
+					</if>
+					
+					<if test="params.forwardTitle != null">
+						AND ${table.titleColumnName} LIKE CONCAT('%', '${params.forwardTitle}', '%')
+					</if>
+					
+					<if test="params.statusMessage != null">
+						<choose>
+							<when test="params.statusMessage == 'onlined'">
+								<![CDATA[ AND (${table.onlineTimeColumnName} is NULL OR ${table.onlineTimeColumnName} > #{now}) AND (${table.offlineTimeColumnName} IS NULL OR #{now} < ${table.offlineTimeColumnName}) ]]>
+							</when>
+							<when test="params.statusMessage == 'awaitOnlined'">
+								<![CDATA[ AND ${table.onlineTimeColumnName} IS NOT NULL AND ${table.onlineTimeColumnName} < #{now} ]]>
+							</when>
+							<when test="params.statusMessage == 'offlined'">
+								<![CDATA[ AND ${table.offlineTimeColumnName} IS NOT NULL AND ${table.offlineTimeColumnName} < #{now} ]]>
+							</when>
+						</choose>
+					</if>
+					
+					<if test="params.onlineTime != null">
+						<choose>
+							<when test="params.onlineTimeRule == 'gte'">
+								<![CDATA[ AND ${table.onlineTimeColumnName} >= #{params.onlineTime} ]]>
+							</when>
+							<when test="params.onlineTimeRule == 'lte'">
+								<![CDATA[ AND ${table.onlineTimeColumnName} <= #{params.onlineTime} ]]>
+							</when>
+							
+							<otherwise>
+								AND DATE_FORMAT(${table.onlineTimeColumnName}, '%Y%c%e') = DATE_FORMAT(#{params.onlineTime}, '%Y%c%e')
+							</otherwise>
+						</choose>
+					</if>
+					
+					<if test="params.offlineTime != null">
+						<choose>
+							<when test="params.offlineTimeRule == 'gte'">
+								<![CDATA[ AND ${table.offlineTimeColumnName} >= #{params.offlineTime} ]]>
+							</when>
+							<when test="params.offlineTimeRule == 'lte'">
+								<![CDATA[ AND ${table.offlineTimeColumnName} <= #{params.offlineTime} ]]>
+							</when>
+							
+							<otherwise>
+								AND DATE_FORMAT(${table.offlineTimeColumnName}, '%Y%c%e') = DATE_FORMAT(#{params.offlineTime}, '%Y%c%e')
+							</otherwise>
+						</choose>
+					</if>
+					
+					<if test="params.forwardType != null">
+						AND ${table.pageUrlColumnName} LIKE CONCAT('${params.forwardType}', '%')
+					</if>
+					
+				</otherwise>
+			</choose>
+		</where>
+		
+	</sql>
+
+	<update id="updateDisplayStatus">
+		UPDATE
+			${table.tableName}
+		SET
+			${table.displayColumnName} = ${params.display}
+		WHERE
+			${table.idColumnName} = #{params.id}
+	</update>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="params.id">
+		INSERT INTO ${table.tableName} (
+			${table.titleColumnName},
+			${table.sortColumnName},
+			${table.imageUrlColumnName},
+			${table.pageUrlColumnName},
+			${table.displayColumnName},
+			${table.onlineTimeColumnName},
+			${table.offlineTimeColumnName},
+			${table.minVersionColumnName},
+			${table.maxVersionColumnName}
+			<if test="table.typeDiscriminateValue != null">
+				,${table.typeDiscriminator}
+			</if>
+		) VALUES (
+			#{params.forwardTitle},
+			#{params.sort},
+			#{params.imageUrl},
+			#{params.pageUrl},
+			${table.enabledDisplayValue},
+			#{params.onlineTime},
+			#{params.offlineTime},
+			#{params.minVersion},
+			#{params.maxVersion}
+			<if test="table.typeDiscriminateValue != null">
+				, ${table.typeDiscriminateValue}
+			</if>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE 
+			${table.tableName}
+		SET
+			${table.titleColumnName} = #{params.forwardTitle},
+			${table.sortColumnName} = #{params.sort},
+			${table.pageUrlColumnName} = #{params.pageUrl},
+			${table.onlineTimeColumnName} = #{params.onlineTime},
+			${table.offlineTimeColumnName} = #{params.offlineTime},
+			${table.minVersionColumnName} = #{params.minVersion},
+			<if test="params.imageUrl != null">
+			${table.imageUrlColumnName} = #{params.imageUrl},
+			</if>
+			${table.maxVersionColumnName} = #{params.maxVersion}
+		WHERE
+			${table.idColumnName} = #{params.id}
+	</update>
+	
+</mapper>

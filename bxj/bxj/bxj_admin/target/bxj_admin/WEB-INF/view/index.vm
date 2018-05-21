@@ -1,0 +1,198 @@
+
+$pageModule.init("app/index", "init")
+<div class="row">
+
+    <div class="col-sm-6 col-lg-3">
+
+        <!--Registered User-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <div class="panel media pad-all">
+            <div class="media-left">
+									<span class="icon-wrap icon-wrap-sm icon-circle bg-success">
+									<i class="fa fa-user fa-2x"></i>
+									</span>
+            </div>
+
+            <div class="media-body">
+                <p class="text-2x mar-no text-thin"></p>
+                <p class="text-muted mar-no">注册人数</p>
+            </div>
+        </div>
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+    </div>
+    <div class="col-sm-6 col-lg-3">
+
+        <!--New Order-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <div class="panel media pad-all">
+            <div class="media-left">
+									<span class="icon-wrap icon-wrap-sm icon-circle bg-info">
+									<i class="fa fa-shopping-cart fa-2x"></i>
+									</span>
+            </div>
+
+            <div class="media-body">
+                <p class="text-2x mar-no text-thin"></p>
+                <p class="text-muted mar-no">新增订单</p>
+            </div>
+        </div>
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+    </div>
+    <div class="col-sm-6 col-lg-3">
+
+        <!--Comments-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <div class="panel media pad-all">
+            <div class="media-left">
+									<span class="icon-wrap icon-wrap-sm icon-circle bg-warning">
+									<i class="fa fa-comment fa-2x"></i>
+									</span>
+            </div>
+
+            <div class="media-body">
+                <p class="text-2x mar-no text-thin"></p>
+                <p class="text-muted mar-no">新增反馈</p>
+            </div>
+        </div>
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+    </div>
+    <div class="col-sm-6 col-lg-3">
+
+        <!--Sales-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <div class="panel media pad-all">
+            <div class="media-left">
+									<span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
+									<i class="fa fa-dollar fa-2x"></i>
+									</span>
+            </div>
+
+            <div class="media-body">
+                <p class="text-2x mar-no text-thin"></p>
+                <p class="text-muted mar-no">销售额</p>
+            </div>
+        </div>
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+    </div>
+
+</div>
+
+<div class="row">
+
+
+    <div class="col-lg-5">
+		<div class="row">
+
+            <!--Large tile (Visit Today)-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div class="col-sm-6 col-md-4">
+                <div class="panel panel-dark panel-colorful">
+                    <div class="panel-body text-center">
+                        <p class="text-uppercase mar-btm text-sm">今日访问</p>
+                        <i class="fa fa-users fa-5x"></i>
+                        <hr>
+                        <p class="h2 text-thin"></p>
+                        <small><span class="text-semibold">%</span> 同比昨日</small>
+                    </div>
+                </div>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <!--End large tile (Visit Today)-->
+
+
+            <!--Large tile (Comments)-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div class="col-sm-6 col-md-4">
+                <div class="panel panel-danger panel-colorful">
+                    <div class="panel-body text-center">
+                        <p class="text-uppercase mar-btm text-sm">反馈</p>
+                        <i class="fa fa-comment fa-5x"></i>
+                        <hr>
+                        <p class="h2 text-thin"></p>
+                        <small><span class="text-semibold"><i class="fa fa-unlock-alt fa-fw"></i></span> 未解决</small>
+                    </div>
+                </div>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <!--Large tile (Comments)-->
+
+
+            <!--Large tile (New orders)-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div class="col-sm-12 col-md-4">
+                <div class="panel panel-primary panel-colorful">
+                    <div class="panel-body text-center">
+                        <p class="text-uppercase mar-btm text-sm">今日订单</p>
+                        <i class="fa fa-shopping-cart fa-5x"></i>
+                        <hr>
+                        <p class="h2 text-thin"></p>
+                        <small><span class="text-semibold"><i class="fa fa-shopping-cart fa-fw"></i></span>
+                            本月订单</small>
+                    </div>
+                </div>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <!--End Large tile (New orders)-->
+
+		</div>
+
+        <div id="demo-weather-widget" class="panel panel-mint panel-colorful text-center">
+            <div class="panel-body">
+
+                <!--Weather widget body-->
+                <div class="row pad-top">
+                    <div class="col-xs-6">
+                        <canvas id="demo-weather-icon-1" width="98" height="98"></canvas>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="text-4x">27&#176;</p>
+                        <p class="text-semibold">Partly Cloudy Day</p>
+                    </div>
+                </div>
+
+                <h4 class="mar-no pad-top">San Jose, CA</h4>
+                <p>Today</p>
+
+                <hr>
+
+                <!--Weather widget footer-->
+                <ul class="list-unstyled text-center clearfix">
+                    <li class="col-xs-3">
+                        <canvas id="demo-weather-icon-2" width="32" height="32"></canvas>
+                        <p class="text-sm mar-no">Saturday</p>
+                        <p>25 &#176;C</p>
+                    </li>
+                    <li class="col-xs-3">
+                        <canvas id="demo-weather-icon-3" width="32" height="32"></canvas>
+                        <p class="text-sm mar-no">Sunday</p>
+                        <p>22 &#176;C</p>
+                    </li>
+                    <li class="col-xs-3">
+                        <canvas id="demo-weather-icon-4" width="32" height="32"></canvas>
+                        <p class="text-sm mar-no">Monday</p>
+                        <p>20 &#176;C</p>
+                    </li>
+                    <li class="col-xs-3">
+                        <canvas id="demo-weather-icon-5" width="32" height="32"></canvas>
+                        <p class="text-sm mar-no">Monday</p>
+                        <p>28 &#176;C</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-7">
+		#parse("/home/contract.vm")
+        <!--User table-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--End user table-->
+
+    </div>
+</div>

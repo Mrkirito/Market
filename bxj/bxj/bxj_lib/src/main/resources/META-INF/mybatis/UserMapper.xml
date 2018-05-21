@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.account.UserMapper">
+
+    <sql id="user_column">
+        a.id as "id",
+        a.user_code as "userCode",
+        a.user_name as "userName",
+        a.password as "password",
+        a.init_passwd as "initPasswd",
+        a.email as "email",
+        a.mobile as "mobile",
+        a.phone as "phone",
+        a.position_title as "positionTitle",
+        a.last_login_time as "lastLoginTime",
+        a.real_name as "realName",
+        a.description as "description",
+        a.head_img as "headImg",
+        a.leader_id as "leaderId",
+        a.theme_name as "themeName",
+        a.department as "department",
+        a.status as "status",
+        a.user_role as "userRole"
+    </sql>
+    
+    <sql id="user_columns">
+        a.id as "id",
+        a.user_code as "userCode",
+        a.user_name as "userName",
+        a.password as "password",
+        a.init_passwd as "initPasswd",
+        a.email as "email",
+        a.mobile as "mobile",
+        a.phone as "phone",
+        a.position_title as "positionTitle",
+        a.last_login_time as "lastLoginTime",
+        a.real_name as "realName",
+        a.description as "description",
+        a.head_img as "headImg",
+        a.leader_id as "leaderId",
+        a.theme_name as "themeName",
+        a.department as "department",
+        a.status as "status",
+        a.user_role as "userRole",
+        b.user_name as "leaderName",
+        (
+            SELECT
+                GROUP_CONCAT(t.role_id)
+            FROM
+                bxj_sys_uic_user_role t
+            WHERE
+                a.id = t.user_id
+            AND t.status = 1
+        ) as "roleIds",
+        (
+            SELECT
+                GROUP_CONCAT(t1.role_name)
+            FROM
+                bxj_sys_uic_user_role t,
+                bxj_sys_uic_role t1
+            WHERE
+                t1.id = t.role_id
+            AND a.id = t.user_id
+            AND t.status = 1
+        ) as "roleNames"
+    </sql>
+
+    <sql id="where_user_query">
+        <where>
+            <if test="id != null">and a.id = #{id}</if>
+            <if test="userCode != null and userCode != ''">and a.user_code = #{userCode}</if>
+            <if test="userName != null and userName != ''">and a.user_name = #{userName}</if>
+            <if test="userNameLike != null and userNameLike != ''">and a.user_name like concat('%', #{userNameLike}, '%')</if>
+            <if test="email != null and email != ''">and a.email like concat('%', #{email}, '%')</if>
+            <if test="mobile != null and mobile != ''">and a.mobile like concat('%', #{mobile}, '%')</if>
+            <if test="status != null">and a.status = #{status}</if>
+            <if test="roleId != null">
+                and EXISTS (
+                select 1 from bxj_sys_uic_user_role b
+                where a.id = b.user_id and b.role_id = #{roleId}
+                and b.status = 1
+                )
+            </if>
+            <if test="notRoleId != null">
+                and not EXISTS (
+                select 1 from bxj_sys_uic_user_role b
+                where a.id = b.user_id and b.role_id = #{notRoleId}
+                and b.status = 1
+                )
+            </if>
+            and a.user_code != 'superman'
+        </where>
+    </sql>
+
+	<select id="select" parameterType="long" resultType="com.hangjia.bxj.model.account.UserDO">
+	select
+		<include refid="user_column"/>
+	from
+		bxj_login_user a
+	where
+		a.id = #{id}
+	</select>
+    <select id="selectByQuery" parameterType="com.hangjia.bxj.query.account.UserQuery" resultType="com.hangjia.bxj.model.account.UserDO">
+        select
+        <include refid="user_columns"/>
+        from bxj_login_user a
+        left join bxj_login_user b on a.leader_id = b.id
+        <include refid="where_user_query"/>
+    </select>
+
+    <select id="queryPage" parameterType="com.hangjia.bxj.query.account.UserQuery" resultType="com.hangjia.bxj.model.account.UserDO">
+        select
+        <include refid="user_columns"/>
+        from bxj_login_user a
+        left join bxj_login_user b on a.leader_id = b.id
+        <include refid="where_user_query"/>
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+        limit ${pageFirstItem}, ${pageSize}
+    </select>
+
+    <select id="queryPageCount" parameterType="com.hangjia.bxj.query.account.UserQuery" resultType="int">
+        select count(1) from bxj_login_user a
+        <include refid="where_user_query"/>
+    </select>
+
+    <select id="queryUserById" parameterType="long" resultType="com.hangjia.bxj.model.account.UserDO">
+        select
+        <include refid="user_columns"/>
+        from bxj_login_user a
+        left join bxj_login_user b on a.leader_id = b.id
+        where a.id = #{value}
+    </select>
+
+    <update id="update" parameterType="com.hangjia.bxj.model.account.UserDO">
+        update bxj_login_user
+        set
+        <if test="null != newPassword and newPassword != ''">
+        password = #{newPassword},
+        </if>
+        real_name = #{realName},
+        mobile = #{mobile},
+        email = #{email},
+        department = #{department}
+        where id = #{id}
+    </update>
+
+    <update id="changePasswd" parameterType="com.hangjia.bxj.model.account.UserDO">
+        update bxj_login_user
+        SET
+        password = #{newPassword}
+        <if test="initPasswd != null">
+            , init_passwd = #{initPasswd}
+        </if>
+        where id = #{id}
+    </update>
+
+    <update id="changeUserImage" parameterType="map">
+        update bxj_login_user
+        SET
+          head_img = #{userImage}
+        where id = #{userId}
+    </update>
+
+    <select id="queryLeaderData" parameterType="string" resultType="com.hangjia.bxj.model.account.UserDO">
+        select
+        <include refid="user_columns"/>
+        from bxj_login_user a
+        left join bxj_login_user b on a.leader_id = b.id
+        where a.status = 1
+        <if test="value != null">
+            and a.user_name like concat('%', #{value}, '%')
+        </if>
+    </select>
+
+    <insert id="addUser" parameterType="com.hangjia.bxj.model.account.UserDO">
+        insert into bxj_login_user (
+        user_code, user_name, password, leader_id, position_title, init_passwd, email, department, mobile, real_name,
+        user_role
+        ) values (
+        #{userCode}, #{userName}, #{password}, #{leaderId}, #{positionTitle}, 0, #{email}, #{department}, #{mobile},
+        #{realName},#{userRole}
+        )
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID() as "id"
+        </selectKey>
+    </insert>
+
+    <update id="updateUser" parameterType="com.hangjia.bxj.model.account.UserDO">
+        update bxj_login_user
+        SET
+          <if test="null != newPassword and newPassword != ''">
+          password = #{newPassword},
+          </if>
+          department = #{department},
+          leader_id = #{leaderId},
+          email = #{email},
+          mobile = #{mobile},
+          real_name = #{realName},
+          position_title = #{positionTitle},
+          user_role = #{userRole}
+        where id = #{id}
+    </update>
+
+    <update id="deleteUser" parameterType="list">
+        update bxj_login_user
+        set status = 0
+        where id in (
+        <foreach collection="list" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </update>
+
+    <update id="changeTheme" parameterType="map">
+        update bxj_login_user
+        SET
+          theme_name = #{themeName}
+        where id = #{userId}
+    </update>
+
+    <select id="queryUserList" parameterType="map" resultType="com.hangjia.bxj.model.account.UserDO">
+        select
+        <include refid="user_columns"/>
+        from bxj_login_user a
+        left join bxj_login_user b on a.leader_id = b.id
+        where a.status = 1 and a.position_title = #{positionTitle}
+        <if test="userName != null">
+            and a.user_name like concat('%', #{userName}, '%')
+        </if>
+    </select>
+
+    <select id="existsUserByCode" parameterType="com.hangjia.bxj.model.account.UserDO" resultType="int">
+        select count(1) from bxj_login_user a
+        <where>
+        <if test="userCode != null">
+            and a.user_code = #{userCode}
+        </if>
+        <if test="id != null">
+            <![CDATA[and a.id <> #{id}]]>
+        </if>
+        </where>
+    </select>
+
+    <select id="existsUserByName" parameterType="com.hangjia.bxj.model.account.UserDO" resultType="int">
+        select count(1) from bxj_login_user a
+        <where>
+        <if test="userName != null">
+            and a.user_name = #{userName}
+        </if>
+        <if test="id != null">
+            <![CDATA[and a.id <> #{id}]]>
+        </if>
+        </where>
+    </select>
+
+    <update id="saveLoginTime" parameterType="com.hangjia.bxj.model.account.UserDO">
+        update bxj_login_user set
+        last_login_time = #{lastLoginTime}
+        where id = #{id}
+    </update>
+
+    <update id="resetPasswd" parameterType="map">
+        update bxj_login_user set
+        password = #{passwd}
+        where id = #{id}
+    </update>
+
+    <update id="enableUser" parameterType="map">
+        update bxj_login_user
+        <set>
+            <if test="enable == 1">
+                status = 1
+            </if>
+            <if test="enable == 0">
+                status = 0
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="queryUserMap" parameterType="list" resultType="com.hangjia.bxj.model.account.UserDO">
+        select
+        a.id as "id",
+        a.user_code as "userCode",
+        a.user_name as "userName",
+        a.email as "email",
+        a.mobile as "mobile",
+        a.phone as "phone"
+        from bxj_login_user a
+        where a.id in (
+        <foreach collection="list" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </select>
+
+</mapper>

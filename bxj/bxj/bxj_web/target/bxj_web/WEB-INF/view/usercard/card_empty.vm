@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>我的微名片</title>
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/namecard_share/css/namecard_share.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="container container_empty">
+	</div>
+	<!-- 分享模块 app外-->
+##	#if(!$request.getParameter('share')||$request.getParameter('share')=='')
+##	<div class="share_block_outapp" style="display: block">
+##		<span onclick="window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster'">立即体验</span>
+##	</div>
+##	#end
+	<!-- 分享模块 app外 结束-->
+	<!-- 分享模块 app内-->
+	<div class="share_block_inapp" style="display: none">分享</div>
+	<!-- 分享模块 app内 结束 -->
+</body>
+</html>
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script>
+	FastClick.attach(document.body);//快速点击绑定
+</script>

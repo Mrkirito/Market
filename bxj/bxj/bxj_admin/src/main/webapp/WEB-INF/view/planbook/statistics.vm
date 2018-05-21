@@ -1,0 +1,31 @@
+$pageModule.init("app/product/statistics", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <div id="portlet-config" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"></button>
+                <h3>portlet Settings</h3>
+            </div>
+            <div class="modal-body">
+                <p>Here will be a configuration form</p>
+            </div>
+        </div>
+        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <!-- END PAGE HEADER-->
+            	起始时间：<input type="text" name="begin" class="input_date" value="${begin}"/> - <input type="text" class="input_date" value="${end}" name="end"/>
+            	<button class="btn btn-info search">搜索</button>
+            <!-- BEGIN PAGE CONTENT-->
+			<div class="data-list"></div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!--底部 结束-->

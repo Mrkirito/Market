@@ -1,0 +1,43 @@
+<!--头部 开始-->
+$pageModule.init("app/champion/videoComment", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+							<div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">评论内容&nbsp;</label>
+                                <input placeholder="评论内容" type="text" class="form-control comment">
+                            </div>
+							<div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">评论人id&nbsp;</label>
+                                <input placeholder="评论人id" type="text" class="form-control userId">
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<!--底部 结束-->

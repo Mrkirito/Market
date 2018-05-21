@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionVideoMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionVideo" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="BIGINT" />
+    <result column="lecturer_id" property="lecturerId" jdbcType="BIGINT" />
+    <result column="lecturer_name" property="lecturerName" jdbcType="VARCHAR" />
+    <result column="page_url" property="pageUrl" jdbcType="VARCHAR" />
+    <result column="video_size" property="videoSize" jdbcType="INTEGER" />
+    <result column="video_Url" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="cover_Image_Url" property="coverImageUrl" jdbcType="VARCHAR" />
+    <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+    <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
+    <result column="is_unicast" property="isUnicast" jdbcType="BIT" />
+    <result column="browse_Num" property="browseNum" jdbcType="INTEGER" />
+    <result column="play_type" property="playType" jdbcType="BIT" />
+    <result column="duration_time" property="durationTime" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="online_time" property="onlineTime" jdbcType="TIMESTAMP" />
+    <result column="online_status" property="onlineStatus" jdbcType="BIT" />
+    <result column="offline_time" property="offlineTime" jdbcType="TIMESTAMP" />
+    <result column="play_Count" property="playCount" jdbcType="INTEGER" />
+    <result column="is_false_count" property="isFalseCount" jdbcType="BIT" />
+    <result column="false_count" property="falseCount" jdbcType="INTEGER" />
+    <result column="share_Count" property="shareCount" jdbcType="INTEGER" />
+    <result column="collection_Count" property="collectionCount" jdbcType="INTEGER" />
+    <result column="voucher_Id" property="voucherId" jdbcType="BIGINT" />
+    <result column="voucher_Count" property="voucherCount" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="watch_time" property="watchTime" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="video_type" property="videoType" jdbcType="INTEGER" />
+    <result column="qiniu_Id" property="qiniuId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_user" property="modifyUser" jdbcType="BIGINT" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+    <result column="audit_user" property="auditUser" jdbcType="BIGINT" />
+    <result column="audit_at" property="auditAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, title, channel_id, lecturer_id, lecturer_name, page_url, video_size, video_Url, 
+    cover_Image_Url, audit_status, is_recommend, is_unicast, browse_Num, play_type, duration_time, 
+    upload_time, online_time, online_status, offline_time, play_Count, is_false_count, 
+    false_count, share_Count, collection_Count, voucher_Id, voucher_Count, money, watch_time, 
+    description, video_type, qiniu_Id, status, sort, create_user, create_at, modify_user, 
+    modify_at, audit_user, audit_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_video
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_video
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionVideo" >
+    insert into champion_video (fid, title, channel_id, 
+      lecturer_id, lecturer_name, page_url, 
+      video_size, video_Url, cover_Image_Url, 
+      audit_status, is_recommend, is_unicast, 
+      browse_Num, play_type, duration_time, 
+      upload_time, online_time, online_status, 
+      offline_time, play_Count, is_false_count, 
+      false_count, share_Count, collection_Count, 
+      voucher_Id, voucher_Count, money, 
+      watch_time, description, video_type, 
+      qiniu_Id, status, sort, 
+      create_user, create_at, modify_user, 
+      modify_at, audit_user, audit_at
+      )
+    values (#{fid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{channelId,jdbcType=BIGINT}, 
+      #{lecturerId,jdbcType=BIGINT}, #{lecturerName,jdbcType=VARCHAR}, #{pageUrl,jdbcType=VARCHAR}, 
+      #{videoSize,jdbcType=INTEGER}, #{videoUrl,jdbcType=VARCHAR}, #{coverImageUrl,jdbcType=VARCHAR}, 
+      #{auditStatus,jdbcType=INTEGER}, #{isRecommend,jdbcType=BIT}, #{isUnicast,jdbcType=BIT}, 
+      #{browseNum,jdbcType=INTEGER}, #{playType,jdbcType=BIT}, #{durationTime,jdbcType=VARCHAR}, 
+      #{uploadTime,jdbcType=TIMESTAMP}, #{onlineTime,jdbcType=TIMESTAMP}, #{onlineStatus,jdbcType=BIT}, 
+      #{offlineTime,jdbcType=TIMESTAMP}, #{playCount,jdbcType=INTEGER}, #{isFalseCount,jdbcType=BIT}, 
+      #{falseCount,jdbcType=INTEGER}, #{shareCount,jdbcType=INTEGER}, #{collectionCount,jdbcType=INTEGER}, 
+      #{voucherId,jdbcType=BIGINT}, #{voucherCount,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{watchTime,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{videoType,jdbcType=INTEGER}, 
+      #{qiniuId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{createUser,jdbcType=BIGINT}, #{createAt,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=BIGINT}, 
+      #{modifyAt,jdbcType=TIMESTAMP}, #{auditUser,jdbcType=BIGINT}, #{auditAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionVideo" >
+    insert into champion_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="lecturerId != null" >
+        lecturer_id,
+      </if>
+      <if test="lecturerName != null" >
+        lecturer_name,
+      </if>
+      <if test="pageUrl != null" >
+        page_url,
+      </if>
+      <if test="videoSize != null" >
+        video_size,
+      </if>
+      <if test="videoUrl != null" >
+        video_Url,
+      </if>
+      <if test="coverImageUrl != null" >
+        cover_Image_Url,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="isRecommend != null" >
+        is_recommend,
+      </if>
+      <if test="isUnicast != null" >
+        is_unicast,
+      </if>
+      <if test="browseNum != null" >
+        browse_Num,
+      </if>
+      <if test="playType != null" >
+        play_type,
+      </if>
+      <if test="durationTime != null" >
+        duration_time,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+      <if test="onlineStatus != null" >
+        online_status,
+      </if>
+      <if test="offlineTime != null" >
+        offline_time,
+      </if>
+      <if test="playCount != null" >
+        play_Count,
+      </if>
+      <if test="isFalseCount != null" >
+        is_false_count,
+      </if>
+      <if test="falseCount != null" >
+        false_count,
+      </if>
+      <if test="shareCount != null" >
+        share_Count,
+      </if>
+      <if test="collectionCount != null" >
+        collection_Count,
+      </if>
+      <if test="voucherId != null" >
+        voucher_Id,
+      </if>
+      <if test="voucherCount != null" >
+        voucher_Count,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="watchTime != null" >
+        watch_time,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="videoType != null" >
+        video_type,
+      </if>
+      <if test="qiniuId != null" >
+        qiniu_Id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyUser != null" >
+        modify_user,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+      <if test="auditUser != null" >
+        audit_user,
+      </if>
+      <if test="auditAt != null" >
+        audit_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="lecturerId != null" >
+        #{lecturerId,jdbcType=BIGINT},
+      </if>
+      <if test="lecturerName != null" >
+        #{lecturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSize != null" >
+        #{videoSize,jdbcType=INTEGER},
+      </if>
+      <if test="videoUrl != null" >
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImageUrl != null" >
+        #{coverImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isRecommend != null" >
+        #{isRecommend,jdbcType=BIT},
+      </if>
+      <if test="isUnicast != null" >
+        #{isUnicast,jdbcType=BIT},
+      </if>
+      <if test="browseNum != null" >
+        #{browseNum,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        #{playType,jdbcType=BIT},
+      </if>
+      <if test="durationTime != null" >
+        #{durationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onlineStatus != null" >
+        #{onlineStatus,jdbcType=BIT},
+      </if>
+      <if test="offlineTime != null" >
+        #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="playCount != null" >
+        #{playCount,jdbcType=INTEGER},
+      </if>
+      <if test="isFalseCount != null" >
+        #{isFalseCount,jdbcType=BIT},
+      </if>
+      <if test="falseCount != null" >
+        #{falseCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCount != null" >
+        #{collectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="voucherId != null" >
+        #{voucherId,jdbcType=BIGINT},
+      </if>
+      <if test="voucherCount != null" >
+        #{voucherCount,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="watchTime != null" >
+        #{watchTime,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="videoType != null" >
+        #{videoType,jdbcType=INTEGER},
+      </if>
+      <if test="qiniuId != null" >
+        #{qiniuId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditUser != null" >
+        #{auditUser,jdbcType=BIGINT},
+      </if>
+      <if test="auditAt != null" >
+        #{auditAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionVideo" >
+    update champion_video
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="lecturerId != null" >
+        lecturer_id = #{lecturerId,jdbcType=BIGINT},
+      </if>
+      <if test="lecturerName != null" >
+        lecturer_name = #{lecturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="pageUrl != null" >
+        page_url = #{pageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSize != null" >
+        video_size = #{videoSize,jdbcType=INTEGER},
+      </if>
+      <if test="videoUrl != null" >
+        video_Url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImageUrl != null" >
+        cover_Image_Url = #{coverImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isRecommend != null" >
+        is_recommend = #{isRecommend,jdbcType=BIT},
+      </if>
+      <if test="isUnicast != null" >
+        is_unicast = #{isUnicast,jdbcType=BIT},
+      </if>
+      <if test="browseNum != null" >
+        browse_Num = #{browseNum,jdbcType=INTEGER},
+      </if>
+      <if test="playType != null" >
+        play_type = #{playType,jdbcType=BIT},
+      </if>
+      <if test="durationTime != null" >
+        duration_time = #{durationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onlineStatus != null" >
+        online_status = #{onlineStatus,jdbcType=BIT},
+      </if>
+      <if test="offlineTime != null" >
+        offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="playCount != null" >
+        play_Count = #{playCount,jdbcType=INTEGER},
+      </if>
+      <if test="isFalseCount != null" >
+        is_false_count = #{isFalseCount,jdbcType=BIT},
+      </if>
+      <if test="falseCount != null" >
+        false_count = #{falseCount,jdbcType=INTEGER},
+      </if>
+      <if test="shareCount != null" >
+        share_Count = #{shareCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCount != null" >
+        collection_Count = #{collectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="voucherId != null" >
+        voucher_Id = #{voucherId,jdbcType=BIGINT},
+      </if>
+      <if test="voucherCount != null" >
+        voucher_Count = #{voucherCount,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="watchTime != null" >
+        watch_time = #{watchTime,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="videoType != null" >
+        video_type = #{videoType,jdbcType=INTEGER},
+      </if>
+      <if test="qiniuId != null" >
+        qiniu_Id = #{qiniuId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditUser != null" >
+        audit_user = #{auditUser,jdbcType=BIGINT},
+      </if>
+      <if test="auditAt != null" >
+        audit_at = #{auditAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionVideo" >
+    update champion_video
+    set title = #{title,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=BIGINT},
+      lecturer_id = #{lecturerId,jdbcType=BIGINT},
+      lecturer_name = #{lecturerName,jdbcType=VARCHAR},
+      page_url = #{pageUrl,jdbcType=VARCHAR},
+      video_size = #{videoSize,jdbcType=INTEGER},
+      video_Url = #{videoUrl,jdbcType=VARCHAR},
+      cover_Image_Url = #{coverImageUrl,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      is_recommend = #{isRecommend,jdbcType=BIT},
+      is_unicast = #{isUnicast,jdbcType=BIT},
+      browse_Num = #{browseNum,jdbcType=INTEGER},
+      play_type = #{playType,jdbcType=BIT},
+      duration_time = #{durationTime,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      online_status = #{onlineStatus,jdbcType=BIT},
+      offline_time = #{offlineTime,jdbcType=TIMESTAMP},
+      play_Count = #{playCount,jdbcType=INTEGER},
+      is_false_count = #{isFalseCount,jdbcType=BIT},
+      false_count = #{falseCount,jdbcType=INTEGER},
+      share_Count = #{shareCount,jdbcType=INTEGER},
+      collection_Count = #{collectionCount,jdbcType=INTEGER},
+      voucher_Id = #{voucherId,jdbcType=BIGINT},
+      voucher_Count = #{voucherCount,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      watch_time = #{watchTime,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      video_type = #{videoType,jdbcType=INTEGER},
+      qiniu_Id = #{qiniuId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      audit_user = #{auditUser,jdbcType=BIGINT},
+      audit_at = #{auditAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+
+  <resultMap id="SearchBaseResultMap" type="com.hangjia.bxj.model.ChampionVideo" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="BIGINT" />
+    <result column="channelTitle" property="channelTitle" jdbcType="VARCHAR" />
+    <result column="lecturer_id" property="lecturerId" jdbcType="BIGINT" />
+    <result column="lecturer_name" property="lecturerName" jdbcType="VARCHAR" />
+    <result column="page_url" property="pageUrl" jdbcType="VARCHAR" />
+    <result column="video_size" property="videoSize" jdbcType="INTEGER" />
+    <result column="video_Url" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="cover_Image_Url" property="coverImageUrl" jdbcType="VARCHAR" />
+    <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+    <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
+    <result column="is_unicast" property="isUnicast" jdbcType="BIT" />
+    <result column="play_type" property="playType" jdbcType="BIT" />
+    <result column="duration_time" property="durationTime" jdbcType="VARCHAR" />
+    <result column="online_time" property="onlineTime" jdbcType="TIMESTAMP" />
+    <result column="offline_time" property="offlineTime" jdbcType="TIMESTAMP" />
+    <result column="play_Count" property="playCount" jdbcType="INTEGER" />
+    <result column="is_false_count" property="isFalseCount" jdbcType="BIT" />
+    <result column="false_count" property="falseCount" jdbcType="INTEGER" />
+    <result column="share_Count" property="shareCount" jdbcType="INTEGER" />
+    <result column="collection_Count" property="collectionCount" jdbcType="INTEGER" />
+    <result column="voucher_Id" property="voucherId" jdbcType="BIGINT" />
+    <result column="voucher_Count" property="voucherCount" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="watch_time" property="watchTime" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="qiniu_Id" property="qiniuId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_user" property="modifyUser" jdbcType="BIGINT" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+    <result column="audit_user" property="auditUser" jdbcType="BIGINT" />
+    <result column="audit_at" property="auditAt" jdbcType="TIMESTAMP" />
+    <result column="browse_Num" property="browseNum" jdbcType="INTEGER" />
+    <result column="channelName" property="channelName" jdbcType="VARCHAR" />
+    <result column="online_status" property="onlineStatus" jdbcType="INTEGER" />
+    <result column="video_type" property="videoType" jdbcType="INTEGER" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Column_List" >
+    fid, title, channel_id, lecturer_id, lecturer_name, page_url, video_size, video_Url,
+    cover_Image_Url, audit_status, is_recommend, is_unicast, play_type, duration_time,
+    online_time, offline_time, CASE is_false_count WHEN 1 THEN false_count ELSE play_Count END AS play_Count, is_false_count, false_count, share_Count,
+    collection_Count, voucher_Id, voucher_Count, money, description, qiniu_Id, status,
+    sort, create_user, create_at, modify_user, modify_at, audit_user, audit_at, watch_time
+  </sql>
+
+  <sql id="Public_Query_Conditions" >
+    <where>
+      <if test="fid != null" >
+        and fid = #{fid,jdbcType=BIGINT}
+      </if>
+      <if test="channelId != null" >
+        and channel_Id = #{channelId,jdbcType=BIGINT}
+      </if>
+      <if test="auditStatus != null" >
+        and audit_status = #{auditStatus,jdbcType=INTEGER}
+      </if>
+      <!--and video_type = 1-->
+    </where>
+  </sql>
+  <sql id="Public_Order_Datas" >
+    <if test="orderDatas != null and orderDatas != ''" >
+      order by
+      <foreach collection="orderDatas" item="orderData" separator=",">
+        ${orderData.field} ${orderData.direction}
+      </foreach>
+    </if>
+  </sql>
+  <sql id="Public_Page">
+    <if test="startIndex != null and pageSize != null">
+      limit #{startIndex},#{pageSize}
+    </if>
+  </sql>
+
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.model.ChampionVideo" >
+    select
+    <include refid="Column_List" />
+    from champion_video
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+
+  <select id="selectBySelectiveCount" resultType="int" parameterType="com.hangjia.bxj.model.ChampionVideo" >
+    select count(*) from champion_video
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <select id="getVideosByModuleId" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT v.* FROM(
+    SELECT
+    t1.title, t1.page_url,t1.cover_Image_Url, t1.lecturer_name, t1.is_unicast, t1.play_type, t1.duration_time,
+    CASE t1.is_false_count WHEN 1 THEN t1.false_count ELSE t1.play_Count END AS play_Count,
+    t1.voucher_Count, t2.sort as sort
+    FROM champion_video t1
+    LEFT JOIN champion_module_video t2 ON t1.fid = t2.video_id
+    WHERE t2.module_id = #{moduleId,jdbcType=BIGINT} <!--and t1.video_type = 1-->
+    <if test="orderby != null">
+      order by #{orderby, jdbcType=VARCHAR}
+    </if>
+    )v order by sort
+    <if test="start != null and end != null" >
+      limit #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <resultMap type="com.hangjia.bxj.model.ChampionVideo" id="championVideo">
+    <result property="fid" column="vdfid" javaType="java.lang.Long" jdbcType="INTEGER"/>
+    <result property="title" column="video_title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result property="pageUrl" column="page_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result property="coverImageUrl" column="cover_Image_Url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result property="lecturerName" column="lecturer_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result property="isUnicast" column="is_unicast" javaType="java.lang.Boolean" jdbcType="BIT"/>
+    <result property="playType" column="play_type" javaType="java.lang.Boolean" jdbcType="BIT"/>
+    <result property="durationTime" column="duration_time" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result property="playCount" column="play_Count" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+    <result property="voucherCount" column="voucher_Count" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+    <result property="videoType" column="video_type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+  </resultMap>
+
+  <!-- <select id="storeList" resultMap="championVideo" parameterType="java.util.Map">
+    SELECT t1.fid as fid1, t2.fid as video_fid, t2.title AS video_title, t2.page_url,t2.cover_Image_Url, t2.lecturer_name, t2.is_unicast, t2.play_type, t2.duration_time,
+    t2.play_Count, t2.voucher_Count
+    from
+    champion_collection t1 left join champion_video t2 on t2.fid = t1.video_id
+    WHERE t1.user_id = #{userId,jdbcType=BIGINT} and t1.is_collection = 1
+    <if test="orderby != null" >
+      order by #{orderby, jdbcType=VARCHAR}
+    </if>
+    <if test="start != null and end != null" >
+      limit #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+    </if>
+  </select> -->
+
+  <select id="myStoreList" resultMap="championVideo" parameterType="java.util.Map">
+    SELECT  vdlog.fid as fid1, vd.fid as vdfid, vd.title AS video_title, vd.page_url,vd.cover_Image_Url, vd.lecturer_name, vd.is_unicast, vd.play_type, vd.duration_time,
+    CASE is_false_count WHEN 1 THEN false_count ELSE play_Count END AS play_Count, vd.voucher_Count, vd.video_type
+    from
+    champion_video vd left join  champion_reward_video vdlog on vd.fid = vdlog.video_id
+    WHERE vdlog.user_id = #{userId,jdbcType=BIGINT} and vdlog.status in(2,5) and vdlog.expire_time >= now()
+    GROUP BY vd.fid
+    <if test="orderby != null" >
+      order by vdlog.create_time desc
+    </if>
+    <if test="start != null and end != null" >
+      limit #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="myStoreCount" resultType="int" parameterType="java.util.Map">
+    SELECT count(*) AS counts from (SELECT vd.fid FROM
+    champion_video vd join  champion_reward_video vdlog on vd.fid = vdlog.video_id
+    WHERE vdlog.user_id = #{userId,jdbcType=BIGINT} and vdlog.status in(2,5) and vdlog.expire_time >= now()
+    GROUP BY vd.fid ) AS menu
+  </select>
+
+  <select id="myCollectList" resultMap="championVideo" parameterType="java.util.Map">
+    SELECT t1.fid as fid1, t2.fid as vdfid, t2.title AS video_title, t2.page_url,t2.cover_Image_Url, t2.lecturer_name, t2.is_unicast, t2.play_type, t2.duration_time,
+    CASE t2.is_false_count WHEN 1 THEN t2.false_count ELSE t2.play_Count END AS play_Count, t2.voucher_Count, t2.video_type
+    from
+    champion_collection t1 join champion_video t2 on t2.fid = t1.video_id
+    WHERE t1.user_id = #{userId,jdbcType=BIGINT} and t1.is_collection = 1
+    order by t1.create_at desc
+    <!-- <if test="orderby != null" >
+      order by #{orderby, jdbcType=VARCHAR}
+    </if> -->
+    <if test="start != null and end != null" >
+      limit #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="myCollectCount" resultType="int" parameterType="java.util.Map">
+    SELECT count(*) AS conuts from (SELECT t1.video_id FROM
+    champion_collection t1 join champion_video t2 on t2.fid = t1.video_id
+    WHERE t1.user_id = #{userId,jdbcType=BIGINT} and t1.is_collection = 1
+    order by t1.create_at) AS menu
+    <!--  <if test="orderby != null" >
+       order by #{orderby, jdbcType=VARCHAR}
+     </if> -->
+
+  </select>
+  <select id="selectByPaginatorCount" resultType="Integer" parameterType="com.baobao.framework.page.Paginator">
+    SELECT
+    count(cv.fid)
+    FROM
+    champion_video cv
+    WHERE cv.video_type in(1, 2) and cv.audit_status = 2 and cv.status = 1
+  </select>
+
+  <select id="selectPaginateVideo" resultMap="SearchBaseResultMap" parameterType="com.baobao.framework.page.Paginator">
+    SELECT
+    t0.fid, t0.title, t0.channel_id,t1.title as channelTitle, t0.lecturer_id, t0.lecturer_name, t0.page_url, t0.video_size, t0.video_Url,
+    t0.cover_Image_Url, t0.audit_status, t0.is_recommend, t0.is_unicast, t0.play_type, t0.duration_time,
+    t0.online_time, t0.offline_time, CASE t0.is_false_count WHEN 1 THEN t0.false_count ELSE t0.play_Count END AS play_Count, t0.is_false_count, t0.false_count, t0.share_Count,
+    t0.collection_Count, t0.voucher_Id, t0.voucher_Count, t0.money, t0.description, t0.qiniu_Id, t0.status,
+    t0.sort, t0.create_user, t0.create_at, t0.modify_user, t0.modify_at, t0.audit_user, t0.audit_at,t0.video_type,t0.browse_Num
+
+    from champion_video t0
+    left JOIN champion_channel t1
+    on t0.channel_id=t1.fid where t0.video_type in(1, 2) and t0.audit_status = 2 and t0.status = 1
+    order by fid desc
+    LIMIT #{offset},#{itemsPerPage}
+  </select>
+
+  <sql id="admin_Column_List" >
+    a.fid, a.title, a.channel_id, a.lecturer_id, a.lecturer_name, a.page_url, a.video_size, a.video_Url,
+    a.cover_Image_Url, a.audit_status, a.is_recommend, a.is_unicast, a.play_type, a.duration_time,
+    a.online_time, a.offline_time, a.play_Count, a.is_false_count, a.false_count, a.share_Count,
+    a.collection_Count, a.voucher_Id, a.voucher_Count, a.money, a.description, a.qiniu_Id, a.status,
+    a.sort, a.create_user, a.create_at, a.modify_user, a.modify_at, a.audit_user, a.audit_at,a.browse_Num,a.online_status,a.video_type,
+    a.upload_time, a.watch_time
+  </sql>
+
+  <select id="queryPageData" parameterType="com.hangjia.bxj.query.champion.ChampionVideoQuery" resultMap="BaseResultMap">
+    SELECT
+    <include refid="admin_Column_List" />
+    ,b.title as "channelName"
+    ,e.tagName as "tagName"
+    FROM champion_video a
+    LEFT JOIN
+    champion_channel b
+    ON 	a.channel_id = b.fid
+    LEFT JOIN (
+    SELECT
+    group_concat(d.name) tagName,
+    c.video_id
+    FROM
+    champion_video_tag c
+    LEFT JOIN champion_tag d ON c.tag_id = d.fid
+    GROUP BY
+    c.video_id
+    ) e ON a.fid = e.video_id
+    <include refid="video_where_list" />
+    ORDER BY
+    create_at DESC
+    <if test="orderBy != null and orderBy != ''">
+      ,#{orderBy}
+    </if>
+    LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+
+  <select id="queryPageDataCount" parameterType="com.hangjia.bxj.query.champion.ChampionVideoQuery" resultType="int">
+    SELECT
+    COUNT(1)
+    FROM
+    champion_video a
+    <include refid="video_where_list" />
+  </select>
+
+  <sql id="video_where_list">
+    <where>
+      a.status = 1
+      <if test="likeName != null and likeName != ''">AND ((a.title like CONCAT(CONCAT('%', #{likeName}), '%')) OR (a.fid like CONCAT(CONCAT('%', #{likeName}), '%')))</if>
+      <if test="uploadTime != null">AND a.upload_time <![CDATA[>=]]> #{uploadTime}</if>
+      <if test="auditStatus != null">AND a.audit_status = #{auditStatus}</if>
+      <if test="channelId != null">AND a.channel_id = #{channelId}</if>
+      <if test="videoType != null">AND a.video_type = #{videoType}</if>
+      <if test="playType != null">AND a.play_type = #{playType}</if>
+      <if test="isRecommend != null">AND a.is_recommend = #{isRecommend}</if>
+      <if test="voucherType != null and voucherType == 0">AND a.voucher_Count = 0</if>
+      <if test="voucherType != null and voucherType == 1">AND a.voucher_Count > 0</if>
+      <if test="lecturerName != null and lecturerName != ''">AND a.lecturer_name like CONCAT(CONCAT('%', #{lecturerName}), '%')</if>
+      <if test="falseCountType != null and falseCount != null">
+        AND	a.false_count
+        <if test="falseCountType == 1"> <![CDATA[>=]]> </if>
+        <if test="falseCountType == 2"> <![CDATA[<=]]> </if>
+        <if test="falseCountType == 3"> <![CDATA[=]]> </if>
+        #{falseCount}
+      </if>
+    </where>
+  </sql>
+
+  <select id="queryVideo" parameterType="com.hangjia.bxj.query.champion.ChampionVideoQuery" resultMap="BaseResultMap">
+    SELECT
+    <include refid="admin_Column_List" />
+    ,b.title as "channelName"
+    FROM champion_video a
+    LEFT JOIN
+    champion_channel b
+    ON 	a.channel_id = b.fid
+    WHERE
+    a.fid = #{fid}
+  </select>
+
+  <sql id="admin_Comment_Column_List" >
+    a.fid as "fid",
+    a.video_id as "videoId",
+    a.user_id as "userId",
+    a.audit_status as "auditStatus",
+    a.audit_at as "auditAt",
+    a.click_like_count as "clickLikeCount",
+    a.comment as "comment",
+    a.create_at as "createAt"
+  </sql>
+
+  <sql id="admin_Report_Column_List" >
+    a.fid as "fid",
+    a.video_id as "videoId",
+    a.user_id as "userId",
+    a.report_id as "reportId",
+    a.create_time as "createTime"
+  </sql>
+
+  <select id="queryCommentPageData" parameterType="com.hangjia.bxj.query.champion.VideoCommentQuery" resultType="com.hangjia.bxj.model.champion.VideoCommentDO">
+    SELECT
+    <include refid="admin_Comment_Column_List" />
+    ,b.name as "nickName"
+    FROM champion_video_comment a
+    LEFT JOIN boss_ucenter.uc_user_card b
+    ON a.user_id = b.fid
+    <include refid="video_comment_where_list" />
+    ORDER BY
+    create_at DESC
+    <if test="orderBy != null and orderBy != ''">
+      ,#{orderBy}
+    </if>
+    LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+
+  <select id="queryCommentPageDataCount" parameterType="com.hangjia.bxj.query.champion.VideoCommentQuery" resultType="int">
+    SELECT
+    COUNT(1)
+    FROM
+    champion_video_comment a
+    <include refid="video_comment_where_list" />
+  </select>
+
+  <sql id="video_comment_where_list">
+    <where>
+      <if test="comment != null and comment != ''">AND a.comment like CONCAT(CONCAT('%', #{comment}), '%')</if>
+      <if test="userId != null">AND a.user_id = #{userId}</if>
+      <if test="videoId != null">AND a.video_id = #{videoId}</if>
+      <if test="auditStatus != null">AND a.audit_status = #{auditStatus}</if>
+    </where>
+  </sql>
+  <delete id="deleteVideoComment" parameterType="com.hangjia.bxj.model.champion.VideoCommentDO">
+    DELETE FROM
+    champion_video_comment
+    WHERE
+    fid = #{fid}
+  </delete>
+
+  <select id="queryVideoNameByOrderNo" parameterType="java.util.List" resultType="com.hangjia.bxj.model.order.AccountOrderExt">
+    SELECT
+    a.order_id as "orderId",
+    b.title as "videoName"
+    FROM
+    champion_reward_video a
+    LEFT JOIN
+    champion_video b
+    ON a.video_id = b.fid
+    WHERE
+    a.order_id in (
+    <foreach collection="list" item="orderId" separator=",">
+      #{orderId}
+    </foreach>
+    )
+  </select>
+
+  <select id="queryReportPageData" parameterType="com.hangjia.bxj.query.champion.VideoReportQuery" resultType="com.hangjia.bxj.model.champion.VideoReportDO">
+    SELECT
+    a.video_id as "videoId"
+    ,b.title as "title"
+    <if test="dimension != null and dimension == 1">
+      ,count(DISTINCT(a.fid)) as "reportCount"
+      ,count(DISTINCT(a.user_id)) as "reportUserCount"
+    </if>
+    <if test="dimension != null and dimension == 2">
+      ,c.content as "content"
+      ,a.create_time as "createTime"
+      ,a.user_id as "userId"
+      ,a.fid as "fid"
+    </if>
+    FROM
+    champion_video_report_log a
+    LEFT JOIN champion_video b ON a.video_id = b.fid
+    LEFT JOIN champion_video_report_content c ON a.report_id = c.fid
+    <include refid="video_report_where_list" />
+    <if test="dimension != null and dimension == 1">
+      GROUP BY
+      a.video_id
+    </if>
+    ORDER BY
+    a.create_time DESC
+    <if test="orderBy != null and orderBy != ''">
+      ,#{orderBy}
+    </if>
+    LIMIT #{pageFirstItem},#{pageSize}
+  </select>
+
+  <select id="queryReportDataCount" parameterType="com.hangjia.bxj.query.champion.VideoReportQuery" resultType="int">
+    SELECT
+    COUNT(1)
+    FROM
+    <if test="dimension != null and dimension == 1">
+      (
+      SELECT
+      COUNT(1)
+      FROM
+      champion_video_report_log a
+      LEFT JOIN champion_video b ON a.video_id = b.fid
+      LEFT JOIN champion_video_report_content c ON a.report_id = c.fid
+      <include refid="video_report_where_list" />
+      GROUP BY
+      a.video_id
+      ) d
+    </if>
+    <if test="dimension != null and dimension == 2">
+      champion_video_report_log a
+      LEFT JOIN champion_video b ON a.video_id = b.fid
+      <include refid="video_report_where_list" />
+    </if>
+  </select>
+
+  <sql id="video_report_where_list">
+    <where>
+      1 = 1
+      <if test="title != null and title != ''">AND b.title = #{title}</if>
+      <if test="reportId != null">AND a.report_id = #{reportId}</if>
+      <if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+        AND DATE(a.create_time) <![CDATA[>=]]> DATE(#{startTime})
+        AND DATE(a.create_time) <![CDATA[<=]]> DATE(#{endTime})
+      </if>
+      <if test="userIds != null and userIds.size() > 0">
+        AND	a.user_id IN (
+        <foreach collection="userIds" item="userId" separator=",">
+          #{userId}
+        </foreach>
+        )
+      </if>
+    </where>
+  </sql>
+
+  <!-- 审核视频评论-审核不通过 -->
+  <update id="unAuthorVideoComment" parameterType="java.lang.Long" >
+    update champion_video_comment
+    set audit_status = 1
+    where fid = #{videoId,jdbcType=BIGINT}
+  </update>
+</mapper>

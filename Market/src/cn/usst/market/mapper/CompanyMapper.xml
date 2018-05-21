@@ -1,0 +1,1077 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.usst.market.mapper.CompanyMapper">
+
+    <insert id="insert" parameterType="cn.usst.market.po.Company">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        insert into company (id, serial_number, name,
+        license, competition_id, people_number
+        )
+        values (#{id,jdbcType=INTEGER}, #{serialNumber,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{license,jdbcType=VARCHAR}, #{competitionId,jdbcType=INTEGER}, #{peopleNumber,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <select id="findCompanyByCondition" parameterType="cn.usst.market.po.Company"
+            resultType="cn.usst.market.po.Company">
+  	select * from company where serial_number=#{serialNumber} and license=#{license}
+  </select>
+
+    <select id="findCompanyById" parameterType="cn.usst.market.po.Company" resultType="cn.usst.market.po.Company">
+  	select * from company where id=#{id}
+  </select>
+
+
+    <update id="updateCompanyName" parameterType="cn.usst.market.po.Company">
+        update company
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="showCompanyByCompetitionId" parameterType="Integer" resultType="cn.usst.market.po.Company">
+  	select * from company where competition_id=#{id}
+  </select>
+
+
+    <select id="countStrategyTitle" resultType="java.lang.String">
+  	select distinct title from strategy_info
+  </select>
+
+    <select id="showStrategyInfoByTitle" parameterType="java.lang.String" resultType="cn.usst.market.po.StrategyInfo">
+  	select * from strategy_info where title=#{title}
+  </select>
+
+
+    <select id="countCompanyRuleTitle" resultType="java.lang.String">
+  	select distinct title from company_rule_info
+  </select>
+
+    <select id="showCompanyRuleInfoBytitle" parameterType="java.lang.String"
+            resultType="cn.usst.market.po.CompanyRuleInfo">
+  	select * from company_rule_info where title=#{title}
+  </select>
+
+    <select id="countPersonalGoalTitle" resultType="java.lang.String">
+  	select distinct title from personal_goal_info
+  </select>
+
+    <select id="showPersonalGoalInfoBytitle" parameterType="java.lang.String"
+            resultType="cn.usst.market.po.PersonalGoalInfo">
+  	select * from personal_goal_info where title=#{title}
+  </select>
+
+    <select id="showAllPosition" resultType="cn.usst.market.po.Duty">
+  	select * from duty
+  </select>
+
+    <select id="showMarketInfo" resultType="cn.usst.market.po.MarketInfo">
+  	select * from market_info2 where competition_id = #{0}
+  </select>
+
+
+    <!--/Guan -->
+
+    <resultMap type="cn.usst.market.po.TeacherQueryVo" id="companyResultMap">
+        <id column="id"/>
+        <result column="memberCount" property="memberCount"/>
+        <association property="company" javaType="cn.usst.market.po.Company">
+            <result column="id" property="id"/>
+            <result column="serial_number" property="serialNumber"/>
+            <result column="name" property="name"/>
+            <result column="license" property="license"/>
+            <result column="competition_id" property="competitionId"/>
+            <result column="people_number" property="peopleNumber"/>
+        </association>
+        <association property="competition" javaType="cn.usst.market.po.Competition">
+            <result column="competition_id" property="id"/>
+            <result column="competition_name" property="name"/>
+            <result column="competition_license" property="license"/>
+        </association>
+    </resultMap>
+
+    <sql id="query_company_where">
+        <if test="teacher!=null">
+            <if test="teacher.id!=null and teacher.id!=''">
+                and companytable.teacher_id=${teacher.id}
+            </if>
+        </if>
+        <if test="competition!=null">
+            <if test="competition.name!=null and competition.name!=''">
+                and companytable.competition_name LIKE '%${competition.name}%'
+            </if>
+            <if test="competition.license!=null and competition.license!=''">
+                and companytable.competition_license LIKE '%${competition.license}%'
+            </if>
+        </if>
+        <if test="company!=null">
+            <if test="company.name!=null and company.name!=''">
+                and companytable.name LIKE '%${company.name}%'
+            </if>
+        </if>
+    </sql>
+
+    <select id="findCompanyList" parameterType="cn.usst.market.po.TeacherQueryVo"
+            resultMap="companyResultMap">
+        select * from (select company.*, COUNT(company_id) as memberCount,competition.`name` as
+        competition_name,competition.license as competition_license,competition.teacher_id
+        from company LEFT JOIN member
+        on member.company_id=company.id
+        INNER JOIN competition
+        on company.competition_id=competition.id
+        INNER JOIN teacher
+        on competition.teacher_id=#{teacher.id}
+        group BY company.id) AS companytable
+        <where>
+            <include refid="query_company_where"></include>
+        </where>
+    </select>
+
+
+    <select id="selectCompanyByPage" parameterType="cn.usst.market.po.TeacherQueryVo"
+            resultMap="companyResultMap">
+        select * from (select company.*, COUNT(company_id) as memberCount,competition.`name` as
+        competition_name,competition.license as competition_license,competition.teacher_id
+        from company LEFT JOIN member
+        on member.company_id=company.id
+        INNER JOIN competition
+        on company.competition_id=competition.id
+        INNER JOIN teacher
+        on competition.teacher_id=#{teacher.id}
+        group BY company.id ) AS companytable
+        <where>
+            <include refid="query_company_where"></include>
+        </where>
+        order by companytable.id desc
+        limit #{startPos},#{pageSize}
+    </select>
+
+    <select id="getCompanyCount" parameterType="cn.usst.market.po.TeacherQueryVo" resultType="long">
+        select count(*) from company ,competition
+        where company.competition_id=competition.id
+        and competition.teacher_id=#{teacher.id}
+        <if test="company!=null">
+            <if test="company.name!=null and company.name!=''">
+                and company.name LIKE '%${company.name}%'
+            </if>
+        </if>
+    </select>
+
+
+    <!-- 以上部分是查询公司操作 -->
+
+    <!-- <select id="findCompanyById" parameterType="java.lang.Integer"
+        resultType="cn.usst.market.po.Company">
+        select company.* from company where id=#{value}
+    </select> -->
+
+    <select id="findCompanyListByCompetitionId" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.Company">
+  		select company.* from company where competition_id=#{value}
+  	</select>
+
+    <update id="updateByPrimaryKey" parameterType="cn.usst.market.po.Company">
+	    update company
+	    set name = #{name,jdbcType=VARCHAR}
+	    where id = #{id,jdbcType=INTEGER}
+  	</update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <select id="findAllCompetition" resultType="cn.usst.market.po.Competition">
+  	select * from competition
+  </select>
+
+    <!-- 分页 -->
+
+
+    <!--  -->
+
+    <select id="selectCompanyById" resultType="cn.usst.market.po.Company">
+		select * from company where id=#{id}
+	
+	</select>
+
+
+    <select id="checkCompanyNameExist" resultType="cn.usst.market.po.Company">
+  		select * from company where name=#{name}
+  	</select>
+
+
+    <update id="updateCompanyNameById">
+	    update company
+	    set name=#{1}
+	    where id = #{0}
+ 	 </update>
+
+
+    <update id="updateCompanyStrategy" parameterType="cn.usst.market.po.CompanyStrategy">
+	    update company_strategy
+	    set main_pro = #{mainPro,jdbcType=VARCHAR},minor_pro = #{minorPro,jdbcType=VARCHAR},strategy_id = #{strategyId,jdbcType=VARCHAR},
+	    service = #{service,jdbcType=VARCHAR}
+	    where company_id = #{companyId,jdbcType=INTEGER} and quarter = #{quarter,jdbcType=INTEGER}
+  	</update>
+
+    <insert id="insertCompanyStrategy" parameterType="cn.usst.market.po.CompanyStrategy">
+   insert into company_strategy (id, company_id, main_pro, 
+      minor_pro, strategy_id,service,quarter
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{mainPro,jdbcType=VARCHAR}, 
+      #{minorPro,jdbcType=VARCHAR}, #{strategyId,jdbcType=VARCHAR}, #{service,jdbcType=VARCHAR}, #{quarter,jdbcType=INTEGER}
+      ) 
+   
+   
+   </insert>
+
+    <select id="selectCompanyStrategy" resultType="cn.usst.market.po.CompanyStrategy">
+  		select * from company_strategy where company_id=#{0} and quarter=#{1}
+  	</select>
+
+
+    <delete id="deleteProductById">
+		delete from
+		company_product where id=#{id}
+	</delete>
+
+
+    <select id="selectProductByCompanyId" resultType="cn.usst.market.po.CompanyProduct">
+			select * from
+			company_product where company_id=#{companyId}
+	</select>
+
+
+    <select id="selectProductByProductId" resultType="cn.usst.market.po.CompanyProduct">
+		select * from company_product where id=#{id}
+	</select>
+
+    <update id="insertCompanyProduct" parameterType="cn.usst.market.po.CompanyProduct">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into company_product (company_id, quarter,name,
+        detail,cost,type
+        )
+        values
+        (#{companyId,jdbcType=INTEGER},#{quarter,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{detail,jdbcType=VARCHAR},
+        #{cost,jdbcType=INTEGER}
+        ,#{type})
+    </update>
+
+    <!--更新产品信息-->
+    <update id="updateCompanyProduct" parameterType="cn.usst.market.po.CompanyProduct">
+		update company_product
+		set name=#{name,jdbcType=VARCHAR},detail=#{detail,jdbcType=VARCHAR},cost=#{cost,jdbcType=INTEGER},type=#{type,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+    <delete id="deleteCompanyProductDemand">
+		delete from company_product_demand where product_id=#{0}
+	</delete>
+
+    <delete id="deleteProductPrice">
+		delete from product_price where product_id=#{0}
+	</delete>
+
+    <update id="updateProductDemand">
+		update company_product_demand set demand=#{2} where product_id=#{0} and quarter=#{1}
+	</update>
+
+
+    <select id="showProductDetailByTitle" parameterType="java.lang.String" resultType="cn.usst.market.po.ProductInfo">
+  		select * from product_info where title=#{title,jdbcType=VARCHAR}
+  
+  	</select>
+
+    <select id="selectMemberByMemberId" resultType="cn.usst.market.po.CompanyDuty">
+  		select * from company_duty where member_id=#{id}
+  	</select>
+
+    <update id="insertMemberDuty" parameterType="cn.usst.market.po.CompanyDuty">
+  		insert into company_duty(company_id,member_id,img,main_id,minor_id)values(#{companyId,jdbcType=INTEGER},#{memberId,jdbcType=INTEGER},#{img,jdbcType=VARCHAR},#{mainId,jdbcType=INTEGER},#{minorId,jdbcType=INTEGER})
+  	</update>
+
+    <update id="updateMemberDuty" parameterType="cn.usst.market.po.CompanyDuty">
+  		update company_duty set img=#{img,jdbcType=VARCHAR},main_id=#{mainId,jdbcType=INTEGER},minor_id=#{minorId,jdbcType=INTEGER} where member_id=#{memberId,jdbcType=INTEGER} 
+  	</update>
+
+    <select id="selectMemberDutyByMemberId" resultType="cn.usst.market.po.CompanyDuty">
+  		select * from company_duty where member_id=#{id}
+  	</select>
+
+    <select id="selectMemberIdByCompanyId" resultType="java.lang.Integer">
+  		select member_id from company_duty where company_id=#{id}
+  	</select>
+
+    <select id="selectMemberDutyByCompanyId" resultType="cn.usst.market.po.CompanyDuty">
+  		select * from company_duty where company_id=#{id}
+  	</select>
+
+    <select id="selectCompanyRule" resultType="cn.usst.market.po.CompanyRule">
+  		select * from company_rule where company_id=#{0} and quarter=#{1}
+  	</select>
+
+    <update id="insertCompanyRule" parameterType="cn.usst.market.po.CompanyRule">
+  		insert into company_rule(company_id,rule_id,quarter)values(#{companyId,jdbcType=INTEGER},#{ruleId,jdbcType=VARCHAR},#{quarter,jdbcType=INTEGER})
+  	</update>
+
+    <update id="updateCompanyRule" parameterType="cn.usst.market.po.CompanyRule">
+  		update company_rule set rule_id=#{ruleId,jdbcType=VARCHAR} where company_id=#{companyId,jdbcType=INTEGER} and quarter=#{quarter,jdbcType=INTEGER}
+  	</update>
+
+    <select id="selectCompanyPersonGoal" resultType="cn.usst.market.po.CompanyPersonGoal">
+  		select * from company_person_goal where company_id=#{0} and quarter=#{1}
+  	</select>
+
+    <update id="insertCompanyPersonGoal" parameterType="cn.usst.market.po.CompanyPersonGoal">
+  		insert into company_person_goal(company_id,goal_id,quarter)values(#{companyId,jdbcType=INTEGER},#{goalId,jdbcType=VARCHAR},#{quarter,jdbcType=INTEGER})
+  	</update>
+
+    <update id="updateCompanyPersonGoal" parameterType="cn.usst.market.po.CompanyPersonGoal">
+  		update company_person_goal set goal_id=#{goalId,jdbcType=VARCHAR} where company_id=#{companyId,jdbcType=INTEGER} and quarter=#{quarter,jdbcType=INTEGER}
+  	</update>
+
+    <insert id="insertmarketinfo" parameterType="cn.usst.market.po.CompanyMarket">
+   insert into company_market (id, company_id, market_id, 
+      is_phy,quarter
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER},#{marketId,jdbcType=VARCHAR},#{isPhy,jdbcType=INTEGER}, #{quarter,jdbcType=INTEGER}
+      ) 
+   </insert>
+    <select id="showCompanymarket" parameterType="cn.usst.market.po.MarketInfo"
+            resultType="cn.usst.market.po.CompanyMarket">
+   select * from company_market where company_id=#{companyId,jdbcType=INTEGER} and is_phy=#{isPhy,jdbcType=INTEGER} and quarter=#{quarter,jdbcType=INTEGER}
+   </select>
+
+    <select id="selectCompanyPhysicalMarket" resultType="cn.usst.market.po.CompanyMarket">
+  		select * from company_market where company_id=#{0} and quarter=#{1} and is_phy=1
+  	</select>
+
+
+    <update id="insertCompanyMarket" parameterType="cn.usst.market.po.CompanyMarket">
+  		insert into company_market(company_id,market_id,is_phy,quarter)values(#{companyId,jdbcType=INTEGER},#{marketId,jdbcType=VARCHAR},
+  		#{isPhy,jdbcType=INTEGER},#{quarter,jdbcType=INTEGER})
+  	</update>
+
+    <update id="updateCompanyMarket" parameterType="cn.usst.market.po.CompanyMarket">
+  		update company_market set market_id=#{marketId,jdbcType=VARCHAR},is_phy=#{isPhy,jdbcType=INTEGER} where company_id=#{companyId,jdbcType=INTEGER} and
+  		quarter=#{quarter,jdbcType=INTEGER} and is_phy = 1
+  	</update>
+    <update id="updateCompanyMarketWeb" parameterType="cn.usst.market.po.CompanyMarket">
+        update company_market set market_id=#{marketId,jdbcType=VARCHAR},is_phy=#{isPhy,jdbcType=INTEGER} where company_id=#{companyId,jdbcType=INTEGER} and
+        quarter=#{quarter,jdbcType=INTEGER} and is_phy in (0,2)
+    </update>
+
+
+    <select id="selectCashFlowByCompanyId" resultType="cn.usst.market.po.CashFlow">
+  		select * from cash_flow where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <update id="updateCashFlowYanFa">
+  	update cash_flow set yanfa_pay=#{0} where company_id=#{1} and quarter=#{2}
+  </update>
+
+
+    <update id="insertCashFlow">
+  	insert into cash_flow(company_id,quarter,yanfa_pay) values(#{companyId},#{quarter},#{yanfaPay})
+  </update>
+
+    <update id="updateCashFlowGongChang">
+  	update cash_flow set gongchang_pay=#{0} where company_id=#{1} and quarter=#{2}
+  </update>
+
+    <select id="selectSalesCenterOpen" resultType="java.lang.Integer">
+  	select open from market_info2 where id=#{market_id}
+  </select>
+
+    <select id="selectSalesCenterWebOpen" resultType="java.lang.Integer">
+  	select web_open from market_info2 where id=#{market_id}
+  </select>
+
+    <update id="updateCashFlowMarket">
+  	update cash_flow set salescenter_pay=#{0} where company_id=#{1} and quarter=#{2}
+  </update>
+
+    <update id="updateCashFlowWebMarket">
+  	update cash_flow set salescenter_web_pay=#{0} where company_id=#{1} and quarter=#{2}
+  </update>
+
+    <select id="selectIncomeStatementByCompanyId" resultType="cn.usst.market.po.IncomeStatement">
+  		select * from income_statement where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <update id="updateIncomeStatementYanFa">
+  	update income_statement set yanfa=#{0} where company_id=#{1} and quarter=#{2}
+  </update>
+
+    <update id="updateIncomeStatementMarket">
+  	update income_statement set salescenter_cost=#{0} where company_id=#{1} and quarter=#{2}
+  </update>
+
+    <update id="updateIncomeStatementWebMarket">
+  	update income_statement set salescenter_web_cost=#{0} where company_id=#{1} and quarter=#{2}
+  </update>
+
+    <update id="deleteCompanyProduct">
+  		delete from company_product where id=#{product_id,jdbcType=INTEGER}
+  </update>
+
+    <select id="countProductInfoTitle" resultType="java.lang.String">
+  		select distinct title from product_info
+  	</select>
+
+    <select id="showProductInfoByTitle" parameterType="java.lang.String" resultType="cn.usst.market.po.ProductInfo">
+  		select * from product_info where title=#{title}
+  	</select>
+
+    <select id="showAllDetail" resultType="cn.usst.market.po.ProductInfo">
+		select * from product_info
+	</select>
+
+    <select id="showCapacityInfo" resultType="cn.usst.market.po.CapacityInfo">
+  	select * from capacity_info
+  </select>
+
+    <select id="selectCapacityInfo" parameterType="java.lang.Integer" resultType="cn.usst.market.po.CapacityInfo">
+  	select * from capacity_info where number=#{number}
+  </select>
+
+    <select id="showCapacityInfo1" resultType="cn.usst.market.po.CompanyCapacity">
+  	select * from company_capacity where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+  	select count(1) from company_capacity where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <insert id="insertCompanyCapacity">
+  	insert into company_capacity(capacity_now,capacity_add,company_id,quarter) values(#{capacityNow},#{number},#{companyId},#{quarter})
+  </insert>
+    <update id="updateCompanyCapacity">
+  update company_capacity set capacity_now=#{0}, capacity_add=#{1} where company_id=#{2} and quarter=#{3}
+   </update>
+
+    <select id="showBalanceSheet" resultType="cn.usst.market.po.BalanceSheet">
+  	select * from balance_sheet where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <select id="showCashFlow" resultType="cn.usst.market.po.CashFlow">
+  	select * from cash_flow where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <select id="showIncomeStatement" resultType="cn.usst.market.po.IncomeStatement">
+  	select * from income_statement where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <update id="updateBalanceSheetZiChan">
+  	update balance_sheet set zichan=#{0} where company_id=#{1} and quarter=#{2}
+  </update>
+
+    <update id="updateBalanceSheetHuoBi">
+  	update balance_sheet set huobi=#{0} where company_id=#{1} and quarter=#{2}
+  </update>
+    <select id="selectGuBen" resultType="java.lang.Integer">
+  	select ifnull(sum(total_price),0) as total_price from company_stock where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <select id="showCompanyStock" resultType="cn.usst.market.po.CompanyStock">
+  	select * from company_stock where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <insert id="insertFixedDeposite">
+	insert into
+	fixed_deposit(company_id,quarter,cunkuan_last,tiqu,cunru,lilv)
+	values(#{0},#{3},#{4},#{1},#{2},1.5)
+  </insert>
+
+    <select id="selectFixedDeposite" resultType="cn.usst.market.po.FixedDeposit">
+  	select * from fixed_deposit where company_id=#{0} and quarter=#{1}
+  </select>
+    <update id="updateFixedDeposite">
+  update fixed_deposit set tiqu=#{1}, cunru=#{2} where company_id=#{0} and quarter=#{3} 
+  </update>
+
+
+    <!-- 财务表中插入数据  cash_flow -->
+
+    <insert id="insertCashFlowFirst" parameterType="cn.usst.market.po.CashFlow">
+		insert into cash_flow (id, company_id, quarter, 
+      xiaoshou_get, lixi_get, jishu_get, 
+      qita_get, fankuan_pay, shengchan_pay, 
+      yanfa_pay, guanggao_pay, saler_pay, 
+      salescenter_pay, salescenter_web_pay, diaoyan_pay, 
+      huoyun_pay, kucun_pay, netmarket_pay, 
+      tax_pay, lixi_pay, jishu_pay, qita_pay, 
+      gongchang_pay, daikuan_normal_get, daikuan_emergy_get, 
+      cunkuan_regular_get, daikuan_normal_pay, daikuan_emergy_pay, 
+      cunkuan_regular_pay, yu_e)
+    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{quarter,jdbcType=INTEGER}, 
+      #{xiaoshouGet,jdbcType=REAL}, #{lixiGet,jdbcType=REAL}, #{jishuGet,jdbcType=REAL}, 
+      #{qitaGet,jdbcType=REAL}, #{fankuanPay,jdbcType=REAL}, #{shengchanPay,jdbcType=REAL}, 
+      #{yanfaPay,jdbcType=REAL}, #{guanggaoPay,jdbcType=REAL}, #{salerPay,jdbcType=REAL}, 
+      #{salescenterPay,jdbcType=REAL}, #{salescenterWebPay,jdbcType=REAL}, #{diaoyanPay,jdbcType=REAL}, 
+      #{huoyunPay,jdbcType=REAL}, #{kucunPay,jdbcType=REAL}, #{netmarketPay,jdbcType=REAL}, 
+      #{taxPay,jdbcType=REAL}, #{lixiPay,jdbcType=REAL}, #{jishuPay,jdbcType=REAL}, #{qitaPay,jdbcType=REAL}, 
+      #{gongchangPay,jdbcType=REAL}, #{daikuanNormalGet,jdbcType=REAL}, #{daikuanEmergyGet,jdbcType=REAL}, 
+      #{cunkuanRegularGet,jdbcType=REAL}, #{daikuanNormalPay,jdbcType=REAL}, #{daikuanEmergyPay,jdbcType=REAL}, 
+      #{cunkuanRegularPay,jdbcType=REAL}, #{yuE,jdbcType=REAL})
+  	</insert>
+
+    <insert id="insertIncomeStatementFirst" parameterType="cn.usst.market.po.IncomeStatement">
+  		insert into income_statement (id, company_id, quarter, 
+      yingye_income, lixi_income, yingye_cost, 
+      fankuan, yanfa, guanggao, saler_cost, 
+      salescenter_cost, salescenter_web_cost, baogao, 
+      huoyun, kucun, excess_capacity, 
+      zhejiu, netmarket_cost, lixi_cost, 
+      tech_income, qita_income, tech_cost, 
+      qita_cost, tax_cost)
+    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{quarter,jdbcType=INTEGER}, 
+      #{yingyeIncome,jdbcType=REAL}, #{lixiIncome,jdbcType=REAL}, #{yingyeCost,jdbcType=REAL}, 
+      #{fankuan,jdbcType=REAL}, #{yanfa,jdbcType=REAL}, #{guanggao,jdbcType=REAL}, #{salerCost,jdbcType=REAL}, 
+      #{salescenterCost,jdbcType=REAL}, #{salescenterWebCost,jdbcType=REAL}, #{baogao,jdbcType=REAL}, 
+      #{huoyun,jdbcType=REAL}, #{kucun,jdbcType=REAL}, #{excessCapacity,jdbcType=REAL}, 
+      #{zhejiu,jdbcType=REAL}, #{netmarketCost,jdbcType=REAL}, #{lixiCost,jdbcType=REAL}, 
+      #{techIncome,jdbcType=REAL}, #{qitaIncome,jdbcType=REAL}, #{techCost,jdbcType=REAL}, 
+      #{qitaCost,jdbcType=REAL}, #{taxCost,jdbcType=REAL})
+  	</insert>
+
+    <insert id="insertBalanceSheetFirst" parameterType="cn.usst.market.po.BalanceSheet">
+  		insert into balance_sheet (id, company_id, quarter, 
+      huobi, cunkuan, lixi_collection, 
+      cunhuo, zichan, daikuan_emergency, 
+      lixi_pay, daikuan_normal, guben, 
+      liucun)
+    values (#{id,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{quarter,jdbcType=INTEGER}, 
+      #{huobi,jdbcType=REAL}, #{cunkuan,jdbcType=REAL}, #{lixiCollection,jdbcType=REAL}, 
+      #{cunhuo,jdbcType=REAL}, #{zichan,jdbcType=REAL}, #{daikuanEmergency,jdbcType=REAL}, 
+      #{lixiPay,jdbcType=REAL}, #{daikuanNormal,jdbcType=REAL}, #{guben,jdbcType=REAL}, 
+      #{liucun,jdbcType=REAL})
+  	</insert>
+
+
+    <select id="showAverageSalaryOfSale" resultType="cn.usst.market.po.AverageSalary">
+  	select * from average_salary where is_sale=1
+  </select>
+
+    <select id="showAverageSalaryOfWork" resultType="cn.usst.market.po.AverageSalary">
+  	select * from average_salary where is_sale=2
+  </select>
+
+
+    <insert id="insertCompanyStock" parameterType="cn.usst.market.po.CompanyStock">
+  	insert into company_stock (company_id,quarter,stock_type,owner,stock_number,stock_price,total_price)values(
+  	#{companyId},#{quarter},#{stockType},#{owner},#{stockNumber},#{stockPrice},#{totalPrice})
+  </insert>
+
+    <insert id="insertCompanyDuty" parameterType="cn.usst.market.po.CompanyDuty">
+  	insert into company_duty(company_id,member_id,img,main_id,minor_id)values(
+  	#{companyId},#{memberId},#{img},#{mainId},#{minorId})
+  </insert>
+
+    <!--  工厂工人薪酬薪酬-->
+    <select id="selectCompanyWorkersSalary" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.WorkersSalary">
+  	select * from workers_salary where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <insert id="insertCompanyWorkersSalary" parameterType="cn.usst.market.po.WorkersSalary">
+	  insert into workers_salary(company_id,quarter,salary,welfare,holiday,public_fund,company_pension,retired_pay,salary_total)values(
+	  #{companyId},#{quarter},#{salary},#{welfare},#{holiday},#{publicFund},#{companyPension},#{retiredPay},#{salaryTotal})
+  </insert>
+
+    <update id="updateCompanyWorkersSalary" parameterType="cn.usst.market.po.WorkersSalary">
+  	update workers_salary set salary=#{salary},welfare=#{welfare},holiday=#{holiday},public_fund=#{publicFund},company_pension=#{companyPension},
+  	retired_pay=#{retiredPay},salary_total=#{salaryTotal} where company_id=#{companyId} and quarter=#{quarter}
+  </update>
+
+    <!--  销售人员薪酬-->
+    <select id="selectCompanySalesSalary" parameterType="java.lang.Integer" resultType="cn.usst.market.po.SalesSalary">
+  	select * from sales_salary where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <select id="findCompanySalesSalary" parameterType="java.lang.Integer" resultType="cn.usst.market.po.SalesSalary">
+  	select * from sales_salary where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <insert id="insertCompanySalesSalary" parameterType="cn.usst.market.po.SalesSalary">
+	  insert into sales_salary(company_id,quarter,salary,welfare,holiday,public_fund,company_pension,retired_pay,salary_total)values(
+	  #{companyId},#{quarter},#{salary},#{welfare},#{holiday},#{publicFund},#{companyPension},#{retiredPay},#{salaryTotal})
+  </insert>
+
+    <update id="updateCompanySalesSalary" parameterType="cn.usst.market.po.SalesSalary">
+  	update sales_salary set salary=#{salary},welfare=#{welfare},holiday=#{holiday},public_fund=#{publicFund},company_pension=#{companyPension},
+  	retired_pay=#{retiredPay},salary_total=#{salaryTotal} where company_id=#{companyId} and quarter=#{quarter}
+  </update>
+
+
+    <!--  需求量预测-->
+    <insert id="insertDemandForecast">
+	insert into
+	demand_forecast(company_id,quarter,demand_average_phy, demand_average_web)
+	values(#{0},#{1},#{2},#{3})
+  </insert>
+
+    <select id="selectDemandForecast" resultType="cn.usst.market.po.DemandForecast">
+  	select * from demand_forecast where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <update id="updateDemandForecast">
+  update demand_forecast set demand_average_phy=#{2}, demand_average_web=#{3} where company_id=#{0} and quarter=#{1} 
+  </update>
+
+    <insert id="insertDemandForecast2" parameterType="cn.usst.market.po.CompanyProduct">
+	insert into
+	company_product(company_id,quarter,demand_num_two)
+	values(#{companyId},#{quarter},#{demandNumTwo})
+  </insert>
+
+
+    <select id="selectDemandForecast2" resultType="cn.usst.market.po.CompanyProduct">
+  	select * from company_product where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <update id="updateDemandForecast2" parameterType="cn.usst.market.po.CompanyProduct">
+  update company_product set demand_num_two=#{demandNumTwo} where  id=#{id}
+  </update>
+
+    <!--产品定价  -->
+    <insert id="insertProductPrice" parameterType="cn.usst.market.po.ProductPrice">
+  	insert into product_price(product_id,company_id,quarter,price,youji,is_sale)values(
+  	#{productId},#{companyId},#{quarter},#{price},#{youji},#{isSale})
+  </insert>
+
+    <update id="updateProductPrice">
+	update product_price set price=#{2}, youji=#{3} where product_id=#{0} and quarter=#{1} 
+  </update>
+
+    <select id="selectProductPrice" resultType="cn.usst.market.po.ProductPrice">
+  	select * from  product_price where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <select id="showTotalProductPrice" resultType="cn.usst.market.po.ProductPrice">
+  	select * from  product_price where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <select id="showTotalCompanyProduct" resultType="cn.usst.market.po.CompanyProduct">
+  	select * from  company_product where company_id=#{0} and quarter&lt;#{1}
+  </select>
+
+    <!--主流媒体投放  -->
+    <select id="selectCompanyMedia" parameterType="java.lang.Integer" resultType="cn.usst.market.po.CompanyMedia">
+  	select * from company_media where company_id=#{0} and quarter=#{1} and media_id=#{2} and product_id=#{3}
+  </select>
+
+    <select id="selectTotalCompanyMedia" parameterType="java.lang.Integer" resultType="cn.usst.market.po.CompanyMedia">
+  	select * from company_media where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <insert id="insertCompanyMedia" parameterType="cn.usst.market.po.CompanyMedia">
+  	insert into company_media(company_id,quarter,product_id,media_id,num)values(
+  	#{companyId},#{quarter},#{productId},#{mediaId},#{num})
+  </insert>
+
+    <update id="updateCompanyMedia" parameterType="cn.usst.market.po.CompanyMedia">
+	update company_media set num=#{num} where product_id=#{productId} and media_id=#{mediaId} and quarter=#{quarter} and company_id=#{companyId}
+  </update>
+
+    <!--设计广告语  -->
+    <select id="selectCompanyAdvertiseByProductId" parameterType="Integer"
+            resultType="cn.usst.market.po.CompanyAdvertise">
+  	select * from company_advertise where company_id=#{0} and quarter=#{1} and product_id=#{2}
+  </select>
+
+    <insert id="insertCompanyAdvertise" parameterType="cn.usst.market.po.CompanyAdvertise">
+  	insert into company_advertise(company_id,quarter,product_id,product_name,advertise_name,advertise_id)values(
+  	#{companyId},#{quarter},#{productId},#{productName},#{advertiseName},#{advertiseId});
+  </insert>
+
+    <update id="updateCompanyAdvertise" parameterType="cn.usst.market.po.CompanyAdvertise">
+  	update company_advertise set advertise_name=#{advertiseName},advertise_id=#{advertiseId} where company_id=#{companyId} and quarter=#{quarter}
+  	and product_id=#{productId}
+  </update>
+
+
+    <!--市场调研报告  -->
+    <select id="selectCompanyReport" resultType="java.lang.String">
+  	select buy_report from  company_report where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <insert id="insertCompanyReport" parameterType="java.lang.Integer">
+  		insert into company_report(company_id,quarter,buy_report)values(
+  		#{0},#{1},#{2})
+  </insert>
+
+    <update id="updateCompanyReport" parameterType="java.lang.Integer">
+  	update company_report set buy_report=#{2} where company_id=#{0} and quarter=#{1}
+  </update>
+
+    <!--核查广告语  -->
+    <select id="selectCompanyAdvertise" parameterType="Integer" resultType="cn.usst.market.po.CompanyAdvertise">
+  	select * from company_advertise where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <select id="selectAdvertsieById" parameterType="Integer" resultType="cn.usst.market.po.AdvertiseInfo">
+  	select * from advertise_info where id=#{0}
+  </select>
+
+    <!--  运行产能-->
+    <insert id="insertOperationCapacity">
+	insert into
+	operation_capacity(company_id,quarter,operate_capacity, worker_productivity)
+	values(#{0},#{1},#{2},#{3})
+  </insert>
+
+    <select id="selectOperationCapacity" resultType="cn.usst.market.po.OperationCapacity">
+  	select * from operation_capacity where company_id=#{0} and quarter=#{1}
+  </select>
+    <update id="updateOperationCapacity">
+  update operation_capacity set operate_capacity=#{2}, worker_productivity=#{3} where company_id=#{0} and quarter=#{1} 
+  </update>
+
+    <!-- 存款 新 -->
+    <select id="selectCunkuanLast" resultType="cn.usst.market.po.FixedDeposit">
+  	select * from fixed_deposit where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <insert id="insertCunkuanLast">
+  	insert into fixed_deposit(company_id,quarter,cunkuan_last,tiqu,cunru,lilv)values(
+  	#{1},#{2},#{0},0,0,1.5)
+  </insert>
+
+    <!--  库存控制-->
+
+    <insert id="insertInventoryControl" parameterType="cn.usst.market.po.CompanyProduct">
+	insert into
+	company_product(company_id,quarter,inventory_max_two)
+	values(#{companyId},#{quarter},#{inventoryMaxTwo})
+  </insert>
+
+
+    <select id="selectInventoryControl" resultType="cn.usst.market.po.CompanyProductVo2">
+  	select a.*,b.inventory from company_product as a,company_product_inventory as b where company_id=#{0} and a.quarter &lt;=#{1} and b.quarter=#{1} and a.id=b.product_id
+  </select>
+
+    <select id="selectInvertoryCountFinancialRatio" resultType="cn.usst.market.po.CompanyProductVo2">
+  	select a.*,b.inventory,b.quarter 
+	from company_product as a,company_product_inventory as b 
+	where company_id=#{0} 
+	and b.quarter &lt;= #{1} 
+	and a.quarter &lt;= #{1} 
+	and a.id=b.product_id
+  </select>
+
+    <update id="updateCompanyProductInventory">
+  	update company_product_inventory set inventory=#{1} where product_id=#{0} and quarter=#{2}
+  </update>
+
+    <delete id="deleteCompanyProductInventory">
+  	delete from company_product_inventory where product_id=#{0}
+  </delete>
+
+    <update id="updateInventoryControl" parameterType="cn.usst.market.po.CompanyProduct">
+  update company_product set inventory_max_two=#{inventoryMaxTwo} where  id=#{id}
+  </update>
+
+    <insert id="insertCompanyProductInventoryById">
+  	insert into company_product_inventory(product_id,quarter,inventory)values(#{0},#{1},0)
+  </insert>
+
+    <!-- 显示销售人员页面 -->
+    <select id="selectHirePeople" resultMap="HirePeopleResultMap">
+  	select market_info2.city, hire_people.*
+	from market_info2,hire_people
+	where market_info2.id=hire_people.market_id
+	and company_id=#{0} and market_id=#{1} and quarter=#{2}
+  </select>
+
+    <!-- 显示网络销售人员 -->
+    <select id="selectHirePeopleOnline" resultType="cn.usst.market.po.HirePeopleOnline">
+  	select *from hire_people_online where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <resultMap type="cn.usst.market.po.HirePeopleVo" id="HirePeopleResultMap">
+        <id column="id"/>
+        <result column="city" property="city"/>
+        <association property="hirePeople" javaType="cn.usst.market.po.HirePeople">
+            <id column="id" property="id"/>
+            <result column="company_id" property="companyId"/>
+            <result column="market_id" property="marketId"/>
+            <result column="saleman" property="saleman"/>
+            <result column="after_sale" property="afterSale"/>
+        </association>
+    </resultMap>
+
+    <resultMap type="cn.usst.market.po.HirePeopleOnlineVo" id="HirePeopleOnlineResultMap">
+        <id column="id"/>
+        <result column="city" property="city"/>
+        <association property="hirePeopleOnline" javaType="cn.usst.market.po.HirePeopleOnline">
+            <id column="id" property="id"/>
+            <result column="company_id" property="companyId"/>
+            <result column="market_id" property="marketId"/>
+            <result column="saleman" property="saleman"/>
+            <result column="after_sale" property="afterSale"/>
+        </association>
+    </resultMap>
+
+
+    <!-- 更新销售人员 -->
+
+    <update id="updateHirePeopleById" parameterType="cn.usst.market.po.HirePeople">
+  	update hire_people set saleman=#{saleman},after_sale=#{afterSale} where id=#{id}
+  </update>
+
+    <update id="updateHirePeopleOnlineById" parameterType="cn.usst.market.po.HirePeopleOnline">
+  	update hire_people_online set saleman=#{saleman},after_sale=#{afterSale},market_id=#{marketId}
+  	 where company_id=#{companyId} and quarter=#{quarter}
+  </update>
+
+
+    <insert id="insertHirePeople" parameterType="cn.usst.market.po.HirePeople">
+	insert into
+	hire_people(company_id,market_id,quarter,saleman,after_sale)
+	values(#{companyId},#{marketId},#{quarter},#{saleman},#{afterSale})
+  </insert>
+
+
+    <select id="selectCompanyCapacity" resultType="cn.usst.market.po.CompanyCapacity">
+  		select * from company_capacity where company_id=#{0} and quarter=#{1}
+  </select>
+
+
+    <insert id="insertHirePeopleOnline" parameterType="cn.usst.market.po.HirePeopleOnline">
+		insert into
+		hire_people_online(company_id,market_id,quarter,saleman,after_sale)
+		values(#{companyId},#{marketId},#{quarter},#{saleman},#{afterSale})
+	</insert>
+
+    <select id="checkHirePeopleOnline" parameterType="cn.usst.market.po.HirePeopleOnline"
+            resultType="cn.usst.market.po.HirePeopleOnline">
+		select * from hire_people_online where company_id=#{companyId} and market_id=#{marketId} and quarter=#{quarter}
+	</select>
+
+    <select id="checkHirePeople" parameterType="cn.usst.market.po.HirePeople" resultType="cn.usst.market.po.HirePeople">
+		select * from hire_people where company_id=#{companyId} and market_id=#{marketId} and quarter=#{quarter}
+	</select>
+
+    <delete id="deleteHirePeopleOnline" parameterType="cn.usst.market.po.HirePeopleOnline">
+		delete from hire_people_online where company_id=#{companyId} and market_id=#{marketId} and quarter=#{quarter}
+	</delete>
+
+    <delete id="deleteHirePeople" parameterType="cn.usst.market.po.HirePeople">
+		delete from hire_people where company_id=#{companyId} and market_id=#{marketId} and quarter=#{quarter}
+	</delete>
+
+
+    <!-- 上季度结果-->
+
+    <select id="selectProductMarketShare" resultType="cn.usst.market.po.ProductMarketShare">
+  	select * from product_market_share  where product_id=#{0} and quarter=#{1}
+  </select>
+
+    <select id="selectCompanyProductByCompanyIdQuarter" resultType="cn.usst.market.po.CompanyProduct">
+  	select * from company_product where company_id=#{0} and quarter &lt; #{1}
+  </select>
+
+    <select id="selectCompanyInvestment" parameterType="cn.usst.market.po.CompanyInvestment"
+            resultType="cn.usst.market.po.CompanyInvestment">
+  	select  * from company_investment  where company_id=#{companyId} and  quarter=#{quarter}
+  </select>
+
+    <!-- 紧急贷款 -->
+    <select id="selectCompanyLoan" resultType="cn.usst.market.po.CompanyLoan">
+  	select * from company_loan where company_id=#{0} and quarter=#{1}
+  </select>
+
+    <insert id="insertCompanyLoan">
+  	insert into company_loan(company_id,quarter,loan_last,get_num,return_num,lilv)values(#{0}
+  	,#{1},0,#{2},#{3},4)
+  </insert>
+
+    <update id="updateCompanyLoan">
+  	update company_loan set get_num=#{2},return_num=#{3} where company_id=#{0} and quarter=#{1} 
+  </update>
+
+    <insert id="insertLoanLast">
+  	insert into company_loan(company_id,quarter,loan_last,get_num,return_num,lilv)values(#{1}
+  	,#{2},#{0},0,0,4)
+  </insert>
+
+
+    <!-- 需求量预测 -->
+    <select id="selectHirePeopleList" resultType="cn.usst.market.po.HirePeople">
+  		select * from hire_people where company_id=#{0} and quarter=#{1}
+	</select>
+
+    <select id="selectHirePeopleOnlineList" resultType="cn.usst.market.po.HirePeopleOnline">
+  		select * from hire_people_online where company_id=#{0} and quarter=#{1}
+	</select>
+
+    <select id="getDemandForecastByCompanyIdAndQuarter" resultType="cn.usst.market.po.DemandForecast">
+		select * from demand_forecast where company_id=#{0} and quarter=#{1}
+	</select>
+    <select id="selectCompanyProduct" resultType="cn.usst.market.po.CompanyProductVo">
+		select a.*,b.demand from company_product as a,company_product_demand as b where a.company_id=#{0} and a.quarter=#{1} and b.quarter=#{2} and a.id=b.product_id
+	</select>
+
+    <insert id="insertCompanyProductDemandById">
+		insert into company_product_demand(product_id,quarter,demand)values(#{0},#{1},0)
+	</insert>
+
+    <delete id="deleteCompanyMedia">
+ 		delete from company_media where product_id=#{0}
+ 	</delete>
+
+    <delete id="deleteCompanyAdvertise">
+ 		delete from company_advertise where product_id=#{0}
+ 	</delete>
+
+    <select id="selectCompanyMarket" parameterType="java.lang.Integer" resultType="cn.usst.market.po.CompanyMarket">
+		select * from company_market where company_id=#{0} and is_phy=#{1} and quarter=#{2}
+	</select>
+
+    <delete id="deleteCompanyMarket" parameterType="cn.usst.market.po.CompanyMarket">
+        delete from company_market where company_id=#{companyId} and quarter=#{quarter}
+    </delete>
+
+    <update id="updateCompanyQuarterTime">
+ 		update company_quarter_time set end_time=#{2},is_submit=1 where company_id=#{0} and quarter=#{1}
+ 	</update>
+
+    <select id="selectCompanyMarket1" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from company_market where company_id=#{0} and is_phy=#{1}
+    </select>
+
+    <update id="updateCompanyMarket1" parameterType="cn.usst.market.po.CompanyMarket">
+        update company_market set market_id=null where is_phy=0 and quarter=#{quarter} and company_id=#{companyId}
+    </update>
+
+    <update id="updateCompanyMarket2" parameterType="cn.usst.market.po.CompanyMarket">
+        update company_market set market_id=#{marketId} where is_phy=0 and quarter=#{quarter} and company_id=#{companyId}
+    </update>
+
+    <select id="selectCompanyDecision" resultType="cn.usst.market.po.CompanyDecision">
+        select company_id as companyId,decision_id as decisionId,money
+        from company_decision
+        where company_id=#{0} and decision_id=#{1}
+    </select>
+
+    <insert id="insertCompanyDecision" parameterType="java.lang.Integer">
+        insert into company_decision values(#{0},#{1},#{2})
+    </insert>
+
+    <update id="updateCompanyDecision" parameterType="java.lang.Integer">
+        update company_decision set money=#{1}
+        where company_id=#{0} and decision_id=#{2}
+    </update>
+
+    <select id="selectCompanyMedia1" parameterType="java.lang.Integer" resultType="cn.usst.market.po.CompanyMedia">
+        select id,company_id as companyId,quarter,product_id as productId,media_id as mediaId,num
+        from company_media
+        where company_id=#{0} and quarter=#{1} and product_id=#{1}
+    </select>
+
+    <update id="updateProductPrice1" parameterType="java.lang.Integer">
+        update product_price set is_sale=#{1} where product_id=#{0}
+    </update>
+
+    <update id="updateProductPrice2" parameterType="cn.usst.market.po.ProductPrice">
+        update product_price set price=#{price},youji=#{youji} where product_id=#{productId} and quarter=#{quarter}
+    </update>
+
+    <select id="selectProductByCompanyIdAndQuarter" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.CompanyProduct">
+		select * from company_product
+		where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <insert id="insertCostIntoMarketWebOpened">
+        insert into market_webopened values(#{0},#{1},#{2})
+    </insert>
+
+    <update id="updateMarketWebOpened">
+        update market_webopened set cost=#{cost}
+        <where>
+            <if test="companyId!=null">
+                companyId=#{companyId}
+            </if>
+            <if test="quarter!=null">
+                and quarter=#{quarter}
+            </if>
+        </where>
+    </update>
+
+
+    <select id="selectCompanyMarketAll" parameterType="java.lang.Integer"
+            resultType="cn.usst.market.po.CompanyMarket">
+        select * from company_market where company_id=#{0} and quarter=#{1} and is_phy=0 or is_phy=2
+    </select>
+
+    <select id="selectMarketWebOpened" resultType="cn.usst.market.po.MarketWebOpened">
+        select * from market_webopened
+        <where>
+            <if test="companyId!=null">
+                companyId=#{companyId}
+            </if>
+            <if test="quarter!=null">
+                and quarter=#{quarter}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectWebCostInCompanyDecision" resultType="cn.usst.market.po.CompanyDecision">
+        select * from company_decision
+        where decision_id=7
+        <if test="companyId!=null">
+            and company_id=#{companyId}
+        </if>
+    </select>
+
+    <insert id="insertCostIntoCompanyDecision">
+        insert into company_decision values(#{companyId},#{cost},7)
+    </insert>
+
+    <update id="updateCostInCompanyDecision">
+        update company_decision set money=#{cost}
+        where company_id=#{companyId} and decision_id=7
+    </update>
+
+    <select id="selectRestMoney" resultType="java.lang.Integer">
+        select ifnull(sum(money),0) from company_decision where decision_id=100
+        <if test="companyId!=null">
+            and company_id=#{companyId}
+        </if>
+    </select>
+
+    <select id="selectIssubmit" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select is_submit from company_quarter_time where company_id=#{0} and quarter=#{1}
+    </select>
+
+
+	<select id="selectCapacityAdd" resultType="java.lang.Integer">
+		select ifnull(sum(capacity_add),0) from company_capacity where company_id=#{0} and quarter=#{1}
+	</select>
+
+    <select id="selectIssubmitState" parameterType="java.lang.Integer" resultType="cn.usst.market.po.StateOfSign">
+        select is_submit as isSubmit,company_id as companyId,quarter
+        from stateOfSign where company_id=#{0} and quarter=#{1}
+    </select>
+
+    <update id="updateIsSubmitState" parameterType="java.lang.Integer">
+        update stateOfSign set is_submit=#{0} where company_id=#{1} and quarter=#{2}
+    </update>
+
+    <insert id="insertIssubmitState" parameterType="java.lang.Integer">
+        insert into stateOfSign values(#{0},#{1},#{2})
+    </insert>
+
+</mapper>

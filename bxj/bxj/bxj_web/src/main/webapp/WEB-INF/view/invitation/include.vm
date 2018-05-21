@@ -1,0 +1,319 @@
+#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+<style>
+.amap-logo {
+	display: none !important;
+}
+.amap-sug-result {
+	text-align: left;
+	left: 76px !important;
+}
+.amap-copyright {
+	display: none !important;
+}
+</style>
+	
+	<div class="container container_invention">
+		<nav class="tab_choose">
+			<li class="checked">已有邀请函</li>
+			<li>新建邀请函</li>
+		</nav>
+		<div id="inv_swiper" class="swiper-container">
+		<div class="swiper-wrapper swiper-no-swiping">
+		<div class="history_change swiper-slide swiper-no-swiping">
+			<ul>
+				<li class="clear">
+					<span class="left_span">邀请函名称</span>
+					<span class="right_span"><select id="inv_selector" class="selecttype_input" style="width: 100%;"></select></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">酒会时间</span>
+					<span class="right_span" id="prev_dateAt"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">地点</span>
+					<span class="right_span inform_main_text" id="prev_address"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">联系人</span>
+					<span class="right_span" id="prev_contact"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">联系方式</span>
+					<span class="right_span" id="prev_contactMobile"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span ">邀请函正文</span>
+					<span class="right_span inform_main_text" id="prev_inv_text"></span>
+				</li>
+				<li class="clear noborder">
+					<span class="right_span clear new_row">
+						<div class="map_block" id="inv_map">
+						</div>
+					</span>
+				</li>
+			</ul>
+			
+				<button class="preview" id="preview_exist">预览</button>
+				<button id="inv_btn_ok" class="bluebtn">选择该邀请函</button>
+			
+		</div>
+		<div class="crate_new swiper-slide swiper-no-swiping">
+			<form id="createInvitationForm">
+			<ul>
+				<li class="clear">
+					<span class="left_span">邀请函名称</span>
+					<span class="right_span"><input type="text" placeholder="请输入邀请函名称" name="name"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">酒会时间</span>
+					<span class="right_span">
+						<input id="inv_dateAt" placeholder="请选择酒会时间" name="dateAt">
+					</span>
+				</li>
+				<li class="clear">
+					<span class="left_span">地点</span>
+					<span class="right_span add_search">
+						<input type="text" placeholder="请输入详细地址" id="inv_new_addr" name="address" autocomplete="off">
+						<a class="search_icon" id="addr_search">
+							<span>搜索</span>
+						</a>
+					</span>
+					<input id="geoLng" name="lng" readonly="readonly" type="hidden">
+					<input id="geoLat" name="lat" readonly="readonly" type="hidden">
+				</li>
+				<li class="clear">
+					<span class="left_span">联系人</span>
+					<span class="right_span"><input type="text" placeholder="请输入联系人姓名" name="contactName"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span">联系方式</span>
+					<span class="right_span"><input type="tel" placeholder="请输入联系方式" name="contactMobile" maxlength="11"></span>
+				</li>
+				<li class="clear">
+					<span class="left_span ">邀请函正文</span>
+					<span class="right_span "><textarea placeholder="请填写不超过80字的正文" maxlength="80" rows="2" name="text"></textarea></span>
+				</li>
+				<li class="clear noborder">
+					<span class="right_span clear new_row">
+						<div class="map_block" id="new_map">
+						</div>
+					</span>
+				</li>
+			</ul>
+			</form>
+			
+			<button class="preview" id="preview_new">预览</button>
+			<button id="saveBtn" class="bluebtn">保存邀请函</button>
+		</div>
+		</div>
+		</div>
+		
+	</div>
+	
+	<script>
+		(function() {
+			var hd;
+			
+			var invit = new Invitation({
+				form: '#createInvitationForm',
+				enhanceDate: '#inv_dateAt',
+				previewButton: '#preview_new',
+				hidePreviewTitle: '$!request.getParameter("hd")',
+				initMap: {
+					mapId: 'new_map',
+					addressInput: 'inv_new_addr',
+					lng: '#geoLng',
+					lat: '#geoLat',
+					searchButton: '#addr_search'
+				},
+				saveUrl: '$bxj_path/invitation/save.do',
+				saveButton: '#saveBtn',
+				nameExist: function(params) {
+					return invitObj[params.name] != undefined;
+				},
+				saveSuccess: function(data) {
+				    checked = data.name;
+				    invitationOkCallback(data);
+				    history.back(-1);
+				}
+			});
+			
+			// 邀请函对象，name是邀请函name，value是邀请函json
+		    var invitObj = {}, 
+		    // 当前已选择的条目，在select重置后重新选择。
+		    checked = getCheckedInvName(),
+		    selector = $('#inv_selector');
+			
+			HeadHeight = $('header').height();
+			FooterHeight = $('footer').height();
+			$('.container').css({'max-height': Wheight - FooterHeight - HeadHeight,'margin-top':HeadHeight});
+			
+			Loader.loadCss('invit_css', 'bxj_two/static/css/invention.css');
+			
+			Loader.loadCss('swiper_css', 'public/css/swiper.css');
+		
+			Loader.loadJs('swiper_script', 'public/js/swiper.js',
+				function() {
+					invSwiper = new Swiper('#inv_swiper', {
+						onlyExternal: true,
+					});
+					
+					resetInvits();
+				
+					$('nav.tab_choose li').click(function(){
+						var Num = $(this).index();
+						if(Num == 0){
+							//$('.crate_new').hide();
+							//$('.history_change').show();
+							$(this).addClass('checked').siblings('li').removeClass('checked');
+							invSwiper.slideTo(0, 300, false);
+						}else if(Num == 1){
+							//$('.crate_new').show();
+							//$('.history_change').hide();
+							var count = selector.find('option').length;
+							if (count > 3) {
+								Messager.toast('邀请函不能超过三条哦</br>请整理后再新建~');
+							} else {
+								$(this).addClass('checked').siblings('li').removeClass('checked');
+								invSwiper.slideTo(1, 300);
+							}
+							
+						}
+					});
+				}
+			);
+			
+			 /**
+		     * 重置邀请函的下拉列表
+		     */
+		    function resetInvits() {
+		    	ajaxTodo({
+					url: '$!bxj_path/invitation/list.do',
+					mask: false,
+					onSuccess: function(json) {
+					
+						invitObj = {};
+						selector.empty();
+						
+						var result = json.result;
+						var size = result.length;
+						
+						// 如果没有邀请函记录，跳转到新建，否则停留在选择页
+						if (size == 0) {
+							$($('nav.tab_choose li')[1]).addClass('checked').siblings('li').removeClass('checked');
+							selector.append('<option value="">--- 您没有邀请函，请新建 ---</option>');
+							invSwiper.slideTo(1, 0);
+						} else {
+							selector.append('<option value="">--- 请选择邀请函 ---</option>');
+							
+							if (!checked) {
+							// 如果没有选择，默认选第一个
+								checked = result[0].name;
+							}
+							
+							for (var i = 0; i < size; i++) {
+								var obj = result[i];
+								console.log(obj);
+								var name = obj.name;
+								invitObj[name] = obj;
+								var selected = (name == checked ? 'selected' : '');
+								
+								selector.append('<option value="' + name + '"' + selected + '>' + name + '</option>');
+							}
+							
+							changeTip(invitObj[checked]);
+						    
+						}
+						
+					}
+				});
+		    }
+		    
+		    selector.change(function() {
+		    	checked = this.value, current = invitObj[checked];
+		    	changeTip(current);
+		    });
+	    
+		    function changeTip(current) {
+		    	var addr = $('#prev_address'), dateAt = $('#prev_dateAt'), contact = $('#prev_contact')
+		    	,contactMobile = $('#prev_contactMobile'), text = $('#prev_inv_text');
+		    	
+		    	if (current) {
+					addr.html(current.address);
+					dateAt.html(current.dateAtCN);
+					contact.html(current.contactName);
+					contactMobile.html(current.contactMobile);
+					text.html(current.text);
+					createMap({
+						id: 'inv_map',
+						lng: current.lng,
+						lat: current.lat
+					});
+		    	} else {
+		    		addr.html('');
+		    		dateAt.html('');
+		    		contact.html('');
+		    		contactMobile.html('');
+		    		text.html('');
+		    		destroyMap('inv_map');
+		    	}
+		    }
+	    
+		    function createMap(opts) {
+				var newmap = new AMap.Map(opts.id, {
+			        resizeEnable: true,
+			        level: opts.level || 15,
+			        center: [opts.lng, opts.lat]
+		    	});
+		    	
+		    	marker = new AMap.Marker({
+		            map: newmap,
+		            position: [opts.lng, opts.lat]
+		        });
+		        
+		        window[opts.id] = newmap;
+		        return newmap;
+			}
+			
+			function destroyMap(id) {
+				if (window[id]) {
+					window[id].destroy();
+				}
+			}
+			
+			function doPreviewNew(current) {
+			// 收件人姓名
+			var name = $('input[name=author]').val();
+			if (name) {
+				current.receiver = name;
+			}
+			
+			invit._preview(current);
+			
+		}
+		
+		// 预览已有邀请函
+		$('#preview_exist').click(function() {
+			var current = invitObj[checked];
+			if (!current) {
+				Messager.toast('请选择邀请函后，点击预览');
+				return;
+			}
+			
+			doPreviewNew(current);
+		});
+		
+		$('#inv_btn_ok').click(function() {
+	    		var invName = selector.val();
+	    		var result = invitObj[invName];
+	    		if (!result) {
+	    			Messager.toast('请选择需要使用的邀请函');
+	    			return;
+	    		}
+	    		history.back(-1);
+	    		invitationOkCallback(result);
+	    	});
+	})();
+	
+	</script>

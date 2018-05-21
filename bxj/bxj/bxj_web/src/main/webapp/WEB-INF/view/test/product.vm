@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<base href="$bxj_path/">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<!--<link rel="stylesheet" type="text/css" href="$static_path/public/css/public.css"/>-->
+		<title>excel</title>
+	</head>
+	
+	<body>
+		<!--内容 开始-->
+        <form id="insure_info" method="post" action="$bxj_path/refreshcache/product.do" enctype="multipart/form-data" accept-charset="utf-8">
+              产品名称：<input type="text" name="name" />
+              <br>
+              上下架：<select><option value="1">上架</option><option value="0">下架</option></select>
+              <br>
+              产品简称：<input type="text" name="cpjc" />
+              <br>
+       	公司：       
+       		<select class="age_select" name="gs">
+            	#foreach($company in $gs)
+	    			<option value="$company.fid">$company.name</option>
+    			#end
+            </select>
+             <br>
+               产品类别：<select name="cptype">
+               <option value="1">医疗</option>
+               <option value="2">重疾</option>
+               <option value="3">人寿</option>
+               <option value="4">意外</option>
+               <option value="5">理财</option>
+               </select>
+              <br> 
+              基本保额：<input type="tel" name="jbbe" />
+              <br>
+              主附产品: 
+              <select name="xz">
+               <option value="1">主险</option>
+               <option value="0">附加险</option>
+               </select> 
+            <br>   
+              投保起始年龄：<input type="tel" name="tbnlks" /> - <input type="tel" name="tbnljs" /> 
+              <br>
+          	默认年龄：<input type="tel" name="hmstate" /> 
+          	  <br>    
+         主险分类标签（计划，热卖等）：<input type="tel" name="cplb" value="NEW" />
+                       <br> 	       
+                       主险产品描述：<input type="tel" name="cpms" />
+                       <br> 	       
+            产品计算方式选择：
+                          <select name="xz">
+               <option value="1">保额算保费</option>
+               <option value="2">保费算保额</option>
+               <option value="3">保额保费互算 </option>
+               </select> 
+       	</form>
+	</body>	
+</html>
+<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="$static_path/public/js/public.js"></script>
+<script type="text/javascript" src="$static_path/index/js/layer.m.js"></script>
+<script type="text/javascript" src="$static_path/index/js/ajax.js"></script>
+<script type="text/javascript">
+	var select=$!selectsjson;
+	function change($this){
+		var fid=$this.val();
+		var flag=$this.data('flag');
+		if(fid>0){
+		for(var k=0;k<select.length;k++){
+			var o=select[k];
+			if(o.fid==fid){			
+				$("#"+flag+"_child").text(o.name).parent().parent().show();
+				var childrens=o.children;
+				var dom='<option value="-999">默认</option>';
+				for(var i=0;i<childrens.length;i++){
+					var child=childrens[i];
+					dom+='<option value="'+child.fid+'">'+child.name+'</option>';		
+				}
+				$("#"+flag+"_child_select").attr('name',o.columnField).html(dom);
+			}
+		}
+		}else{
+			$("#"+flag+"_child").parent().parent().hide();
+		}
+	}
+	$("select.select_change").change(function(){
+		change($(this));
+	});	
+	function trySubmit() {
+		var form=document.getElementById('insure_info');//.submit();
+		ajaxUpload(form,{
+			onSuccess:function(data){
+				console.log(data.result);
+			}
+		});	
+	}	
+</script>

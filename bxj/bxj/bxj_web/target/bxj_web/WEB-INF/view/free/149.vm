@@ -1,0 +1,96 @@
+#set($header_params = {"title":"$model.name", "css":["index/css/style.css", "free/css/free.css", "free/css/free149.css"]})
+#bxj_header($header_params)
+
+#if(!$request.getParameter('hd'))
+<!-- 导航 开始 -->
+<header class="head">
+	<a class="header_left" href="javascript:history.go(-1);"></a>
+    <h1>$model.name</h1>
+    <a class="header_right" href="javascript:;"></a>
+</header>
+
+<div class="morebutton">
+    <div>
+        <a href="plan/index.page" class="syico">首页</a>
+        <a href="javacript:void(0);" class="fenxico">分享</a>
+    </div>
+</div>
+#end
+<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+<div class="container">
+	<div class="content">
+		<div class="div_top_img">
+            <img src="$static_path/free/149/top_img_02.png">
+            <img src="$static_path/free/149/top_img_03.png">
+            <img src="$static_path/free/149/top_img0_02.png">
+            <img src="$static_path/free/149/top_img1_02.png">
+        </div>
+        
+        <div class="div_yl">
+            <div class="div_yl_over">
+                <p><input class="div_self_ipt" type="text" id="name" name="name" placeholder="请输入您的姓名"></p>
+
+                <p><input class="div_self_ipt" type="tel" id="phone" name="phone" placeholder="请输入您的手机号码" maxlength="11"></p>
+
+                <p><input class="div_self_ipt" type="text" id="idcard" name="idcard" placeholder="请输入您的身份证号" maxlength="18"></p>
+                <input class="btn_self" type="button" id="div_submit" value="免费领取">
+            	<input type="hidden" value="${shareId}" id="shareId">
+				<input type="hidden" value="$request.getParameter('pid')" id="pid">
+            </div>
+        </div>
+        
+        <div class="div_detail">
+            <div class="div_detail_left">
+                <p class="div_detail_p div_de_bdbtm">保障期间</p>
+				<p class="div_detail_p div_de_bdbtm">保障年龄</p>
+                <p class="div_detail_p div_de_bdbtm">保障责任</p>
+                <p class="div_de_thl">保额</p>
+            </div>
+            <div class="div_detail_right">
+                <p class="div_detail_p div_de_bdbtm">1年内</p>
+				<p class="div_detail_p div_de_bdbtm">18-70岁</p>
+                <p class="div_detail_p div_de_bdbtm">燃气意外保障</p>
+                <p class="div_de_twl">燃气意外住院医疗费用保险金(经认定的民用燃气意外事故导致住院) 1万元</p>
+                <p class="div_tab"><span class="div_lich">民用燃气意外身故保险金   10万元</span></p>
+            </div>
+        </div>
+        
+        <div class="div_btm">
+        	<div class="div_btm_over">
+                <p>保险责任</p>
+                保险期间内，被保险人遭受民用燃气意外伤害事故并自该事故发生之日起一百八十日内因该事故单独且直接导致身故，给付民用燃气意外身故保险金10万；被保险人遭受民用燃气意外伤害事故，并因该事故单独且直接导致其身体遭受伤害，且经国家卫生行政部门认定的医疗机构的医生诊断必须住院治疗的，对于被保险人在住院期间发生的必要且合理的住院医疗费用，扣除其已从任何机构、个人或社会保险、福利计划获得的补偿后给付民用燃气意外住院医疗费用保险金，最高1万元。以上概述仅供参考，详细内容请参照保险合同，并以保险合同规定为准。
+            </div>
+        </div>
+	</div>
+</div>
+
+#set( $footer_params = ["index/js/layer.m.js", "index/js/Messager.js", "index/js/ajax.js", "free/js/mfree.js?v=201603078", "index/js/share.js?v=201603078"])
+#bxj_footer($footer_params)
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$model.shareTitle',
+                desc: '$!model.shareDesc',
+                imgUrl: '$static_path/free/share_${model.id}.jpg',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+
+	var s = {
+		title: '$model.shareTitle',
+		desc: '$!model.shareDesc',
+		image: '$static_path/free/share_${model.id}.jpg',
+		location: '$bxj_path/free/getFreeInsuranceDetails.page?shareId=${shareId}&pid=$request.getParameter("pid")&hd=1'
+	};
+	
+	setShareInfo(s);
+	
+</script>

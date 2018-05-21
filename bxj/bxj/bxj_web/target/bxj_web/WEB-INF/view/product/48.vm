@@ -1,0 +1,54 @@
+	<ul class="common-info-ul" data-calc="bwrwx">
+		<li class="info-item main_line_height">
+			<label class="info-name disabled">缴费期间</label>
+			<label class="disabled">10年</label>
+			<input type="hidden" name="jfnx" value="26">
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">保障期间</label>
+			
+			<select id="bwrwx-bxnx" class="factor" name="bxnx">
+				<option value="23">30年</option>
+				<option selected value="22">20年</option>
+	        </select>
+			<span class="arrowr"></span>
+		</li>
+		
+		<li class="info-item main_line_height">
+			<label class="info-name">份数</label>
+			
+			<select id="bwrwx-be" class="factor" name="be">
+				<option value="1" selected>1</option>
+				<option value="2">2</option>
+	        </select>
+	        <i class="icon">份</i>
+			<input type="hidden" name="pid" value="48">
+			
+		</li>
+	</ul>
+    
+    #parse("product/product.pa.vm")
+    <script>
+    	$(function() {
+	    	bxj.PlanBook.init({
+	    		title: '百万任我行',
+	    		gs: 'PingAn',
+	    		BeiBaoRen: {
+					age: {
+						min: 18,
+						max: 80,
+					}
+				},
+				TouBaoRen: {
+					enabled: false
+				}
+	    	});
+	    	
+	    	bxj.PlanBook.submitSimple('#touBaoXuanZe');
+	    	
+	    	$('#beiBaoRenAge,#beiBaoRenSex-1, #beiBaoRenSex-0, #bwrwx-bxnx, #bwrwx-be').on('change', function() {
+	    		bxj.PlanBook.submitSimple('#touBaoXuanZe');
+	    	});
+	    	
+    	});
+    </script>

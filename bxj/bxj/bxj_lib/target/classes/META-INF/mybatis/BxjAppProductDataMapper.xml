@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.BxjAppProductDataMapper">
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.BxjAppProductData">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="data_date" jdbcType="TIMESTAMP" property="dataDate" />
+    <result column="plan_pv" jdbcType="BIGINT" property="planPv" />
+    <result column="plan_uv" jdbcType="BIGINT" property="planUv" />
+    <result column="plan_make_population" jdbcType="BIGINT" property="planMakePopulation" />
+    <result column="plan_make_count" jdbcType="BIGINT" property="planMakeCount" />
+    <result column="study_new_pv" jdbcType="BIGINT" property="studyNewPv" />
+    <result column="study_pv" jdbcType="BIGINT" property="studyPv" />
+    <result column="study_uv" jdbcType="BIGINT" property="studyUv" />
+    <result column="friend_pv" jdbcType="BIGINT" property="friendPv" />
+    <result column="friend_uv" jdbcType="BIGINT" property="friendUv" />
+    <result column="friend_share_count" jdbcType="BIGINT" property="friendShareCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, data_date, plan_pv, plan_uv, plan_make_population, plan_make_count, study_new_pv, 
+    study_pv, study_uv, friend_pv, friend_uv, friend_share_count, create_time, create_by, 
+    update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_app_product_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bxj_app_product_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.BxjAppProductData">
+    insert into bxj_app_product_data (id, data_date, plan_pv, 
+      plan_uv, plan_make_population, plan_make_count, 
+      study_new_pv, study_pv, study_uv, 
+      friend_pv, friend_uv, friend_share_count, 
+      create_time, create_by, update_time, 
+      update_by)
+    values (#{id,jdbcType=BIGINT}, #{dataDate,jdbcType=TIMESTAMP}, #{planPv,jdbcType=BIGINT}, 
+      #{planUv,jdbcType=BIGINT}, #{planMakePopulation,jdbcType=BIGINT}, #{planMakeCount,jdbcType=BIGINT}, 
+      #{studyNewPv,jdbcType=BIGINT}, #{studyPv,jdbcType=BIGINT}, #{studyUv,jdbcType=BIGINT}, 
+      #{friendPv,jdbcType=BIGINT}, #{friendUv,jdbcType=BIGINT}, #{friendShareCount,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.BxjAppProductData">
+    insert into bxj_app_product_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dataDate != null">
+        data_date,
+      </if>
+      <if test="planPv != null">
+        plan_pv,
+      </if>
+      <if test="planUv != null">
+        plan_uv,
+      </if>
+      <if test="planMakePopulation != null">
+        plan_make_population,
+      </if>
+      <if test="planMakeCount != null">
+        plan_make_count,
+      </if>
+      <if test="studyNewPv != null">
+        study_new_pv,
+      </if>
+      <if test="studyPv != null">
+        study_pv,
+      </if>
+      <if test="studyUv != null">
+        study_uv,
+      </if>
+      <if test="friendPv != null">
+        friend_pv,
+      </if>
+      <if test="friendUv != null">
+        friend_uv,
+      </if>
+      <if test="friendShareCount != null">
+        friend_share_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dataDate != null">
+        #{dataDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planPv != null">
+        #{planPv,jdbcType=BIGINT},
+      </if>
+      <if test="planUv != null">
+        #{planUv,jdbcType=BIGINT},
+      </if>
+      <if test="planMakePopulation != null">
+        #{planMakePopulation,jdbcType=BIGINT},
+      </if>
+      <if test="planMakeCount != null">
+        #{planMakeCount,jdbcType=BIGINT},
+      </if>
+      <if test="studyNewPv != null">
+        #{studyNewPv,jdbcType=BIGINT},
+      </if>
+      <if test="studyPv != null">
+        #{studyPv,jdbcType=BIGINT},
+      </if>
+      <if test="studyUv != null">
+        #{studyUv,jdbcType=BIGINT},
+      </if>
+      <if test="friendPv != null">
+        #{friendPv,jdbcType=BIGINT},
+      </if>
+      <if test="friendUv != null">
+        #{friendUv,jdbcType=BIGINT},
+      </if>
+      <if test="friendShareCount != null">
+        #{friendShareCount,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.BxjAppProductData">
+    update bxj_app_product_data
+    <set>
+      <if test="dataDate != null">
+        data_date = #{dataDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planPv != null">
+        plan_pv = #{planPv,jdbcType=BIGINT},
+      </if>
+      <if test="planUv != null">
+        plan_uv = #{planUv,jdbcType=BIGINT},
+      </if>
+      <if test="planMakePopulation != null">
+        plan_make_population = #{planMakePopulation,jdbcType=BIGINT},
+      </if>
+      <if test="planMakeCount != null">
+        plan_make_count = #{planMakeCount,jdbcType=BIGINT},
+      </if>
+      <if test="studyNewPv != null">
+        study_new_pv = #{studyNewPv,jdbcType=BIGINT},
+      </if>
+      <if test="studyPv != null">
+        study_pv = #{studyPv,jdbcType=BIGINT},
+      </if>
+      <if test="studyUv != null">
+        study_uv = #{studyUv,jdbcType=BIGINT},
+      </if>
+      <if test="friendPv != null">
+        friend_pv = #{friendPv,jdbcType=BIGINT},
+      </if>
+      <if test="friendUv != null">
+        friend_uv = #{friendUv,jdbcType=BIGINT},
+      </if>
+      <if test="friendShareCount != null">
+        friend_share_count = #{friendShareCount,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.BxjAppProductData">
+    update bxj_app_product_data
+    set data_date = #{dataDate,jdbcType=TIMESTAMP},
+      plan_pv = #{planPv,jdbcType=BIGINT},
+      plan_uv = #{planUv,jdbcType=BIGINT},
+      plan_make_population = #{planMakePopulation,jdbcType=BIGINT},
+      plan_make_count = #{planMakeCount,jdbcType=BIGINT},
+      study_new_pv = #{studyNewPv,jdbcType=BIGINT},
+      study_pv = #{studyPv,jdbcType=BIGINT},
+      study_uv = #{studyUv,jdbcType=BIGINT},
+      friend_pv = #{friendPv,jdbcType=BIGINT},
+      friend_uv = #{friendUv,jdbcType=BIGINT},
+      friend_share_count = #{friendShareCount,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--**************************** extend admin begin here *******************************-->
+    <!-- 查询条件 -->
+    <sql id="Public_Admin_Query_Conditions">
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="queryMonth != null and queryMonth != ''">
+                and date_format(data_date,'%Y%m') = #{queryMonth,jdbcType=VARCHAR}
+            </if>
+            <if test="dataDate != null and dataDate != ''">
+                and date_format(data_date,'%Y-%m-%d') = date_format(#{dataDate,jdbcType=VARCHAR},'%Y-%m-%d')
+            </if>
+
+        </where>
+    </sql>
+
+    <!-- 排序 -->
+    <sql id="Public_Admin_Order_Datas">
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+    </sql>
+
+    <!-- 分页 -->
+   <!--  
+   <sql id="Public_Admin_Page">
+        <if test="pageFirstItem != null and pageSize != null">
+            LIMIT #{pageFirstItem}, #{pageSize}
+        </if>
+    </sql>
+	 -->
+    <!-- 查询 -->
+    <select id="queryAppProductDataPage" parameterType="com.hangjia.bxj.query.report.ProductDataReportQuery" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from bxj_app_product_data
+        <include refid="Public_Admin_Query_Conditions" />
+        <include refid="Public_Admin_Order_Datas" />
+        <!-- <include refid="Public_Admin_Page" /> -->
+    </select>
+    <select id="queryALLAppProductDataPage" resultMap="BaseResultMap">
+    	select <include refid="Base_Column_List" />  from bxj_app_product_data order by data_date
+    </select>
+	
+    <select id="queryAppProductDataCount" parameterType="com.hangjia.bxj.query.report.ProductDataReportQuery" resultType="int">
+        select
+        count(*)
+        from bxj_app_product_data
+        <include refid="Public_Admin_Query_Conditions" />
+    </select>
+
+    <select id="selectProdectDataDetail" resultType="com.hangjia.bxj.vo.ProductDetailVo">
+        <![CDATA[
+--             select 1 productType,'计划书' productName,'产品规划<br/><hr>计划书内容梳理' workDetail,'张纪行' worker,'PlanPv' dataName,'PV' dataInfo from dual union ALL
+--             select 1 productType,'计划书' productName,'产品规划<br/><hr>计划书内容梳理' workDetail,'张纪行' worker,'PlanUv' dataName,'UV' dataInfo from dual union ALL
+--             select 1 productType,'计划书' productName,'产品规划<br/><hr>计划书内容梳理' workDetail,'张纪行' worker,'PlanMakePopulation' dataName,'制作人数' dataInfo from dual union ALL
+--             select 1 productType,'计划书' productName,'产品规划<br/><hr>计划书内容梳理' workDetail,'张纪行' worker,'PlanMakeCount' dataName,'制作数' dataInfo from dual union ALL
+--             select 2 productType,'学习' productName,'产品规划<br/><hr>文章编辑<br/><hr>文章编辑' workDetail,'</br>马宁</br>' worker,'StudyPv' dataName,'PV' dataInfo from dual union ALL
+--             select 2 productType,'学习' productName,'产品规划<br/><hr>文章编辑<br/><hr>文章编辑' workDetail,'</br>马宁</br>' worker,'StudyUv' dataName,'UV' dataInfo from dual union ALL
+--             select 3 productType,'朋友圈助手' productName,'产品规划<br/><hr>内容编辑' workDetail,'</br>马宁</br>' worker,'FriendPv' dataName,'PV' dataInfo from dual union ALL
+--             select 3 productType,'朋友圈助手' productName,'产品规划<br/><hr>内容编辑' workDetail,'</br>马宁</br>' worker,'FriendUv' dataName,'UV' dataInfo from dual union ALL
+--             select 3 productType,'朋友圈助手' productName,'产品规划<br/><hr>内容编辑' workDetail,'</br>马宁</br>' worker,'FriendShareCount' dataName,'分享数' dataInfo  from dual
+            select 1 productType,'计划书' productName,'产品规划<br/><hr>计划书内容梳理' workDetail,'<br/><br/>张纪行<br/>' worker,'PlanPv,PlanUv,PlanMakePopulation,PlanMakeCount' dataName,'PV<br/><hr>UV<br/><hr>制作人数<br/><hr>制作数' dataInfo from dual union ALL
+            select 2 productType,'学习' productName,'产品规划<br/><hr>文章编辑<br/><hr>文章编辑' workDetail,'</br><br/>马宁</br>' worker,'StudyPv,StudyUv,StudyNewPv' dataName,'PV<br/><hr>UV<br/><hr>新内容PV' dataInfo from dual union ALL
+            select 3 productType,'朋友圈助手' productName,'产品规划<br/><hr>内容编辑' workDetail,'</br><br/>马宁</br>' worker,'FriendPv,FriendUv,FriendShareCount' dataName,'PV<br/><hr>UV<br/><hr>UV分享数' dataInfo from dual
+        ]]>
+    </select>
+  <select id="selectXrtProdectDataDetail" resultType="com.hangjia.bxj.vo.ProductDetailVo">
+    <![CDATA[
+            select 4 productType,'新人通' productName,'产品规划<br/><hr>内容编辑' workDetail,'</br><br/>张闯</br>' worker,'StudyCount,StudyCountUv,TestCount,TestCountUv,ClearanceCount,ClearanceCountUv' dataName,'学习PV<br/><hr>学习UV<br/><hr>测试PV<br/><hr>测试UV<br/><hr>通关PV<br/><hr>通关UV' dataInfo from dual
+        ]]>
+  </select>
+  <select id="selectKmhProdectDataDetail" resultType="com.hangjia.bxj.vo.ProductDetailVo">
+    <![CDATA[
+      select 5 productType,'开门红' productName,'产品规划<br/><hr>内容编辑' workDetail,'</br><br/>张闯</br>' worker,'BrowseCount,BrowseCountUv,ShareCount,ShareCountUv' dataName,'浏览PV<br/><hr>浏览UV<br/><hr>分享PV<br/><hr>分享UV' dataInfo from dual
+
+        ]]>
+  </select>
+    <!--**************************** extend admin end here *******************************-->
+</mapper>

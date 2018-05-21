@@ -1,0 +1,96 @@
+.city-toggle {
+    display: none;
+    /*border-right: 1px solid #ddd;*/
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    min-width: 160px;
+    width: 400px;
+    position: absolute;
+    float: left;
+    padding: 5px 0;
+    padding-top: 0px;
+    margin: 2px 0 0;
+    z-index: 1000;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+
+.city-toggle.open {
+    display: block;
+}
+
+.city-toggle .head {
+    border-bottom: 1px solid #ddd;
+}
+
+.city-toggle .head ul {
+    margin-bottom: -1px;
+    padding-left: 0px;
+    background: #ddd;
+}
+
+.city-toggle .head ul li {
+    padding: 5px 15px;
+    /*border-radius: 4px 4px 0 0;*/
+    cursor: pointer;
+}
+
+.city-toggle .head ul li.active {
+    background: #fff;
+}
+
+.city-toggle ul {
+    padding: 0;
+}
+
+.city-toggle ul li {
+    list-style: none;
+    display: inline-block;
+}
+
+.city-toggle ul li a {
+    padding: 5px;
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-block;
+}
+.city-toggle ul li a:hover {
+    color: red;
+    padding: 4px;
+    border: 1px solid #ddd;
+    background: #ddd;
+    border-radius: 4px;;
+}
+
+
+.city-toggle .provinces {
+    padding: 15px;
+    display: none;
+}
+
+.city-toggle .provinces.active {
+    display: block;
+}
+.city-toggle .citys {
+    padding: 15px;
+    display: none;
+}
+.city-toggle .citys.open {
+    display: block;
+}
+
+.city-toggle .citys .city {
+    display: none;
+}
+
+.city-toggle .citys .city.active {
+    display: block;
+}

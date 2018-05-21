@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.MyJuniorsDao">
+
+	<!-- 查询我的下线（我推荐后成功注册的用户）数量 -->
+	<select id="selectMyJuniorCount" resultType="int">
+	SELECT
+		COUNT(1)
+	FROM
+		my_juniors
+	WHERE
+		user_id = #{0, javaType=java.lang.Integer, jdbcType=INTEGER}
+	AND
+		actived = 1
+	</select>
+	
+	<resultMap type="com.hangjia.bxj.model.MyJunior" id="MyJuniors">
+		<id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+		<result property="userId" column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="sharedMobile" column="shared_mobile" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="createAt" column="create_at" javaType="java.util.Date" jdbcType="DATE"/>
+	</resultMap>
+	
+	<!-- 查询我的下线（我推荐后成功注册的用户）列表 -->
+	<select id="listMyJuniors" resultMap="MyJuniors">
+	SELECT
+		id,
+		user_id,
+		shared_mobile,
+		actived_at create_at
+	FROM
+		my_juniors
+	WHERE
+		user_id = #{0, javaType=java.lang.Integer, jdbcType=INTEGER}
+	AND
+		actived = 1
+	</select>
+	
+	<update id="active" parameterType="java.lang.String">
+		UPDATE
+			my_juniors
+		SET
+			actived = 1,
+			actived_at = now()
+		WHERE
+			shared_mobile = #{0, javaType=java.lang.String, jdbcType=VARCHAR}
+			AND actived = 0
+		LIMIT 1
+	</update>
+	
+	<insert id="saveMyJunior" useGeneratedKeys="true">
+	INSERT INTO 
+		my_juniors(user_id, shared_mobile)
+	VALUES
+		(#{0, javaType=java.lang.Integer, jdbcType=INTEGER}, #{1, javaType=java.lang.String, jdbcType=VARCHAR})
+	</insert>
+	
+</mapper>

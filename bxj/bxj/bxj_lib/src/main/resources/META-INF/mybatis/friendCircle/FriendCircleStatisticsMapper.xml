@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.firendcircle.FriendCircleStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.firendcircle.FriendCircleStatistics" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="friend_circle_id" property="friendCircleId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, friend_circle_id, user_id, type, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_friend_circle_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_friend_circle_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleStatistics" >
+    insert into bxj_friend_circle_statistics (id, friend_circle_id, user_id, 
+      type, create_time)
+    values (#{id,jdbcType=BIGINT}, #{friendCircleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleStatistics" >
+    insert into bxj_friend_circle_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="friendCircleId != null" >
+        friend_circle_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="friendCircleId != null" >
+        #{friendCircleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleStatistics" >
+    update bxj_friend_circle_statistics
+    <set >
+      <if test="friendCircleId != null" >
+        friend_circle_id = #{friendCircleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleStatistics" >
+    update bxj_friend_circle_statistics
+    set friend_circle_id = #{friendCircleId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions">
+    <where>
+      <if test="friendCircleId != null">
+        and friend_circle_id = #{friendCircleId,jdbcType=BIGINT}
+      </if>
+      <if test="userId != null">
+        and user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="type != null">
+        and type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+        and date_format(create_time,'%Y-%m-%d') = date_format(#{createTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+      </if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas">
+    <if test="orderDatas != null and orderDatas != ''">
+      order by
+      <foreach collection="orderDatas" item="orderData" separator=",">
+        ${orderData.field} ${orderData.direction}
+      </foreach>
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="startIndex != null and pageSize != null">
+      limit #{startIndex},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 总个数 -->
+  <select id="selectCount" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleStatistics" resultType="int">
+    select
+    count(*)
+    from bxj_friend_circle_statistics
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 查询个数 -->
+  <select id="selectBySelectiveCount" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleStatistics"  resultType="int">
+    select
+    count(*)
+    from bxj_friend_circle_statistics
+    <include refid="Public_Query_Conditions"/>
+    and type = 1
+  </select>
+
+  <!-- 删除喜欢 -->
+  <delete id="deleteByUserId" parameterType="com.hangjia.bxj.model.firendcircle.FriendCircleStatistics">
+    delete from bxj_friend_circle_statistics
+    <include refid="Public_Query_Conditions" />
+  </delete>
+</mapper>

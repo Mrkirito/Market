@@ -1,0 +1,87 @@
+<html>
+<head>
+    #set($static_path = ${configuration.getProperty("urlPath","static_path")})
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+
+<style>
+    .mask {
+        height: 100%; width: 100%;
+        background-color: rgba(0,0,0,.35);
+        position: absolute; left: 0; top: 0;
+        z-index: 250;
+    }
+    .loading {
+        width: 3px; height:3px;
+        border-radius: 100%;
+        box-shadow: 0 -10px 0 1px currentColor,           /* top, 1px expand */
+        10px 0px currentColor,                /* right */
+        0 10px currentColor,                  /* bottom */
+        -10px 0 currentColor,                 /* left */
+
+        -7px -7px 0 .5px currentColor,        /* left-top, 0.5px expand */
+        7px -7px 0 1.5px currentColor,        /* right-top, 1.5px expand */
+        7px 7px currentColor,                 /* right-bottom */
+        -7px 7px currentColor;                /* left-bottom */
+        -webkit-animation: spin 1s steps(8) infinite;
+        animation: spin 1s steps(8) infinite;
+        /*center*/
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        margin: auto;
+    }
+    [data-dpr="2"] .loading {
+        width: 6px!important; height:6px!important;
+        border-radius: 100%;
+        box-shadow: 0 -20px 0 2px currentColor,           /* top, 1px expand */
+        20px 0px currentColor,                /* right */
+        0 20px currentColor,                  /* bottom */
+        -20px 0 currentColor,                 /* left */
+
+        -14px -14px 1px currentColor,        /* left-top, 0.5px expand */
+        14px -14px 0 3px currentColor,        /* right-top, 1.5px expand */
+        14px 14px currentColor,                 /* right-bottom */
+        -14px 14px currentColor!important;                /* left-bottom */
+    }
+    [data-dpr="3"] .loading {
+        width: 9px!important; height:9px!important;
+        border-radius: 100%;
+        box-shadow: 0 -30px 0 3px currentColor,           /* top, 1px expand */
+        30px 0px currentColor,                /* right */
+        0 30px currentColor,                  /* bottom */
+        -30px 0 currentColor,                 /* left */
+
+        -21px -21px 0 1.5px currentColor,        /* left-top, 0.5px expand */
+        21px -21px 0 4.5px currentColor,        /* right-top, 1.5px expand */
+        21px 21px currentColor,                 /* right-bottom */
+        -21px 21px currentColor!important;                /* left-bottom */
+    }
+
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+
+</style>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script>
+    if (IosorAndroid() == 0){
+        window.hjb_wv.closeWebView();
+    }else {
+        closeWebView();
+    }
+</script>
+
+    <body>
+        <div class="mask"><i class="loading"></i></div>
+    </body>
+
+</html>

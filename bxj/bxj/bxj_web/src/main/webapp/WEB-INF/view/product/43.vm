@@ -1,0 +1,213 @@
+		<ul class="common-info-ul">
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>乐享福</em>
+					</span>
+					<span class="creatDes-add-btn" data-layer="mainLayer" data-enable="#btnAddon,#btnAddMore"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddon" data-layer="fjx-layer" data-title="附加险" data-products="['zyjt', 'zyyl', 'ywsh', 'ywyl']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>险种组合</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddMore" data-layer="zhx-layer" data-title="险种组合" data-products="['xinli', 'xinsheng', 'xinxiang', 'ankang', 'anxiang', 'xingfuA']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加险种</em>
+					</span>
+				</div>
+			</li>
+			
+		</ul>
+		
+		#parse("product/product.pa.vm")
+	    <script>
+	    	$(function() {
+		    	bxj.PlanBook.init({
+		    		title: '乐享福',
+		    		gs: 'PingAn',
+		    		autoRefresh: true,
+		    		BeiBaoRen: {
+						age: {
+							min: 0,
+							max: 64,
+						}
+					}
+		    	});
+	    	});
+	    	
+	    	function calcJFNX(d,c) {
+	    		if (d.jfnx == 'to-lqnl') {
+	    			var lqnlText = $('#lexiangfu-lqnl').find('option:selected').text();
+	    			var lqnl = parseInt(lqnlText.substring(0,2), 10),
+	    				age = bxj.PlanBook.instance.getBeiBaoRenAge(true), 
+	    				to = bxj.PlanBook.getJfnxId(lqnl - age);
+	    			d.jfnx = to;
+	    			//c['lexiangfu-jfnx'] = '至' + lqnlText;
+	    		}
+	    	}
+	    	
+	    	function calcLXF(d,c) {
+	    		c.bzlq = $('#lexiangfu-bzlq').val();
+	    		calcJFNX(d, c);
+	    	}
+	    	
+	    	function lxfJFNX(d,c) {
+	    		if (d.jfnx == 'to-lqnl') {
+	    			d.jfnx = '96';
+	    			c['lexiangfu-jfnx'] = '交至领取年龄';
+	    		} else if(d.jfnx == 7) {
+	    			c['lexiangfu-jfnx'] = '趸交';
+	    		} else {
+	    			c['lexiangfu-jfnx'] = '交'+$('#lexiangfu-jfnx').find('option:selected').text();
+	    		}
+	    		
+	    		c.bzlq = $('#lexiangfu-bzlq').val();
+	    	}
+	    	
+	    	function calcJFNX_zj(d,c) {
+	    		if (d.jfnx == 'to-lqnl') {
+	    			var lqnl = $('#lexiangfu-lqnl').val(),
+	    			jfnxs_ = {
+	    				15: 143,
+	    				14: 32,
+	    				13: 31,
+	    				95: 142,
+	    				94: 141,
+	    				93: 140
+	    			};
+	    			
+	    			d.jfnx = jfnxs_[lqnl];
+	    		}
+	    	}
+	    </script>
+    
+    
+    	#set($footer = '
+		
+	<div id="mainLayer" class="popup-layer" style="display: none" data-product="lexiangfu">
+	    <form class="popup-form-layer">
+	        <div class="popup-layer-title">乐享福</div>
+	        <ul class="popup-layer-ul">
+	        	<li id="lexiangfu-lqnl-data">
+	                <label class="info-name" for="lexiangfu-lqnl">领取年龄</label>
+	                <select id="lexiangfu-lqnl" class="factor" name="lqnl" text-name="lexiangfu-lqnl">
+	                	<option value="15">65岁</option>
+				    	<option value="14">60岁</option>
+				    	<option value="13">55岁</option>
+				    	<option value="95">50岁</option>
+				    	<option value="94">45岁</option>
+				    	<option value="93">40岁</option>
+	                </select>
+	                <span class="arrowr"></span>
+	            </li>
+	            
+	            <li data-commons>
+	                <label class="info-name" for="lexiangfu-jfnx">缴费期间</label>
+	                <select id="lexiangfu-jfnx" class="factor" text-name="lexiangfu-jfnx1" name="jfnx" data-jfnx="[20,15,10,5,0]" data-defaults="20">
+	                	<option value="to-lqnl">交至领取年龄</option>
+	                </select>
+	                <span class="arrowr"></span>
+	                <input type="hidden" name="bxnx" value="6">
+	            </li>
+	            
+	            <li>
+	                <label class="info-name" for="lexiangfu-bzlq">保证领取</label>
+	                <select id="lexiangfu-bzlq" class="factor">
+	                	<option value="29">20年</option>
+				    	<option value="30">30年</option>
+	                </select>
+	                <span class="arrowr"></span>
+	            </li>
+	            
+	            <!-- data-param-fn="calcLXF" -->
+	            <li data-calc="lexiangfu" data-ref="#lexiangfu-lqnl-data" data-param-fn="lxfJFNX">
+	                <label class="info-name" for="lexiangfu-be">乐享福保额</label>
+	                <input value="200000" pattern="[0-9]*" data-vali="min" data-min="1000" placeholder="1千以上" id="lexiangfu-be" name="be">
+	                <i class="icon">元</i>
+	                <input type="hidden" name="pid" value="43">
+	            </li>
+	            
+	            <li data-calc="lexiangfu-zj" data-param-fn="calcJFNX_zj">
+	            	<dl>
+	                    <dt>
+	                        <input id="lexiangfu-zjcb" class="checkbox-single" type="checkbox">
+	                        <label for="lexiangfu-zjcb">附加重疾</label>
+	                    </dt>
+	                    <dd>
+	                        <label class="info-name" for="lexiangfu-zj-be">保额</label>
+			                <input value="200000" class="factor" pattern="[0-9]*" data-vali="min" data-min="10000" data-min-msg="重疾保额不得低于1万" placeholder="1万以上" id="lexiangfu-zj-be" name="be">
+			                <i class="icon">元</i>
+			                <input type="hidden" name="pid" value="50">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="lexiangfu-hmc" data-param-fn="calcJFNX" id="lexiangfu-hmc">
+	            	<dl>
+	                    <dt>
+	                        <input type="checkbox" id="lexiangfu-hmccb" class="checkbox-single">
+	                        <label for="lexiangfu-hmccb">豁免C(1148)</label>
+	                    </dt>
+	                    <dd data-hide>
+	                    	<input type="hidden" name="pid" value="236">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="lexiangfu-tbrhm" data-param-fn="calcJFNX" data-toubaoren id="lexiangfu-tbrhm">
+	                <dl>
+	                    <dt>
+	                        <input id="lexiangfu-hm" class="checkbox-single" type="checkbox" data-enhance="tbrhm">
+	                        <label for="lexiangfu-hm">投保人豁免<em class="notes">（非本人可附加）</em></label>
+	                    </dt>
+	                    <dd>
+	                        <input id="paf-hmA" class="radio_box" name="pid" type="radio" value="245">
+	                        <label for="paf-hmA">豁免A14</label>
+	                        <input id="paf-hmB" class="radio_box" name="pid" type="radio" value="246" checked>
+	                        <label class="mrg-right-2" for="paf-hmB">豁免B加强</label>
+	                        <input type="hidden" name="bxnx" value="6">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="lexiangfu-tbrhm-s" data-toubaoren s data-ref="#lexiangfu-tbrhm" id="lexiangfu-tbrhm-s">
+	            	
+	                <dl>
+	                    <dt>
+	                        <input id="lexiangfu-hm-s" class="checkbox-single" type="checkbox">
+	                        <label for="lexiangfu-hm-s">投保人双豁免</label>
+	                    </dt>
+	                    <dd>
+	                    	<label class="info-name" for="shuanghuomian-age">配偶年龄</label>
+			                <select class="factor" name="age" id="shuanghuomian-age">
+			                </select>
+			                <span class="arrowr"></span>
+	                    </dd>
+	                </dl>
+	                
+	            </li>
+	        </ul>
+	        <div class="popup-layer-btn">
+	            <span class="popup-layer-cancel-btn" data-cancel>取消</span><span class="popup-layer-ok-btn" data-ok>确定</span>
+	        </div>
+	    </form>
+	</div>
+	')

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bxj_admin" />
+        <module name="bxj_client" />
+        <module name="bxj_lib" />
+        <module name="bxj_search" />
+        <module name="bxj_service" />
+        <module name="bxj_web" />
+        <module name="core_lib" />
+        <module name="qibao_lib" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.7">
+      <module name="bxj" target="1.5" />
+      <module name="bxj_admin" target="1.6" />
+      <module name="bxj_client" target="1.5" />
+      <module name="bxj_lib" target="1.5" />
+      <module name="bxj_search" target="1.5" />
+      <module name="bxj_service" target="1.5" />
+      <module name="bxj_web" target="1.5" />
+      <module name="core_lib" target="1.5" />
+      <module name="qibao_lib" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

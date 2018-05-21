@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+		
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	<context:component-scan base-package="cn.usst.market"></context:component-scan>	
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"></property>
+		<property name="suffix"  value=".jsp"></property>
+	</bean>
+	
+	<mvc:resources location="/res/images/" mapping="/images/**"/> 
+	<mvc:resources location="/res/css/" mapping="/css/**"/> 
+	<mvc:resources location="/res/js/" mapping="/js/**"/>
+	<mvc:resources location="/res/font/" mapping="/font/**"/>
+	<mvc:resources location="/res/fonts/" mapping="/fonts/**"/>
+	<mvc:resources location="/res/teacherTextbook/" mapping="/teacherTextbook/**"/>
+	
+	
+	
+	<bean    
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">    
+        <property name="messageConverters">    
+            <list>    
+                <ref bean="mappingJackson2HttpMessageConverter" />    
+            </list>    
+        </property>    
+    </bean>    
+    <bean id="mappingJackson2HttpMessageConverter"    
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">    
+        <property name="supportedMediaTypes">    
+            <list>    
+                <value>text/html;charset=UTF-8</value>    
+                <value>text/json;charset=UTF-8</value>    
+                <value>application/json;charset=UTF-8</value>    
+            </list>    
+        </property>    
+    </bean>
+    
+    <!-- 文件上传 -->
+	<!-- <bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxInMemorySize">
+			<value>1638400</value>
+		</property>
+	</bean> -->
+	
+	<!-- 文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为5MB -->
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean>
+	
+	<!-- 使用annotation注解方式配置事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"  />
+	
+
+</beans>

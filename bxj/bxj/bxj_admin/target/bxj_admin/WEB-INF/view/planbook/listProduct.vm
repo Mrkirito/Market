@@ -1,0 +1,85 @@
+$pageModule.init("app/product/listProduct", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <div id="portlet-config" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"></button>
+                <h3>portlet Settings</h3>
+            </div>
+            <div class="modal-body">
+                <p>Here will be a configuration form</p>
+            </div>
+        </div>
+        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <!-- END PAGE HEADER-->
+            	产品名称：<input type="text" name="name"/>
+            	公司：<select class="age_select" name="gs">#foreach($gs in $company)<option value="$gs.fid">$gs.name</option>#end </select>
+            	上下架状态：<select class="age_select" name="sxj"><option value="1">已上架</option><option value="0">已下架</option></select>
+            	险种：<select class="age_select" name="xz"><option value="1">主险</option><option value="0">附加险</option></select>
+            	<button class="btn btn-info search">搜索</button>
+            	&nbsp;&nbsp;<button class="btn btn-danger add">新增产品</button>
+            	<!--<button class="btn btn-info detail">详情</button>-->
+            	<button class="btn btn-warning update">修改产品</button>
+				<button class="btn btn-primary qy_detail">权益预览</button>
+				<button class="btn btn-danger qy_update">权益修改</button>
+				<!--<button class="btn btn-danger import">导入费率</button>-->
+            <!-- BEGIN PAGE CONTENT-->
+			<div class="data-list"></div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+<!--底部 结束-->
+<div class="popup_div hidden">
+    <div class="form-body"></div>
+</div>
+<div class="popup_qy_update_div hidden">
+    <button id="add_qy">添加权益</button>
+    <div class="form-body"></div>
+</div>
+<div class="popup_add_div hidden">
+<div class="form-body">
+	<form class="product_add_form">
+		<input type="hidden" name="fid" value="" />
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">产品分类标签</label><div class="input-group col-md-9"><input type="hidden" class="cate_fid"></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">产品名称</label><div class="input-group col-md-9"><input type="text" class="form-control" name="name" value=""></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">产品简称</label><div class="input-group col-md-9"><input type="text" class="form-control" name="cpjc" value=""></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">基本保额</label><div class="input-group col-md-9"><input type="text" class="form-control" name="jbbe" value=""></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">起始年龄</label><div class="input-group col-md-9"><input type="text" class="form-control" name="tbnlks" value="0"></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">结束年龄</label><div class="input-group col-md-9"><input type="text" class="form-control" name="tbnljs" value=""></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">默认年龄</label><div class="input-group col-md-9"><input type="text" class="form-control" name="hmstate" value=""></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">上下架状态</label><div class="input-group col-md-9"><select class="form-control" name="sxj"><option value="0">下架</option><option value="1">上架</option></select></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">险种</label><div class="input-group col-md-9"><select class="form-control" name="xz"><option value="1">主险</option><option value="0">附加险</option></select></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">公司</label><div class="input-group col-md-9"><select class="form-control" name="gs">#foreach($gs in $company)<option value="$gs.fid">$gs.name</option>#end </select></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">产品标签</label><div class="input-group col-md-9"><input type="text" class="form-control" name="cplb" value=""></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">产品描述</label><div class="input-group col-md-9"><input type="text" class="form-control" name="cpms" value=""></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">附加险开关（平安除外）</label><div class="input-group col-md-9"><select class="form-control" name="cdmc"><option value="0">关</option><option value="1">开</option></select></div></div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">免除</label>
+			<div class="input-group col-md-9">
+				<div id="mc"></div>
+				<input type="hidden" name="mc" />
+			</div>
+		</div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">案例说明</label>
+			<div class="input-group">
+				<div id="bbrqy"></div>
+				<input type="hidden" name="bbrqy" />				
+			</div>
+		</div>
+		<div class="form-group form-group col-sm-12"><label class="col-md-3 control-label">产品特色</label>
+			<div class="input-group">
+				<div id="cpts"></div>
+				<input type="hidden" name="cpts" />				
+			</div>
+		</div>
+	</form>
+</div>
+</div>

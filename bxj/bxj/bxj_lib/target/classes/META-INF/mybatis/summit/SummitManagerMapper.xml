@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.summit.SummitManagerDao">
+
+	<insert id="saveSummit" parameterType="com.hangjia.bxj.model.summit.ChampionSummitEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO summit_champion (
+			`name`,
+			begin_at,
+			end_at,
+			total_joins,
+			image_url,
+			is_display
+		) VALUES (
+			#{name, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{beginAt, jdbcType=TIMESTAMP},
+			#{endAt, jdbcType=TIMESTAMP},
+			#{totalJoins, javaType=java.lang.Integer, jdbcType=INTEGER},
+			#{imageUrl, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{display, javaType=java.lang.String, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="updateSummit" parameterType="com.hangjia.bxj.model.summit.ChampionSummitEntity">
+		UPDATE
+			summit_champion
+		SET
+		    <if test="name != null">
+		      `name` = #{name, javaType=java.lang.String, jdbcType=VARCHAR},
+		    </if>
+			
+			<if test="beginAt != null">
+			  begin_at = #{beginAt, jdbcType=TIMESTAMP},
+		   </if>
+			
+			<if test="endAt != null">
+			  end_at = #{endAt, jdbcType=TIMESTAMP},
+		   </if>
+			
+			<if test="totalJoins != null">
+			  total_joins = #{totalJoins, javaType=java.lang.Integer, jdbcType=INTEGER},
+		   </if>
+		   <if test="imageUrl != null">
+		      image_url = #{imageUrl, javaType=java.lang.String, jdbcType=VARCHAR},
+		   </if>
+		  
+			is_display= #{display, javaType=java.lang.String, jdbcType=VARCHAR}
+			
+		WHERE
+			id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	
+	<select id="summitCount" parameterType="com.hangjia.bxj.query.summit.SummitManagerQuery" resultType="int">
+		SELECT
+			COUNT(*)
+		<include refid="summitQuerySql"/>
+	</select>
+	<!-- 查询冠军论坛峰会 -->
+	<select id="listSummits" parameterType="com.hangjia.bxj.query.summit.SummitManagerQuery" resultType="com.hangjia.bxj.model.summit.ChampionSummitListEntry">
+		SELECT
+			s.id,
+			s.`name`,
+			s.begin_at beginAt,
+			s.end_at endAt,
+			s.total_joins totalJoins,
+			s.image_url imageUrl,
+			s.is_display display,
+			s.create_at createAt,
+			s.modify_at modifyAt,
+			(
+			SELECT
+				GROUP_CONCAT(c.teacher_name SEPARATOR '、')
+			FROM
+				summit_champion_classroom c
+			WHERE
+				c.summit_id = s.id  AND c.is_display != 'false'
+			ORDER BY c.sort, c.id DESC
+			) teacherNames
+		
+		<include refid="summitQuerySql"/>
+			
+		ORDER BY s.begin_at DESC
+		
+		LIMIT #{pageFirstItem, javaType=java.lang.Integer, jdbcType=INTEGER}, #{pageSize, javaType=java.lang.Integer, jdbcType=INTEGER}
+		
+	</select>
+	
+	<sql id="summitQuerySql">
+		FROM
+			summit_champion s
+		WHERE
+			1 = 1
+			<if test="display != null and display != '' and display != '请选择'">
+					AND s.is_display = #{display, javaType=java.lang.String, jdbcType=VARCHAR}
+			</if>
+			<choose>
+				<when test="id != null">
+					AND s.id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+				</when>
+				
+				<otherwise>
+					<if test="name != null">
+					AND s.`name` LIKE CONCAT('%', #{name, javaType=java.lang.String, jdbcType=VARCHAR} ,'%')
+					</if>
+				</otherwise>
+			</choose>
+	</sql>
+	
+	<select id="getSummitName" resultType="java.lang.String" parameterType="java.lang.Integer">
+		SELECT
+			`name`
+		FROM
+			summit_champion
+		WHERE
+			id = #{summitId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</select>
+	
+	<!-- 峰会讲师 -->
+	<insert id="saveSummitClass" parameterType="com.hangjia.bxj.model.summit.ClassroomEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO summit_champion_classroom (
+			`teacher_name`,
+			title,
+			summit_id,
+			sort,
+			click_times_real,
+			click_times_sham,
+			image_url,
+			is_display
+		) VALUES (
+			#{teacherName, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{title, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{summitId, javaType=java.lang.Integer, jdbcType=INTEGER},
+			#{sort, javaType=java.lang.Integer, jdbcType=INTEGER},
+			#{clickReal, javaType=java.lang.Integer, jdbcType=INTEGER},
+			#{clickSham, javaType=java.lang.Integer, jdbcType=INTEGER},
+			#{imageUrl, javaType=java.lang.String, jdbcType=VARCHAR},
+			#{display, javaType=java.lang.String, jdbcType=VARCHAR}
+		)
+	</insert>
+	<!-- 修改峰会讲师 -->
+	<update id="updateSummitClass" parameterType="com.hangjia.bxj.model.summit.ClassroomEntity">
+		UPDATE
+			summit_champion_classroom
+		SET
+		    <if test="teacherName != null">
+		      `teacher_name` = #{teacherName, javaType=java.lang.String, jdbcType=VARCHAR},
+		    </if>
+			<if test="title != null">
+		      `title` = #{title, javaType=java.lang.String, jdbcType=VARCHAR},
+		    </if>
+		    <if test="summitId != null">
+			   summit_id=#{summitId, javaType=java.lang.Integer, jdbcType=INTEGER},
+		   </if>
+		    <if test="sort != null">
+			   sort=#{sort, javaType=java.lang.Integer, jdbcType=INTEGER},
+		   </if>
+			<if test="clickReal != null">
+			  click_times_real = #{clickReal, javaType=java.lang.Integer, jdbcType=INTEGER},
+		   </if>
+		   <if test="clickSham != null">
+			  click_times_sham = #{clickSham, javaType=java.lang.Integer, jdbcType=INTEGER},
+		   </if>
+		    <if test="imageUrl != null">
+		      image_url = #{imageUrl, javaType=java.lang.String, jdbcType=VARCHAR},
+		   </if>
+			 is_display= #{display, javaType=java.lang.String, jdbcType=VARCHAR}
+			
+		WHERE
+			id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</update>
+	<!-- 讲师 条件 -->
+	<sql id="summitTeacherQuery">
+		FROM
+           summit_champion_classroom c
+            <if test="name != null">
+					, summit_champion s
+			</if>
+		WHERE
+			1 = 1
+			<if test="name != null">
+			   AND	c.summit_id = s.id	AND s.`name` LIKE CONCAT('%', #{name, javaType=java.lang.String, jdbcType=VARCHAR} ,'%')
+			</if>
+			<if test="display != null and display != '' and display != '请选择'">
+					AND c.is_display = #{display, javaType=java.lang.String, jdbcType=VARCHAR}
+			 </if>
+			<choose>
+				<when test="id != null">
+					AND c.id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+				</when>
+				<otherwise>
+				 <if test="title != null">
+					AND c.`title` LIKE CONCAT('%', #{title, javaType=java.lang.String, jdbcType=VARCHAR} ,'%')
+				 </if>
+				</otherwise>
+			</choose>
+	</sql>
+	
+	<!-- 查询 峰会讲师数 -->
+	<select id="sumTeachers" parameterType="com.hangjia.bxj.query.summit.SummitManagerQuery" resultType="int">
+		SELECT
+			COUNT(*)
+		<include refid="summitTeacherQuery"/>
+	</select>
+	<!-- 查询 峰会讲师列表 -->
+	<select id="listSummitTeachers" parameterType="com.hangjia.bxj.query.summit.SummitManagerQuery" resultType="com.hangjia.bxj.model.summit.ClassroomEntity">
+		SELECT
+			c.id,
+			c.teacher_name teacherName,
+			c.title title,
+			c.summit_id summitId,
+		    c.click_times_real clickReal,
+		    c.click_times_sham clickSham,
+		    c.sort sort,
+			c.image_url imageUrl,
+			c.is_display display,
+			c.create_at createAt,
+			c.modify_at modifyAt,
+			(
+			SELECT
+				 	s.`name`
+			FROM
+				summit_champion s
+			WHERE
+				c.summit_id = s.id
+			) summitName,
+			(
+				SELECT
+					GROUP_CONCAT(img.image_url)
+				FROM
+					(
+					SELECT
+						i.image_url
+					FROM
+						summit_champion_images i
+					WHERE
+						i.classroom_id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+					AND
+						i.is_display = 'true'
+					ORDER BY i.create_at ,i.id
+					 
+					) img
+	
+		  ) AS images
+			
+		<include refid="summitTeacherQuery"/>
+			
+		ORDER BY c.sort, c.modify_at DESC ,c.id DESC
+		
+		LIMIT #{pageFirstItem, javaType=java.lang.Integer, jdbcType=INTEGER}, #{pageSize, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</select>
+	
+	<!-- 查询单个峰会 讲师  -->
+	<select id="selSummitTeachers" parameterType="com.hangjia.bxj.query.summit.SummitManagerQuery" resultType="com.hangjia.bxj.model.summit.ClassroomEntity">
+		SELECT
+			c.id,
+			c.teacher_name teacherName,
+			c.title title,
+			c.summit_id summitId,
+		    c.click_times_real clickReal,
+		    c.click_times_sham clickSham,
+		    c.sort sort,
+			c.image_url imageUrl,
+			c.is_display display,
+			c.create_at createAt,
+			c.modify_at modifyAt,
+			(
+			SELECT
+				 	s.`name`
+			FROM
+				summit_champion s
+			WHERE
+				c.summit_id = s.id
+			) summitName 
+		FROM
+           summit_champion_classroom c
+           where  c.id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER} 
+	</select>
+	
+	<!--  添加 峰会讲师 图片 -->
+	<insert id="saveTeacherImages">	 
+		INSERT INTO summit_champion_images(
+			classroom_id,
+			image_url
+		) VALUES
+	
+		<foreach collection="images" item="url" separator=",">
+		(#{classRoomId, javaType=java.lang.Integer, jdbcType=INTEGER}, #{url, javaType=java.lang.String, jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+	<delete id="deleteImgs">
+	    DELETE from summit_champion_images 
+	    where  classroom_id=#{classRoomId, javaType=java.lang.Integer, jdbcType=INTEGER}
+	</delete>
+	
+	
+	<!-- 查询ppt图片集合 -->
+	<select id="selAllImgs" parameterType="com.hangjia.bxj.query.summit.SummitManagerQuery" resultType="com.hangjia.bxj.model.summit.ClassroomEntity">
+			SELECT
+				i.image_url AS imageUrl
+			FROM
+				summit_champion_images i
+			WHERE
+				i.classroom_id = #{id, javaType=java.lang.Integer, jdbcType=INTEGER}
+			AND
+				i.is_display = 'true'
+			ORDER BY i.create_at ,i.id
+	</select>
+	
+</mapper>

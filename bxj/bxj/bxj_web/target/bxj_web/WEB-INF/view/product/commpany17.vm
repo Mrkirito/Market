@@ -1,0 +1,30 @@
+<div class="popup-layer product_div_185" style="display:none" data-pid="185" data-jbbe="100000.00" data-cpjc="福相随" data-table="0">
+	<form class="popup-form-layer handler-host">
+		<div class="popup-layer-title">福相随</div>
+		<ul class="popup-layer-ul">
+			<input type="hidden" name="bxnx" value="6" class="factor" data-text="终身" />
+			<li>
+				<label class="info-name">缴费期限</label> 
+				<select class="factor" name="jfnx">
+				<option value="12">30年交</option>
+				<option value="11">20年交</option>
+				<option value="10">15年交</option>
+				<option value="9">10年交</option>
+				<option value="8">5年交</option>
+				<option value="19">3年交</option>
+				<option value="7">趸交</option>
+			</select>
+			</li>
+																							 	<li>
+			<label class="info-name">保额</label> 
+			<input type="tel" placeholder="请输入保额" value="" class="demo_price factor" name="be" maxlength="15"/>
+			<i class="icon">元</i>
+													<span class="error-tips" style="display:none;"></span>
+												</li>
+														</ul>
+		<div class="popup-layer-btn">
+			<span class="popup-layer-cancel-btn">取消</span>
+			<span class="popup-layer-ok-btn" data-table="0">确定</span>
+		</div>
+	</form>
+</div>

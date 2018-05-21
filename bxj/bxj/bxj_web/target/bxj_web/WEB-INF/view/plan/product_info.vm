@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		#set($static_path = ${configuration.getProperty("urlPath","static_path")})
+    	#set($bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="format-detection" content="telephone=no">
+		<title>$!mainRel.planProductMain.cpjc</title>
+		<meta name="keywords" content="计划书">
+		<meta name="description" content="计划书">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/planbook_finish/css/product_specialist.css?v=2">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	<!--[if lt IE 9]>
+	<script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+	</head>
+<body>
+	<!--导航 开始-->
+	#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+		<header class="head">
+			<a class="header_left" href="javascript:history.back(-1);"></a>
+			<h1>$!product.cpjc</h1>
+		</header>
+		<div class="header_heightblock"></div>
+	#end
+	<!--导航 结束-->
+	
+	<div class="container container_porduct_specialist">
+		<dl class="specialist_block">
+			
+			#if($product.cpts && $product.cpts !='')
+			<dt><span class="icon icon01"></span>产品特色</dt>
+			<dd class="left_align">
+				<p>$!product.cpts</p>
+			</dd>
+			#end
+			
+			#if($product.bbrqy && $product.bbrqy !='')
+			<dt><span class="icon icon02"></span>案例说明</dt>
+			<dd class="left_align">
+				$!product.bbrqy
+			</dd>
+			#end
+			
+			#if($product.mc && $product.mc !='')
+			<dt><span class="icon icon04"></span>除外责任</dt>
+			<dd class="left_align">
+				$!product.mc
+			</dd>
+			#end
+			
+			#if($product.tk && $product.tk !='')
+			<dt><span class="icon icon03"></span>产品条款</dt>
+			<dd class="left_align">
+				<a id="ha" href="http://cdn.hangjiabao.com/bxj_web/$!product.tk">$!product.cpjc条款</a>
+			</dd>
+			#end
+		</dl>
+	</div>
+	<div class="imgtouch_block"  style="display: none;">
+		<img id="touchImg" src="">
+	</div>
+</body>
+</html>
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script src="$static_path/bxj_three/static/planbook_finish/js/hammer-min.js"></script>
+<script>
+//快速点击绑定
+FastClick.attach(document.body);
+$(function(){
+	$('.specialist_block dt').click(function(){
+		$(this).toggleClass('checked').next('dd').slideToggle(1);
+	});
+	$('.imgtouch_block').click(function(){
+		$(this).hide();
+	})
+
+	if(1 == IosorAndroid()) {
+		$('#ha').attr('href', 'http://cdn.hangjiabao.com/bxj_web/$!product.tk');
+	} else {
+		$('#ha').attr('href', '$bxj_path/plan/pdf.page?hd=$request.getParameter('hd')&tk=$!product.tk');
+	}
+})
+	 var reqAnimationFrame = (function () {
+        return window[Hammer.prefixed(window, 'requestAnimationFrame')] || function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+    })();
+    var el = document.querySelector("#touchImg");
+    var START_X = Math.round((window.innerWidth - el.offsetWidth) / 2);
+    var START_Y = Math.round((window.innerHeight - el.offsetHeight) / 2);
+    var FINAL_X = 0;
+    var FINAL_Y = 0;
+    var ScaleStatue = 1;
+    var ticking = false;
+    var mc = new Hammer.Manager(el);
+
+    mc.add(new Hammer.Pan({ threshold: 0, pointers: 0 }));
+    mc.add(new Hammer.Rotate({ threshold: 0 })).recognizeWith(mc.get('pan'));
+    mc.add(new Hammer.Pinch({ threshold: 0 })).recognizeWith([mc.get('pan'), mc.get('rotate')]);
+
+    mc.on("panstart panmove", onPan);
+    mc.on("pinchstart pinchmove", onPinch);
+
+    mc.on("hammer.input", function(ev) {
+        if(ev.isFinal) {
+            resetElement();
+        }
+    });
+
+
+	$('.specialist_block').find('img').click(function(){
+		var ImgSrc = $(this).attr('src');
+		$('.imgtouch_block').show().children('#touchImg').attr('src',ImgSrc);
+		FINAL_X = 0;
+    	FINAL_Y = 0;
+    	ScaleStatue = 1;
+		resetElement();
+	})
+
+    function resetElement() {
+        el.className = 'animate';
+        START_X = FINAL_X;
+        START_Y = FINAL_Y;
+        transform = {
+            translate: { x: FINAL_X, y: FINAL_Y },
+            scale: ScaleStatue,
+            angle: 0,
+            rx: 0,
+            ry: 0,
+            rz: 0
+        };
+        requestElementUpdate();
+    }
+
+    function updateElementTransform() {
+        var value = [
+                    'translate3d(' + transform.translate.x + 'px, ' + transform.translate.y + 'px, 0)',
+                    'scale(' + transform.scale + ', ' + transform.scale + ')',
+                    'rotate3d('+ transform.rx +','+ transform.ry +','+ transform.rz +','+  transform.angle + 'deg)'
+        ];
+
+        value = value.join(" ");
+        el.textContent = value;
+        el.style.webkitTransform = value;
+        el.style.mozTransform = value;
+        el.style.transform = value;
+        ticking = false;
+    }
+
+    function requestElementUpdate() {
+        if(!ticking) {
+            reqAnimationFrame(updateElementTransform);
+            ticking = true;
+        }
+    }
+
+    function onPan(ev) {
+        el.className = '';
+        transform.translate = {
+            x: START_X + ev.deltaX,
+            y: START_Y + ev.deltaY
+        };
+        FINAL_X = START_X + ev.deltaX;
+        FINAL_Y = START_Y + ev.deltaY;
+        requestElementUpdate();
+    }
+
+    var initScale = 1;
+    function onPinch(ev) {
+        if(ev.type == 'pinchstart') {
+            initScale = transform.scale || 1;
+        }
+
+        el.className = '';
+        ScaleStatue = transform.scale = initScale * ev.scale;
+        requestElementUpdate();
+    }
+    resetElement();
+</script>

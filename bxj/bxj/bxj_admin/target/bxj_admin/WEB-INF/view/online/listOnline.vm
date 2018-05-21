@@ -1,0 +1,261 @@
+$pageModule.init("app/online/listOnline", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+			
+
+			<div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">ID&nbsp;</label>
+								<input type="text" class="form-control id" >
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">课程父id</label>
+								<input type="text" class="form-control parentId" >
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			
+			
+			
+			<div class="data-list"></div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<!--底部 结束-->
+<div class="video-tpl hidden">
+	<form id="form">
+	<input type="hidden" name="id" />
+	<input type="hidden" name="lecturerName" />
+    <div class="form-body">
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">课程父id</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="parentId">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">类型</label>
+			<div class="col-md-9">
+                <select class="form-control" name="type">
+                    <option disabled='disabled' selected>请选择</option>
+                    <option value="1">总场</option>
+                    <option value="2">分场</option>
+                </select>
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">标题</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="title">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">上下线</label>
+			<div class="col-md-9">
+				<select class="form-control" name="isDisplay">
+                    <option disabled='disabled' selected>请选择</option>
+                    <option value="1">上线</option>
+                    <option value="0">下线</option>
+                </select>
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">销售状态</label>
+			<div class="col-md-9">
+				<select class="form-control" name="salasStatus">
+                    <option disabled='disabled' selected>请选择</option>
+                    <option value="1">正在直播</option>
+                    <option value="2">火热预约</option>
+					<option value="3">已爆满</option>
+					<option value="4">已结束</option>
+					<option value="5">精彩回放</option>
+                </select>
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">关联讲师</label>
+    		<div class="col-md-9">
+                <input type="hidden" name="lecturerId">
+            </div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">直播地址</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="liveAddress">
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">精彩回话视频id</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="videoId">
+			</div>
+        </div>		
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">直播开始时间</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="liveStartTime">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">直播持续时间</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="liveDureTime">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">原价格</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="originalPrice">
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">销售价格</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="salePrice">
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">团购价</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="groupPrice">
+			</div>
+        </div>		
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">团购人数</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="groupCount">
+			</div>
+        </div>	
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">省份</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="province">
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">排序</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control is_number" name="sort">
+			</div>
+        </div>		
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">描述</label>
+			<div class="col-md-9">
+				<input type="text" class="form-control" name="description">
+			</div>
+        </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">图片1</label>
+			<div class="">
+                <div class="col-md-9">
+                    <div class="">
+    				    <div class="uploadImg">
+    						<li style="display: inline-block; margin-right: 3px;" >
+        		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+        		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+        		            <a class="btn btn-primary remove-img">删除</a>
+        		            </span></li>
+    						<a class="btn btn-primary infos-images">上传封面图片</a>
+							<input name="pic1" type="hidden" />
+                    	</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">图片2</label>
+			<div class="">
+                <div class="col-md-9">
+                    <div class="">
+    				    <div class="uploadImg">
+    						<li style="display: inline-block; margin-right: 3px;" >
+        		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+        		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+        		            <a class="btn btn-primary remove-img">删除</a>
+        		            </span></li>
+    						<a class="btn btn-primary infos-images">上传封面图片</a>
+							<input name="pic2" type="hidden" />
+                    	</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">图片3</label>
+			<div class="">
+                <div class="col-md-9">
+                    <div class="">
+    				    <div class="uploadImg">
+    						<li style="display: inline-block; margin-right: 3px;" >
+        		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+        		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+        		            <a class="btn btn-primary remove-img">删除</a>
+        		            </span></li>
+    						<a class="btn btn-primary infos-images">上传封面图片</a>
+							<input name="pic3" type="hidden" />
+                    	</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">图片4</label>
+			<div class="">
+                <div class="col-md-9">
+                    <div class="">
+    				    <div class="uploadImg">
+    						<li style="display: inline-block; margin-right: 3px;" >
+        		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+        		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+        		            <a class="btn btn-primary remove-img">删除</a>
+        		            </span></li>
+    						<a class="btn btn-primary infos-images">上传封面图片</a>
+							<input name="pic4" type="hidden" />
+                    	</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">图片5</label>
+			<div class="">
+                <div class="col-md-9">
+                    <div class="">
+    				    <div class="uploadImg">
+    						<li style="display: inline-block; margin-right: 3px;" >
+        		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+        		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+        		            <a class="btn btn-primary remove-img">删除</a>
+        		            </span></li>
+    						<a class="btn btn-primary infos-images">上传封面图片</a>
+							<input name="pic5" type="hidden" />
+                    	</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+		</form>
+</div>

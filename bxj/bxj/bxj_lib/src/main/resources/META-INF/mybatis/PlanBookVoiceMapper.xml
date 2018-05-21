@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.PlanBookVoiceMapper">
+    <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.PlanBookVoice">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="book_id" jdbcType="BIGINT" property="bookId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="voice_name" jdbcType="VARCHAR" property="voiceName"/>
+        <result column="voice_url" jdbcType="VARCHAR" property="voiceUrl"/>
+        <result column="voice_time" jdbcType="VARCHAR" property="voiceTime"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="is_only" jdbcType="INTEGER" property="isOnly"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+        <result column="create_at" jdbcType="TIMESTAMP" property="createAt"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="modify_at" jdbcType="TIMESTAMP" property="modifyAt"/>
+        <result column="modify_by" jdbcType="VARCHAR" property="modifyBy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, book_id, user_id, voice_name, voice_url, voice_time, type, is_only, is_deleted, 
+    create_at, create_by, modify_at, modify_by
+  </sql>
+
+    <sql id="Public_Query_Conditions">
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="bookId != null">
+                and book_id = #{bookId,jdbcType=BIGINT}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId,jdbcType=BIGINT}
+            </if>
+            <if test="type != null">
+                and type = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+    <sql id="Public_Order_Datas">
+        <if test="orderDatas != null and orderDatas != ''">
+            order by
+            <foreach collection="orderDatas" item="orderData" separator=",">
+                ${orderData.field} ${orderData.direction}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from plan_book_voice
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectBySelective" parameterType="com.hangjia.bxj.model.PlanBookVoice" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from plan_book_voice
+        <include refid="Public_Query_Conditions"/>
+        <include refid="Public_Order_Datas"/>
+    </select>
+
+    <select id="selectBySelectiveCount" parameterType="com.hangjia.bxj.model.PlanBookVoice" resultType="int">
+        select
+        count(*)
+        from plan_book_voice
+        <include refid="Public_Query_Conditions"/>
+        <include refid="Public_Order_Datas"/>
+    </select>
+
+    <select id="selectMaxPrimaryKey" resultType="long">
+        select
+        max(id)
+        from plan_book_voice
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from plan_book_voice
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hangjia.bxj.model.PlanBookVoice">
+    insert into plan_book_voice (id, book_id, user_id, 
+      voice_name, voice_url, voice_time, 
+      type, is_only, is_deleted, 
+      create_at, create_by, modify_at, 
+      modify_by)
+    values (#{id,jdbcType=BIGINT}, #{bookId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{voiceName,jdbcType=VARCHAR}, #{voiceUrl,jdbcType=VARCHAR}, #{voiceTime,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{isOnly,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{modifyAt,jdbcType=TIMESTAMP}, 
+      #{modifyBy,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hangjia.bxj.model.PlanBookVoice">
+        insert into plan_book_voice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="bookId != null">
+                book_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="voiceName != null">
+                voice_name,
+            </if>
+            <if test="voiceUrl != null">
+                voice_url,
+            </if>
+            <if test="voiceTime != null">
+                voice_time,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="isOnly != null">
+                is_only,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="modifyAt != null">
+                modify_at,
+            </if>
+            <if test="modifyBy != null">
+                modify_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="bookId != null">
+                #{bookId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="voiceName != null">
+                #{voiceName,jdbcType=VARCHAR},
+            </if>
+            <if test="voiceUrl != null">
+                #{voiceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="voiceTime != null">
+                #{voiceTime,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="isOnly != null">
+                #{isOnly,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=INTEGER},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyAt != null">
+                #{modifyAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.PlanBookVoice">
+        update plan_book_voice
+        <set>
+            <if test="bookId != null">
+                book_id = #{bookId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="voiceName != null">
+                voice_name = #{voiceName,jdbcType=VARCHAR},
+            </if>
+            <if test="voiceUrl != null">
+                voice_url = #{voiceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="voiceTime != null">
+                voice_time = #{voiceTime,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="isOnly != null">
+                is_only = #{isOnly,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=INTEGER},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyAt != null">
+                modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                modify_by = #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.PlanBookVoice">
+    update plan_book_voice
+    set book_id = #{bookId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      voice_name = #{voiceName,jdbcType=VARCHAR},
+      voice_url = #{voiceUrl,jdbcType=VARCHAR},
+      voice_time = #{voiceTime,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      is_only = #{isOnly,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      modify_by = #{modifyBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

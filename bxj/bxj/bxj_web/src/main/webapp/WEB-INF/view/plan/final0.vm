@@ -1,0 +1,243 @@
+#set($header_params = {"title":"$!mainRel.planProductMain.cpjc", "css":["index/css/style.css?v=20160322","bxj_two/static/css/final2.css?v=20160601"]})
+#bxj_header($header_params)
+<script src="$static_path/bxj_three/public/js/flexible.js?v=100"></script>
+<!--导航 开始-->
+#set($bxj_header_params = {"title":"$!mainRel.planProductMain.cpjc", "isShare":2})
+#bxj_header_html($bxj_header_params)
+<!--导航 结束-->
+<div class="greyDiv" id="greyDiv" style="display:none"></div>
+<div class="show_block" id="show_product_infos" style="display:none;">
+	<h1></h1>
+	<div class="main_div" id="main_div">
+	</div>
+	<span class="show_block_button">确定</span>
+</div>
+#if($hasVoice)
+<audio id="bgMusic" src="$!voice.videoUrl"></audio>
+<div class="mubtn"></div>
+#end
+	<!-- 信封蒙层 -->
+	<div class="cover_block">
+		<div class="cover_div">
+			<div class="top_block">
+				<p class="Cyear tb-rl date_p"></p>
+				<p class="Cdate tb-rl date_p"></p>
+				<p class="tb-rl name_p">$!mainRel.planProductMain.cpjc</p>
+				<p class="tb-rl text_p">是保障</p>
+				<p class="tb-rl text_p">也是投资</p>
+				<p class="tb-rl text_p">更是永不止息的爱</p>
+			</div>
+			<div class="bottom_block">
+				<p class="addressee">敬呈<span> #if($!plan.author!='')  $!plan.author #else 投保人 #end</span></p>
+				<span class="open_button">亲启</span>
+				<p class="sender"><span>#if($cardFlag) $!userCard.name #end</span>敬上</p>
+			</div>
+		</div>
+		<p class="number_p">5</p>
+	</div>
+	<!-- 信封蒙层 结束-->
+<!--内容 开始-->
+<!--3.8二期需求 -->
+<div class="greyblock"></div>
+<!-- 弹出框 -->
+<!-- 弹出框 结束-->
+#if($hasInvitation)
+<div class="invent_block">
+    <div class="invent_close_icon"></div>
+    <h1>尊敬的<span>#if($!plan.author!='')$!plan.author#else贵宾#end</span></h1>
+    <p class="intro_block">$!invitation.text</p>
+    <dl>
+        <dt>酒会时间:</dt><dd>$!invitation.dateAtCN</dd>
+        <dt>地点：</dt><dd>$!invitation.address</dd>
+        <dt>联系人：</dt><dd>$!invitation.contactName</dd>
+        <dt>联系方式：</dt><dd>$!invitation.contactMobile</dd>
+    </dl>
+    <div class="img_block" id="map_img_block"></div>
+    <button class="navigation_button" id="map_follow_my">带我去</button>
+</div>
+<div class="invent_button_block">
+    <div class="gift_bg">
+        <div class="gift_cover"></div>
+    </div>
+    <button class="invetn_button">
+        <img src="$static_path/bxj_two/static/image/invent_button_icon.png">
+        <span>您有一份邀请函</span>
+    </button>
+</div>
+<div class="grevCover"></div>
+#end
+<!--3.8二期需求 结束-->
+<div class="container container_final">
+	<input type="hidden" name="head_appear" value="$!request.getParameter('hd')" />
+    <div class="banner bottom_line">
+    	<img src="$static_path/$!mainRel.planProductMain.img2" width="100%"/>
+    </div>
+    <div class="final_div">
+    	<span class="final_span">性别：<span id="sex_span">#if($plan.sex==1)男#else女#end</span></span>
+        <span class="final_span">年龄：<span id="age_span">$plan.age</span>岁</span>
+    </div>
+    <div class="final_inform">
+    	<div class="final_div01"></div>
+        <div class="final_div02">
+        	<p><span class="final_span" id="totail_span">$!plan.bf</span>元/年</p>
+        </div>
+        <div class="final_div02">
+        	<p><span class="final_span">$!mainRel.jfnxConstant.name</span></p>
+        	<!--<p>交<span class="final_span">$!mainRel.jfnxConstant.value</span>年</p>-->
+        </div>
+        <div class="final_div02">
+        	<p><span class="final_span">$!mainRel.bxnxConstant.name</span></p>
+        </div>
+    	<p class="detail_view"><span class="arrwo_bg "></span></p>
+        <table class="detail_table" style="display:table;">
+            <tr>
+                <th>险种名称</th>
+                <th>保额/份数</th>
+                <th>保费</th>
+                <th>保障期限</th>
+                <th>交费期间</th>
+            </tr>
+            #foreach($rel in $rels)
+             <tr>
+                <td>$!rel.planProductMain.cpjc</td>
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.be</td> #end
+                <td>$!rel.bf</td>
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.bxnxConstant.name</td> #end
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.jfnxConstant.name</td> #end
+            </tr>
+            #end
+        </table>
+    </div>
+    #if($mainRel.planProductMain.qyMark==0)
+    <div class="img-div">
+        <img src="$static_path/index/images/final-bg01.jpg" width="100%"/>
+        <p class="img-title">获得<span class="yellow-span">$!qyCounts</span>项保障</p>
+        <dl class="final_dl">
+        		#foreach($qy in $qys)
+		            <dt><img src="$static_path/$!qy.img" width="100%"/></dt>
+	    	        <dd><p class="final_p font-h4">${velocityCount}.&nbsp;$!qy.des</p></dd>
+	    	        <img src="$static_path/index/images/final-line.jpg" width="100%"/>
+        		#end       		
+        </dl>
+    </div>
+    #else
+    <div class="img-div-type02">
+    	<img src="$static_path/index/images/final-bg01.jpg" width="100%"/>
+    	#foreach($qy in $qys)
+    	<div class="infom_div">
+    		$!qy.head1
+    		$!qy.head2
+    		$!qy.head3
+    	</div>
+    	#end
+    </div>
+    #end
+    <div class="namecard-div">
+    	<img src="$static_path/index/images/final-bg03.jpg" width="100%" />
+        <div class="namecard-button-div">
+        	<img src="$static_path/index/images/final-img001.png" width="9" class="left-top"/>
+            <img src="$static_path/index/images/final-img001.png" width="9" class="right-top"/>
+        	<img src="$static_path/index/images/final-img001.png" width="9" class="left-bottom"/>
+            <img src="$static_path/index/images/final-img001.png" width="9" class="right-bottom"/>
+        	<ul>
+				<li class="pop_up_des" onclick="javascript:window.location.href='$bxj_path/plan/product_info.page?pid=$!plan.pid&hd=$!request.getParameter('hd')';">
+					 <a class="button-span"><span class="button01">产品详情</span></a>
+				</li>
+			</ul>
+        </div>
+        #if($hasCustomerId)
+            <div class="namecard-button-div font-h5 pV20">
+                <img src="$static_path/index/images/final-img001.png" width="9" class="left-top"/>
+                <img src="$static_path/index/images/final-img001.png" width="9" class="right-top"/>
+                <img src="$static_path/index/images/final-img001.png" width="9" class="left-bottom"/>
+                <img src="$static_path/index/images/final-img001.png" width="9" class="right-bottom"/>
+                <p class="inform_p">亲，
+                    #if($cardFlag)
+                        $!userCard.name
+                    #end
+                    为您做的计划书还满意吗？</br>给个好评呗！</p>
+                #if($hasAgree)
+                    <button class="zan_button _grey" style="background: rgb(129, 129, 129);">感谢您的好评！</button>
+                #else
+                    <button class="zan_button">好评！</button>
+                    <form id="customerPlanInfos">
+                        <input type="hidden" name="customerId" value="$!customerId" />
+                        <input type="hidden" name="bookId" value="$!plan.fid" />
+                        <input type="hidden" name="readStatus" value="1" />
+                    </form>
+                #end
+            </div>
+        #end
+
+		#if($plan.userId>0)
+        #if($cardFlag)
+            <div class="namecard">
+                <ul>
+                    <li><h1>$!userCard.name&nbsp;</h1></li>
+                    <li><h2>$!userCard.job&nbsp;</h2></li>
+                    <li class="icon-li icon-li01"><span>$!userCard.phone&nbsp;</span></li>
+                    <li class="icon-li icon-li02"><span>$!userCard.company&nbsp;</span></li>
+                    <li class="icon-li icon-li03"><span>$!userCard.area $!userCard.department $!userCard.address&nbsp;</span></li>
+                </ul>
+                <div class="headicon-div">
+                    <span class="head-icon">
+						#if($userCard.photo)
+							<img src="$!userCard.photo" />
+						#else
+							<img src="$static_path/bxj_three/static/namecard_share/image/headimg_bg.png">
+						#end
+                    </span>
+                </div>
+            </div>
+        #else
+            <div class="namecard nonamecard">
+                <img src="$static_path/index/images/final-img001.png" width="9" class="left-top"/>
+                <img src="$static_path/index/images/final-img001.png" width="9" class="right-top"/>
+                <span class="head-icon">
+                    <img src="$static_path/index/images/nonamecard-icon.jpg"/>
+                </span>
+                <p>您还没有名片</p>
+                <button type="button" onclick="javascript:window.location.href='$bxj_path/planUserCard/userCard.page';">去创建名片</button>
+            </div>
+        #end
+        #end
+        <p class="notice_p">演示数据仅供参考，具体请以实际为准。</p>
+    </div>
+</div>
+
+<!--内容 结束-->
+<!--底部 结束-->
+#set( $footer_params = ["layer_mobile/layer/layer.m/layer.m.js","index/js/final.js?v=148","index/js/share.js?v=201603078","public/js/loader.js","index/js/Messager.js"])
+#bxj_footer($footer_params)
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+	var s = {title: '$!mainRel.planProductMain.cpjc'+'计划书演示',desc: '$!userCard.name 为您设计的专属保险计划书，请查阅！保险——让生活更美好',image: '$static_path/$!mainRel.planProductMain.img2',location: '$bxj_path/plan/detail${plan.fid}.page?share=1&hd=1&customerId=$!customerId'};;	
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: s.title,
+                desc: s.desc,
+                imgUrl: s.image,
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+    var _date='$!date.format('yyyy-M-d',$!plan.ctime)';
+	setShareInfo(s);
+	#if($hasVoice)
+	    var music = document.getElementById("bgMusic");
+        $("div.mubtn").click(function(){
+            if(music.paused){
+                music.play();
+                $(".mubtn").removeClass("mubtn2");
+            }else{
+                music.pause();
+                $(".mubtn").addClass("mubtn2");
+            }
+        });
+    #end  
+</script>

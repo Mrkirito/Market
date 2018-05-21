@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.SysMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.SysMessage" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="msg" property="msg" jdbcType="VARCHAR" />
+    <result column="send_id" property="sendId" jdbcType="BIGINT" />
+    <result column="msg_type" property="msgType" jdbcType="TINYINT" />
+    <result column="is_read" property="isRead" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+         
+    <result column="msg_Name" property="msgName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, user_id, msg, send_id, msg_type, is_read, status, create_by, create_time, update_by, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bxj_sys_message
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bxj_sys_message
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.SysMessage" >
+    insert into bxj_sys_message (fid, user_id, msg, 
+      send_id, msg_type, is_read, 
+      status, create_by, create_time, 
+      update_by, update_time)
+    values (#{fid,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{msg,jdbcType=VARCHAR}, 
+      #{sendId,jdbcType=BIGINT}, #{msgType,jdbcType=TINYINT}, #{isRead,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}) 
+  </insert> 
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.SysMessage" useGeneratedKeys="true" keyProperty="fid">
+    insert into bxj_sys_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="msg != null" >
+        msg,
+      </if>
+      <if test="sendId != null" >
+        send_id,
+      </if>
+      <if test="msgType != null" >
+        msg_type,
+      </if>
+      <if test="isRead != null" >
+        is_read,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>      
+      <if test="msgName != null" >
+         msg_Name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="sendId != null" >
+        #{sendId,jdbcType=BIGINT},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=TINYINT},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="msgName != null" >
+         #{msgName,jdbcType=VARCHAR},
+      </if>
+       
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.SysMessage" >
+    update bxj_sys_message
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="msg != null" >
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="sendId != null" >
+        send_id = #{sendId,jdbcType=BIGINT},
+      </if>
+      <if test="msgType != null" >
+        msg_type = #{msgType,jdbcType=TINYINT},
+      </if>
+      <if test="isRead != null" >
+        is_read = #{isRead,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+       
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.SysMessage" >
+    update bxj_sys_message
+    set user_id = #{userId,jdbcType=BIGINT},
+      msg = #{msg,jdbcType=VARCHAR},
+      send_id = #{sendId,jdbcType=BIGINT},
+      msg_type = #{msgType,jdbcType=TINYINT},
+      is_read = #{isRead,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  
+  <select id="querySysMessageList" parameterType="com.hangjia.bxj.model.SysMessage" resultMap="BaseResultMap">
+	SELECT
+		a.fid,
+		a.user_id,
+		a.msg,
+		a.send_id,
+		a.msg_type,
+		a.is_read,
+		a.create_time,
+		a.msg_Name
+	FROM
+		(
+			SELECT
+				b.fid,
+				b.user_id,
+				b.msg,
+				b.send_id,
+				b.msg_type,
+				b.is_read,
+				b.create_time,
+				b.msg_Name
+			FROM
+				bxj_sys_message b
+			WHERE
+				b.user_id = #{userId}
+			OR
+				b.msg_type = 1
+			ORDER BY
+				b.create_time DESC
+		) a
+	GROUP BY
+		a.msg_type
+	ORDER BY
+		a.msg_type
+  </select>
+  <select id="querySysMessageDetail" parameterType="com.hangjia.bxj.model.SysMessage" resultMap="BaseResultMap">
+	SELECT
+		a.fid,
+		a.user_id,
+		a.msg,
+		a.send_id,
+		a.msg_type,
+		a.is_read,
+		a.create_time,
+		a.msg_Name
+	FROM
+		bxj_sys_message a
+	WHERE
+	<if test="msgType != 1">
+		a.user_id = #{userId}
+	AND 
+	</if>
+	<if test=" msgName != null and msgName!=''">
+		a.msg_Name = #{msgName}
+	AND 
+	</if>
+		a.msg_type = #{msgType}
+	ORDER BY
+		a.create_time DESC
+  </select>
+  
+  <update id="batchUpdateMsgRead" parameterType="com.hangjia.bxj.model.SysMessage">
+    UPDATE bxj_sys_message
+    set 
+      is_read = #{isRead,jdbcType=TINYINT}
+    WHERE 
+    	msg_type = #{msgType}
+    <if test="msgType != 1">AND user_id = #{userId}</if>
+  </update>
+  
+  <select id="queryLetterModuleById" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.model.message.MessageLetterDO">
+  	SELECT
+  		a.id as "id",
+  		a.module_name as "moduleName",
+  		a.description as "description",
+  		a.module_title as "moduleTitle",
+  		a.module_content as "moduleContent",
+  		a.to_obj as "toObj",
+  		a.status as "status",
+  		a.create_time as "createTime",
+  		a.create_name as "createName",
+  		a.update_time as "updateTime",
+  		a.update_name as "updateName"
+  	FROM
+  		bxj_message_module a
+  	WHERE
+  		a.id = #{moduleId}
+  	AND	a.status = 1
+  </select>
+  
+  <insert id="batchInsertLetter" parameterType="com.hangjia.bxj.model.SysMessage">
+    insert into bxj_sys_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="msg != null" >
+        msg,
+      </if>
+      <if test="sendId != null" >
+        send_id,
+      </if>
+      <if test="msgType != null" >
+        msg_type,
+      </if>
+        is_read,
+        status,
+      <if test="createBy != null" >
+        create_by,
+      </if>
+        create_time,
+      <if test="msgName != null" >
+         msg_Name,
+      </if>
+    </trim>
+    
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <foreach collection="userIds" item="batchUserId" index="index" separator="," > 
+	      <if test="userId != null" >
+	        #{batchUserId,jdbcType=BIGINT},
+	      </if>
+	      <if test="msg != null" >
+	        #{msg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="sendId != null" >
+	        #{sendId,jdbcType=BIGINT},
+	      </if>
+	      <if test="msgType != null" >
+	        #{msgType,jdbcType=TINYINT},
+	      </if>
+	        0,
+	        1,
+	      <if test="createBy != null" >
+	        #{createBy,jdbcType=VARCHAR},
+	      </if>
+	      	now(),
+	       <if test="msgName != null" >
+	         #{msgName,jdbcType=VARCHAR},
+	      </if>
+      </foreach>
+    </trim>
+  </insert>
+  
+  <select id="queryPushModuleById" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.model.message.MessagePushDO">
+  	SELECT
+  		a.id as "id",
+  		a.module_name as "moduleName",
+  		a.description as "description",
+  		a.module_title as "moduleTitle",
+  		a.module_content as "moduleContent",
+  		a.to_obj as "toObj",
+  		a.jump_type as "jumpType",
+  		a.status as "status",
+  		a.create_time as "createTime",
+  		a.create_name as "createName",
+  		a.update_time as "updateTime",
+  		a.update_name as "updateName"
+  	FROM
+  		bxj_message_push_module a
+  	WHERE
+  		a.id = #{moduleId}
+  	AND	a.status = 1
+  </select>
+</mapper>

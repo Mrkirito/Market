@@ -1,0 +1,63 @@
+$pageModule.init("app/order/accountProfit", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">交易日期&nbsp;</label>
+								<input type="text" class="form-control createTime">
+								<input type="hidden" class="startTime"/>
+                                <input type="hidden" class="endTime"/>
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">会员账号&nbsp;</label>
+								<input type="text" class="form-control userName">
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">会员用户名&nbsp;</label>
+								<input type="text" class="form-control nickName">
+                            </div>
+							<div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">交易单号&nbsp;</label>
+								<input type="text" class="form-control orderNo">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">维度&nbsp;</label>
+                                <select class="form-control dimension">
+                                    <option value="0" checked>否</option>
+                                    <option value="1">按人统计</option>
+									<option value="2">按天统计</option>
+									<option value="3">按人按天统计</option>
+									<option value="4">按每笔统计</option>
+                                </select>
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<!--底部 结束-->
+

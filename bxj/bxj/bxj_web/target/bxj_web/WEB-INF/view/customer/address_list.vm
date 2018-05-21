@@ -1,0 +1,184 @@
+
+#set($header_params = {"title":"客户管理", "css":["index/css/style.css"]})
+#bxj_header($header_params)
+
+<!--导航 开始-->
+#if(!$request.getParameter('hd'))
+<header class="head">
+    <a class="header_left versionBack" onclick="goback();"></a>
+    <h1>客户管理</h1>
+</header>
+#else
+	<style>
+		.search_block{
+			top: 0;
+		}
+		.container_address_list{
+			margin-top: 4.5rem!important;
+		}
+	</style>
+#end
+<!--导航 结束-->
+
+#if ($list.empty)
+	<!-- 通讯录内容为空 -->
+	<div class="container container_address_list_nouser">
+		<div class="no_user">
+			<img src="$static_path/index/images/list_nouser_bg.png" width="100%"/>
+			#if(!$!request.getParameter('hda') || $!request.getParameter('hda').length() == 0)
+				<a class="button" href="plan/list.page?customerId=$id&video=1">制作计划书来增加客户</a>
+			#end
+		</div>
+	</div>
+	<!-- 通讯录内容为空 结束 -->
+##	<footer style="position:absolute;width:100%;height:49px;bottom:0;left:0;"></footer>
+	#set( $footer_params = ["index/js/address_list.js"])
+	#bxj_footer($footer_params)
+#else
+
+
+	<!--内容 开始-->
+	<!-- 搜索框 -->
+	<!-- 如果没内容，这个也要删除-->
+	<div class="search_block">
+		<input type="search" placeholder="搜索客户（共${list.size()}位）" oninput="searchCus(this)"/>
+	</div>
+	
+	<!-- 搜索框结束 -->
+	<!-- 通讯录有内容情况 -->
+	<div class="container container_address_list" id="container">
+	    <ul class="product_list" id="customer_list">
+	    <!-- js 生成 -->
+	    </ul>
+	</div>
+##	<footer style="position:absolute;width:100%;height:49px;bottom:0;left:0;"></footer>
+	#set( $footer_params = ["index/js/address_list.js", "index/js/pinyin.js"])
+	#bxj_footer($footer_params)
+<script>
+
+var content = [];
+	
+#foreach($i in $list)
+	content.push({name: '$esc.javascript($!i.name)', mobile: '$!i.mobile', sex: $!i.sex, id: $!i.id, imageUrl: '$!i.imageUrl', ename: '$esc.javascript($!i.name)'});
+#end
+content.sort(function(a, o) {
+	return a.ename.localeCompare(o.ename);
+})
+
+var list = jQuery('#customer_list');
+var prevFirstChar;
+var py = {};
+var current;
+
+// 不在 a-z 范围内的，都归类在#里
+var noneSpan = $('<span class="pinyin" id="py-other"><li class="title">#</li></span>');
+var appendNoneSpan;
+
+for (var i = 0; i < content.length; i++) {
+	var item = content[i];
+	// 首字母，本身就是大写，不用转
+	var firstChar = item.ename.charAt(0);
+	
+	var span;
+	
+	if (/[A-Za-z]/.test(firstChar)) {
+		if (i == 0 || firstChar != prevFirstChar) {
+			span = $('<span class="pinyin" id="py-' + firstChar + '"><li class="title">' + firstChar + '</li></span>');
+			list.append(span);
+			current = [];
+			py['py-' + firstChar] = current;
+		} else {
+			span = jQuery('#py-' + firstChar);
+			current = py['py-' + firstChar];
+		}
+	} else {
+		span = noneSpan;
+		current = py['py-other'];
+		if (!current) {
+			current = [];
+			py['py-other'] = current;
+		}
+		appendNoneSpan=true;
+	}
+	
+	span.append('<a href="customer/getCustomerDetails.page?hd=$!request.getParameter('hd')&hda=$!request.getParameter('hda')&hf=$!request.getParameter('hf')&customerId=' + item.id + '" id="' + item.id + '" type="cus">' +
+	        '<li class="main_li">' +
+	            '<span class="head_div">' +
+	            	(item.imageUrl ? '<img style="border-radius:50%" src="$static_path/upload/c/' + item.id + '/images/' + item.imageUrl + '">' : '<img src="$static_path/index/images/' + (item.sex == 1 ? 'head_bg02.png' : 'head_bg.png') + '"/>') +
+	            '</span>' +
+	            '<span class="name">' + item.name + '</span>' +
+	            '<span class="tel">' + item.mobile + '</span>' +
+	        '</li>' +
+	    '</a>');
+	item.ename = pinyin.getFullChars(item.name).toLowerCase();
+	item.ejname = pinyin.getCamelChars(item.name).toLowerCase();
+	prevFirstChar = firstChar;
+	current.push(item);
+};
+
+if (appendNoneSpan) {
+	list.append(noneSpan);
+}
+
+function searchCus(e) {
+	var key = e.value.toLowerCase();
+	//for(var i = 0; i < content.length; i++) {
+	//	var item = content[i];
+	//	if (!key || item.name.indexOf(key) != -1 || item.ename.indexOf(key)!= -1 || item.ejname.indexOf(key) != -1) {
+	//		$('#' + item.id).show();
+	//	} else {
+	//		$('#' + item.id).hide();
+	//	}
+	//}
+	
+	var all = 0;
+	var hi = 0;
+	for(var ii in py) {
+		var ary = py[ii];
+		var total = ary.length;
+		var hidden = 0;
+		for(var i = 0; i < total; i++) {
+			var item = ary[i];
+			if (!key || item.name.indexOf(key) != -1 || item.ename.indexOf(key)!= -1 || item.ejname.indexOf(key) != -1) {
+				$('#' + item.id).show();
+			} else {
+				$('#' + item.id).hide();
+				hidden++;
+			}
+		}
+		if (hidden >= total) {
+			$('#' + ii).hide();
+			hi++;
+		} else {
+			$('#' + ii).show();
+		}
+		
+		all++;
+	}
+	
+	if (hi >= all) {
+		if (!document.getElementById('nocus')) {
+			$('<center id="nocus">没有搜索到客户，请检查下名字是否输错哦！</center>').appendTo('#container');
+		}
+	} else {
+		$('#nocus').remove();
+	}
+}
+
+
+</script>
+	<!-- 通讯录有内容情况 结束-->
+#end
+
+<script>
+    function goback() {
+        window.hjb_wv.GoBack();
+    }
+</script>
+<script type="text/javascript" src="$static_path/bxj_three/public/js/2.3-2.4.js"></script>
+
+<!--内容 结束-->
+
+
+
+

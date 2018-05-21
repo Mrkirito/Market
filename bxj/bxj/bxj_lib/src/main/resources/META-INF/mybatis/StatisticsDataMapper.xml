@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.StatisticsDataMapper">
+	
+	<select id="newPeopleStatisticsData" resultType="com.hangjia.bxj.vo.StatisticsDataVo">
+		SELECT type,count(*) as number,count(DISTINCT user_id) as people FROM study_new_person_course_access_log WHERE create_time BETWEEN #{0} AND #{1} GROUP BY type
+	</select>
+	
+	<insert id="insertNewPeopleStatisticsData" parameterType="com.hangjia.bxj.vo.StatisticsDataVo" >
+    	insert into bxj_app_xrt_data (data_time,study_count,test_count, clearance_count,study_count_uv,test_count_uv, clearance_count_uv, create_time)
+    	values (#{dataTime,jdbcType=TIMESTAMP}, #{studyCount,jdbcType=INTEGER},#{testCount,jdbcType=INTEGER}, #{clearanceCount,jdbcType=INTEGER}, #{studyCountUv,jdbcType=INTEGER},#{testCountUv,jdbcType=INTEGER}, #{clearanceCountUv,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP})
+  	</insert>
+	
+	<select id="goodStartStatisticsData" resultType="com.hangjia.bxj.vo.StatisticsDataVo" >
+		SELECT type,count(*) as number,count(DISTINCT user_id) as people FROM activity_opener_article_access_log where create_time BETWEEN #{0} AND #{1} GROUP BY type
+    </select>
+
+    <insert id="insertGoodStart" parameterType="com.hangjia.bxj.vo.StatisticsDataVo" >
+     insert into bxj_app_kmh_data ( data_time, browse_count,share_count, browse_count_uv,share_count_uv, create_time)
+    	values (#{dataTime,jdbcType=TIMESTAMP}, #{browseCount,jdbcType=INTEGER}, 
+      #{shareCount,jdbcType=INTEGER}, #{browseCountUv,jdbcType=INTEGER},
+      #{shareCountUv,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  	</insert> 	
+  	
+  	
+  	<select id="newPeopleStatisticsDataCount" resultType="int" >
+    	select count(*) from bxj_app_xrt_data WHERE data_time BETWEEN #{0} AND #{1}
+    </select>
+  	<select id="goodStartStatisticsDataCount" resultType="int" >
+    	select count(*) from bxj_app_kmh_data WHERE data_time BETWEEN #{0} AND #{1}
+    </select> 
+    
+<!--     <select id="goodStartStatisticsDataAll" resultType="com.hangjia.bxj.vo.StatisticsDataVo" >
+    	SELECT sum(browse_count_real) as browseCount,sum(share_count_real) as shareCount FROM activity_opener_article
+    </select>   -->
+</mapper>

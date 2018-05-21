@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionChannelMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionChannel" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="level" property="level" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="short_title" property="shortTitle" jdbcType="VARCHAR" />
+    <result column="is_lock" property="isLock" jdbcType="BIT" />
+    <result column="is_display" property="isDisplay" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="more" property="more" jdbcType="VARCHAR" />
+    <result column="more_url" property="moreUrl" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_user" property="modifyUser" jdbcType="BIGINT" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, parent_id, level, title, short_title, is_lock, is_display, sort, more, more_url, 
+    create_user, create_at, modify_user, modify_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_channel
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_channel
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionChannel" >
+    insert into champion_channel (fid, parent_id, level, 
+      title, short_title, is_lock, 
+      is_display, sort, more, 
+      more_url, create_user, create_at, 
+      modify_user, modify_at)
+    values (#{fid,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{level,jdbcType=BIGINT}, 
+      #{title,jdbcType=VARCHAR}, #{shortTitle,jdbcType=VARCHAR}, #{isLock,jdbcType=BIT}, 
+      #{isDisplay,jdbcType=BIT}, #{sort,jdbcType=INTEGER}, #{more,jdbcType=VARCHAR}, 
+      #{moreUrl,jdbcType=VARCHAR}, #{createUser,jdbcType=BIGINT}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=BIGINT}, #{modifyAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionChannel" >
+    insert into champion_channel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="shortTitle != null" >
+        short_title,
+      </if>
+      <if test="isLock != null" >
+        is_lock,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="more != null" >
+        more,
+      </if>
+      <if test="moreUrl != null" >
+        more_url,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyUser != null" >
+        modify_user,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        #{isLock,jdbcType=BIT},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="more != null" >
+        #{more,jdbcType=VARCHAR},
+      </if>
+      <if test="moreUrl != null" >
+        #{moreUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionChannel" >
+    update champion_channel
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        short_title = #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        is_lock = #{isLock,jdbcType=BIT},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="more != null" >
+        more = #{more,jdbcType=VARCHAR},
+      </if>
+      <if test="moreUrl != null" >
+        more_url = #{moreUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionChannel" >
+    update champion_channel
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      level = #{level,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      short_title = #{shortTitle,jdbcType=VARCHAR},
+      is_lock = #{isLock,jdbcType=BIT},
+      is_display = #{isDisplay,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      more = #{more,jdbcType=VARCHAR},
+      more_url = #{moreUrl,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+
+    <sql id="Public_Query_Conditions" >
+        <where>
+            <if test="fid != null" >
+                and fid = #{fid,jdbcType=BIGINT}
+            </if>
+            <if test="isDisplay != null" >
+                and is_display = #{isDisplay,jdbcType=BIT}
+            </if>
+            <if test="parentId != null" >
+                and parent_id = #{parentId,jdbcType=BIGINT}
+            </if>
+ 			<if test="channelName != null" >
+        		and title like CONCAT(CONCAT('%', #{channelName}), '%')
+      		</if>
+        </where>
+    </sql>
+    <sql id="Public_Order_Datas" >
+        <if test="orderDatas != null and orderDatas != ''" >
+            order by
+            <foreach collection="orderDatas" item="orderData" separator=",">
+                ${orderData.field} ${orderData.direction}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="selectBySelective" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from champion_channel
+        <include refid="Public_Query_Conditions" />
+        <include refid="Public_Order_Datas" />
+    </select>
+
+    <select id="getIdsByParentId" resultType="java.lang.Long" parameterType="java.lang.Long">
+        SELECT fid FROM champion_channel WHERE parent_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="getChannelsByParentId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+        champion_channel
+        WHERE parent_id = #{id,jdbcType=BIGINT}
+        order by sort
+    </select>
+</mapper>

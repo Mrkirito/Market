@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<base href="$bxj_path/">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+			<link id="bootstrap-style" href="$bxj_path/res2/media/css/bootstrap.min.css" rel="stylesheet">
+	<link href="$bxj_path/res2/media/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link id="base-style" href="$bxj_path/res2/media/css/style.css" rel="stylesheet">
+	<link id="base-style-responsive" href="$bxj_path/res2/media/css/style-responsive.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" charset="utf-8" src="$bxj_path/uedit/ueditor.config.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="$bxj_path/uedit/ueditor.all.min.js"> </script>
+    	<script type="text/javascript" charset="utf-8" src="$bxj_path/uedit/lang/zh-cn/zh-cn.js"></script>
+    	<script>var bxj_path = '$bxj_path', static_path = '$static_path',zxPid='$!product.fid';</script>
+    	    <style type="text/css">
+        div{
+            width:100%;
+        }
+    </style>
+		<title>产品列表</title>
+	</head>
+<body>
+<form id="form" action="$bxj_path/refreshcache/product_list.jhtml">
+产品简称：<input type="text" name="cpjc" value="$!vo.cpjc" />&nbsp;&nbsp;&nbsp;&nbsp;公司：        	<select class="age_select" name="gs">  
+            	#foreach($company in $gs)
+	    			<option value="$company.fid" #if($!vo.gs==$company.fid) selected="selected" #end>$company.name</option>
+    			#end
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="search">搜索产品</button> 
+            &nbsp;&nbsp;<button type="button" onclick="javascript:window.location.href='$bxj_path/refreshcache/product.jhtml';">新增产品</button></form>
+<table border="1" style="table-layout: fixed;width:99%;">
+							<thead>
+								<tr>
+									<th>产品ID</th>
+									<th>产品名称</th>
+									<th>产品简称</th>
+									<th>基本保额</th>
+									<th>起始年龄</th>
+									<th>默认年龄</th>
+									<th>上架状态</th>
+									<th>险种</th>
+									<th>公司</th>
+									<th>分类标签</th>
+									<th>产品描述</th>
+									<th colspan="2">产品总数：$products.size() 个</th>
+								</tr>
+							</thead>
+							<tbody>
+									#foreach($p in $products)
+										<tr>
+											<td>$!p.fid</td>
+											<td>$!p.name</td>
+											<td>$!p.cpjc</td>
+											<td>$!p.jbbe</td>
+											<td>$!p.tbnlks - $!p.tbnljs</td>
+											<td>$!p.hmstate</td>
+											<td>#if($!p.sxj==1) 上架 #else <font color="blue">下架</font> #end</td>
+											<td>$!p.xz</td>
+											<td>$!p.gs</td>
+											<td>$!p.cplb</td>
+											<td>$!p.cpms</td>
+											<td colspan="2">
+												<button class="drfl" data-link="$bxj_path/refreshcache/product_edit.jhtml?pfid=$!p.fid">编辑产品</button>										
+												&nbsp;&nbsp;<button class="drfl" data-link="$bxj_path/refreshcache/import.jhtml?entre=bxj_app_(_)&pfid=$!p.fid">导入费率</button>
+												&nbsp;&nbsp;<button class="scvm" data-fid="$!p.fid">生成VM</button>
+											<!--&nbsp;&nbsp;<a style="color:orange;">删除产品</a>-->
+											</td>
+										</tr>
+									#end
+							</tbody>							
+</table>	
+</body>
+</html>
+<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="$bxj_path/public/public.js"></script>

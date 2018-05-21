@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.core.cms.dao.mapper.TradeAssuredMapper" >
+  <resultMap id="BaseResultMap" type="com.core.cms.model.mapper.TradeAssured" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="third_order_id" property="thirdOrderId" jdbcType="VARCHAR" />
+    <result column="trade_id" property="tradeId" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="identity_id" property="identityId" jdbcType="CHAR" />
+    <result column="identity_name" property="identityName" jdbcType="VARCHAR" />
+    <result column="identity_card" property="identityCard" jdbcType="VARCHAR" />
+    <result column="identity_stop_date" property="identityStopDate" jdbcType="DATE" />
+    <result column="is_security" property="isSecurity" jdbcType="INTEGER" />
+    <result column="year_earnings" property="yearEarnings" jdbcType="DECIMAL" />
+    <result column="mobile_code" property="mobileCode" jdbcType="VARCHAR" />
+    <result column="relatives" property="relatives" jdbcType="VARCHAR" />
+    <result column="state_code" property="stateCode" jdbcType="VARCHAR" />
+    <result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+    <result column="town_code" property="townCode" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="town" property="town" jdbcType="VARCHAR" />
+    <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="career_name" property="careerName" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="country_name" property="countryName" jdbcType="VARCHAR" />
+    <result column="travel_name" property="travelName" jdbcType="VARCHAR" />
+    <result column="certificate_code1" property="certificateCode1" jdbcType="VARCHAR" />
+    <result column="certificate_code2" property="certificateCode2" jdbcType="VARCHAR" />
+    <result column="insure_area" property="insureArea" jdbcType="VARCHAR" />
+    <result column="flight_number" property="flightNumber" jdbcType="VARCHAR" />
+    <result column="school_type" property="schoolType" jdbcType="VARCHAR" />
+    <result column="school_nature" property="schoolNature" jdbcType="VARCHAR" />
+    <result column="job1_code" property="job1Code" jdbcType="VARCHAR" />
+    <result column="job1_name" property="job1Name" jdbcType="VARCHAR" />
+    <result column="job2_code" property="job2Code" jdbcType="VARCHAR" />
+    <result column="job2_name" property="job2Name" jdbcType="VARCHAR" />
+    <result column="job3_code" property="job3Code" jdbcType="VARCHAR" />
+    <result column="job3_name" property="job3Name" jdbcType="VARCHAR" />
+    <result column="insure_state" property="insureState" jdbcType="VARCHAR" />
+    <result column="insure_address" property="insureAddress" jdbcType="VARCHAR" />
+    <result column="favored_sort" property="favoredSort" jdbcType="VARCHAR" />
+    <result column="favored_sort_proportion" property="favoredSortProportion" jdbcType="INTEGER" />
+    <result column="post" property="post" jdbcType="VARCHAR" />
+    <result column="is_spouse" property="isSpouse" jdbcType="INTEGER" />
+    <result column="xq_name" property="xqName" jdbcType="VARCHAR" />
+    <result column="xq_bank_code" property="xqBankCode" jdbcType="VARCHAR" />
+    <result column="xq_bank_name" property="xqBankName" jdbcType="VARCHAR" />
+    <result column="xq_bank_no" property="xqBankNo" jdbcType="VARCHAR" />
+    <result column="bank_state_id" property="bankStateId" jdbcType="VARCHAR" />
+    <result column="bank_state_name" property="bankStateName" jdbcType="VARCHAR" />
+    <result column="bank_city_id" property="bankCityId" jdbcType="VARCHAR" />
+    <result column="bank_city_name" property="bankCityName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="xq_sub_bank_name" property="xqSubBankName" jdbcType="VARCHAR" />
+    <result column="xq_sub_bank_code" property="xqSubBankCode" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, order_id, third_order_id, trade_id, flag, real_name, sex, birthday, identity_id, 
+    identity_name, identity_card, identity_stop_date, is_security, year_earnings, mobile_code, 
+    relatives, state_code, city_code, town_code, state, city, town, zipcode, address, 
+    mail, career_name, company_name, country_name, travel_name, certificate_code1, certificate_code2, 
+    insure_area, flight_number, school_type, school_nature, job1_code, job1_name, job2_code, 
+    job2_name, job3_code, job3_name, insure_state, insure_address, favored_sort, favored_sort_proportion, 
+    post, is_spouse, xq_name, xq_bank_code, xq_bank_name, xq_bank_no, bank_state_id, 
+    bank_state_name, bank_city_id, bank_city_name, create_time, member_id, xq_sub_bank_name, 
+    xq_sub_bank_code,height,weight
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_trade_assured
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_c_trade_assured
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.core.cms.model.mapper.TradeAssured" >
+    insert into t_c_trade_assured (fid, order_id, third_order_id, 
+      trade_id, flag, real_name, 
+      sex, birthday, identity_id, 
+      identity_name, identity_card, identity_stop_date, 
+      is_security, year_earnings, mobile_code, 
+      relatives, state_code, city_code, 
+      town_code, state, city, 
+      town, zipcode, address, 
+      mail, career_name, company_name, 
+      country_name, travel_name, certificate_code1, 
+      certificate_code2, insure_area, flight_number, 
+      school_type, school_nature, job1_code, 
+      job1_name, job2_code, job2_name, 
+      job3_code, job3_name, insure_state, 
+      insure_address, favored_sort, favored_sort_proportion, 
+      post, is_spouse, xq_name, 
+      xq_bank_code, xq_bank_name, xq_bank_no, 
+      bank_state_id, bank_state_name, bank_city_id, 
+      bank_city_name, create_time, member_id, 
+      xq_sub_bank_name, xq_sub_bank_code)
+    values (#{fid,jdbcType=BIGINT}, #{orderId,jdbcType=INTEGER}, #{thirdOrderId,jdbcType=VARCHAR}, 
+      #{tradeId,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{identityId,jdbcType=CHAR}, 
+      #{identityName,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR}, #{identityStopDate,jdbcType=DATE}, 
+      #{isSecurity,jdbcType=INTEGER}, #{yearEarnings,jdbcType=DECIMAL}, #{mobileCode,jdbcType=VARCHAR}, 
+      #{relatives,jdbcType=VARCHAR}, #{stateCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
+      #{townCode,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{town,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{careerName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{countryName,jdbcType=VARCHAR}, #{travelName,jdbcType=VARCHAR}, #{certificateCode1,jdbcType=VARCHAR}, 
+      #{certificateCode2,jdbcType=VARCHAR}, #{insureArea,jdbcType=VARCHAR}, #{flightNumber,jdbcType=VARCHAR}, 
+      #{schoolType,jdbcType=VARCHAR}, #{schoolNature,jdbcType=VARCHAR}, #{job1Code,jdbcType=VARCHAR}, 
+      #{job1Name,jdbcType=VARCHAR}, #{job2Code,jdbcType=VARCHAR}, #{job2Name,jdbcType=VARCHAR}, 
+      #{job3Code,jdbcType=VARCHAR}, #{job3Name,jdbcType=VARCHAR}, #{insureState,jdbcType=VARCHAR}, 
+      #{insureAddress,jdbcType=VARCHAR}, #{favoredSort,jdbcType=VARCHAR}, #{favoredSortProportion,jdbcType=INTEGER}, 
+      #{post,jdbcType=VARCHAR}, #{isSpouse,jdbcType=INTEGER}, #{xqName,jdbcType=VARCHAR}, 
+      #{xqBankCode,jdbcType=VARCHAR}, #{xqBankName,jdbcType=VARCHAR}, #{xqBankNo,jdbcType=VARCHAR}, 
+      #{bankStateId,jdbcType=VARCHAR}, #{bankStateName,jdbcType=VARCHAR}, #{bankCityId,jdbcType=VARCHAR}, 
+      #{bankCityName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{memberId,jdbcType=INTEGER}, 
+      #{xqSubBankName,jdbcType=VARCHAR}, #{xqSubBankCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.core.cms.model.mapper.TradeAssured" >
+    insert into t_c_trade_assured
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="thirdOrderId != null" >
+        third_order_id,
+      </if>
+      <if test="tradeId != null" >
+        trade_id,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="identityId != null" >
+        identity_id,
+      </if>
+      <if test="identityName != null" >
+        identity_name,
+      </if>
+      <if test="identityCard != null" >
+        identity_card,
+      </if>
+      <if test="identityStopDate != null" >
+        identity_stop_date,
+      </if>
+      <if test="isSecurity != null" >
+        is_security,
+      </if>
+      <if test="yearEarnings != null" >
+        year_earnings,
+      </if>
+      <if test="mobileCode != null" >
+        mobile_code,
+      </if>
+      <if test="relatives != null" >
+        relatives,
+      </if>
+      <if test="stateCode != null" >
+        state_code,
+      </if>
+      <if test="cityCode != null" >
+        city_code,
+      </if>
+      <if test="townCode != null" >
+        town_code,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="town != null" >
+        town,
+      </if>
+      <if test="zipcode != null" >
+        zipcode,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="careerName != null" >
+        career_name,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="countryName != null" >
+        country_name,
+      </if>
+      <if test="travelName != null" >
+        travel_name,
+      </if>
+      <if test="certificateCode1 != null" >
+        certificate_code1,
+      </if>
+      <if test="certificateCode2 != null" >
+        certificate_code2,
+      </if>
+      <if test="insureArea != null" >
+        insure_area,
+      </if>
+      <if test="flightNumber != null" >
+        flight_number,
+      </if>
+      <if test="schoolType != null" >
+        school_type,
+      </if>
+      <if test="schoolNature != null" >
+        school_nature,
+      </if>
+      <if test="job1Code != null" >
+        job1_code,
+      </if>
+      <if test="job1Name != null" >
+        job1_name,
+      </if>
+      <if test="job2Code != null" >
+        job2_code,
+      </if>
+      <if test="job2Name != null" >
+        job2_name,
+      </if>
+      <if test="job3Code != null" >
+        job3_code,
+      </if>
+      <if test="job3Name != null" >
+        job3_name,
+      </if>
+      <if test="insureState != null" >
+        insure_state,
+      </if>
+      <if test="insureAddress != null" >
+        insure_address,
+      </if>
+      <if test="favoredSort != null" >
+        favored_sort,
+      </if>
+      <if test="favoredSortProportion != null" >
+        favored_sort_proportion,
+      </if>
+      <if test="post != null" >
+        post,
+      </if>
+      <if test="isSpouse != null" >
+        is_spouse,
+      </if>
+      <if test="xqName != null" >
+        xq_name,
+      </if>
+      <if test="xqBankCode != null" >
+        xq_bank_code,
+      </if>
+      <if test="xqBankName != null" >
+        xq_bank_name,
+      </if>
+      <if test="xqBankNo != null" >
+        xq_bank_no,
+      </if>
+      <if test="bankStateId != null" >
+        bank_state_id,
+      </if>
+      <if test="bankStateName != null" >
+        bank_state_name,
+      </if>
+      <if test="bankCityId != null" >
+        bank_city_id,
+      </if>
+      <if test="bankCityName != null" >
+        bank_city_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="xqSubBankName != null" >
+        xq_sub_bank_name,
+      </if>
+      <if test="xqSubBankCode != null" >
+        xq_sub_bank_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="thirdOrderId != null" >
+        #{thirdOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeId != null" >
+        #{tradeId,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="identityId != null" >
+        #{identityId,jdbcType=CHAR},
+      </if>
+      <if test="identityName != null" >
+        #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCard != null" >
+        #{identityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="identityStopDate != null" >
+        #{identityStopDate,jdbcType=DATE},
+      </if>
+      <if test="isSecurity != null" >
+        #{isSecurity,jdbcType=INTEGER},
+      </if>
+      <if test="yearEarnings != null" >
+        #{yearEarnings,jdbcType=DECIMAL},
+      </if>
+      <if test="mobileCode != null" >
+        #{mobileCode,jdbcType=VARCHAR},
+      </if>
+      <if test="relatives != null" >
+        #{relatives,jdbcType=VARCHAR},
+      </if>
+      <if test="stateCode != null" >
+        #{stateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="townCode != null" >
+        #{townCode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null" >
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="careerName != null" >
+        #{careerName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryName != null" >
+        #{countryName,jdbcType=VARCHAR},
+      </if>
+      <if test="travelName != null" >
+        #{travelName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateCode1 != null" >
+        #{certificateCode1,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateCode2 != null" >
+        #{certificateCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="insureArea != null" >
+        #{insureArea,jdbcType=VARCHAR},
+      </if>
+      <if test="flightNumber != null" >
+        #{flightNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolType != null" >
+        #{schoolType,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNature != null" >
+        #{schoolNature,jdbcType=VARCHAR},
+      </if>
+      <if test="job1Code != null" >
+        #{job1Code,jdbcType=VARCHAR},
+      </if>
+      <if test="job1Name != null" >
+        #{job1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="job2Code != null" >
+        #{job2Code,jdbcType=VARCHAR},
+      </if>
+      <if test="job2Name != null" >
+        #{job2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="job3Code != null" >
+        #{job3Code,jdbcType=VARCHAR},
+      </if>
+      <if test="job3Name != null" >
+        #{job3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="insureState != null" >
+        #{insureState,jdbcType=VARCHAR},
+      </if>
+      <if test="insureAddress != null" >
+        #{insureAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="favoredSort != null" >
+        #{favoredSort,jdbcType=VARCHAR},
+      </if>
+      <if test="favoredSortProportion != null" >
+        #{favoredSortProportion,jdbcType=INTEGER},
+      </if>
+      <if test="post != null" >
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="isSpouse != null" >
+        #{isSpouse,jdbcType=INTEGER},
+      </if>
+      <if test="xqName != null" >
+        #{xqName,jdbcType=VARCHAR},
+      </if>
+      <if test="xqBankCode != null" >
+        #{xqBankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="xqBankName != null" >
+        #{xqBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="xqBankNo != null" >
+        #{xqBankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankStateId != null" >
+        #{bankStateId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankStateName != null" >
+        #{bankStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCityId != null" >
+        #{bankCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCityName != null" >
+        #{bankCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="xqSubBankName != null" >
+        #{xqSubBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="xqSubBankCode != null" >
+        #{xqSubBankCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.core.cms.model.mapper.TradeAssured" >
+    update t_c_trade_assured
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="thirdOrderId != null" >
+        third_order_id = #{thirdOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeId != null" >
+        trade_id = #{tradeId,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="identityId != null" >
+        identity_id = #{identityId,jdbcType=CHAR},
+      </if>
+      <if test="identityName != null" >
+        identity_name = #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCard != null" >
+        identity_card = #{identityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="identityStopDate != null" >
+        identity_stop_date = #{identityStopDate,jdbcType=DATE},
+      </if>
+      <if test="isSecurity != null" >
+        is_security = #{isSecurity,jdbcType=INTEGER},
+      </if>
+      <if test="yearEarnings != null" >
+        year_earnings = #{yearEarnings,jdbcType=DECIMAL},
+      </if>
+      <if test="mobileCode != null" >
+        mobile_code = #{mobileCode,jdbcType=VARCHAR},
+      </if>
+      <if test="relatives != null" >
+        relatives = #{relatives,jdbcType=VARCHAR},
+      </if>
+      <if test="stateCode != null" >
+        state_code = #{stateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="townCode != null" >
+        town_code = #{townCode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null" >
+        town = #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="careerName != null" >
+        career_name = #{careerName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryName != null" >
+        country_name = #{countryName,jdbcType=VARCHAR},
+      </if>
+      <if test="travelName != null" >
+        travel_name = #{travelName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateCode1 != null" >
+        certificate_code1 = #{certificateCode1,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateCode2 != null" >
+        certificate_code2 = #{certificateCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="insureArea != null" >
+        insure_area = #{insureArea,jdbcType=VARCHAR},
+      </if>
+      <if test="flightNumber != null" >
+        flight_number = #{flightNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolType != null" >
+        school_type = #{schoolType,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNature != null" >
+        school_nature = #{schoolNature,jdbcType=VARCHAR},
+      </if>
+      <if test="job1Code != null" >
+        job1_code = #{job1Code,jdbcType=VARCHAR},
+      </if>
+      <if test="job1Name != null" >
+        job1_name = #{job1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="job2Code != null" >
+        job2_code = #{job2Code,jdbcType=VARCHAR},
+      </if>
+      <if test="job2Name != null" >
+        job2_name = #{job2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="job3Code != null" >
+        job3_code = #{job3Code,jdbcType=VARCHAR},
+      </if>
+      <if test="job3Name != null" >
+        job3_name = #{job3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="insureState != null" >
+        insure_state = #{insureState,jdbcType=VARCHAR},
+      </if>
+      <if test="insureAddress != null" >
+        insure_address = #{insureAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="favoredSort != null" >
+        favored_sort = #{favoredSort,jdbcType=VARCHAR},
+      </if>
+      <if test="favoredSortProportion != null" >
+        favored_sort_proportion = #{favoredSortProportion,jdbcType=INTEGER},
+      </if>
+      <if test="post != null" >
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="isSpouse != null" >
+        is_spouse = #{isSpouse,jdbcType=INTEGER},
+      </if>
+      <if test="xqName != null" >
+        xq_name = #{xqName,jdbcType=VARCHAR},
+      </if>
+      <if test="xqBankCode != null" >
+        xq_bank_code = #{xqBankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="xqBankName != null" >
+        xq_bank_name = #{xqBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="xqBankNo != null" >
+        xq_bank_no = #{xqBankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankStateId != null" >
+        bank_state_id = #{bankStateId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankStateName != null" >
+        bank_state_name = #{bankStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCityId != null" >
+        bank_city_id = #{bankCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCityName != null" >
+        bank_city_name = #{bankCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="xqSubBankName != null" >
+        xq_sub_bank_name = #{xqSubBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="xqSubBankCode != null" >
+        xq_sub_bank_code = #{xqSubBankCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.core.cms.model.mapper.TradeAssured" >
+    update t_c_trade_assured
+    set order_id = #{orderId,jdbcType=INTEGER},
+      third_order_id = #{thirdOrderId,jdbcType=VARCHAR},
+      trade_id = #{tradeId,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      real_name = #{realName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      identity_id = #{identityId,jdbcType=CHAR},
+      identity_name = #{identityName,jdbcType=VARCHAR},
+      identity_card = #{identityCard,jdbcType=VARCHAR},
+      identity_stop_date = #{identityStopDate,jdbcType=DATE},
+      is_security = #{isSecurity,jdbcType=INTEGER},
+      year_earnings = #{yearEarnings,jdbcType=DECIMAL},
+      mobile_code = #{mobileCode,jdbcType=VARCHAR},
+      relatives = #{relatives,jdbcType=VARCHAR},
+      state_code = #{stateCode,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      town_code = #{townCode,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      town = #{town,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      career_name = #{careerName,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      country_name = #{countryName,jdbcType=VARCHAR},
+      travel_name = #{travelName,jdbcType=VARCHAR},
+      certificate_code1 = #{certificateCode1,jdbcType=VARCHAR},
+      certificate_code2 = #{certificateCode2,jdbcType=VARCHAR},
+      insure_area = #{insureArea,jdbcType=VARCHAR},
+      flight_number = #{flightNumber,jdbcType=VARCHAR},
+      school_type = #{schoolType,jdbcType=VARCHAR},
+      school_nature = #{schoolNature,jdbcType=VARCHAR},
+      job1_code = #{job1Code,jdbcType=VARCHAR},
+      job1_name = #{job1Name,jdbcType=VARCHAR},
+      job2_code = #{job2Code,jdbcType=VARCHAR},
+      job2_name = #{job2Name,jdbcType=VARCHAR},
+      job3_code = #{job3Code,jdbcType=VARCHAR},
+      job3_name = #{job3Name,jdbcType=VARCHAR},
+      insure_state = #{insureState,jdbcType=VARCHAR},
+      insure_address = #{insureAddress,jdbcType=VARCHAR},
+      favored_sort = #{favoredSort,jdbcType=VARCHAR},
+      favored_sort_proportion = #{favoredSortProportion,jdbcType=INTEGER},
+      post = #{post,jdbcType=VARCHAR},
+      is_spouse = #{isSpouse,jdbcType=INTEGER},
+      xq_name = #{xqName,jdbcType=VARCHAR},
+      xq_bank_code = #{xqBankCode,jdbcType=VARCHAR},
+      xq_bank_name = #{xqBankName,jdbcType=VARCHAR},
+      xq_bank_no = #{xqBankNo,jdbcType=VARCHAR},
+      bank_state_id = #{bankStateId,jdbcType=VARCHAR},
+      bank_state_name = #{bankStateName,jdbcType=VARCHAR},
+      bank_city_id = #{bankCityId,jdbcType=VARCHAR},
+      bank_city_name = #{bankCityName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      member_id = #{memberId,jdbcType=INTEGER},
+      xq_sub_bank_name = #{xqSubBankName,jdbcType=VARCHAR},
+      xq_sub_bank_code = #{xqSubBankCode,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

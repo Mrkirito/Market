@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.PlanBookMapper" >
+  <sql id="queryProductColumn">
+	fid, name, cpjc, cptype, gs, sxj, px, img, jbbe, tbnlks,tbnljs, xz, tk, cdmc, cplx,bjmb,groupids,hmstate,cplb,cpms,link,calflag,group_name as groupName,zxflag,bbrqy,tbrqy,mc,cpts,qy_mark as qyMark,control,tbrinfo,genpage,img2,cpje,bonus_state as bonusState,bonus_num as bonusNum
+  </sql>
+  <select id="getPlanProductMainsByPage" parameterType="com.hangjia.bxj.vo.QueryProductVo" resultType="com.hangjia.bxj.model.PlanProductMain">
+	SELECT fid,img,cplb,cpms,cpjc
+	FROM plan_product_main where sxj=1 and xz=1 and display=1
+	<if test="name!=null and name!=''">
+		AND cpjc like CONCAT('%',#{name},'%')
+	</if>	
+	<if test="gs!=null and gs!=''">
+		AND gs=#{gs,jdbcType=INTEGER}
+	</if>
+	order by px,fid
+	limit #{offset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 查询产品列表，简单字段，用于列表显示。
+  	select case 根据 zxflag 判定，用于名称显示的字段是 group_name 还是 cpjc -->
+  <select id="getPlanProductSimpleByPage" parameterType="com.hangjia.bxj.vo.QueryProductVo" resultType="com.hangjia.bxj.model.PlanProductSimple">
+	SELECT a.fid,a.imageURL,a.cplb,a.cpms,a.gs,a.`name`,a.px,a.linkUrl FROM 
+		(SELECT fid,IMG imageURL,cplb,cpms,gs,px,cpjc name,url AS linkUrl FROM plan_product_main WHERE SXJ=1 AND xz=1 and display=1
+	<if test="name!=null and name!=''">
+		AND cpjc like CONCAT('%',#{name},'%')
+	</if>	
+	<if test="gs!=null and gs!=''">
+		AND gs=#{gs,jdbcType=INTEGER}
+	</if>		
+		) a
+	<if test="cfid!=null and cfid!=''">
+		LEFT JOIN plan_product_categroy_rel c ON a.fid=c.pid 
+		WHERE cid=#{cfid,jdbcType=INTEGER}    
+	</if>
+	order by a.px,a.fid
+	limit #{offset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+  </select>
+  <select id="getCount" parameterType="com.hangjia.bxj.vo.QueryProductVo" resultType="int">
+	SELECT count(*) FROM 
+		(SELECT fid FROM plan_product_main WHERE SXJ=1 AND xz=1 and display=1
+	<if test="name!=null and name!=''">
+		AND cpjc like CONCAT('%',#{name},'%')
+	</if>	
+	<if test="gs!=null and gs!=''">
+		AND gs=#{gs,jdbcType=INTEGER}
+	</if>		
+		) a
+	<if test="cfid!=null and cfid!=''">
+		LEFT JOIN plan_product_categroy_rel c ON a.fid=c.pid 
+		WHERE cid=#{cfid,jdbcType=INTEGER}    
+	</if>
+  </select>
+  
+  <select id="getPlanProductMains" parameterType="com.hangjia.bxj.vo.QueryProductVo" resultType="com.hangjia.bxj.model.PlanProductMain">
+	SELECT pid FROM plan_product_main where sxj=1 AND cplx=1 AND xz=#{xz,jdbcType=INTEGER} AND gs=#{gs,jdbcType=INTEGER}
+  </select>
+  <select id="getPlanProductRelates" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.model.PlanProductRelates">
+    	SELECT CHILDID as pid FROM plan_product_group WHERE pid=#{pid,jdbcType=INTEGER} order by findex
+  </select>    
+  <select id="getPlanProductMainById" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.model.PlanProductMain">
+	SELECT <include refid="queryProductColumn" />  FROM plan_product_main where fid=#{fid,jdbcType=INTEGER}
+  </select>
+  <select id="getPlanProductMainWithBLOBs" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.model.PlanProductMainWithBLOBs">
+	SELECT fid, name, cpjc, cptype, gs, sxj, px, creater,img, jbbe, tbnlks,tbnljs, xz, tk,  cdmc, cplx,bjmb,bbrqy,tbrqy,mc,cpts,cpms,bjmb
+	FROM plan_product_main where sxj=1 and fid=#{fid,jdbcType=INTEGER}
+  </select>    
+  <select id="getPlanProductJflxs" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.model.PlanProductJflx">
+  	SELECT fid,name FROM plan_product_jflx a INNER JOIN (SELECT JFLX FROM plan_product_fl WHERE pid=#{pid,jdbcType=INTEGER} GROUP BY JFLX) b ON a.FID=b.JFLX AND a.QY=1 order by a.px
+  </select>
+  <select id="getPlanProductJfnxs" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.model.PlanProductJfnx">
+  	SELECT fid,name FROM plan_product_jfnx a INNER JOIN (SELECT JFNX FROM plan_product_fl WHERE pid=#{pid,jdbcType=INTEGER} GROUP BY JFNX) b ON a.FID=b.JFNX AND a.QY=1 order by a.px 	
+  </select>
+  <select id="getPlanProductFl" parameterType="com.hangjia.bxj.model.PlanProductFl" resultType="com.hangjia.bxj.model.PlanProductFl">
+	select bf FROM plan_product_fl where 1=1 
+	  <if test="pid != null" >
+       and PID=#{pid}
+      </if>
+      <if test="age != null" >
+       and AGE=#{age}
+      </if>
+      <if test="sex != null" >
+       and SEX=#{sex}
+      </if>
+      <if test="jfnx != null" >
+       and JFNX=#{jfnx}
+      </if>
+      <if test="bxnx != null" >
+       and BXNX=#{bxnx}
+      </if>
+      <if test="lqnl != null" >
+       and lqnl=#{lqnl}
+      </if>
+      <if test="factor1 != null" >
+       and factor1=#{factor1}
+      </if>
+      <if test="factor2 != null" >
+       and factor2=#{factor2}
+      </if>
+      <if test="factor3 != null" >
+       and factor3=#{factor3}
+      </if>
+      <if test="factor4 != null" >
+       and factor4=#{factor4}
+      </if>
+      <if test="factor5 != null" >
+       and factor5=#{factor5}
+      </if>
+      <if test="factor6 != null" >
+       and factor6=#{factor6}
+      </if>
+      <if test="factor7 != null" >
+       and factor7=#{factor7}
+      </if>
+      <if test="factor8 != null" >
+       and factor8=#{factor8}
+      </if>
+      limit 1
+  </select>
+  <select id="getPlanProductQies" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.model.PlanProductQy">
+    select fid,name,pid, img, des, head1,head2,head3 from plan_product_qy where PID=#{pid,jdbcType=INTEGER} and qy=1 order by px  
+  </select>
+  <insert id="insertPlanBook" parameterType="com.hangjia.bxj.model.PlanBook" useGeneratedKeys="true" keyProperty="fid">
+    insert into plan_book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="age != null" >
+        AGE,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="njbf != null" >
+        NJBF,
+      </if>
+      <if test="res != null" >
+        RES,
+      </if>
+      <if test="gs != null" >
+        GS,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="bf != null" >
+        BF,
+      </if>
+      <if test="author != null" >
+        AUTHOR,
+      </if>
+      <if test="ctime != null" >
+        CTIME,
+      </if>
+      <if test="planxh != null" >
+        planxh,
+      </if>
+      <if test="kchs != null" >
+        kchs,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if> 
+      <if test="invitationId != null" >
+        invitation_id,
+      </if>
+      <if test="voiceId != null" >
+        voice_id,
+      </if>
+      <if test="appOs != null" >
+        app_os,
+      </if>
+      <if test="appVersionCode != null" >
+        app_version_code,
+      </if>
+      <if test="appVersionName != null" >
+        app_version_name,
+      </if>        
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="njbf != null" >
+        #{njbf,jdbcType=DECIMAL},
+      </if>
+      <if test="res != null" >
+        #{res,jdbcType=INTEGER},
+      </if>
+      <if test="gs != null" >
+        #{gs,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="bf != null" >
+        #{bf,jdbcType=DECIMAL},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planxh != null" >
+        #{planxh,jdbcType=VARCHAR},
+      </if>
+      <if test="kchs != null" >
+        #{kchs,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if> 
+      <if test="invitationId != null" >
+        #{invitationId},
+      </if>
+      <if test="voiceId != null" >
+        #{voiceId},
+      </if>
+      <if test="appOs != null" >
+        #{appOs},
+      </if>
+      <if test="appVersionCode != null" >
+        #{appVersionCode},
+      </if>
+      <if test="appVersionName != null" >
+        #{appVersionName},
+      </if>          
+    </trim>
+  </insert>
+  <insert id="insertPlanBookproRel" parameterType="com.hangjia.bxj.model.PlanBookproRel" useGeneratedKeys="true" keyProperty="fid">
+    insert into plan_bookpro_rel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FID,
+      </if>
+      <if test="planid != null" >
+        PLANID,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="res != null" >
+        RES,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="jfnx != null" >
+        JFNX,
+      </if>
+      <if test="bxnx != null" >
+        bxnx,
+      </if>
+      <if test="bf != null" >
+        BF,
+      </if>
+      <if test="be != null" >
+        BE,
+      </if>
+      <if test="ctime != null" >
+        CTIME,
+      </if>
+<!--       <if test="cplx != null" >
+        CPLX,
+      </if> -->
+      <if test="bzlq != null" >
+        BZLQ,
+      </if>
+      <if test="lqnl != null" >
+        LQNL,
+      </if>
+      <if test="dyqy != null" >
+        DYQY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="planid != null" >
+        #{planid,jdbcType=BIGINT},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="res != null" >
+        #{res,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="jfnx != null" >
+        #{jfnx,jdbcType=INTEGER},
+      </if>
+      <if test="bxnx != null" >
+        #{bxnx,jdbcType=INTEGER},
+      </if>
+      <if test="bf != null" >
+        #{bf,jdbcType=DECIMAL},
+      </if>
+      <if test="be != null" >
+        #{be,jdbcType=DECIMAL},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+<!--       <if test="cplx != null" >
+        #{cplx,jdbcType=INTEGER},
+      </if>
+ -->      <if test="bzlq != null" >
+        #{bzlq,jdbcType=INTEGER},
+      </if>
+      <if test="lqnl != null" >
+        #{lqnl,jdbcType=INTEGER},
+      </if>
+      <if test="dyqy != null" >
+        #{dyqy,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertPlanBookproRelSon" parameterType="com.hangjia.bxj.model.PlanBookproRelSon" >
+    insert into plan_bookpro_rel_son
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FID,
+      </if>
+      <if test="rid != null" >
+        RID,
+      </if>
+      <if test="planid != null" >
+        PLANID,
+      </if>
+      <if test="fpid != null" >
+        FPID,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="res != null" >
+        RES,
+      </if>
+      <if test="jfnx != null" >
+        JFNX,
+      </if>
+      <if test="jflx != null" >
+        JFLX,
+      </if>
+      <if test="bf != null" >
+        BF,
+      </if>
+      <if test="be != null" >
+        BE,
+      </if>
+      <if test="ctime != null" >
+        CTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=BIGINT},
+      </if>
+      <if test="planid != null" >
+        #{planid,jdbcType=BIGINT},
+      </if>
+      <if test="fpid != null" >
+        #{fpid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="res != null" >
+        #{res,jdbcType=INTEGER},
+      </if>
+      <if test="jfnx != null" >
+        #{jfnx,jdbcType=INTEGER},
+      </if>
+      <if test="jflx != null" >
+        #{jflx,jdbcType=INTEGER},
+      </if>
+      <if test="bf != null" >
+        #{bf,jdbcType=DECIMAL},
+      </if>
+      <if test="be != null" >
+        #{be,jdbcType=DECIMAL},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertPlanBookUserRel" parameterType="com.hangjia.bxj.model.PlanBookUserRel" >
+    insert into plan_bookuser_rel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FID,
+      </if>
+      <if test="planid != null" >
+        PLANID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="isdel != null" >
+        ISDEL,
+      </if>
+      <if test="delTime != null" >
+        DEL_TIME,
+      </if>
+      <if test="ctime != null" >
+        CTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="planid != null" >
+        #{planid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="delTime != null" >
+        #{delTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="getPlanBookByFid" parameterType="java.lang.Long" resultType="com.hangjia.bxj.model.PlanBook">
+  	select fid, name, age, sex, njbf, res, gs, pid, bf, author,kchs,user_id as userId,invitation_id as invitationId,voice_id as voiceId,ctime,planxh from plan_book where FID=#{fid,jdbcType=BIGINT}
+  </select>
+  <select id="getAllBookproRels" parameterType="java.lang.Long" resultType="com.hangjia.bxj.model.PlanBookproRel">
+	SELECT pid,bf,be,jfnx,bxnx,lqnl,bzlq FROM plan_bookpro_rel a INNER JOIN plan_product_main b ON a.PID=b.FID WHERE PLANID =#{planId} ORDER BY b.px
+  </select>
+  <select id="getAllPlanBookproRelSons" parameterType="java.util.HashMap" resultType="com.hangjia.bxj.model.PlanBookproRelSon">
+select a.fid,a.rid,a.planid,a.fpid,a.pid,a.res,a.jfnx,a.jflx,a.bf,a.be,b.cpjc,b.fllx,b.jbbe as basebe,b.bxnx as bxnx,b.cplx from (select fid, planid,rid,fpid ,pid, res,jfnx, jflx, bf, be from plan_bookpro_rel_son where planid=#{planId,jdbcType=BIGINT} and fpid=#{pid,jdbcType=INTEGER}) a INNER JOIN plan_product_main b on a.pid=b.FID
+  </select>  
+  <select id="getAllPlanProductJflxs" resultType="com.hangjia.bxj.model.PlanProductJflx">
+select fid,name,lxnum from plan_product_jflx where QY=1 
+  </select>           
+  <select id="getAllPlanProductJfnxs" resultType="com.hangjia.bxj.model.PlanProductJfnx">
+select fid,name,nxnum from plan_product_jfnx where QY=1 
+  </select>
+  <select id="getBatchPlanProductQies" resultType="com.hangjia.bxj.model.PlanProductQy">
+    select fid, pid, name, img, des, px, qy, bak from plan_product_qy where 1=1    
+    <if test="list.size() > 0">  
+            AND PID IN  
+            <foreach  
+                collection="list"  
+                item="item"  
+                open="("  
+                separator=","  
+                close=")">  
+                #{item}  
+            </foreach>  
+        </if>  
+  </select>
+  <select id="getPlanBooks" resultType="com.hangjia.bxj.model.PlanBook" parameterType="com.hangjia.bxj.vo.QueryPlanBookVo">
+  	select fid, name, age, sex, njbf, res, gs, pid, bf, author,kchs,abs(#{age}-AGE) ageGap,abs(#{njbf}-BF) bfGap from plan_book where PID=#{zxId} and (SEX=#{sex} or SEX=2) order by ageGap,bfGap limit 1;
+  </select>
+  <select id="getPlanBookByPlanXh" resultType="com.hangjia.bxj.model.PlanBook" parameterType="java.lang.String">
+  	select fid, name, age, sex, njbf, res, gs, pid, bf, author,kchs from plan_book where planxh=#{planXh} limit 1;
+  </select>   
+  <select id="getPlanProductLcjz" parameterType="com.hangjia.bxj.model.PlanBook" resultType="com.hangjia.bxj.model.PlanProductLcjz">
+  	select fid, pid, jfnx, sex, age ,be , low, mid, high from plan_product_lcjz where pid=#{pid} and jfnx=#{jfnxVal} and sex=#{sex} and age=#{age}
+  </select>
+  <select id="getAllFjPidByZxId" parameterType="java.lang.Integer" resultType="java.util.Map">
+  	SELECT CHILDID as pid FROM plan_product_group WHERE PID IN (SELECT PID FROM plan_product_group WHERE CHILDID=#{pid})
+  </select>
+  <select id="getOnePlanProductQy" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT fid FROM plan_product_qy WHERE PID=#{pid} and name=#{name} limit 1
+  </select>
+  <select id="getPlanProductQyByPk" parameterType="java.lang.Integer" resultType="com.hangjia.bxj.model.PlanProductQy">
+		SELECT fid, pid, name, img, des, px, qy, bak FROM plan_product_qy WHERE fid=#{fid}
+  </select>  
+  <insert id="insertPlanDecision" parameterType="com.hangjia.bxj.model.PlanDecision" >
+    insert into plan_decision
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="yjsj != null" >
+        yjsj,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="yjsj != null" >
+        #{yjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="getPlanBookUserRel" parameterType="com.hangjia.bxj.model.PlanBookUserRel" resultType="int">
+  	SELECT count(1) FROM plan_bookuser_rel WHERE USERID=#{userid} and PLANID=${planid} and isdel=0;
+  </select>
+  <select id="getPlanBookUserRelByUserId" parameterType="java.lang.Integer" resultType="int">
+  	SELECT count(1) FROM plan_bookuser_rel WHERE USERID=#{userid} and isdel=0;
+  </select>
+  <select id="getAllPlanProductBxnx" resultType="com.hangjia.bxj.model.PlanProductBxnx">
+  SELECT fid,name from plan_product_bxnx WHERE qy=1
+  </select>
+  <select id="getProductConstants" resultType="com.hangjia.bxj.model.PlanProductConstant" parameterType="java.util.Map">
+		SELECT
+			a.fid,
+			a.name,
+			a.input_type AS inputType,
+			a.default_value AS defaultValue,
+			a.column_field AS columnField,
+			a.value,
+			a.hide AS hide,
+			a.placeholder,
+			a.min_value as minValues,
+			a.max_value as maxValues,
+			a.flag as flag, 
+			a.zx_id as zxId  
+		FROM plan_product_constant a
+		INNER JOIN plan_product_constant_rel b ON a.FID = b.cid
+		WHERE b.pid = #{pid}
+		AND a.FATHER_ID=#{fatherId}
+		AND b.is_display=1
+		ORDER BY b.findex
+ </select>
+ <select id="getMainProducts" resultType="com.hangjia.bxj.model.PlanProductMain" parameterType="java.lang.Integer">
+	SELECT fid,cdmc,cpjc FROM plan_product_main WHERE GS=#{gs} AND XZ=1 AND SXJ=1 AND zxflag!=4 ORDER BY PX	
+ </select>
+ <select id="getAllProducts1" resultType="com.hangjia.bxj.model.PlanProductMain" parameterType="com.hangjia.bxj.model.PlanProductMain">
+	 SELECT <include refid="queryProductColumn" /> FROM plan_product_main WHERE  xz=1  
+	  <if test="fid!=null">
+	     and fid=#{fid}
+	  </if>
+	  AND <![CDATA[fid<=116]]> 	  
+	  AND SXJ=1 AND bjmb=0 AND fid NOT in(44,48)
+ </select>
+ <select id="getAllProducts2" resultType="com.hangjia.bxj.model.PlanProductConstant" parameterType="java.lang.Integer">
+ 	SELECT jfnx as fid FROM plan_product_fl WHERE PID=#{pid} GROUP BY JFNX ORDER BY JFNX
+ </select>
+  <select id="getAllProducts3" resultType="com.hangjia.bxj.model.PlanProductConstant" parameterType="java.lang.Integer">
+ 	SELECT bxnx as fid FROM plan_product_fl WHERE PID=#{pid} GROUP BY bxnx ORDER BY BXNX
+ </select>
+ <select id="getAllProducts4" resultType="com.hangjia.bxj.model.PlanProductConstant" parameterType="java.lang.Integer">
+ 	SELECT factor5 as fid FROM plan_product_fl WHERE PID=#{pid} GROUP BY factor5 ORDER BY factor5
+ </select>
+ <select id="getAllProducts5" resultType="com.hangjia.bxj.model.PlanProductConstant" parameterType="java.lang.Integer">
+ 	SELECT lqnl as fid FROM plan_product_fl WHERE PID=#{pid} GROUP BY lqnl ORDER BY lqnl
+ </select>
+ <select id="listPlanProductMains" resultType="com.hangjia.bxj.model.PlanProductMain">
+ 	SELECT fid FROM plan_product_main
+ </select>
+ <select id="getAllProductConstants" resultType="com.hangjia.bxj.model.PlanProductConstant" parameterType="java.lang.Integer">
+		SELECT
+			a.fid,
+			a.name,
+			a.input_type AS inputType,
+			a.default_value AS defaultValue,
+			a.column_field AS columnField,
+			a.value,
+			a.hide AS hide,
+			a.placeholder,
+			a.min_value as minValues,
+			a.max_value as maxValues,
+			a.flag as flag, 
+			a.zx_id as zxId  
+		FROM plan_product_constant a
+		WHERE a.FATHER_ID=#{fid}
+ </select>
+ <select id="getProductConstantList" resultType="com.hangjia.bxj.model.PlanProductConstant">
+		SELECT
+			a.fid,
+			a.name,
+			a.value
+		FROM plan_product_constant a
+		WHERE a.FATHER_ID>0
+ </select>
+ <delete id="deletePlanProductFl" parameterType="java.lang.Integer">
+     delete from plan_product_fl where pid=#{pid}     
+ </delete>
+ <delete id="deletePlanProductConstantRel" parameterType="java.lang.Integer">
+     delete from plan_product_constant_rel where pid=#{pid}     
+ </delete>
+<insert id="insertPlanProductFl" parameterType="com.hangjia.bxj.model.PlanProductFl" >
+    insert into plan_product_fl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FID,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="age != null" >
+        AGE,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="jfnx != null" >
+        JFNX,
+      </if>
+      <if test="jflx != null" >
+        JFLX,
+      </if>
+      <if test="bxnx != null" >
+        BXNX,
+      </if>
+      <if test="factor1 != null" >
+        factor1,
+      </if>
+      <if test="factor2 != null" >
+        factor2,
+      </if>
+      <if test="factor3 != null" >
+        factor3,
+      </if>
+      <if test="factor4 != null" >
+        factor4,
+      </if>
+      <if test="factor5 != null" >
+        factor5,
+      </if>
+      <if test="factor6 != null" >
+        factor6,
+      </if>
+      <if test="factor7 != null" >
+        factor7,
+      </if>
+      <if test="factor8 != null" >
+        factor8,
+      </if>
+      <if test="bf != null" >
+        BF,
+      </if>
+      <if test="ctime != null" >
+        CTIME,
+      </if>
+      <if test="ver != null" >
+        ver,
+      </if>
+      <if test="lqnl != null" >
+        lqnl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="jfnx != null" >
+        #{jfnx,jdbcType=INTEGER},
+      </if>
+      <if test="jflx != null" >
+        #{jflx,jdbcType=INTEGER},
+      </if>
+      <if test="bxnx != null" >
+        #{bxnx,jdbcType=INTEGER},
+      </if>
+      <if test="factor1 != null" >
+        #{factor1,jdbcType=VARCHAR},
+      </if>
+      <if test="factor2 != null" >
+        #{factor2,jdbcType=VARCHAR},
+      </if>
+      <if test="factor3 != null" >
+        #{factor3,jdbcType=VARCHAR},
+      </if>
+      <if test="factor4 != null" >
+        #{factor4,jdbcType=VARCHAR},
+      </if>
+      <if test="factor5 != null" >
+        #{factor5,jdbcType=INTEGER},
+      </if>
+      <if test="factor6 != null" >
+        #{factor6,jdbcType=INTEGER},
+      </if>
+      <if test="factor7 != null" >
+        #{factor7,jdbcType=INTEGER},
+      </if>
+      <if test="factor8 != null" >
+        #{factor8,jdbcType=INTEGER},
+      </if>
+      <if test="bf != null" >
+        #{bf,jdbcType=DECIMAL},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ver != null" >
+        #{ver,jdbcType=BIGINT},
+      </if>
+      <if test="lqnl != null" >
+        #{lqnl,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert> 
+  <select id="getPlanBooksByUserId" resultType="com.hangjia.bxj.model.PlanBookUserVo" parameterType="com.hangjia.bxj.query.PlanBookQuery" >
+	SELECT t2.FID AS planId,t3.name,t2.author,t3.img,t2.ctime FROM plan_book t2 INNER JOIN plan_product_main T3 ON t2.PID = T3.FID WHERE t2.user_id=#{userId} order by t2.ctime desc LIMIT #{pageFirstItem},#{pageSize} 
+  </select>
+  <select id="getPlanBookCountByUserId" resultType="int" parameterType="com.hangjia.bxj.query.PlanBookQuery" >
+  	SELECT count(*) FROM plan_book t2 INNER JOIN plan_product_main T3 ON t2.PID = T3.FID WHERE t2.user_id=#{userId}
+  </select>
+  <delete id="deletePlanBookByPlanIds" parameterType="com.hangjia.bxj.query.PlanBookQuery" >
+    delete from plan_book where fid in 
+  	 <foreach item="item" index="index" collection="planIds" open="(" separator="," close=")">  
+ 		 #{item}  
+ 	</foreach>
+ 	and user_id=#{userId} 
+  </delete>
+</mapper>

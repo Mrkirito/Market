@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+ #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+  #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>新人通</title>
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/theNew/css/list.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/swiper-3.3.1.min.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+	<style>
+	.hideClass{display:none;}
+	</style>
+</head>
+
+<body>
+ <!--导航 开始   -->
+
+	<header class="head">
+	  	#if($request.getParameter('head')==1)
+         <a class="header_left" href="javascript:history.go(-1)"></a>
+        #else
+        <a class="header_left" href="javascript:goback()"></a>
+        #end	
+	  	<h1>新人通</h1>
+	</header>
+   <div class="header_heightblock"></div>
+
+
+	<!-- 导航 结束-->
+	<div class="mask"><span class="loading"></span></div>
+    <div class="container swiper-container">
+		<div class="swiper-wrapper hideClass">
+			<!-- 第一天 -->
+	        <div class="swiper-slide">
+				<!-- 顶部模块 -->
+				<div class="top_block">
+					<h1><span class="day01">第一天</span>
+					 #set($dayone = 1)
+				     #foreach($info in $listinit)
+				    	 #if($!info.day==1&&$dayone==1)
+				    	     #set($dayone = 2)
+				    	     $!info.knowExp    
+					    #end 
+					   #end
+					  </h1>
+					<!-- 内容文字 -->
+					<p> #set($dayone = 1) #foreach($info in $listinit)  #if($!info.day==1&&$dayone==1) $!info.newText  #set($dayone = 2)  #end  #end</p>
+					<!-- 内容文字 结束-->
+				</div>
+				<!-- 顶部模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block video_list" id="videoIDList1">
+					<h2>$!vdOneInfo.videoName</h2>
+					<ul>
+					 #foreach($info in $vdList) 
+					   #if($!info.day==1)
+                          <a href="javascript:showVideo('$!info.videoId','$!info.playCount','$!info.id')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<span class="playtime">$!info.durationTime</span>
+									<img src="$static_path/$!info.coverImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!info.title</h3>
+									<span class="name">$!info.lecturerName</span>
+									<span class="playnum">$!info.playCount</span>
+								</div>
+							</li>
+						</a>
+						 
+						 #end 
+						
+						#end 
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block ppt_list">
+					<h2>$!vdOneInfo.courseName</h2>
+					<ul>
+					  #foreach( $couinfo in $courseList) 
+                         #if($!couinfo.day==1)
+					      <a href="javascript:courseDeatail('$!couinfo.lecturerName','$!couinfo.title','$!couinfo.playCount','$!couinfo.courseUrl','$!couinfo.id','$!couinfo.courseImageUrl')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<img src="$static_path/bxj_three/static/theNew/image/$!couinfo.courseImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!couinfo.title</h3>
+									<span class="name">$!couinfo.lecturerName</span>
+									<span class="playnum">$!couinfo.playCount</span>
+								</div>
+							</li>
+						   </a>
+						
+						 #end 
+						
+						#end 
+						 
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+	        </div>
+	        <!-- 第一天结束 -->
+	        <!-- 第二天 -->
+	        <div class="swiper-slide">
+				<!-- 顶部模块 -->
+				<div class="top_block">
+					<h1><span class="day02">第二天</span> 				   
+					#set($dayone = 1)
+				     #foreach($info in $listinit)
+				    	 #if($!info.day==2&&$dayone==1)
+				    	     #set($dayone = 2)
+				    	     $!info.knowExp    
+					    #end 
+					   #end
+					  </h1>
+					<!-- 内容文字 -->
+					<p> #set($dayone = 1) #foreach($info in $listinit)  #if($!info.day==2&&$dayone==1) $!info.newText  #set($dayone = 2)  #end  #end</p>
+					
+					<!-- 内容文字 结束-->
+				</div>
+				<!-- 顶部模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block video_list" id="videoIDList2">
+					<h2>$!vdOneInfo.videoName</h2>
+					<ul>
+					#foreach($info in $vdList) 
+					   #if($!info.day==2)
+                          <a href="javascript:showVideo('$!info.videoId','$!info.playCount','$!info.id')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<span class="playtime">$!info.durationTime</span>
+									<img src="$static_path/$!info.coverImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!info.title</h3>
+									<span class="name">$!info.lecturerName</span>
+									<span class="playnum">$!info.playCount</span>
+								</div>
+							</li>
+						</a>
+						
+						 #end 
+						
+						#end 
+						 
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block ppt_list">
+					<h2>$!vdOneInfo.courseName</h2>
+					<ul>
+					 #foreach( $couinfo in $courseList) 
+                         #if($!couinfo.day==2)
+					      <a href="javascript:courseDeatail('$!couinfo.lecturerName','$!couinfo.title','$!couinfo.playCount','$!couinfo.courseUrl','$!couinfo.id','$!couinfo.courseImageUrl')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<img src="$static_path/bxj_three/static/theNew/image/$!couinfo.courseImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!couinfo.title</h3>
+									<span class="name">$!couinfo.lecturerName</span>
+									<span class="playnum">$!couinfo.playCount</span>
+								</div>
+							</li>
+						   </a>
+						 
+						 #end 
+						
+						#end 
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+	        </div>
+	        <!-- 第二天结束 -->
+	        <!-- 第三天 -->
+	        <div class="swiper-slide">
+				<!-- 顶部模块 -->
+				<div class="top_block">
+					<h1><span class="day03">第三天</span>
+				    #set($dayone = 1)
+				     #foreach($info in $listinit)
+				    	 #if($!info.day==3&&$dayone==1)
+				    	     #set($dayone = 2)
+				    	     $!info.knowExp    
+					    #end 
+					   #end
+					  </h1>
+					<!-- 内容文字 -->
+					<p> #set($dayone = 1) #foreach($info in $listinit)  #if($!info.day==3&&$dayone==1) $!info.newText  #set($dayone = 2)  #end  #end</p>
+				 
+					<!-- 内容文字 结束-->
+				</div>
+				<!-- 顶部模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block video_list" id="videoIDList3">
+					<h2>$!vdOneInfo.videoName</h2>
+					<ul>
+					  #foreach($info in $vdList) 
+					   #if($!info.day==3)
+                          <a href="javascript:showVideo('$!info.videoId','$!info.playCount','$!info.id')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<span class="playtime">$!info.durationTime</span>
+									<img src="$static_path/$!info.coverImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!info.title</h3>
+									<span class="name">$!info.lecturerName</span>
+									<span class="playnum">$!info.playCount</span>
+								</div>
+							</li>
+						</a>
+						
+						 #end 
+						
+						#end 
+						 
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block ppt_list">
+					<h2>$!vdOneInfo.courseName</h2>
+					<ul>
+					 #foreach( $couinfo in $courseList) 
+                         #if($!couinfo.day==3)
+					      <a href="javascript:courseDeatail('$!couinfo.lecturerName','$!couinfo.title','$!couinfo.playCount','$!couinfo.courseUrl','$!couinfo.id','$!couinfo.courseImageUrl')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<img src="$static_path/bxj_three/static/theNew/image/$!couinfo.courseImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!couinfo.title</h3>
+									<span class="name">$!couinfo.lecturerName</span>
+									<span class="playnum">$!couinfo.playCount</span>
+								</div>
+							</li>
+						   </a>
+						 
+						 #end 
+						
+						#end 
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+	        </div>
+	        <!-- 第三天结束 -->
+	        <!-- 第四天 -->
+	        <div class="swiper-slide">
+				<!-- 顶部模块 -->
+				<div class="top_block">
+					<h1><span class="day04">第四天</span>
+					 #set($dayone = 1)
+				     #foreach($info in $listinit)
+				    	 #if($!info.day==4&&$dayone==1)
+				    	     #set($dayone = 2)
+				    	     $!info.knowExp    
+					    #end 
+					   #end
+					  </h1>
+					<!-- 内容文字 -->
+					<p> #set($dayone = 1) #foreach($info in $listinit)  #if($!info.day==4&&$dayone==1) $!info.newText  #set($dayone = 2)  #end  #end</p>
+				
+					<!-- 内容文字 结束-->
+				</div>
+				<!-- 顶部模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block video_list" id="videoIDList4" >
+					<h2>$!vdOneInfo.videoName</h2>
+					<ul>
+					  #foreach($info in $vdList) 
+					   #if($!info.day==4)
+                          <a href="javascript:showVideo('$!info.videoId','$!info.playCount','$!info.id')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<span class="playtime">$!info.durationTime</span>
+									<img src="$static_path/$!info.coverImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!info.title</h3>
+									<span class="name">$!info.lecturerName</span>
+									<span class="playnum">$!info.playCount</span>
+								</div>
+							</li>
+						</a>
+						
+						 #end 
+						
+						#end  
+						 
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block ppt_list">
+					<h2>$!vdOneInfo.courseName</h2>
+					<ul>
+					  #foreach( $couinfo in $courseList) 
+                         #if($!couinfo.day==4)
+					      <a href="javascript:courseDeatail('$!couinfo.lecturerName','$!couinfo.title','$!couinfo.playCount','$!couinfo.courseUrl','$!couinfo.id','$!couinfo.courseImageUrl')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<img src="$static_path/bxj_three/static/theNew/image/$!couinfo.courseImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!couinfo.title</h3>
+									<span class="name">$!couinfo.lecturerName</span>
+									<span class="playnum">$!couinfo.playCount</span>
+								</div>
+							</li>
+						   </a>
+						 
+						 #end 
+						
+						#end 
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+	        </div>
+	        <!-- 第四天结束 -->
+	        <!-- 第五天 -->
+	        <div class="swiper-slide">
+				<!-- 顶部模块 -->
+				<div class="top_block">
+					<h1><span class="day05">第五天</span>
+			  	    #set($dayone = 1)
+				     #foreach($info in $listinit)
+				    	 #if($!info.day==5&&$dayone==1)
+				    	     #set($dayone = 2)
+				    	     $!info.knowExp    
+					    #end 
+					   #end
+					  </h1>
+					<!-- 内容文字 -->
+					<p> #set($dayone = 1) #foreach($info in $listinit)  #if($!info.day==5&&$dayone==1) $!info.newText  #set($dayone = 2)  #end  #end</p>
+				
+					<!-- 内容文字 结束-->
+				</div>
+				<!-- 顶部模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block video_list" id="videoIDList5">
+					<h2>$!vdOneInfo.videoName</h2>
+					<ul>
+                      #foreach($info in $vdList) 
+					   #if($!info.day==5)
+                          <a href="javascript:showVideo('$!info.videoId','$!info.playCount','$!info.id')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<span class="playtime">$!info.durationTime</span>
+									<img src="$static_path/$!info.coverImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!info.title</h3>
+									<span class="name">$!info.lecturerName</span>
+									<span class="playnum">$!info.playCount</span>
+								</div>
+							</li>
+						</a>
+						 
+						 #end 
+						
+						#end  
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+				<!-- 内容模块 -->
+				<div class="main_block ppt_list">
+					<h2>$!vdOneInfo.courseName</h2>
+					<ul>
+					  #foreach( $couinfo in $courseList) 
+                         #if($!couinfo.day==5)
+					      <a href="javascript:courseDeatail('$!couinfo.lecturerName','$!couinfo.title','$!couinfo.playCount','$!couinfo.courseUrl','$!couinfo.id','$!couinfo.courseImageUrl')">
+							<li>
+								<div class="img_block">
+									<div class="img_cover"></div>
+									<img src="$static_path/bxj_three/static/theNew/image/$!couinfo.courseImageUrl" />
+								</div>
+								<div class="text_block">
+									<h3>$!couinfo.title</h3>
+									<span class="name">$!couinfo.lecturerName</span>
+									<span class="playnum">$!couinfo.playCount</span>
+								</div>
+							</li>
+						   </a>
+						
+						 #end 
+						
+						#end 
+					</ul>
+				</div>
+				<!-- 内容模块 结束-->
+	        </div>
+	        <!-- 第五天结束 -->
+	    </div>
+    </div>
+    <input type="hidden" id="dayID" />
+    <div class="swiper_button button_prev">上一天</div>
+    <div class="swiper_button button_next">下一天</div>
+</body>
+</html>
+ 
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script src="$static_path/bxj_three/public/js/swiper-3.3.1.jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/share.js"></script>
+<script type="text/javascript" src="$static_path/bxj_three/public/js/2.3-2.4-newpeople.js"></script>
+
+<script>
+FastClick.attach(document.body);//快速点击绑定
+</script>
+<script>
+var StartIndex;
+if(localStorage){
+	if(localStorage.index){
+		StartIndex = localStorage.index;
+	}
+}
+var Num;
+var mySwiper = new Swiper ('.swiper-container', {
+	direction: 'horizontal',
+	loop: false,
+	prevButton:'.button_prev',
+	nextButton:'.button_next',
+	initialSlide : StartIndex,
+	onSlideChangeEnd: function(swiper){
+      if(swiper.activeIndex != "undefined"){
+      	localStorage.index = swiper.activeIndex;
+      };
+    }
+})
+$('.mask').hide();
+$('.swiper-wrapper').removeClass('hideClass');
+//localStorage.clear();
+
+   loadInfo();
+	
+   function loadInfo(){
+	 // 循环隐藏 视频列表
+	      for(var i=1;i<6;i++){
+	       $("#videoIDList"+i).hide();
+	      }  
+	}
+  
+  //跳转课件详情 
+  function  courseDeatail(lecturerName,title,playCount,courseUrl,id,courseImageUrl){
+        var url ='${bxj_path}/newPeoplePass/showpptDetail.page?head=1&lecturerName=' + lecturerName + '&title=' + title+'&playCount='+playCount+'&courseUrl='+courseUrl+'&courseID='+id+'&courseImageUrl='+courseImageUrl + '&shareios=1#/plan/detail';         
+		//if (true) { 	url += '&hd=' + 1;} // 加上 1 表示 没网页列头 导航
+		
+		window.location.href=url;
+  }
+  
+  function showVideo(videoId,playCount,id){
+     var url ='${bxj_path}/newPeoplePass/videoDetail.page?head=1&fid=' + videoId + '&playCount='+playCount+'&id='+id;
+     window.location.href=url;
+  }
+
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>

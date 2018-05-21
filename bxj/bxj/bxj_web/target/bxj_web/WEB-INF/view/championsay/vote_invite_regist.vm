@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<base href="$bxj_path/">
+        <title>邀请好友</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+
+        <link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/inventfriend/css/vote.css">
+        <link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+        <script src="$static_path/bxj_three/public/js/flexible.js"></script>
+</head>
+
+<body>
+#*	<header class="head">
+		<a class="header_left" href="javascript:history.go(-1)"></a>
+		<h1>邀请好友</h1>
+	</header>
+	<div class="header_heightblock"></div>*#
+	<div class="container vote_theme03">
+		<div class="voteBanner"><img src="$static_path/bxj_three/static/inventfriend/image/invite_banner.jpg" alt=""></div>
+		
+		<div class="vote_sec invite_sec">
+			<p class="tel_input">
+				<input type="tel" placeholder="请输入手机号码" id="phone" maxlength="11">
+				<input id="inviteUserId" type="hidden" value="${inviteUserId}">
+			</p>
+			<p class="verify">
+				<input type="tel" placeholder="请输入验证码" id="code" class="code">
+				<a href="javascript:sendMessage();" class="getcode_btn getMsn">获取验证码</a>
+			</p>
+			<div class="btnGp">
+				<a href="javascript:;" class="one_btn" id="getId">立即体验</a>
+			</div>
+			<div class="about">
+				<h2>首届中国保险家评选活动介绍</h2>
+				<p>中国保险业经历 20 年的风雨，正在步入快速增长期，涌现出一批又一批行业领袖和标杆。中国保险经理人协会的主旨之一，就是要让这批为行业做出深远贡献的保险家，从幕后走到台前，让更多的人受到他们激励，加入中国保险行业的转型升级！中国保险经理人协会的另一大主旨，是要在这个平台上，培养更多的新生力量，让越来越多加入保险行业的年轻人，成为行业的标杆。青黄相接，生生不息，让原本就处于朝阳行业的保险业更加蓬勃发展。</p>
+				<p>中国保险经理人协会现携手中国保险业讲师协会、中国保险冠军论坛，举办首届“中国保险家”颁奖盛典。由“保险家APP”唯一网络冠名，活动最终解释权归中国保险冠军论坛所有。</p>
+			</div>
+			<div class="sec_btm_bg"></div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    FastClick.attach(document.body);//快速点击绑定
+    /* 验证码计时事件 */
+    var InterValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    var code = ""; //验证码
+    var codeLength = 6;//验证码长度
+    function sendMessage() {
+        curCount = count;
+        var phone=$("#phone").val();//手机号码
+        if(phone != "" || null==phone) {
+            if (checkPhone(phone)) {
+                jQuery.post("${bxj_path}/champion/video/regist.do", {phone: phone}, function(data) {
+                    if(data.status==0 && (null!=data.result.code && "1002"==data.result.code)) {
+                        _inform('手机号已经注册过！');
+                        $("#phone").focus();
+                        return false;
+                    } else {
+						$(".getMsn").removeAttr("href").text(+curCount + "秒重新获取");
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        //向后台发送处理数据，此处添加AXAJ
+                        jQuery.post("${bxj_path}/champion/video/getValidateCode.do", {phone: phone}, function (data) {
+                            if(null==data || "1000"!=data.result.code) {
+                                _inform(data.result.msg);
+                            } else {
+                                _inform('验证码已发送');
+                            }
+                        });
+                    }
+                });
+            } else {
+                _inform('手机号不正确');
+            }
+        }else{
+            _inform('手机号不能为空');
+        }
+    }
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $(".getMsn").attr("href", "javascript:sendMessage();").text("重新发送");//启用按钮
+            //code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
+        }
+        else {
+            curCount--;
+            $(".getMsn").text(+curCount + "秒重新获取");
+        }
+    }
+
+    var InterValObjSec;
+    var SysSecond
+    function setButtonTime(){
+        SysSecond = parseInt(600); //这里获取倒计时的起始时间
+        InterValObjSec = window.setInterval(SetRemainTimeSec, 1000); //间隔函数，1秒执行
+    }
+    //将时间减去1秒，计算分、秒
+    function SetRemainTimeSec() {
+        if (SysSecond > 0) {
+            SysSecond = SysSecond - 1;
+            var second = Math.floor(SysSecond % 60);             // 计算秒
+            var minite = Math.floor((SysSecond / 60) % 60);      //计算分
+
+            $(".popbox button").html( "知道了（还剩" + minite + "：" + second + "）");
+        } else {//剩余时间小于或等于0的时候，就停止间隔函数
+            $(".popbox button").html("我知道了");
+            window.clearInterval(InterValObjSec);
+            //这里可以添加倒计时时间为0后需要执行的事件
+        }
+    }
+    //输入框获取焦点事件
+    $('.tel,.code').focus(function(){
+        $('.container').scrollTop('150');
+    })
+
+    $('#getId').on('click', function(){
+        var phone=$("#phone").val();
+        var code = $('#code').val();
+        var inviteUserId = $('#inviteUserId').val();
+        if(""==phone || null==phone) {
+            _inform('手机号不能为空');
+            return false;
+        }
+        if(""==code || null==code) {
+            _inform('验证码不能为空');
+            return false;
+        }
+        if(!checkPhone(phone)) {
+            _inform('手机号不正确');
+            return false;
+        }
+        if(code.length != 4) {
+            _inform('请输入四位的验证码');
+            return false;
+        }
+        jQuery.post("${bxj_path}/champion/video/regist.do", {phone: phone, code: code, inviteUserId:inviteUserId}, function(data) {
+            if(data.status==0 && (null!=data.result.code && "1000"==data.result.code)) {
+                if(null!=data.result.msg && ""!=data.result.msg) _inform(data.result.msg);
+//                $('#useId').show();
+//                $('#appDiv').show();
+//                $('#telUl').hide();
+//                $('#getId').hide();
+//                $("#count").html(data.result.inviteCount);
+                  window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster";
+            } else {
+                if(null!=data && null!=data.result && null!=data.result.msg && ""!=data.result.msg) _inform(data.result.msg);
+                else _inform('领取失败');
+            }
+        });
+    });
+
+    function checkPhone(tel) {
+        var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+        if (reg.test(tel)) {
+            return true;
+        }else{
+            return false;
+        };
+    }
+</script>
+
+<!--百度统计-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '保险家下起红包雨！',
+                desc: '每天 5 个红包等你抽！单个红包最高 88 元，百分百中奖哦！',
+                imgUrl: '$static_path/bxj_three/static/inventfriend/image/redenvelope.png',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+</script>

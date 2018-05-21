@@ -1,0 +1,69 @@
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-pid="731" data-jbbe="$!product.jbbe" data-cpjc="感恩福" data-table="0">
+		<li class="info-item main_line_height">
+			<label class="info-name">保障期限</label>
+			<select class="factor" name="bxnx">
+				<option value="150">保障至85周岁</option>
+				<option value="46">保障10年</option>
+			</select>
+			<span class="arrowr"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">缴费期限</label>
+			<select class="factor" name="jfnx" disabled>
+				<option value="9">10年交</option>
+			</select>
+			<span class="arrowr"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">保额</label>
+			<select class="factor demo_price" name="be">
+				<option value="100000">10万</option>
+				<option value="150000">15万</option>
+				<option value="200000" class="appear_option">20万</option>
+			</select>
+			<span class="arrowr"></span>
+		</li>
+	</div>
+	<li class="main_item li_table_0" style="display:none">
+		<div class="creatDes_header">
+			<span class="createDes-title">
+				<em>感恩福</em>
+				<em class="price"></em>
+			</span>
+			<span class="createDes-btn">
+				<a class="main_edit_btn" data-table="0">修改</a>
+			</span>
+		</div>
+		<table class="createDes-table">
+		<thead>
+			<tr>
+				<td>险种</td>
+				<td>保额</td>
+				<td>保费</td>
+				<td>保障期限</td>
+				<td>缴费期限</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		</table>
+	</li>
+	#parse("product/addzx.vm")
+	</ul>
+</div>
+<script>
+	$('select[name=age]').change(function(){
+		var op=$(this) ;
+		var age=op.val();
+		if(age>60){
+			$('option.appear_option').prop({'seleted':false,'disabled':'disabled'});
+			var prev=op.prev();
+			prev.prop('seleted','selected');
+			op.parent().val(prev.val());
+		}else{
+			$('option.appear_option').prop('disabled',false);
+		}
+	});
+</script>

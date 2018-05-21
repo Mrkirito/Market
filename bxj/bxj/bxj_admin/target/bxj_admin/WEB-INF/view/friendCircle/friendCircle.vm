@@ -1,0 +1,412 @@
+<!--头部 开始-->
+$pageModule.init("app/friendCircle/friendCircle", "list")
+#set($admin_path = ${configuration.getProperty("urlPath","bxj_path")})
+
+<style>
+.field-name {
+	font-size: larger;
+	width: 90px;
+}
+div .form-group {
+	padding-left: 0px;
+}
+.chosen-container-multi .chosen-choices {
+	font-size: 12px;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid #e9e9e9;
+    transition-duration: .5s;
+}
+
+img{
+	display:block;
+	margin:0;
+}
+
+#edui4_wordcount{
+  display:none;
+}
+
+#edui1_wordcount{
+   display:none;
+}
+</style>
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-md-1 col-xs-6">
+                                <label>ID&nbsp;</label>
+                                <input placeholder="ID" type="text" class="form-control sid">
+                            </div>
+                            <div class="form-group col-md-3 col-xs-12">
+                                <label>标题&nbsp;</label>
+                                <input placeholder="标题" type="text" class="form-control stitle">
+                            </div>
+                             <div class="form-group col-md-2 col-xs-12">
+                                <label>类型&nbsp;</label>
+                                <select class="form-control ftype">
+                                    <option value="">请选择</option>
+                                    <option value="2">文章</option>
+                					<option value="1">图文</option>
+                                </select>
+                            </div>
+                          
+                            <div class="form-group col-md-2 col-xs-12">
+                                <label>状态&nbsp;</label>
+                                <select class="form-control sAuditStatus">
+                                    <option value="">请选择</option>
+                                     <option value="2">上线</option>
+                                     <option value="3">下线</option>
+                				     <option value="1">未上线</option>
+                                </select>
+                            </div>
+                           
+                            <div class="form-group col-md-3 col-xs-12">
+                    			<label>发布时间</label>
+                    			<div class="input-group">
+                    				<input type="text" class="form-control sOnlineTime" placeholder="">
+                    			</div>
+                            </div>
+                             
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			</div>
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+
+<!--底部 结束-->
+
+<script>
+//    jQuery(document).ready(function() {
+//        App.init();
+//        TableManaged.init();
+//    });
+</script>
+<div class="news-detail hidden">
+	<div class="newsDetail">
+    </div>
+</div>
+
+<!--add update 修改 --> 
+<div class="friend-circle-text hidden">
+   <div class="form-body">
+    <div class="circleTextclass"> <!--add 修改文章 div开始 标志-->
+      <div class="form-group col-sm-12">
+                        	<label class="col-md-3 control-label">类型&nbsp;</label>
+                        	<div class="input-group col-md-3">
+                                <span>文章</span>
+                            </div>
+		       </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">发布时间</label>
+			<div class="input-group col-md-3">
+				<input type="text"  class="form-control onlineTime" placeholder="">
+			</div>
+		</div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label" >保险公司</label>
+            <div class="input-group col-md-3">
+                <select class="form-control company">
+                    <option value=""></option>
+                    <option value="平安">平安      </option>
+                    <option value="阳光">阳光      </option>
+                    <option value="太平">太平      </option>
+                    <option value="太平洋">太平洋    </option>
+                    <option value="大地保险">大地保险  </option>
+                    <option value="永安">永安      </option>
+                    <option value="同方全球">同方全球  </option>
+                    <option value="泰康">泰康      </option>
+                    <option value="国寿">国寿      </option>
+                    <option value="新华">新华      </option>
+                    <option value="华夏">华夏      </option>
+                    <option value="人保寿">人保寿    </option>
+                    <option value="中英人寿">中英人寿  </option>
+                    <option value="中荷">中荷      </option>
+                    <option value="人保健康">人保健康  </option>
+                    <option value="民生">民生      </option>
+                    <option value="富德生命">富德生命  </option>
+                    <option value="国华">国华      </option>
+                    <option value="信泰">信泰      </option>
+                    <option value="华泰">华泰      </option>
+                    <option value="中宏">中宏      </option>
+                    <option value="利安人寿">利安人寿  </option>
+                    <option value="英大">英大      </option>
+                    <option value="北大方正">北大方正  </option>
+                    <option value="东吴人寿">东吴人寿  </option>
+                    <option value="光大永明">光大永明  </option>
+                    <option value="君龙人寿">君龙人寿  </option>
+                    <option value="昆仑健康">昆仑健康  </option>
+                    <option value="信诚人寿">信诚人寿  </option>
+                    <option value="中韩人寿">中韩人寿  </option>
+                    <option value="工银安盛">工银安盛  </option>
+                    <option value="中意人寿">中意人寿  </option>
+                    <option value="幸福人寿">幸福人寿  </option>
+                    <option value="德华安顾">德华安顾  </option>
+                    <option value="长城人寿">长城人寿  </option>
+                    <option value="百年人寿">百年人寿  </option>
+                    <option value="陆家嘴国泰">陆家嘴国泰</option>
+                    <option value="独立经纪人">独立经纪人</option>
+                    <option value="友邦">友邦      </option>
+                    <option value="建信">建信      </option>
+                    <option value="合众人寿">合众人寿  </option>
+                    <option value="中德安联">中德安联  </option>
+                    <option value="农银人寿">农银人寿  </option>
+                    <option value="德华安顾">德华安顾  </option>
+                    <option value="珠江人寿">珠江人寿  </option>
+                    <option value="复星保德信">复星保德信</option>
+                    <option value="大都会人寿">大都会人寿</option>
+                    <option value="安邦">安邦      </option>
+                    <option value="天安人寿">天安人寿  </option>
+                    <option value="恒安标准">恒安标准  </option>
+                    <option value="中银保险">中银保险  </option>
+                    <option value="MSH万欣和">MSH万欣和 </option>
+                    <option value="和谐健康">和谐健康  </option>
+                    <option value="瑞泰人寿">瑞泰人寿  </option>
+                    <option value="中华人寿">中华人寿  </option>
+                    <option value="吉祥人寿">吉祥人寿  </option>
+                    <option value="国联人寿">国联人寿  </option>
+                    <option value="诚泰">诚泰      </option>
+                    <option value="史带">史带      </option>
+				</select>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label" >父级</label>
+            <div class="input-group col-md-3 ">
+                <input type="text"  class="form-control pfid" placeholder="">
+            </div>
+        </div>
+		
+		<div class="form-group col-sm-12">
+		     <label class="col-md-3 control-label" >排序</label>
+		     <div class="input-group col-md-3">
+                <input type="text"  class="form-control sort" placeholder="">
+             </div>
+		</div>
+		
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">来源</label>
+			<div class="input-group col-md-6">
+				<input type="text" class="form-control source"  placeholder="标题不超过50字">
+			</div>
+		</div>
+		
+		<div class="form-group">
+		  <label class="col-md-3 control-label">关联的分类标签:</label>
+		  <!--  下拉框  padding-left:8px; -->
+		  <div class="input-group col-md-5" style="text-align:left;">
+		    <input type="hidden" class="categorySel" />
+		  </div>
+		</div> 
+		
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">文字:</label>
+			 <!-- <script id="mywords" type="text/plain" style="width:80%;height:auto;float:right;" >
+			 </script>  -->
+		   <div class="input-group col-md-9">
+			  <textarea class="form-control mywords" rows="5"></textarea>
+		   </div>
+		   
+		</div>
+		
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">图片</label>
+			<div class="input-group col-md-9">
+            <div class="col-sm-6">
+                <div class="">
+				    <div class="uploadImg">
+						<li style="display: inline-block; margin-right: 3px;" >
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrl">
+    		            <a class="btn btn-primary remove-img">删除</a>
+    		            </span></li>
+						<a class="btn btn-primary infos-images">上传图片</a>
+						<p class="text-danger">注意：图片尺寸限制：100 x 100</p>
+                	</div>
+                </div>
+            </div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">标题</label>
+			<div class="input-group col-md-9">
+				<input type="text" class="form-control" id="title" placeholder="标题不超过128字">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">内容</label>
+			<div class="input-group col-md-9">
+				<div id="newsContent"></div> 
+			</div>
+		</div>
+	</div> <!--修改文章 div结束-->
+		
+		
+    <!-- add 图文--> 
+    <!-- update修改  图文--> 
+	<div class="imgTextclass">
+      <div class="form-group col-sm-12">
+                        	<label class="col-md-3 control-label">类型&nbsp;</label>
+                        	<div class="input-group col-md-3">
+                                <span>图文</span>
+                            </div>
+		       </div>
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">发布时间</label>
+			<div class="input-group col-md-3">
+				<input type="text" id="" class="form-control imgonlineTime" placeholder="">
+			</div>
+		</div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label" >保险公司</label>
+            <div class="input-group col-md-3">
+                <select class="form-control" id="company">
+                    <option value=""></option>
+                    <option value="平安">平安      </option>
+                    <option value="阳光">阳光      </option>
+                    <option value="太平">太平      </option>
+                    <option value="太平洋">太平洋    </option>
+                    <option value="大地保险">大地保险  </option>
+                    <option value="永安">永安      </option>
+                    <option value="同方全球">同方全球  </option>
+                    <option value="泰康">泰康      </option>
+                    <option value="国寿">国寿      </option>
+                    <option value="新华">新华      </option>
+                    <option value="华夏">华夏      </option>
+                    <option value="人保寿">人保寿    </option>
+                    <option value="中英人寿">中英人寿  </option>
+                    <option value="中荷">中荷      </option>
+                    <option value="人保健康">人保健康  </option>
+                    <option value="民生">民生      </option>
+                    <option value="富德生命">富德生命  </option>
+                    <option value="国华">国华      </option>
+                    <option value="信泰">信泰      </option>
+                    <option value="华泰">华泰      </option>
+                    <option value="中宏">中宏      </option>
+                    <option value="利安人寿">利安人寿  </option>
+                    <option value="英大">英大      </option>
+                    <option value="北大方正">北大方正  </option>
+                    <option value="东吴人寿">东吴人寿  </option>
+                    <option value="光大永明">光大永明  </option>
+                    <option value="君龙人寿">君龙人寿  </option>
+                    <option value="昆仑健康">昆仑健康  </option>
+                    <option value="信诚人寿">信诚人寿  </option>
+                    <option value="中韩人寿">中韩人寿  </option>
+                    <option value="工银安盛">工银安盛  </option>
+                    <option value="中意人寿">中意人寿  </option>
+                    <option value="幸福人寿">幸福人寿  </option>
+                    <option value="德华安顾">德华安顾  </option>
+                    <option value="长城人寿">长城人寿  </option>
+                    <option value="百年人寿">百年人寿  </option>
+                    <option value="陆家嘴国泰">陆家嘴国泰</option>
+                    <option value="独立经纪人">独立经纪人</option>
+                    <option value="友邦">友邦      </option>
+                    <option value="建信">建信      </option>
+                    <option value="合众人寿">合众人寿  </option>
+                    <option value="中德安联">中德安联  </option>
+                    <option value="农银人寿">农银人寿  </option>
+                    <option value="德华安顾">德华安顾  </option>
+                    <option value="珠江人寿">珠江人寿  </option>
+                    <option value="复星保德信">复星保德信</option>
+                    <option value="大都会人寿">大都会人寿</option>
+                    <option value="安邦">安邦      </option>
+                    <option value="天安人寿">天安人寿  </option>
+                    <option value="恒安标准">恒安标准  </option>
+                    <option value="中银保险">中银保险  </option>
+                    <option value="MSH万欣和">MSH万欣和 </option>
+                    <option value="和谐健康">和谐健康  </option>
+                    <option value="瑞泰人寿">瑞泰人寿  </option>
+                    <option value="中华人寿">中华人寿  </option>
+                    <option value="吉祥人寿">吉祥人寿  </option>
+                    <option value="国联人寿">国联人寿  </option>
+                    <option value="诚泰">诚泰      </option>
+                    <option value="史带">史带      </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label" >父级</label>
+            <div class="input-group col-md-3">
+                <input type="text"  class="form-control" id="pfid" placeholder="">
+            </div>
+        </div>
+		<div class="form-group col-sm-12">
+		     <label class="col-md-3 control-label" >排序</label>
+		     <div class="input-group col-md-3">
+                <input type="text"  class="form-control" id="sort" placeholder="">
+             </div>
+		</div>
+		
+		
+		<div class="form-group col-sm-12">
+		  <label class="col-md-3 control-label">文字:</label>
+		<!-- 	<script id="wordsID" type="text/plain" style="width:80%;height:auto;float:right;" >
+				  
+			</script>  -->
+		  <div class="input-group col-md-9">
+			 <textarea class="form-control wordsID" rows="5"></textarea>
+	      </div> 
+	      
+		</div>
+		
+		<div class="form-group">
+		  <label class="col-md-3 control-label">关联的分类标签:</label>
+		  <!--  下拉框   .categorySelByImg" padding-left:8px;-->
+		  <div class="input-group col-md-5" style="text-align:left;">
+		     <input type="hidden" class="categorySelByImg" />
+		  </div>
+		</div>
+		
+		<div class="form-group col-sm-12">
+			<label class="col-md-3 control-label">图片(最多9个)</label>
+			<div class="input-group col-md-9">
+            <div class="col-sm-6">
+                <div class="">
+				    <div class="uploadImgText">
+						<li style="display: inline-block; margin-right: 3px;" >
+    		            <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+    		            
+    		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id="" class="picUrlimgText"/>
+    		            <a class="btn btn-primary remove-imgText">删除</a>
+    		             <div class="addimgText">
+    		            
+    		             </div>
+    		            </span></li>
+						<a class="btn btn-primary infos-imagesText">上传图片</a>
+						<p class="text-danger"></p>
+                	</div>
+                </div>
+            </div>
+			</div>
+		</div>
+     </div> <!-- add 修改 图文结束-->
+		
+	</div>
+</div>
+ 

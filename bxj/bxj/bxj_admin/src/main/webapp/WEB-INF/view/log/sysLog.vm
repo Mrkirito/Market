@@ -1,0 +1,57 @@
+<!--头部 开始-->
+$pageModule.init("app/log/sysLog", "list")
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            
+                            <div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">操作时间&nbsp;</label>
+								<input type="text" class="form-control createTime">
+                            </div>
+							<div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">操作人&nbsp;</label>
+                                <input placeholder="操作人" type="text" class="form-control operationName">
+                            </div>
+							<div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">操作ip&nbsp;</label>
+                                <input placeholder="操作ip" type="text" class="form-control operationIp">
+                            </div>
+							<div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">操作地址&nbsp;</label>
+                                <input placeholder="操作地址" type="text" class="form-control operationMethod">
+                            </div>
+							<div class="form-group col-sm-12 col-sm-3">
+                                <label class="control-label pad-btm">操作描述&nbsp;</label>
+                                <input placeholder="操作描述" type="text" class="form-control operationRemark">
+                            </div>
+						</div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </div>
+			<div class="data-list">
+			</div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+<!--底部 结束-->
+
+

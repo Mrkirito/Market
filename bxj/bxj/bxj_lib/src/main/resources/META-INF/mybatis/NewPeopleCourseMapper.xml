@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangjia.bxj.dao.NewPeopleCourseMapper">
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.NewPeopleCourse">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="day" jdbcType="INTEGER" property="day" />
+    <result column="play_Count" jdbcType="INTEGER" property="playCount" />
+    <result column="is_false_count" jdbcType="BIT" property="isFalseCount" />
+    <result column="false_count" jdbcType="INTEGER" property="falseCount" />
+    <result column="lecturer_name" jdbcType="VARCHAR" property="lecturerName" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="course_image_Url" jdbcType="VARCHAR" property="courseImageUrl" />
+    <result column="course_Url" jdbcType="VARCHAR" property="courseUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="course_pptNum" jdbcType="INTEGER" property="coursePPTNum" /> 
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, day, CASE is_false_count WHEN 1 THEN false_count ELSE play_Count END AS play_Count, is_false_count, false_count, lecturer_name, title, 
+    course_image_Url, create_time, status ,course_Url,course_pptNum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from newpeople_course
+    where status=0 AND id = #{id,jdbcType=BIGINT}
+  </select>
+  
+   <!-- 查询原始数据 -->
+   <select id="selTrueCourseInfo" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+     id, user_id, day, play_Count, is_false_count, false_count, lecturer_name, title, 
+    course_image_Url, create_time, status ,course_Url,course_pptNum
+    from newpeople_course
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from newpeople_course
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.NewPeopleCourse">
+    insert into newpeople_course (id, user_id, day, 
+      play_Count, is_false_count, false_count, 
+      lecturer_name, title, course_image_Url, 
+      create_time, status)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{day,jdbcType=INTEGER}, 
+      #{playCount,jdbcType=INTEGER}, #{isFalseCount,jdbcType=BIT}, #{falseCount,jdbcType=INTEGER}, 
+      #{lecturerName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{courseImageUrl,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.NewPeopleCourse">
+    insert into newpeople_course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="day != null">
+        day,
+      </if>
+      <if test="playCount != null">
+        play_Count,
+      </if>
+      <if test="isFalseCount != null">
+        is_false_count,
+      </if>
+      <if test="falseCount != null">
+        false_count,
+      </if>
+      <if test="lecturerName != null">
+        lecturer_name,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="courseImageUrl != null">
+        course_image_Url,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=INTEGER},
+      </if>
+      <if test="playCount != null">
+        #{playCount,jdbcType=INTEGER},
+      </if>
+      <if test="isFalseCount != null">
+        #{isFalseCount,jdbcType=BIT},
+      </if>
+      <if test="falseCount != null">
+        #{falseCount,jdbcType=INTEGER},
+      </if>
+      <if test="lecturerName != null">
+        #{lecturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="courseImageUrl != null">
+        #{courseImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.NewPeopleCourse">
+    update newpeople_course
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="day != null">
+        day = #{day,jdbcType=INTEGER},
+      </if>
+      <if test="playCount != null">
+        play_Count = #{playCount,jdbcType=INTEGER},
+      </if>
+      <if test="isFalseCount != null">
+        is_false_count = #{isFalseCount,jdbcType=BIT},
+      </if>
+      <if test="falseCount != null">
+        false_count = #{falseCount,jdbcType=INTEGER},
+      </if>
+      <if test="lecturerName != null">
+        lecturer_name = #{lecturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="courseImageUrl != null">
+        course_image_Url = #{courseImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.NewPeopleCourse">
+    update newpeople_course
+    set user_id = #{userId,jdbcType=BIGINT},
+      day = #{day,jdbcType=INTEGER},
+      play_Count = #{playCount,jdbcType=INTEGER},
+      is_false_count = #{isFalseCount,jdbcType=BIT},
+      false_count = #{falseCount,jdbcType=INTEGER},
+      lecturer_name = #{lecturerName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      course_image_Url = #{courseImageUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+ <resultMap id="listCourse" type="com.hangjia.bxj.vo.NewPeoplePassVo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="day" jdbcType="INTEGER" property="day" />
+    <result column="play_Count" jdbcType="INTEGER" property="playCount" />
+    <result column="is_false_count" jdbcType="BIT" property="isFalseCount" />
+    <result column="false_count" jdbcType="INTEGER" property="falseCount" />
+    <result column="lecturer_name" jdbcType="VARCHAR" property="lecturerName" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="course_image_Url" jdbcType="VARCHAR" property="courseImageUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />        
+   
+    <result column="course_pptNum" jdbcType="INTEGER" property="coursePPTNum" /> 
+    <result column="course_Url" jdbcType="VARCHAR" property="courseUrl" />
+  </resultMap>
+
+  <sql id="choose_where">
+     <if test="userId != null" >
+        AND newcou.user_id =  #{userId,jdbcType=BIGINT}
+     </if> 
+     <if test="day != null" >
+       AND newcou.day = #{day,jdbcType=INTEGER}
+      </if>
+  </sql>
+    
+ <select id="selListNewCourse" resultMap="listCourse" parameterType="java.util.Map" >
+	   SELECT newcou.id, newcou.lecturer_name ,newcou.title, newcou.course_image_Url , course_Url,
+	             CASE is_false_count WHEN 1 THEN false_count ELSE play_Count END AS play_Count ,day,course_pptNum
+	   FROM newpeople_course newcou
+       WHERE   newcou.status=0 AND day is not NULL
+     <include refid="choose_where"></include>
+       GROUP BY newcou.id asc 
+      <if test="start != null and end != null" >
+        limit #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+       </if>
+  </select>
+  
+   <update id="updateCountByPK" parameterType="com.hangjia.bxj.vo.NewPeoplePassVo">
+    update newpeople_course
+    set  
+      play_Count = #{playCount,jdbcType=INTEGER},
+      false_count = #{falseCount,jdbcType=INTEGER}      
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+   
+   <select id="selNewCount" resultType="int" parameterType="java.util.Map" > 
+	   SELECT count(newcou.id) FROM newpeople_course newcou
+       WHERE  newcou.status=0 AND day is not NULL
+      <include refid="choose_where"></include> 
+  </select>
+</mapper>

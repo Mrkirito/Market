@@ -1,0 +1,146 @@
+		<ul class="common-info-ul">
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>鑫盛2017</em>
+					</span>
+					<span class="creatDes-add-btn" data-layer="mainLayer" data-enable="#btnAddon,#btnAddMore"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>附加险</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddon" data-layer="fjx-layer" data-title="附加险" data-products="['zyjt', 'zyyl', 'ywsh', 'ywyl']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加附加险</em>
+					</span>
+				</div>
+			</li>
+			
+			<li class="main_item">
+				<div class="creatDes_header">
+					<span class="createDes-title verticalmiddle">
+						<em>险种组合</em>
+					</span>
+					<span class="creatDes-add-btn" id="btnAddMore" data-layer="zhx-layer" data-title="险种组合" data-products="['xinli', 'xinxiang', 'ankang', 'anxiang', 'xingfuA']"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加险种</em>
+					</span>
+				</div>
+			</li>
+			
+		</ul>
+		
+		#parse("product/product.pa.vm")
+	    <script>
+	    	$(function() {
+		    	bxj.PlanBook.init({
+		    		title: '鑫盛2017',
+		    		gs: 'PingAn',
+		    		autoRefresh: true,
+		    		BeiBaoRen: {
+						age: {
+							min: 0,
+							max: 60,
+						}
+					}
+		    	});
+	    	});
+	    </script>
+	    
+	    #set($footer = '
+		
+	<div id="mainLayer" class="popup-layer" style="display: none" data-product="xinsheng">
+	    <form class="popup-form-layer">
+	        <div class="popup-layer-title">鑫盛2017</div>
+	        <ul class="popup-layer-ul">
+	            <li data-commons>
+	                <label class="info-name" for="xinsheng-jfnx">缴费期间</label>
+	                <select id="xinsheng-jfnx" class="factor" name="jfnx" text-name="xinsheng-jfnx">
+	                	<option value="9">10年</option>
+				        <option value="10">15年</option>
+				        <option value="11">20年</option>
+				        <option value="12" selected >30年</option>
+	                </select>
+	                <input type="hidden" name="bxnx" value="6">
+	                <span class="arrowr"></span>
+	            </li>
+	            <li data-calc="xinsheng">
+	                <label class="info-name" for="xinsheng-be">鑫盛保额</label>
+	                <input value="30000" class="factor" pattern="[0-9]*" data-vali="min" data-min="30000" data-min-msg="鑫盛保额不得低于3万" placeholder="请输入保额" name="be" maxlength="7" id="xinsheng-be" data-name="xinsheng-be">
+	                <i class="icon">元</i>
+	                <input type="hidden" name="pid" value="774">
+	            </li>
+	            <li data-calc="xinsheng-zj">
+	            	<dl>
+	            		<dt>
+	            			<input id="xinsheng-zjcb" type="checkbox" class="checkbox-single">
+	            			<label for="xinsheng-zjcb">附加重疾</label>
+	            		</dt>
+	            		<dd>
+	            			<label class="info-name" for="xinsheng-zj-be">重疾保额</label>
+	            			<input value="30000" class="factor" pattern="[0-9]*" data-vali="between-maxRef" data-min="30000" data-min-msg="鑫盛附加重疾保额不得低于3万" data-max="#xinsheng-be" data-max-msg="鑫盛附加重疾保额不得高于主险保额" placeholder="请输入保额" id="xinsheng-zj-be" name="be" data-name="xinsheng-zj-be">
+			                <i class="icon">元</i>
+			                <input type="hidden" name="pid" value="779">
+	            		</dd>
+	            	</dl>
+	            </li>
+	            <li data-calc="xinsheng-hmc">
+	            	<dl>
+	                    <dt>
+	                        <input id="xinsheng-hmccb" type="checkbox" class="checkbox-single">
+	                        <label for="xinsheng-hmccb">豁免C(1103)</label>
+	                    </dt>
+	                    <dd>
+	                    	<input type="hidden" name="pid" value="233">
+	                    </dd>
+	                </dl>
+	                
+	            </li>
+	            <li data-calc="xinsheng-tbrhm" data-toubaoren id="xinsheng-tbrhm">
+	                <dl>
+	                    <dt>
+	                        <input id="xinsheng-hm" class="checkbox-single" type="checkbox">
+	                        <label for="xinsheng-hm">投保人豁免<em class="notes">（非本人可附加）</em></label>
+	                    </dt>
+	                    <dd>
+	                    	<input id="paf-hmA" class="radio_box" name="pid" type="radio" value="245">
+	                        <label for="paf-hmA">豁免A(1124)</label>
+	                        
+	                        <input id="paf-hmB" class="radio_box" name="pid" type="radio" value="251" checked>
+	                        <label class="mrg-right-2" for="paf-hmB">豁免B(1125)</label>
+	                        
+	                        <input type="hidden" name="bxnx" value="6">
+	                    </dd>
+	                </dl>
+	            </li>
+	            
+	            <li data-calc="xinsheng-tbrhm-s" data-toubaoren s data-ref="#xinsheng-tbrhm">
+	            	
+	                <dl>
+	                    <dt>
+	                        <input id="xinsheng-hm-s" class="checkbox-single" type="checkbox">
+	                        <label for="xinsheng-hm-s">投保人双豁免</label>
+	                    </dt>
+	                    <dd>
+	                    	<label class="info-name" for="shuanghuomian-age">配偶年龄</label>
+			                <select class="factor" name="age" id="shuanghuomian-age">
+			                </select>
+			                <span class="arrowr"></span>
+	                    </dd>
+	                </dl>
+	                
+	            </li>
+	        </ul>
+	        <div class="popup-layer-btn">
+	            <span class="popup-layer-cancel-btn" data-cancel>取消</span><span class="popup-layer-ok-btn" data-ok>确定</span>
+	        </div>
+	    </form>
+	</div>
+	')

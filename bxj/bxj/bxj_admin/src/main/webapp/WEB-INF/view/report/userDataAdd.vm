@@ -1,0 +1,205 @@
+$pageModule.init("app/report/userDataAdd", "init")
+<!-- BEGIN CONTAINER -->
+<div class="panel">
+	<div class="panel-heading">
+        <h3 class="panel-title">app统计数据新增</h3>
+    </div>
+	<div class="panel-body">
+        <div class="form-body">
+    		<div class="form-group col-sm-12">
+    			<label class="col-md-3 control-label"><span class="text-danger">*</span>数据统计时间</label>
+    			<div class="col-md-9">
+    				<input type="text" class="form-control dataTime">
+    			</div>
+    		</div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>目标用户数</label>
+                <div class="col-md-9">
+                    <input type="text" value="450" placeholder="目标用户数" class="form-control newAddTarget">
+                </div>
+            </div>
+    		<div class="form-group col-sm-12">
+    			<label class="col-md-3 control-label"><span class="text-danger">*</span>ios新增用户</label>
+    			<div class="col-md-9">
+    				<input type="text" placeholder="ios新增用户" class="form-control newIosNum">
+    			</div>
+    		</div>
+    		<div class="form-group col-sm-12">
+    			<label class="col-md-3 control-label"><span class="text-danger">*</span>安卓新增用户</label>
+    			<div class="col-md-9">
+    				<input type="text" placeholder="安卓新增用户" class="form-control newAndroidNum">
+    			</div>
+    		</div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>目标启动数</label>
+                <div class="col-md-9">
+                    <input type="text" value="12500" placeholder="目标启动数" class="form-control newStartTarget">
+                </div>
+            </div>
+    		<div class="form-group col-sm-12">
+    			<label class="col-md-3 control-label"><span class="text-danger">*</span>ios启动用户</label>
+    			<div class="col-md-9">
+    				<input type="text" placeholder="ios启动用户" class="form-control activeIosNum">
+    			</div>
+    		</div>
+    		<div class="form-group col-sm-12">
+    			<label class="col-md-3 control-label"><span class="text-danger">*</span>安卓启动用户</label>
+    			<div class="col-md-9">
+    				<input type="text" placeholder="安卓启动用户" class="form-control activeAndroidNum">
+    			</div>
+    		</div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>ios启动次数</label>
+                <div class="col-md-9">
+                    <input type="text" placeholder="ios启动次数" class="form-control timesIosNum">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>安卓启动次数</label>
+                <div class="col-md-9">
+                    <input type="text" placeholder="安卓启动次数" class="form-control timesAndroidNum">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>目标销售额</label>
+                <div class="col-md-9">
+                    <input type="text" value="3000" placeholder="目标销售额" class="form-control salesTotalTarget">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>短信數量</label>
+                <div class="col-md-9">
+                    <input type="text" placeholder="总销售额" class="form-control message">
+                </div>
+            </div>
+    		<div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>总销售额</label>
+                <div class="col-md-9">
+                    <input type="text" placeholder="总销售额" class="form-control salesTotal">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>毛利</label>
+                <div class="col-md-9">
+                    <input type="text" placeholder="毛利" class="form-control salesProfits">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保网PV</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网PV" class="form-control bbwNew">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保网UV</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control bbwStart">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保网新增用户</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control bbwTimes">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保网短信数量</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control bbwMessage">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保网销售额</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control bbwSalesTotal">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保appPv</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保app新增用户" class="form-control bbappNew">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保appUv</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保app启动用户" class="form-control bbappStart">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保app新增用户</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control bbappTimes">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保app短信数量</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control bbappMessage">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>保保网销售额</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control bbappSalesTotal">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>行家appPv</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="行家app新增用户" class="form-control hjappNew">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>行家appUv</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="行家app启动用户" class="form-control hjappStart">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>行家APP新增用户</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control hjappTimes">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>行家APP短信数量</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control hjappMessage">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>行家APP销售额</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="保保网UV" class="form-control hjappSalesTotal">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>行家网PV</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="行家网PV" class="form-control hjwPv">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label"><span class="text-danger">*</span>行家网UV</label>
+                <div class="col-md-9">
+                    <input type="text" value="0" placeholder="行家网UV" class="form-control hjwUv">
+                </div>
+            </div>
+
+
+
+            <p class="text-right">
+				<a class="btn btn-info saveIn">新增</a>
+			</p>
+    	</div>
+	</div>
+</div>

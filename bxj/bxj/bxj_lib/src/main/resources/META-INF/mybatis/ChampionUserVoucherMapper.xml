@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionUserVoucherMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionUserVoucher" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="voucher_id" property="voucherId" jdbcType="BIGINT" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="get_Allcounts" property="getAllcounts" jdbcType="INTEGER" />
+    <result column="use_Allcounts" property="useAllcounts" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, user_id, voucher_id, total, get_Allcounts, use_Allcounts, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_user_voucher
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_user_voucher
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionUserVoucher" >
+    insert into champion_user_voucher (fid, user_id, voucher_id, 
+      total, get_Allcounts, use_Allcounts, 
+      create_time, update_time)
+    values (#{fid,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{voucherId,jdbcType=BIGINT}, 
+      #{total,jdbcType=INTEGER}, #{getAllcounts,jdbcType=INTEGER}, #{useAllcounts,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionUserVoucher" >
+    insert into champion_user_voucher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="voucherId != null" >
+        voucher_id,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="getAllcounts != null" >
+        get_Allcounts,
+      </if>
+      <if test="useAllcounts != null" >
+        use_Allcounts,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="voucherId != null" >
+        #{voucherId,jdbcType=BIGINT},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="getAllcounts != null" >
+        #{getAllcounts,jdbcType=INTEGER},
+      </if>
+      <if test="useAllcounts != null" >
+        #{useAllcounts,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionUserVoucher" >
+    update champion_user_voucher
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="voucherId != null" >
+        voucher_id = #{voucherId,jdbcType=BIGINT},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="getAllcounts != null" >
+        get_Allcounts = #{getAllcounts,jdbcType=INTEGER},
+      </if>
+      <if test="useAllcounts != null" >
+        use_Allcounts = #{useAllcounts,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionUserVoucher" >
+    update champion_user_voucher
+    set user_id = #{userId,jdbcType=BIGINT},
+      voucher_id = #{voucherId,jdbcType=BIGINT},
+      total = #{total,jdbcType=INTEGER},
+      get_Allcounts = #{getAllcounts,jdbcType=INTEGER},
+      use_Allcounts = #{useAllcounts,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+
+  <sql id="Public_Query_Conditions" >
+    <where>
+      <if test="fid != null" >
+        and fid = #{fid,jdbcType=BIGINT}
+      </if>
+      <if test="userId != null" >
+        and user_id = #{userId,jdbcType=BIGINT}
+      </if>
+      <if test="voucherId != null" >
+        and voucher_id = #{voucherId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.model.ChampionUserVoucher" >
+    select
+    <include refid="Base_Column_List" />
+    from champion_user_voucher
+    <include refid="Public_Query_Conditions" />
+  </select>
+</mapper>

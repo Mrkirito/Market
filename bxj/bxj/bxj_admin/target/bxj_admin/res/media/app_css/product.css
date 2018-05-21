@@ -1,0 +1,59 @@
+/*
+**author Qinling
+*/
+.modal-body{
+	background:#ffdfd7;
+}
+.result_block{
+	background:#fff;
+	width: 320px;
+	border-radius:15px;
+	margin:0 auto 5px;
+	position: relative;
+	text-align:center;
+}
+.result_block p{
+	font-family:"microsoft yahei";
+}
+.result_block h1 {
+  margin: 0 33px 12px;
+  line-height: 40px;
+  color: #000;
+  font-size: 20px;
+  border-bottom: solid 1px #f5f5f5;
+  font-family:"microsoft yahei";
+}
+.largest_font{
+	font-size:17px;
+	line-height:24px;
+	color:#8f8f8f;
+	font-family:"microsoft yahei";
+}
+.large_font{
+	font-size:14px;
+	line-height: 24px;
+	color:#8f8f8f;
+	font-family:"microsoft yahei";
+}
+.redfont {
+  color: #ff0000;
+}
+.form-group label{
+	float:left;
+	width:20%;
+	height:40px;
+	line-height:40px;
+}
+.input-group{
+	width:50%;
+	height:40px;
+}
+table.dataTable tbody tr.selected,
+table.dataTable tbody th.selected,
+table.dataTable tbody td.selected {
+	color: #333!important;
+	background:#08C!important;
+}
+.table-striped>tbody>tr.selected>td, .table-striped>tbody>tr.selected>th{
+	background:#08C!important;
+}

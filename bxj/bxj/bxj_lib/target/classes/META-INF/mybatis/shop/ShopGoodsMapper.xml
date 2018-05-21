@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.shop.dao.ShopGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.shop.model.ShopGoods" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="short_name" property="shortName" jdbcType="VARCHAR" />
+    <result column="out_html_url" property="outHtmlUrl" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="is_online" property="isOnline" jdbcType="BIT" />
+    <result column="is_limit_purchase" property="isLimitPurchase" jdbcType="BIT" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="price1" property="price1" jdbcType="DECIMAL" />
+    <result column="price2" property="price2" jdbcType="DECIMAL" />
+    <result column="price3" property="price3" jdbcType="DECIMAL" />
+    <result column="max_buy_count" property="maxBuyCount" jdbcType="INTEGER" />
+    <result column="sale_count" property="saleCount" jdbcType="INTEGER" />
+    <result column="false_sale_count" property="falseSaleCount" jdbcType="INTEGER" />
+    <result column="max_sale_count" property="maxSaleCount" jdbcType="INTEGER" />
+    <result column="guide_sharing_word" property="guideSharingWord" jdbcType="VARCHAR" />
+    <result column="share_title" property="shareTitle" jdbcType="VARCHAR" />
+    <result column="share_desc" property="shareDesc" jdbcType="VARCHAR" />
+    <result column="share_pic" property="sharePic" jdbcType="VARCHAR" />
+    <result column="share_url" property="shareUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_uesr" property="updateUesr" jdbcType="BIGINT" />
+    <result column="min_buy_count" property="minBuyCount" jdbcType="INTEGER" />
+    <result column="has_mark" property="hasMark" jdbcType="INTEGER" />
+    <result column="mark_text" property="markText" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="head" property="head" jdbcType="INTEGER" />
+    <result column="picture2" property="picture2" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hangjia.bxj.shop.model.ShopGoods" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, name, short_name, out_html_url, unit, weight, status, is_online, is_limit_purchase, 
+    picture, price1, price2, price3, max_buy_count, sale_count, false_sale_count, max_sale_count, 
+    guide_sharing_word, share_title, share_desc, share_pic, share_url, create_time, create_user, 
+    update_time, update_uesr, min_buy_count, has_mark, mark_text, sort, head, picture2
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shop_goods
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from shop_goods
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.shop.model.ShopGoods" >
+    insert into shop_goods (id, title, name, 
+      short_name, out_html_url, unit, 
+      weight, status, is_online, 
+      is_limit_purchase, picture, price1, 
+      price2, price3, max_buy_count, 
+      sale_count, false_sale_count, max_sale_count, 
+      guide_sharing_word, share_title, share_desc, 
+      share_pic, share_url, create_time, 
+      create_user, update_time, update_uesr, 
+      min_buy_count, has_mark, mark_text, 
+      sort, head, picture2, 
+      description)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{shortName,jdbcType=VARCHAR}, #{outHtmlUrl,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, #{isOnline,jdbcType=BIT}, 
+      #{isLimitPurchase,jdbcType=BIT}, #{picture,jdbcType=VARCHAR}, #{price1,jdbcType=DECIMAL}, 
+      #{price2,jdbcType=DECIMAL}, #{price3,jdbcType=DECIMAL}, #{maxBuyCount,jdbcType=INTEGER}, 
+      #{saleCount,jdbcType=INTEGER}, #{falseSaleCount,jdbcType=INTEGER}, #{maxSaleCount,jdbcType=INTEGER}, 
+      #{guideSharingWord,jdbcType=VARCHAR}, #{shareTitle,jdbcType=VARCHAR}, #{shareDesc,jdbcType=VARCHAR}, 
+      #{sharePic,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUesr,jdbcType=BIGINT}, 
+      #{minBuyCount,jdbcType=INTEGER}, #{hasMark,jdbcType=INTEGER}, #{markText,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{head,jdbcType=INTEGER}, #{picture2,jdbcType=VARCHAR}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.shop.model.ShopGoods" >
+    insert into shop_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="shortName != null" >
+        short_name,
+      </if>
+      <if test="outHtmlUrl != null" >
+        out_html_url,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="isOnline != null" >
+        is_online,
+      </if>
+      <if test="isLimitPurchase != null" >
+        is_limit_purchase,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="price1 != null" >
+        price1,
+      </if>
+      <if test="price2 != null" >
+        price2,
+      </if>
+      <if test="price3 != null" >
+        price3,
+      </if>
+      <if test="maxBuyCount != null" >
+        max_buy_count,
+      </if>
+      <if test="saleCount != null" >
+        sale_count,
+      </if>
+      <if test="falseSaleCount != null" >
+        false_sale_count,
+      </if>
+      <if test="maxSaleCount != null" >
+        max_sale_count,
+      </if>
+      <if test="guideSharingWord != null" >
+        guide_sharing_word,
+      </if>
+      <if test="shareTitle != null" >
+        share_title,
+      </if>
+      <if test="shareDesc != null" >
+        share_desc,
+      </if>
+      <if test="sharePic != null" >
+        share_pic,
+      </if>
+      <if test="shareUrl != null" >
+        share_url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUesr != null" >
+        update_uesr,
+      </if>
+      <if test="minBuyCount != null" >
+        min_buy_count,
+      </if>
+      <if test="hasMark != null" >
+        has_mark,
+      </if>
+      <if test="markText != null" >
+        mark_text,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="head != null" >
+        head,
+      </if>
+      <if test="picture2 != null" >
+        picture2,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="outHtmlUrl != null" >
+        #{outHtmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isOnline != null" >
+        #{isOnline,jdbcType=BIT},
+      </if>
+      <if test="isLimitPurchase != null" >
+        #{isLimitPurchase,jdbcType=BIT},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price1 != null" >
+        #{price1,jdbcType=DECIMAL},
+      </if>
+      <if test="price2 != null" >
+        #{price2,jdbcType=DECIMAL},
+      </if>
+      <if test="price3 != null" >
+        #{price3,jdbcType=DECIMAL},
+      </if>
+      <if test="maxBuyCount != null" >
+        #{maxBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="saleCount != null" >
+        #{saleCount,jdbcType=INTEGER},
+      </if>
+      <if test="falseSaleCount != null" >
+        #{falseSaleCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxSaleCount != null" >
+        #{maxSaleCount,jdbcType=INTEGER},
+      </if>
+      <if test="guideSharingWord != null" >
+        #{guideSharingWord,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTitle != null" >
+        #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDesc != null" >
+        #{shareDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sharePic != null" >
+        #{sharePic,jdbcType=VARCHAR},
+      </if>
+      <if test="shareUrl != null" >
+        #{shareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUesr != null" >
+        #{updateUesr,jdbcType=BIGINT},
+      </if>
+      <if test="minBuyCount != null" >
+        #{minBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="hasMark != null" >
+        #{hasMark,jdbcType=INTEGER},
+      </if>
+      <if test="markText != null" >
+        #{markText,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="head != null" >
+        #{head,jdbcType=INTEGER},
+      </if>
+      <if test="picture2 != null" >
+        #{picture2,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.shop.model.ShopGoods" >
+    update shop_goods
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="outHtmlUrl != null" >
+        out_html_url = #{outHtmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isOnline != null" >
+        is_online = #{isOnline,jdbcType=BIT},
+      </if>
+      <if test="isLimitPurchase != null" >
+        is_limit_purchase = #{isLimitPurchase,jdbcType=BIT},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="price1 != null" >
+        price1 = #{price1,jdbcType=DECIMAL},
+      </if>
+      <if test="price2 != null" >
+        price2 = #{price2,jdbcType=DECIMAL},
+      </if>
+      <if test="price3 != null" >
+        price3 = #{price3,jdbcType=DECIMAL},
+      </if>
+      <if test="maxBuyCount != null" >
+        max_buy_count = #{maxBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="saleCount != null" >
+        sale_count = #{saleCount,jdbcType=INTEGER},
+      </if>
+      <if test="falseSaleCount != null" >
+        false_sale_count = #{falseSaleCount,jdbcType=INTEGER},
+      </if>
+      <if test="maxSaleCount != null" >
+        max_sale_count = #{maxSaleCount,jdbcType=INTEGER},
+      </if>
+      <if test="guideSharingWord != null" >
+        guide_sharing_word = #{guideSharingWord,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTitle != null" >
+        share_title = #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDesc != null" >
+        share_desc = #{shareDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sharePic != null" >
+        share_pic = #{sharePic,jdbcType=VARCHAR},
+      </if>
+      <if test="shareUrl != null" >
+        share_url = #{shareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUesr != null" >
+        update_uesr = #{updateUesr,jdbcType=BIGINT},
+      </if>
+      <if test="minBuyCount != null" >
+        min_buy_count = #{minBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="hasMark != null" >
+        has_mark = #{hasMark,jdbcType=INTEGER},
+      </if>
+      <if test="markText != null" >
+        mark_text = #{markText,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="head != null" >
+        head = #{head,jdbcType=INTEGER},
+      </if>
+      <if test="picture2 != null" >
+        picture2 = #{picture2,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hangjia.bxj.shop.model.ShopGoods" >
+    update shop_goods
+    set title = #{title,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      out_html_url = #{outHtmlUrl,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      is_online = #{isOnline,jdbcType=BIT},
+      is_limit_purchase = #{isLimitPurchase,jdbcType=BIT},
+      picture = #{picture,jdbcType=VARCHAR},
+      price1 = #{price1,jdbcType=DECIMAL},
+      price2 = #{price2,jdbcType=DECIMAL},
+      price3 = #{price3,jdbcType=DECIMAL},
+      max_buy_count = #{maxBuyCount,jdbcType=INTEGER},
+      sale_count = #{saleCount,jdbcType=INTEGER},
+      false_sale_count = #{falseSaleCount,jdbcType=INTEGER},
+      max_sale_count = #{maxSaleCount,jdbcType=INTEGER},
+      guide_sharing_word = #{guideSharingWord,jdbcType=VARCHAR},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_desc = #{shareDesc,jdbcType=VARCHAR},
+      share_pic = #{sharePic,jdbcType=VARCHAR},
+      share_url = #{shareUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_uesr = #{updateUesr,jdbcType=BIGINT},
+      min_buy_count = #{minBuyCount,jdbcType=INTEGER},
+      has_mark = #{hasMark,jdbcType=INTEGER},
+      mark_text = #{markText,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      head = #{head,jdbcType=INTEGER},
+      picture2 = #{picture2,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.shop.model.ShopGoods" >
+    update shop_goods
+    set title = #{title,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      out_html_url = #{outHtmlUrl,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      is_online = #{isOnline,jdbcType=BIT},
+      is_limit_purchase = #{isLimitPurchase,jdbcType=BIT},
+      picture = #{picture,jdbcType=VARCHAR},
+      price1 = #{price1,jdbcType=DECIMAL},
+      price2 = #{price2,jdbcType=DECIMAL},
+      price3 = #{price3,jdbcType=DECIMAL},
+      max_buy_count = #{maxBuyCount,jdbcType=INTEGER},
+      sale_count = #{saleCount,jdbcType=INTEGER},
+      false_sale_count = #{falseSaleCount,jdbcType=INTEGER},
+      max_sale_count = #{maxSaleCount,jdbcType=INTEGER},
+      guide_sharing_word = #{guideSharingWord,jdbcType=VARCHAR},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_desc = #{shareDesc,jdbcType=VARCHAR},
+      share_pic = #{sharePic,jdbcType=VARCHAR},
+      share_url = #{shareUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_uesr = #{updateUesr,jdbcType=BIGINT},
+      min_buy_count = #{minBuyCount,jdbcType=INTEGER},
+      has_mark = #{hasMark,jdbcType=INTEGER},
+      mark_text = #{markText,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      head = #{head,jdbcType=INTEGER},
+      picture2 = #{picture2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--**************************** extend begin here *******************************-->
+  <sql id="Column_List" >
+    id, title, name, short_name, unit, weight, status, is_limit_purchase, is_online, picture, price1, price2, price3,
+    max_buy_count, sale_count+false_sale_count sale_count, false_sale_count, max_sale_count, guide_sharing_word,
+    share_title, share_desc, share_pic, share_url, create_time, create_user, update_time,update_uesr, min_buy_count, has_mark, mark_text, sort, head, picture2
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions" >
+    <where>
+      <if test="name != null" >
+        and name like CONCAT(CONCAT('%', #{name}), '%')
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderBy != null and orderBy != ''" >
+      ORDER BY ${orderBy}
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="pageFirstItem != null and pageSize != null">
+      LIMIT #{pageFirstItem},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询总条数 -->
+  <select id="selectByCount" resultType="int" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    count(*)
+    from shop_goods
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.common.BaseCommonQuery" >
+    select
+    <include refid="Column_List" />
+    from shop_goods
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+
+  <!-- 查询总条数 -->
+  <select id="selectCountByQuery" resultType="int" parameterType="com.hangjia.bxj.shop.query.ShopGoodsQuery" >
+    select
+    count(*)
+    from shop_goods
+    <include refid="Public_Query_Conditions" />
+  </select>
+
+  <!-- 分页查询 -->
+  <select id="selectPageByQuery" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.shop.query.ShopGoodsQuery" >
+    select
+    <include refid="Column_List" />
+    from shop_goods
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+</mapper>

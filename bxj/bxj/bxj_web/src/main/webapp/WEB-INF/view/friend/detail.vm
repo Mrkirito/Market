@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    #set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+    #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>详情</title>
+    <meta name="keywords" content="朋友图">
+    <meta name="description" content="朋友图">
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+    <link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/friend/css/detail.css">
+    <script src="$static_path/bxj_three/public/js/flexible.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<!--导航 开始-->
+<!--
+<header class="head">
+    <a class="header_left" href="javascript:history.go(-1)"></a>
+    <h1>详情</h1>
+    <a class="header_right_shareicon" onclick="share()"></a>
+</header>
+-->
+<!--导航 结束-->
+<div class="container container_forum" >
+    <div class="hd clearfix">
+        <div class="teacher">
+            <h2>$!bean.title</h2>
+            <h3><span class="time"> $!date.format('yyyy-MM-dd',$!bean.publishTime)&nbsp;&nbsp;&nbsp;&nbsp;$!bean.source</span></h3>
+        </div>
+    </div>
+    <!--个人名片信息模块，APP外显示，APP内隐藏 -->
+    #if ($user)
+    <div class="namecard_title_block">
+        <div class="name">
+            <div class="headimg_block">
+                <img src="$!user.photo" />
+            </div>
+            <div class="name_block">
+                <p class="name_p">$!user.name</p>
+                <p class="phone_p">电话:$!user.phone</p>
+            </div>
+        </div>
+        #if ("1"==$isApp)
+            <span class="namecard"><a href="$bxj_path/planUserCard/$!user.fid/shareUserCard.page?share=1">查看微名片</a></span>
+        #else
+            <span class="namecard"><a href="$bxj_path/planUserCard/$!user.fid/shareUserCard.page">查看微名片</a></span>
+        #end
+    </div>
+    #end
+    <div class="main_block" id="content">
+        <p>$!bean.content</p>
+    </div>
+</div>
+</body>
+</html>
+
+<script src="$static_path/bxj_three/public/js/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+
+<!--百度统计-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+    var content = $('#content').text().substring(0, 100);
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$!bean.title',
+                desc: content,
+                imgUrl: '$static_path$!bean.pic1',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+
+    /**分享**/
+    /*function share() {
+        if(setuped) SewisePlayer.doPause();
+        var info = {
+            title: '$!bean.title',
+            desc: content,
+            imgUrl: '$static_path$!bean.pic1',
+            location: "${bxj_path}/friend/detail.page?id=$!bean.fid"
+        };
+        setShareInfo(info);
+        app_share(info.title,info.desc,info.image,info.location);
+    }*/
+</script>

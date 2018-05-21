@@ -1,0 +1,96 @@
+$pageModule.init("app/newperson/courseType", "list")
+
+#set($show_path = ${configuration.getProperty("urlPath","show_path")})
+<input type="hidden" id="show_path" value="$show_path">
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- BEGIN PAGE HEADER-->
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">课程阶段&nbsp;</label>
+                                <input type="hidden" class="form-control courseStageId" id="courseStageId">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="control-label pad-btm">启用状态&nbsp;</label>
+                                <select class="form-control enableStatus">
+                                    <option value="" checked>全部</option>
+                                    <option value="1">启用</option>
+                                    <option value="0">禁用</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data-list">
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE -->
+</div>
+
+
+<!-- 添加、编辑 -->
+<div class="hidden" id="dialog">
+    <div class="form-body">
+        <div class="circleTextclass">
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">名称</label>
+                <div class="input-group col-md-8">
+                    <input type="hidden" id="id">
+                    <input type="text" class="form-control name" placeholder="名称">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">课程阶段</label>
+                <div class="input-group col-md-8">
+                    <input type="text" class="form-control courseStageId">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">排序</label>
+                <div class="input-group col-md-8">
+                    <input type="text" class="form-control sort" placeholder="排序"
+                           onkeyup="this.value=this.value.replace(/\D/g,'')"
+                           onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="col-md-3 control-label">图标</label>
+                <div class="input-group col-md-8">
+                    <div class="col-sm-6">
+                        <div class="">
+                            <div class="uploadImg">
+                                <li style="display: inline-block; margin-right: 3px;">
+    		                        <span style="display: inline-block;border: 1px solid #ddd;padding: 3px 5px;">
+                		            <img style="height: 100px;width: 100px;" src="" data-url="" data-id=""
+                                         class="picUrl">
+    		                        <a class="btn btn-primary remove-img">删除</a>
+    		                        </span>
+                                </li>
+                                <a class="btn btn-primary infos-images">上传图片</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

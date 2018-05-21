@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionDictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionDictionary" >
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionDictionary" >
+    insert into champion_dictionary (code, value, description
+      )
+    values (#{code,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionDictionary" >
+    insert into champion_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!--**************************** extend begin here *******************************-->
+  <sql id="Base_Column_List" >
+    code, value, description
+  </sql>
+  <!-- 查询条件 -->
+  <sql id="Public_Query_Conditions" >
+    <where>
+      <if test="code != null" >
+        and code = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="value != null" >
+        and value = #{value,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+
+  <!-- 排序 -->
+  <sql id="Public_Order_Datas" >
+    <if test="orderDatas != null and orderDatas != ''" >
+      order by
+      <foreach collection="orderDatas" item="orderData" separator=",">
+        ${orderData.field} ${orderData.direction}
+      </foreach>
+    </if>
+  </sql>
+
+  <!-- 分页 -->
+  <sql id="Public_Page">
+    <if test="startIndex != null and pageSize != null">
+      limit #{startIndex},#{pageSize}
+    </if>
+  </sql>
+
+  <!-- 查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.hangjia.bxj.model.ChampionDictionary">
+    select
+    <include refid="Base_Column_List" />
+    from champion_dictionary
+    <include refid="Public_Query_Conditions" />
+    <include refid="Public_Order_Datas" />
+    <include refid="Public_Page" />
+  </select>
+</mapper>

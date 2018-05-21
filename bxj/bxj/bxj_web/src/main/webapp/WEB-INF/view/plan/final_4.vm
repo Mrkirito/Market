@@ -1,0 +1,110 @@
+<div class="container container_planbook_znx">
+		<div class="banner">
+			<span class="company_tip">$!mainRel.planProductMain.gsName</span>
+			<img src="$static_path/bxj_three/static/planbook_finish/image/banner_znx.jpg">
+		</div>
+		<div class="sexname_block">
+			<span class="sex">性别：<span>#if($!plan.sex==1)男#else女#end</span></span>
+			<span class="age">年龄：<span>$!plan.age</span></span>
+		</div>
+		<div class="result_block main_block">
+			<div class="inform_block">
+				<span class="inform_title">保险金额</span>
+				<span class="inform_text">$!mainRel.be</span>
+			</div>
+			<div class="inform_block">
+				<span class="inform_title">保险期间</span>
+				<span class="inform_text">$!mainRel.bxnxConstant.name</span>
+			</div>
+			<div class="inform_block">
+				<span class="inform_title">交费期间</span>
+				<span class="inform_text">$!mainRel.jfnxConstant.name</span>
+			</div>
+			<div class="inform_block">
+				<span class="inform_title">首年保费</span>
+				<span class="inform_text">$!plan.bf</span>
+			</div>
+			<span class="arrow_block downarrow" style="display: block;"></span>
+		</div>
+		<div class="result_block table_block iconbutton_block" style="display:none;">
+			<table>
+				<thead>
+					<tr>
+						<th>险种</br>名称</th>
+						<th>保额/份数</th>
+						<th>保费</th>
+						<th>保障</br>期限</th>
+						<th>缴费</br>期间</th>
+					</tr>
+				</thead>
+				<tbody>
+            #foreach($rel in $rels)
+             <tr>
+                <td>$!rel.planProductMain.cpjc</td>
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.be</td> #end
+                <td>$!rel.bf</td>
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.bxnxConstant.name</td> #end
+                #if($rel.planProductMain.cplx==2)<td>-</td>#else <td>$!rel.jfnxConstant.name</td> #end
+            </tr>
+            #end
+				</tbody>
+			</table>
+			<span class="arrow_block uparrow" style="display:none;"></span>
+		</div>
+		<div class="img_block"></div>
+		#foreach($qy in $qys)
+		<div class="result_block font_block">
+			$!qy.head1
+    		$!qy.head2
+    		$!qy.head3
+		</div>
+		#end
+		#if($hasBonus)
+		<div class="result_block font_block">
+			<h2>一个账户 多重保障</h2>
+			<p class="large_font" align="left" style="padding-left:10%;padding-right:10%">
+			以假定“中档分红”为例，选择不同收益档次，拖动可以查看不同分红档次的利益
+			</p>
+			<!-- 分红档次选择按钮 -->
+			<div class="green button_type_block #if($profitColumnCount==4) four #else three #end"><!-- two three four 根据按钮数量改变 -->
+				<div class="button_type_div" data-profit="low">
+					<div class="button_span">
+						<span>低(1.75%)</span>
+					</div>
+				</div>
+				<div class="button_type_div checked" data-profit="middle">
+					<div class="button_span">
+						<span>中(4.5%)</span>
+					</div>
+				</div>
+				<div class="button_type_div" data-profit="high">
+					<div class="button_span">
+						<span>高(6%)</span>
+					</div>
+				</div>
+			</div>
+			<!-- 分红档次选择按钮 结束 -->
+			<!-- 分红箭头模块 -->
+			<div class="choose_line_block">
+				<span class="choose_arrow #if($profitColumnCount==4) four #else three #end"><span></span></span>
+			</div>
+			<!-- 分红箭头模块 结束-->
+			<!-- 分红内容模块 -->
+			<div class="bonus_block">
+				<h3>被保人在
+					<span class="select_result"></span>
+					<select class="bonus_age_select">
+					</select>岁时</h3>
+				#foreach($pf in $profit)
+					<p><span class="profit_name">$!pf.name：</sapn><span class="profit_num"></span>元</p>				
+				#end
+			</div>
+			<div class="myage">
+				<div class="range_minus"></div>
+            	<input type="range" min="" max="" step="1" value="0" data-rangeslider>
+            	<div class="range_add"></div>
+            </div>
+            <p class="intro_range_p">拖动按钮查看不同年龄的账户价值</p>
+			<!-- 分红内容模块 结束-->
+		</div>
+		#end	

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		#set($static_path = ${configuration.getProperty("urlPath","static_path")})
+    	#set($bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		#set($bxj_v3 = ${configuration.getProperty("urlPath","bxj_v3")})
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="format-detection" content="telephone=no">
+		<title>$!product.cpjc计划书演示</title>
+		<meta name="keywords" content="计划书">
+		<meta name="description" content="计划书">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="$bxj_v3/activity/css/win_life/win_life.css">		
+		<link rel="stylesheet" type="text/css" href="$bxj_v3/public/css/public.css">
+		<script type="text/javascript" src="$bxj_v3/public/js/flexible.js"></script>	
+	</head>
+	<body>
+	#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+		<header class="head">
+			<a class="header_left" href="javascript:history.back(-1);"></a>
+			<h1>$!product.cpjc计划书演示</h1>
+			<a href="javacript:void(0);" class="header_right_shareicon fenxico"></a>
+		</header>
+		<div class="header_heightblock"></div>
+	#end
+	<div class="container container_edmond">
+		
+		<div class="img03">
+            
+            <ul class="clearfix list">
+                <li>
+                    <dl>
+                        <dt><span>快返金：</span><bdo>首年受益</bdo></dt>
+                        <dd>返还首年保费<span>30%</span></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt><span>关爱金：</span><bdo>体现真爱</bdo></dt>
+                        <dd>身故或全残,被保人每年领取保额<span>40%</span>至<span>18</span>岁</dd>
+                    </dl>                    
+                </li>
+                <li>
+                    <dl>
+                        <dt><span>固定金：</span><bdo>生生不息</bdo></dt>
+                        <dd>每年领取保额<span>20%</span>，领至终身</dd>
+                    </dl>                    
+                </li>
+                <li>
+                    <dl>
+                        <dt><span>千万金：</span><bdo>航空保障</bdo></dt>
+                        <dd>首年享受<span>1000</span>万的航空意外</dd>
+                    </dl>                    
+                </li>
+                <li>
+                    <dl>
+                        <dt><span>分红金：</span><bdo>分享成果</bdo></dt>
+                        <dd>公司利润<span>70%</span>分红</dd>
+                    </dl>                    
+                </li>
+                <li>
+                    <dl>
+                        <dt><span>传承金：</span><bdo>福泽三代</bdo></dt>
+                        <dd>所交保费和现金价值两者取大者</dd>
+                    </dl>                    
+                </li>
+                <li>
+                    <dl>
+                        <dt><span>聚财金：</span><bdo>稳健成长</bdo></dt>
+                        <dd>聚财宝账户<span>5%</span>复利滚存</dd>
+                    </dl>                    
+                </li>
+                <li>
+                    <dl>
+                        <dt><span>信托金：</span><bdo>保险信托</bdo></dt>
+                        <dd>延续生前一直，弥补保险不足</dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt><span>应急金：</span><bdo>护航一生</bdo></dt>
+                        <dd>现金价值<span>80%</span>及聚财宝贷款</dd>
+                    </dl>                    
+                </li>
+            </ul>
+
+        </div>
+        <div class="img04">
+            <div class="link">
+                <a class="link-security">参考案例</a>
+				#if(!$request.getParameter('share')||$request.getParameter('share')=='')
+					<a class="link-more">想要更多险种组合？猛戳</a>
+				#end		
+            </div>
+        </div>
+
+	</div>
+    
+
+	#if($request.getParameter('share'))
+    <div class="pop download-pop">
+        
+        <div class="left">
+            <bdo></bdo>
+            <div class="download-infor">
+                <b>下载保险家</b>
+                <span>直达客户 直达专家</span>
+            </div>
+        </div> 
+
+        <div class="right">
+            <a class="download-btn"  href="http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster">立即体验</a>
+        </div> 
+
+    </div>
+	#else
+    <!-- make -->
+    <div class="pop make">
+        <span onclick="javascript:window.location.href='$bxj_path/plan/make${fid}.page?hasad=1&hd=$request.getParameter('hd')';">马上去做计划书</span>
+    </div>
+    <!-- make end -->		
+    #end
+	<!-- masks -->
+    <div class="masks"></div>
+    <!-- masks end -->
+    
+    <!-- security -->
+    <div class="security-box">
+
+        <div class="security">
+            
+            <div class="security-title">参考案例</div>        
+            
+            <div class="security-content">
+
+                <div class="security-show">
+            
+                    <p>王先生为<span>0</span>岁的儿子小王投保赢越人生，年交保费<span>390910</span>元，<span>3</span>年交费，保额<span>100000</span>元。希望通过专款专用的规划，实现对孩子的财务支持。</p>
+                    <p>保险利益：</p>
+                    <ul>
+                        <li>1. 快返金：小王的保单第一周年：<span>117273</span>元（首期保费<span>30%</span>）；</li>
+                        <li>2. 固定金：小王1岁—终身，每年返还<span>20000</span>元（保额<span>20%</span>）；</li>
+                        <li>3. 分红金：中国平安利润<span>70%</span>分红；</li>
+                        <li>4. 传承金：小王身故时，一次性返还<span>1172730</span>元（所交保费与身故时现金价值两者较大者）；</li>
+                        <li>5. 聚财金：所有返还，若不领取，则进入聚财宝账户复利增值；</li>
+                        <li>6. 关爱金：若投保人老王身故或全残，则被保险人小王每年领取保额的<span>40%</span>，每年<span>40000</span>元直至<span>18</span>岁；</li>
+                        <li>7. 应急金：现金价值的<span>80%</span>及聚财宝贷款。</li>
+                        <li>8. 千万金：投保人老王首年享有<span>1000</span>万的航空意外保障。</li>
+                    </ul>
+                    <p>以上返还进入聚财宝万能账户二次增值（按照中档利率<span>4.5%</span>）：</p>
+                    <ol>
+                        <li><span>20</span>岁时聚财宝账户价值：<span>230</span>万元；</li>
+                        <li><span>30</span>岁时聚财宝账户价值：<span>357</span>万元；</li>
+                        <li><span>40</span>岁时聚财宝账户价值：<span>554</span>万元；</li>
+                        <li><span>60</span>岁时聚财宝账户价值：<span>1335</span>万元；</li>
+                        <li><span>80</span>岁时聚财宝账户价值：<span>3213</span>万元；</li>
+                    </ol>
+
+                </div>
+
+                <div class="security-btn">
+                    <span class="btn">关闭</span>
+                </div>
+
+            </div>
+        
+        </div>
+
+    </div>
+    <!-- security end -->
+    <!-- spicilegium -->
+    <div class="spicilegium">
+        <div class="security-title">信息搜集</div>
+        <div class="spicilegium-content">
+            <p>请留下您的联系方式与想组合的险种<br/>保险家客服会在一周内联系您~</p>
+            <ul>
+								<form id="form">
+                <li>
+                    <label>险种组合</label>
+                    <div class="input-text">
+                        <input type="text" placeholder="请输入险种组合" name="gname" />
+                    </div>
+                </li>
+                <li>
+                    <label>联系方式</label>
+                    <div class="input-text">
+                        <input placeholder="请输入手机号" type="tel" maxlength="11" value="$!userCard.phone" name="phone"/>
+                    </div>
+                </li>
+								</form>
+            </ul>
+            <div class="spicilegium-btn">
+                <a class="btn cancel-btn button_cancel">取消</a>
+                <a class="btn submit-btn button_submit">提交</a>
+            </div>
+        </div>            
+    </div>
+</body>
+</html>
+		<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js?v=98"></script>
+		<script src="$static_path/bxj_three/public/js/public.js?v=92"></script>
+		<script type="text/javascript" src="$static_path/bxj_three/public/js/fastclick.js"></script>
+		<script>var bxj_path = '$bxj_path', static_path = '$static_path',zxPid='$!product.fid';</script>
+		<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+		<![endif]-->
+		<script src="$static_path/index/js/share.js?v=92"></script>
+		<script src="$static_path/bxj_three/static/product_ad/js/laobaoCard.js?v=12"></script>
+        <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+        <script>
+    var securityLink = $('.link-security'),
+        securityBox  = $('.security-box'),
+        securityBtn  = $('.security-btn'),
+
+        moreLink     = $('.link-more'),
+        spicilegium  = $('.spicilegium'),
+        cancelBtn    = $('.cancel-btn'),
+        mask = $('.masks');
+    
+    // 详细保障利益 
+    securityLink.on('click', function(){
+        mask.fadeIn();
+        securityBox.fadeIn();
+    });
+
+    securityBtn.on('click', function(){
+        mask.fadeOut();
+        securityBox.fadeOut();
+    });
+
+    // 信息搜集
+    moreLink.on('click', function(){
+        mask.fadeIn();
+        spicilegium.fadeIn();
+    });
+
+    cancelBtn.on('click', function(){
+        mask.fadeOut();
+        spicilegium.fadeOut();
+    });
+
+    //快速点击绑定
+    FastClick.attach(document.body);		
+    var _share = {
+		title : '2017年开门红产品赢越人生',
+		desc : '终身年金理财产品，交费期限短，3种交费方式可灵活选择，年年领取保险金，可享公司分红',
+		image : '$bxj_v3/activity/image/win_life/share.png',
+		location : '$bxj_path/plan/detail/ad/${fid}.page?share=1&hd=1'
+	};
+	var weixin = new WeiXinBridge(true);
+	weixin.config({
+		url : 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+		api : [ weixin.Share.api.all ],
+		success : function() {
+			weixin.share({
+				title : _share.title,
+				desc : _share.desc,
+				imgUrl : _share.image,
+				link : location.href.split('#')[0]
+			});
+		}
+	});
+	setShareInfo(_share);
+        </script>
+        <script>
+    var _hmt = _hmt || [];
+    (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+	 })();
+</script>

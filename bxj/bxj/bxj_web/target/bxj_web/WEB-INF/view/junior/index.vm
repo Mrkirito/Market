@@ -1,0 +1,190 @@
+#set($header_params = {"title":"邀请注册", "css":[]})
+#bxj_header2($header_params)
+#if(!$request.getParameter('hd'))
+<header class="head">
+	<a class="header_left" href="javascript:history.back(-1);"></a>
+    <h1>邀请好友</h1>
+</header>
+#end
+<!-- 弹出框 -->
+	<div class="greyblock"></div>
+	<div class="popbox">
+		<div class="close_icon"></div>
+	</div>
+	
+## shareId 就是当前用户的ID
+
+<div class="container container_in">
+
+		<div class="banner">
+			<img src="$static_path/bxj_two/static/image/invent_in_banner1.gif" width="100%"/>
+		</div>
+		##<a class="rule">点此查看活动规则</a>
+		<div class="button_block">
+			<div class="friend_num_block">
+				<span class="friend_num">
+				<img src="$static_path/bxj_two/static/image/invent_icon.png">好友数量：<span>$count</span>人</span>
+				#if(!$request.getParameter('hd'))
+				<a class="view_button" href="junior/myJuniors.page">查看</a>
+				#else
+				<a class="view_button" href="junior/myJuniors.page?hd=1">查看</a>
+				#end
+			</div>
+			#if(!$request.getParameter('hd'))
+			<button class="voice_button" onclick="window.location.href='$static_path/demo/yanshi2.html?v=1';">肖珊总监教你做语音计划书</button>
+			#else
+			<button class="voice_button" onclick="window.location.href='$static_path/demo/yanshi3.html?v=1&hd=1';">肖珊总监教你做语音计划书</button>
+			#end
+			<p class="tips">请您打开声音进行体验！</p>
+			#if($!shareId)
+			<button class="submit_button login_state">邀请好友</button>
+			#else
+			<button class="submit_button unlogin_state">邀请好友</button>
+			#end<!-- 登陆状态去除后面unlogin_state,改为login_state即可 -->
+		</div>
+		#if($!shareId)
+		<div class="erweima" id="qrCode"></div>
+		<p class="intro_p">个人专属二维码</p>
+		<p class="intro_p">让好友扫我，立刻邀请！</p>
+		
+		<!-- 二维码放大浮层 -->
+		<div class="overlay box-login">
+		    <div class="section" id="qrCodeLarge">
+		        
+		    </div>
+		</div>
+		#else
+		<p class="intro_p">登录后才能邀请哦！<a href="${configuration.getProperty('hjbsso','hjb_sso_login_url')}&ret=${bxj_path}/junior/index.page">马上登录</a></p>
+		#end
+		<!-- 登陆状态 -->
+		<!--  -->
+		<!-- 未登陆状态 -->
+		
+	</div>
+
+#set( $footer_params = ["public/js/qrcode.js", "index/js/share.js?v=20160312"])
+#bxj_footer($footer_params)
+
+#if($!shareId)
+<script>
+	jQuery.browser = jQuery.browser || jQuery.support;
+	// 生成二维码
+	function code(sel) {
+		var _this = $(sel);
+		var height = _this.height();
+		var width = _this.width();
+		_this.qrcode({
+			text: '$!bxj_path/junior/share.page?shareId=$shareId',
+			height: height,
+			width: width,
+			src: 'favicon.ico'
+		});
+	}
+	
+	code('#qrCode');
+	setTimeout(function() {
+		code('#qrCodeLarge');
+	}, 200);
+	
+	// 二维码点击放大
+	$('#qrCode').on('click',function(event){
+		if (event.stopPropagation) {
+			event.stopPropagation();
+		} else {
+			event.cancelBubble = true;
+		}
+		
+	    $('.box-login').fadeIn(200);
+
+	     var move = function(e) {
+	        if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+			e.preventDefault && e.preventDefault();
+	        e.returnValue = false;
+	        e.stopPropagation && e.stopPropagation();
+	        return false;
+	    }
+	    document.documentElement.style.overflow = 'hidden';
+	    document.body.style.overflow = 'hidden';
+
+	    
+	    //禁止滚动
+	    function addliste() {
+	        if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+	        window.addEventListener('touchmove', move);
+	    }
+	   
+	});
+	
+	$('.overlay').on('click',function(event){
+		 if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+	    $('.overlay').fadeOut(200,function(){
+	        $(this).removeAttr('style');
+	    });
+	     var move = function(e) {
+	         if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+	        e.preventDefault && e.preventDefault();
+	        e.returnValue = false;
+	        e.stopPropagation && e.stopPropagation();
+	        return false;
+	    }
+	    document.documentElement.style.overflow = 'visible';
+	    document.body.style.overflow = 'visible';
+	    
+	    
+	    
+	    function addliste() {
+	        if (event.stopPropagation) { event.stopPropagation(); } else { event.cancelBubble = true; }
+	        window.addEventListener('touchmove', move);
+	    }
+
+
+	});
+	
+	$('.submit_button.login_state').bind('touchend',function(){
+		$('button.submit_button').css({'transform':'translate(0,0)','box-shadow':'0 0.133333rem 0 #bf9618'});
+	}).bind('touchstart',function(){
+		$('button.submit_button').css({'transform':'translate(0,0.133333rem)','box-shadow':'0 0 0 #bf9618'});
+	}).click(function() {
+		app_share('邀请优秀的你加入！全国最中立的计划书神器！','六百万代理人的选择！中国保险经理人协会荣誉推荐！','$static_path/index/images/invitation.jpg','$bxj_path/junior/share.page?shareId=$shareId');
+	});
+</script>
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+var weixin = new WeiXinBridge(true);
+weixin.config({
+    url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+    api: [weixin.Share.api.all],
+    success: function() {
+        weixin.share({
+            title: '邀请优秀的你加入！全国最中立的计划书神器！',
+            desc: '六百万代理人的选择！中国保险经理人协会荣誉推荐！',
+            imgUrl: '$static_path/index/images/invitation.jpg',
+            link: location.href.split('#')[0]
+        });
+    }
+});
+</script>
+#else
+<script>
+	$('.submit_button.unlogin_state').bind('touchend',function(){
+		$('button.submit_button').css({'transform':'translate(0,0)','box-shadow':'0 0.133333rem 0 #545454'});
+	}).bind('touchstart',function(){
+		$('button.submit_button').css({'transform':'translate(0,0.133333rem)','box-shadow':'0 0 0 #545454'});
+	}).click(function() {
+		location = "${configuration.getProperty('hjbsso','hjb_sso_login_url')}&ret=${bxj_path}/junior/index.page";
+	});
+	
+</script>
+#end
+
+<script>
+	// 显示和关闭活动规则
+	$('.rule').click(function(){
+		$('.popbox,.greyblock').show();
+	});
+	$('.close_icon').click(function(){
+		$('.popbox,.greyblock').hide();
+	});
+</script>

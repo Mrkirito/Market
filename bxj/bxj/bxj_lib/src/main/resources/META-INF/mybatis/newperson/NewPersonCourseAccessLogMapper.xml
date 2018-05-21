@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.newperson.dao.NewPersonCourseAccessLogMapper">
+    <resultMap id="BaseResultMap" type="com.hangjia.bxj.newperson.model.NewPersonCourseAccessLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="course_id" property="courseId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, course_id, user_id, type, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from study_new_person_course_access_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from study_new_person_course_access_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseAccessLog">
+    insert into study_new_person_course_access_log (id, course_id, user_id, 
+      type, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseAccessLog">
+        insert into study_new_person_course_access_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="courseId != null">
+                course_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="courseId != null">
+                #{courseId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseAccessLog">
+        update study_new_person_course_access_log
+        <set>
+            <if test="courseId != null">
+                course_id = #{courseId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.newperson.model.NewPersonCourseAccessLog">
+    update study_new_person_course_access_log
+    set course_id = #{courseId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--**************************** extend begin here *******************************-->
+    <!-- 查询条件 -->
+    <sql id="Public_Query_Conditions">
+        <where>
+        </where>
+    </sql>
+
+    <!-- 排序 -->
+    <sql id="Public_Order_Datas">
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+    </sql>
+
+    <!-- 分页 -->
+    <sql id="Public_Page">
+        <if test="pageFirstItem != null and pageSize != null">
+            LIMIT #{pageFirstItem}, #{pageSize}
+        </if>
+    </sql>
+
+    <select id="queryAccessDataPage" parameterType="com.hangjia.bxj.newperson.query.NewPersonCourseAccessQuery"
+            resultType="com.hangjia.bxj.newperson.model.NewPersonCourseAccessLog">
+        SELECT * from (
+        SELECT
+        t.id id,
+        t.type type,
+        t.create_time createTime,
+        t1.course_title courseTitle,
+        t2.id typeId,
+        t2.name typeName,
+        t3.id stageId,
+        t3.name stageName,
+        t4.mobile phone,
+        t5.name userName
+        FROM
+        study_new_person_course_access_log t
+        LEFT JOIN study_new_person_course t1 ON t.course_id = t1.id
+        LEFT JOIN study_new_person_course_type t2 ON t1.course_type_id = t2.id
+        LEFT JOIN study_new_person_course_stage t3 ON t2.course_stage_id = t3.id
+        LEFT JOIN boss_ucenter.uc_user t4 ON t.user_id = t4.id
+        LEFT JOIN boss_ucenter.uc_user_card t5 ON t.user_id = t5.fid
+        ) t
+        <where>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="userName != null and userName != ''">
+                and userName like CONCAT('%',#{userName,jdbcType=VARCHAR},'%' )
+            </if>
+            <if test="type != null">
+                and type = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="typeId != null">
+                and typeId = #{typeId,jdbcType=BIGINT}
+            </if>
+            <if test="stageId != null">
+                and stageId = #{stageId,jdbcType=BIGINT}
+            </if>
+        </where>
+        <include refid="Public_Order_Datas"/>
+        <include refid="Public_Page"/>
+    </select>
+
+    <select id="queryAccessDataCount" parameterType="com.hangjia.bxj.newperson.query.NewPersonCourseAccessQuery"
+            resultType="java.lang.Integer">
+        select count(*) from (
+        SELECT
+        t.id id,
+        t.type type,
+        t.create_time createTime,
+        t1.course_title courseTitle,
+        t2.id typeId,
+        t2.name typeName,
+        t3.id stageId,
+        t3.name stageName,
+        t4.mobile phone,
+        t5.name userName
+        FROM
+        study_new_person_course_access_log t
+        LEFT JOIN study_new_person_course t1 ON t.course_id = t1.id
+        LEFT JOIN study_new_person_course_type t2 ON t1.course_type_id = t2.id
+        LEFT JOIN study_new_person_course_stage t3 ON t2.course_stage_id = t3.id
+        LEFT JOIN boss_ucenter.uc_user t4 ON t.user_id = t4.id
+        LEFT JOIN boss_ucenter.uc_user_card t5 ON t.user_id = t5.fid
+        ) t
+        <where>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="userName != null and userName != ''">
+                and userName like CONCAT('%',#{userName,jdbcType=VARCHAR},'%' )
+            </if>
+            <if test="type != null">
+                and type = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="typeId != null">
+                and typeId = #{typeId,jdbcType=BIGINT}
+            </if>
+            <if test="stageId != null">
+                and stageId = #{stageId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+</mapper>

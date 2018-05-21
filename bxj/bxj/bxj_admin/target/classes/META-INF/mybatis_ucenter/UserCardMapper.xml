@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.ucenter.dao.UserCardMapper" >
+  
+  <sql id="user_card_where">
+	  <where>
+	  		a.real_audit_status in (1,2,3)
+	  		<if test="phone != null and phone != ''">AND b.mobile = #{phone}</if>
+	  		<if test="realName != null and realName != ''">AND a.name= #{realName}</if>
+	  		<if test="idCard != null and idCard != ''">AND a.id_card = #{idCard}</if>
+	  		<if test="realAuditStatus != null">AND a.real_audit_status = #{realAuditStatus}</if>
+			<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+				AND DATE(a.apply_time) <![CDATA[>=]]> DATE(#{startTime})
+				AND DATE(a.apply_time) <![CDATA[<=]]> DATE(#{endTime})
+	  		</if>
+	  </where>
+  </sql>
+  <select id="queryUserCardDataCount" parameterType="com.hangjia.bxj.ucenter.query.UserCardQuery" resultType="int">
+  	SELECT
+  		COUNT(1)
+  	FROM
+  		uc_user_card a
+  	lEFT JOIN
+	  	uc_user b
+  	ON a.fid = b.id
+  	<include refid="user_card_where"/>
+  </select>
+  
+  <select id="queryUserCardDataPage" parameterType="com.hangjia.bxj.ucenter.query.UserCardQuery" 
+  		resultType="com.hangjia.bxj.ucenter.model.UserCard">
+	SELECT
+		a.fid as "fid",
+		b.mobile as "phone",
+		a.audit_time as "auditTime",
+		a.realname as "realName",
+		a.id_card as "idCard",
+		a.id_card_front_url as "idCardFrontUrl",
+		a.id_card_reverse_url as "idCardReverseUrl",
+		a.real_audit_status as "realAuditStatus",
+		a.audit_reason as "auditReason",
+		a.apply_time as "applyTime"
+	FROM
+		uc_user_card a
+	lEFT JOIN
+	  	uc_user b
+	ON  a.fid = b.id
+	<include refid="user_card_where"/>
+    ORDER BY 
+    	a.apply_time DESC
+    	<if test="orderBy != null and orderBy != ''">
+    	,#{orderBy}
+    	</if>
+    limit ${pageFirstItem}, ${pageSize}
+  </select>
+  
+  <update id="updateUserCardStatus" parameterType="com.hangjia.bxj.ucenter.model.UserCard">
+    UPDATE uc_user_card
+    <set >
+    	audit_time = #{auditTime,jdbcType=TIMESTAMP}
+        ,uptime = #{auditTime,jdbcType=TIMESTAMP}
+      <if test="realAuditStatus != null and realAuditStatus == 2" >
+    	,virtual_status = 0
+    	,real_cert_state = 1
+    	,is_lecturer = 1
+      </if>
+      <if test="realName != null" >
+        ,name = #{realName,jdbcType=VARCHAR}
+      </if>
+      <if test="realAuditStatus != null" >
+        ,real_audit_status = #{realAuditStatus,jdbcType=INTEGER}
+      </if>
+      <if test="auditReason != null" >
+        ,audit_reason = #{auditReason,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

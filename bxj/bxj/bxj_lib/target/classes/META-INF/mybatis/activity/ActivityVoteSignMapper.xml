@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.activity.ActivityVoteSignMapper">
+    <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.activity.ActivityVoteSign">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="realname" property="realname" jdbcType="VARCHAR"/>
+        <result column="photo" property="photo" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="sign_code" property="signCode" jdbcType="VARCHAR"/>
+        <result column="step" property="step" jdbcType="INTEGER"/>
+        <result column="home_page" property="homePage" jdbcType="VARCHAR"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="job" property="job" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="year_salary" property="yearSalary" jdbcType="VARCHAR"/>
+        <result column="my_des" property="myDes" jdbcType="VARCHAR"/>
+        <result column="sign_type" property="signType" jdbcType="INTEGER"/>
+        <result column="pic1" property="pic1" jdbcType="VARCHAR"/>
+        <result column="pic2" property="pic2" jdbcType="VARCHAR"/>
+        <result column="pic3" property="pic3" jdbcType="VARCHAR"/>
+        <result column="income_pic" property="incomePic" jdbcType="VARCHAR"/>
+        <result column="weixin_id" property="weixinId" jdbcType="VARCHAR"/>
+        <result column="join_time" property="joinTime" jdbcType="VARCHAR"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+        <result column="user_card_pic" property="userCardPic" jdbcType="VARCHAR"/>
+        <result column="position_pic" property="positionPic" jdbcType="VARCHAR"/>
+        <result column="job_year" property="jobYear" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="auth_time" property="authTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, realname, photo, mobile, sign_code, step, home_page, company, job, id_card, 
+    year_salary, my_des, sign_type, pic1, pic2, pic3, income_pic, weixin_id, join_time, 
+    num, user_card_pic, position_pic, job_year, province, status, auth_time, create_time, 
+    update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from activity_vote_sign
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from activity_vote_sign
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hangjia.bxj.model.activity.ActivityVoteSign">
+    insert into activity_vote_sign (id, user_id, realname, 
+      photo, mobile, sign_code, 
+      step, home_page, company, 
+      job, id_card, year_salary, 
+      my_des, sign_type, pic1, 
+      pic2, pic3, income_pic, 
+      weixin_id, join_time, num, 
+      user_card_pic, position_pic, job_year, 
+      province, status, auth_time, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{realname,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{signCode,jdbcType=VARCHAR}, 
+      #{step,jdbcType=INTEGER}, #{homePage,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{job,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{yearSalary,jdbcType=VARCHAR}, 
+      #{myDes,jdbcType=VARCHAR}, #{signType,jdbcType=INTEGER}, #{pic1,jdbcType=VARCHAR}, 
+      #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{incomePic,jdbcType=VARCHAR}, 
+      #{weixinId,jdbcType=VARCHAR}, #{joinTime,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, 
+      #{userCardPic,jdbcType=VARCHAR}, #{positionPic,jdbcType=VARCHAR}, #{jobYear,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{authTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hangjia.bxj.model.activity.ActivityVoteSign">
+        insert into activity_vote_sign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="realname != null">
+                realname,
+            </if>
+            <if test="photo != null">
+                photo,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="signCode != null">
+                sign_code,
+            </if>
+            <if test="step != null">
+                step,
+            </if>
+            <if test="homePage != null">
+                home_page,
+            </if>
+            <if test="company != null">
+                company,
+            </if>
+            <if test="job != null">
+                job,
+            </if>
+            <if test="idCard != null">
+                id_card,
+            </if>
+            <if test="yearSalary != null">
+                year_salary,
+            </if>
+            <if test="myDes != null">
+                my_des,
+            </if>
+            <if test="signType != null">
+                sign_type,
+            </if>
+            <if test="pic1 != null">
+                pic1,
+            </if>
+            <if test="pic2 != null">
+                pic2,
+            </if>
+            <if test="pic3 != null">
+                pic3,
+            </if>
+            <if test="incomePic != null">
+                income_pic,
+            </if>
+            <if test="weixinId != null">
+                weixin_id,
+            </if>
+            <if test="joinTime != null">
+                join_time,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+            <if test="userCardPic != null">
+                user_card_pic,
+            </if>
+            <if test="positionPic != null">
+                position_pic,
+            </if>
+            <if test="jobYear != null">
+                job_year,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="authTime != null">
+                auth_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="realname != null">
+                #{realname,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null">
+                #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="signCode != null">
+                #{signCode,jdbcType=VARCHAR},
+            </if>
+            <if test="step != null">
+                #{step,jdbcType=INTEGER},
+            </if>
+            <if test="homePage != null">
+                #{homePage,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null">
+                #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="yearSalary != null">
+                #{yearSalary,jdbcType=VARCHAR},
+            </if>
+            <if test="myDes != null">
+                #{myDes,jdbcType=VARCHAR},
+            </if>
+            <if test="signType != null">
+                #{signType,jdbcType=INTEGER},
+            </if>
+            <if test="pic1 != null">
+                #{pic1,jdbcType=VARCHAR},
+            </if>
+            <if test="pic2 != null">
+                #{pic2,jdbcType=VARCHAR},
+            </if>
+            <if test="pic3 != null">
+                #{pic3,jdbcType=VARCHAR},
+            </if>
+            <if test="incomePic != null">
+                #{incomePic,jdbcType=VARCHAR},
+            </if>
+            <if test="weixinId != null">
+                #{weixinId,jdbcType=VARCHAR},
+            </if>
+            <if test="joinTime != null">
+                #{joinTime,jdbcType=VARCHAR},
+            </if>
+            <if test="num != null">
+                #{num,jdbcType=INTEGER},
+            </if>
+            <if test="userCardPic != null">
+                #{userCardPic,jdbcType=VARCHAR},
+            </if>
+            <if test="positionPic != null">
+                #{positionPic,jdbcType=VARCHAR},
+            </if>
+            <if test="jobYear != null">
+                #{jobYear,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="authTime != null">
+                #{authTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.activity.ActivityVoteSign">
+        update activity_vote_sign
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="realname != null">
+                realname = #{realname,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null">
+                photo = #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="signCode != null">
+                sign_code = #{signCode,jdbcType=VARCHAR},
+            </if>
+            <if test="step != null">
+                step = #{step,jdbcType=INTEGER},
+            </if>
+            <if test="homePage != null">
+                home_page = #{homePage,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null">
+                job = #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="yearSalary != null">
+                year_salary = #{yearSalary,jdbcType=VARCHAR},
+            </if>
+            <if test="myDes != null">
+                my_des = #{myDes,jdbcType=VARCHAR},
+            </if>
+            <if test="signType != null">
+                sign_type = #{signType,jdbcType=INTEGER},
+            </if>
+            <if test="pic1 != null">
+                pic1 = #{pic1,jdbcType=VARCHAR},
+            </if>
+            <if test="pic2 != null">
+                pic2 = #{pic2,jdbcType=VARCHAR},
+            </if>
+            <if test="pic3 != null">
+                pic3 = #{pic3,jdbcType=VARCHAR},
+            </if>
+            <if test="incomePic != null">
+                income_pic = #{incomePic,jdbcType=VARCHAR},
+            </if>
+            <if test="weixinId != null">
+                weixin_id = #{weixinId,jdbcType=VARCHAR},
+            </if>
+            <if test="joinTime != null">
+                join_time = #{joinTime,jdbcType=VARCHAR},
+            </if>
+            <if test="num != null">
+                num = #{num,jdbcType=INTEGER},
+            </if>
+            <if test="userCardPic != null">
+                user_card_pic = #{userCardPic,jdbcType=VARCHAR},
+            </if>
+            <if test="positionPic != null">
+                position_pic = #{positionPic,jdbcType=VARCHAR},
+            </if>
+            <if test="jobYear != null">
+                job_year = #{jobYear,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="authTime != null">
+                auth_time = #{authTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.activity.ActivityVoteSign">
+    update activity_vote_sign
+    set user_id = #{userId,jdbcType=BIGINT},
+      realname = #{realname,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      sign_code = #{signCode,jdbcType=VARCHAR},
+      step = #{step,jdbcType=INTEGER},
+      home_page = #{homePage,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      year_salary = #{yearSalary,jdbcType=VARCHAR},
+      my_des = #{myDes,jdbcType=VARCHAR},
+      sign_type = #{signType,jdbcType=INTEGER},
+      pic1 = #{pic1,jdbcType=VARCHAR},
+      pic2 = #{pic2,jdbcType=VARCHAR},
+      pic3 = #{pic3,jdbcType=VARCHAR},
+      income_pic = #{incomePic,jdbcType=VARCHAR},
+      weixin_id = #{weixinId,jdbcType=VARCHAR},
+      join_time = #{joinTime,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      user_card_pic = #{userCardPic,jdbcType=VARCHAR},
+      position_pic = #{positionPic,jdbcType=VARCHAR},
+      job_year = #{jobYear,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      auth_time = #{authTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <!--**************************** extend begin here *******************************-->
+    <!-- 查询条件 -->
+    <sql id="Public_Query_Conditions">
+        <where>
+            <if test="realname != null and realname != ''">
+                and realname like CONCAT('%',#{realname,jdbcType=VARCHAR},'%' )
+            </if>
+            <if test="mobile != null and mobile !=''">
+                and mobile = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="signDate != null and signDate !=''">
+                and date_format(create_time,'%Y-%m-%d') = date_format(#{signDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            </if>
+            <if test="authDate != null and authDate !=''">
+            and date_format(auth_time,'%Y-%m-%d') = date_format(#{authDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+            <if test="step != null">
+                and step = #{step,jdbcType=INTEGER}
+            </if>
+            <if test="signType != null">
+                and sign_type = #{signType,jdbcType=INTEGER}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 排序 -->
+    <sql id="Public_Order_Datas">
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+    </sql>
+
+    <!-- 分页 -->
+    <sql id="Public_Page">
+        <if test="pageFirstItem != null and pageSize != null">
+            LIMIT #{pageFirstItem}, #{pageSize}
+        </if>
+    </sql>
+
+    <select id="querySignerDataPage" parameterType="com.hangjia.bxj.query.activity.VoteSignerQuery"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from activity_vote_sign
+        <include refid="Public_Query_Conditions"/>
+        <include refid="Public_Order_Datas"/>
+        <include refid="Public_Page"/>
+    </select>
+
+    <select id="querySignerDataCount" parameterType="com.hangjia.bxj.query.activity.VoteSignerQuery"
+            resultType="java.lang.Integer">
+        select
+        count(*)
+        from activity_vote_sign
+        <include refid="Public_Query_Conditions"/>
+    </select>
+
+    <select id="queryMaxSignCode" parameterType="com.hangjia.bxj.query.activity.VoteSignerQuery"
+            resultType="java.lang.Integer">
+        select
+        ifnull(max(CONVERT(sign_code,SIGNED)),0)
+        from activity_vote_sign
+        <include refid="Public_Query_Conditions"/>
+    </select>
+</mapper>

@@ -1,0 +1,124 @@
+		<style>
+		.common_info .common-info-ul .info-name {
+			width: 25%;
+		}
+		</style>
+		
+		<ul class="common-info-ul" id="annuo-container">
+			<li class="info-item main_line_height" data-calc="ajb-ayb" style="display: none;">
+				<input type="hidden" name="pid" value="230">
+			</li>
+			<li data-commons class="info-item main_line_height">
+				<label class="info-name">保障期间</label>
+				<select class="factor" name="bxnx" id="annuo-bxnx">
+					<option value="48">至80岁</option>
+					<option value="60">至70岁</option>
+	                <option value="50">30年</option>
+	            </select>
+	            <span class="arrowr"></span>
+			</li>
+			<li data-commons class="info-item main_line_height">
+				<label class="info-name">缴费期间</label>
+				<select class="factor" name="jfnx" id="annuo-jfnx">
+					<option value="11">20年</option>
+					<option value="10">15年</option>
+					<option value="9">10年</option>
+	            </select>
+	            <span class="arrowr"></span>
+			</li>
+			<li data-commons class="info-item main_line_height">
+				<label class="info-name">安君宝保额</label>
+				<input class="factor" name="be" maxlength="7" data-vali="between" data-min="200000" data-min-msg="主险保额不得低于20万" data-max="500000" data-max-msg="主险保额不得高于50万" value="250000" placeholder="20万-50万" pattern="[0-9]*" id="annuo-be">
+	            <i class="icon">元</i>
+			</li>
+			<li style="display: none;" data-calc="annuo">
+				<input type="hidden" name="pid" value="263">
+			</li>
+			
+		</ul>
+		
+		#parse("product/product.pa.vm")
+		<script>
+			$(function() {
+				bxj.PlanBook.init({
+					gs: 'PingAn',
+					title: '安君宝',
+					BeiBaoRen: {
+						age: {
+							min: 18,
+							max: 55,
+						}
+					},
+					
+					TouBaoRen: {
+						enabled: false
+					}
+				});
+				
+				$('#beiBaoRenSex-0').attr('disabled', '').hide().next().hide();
+				
+				function submit() {
+					if (bxj.valid.byElement($('#annuo-be'))) {
+						var result = [['险种','保额','保费','保障期','缴费期']];
+						bxj.PlanBook.submitSimple('#touBaoXuanZe', function(row) {
+							if (row && row[2]) {
+								result.push(row);
+							}
+						}, function() {
+							if (result.length > 1) {
+								bxj.PlanBook.drawTable(result, $('#annuo-container'));
+							} else {
+								$('#annuo-container').find('table').remove();
+							}
+						});
+					}
+				}
+				
+				$('#beiBaoRenAge, #annuo-jfnx, #annuo-bxnx').on('change', doRuleAndSubmit);
+				
+				$('#annuo-be').on('change', submit).trigger('change');
+				
+				function doRuleAndSubmit() {
+					var bxnxSel = $('#annuo-bxnx'), bxnx = bxnxSel.val(), 
+						jfnxSel = $('#annuo-jfnx'), jfnx = jfnxSel.val(),
+						age = bxj.PlanBook.instance.getBeiBaoRenAge(true);
+					
+					function f() {
+						if (age > 55) {
+							bxj.PlanBook.invalidSelect(jfnxSel, [11,10], 9, jfnx);
+						} else if (age > 50) {
+							bxj.PlanBook.invalidSelect(jfnxSel, [11], 10, jfnx);
+						} else {
+							bxj.PlanBook.invalidSelect(jfnxSel, []);
+						}
+					};
+					
+					if (age > 55) {
+						// 年龄大于55岁，没有保障到70岁，改为保到80岁，并调用80岁规则f()
+						bxj.PlanBook.invalidSelect(bxnxSel, [60], 48, bxnx);
+						f();
+					} else {
+						bxj.PlanBook.invalidSelect(bxnxSel, []);
+						
+						if (bxnx == 50 || bxnx == 48) {
+							f();
+						} else {
+							// 保障至70岁
+							bxj.PlanBook.invalidSelect(bxnxSel, []);
+								
+							if (age > 50) {
+								bxj.PlanBook.invalidSelect(jfnxSel, [11, 10], 9, jfnx);
+							} else if (age > 45) {
+								bxj.PlanBook.invalidSelect(jfnxSel, [11], 10, jfnx);
+							} else {
+								bxj.PlanBook.invalidSelect(jfnxSel, []);
+							}
+							
+						}
+					}
+					
+					submit();
+				}
+				
+			});
+		</script>

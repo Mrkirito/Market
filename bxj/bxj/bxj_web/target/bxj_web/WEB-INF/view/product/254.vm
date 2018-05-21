@@ -1,0 +1,65 @@
+<div class="common_info">
+		<h1 class="assured_info_title tbxz_title">投保选择</h1>
+		<ul class="common-info-ul">
+            <div class="main_insure_product_div" data-pid="254" data-jbbe="1" data-cpjc="智能星" data-table="7">
+			<input type="hidden" name="bxnx" value="6" class="factor" data-text="终身">
+			<li class="info-item main_line_height">
+				<label class="info-name">缴费期限</label> 
+		         	<select class="factor" name="jfnx">
+		         		<option value="11">20年交</option>
+						<option value="139">19年交</option>
+						<option value="138">18年交</option>
+						<option value="137">17年交</option>
+						<option value="136">16年交</option>
+						<option value="10">15年交</option>
+						<option value="135">14年交</option>
+						<option value="134">13年交</option>
+						<option value="133">12年交</option>
+				        <option value="132">11年交</option>
+						<option value="9">10年交</option>
+			        </select>
+			        <span class="arrowr"></span>
+			</li>
+			<li class="info-item main_line_height">
+					<label class="info-name">保费</label> 	        
+					<input type="tel" value="4000" class="demo_price factor" name="singlebf" maxlength="15" data-min="4000" id="bfId"/>
+					<i class="icon">元</i>
+					<span class="error-tips" style="display:none;"></span>
+			</li>
+			<li class="info-item main_line_height">
+					<label class="info-name">保额</label> 	        
+					<input type="tel" value="80000" disabled="disabled" class="demo_price factor" name="be" maxlength="15" id="beId"/>
+					<i class="icon">元</i>
+			</li>
+			</div>
+			<li class="main_item li_table_0" style="display:none">
+					<div class="creatDes_header">
+							<span class="createDes-title">
+								<em>智能星</em>
+								<em class="price"></em>
+							</span>
+                    		<span class="createDes-btn">
+                    			<a class="main_edit_btn_zx">修改</a>
+                    		</span>
+						</div>
+						<table class="createDes-table">
+							<thead>
+							<tr>
+									<td>险种</td>
+									<td>保额</td>
+									<td>保费</td>
+									<td>保障期限</td>
+									<td>缴费期限</td>
+								</tr>
+							</thead>
+							<tbody>
+							<tr id="znx_tr">
+                				<td>智能星(经典版)</td><td>120000</td><td>6000.00</td><td>终身</td><td>10年交</td>
+                			</tr>
+							</tbody>
+					</table>
+			</li>
+		#parse("product/addfjx.vm")
+	</ul>
+</div>
+			

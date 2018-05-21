@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.prize.PrizeBonusLogMapper" >
+ 
+	<select id="queryPrizeLogCount" parameterType="com.hangjia.bxj.query.prize.PrizeDetailQuery" resultType="int">
+		SELECT COUNT(log.prize_id)
+           FROM
+			 champion_egg_prize a
+		  	 JOIN champion_egg_bonus_log  log ON log.prize_id=a.id
+	         JOIN champion_egg_prize_active active ON active.bonus_log_id=log.id
+		<include refid="prize_where"/>
+	</select>
+	 <!-- 查询 奖品明细  -->
+	<select id="queryPrizeLogList" parameterType="com.hangjia.bxj.query.prize.PrizeDetailQuery" resultType="com.hangjia.bxj.model.prize.PrizeBonusLog">
+		 SELECT
+			a.id as "id",
+			a.name as "name",
+			a.amount as "amount",
+			a.total_num as "totalNum",
+			a.usable_num as "usableNum",
+			a.used_num as "usedNum",
+			a.probability as "probability",
+			a.amount_limit as "amountLimit",
+			a.max_count as "maxCount",
+			a.type as "type",
+			a.unit as "unit",
+			a.level as "level",
+			a.is_enable as "isEnable",
+			a.prize_img as "prizeImg",
+			a.context_img as "contextImg",			 			
+			a.version as "version",
+		      active.phone AS takephone,
+		      active.`name` AS takeName,
+		      active.area AS area,
+		      active.address AS address,
+		      log.`status` AS  logStatus,
+		      log.bonus_type AS bonusType,
+		      log.create_time AS logCreateTime,
+		      log.id AS bonusLogId,
+		      log.user_id AS userID
+		FROM
+			champion_egg_prize a
+		   JOIN champion_egg_bonus_log  log ON log.prize_id=a.id
+           JOIN champion_egg_prize_active active ON active.bonus_log_id=log.id
+		<include refid="prize_where"/>
+	    ORDER BY log.update_time DESC,
+	     a.is_enable DESC,
+    	 log.create_time 
+    	<if test="orderBy != null and orderBy != ''">
+    	,#{orderBy}
+    	</if>
+    	LIMIT ${pageFirstItem}, ${pageSize}
+	</select>
+	
+	 
+	<sql id="prize_where">
+		where a.type!=1   
+			<if test="startTime != null and endTime != null and startTime != '' and endTime != ''">
+				AND DATE(log.create_time) <![CDATA[>=]]> DATE(#{startTime})
+				AND DATE(log.create_time) <![CDATA[<=]]> DATE(#{endTime})
+	  		</if>
+	  		<if test="logStatus != null and logStatus!=''">AND log.`status`= #{logStatus}</if>
+	  		<if test="name != null and name != ''">AND	a.name like CONCAT(CONCAT('%', #{name}), '%')</if>
+		    <if test="takeName != null and takeName != ''">AND	active.`name` like CONCAT(CONCAT('%', #{takeName}), '%')</if>
+		    <if test="takephone != null and takephone != ''">AND active.phone like CONCAT(CONCAT('%', #{takephone}), '%')</if>
+		     
+	</sql>
+	
+	<!-- 更新 为 发货成功   champion_egg_bonus_log -->
+	<update id="updatePrizeLogStatus" parameterType="com.hangjia.bxj.model.prize.PrizeBonusLog">
+	    UPDATE champion_egg_bonus_log
+	    <set>
+	        status = #{logStatus,jdbcType=INTEGER}
+	    </set>
+	    WHERE id = #{bonusLogId,jdbcType=BIGINT}
+	</update>
+	
+	
+</mapper>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  #set( $bxj_v3 = ${configuration.getProperty("urlPath","bxj_v3")})
+  #set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>新人通</title>
+	<link rel="stylesheet" type="text/css" href="$bxj_v3/theNew/css/list/list.css">
+	<link rel="stylesheet" type="text/css" href="$bxj_v3/public/css/public.css">
+	<script src="$bxj_v3/public/js/flexible.js"></script>
+	
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+<!--导航 开始 -->
+
+<header class="head">
+    	 
+     <!--  <a class="header_left" href="javascript:history.go(-1)">111A</a> -->
+         
+        <a class="header_left" href="javascript:goback()"></a>
+        
+    <h1>新人通</h1>
+ 
+</header>
+ <div class="header_heightblock"></div> 
+
+
+<!--导航 结束-->
+<div class="container">
+	<div class="preloader"> Loading... </div>
+	<div class="swiper-container">
+	  <div class="swiper-wrapper">
+	    <div class="swiper-slide">
+			<div class="banner_block">
+				<img src="$bxj_v3/theNew/image/list/banner.jpg">
+			</div>
+			<ul class="menu_list">
+				<li>
+					<span class="icon01"></span>
+					<div class="vertical_block">
+						<h1>保险入门</h1>
+						<h2>了解保险业职业发展规划</h2>
+					</div>
+					<span class="view_num">
+					    #foreach($info in $listinit)  #if($!info.day==1) $!info.browseNum  #end  #end
+					</span>
+				</li>
+				<li>
+					<span class="icon02"></span>
+					<div class="vertical_block">
+						<h1>理念导入</h1>
+						<h2>深入浅出讲解各种保险理念</h2>
+					</div>
+					<span class="view_num">
+					  #foreach($info in $listinit)  #if($!info.day==2) $!info.browseNum  #end  #end
+					</span>
+				</li>
+				<li>
+					<span class="icon03"></span>
+					<div class="vertical_block">
+						<h1>销售技巧</h1>
+						<h2>展业、签单，轻松搞定</h2>
+					</div>
+					<span class="view_num">
+					   #foreach($info in $listinit)  #if($!info.day==3) $!info.browseNum  #end  #end
+					</span>
+				</li>
+				<li>
+					<span class="icon04"></span>
+					<div class="vertical_block">
+						<h1>技能进阶</h1>
+						<h2>概念营销，销售水到渠成</h2>
+					</div>
+					<span class="view_num">
+					    #foreach($info in $listinit)  #if($!info.day==4) $!info.browseNum  #end  #end
+					</span>
+				</li>
+				<li>
+					<span class="icon05"></span>
+					<div class="vertical_block">
+						<h1>特别课程</h1>
+						<h2>助你成为优秀保险家</h2>
+					</div>
+					<span class="view_num">
+					    #foreach($info in $listinit)  #if($!info.day==5) $!info.browseNum  #end  #end
+					</span>
+				</li>
+			</ul>
+	    </div>
+	  </div>
+	</div>
+</div>
+</body>
+</html>
+<script src="$bxj_v3/theNew/js/list/idangerous.swiper.min.js"></script>
+<script src="$bxj_v3/public/js/jquery.min.js"></script>
+<script src="$bxj_v3/public/js/public.js"></script>
+<script src="$bxj_v3/public/js/share.js"></script>
+<script>
+  var holdPosition = 0;
+  var Height = $('.preloader').height();
+  var mySwiper = new Swiper('.swiper-container',{
+    slidesPerView:'auto',
+    mode:'vertical',
+    watchActiveIndex: true,
+    onTouchStart: function() {
+      holdPosition = 0;
+    },
+    onResistanceBefore: function(s, pos){
+      holdPosition = pos;
+    },
+    onTouchEnd: function(){
+      if (holdPosition>100) {
+        mySwiper.setWrapperTranslate(0,Height,0)
+        mySwiper.params.onlyExternal=true
+        $('.preloader').addClass('visible');
+        loadNewSlides();
+      }
+    }
+  })
+  function loadNewSlides(){//写ajax的地方
+    window.location.href='${bxj_path}/newPeoplePass/showNewPeoIndex.page?head=1';
+    setTimeout(function(){
+      mySwiper.params.onlyExternal=false;
+      mySwiper.setWrapperTranslate(0,0,0)
+      $('.preloader').removeClass('visible');
+    },1000)
+  }
+  $('.menu_list li').on('click',function(){
+  	localStorage.index = $(this).index();
+  	var numday=$(this).index()+1;
+  	window.location.href='${bxj_path}/newPeoplePass/showNewPeople.page?head=1&day='+numday;
+  })
+  
+  function isHjbIos() {
+    var ua = window.navigator.userAgent.toLowerCase();
+    if (ua.indexOf("hjb_ios") > -1 || (ua.indexOf("cpu iphone os") > -1 && ua.indexOf("mobile/") > -1 && ua.lastIndexOf("/") == ua.indexOf("/", ua.indexOf("mobile/")))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+ function goback() {
+ if(isHjbIos()) {
+      goback();
+  }else{
+     window.hjb_wv.GoBack();
+  }   
+}
+
+ </script>
+ 
+ <script>
+   <!--百度统计-->
+	var _hmt = _hmt || [];
+	(function() {
+	    var hm = document.createElement("script");
+	    hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(hm, s);
+	})();
+  </script>

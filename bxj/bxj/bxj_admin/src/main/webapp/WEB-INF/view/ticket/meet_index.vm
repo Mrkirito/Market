@@ -1,0 +1,111 @@
+$pageModule.init("app/ticket/ticket", "list")
+<!-- BEGIN CONTAINER -->
+
+
+	<!--
+    <div class="row">
+		#foreach($surplus in $surplusTickets)
+            <div class="col-sm-6 col-lg-3">        
+                <div class="panel media pad-all">
+                    <div class="media-body">
+                        <p class="text-2x mar-no text-thin">$!surplus.activityName(总票:<font color="red">$!surplus.totalTicketsNum</font>/余票:<font color="red">$!surplus.surplusTicketsNum</font>)</p>
+                    </div>
+                </div>
+            </div>
+		#end
+    </div>-->
+<table class="table table-hover table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>会议名称</th>
+        <th>总票数</th>
+        <th>余票数</th>
+        <th>会议时间</th>
+        <th>会议地点</th>
+		<th></th>
+    </tr>
+    </thead>
+    <tbody>
+        #foreach($surplus in $surplusTickets)
+        <tr>
+            <td>$!surplus.activityName</td>
+            <td>$!surplus.totalTicketsNum</td>
+            <td><font color="red">$!surplus.surplusTicketsNum</font></td>
+            <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!surplus.beginTime) #if($!surplus.endTime) ~ $!date.format('yyyy-MM-dd HH:mm:ss',$!surplus.endTime)#end </td>
+            <td>$!surplus.address</td>
+            <th><a href="ticket/exportExcel.jhtml?fid=$!surplus.basicId">导出名单</a></th>
+        </tr>
+        #end
+    </tbody>
+</table>
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default search">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">查询条件</h3>
+                        </div>
+                        <div class="panel-body">
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>支付时间&nbsp;</label>
+								<input type="text" class="form-control reportTime" value="">
+								<input type="hidden" class="startTime" value=""/>
+                                <input type="hidden" class="endTime" value=""/>
+                            </div>
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>会议名称&nbsp;</label>
+								<select class="form-control" name="basicId">
+                                    <option value="">请选择</option>
+									#foreach($s in $surplusTickets)
+                                        <option value="$!s.basicId">$!s.activityName</option>
+									#end
+                                </select>
+                            </div>
+							#if($salemans.size()>1)
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>销售人员&nbsp;</label>
+    								<select class="form-control channelId">
+                                        <option value="">请选择</option>
+    									#foreach($man in $salemans)
+                                            <option value="$!man.fid">$!man.name</option>
+    									#end
+                                    </select>
+                            </div>
+							#else
+								#foreach($man in $salemans)
+									<input class="channelId" type="hidden" value="$!man.fid" /> 
+								#end
+							#end	
+							<div class="form-group col-md-2 col-xs-12">
+                                <label>支付方式&nbsp;</label>
+								<select class="form-control" name="payType">
+                                    <option value="">请选择</option>
+                                    <option value="1">微信支付</option>
+									<option value="2">支付宝支付</option>
+									<option value="3">线下支付</option>
+                                </select>
+                            </div>
+							<div class="form-group col-md-1 col-xs-12">
+                                <button class="btn btn-primary search-action">查询</button>
+                            </div>
+													<div class="form-group col-md-1 col-xs-12">
+								 <button class="btn btn-primary clear-action">清空</button>
+													</div>
+						</div>
+						<!--
+                        <div class="panel-footer">
+                            <div style="text-align: center;">
+                            </div>
+                        </div>
+						-->
+                    </div>
+                </div>
+            </div>
+			<div class="data-list"></div>
+            <!-- END PAGE CONTENT-->
+        </div>
+        <!-- END PAGE CONTAINER-->
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		#set($static_path = ${configuration.getProperty("urlPath","static_path")})
+    	#set($bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="format-detection" content="telephone=no">
+		<title>$!product.cpjc计划书演示</title>
+		<meta name="keywords" content="计划书">
+		<meta name="description" content="计划书">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css?v=100">		
+		<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/product_ad/css/laobaoCard.css?v=160">
+		<script type="text/javascript" src="$static_path/bxj_three/public/js/flexible.js"></script>
+	</head>
+	<body>
+	#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+		<header class="head">
+			<a class="header_left" href="javascript:history.back(-1);"></a>
+			<h1>$!product.cpjc计划书演示</h1>
+			<a href="javacript:void(0);" class="header_right_shareicon fenxico"></a>
+		</header>
+		<div class="header_heightblock"></div>
+	#end
+	<div class="container container_laobaoCard">
+		<div class="img01"></div>
+		<div class="img02">
+			<a class="words_a">参考话术</a>
+			#if(!$request.getParameter('share')||$request.getParameter('share')=='')<a class="group_a">想要更多险种组合？猛戳</a>#end
+		</div>
+	</div>
+	<div class="grey_block words">
+		<div class="main_block text_block">
+			<h1>参考话术</h1>
+			<p class="marginbottom">陈先生，您现在30岁，我们这份计划将为您提供门诊补贴、住院费用报销、意外保障、养老补贴等利益。每年交的保费是1500元左右，那么30年累计交费大约在4.6万左右。</p>
+			<p>首先，您终身可以享受门诊医疗补贴每年350元，每2年领一次，领700元，作为您平时生小病的门诊费用。当然因为是固定补贴，所以你不生病也可以领取，因为它无需任何发票；其次，若如果生个病需要住院或动小手术，我们这个计划在缴费期内，您每次住院一般可享受9000元的报销额度，其中普通住院费用为6000元，手术住院费用为3000元，万一发生器官移植手术，最高报销29000元。</p>
+			<p>另外，这个计划书还提供意外保障10万元，意外医疗2万元，如果发生小磕小碰的事情，100元以上凭医院发票报销。</p>
+			<p class="marginbottom">当然，我们都希望自己一生平安，如果您一生平安也不吃亏，这个计划还有分红，再加上门诊补贴，如果一直存在保险账户上作为养老补贴，按照我们正常的经营水平测算，到您60岁时可累积25000左右，80岁时可累积86000左右。</p>
+			<p>所以这个计划从门诊到报销，从保障到养老都非常齐全，一句话概括就是“小病用门诊、住院有报销、无病本利还”，很适合您！</p>
+			<a class="button_close">关闭</a>
+		</div>
+	</div>
+	#if($request.getParameter('share'))
+		<a class="share_block" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster"></a>
+	#else
+		<div class="grey_block group">
+		<div class="main_block input_block">
+			<form id="form">
+			<h1>信息搜集</h1>
+			<p>请留下您的联系方式与想组合的险种</p>
+			<p>保险家客服会在一周内联系您~</p>
+			<dl>
+				<dt>险种组合</dt>
+				<dd><input placeholder="请输入险种组合" name="gname" /></dd>
+				<dt>联系方式</dt>
+				<dd><input placeholder="请输入手机号" value="$!userCard.phone" name="phone" type="tel" maxlength="11" /></dd>
+			</dl>
+			</form>
+			<a class="button_cancel">取消</a>
+			<a class="button_submit">提交</a>
+		</div>
+		</div>
+		<a class="gotoplanbook" href="$bxj_path/plan/make${fid}.page?mark=$!mark&hasad=1&hd=$request.getParameter('hd')"></a>	
+	#end
+</body>
+</html>
+		<script type="text/javascript" src="$static_path/public/js/jquery-1.11.3.min.js?v=98"></script>
+		<script src="$static_path/bxj_three/public/js/public.js?v=92"></script>
+		<script type="text/javascript" src="$static_path/bxj_three/public/js/fastclick.js"></script>
+		<script>var bxj_path = '$bxj_path', static_path = '$static_path',zxPid='$!product.fid';</script>
+		<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+		<![endif]-->
+		<script src="$static_path/index/js/share.js?v=92"></script>
+		<script src="$static_path/bxj_three/static/product_ad/js/laobaoCard.js?v=12"></script>
+        <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+        <script>
+    var _share = {
+		title : '平安鑫利劳保卡组合',
+		desc : '平安鑫利劳保卡组合火热上线，每天5元尊享10大保障',
+		image : '$static_path/bxj_three/static/product_ad/image/laobaoCard/636.png',
+		location : '$bxj_path/plan/detail/ad/${fid}.page?share=1&hd=1'
+	};
+	var weixin = new WeiXinBridge(true);
+	weixin.config({
+		url : 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+		api : [ weixin.Share.api.all ],
+		success : function() {
+			weixin.share({
+				title : _share.title,
+				desc : _share.desc,
+				imgUrl : _share.image,
+				link : location.href.split('#')[0]
+			});
+		}
+	});
+	setShareInfo(_share);
+        </script>
+        <script>
+    var _hmt = _hmt || [];
+    (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?0d4ab9d363c7398f80de1e881dc6543c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+	 })();
+</script>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	#set( $static_path = ${configuration.getProperty("urlPath","static_path")})
+	#set( $bxj_path = ${configuration.getProperty("urlPath","bxj_path")})
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>我的微名片</title>
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/static/namecard_share/css/namecard_share.css">
+	<link rel="stylesheet" type="text/css" href="$static_path/bxj_three/public/css/public.css">
+	<script src="$static_path/bxj_three/public/js/flexible.js"></script>
+	<!--[if lt IE 9]>
+	    <script src="http://html.baobao18.com/wechat/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	#if(!$request.getParameter('hd')||$request.getParameter('hd')=='')
+	<header class="head" id="doc-header" style="background:#6481DC;">
+	  	<a class="header_left" href="javascript:history.back();"></a>
+	    <h1 id="header-title">我的微名片</h1>
+	</header>
+	<div class="header_heightblock"></div>
+	#end
+	<div class="container container_business">
+		<!-- 头部模块 -->
+		<div class="head">
+			<a class="tel_icon"  data-href="tel:$!userCard.phone"></a>
+			<div class="headimg_block">
+				#if (1 == $!userCard.certstate)
+                    <span class="authentication_icon"></span>
+				#end
+				#if($!userCard.photo)
+                    <img src="$!userCard.photo" class="headimg" />
+				#else
+                    <img src="$static_path/bxj_three/static/namecard_share/image/headimg_bg.png" class="headimg" />
+				#end
+			</div>
+			<a class="mes_icon" data-href="sms:$!userCard.phone"></a>
+			<p class="name_p"><span class="name">$!userCard.name</span></p>
+			<p class="company_p"><span class="company">$!userCard.company</span></p>
+		</div>
+		<!-- 头部模块 结束-->
+		<div class="company_infrom_block">
+			<div class="left_block">
+				<div class="vertcal_middle">
+					<span class="city">$!userCard.cities</span>
+					<span class="block_name">公司地区</span>
+				</div>
+			</div>
+			<div class="right_block">
+				<div class="vertcal_middle">
+					<span class="position">$!userCard.job</span>
+					<span class="block_name">职级</span>
+				</div>
+			</div>
+		</div>
+		<!-- 个人信息模块 -->
+		<div class="inform_block ul_block">
+			<ul>
+				#if($!userCard.department && $!userCard.department.length() > 0)
+                    <li class="position"><p><span class="inform_title">部门</span>
+					<span class="inform_text">
+						$!userCard.department
+					</span></p>
+                    </li>
+				#end
+				#if($!userCard.phone && $!userCard.phone.length() > 0)
+                    <li class="phone"><p><span class="inform_title">手机</span>
+					<span class="inform_text">
+						$!userCard.phone
+					</span></p>
+                    </li>
+				#end
+				#if($!userCard.address && $!userCard.address.length() > 0)
+				<li class="address"><p><span class="inform_title">公司地址</span>
+					<span class="inform_text">
+						$!userCard.address
+					</span></p>
+				</li>
+				#end
+				#if($!userCard.certificate && $!userCard.certificate.length() > 0)
+				<li class="certificate"><p><span class="inform_title">保险资格证号</span>
+					<span class="inform_text">
+						$!userCard.certificate
+					</span></p>
+				</li>
+				#end
+				#if($!userCard.jobyeartext && $!userCard.jobyeartext.length() > 0)
+				<li class="time"><p><span class="inform_title">从业时间</span>
+					<span class="inform_text">
+						$!userCard.jobyeartext
+					</span></p>
+				</li>
+				#end
+			</ul>
+		</div>
+		<!-- 个人信息模块 结束 -->
+		<!-- 个人简介模块 -->
+		#if ($!userCard.mark && $!userCard.mark.length() > 0)
+            <div class="inform_block" id="userImgs">
+                <h2>个人简介</h2>
+                <p class="intro_text">$!userCard.mark</p>
+            </div>
+		#end
+		<!--个人简介模块 结束-->
+
+		<!-- 个人风采模块 -->
+		#if($!userCard.userImgs && $!userCard.userImgs.size() > 0)
+			<div class="inform_block photo_block">
+				<h2>个人风采</h2>
+				#foreach($userImg in $userCard.userImgs)
+					<img src="$userImg.imgUrl" class="photo_img">
+				#end
+			</div>
+		#end
+		<!-- 个人风采模块 结束-->
+	</div>
+	#if(!$request.getParameter('share')||$request.getParameter('share')=='')
+	<div class="share_block_outapp" style="display:none"></div>
+	#end
+	<!-- 分享模块 app外-->
+##	#if(!$request.getParameter('share')||$request.getParameter('share')=='')
+##	<div class="share_block_outapp" style="display: block">
+##		<span onclick="window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=com.hangjia.insurancemaster'">立即体验</span>
+##	</div>
+##	#end
+	<!-- 分享模块 app外 结束-->
+	<!-- 分享模块 app内-->
+	<div class="share_block_inapp" style="display: none">分享</div>
+	<!-- 分享模块 app内 结束 -->
+</body>
+</html>
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script src="$static_path/bxj_three/public/js/public.js"></script>
+<script src="$static_path/bxj_three/public/js/fastclick.js"></script>
+<script src="$static_path/bxj_three/static/usercard/js/usercard.js?v=114"></script>
+<script>
+    FastClick.attach(document.body);//快速点击绑定
+</script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://m.hangjiabao.com/wechat/open/js/weixin.js"></script>
+<script>
+    var weixin = new WeiXinBridge(true);
+    weixin.config({
+        url: 'http://m.hangjiabao.com/wechat/js/evalSignature.json',
+        api: [weixin.Share.api.all],
+        success: function() {
+            weixin.share({
+                title: '$!userCard.name'+'的个人名片',
+                desc: '我是保险家'+'$!userCard.name'+'，我将为您带来最专业的保险信息，定制最合适您的保险计划!',
+                imgUrl: '$!userCard.photo',
+                link: location.href.split('#')[0]
+            });
+        }
+    });
+</script>

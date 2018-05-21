@@ -1,0 +1,143 @@
+			<div class="common_info">
+				<h1 class="assured_info_title tbr_title">投保险人信息</h1>
+				<ul class="common-info-ul">
+					<li class="info-item">
+			            <input class="checkbox-single" type="checkbox" id="tbr_hm" autocomplete="off">
+			    	    <label class="" for="tbr_hm">设置投保人</label>
+			    	</li>
+					<li class="info-item" style="display:none;">
+						<label class="info-name">性别</label>
+						<input type="radio" name="tbrsex" value="1" id="tbrmale" checked="checked" />
+						<label for="tbrmale" class="inputRadio_label">男</label>
+						<input type="radio" name="tbrsex" value="0" id="tbrfemale"/>
+						<label for="tbrfemale" class="inputRadio_label">女</label>
+					</li>
+					<li class="info-item" style="display:none;">
+						<label class="info-name">年龄</label>
+						<select name="tbrage" class="factor">
+            				<option value="18">18</option>
+            				<option value="19">19</option>
+            				<option value="20">20</option>
+            				<option value="21">21</option>
+            				<option value="22">22</option>
+            				<option value="23">23</option>
+            				<option value="24">24</option>
+            				<option value="25">25</option>
+            				<option value="26">26</option>
+            				<option value="27">27</option>
+            				<option value="28">28</option>
+            				<option value="29">29</option>
+            				<option value="30">30</option>
+            				<option value="31">31</option>
+            				<option value="32">32</option>
+            				<option value="33">33</option>
+            				<option value="34">34</option>
+            				<option value="35">35</option>
+            				<option value="36">36</option>
+            				<option value="37">37</option>
+            				<option value="38">38</option>
+            				<option value="39">39</option>
+            				<option value="40">40</option>
+            				<option value="41">41</option>
+            				<option value="42">42</option>
+            				            					<option value="43">43</option>
+            				            					<option value="44">44</option>
+            				            					<option value="45">45</option>
+            				            					<option value="46">46</option>
+            				            					<option value="47">47</option>
+            				            					<option value="48">48</option>
+            				            					<option value="49">49</option>
+            				            					<option value="50">50</option>
+            				            					<option value="51">51</option>
+            				            					<option value="52">52</option>
+            				            					<option value="53">53</option>
+            				            					<option value="54">54</option>
+            				            					<option value="55">55</option>
+            				            					<option value="56">56</option>
+            				            					<option value="57">57</option>
+            				            					<option value="58">58</option>
+            				            					<option value="59">59</option>
+            				            					<option value="60">60</option>
+															<option value="61">61</option>
+															<option value="62">62</option>
+															<option value="63">63</option>
+						<option value="64">64</option>
+						<option value="65">65</option>
+                		</select>
+						<span class="arrowr"></span>
+					</li>
+				</ul>
+			</div>
+<div class="common_info">
+	<h1 class="assured_info_title tbxz_title">投保选择</h1>
+	<ul class="common-info-ul">
+	<div class="main_insure_product_div" data-pid="69" data-jbbe="1000.00" data-cpjc="乐安康" style="display:none" data-table="0">
+		<input type="hidden" name="bxnx" value="6" class="factor" data-text="终身" />
+		<li class="info-item main_line_height">
+			<label class="info-name">缴费期限</label>
+			<select class="factor" name="jfnx">
+				<option value="11">20年交</option>
+				<option value="10">15年交</option>
+				<option value="9">10年交</option>
+				<option value="8">5年交</option>
+				<option value="7">趸交</option>
+			</select>
+			<span class="arrowr"></span>
+		</li>
+		<li class="info-item main_line_height">
+			<label class="info-name">保额</label>
+			<input type="tel" placeholder="请输入保额" value="" class="demo_price factor" name="be" maxlength="15"/>
+			<i class="icon">元</i>
+			<span class="error-tips" style="display:none;"></span>
+		</li>
+		<li class="_tb_hm_li">
+			<input type="hidden" name="pid" value="635" data-zxpid="69" data-jbbe="1000" data-cpjc="投保人豁免">
+			<input type="hidden" name="bxnx" value="6">
+			<dl>
+				<dt>
+					<input type="checkbox" id="hm_635" disabled="disabled" class="checkbox-single _tb_hm">
+					<label for="hm_635" class="grey_span">投保人豁免(非本人可附加)</label>
+				</dt>
+			</dl>
+		</li>		
+	</div>
+	<li class="main_item" >
+		<div class="creatDes_header">
+				<span class="createDes-title verticalmiddle">
+						<em>乐安康</em>			
+					</span>
+					<span class="creatDes-add-btn"> 
+						<em class="add_icon"></em>
+						<em class="add_font">添加主险</em>
+					</span>
+		</div>
+	</li>
+	<li class="main_item li_table_0" style="display:none">
+		<div class="creatDes_header">
+			<span class="createDes-title">
+				<em>乐安康</em>
+				<em class="price"></em>
+			</span>
+			<span class="createDes-btn">
+				<a class="main_edit_btn" data-table="0">修改</a>
+			</span>
+		</div>
+		<table class="createDes-table">
+		<thead>
+			<tr>
+				<td>险种</td>
+				<td>保额</td>
+				<td>保费</td>
+				<td>保障期限</td>
+				<td>缴费期限</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		</table>
+	</li>
+	#parse("product/addzx.vm")
+	</ul>
+</div>
+<script>
+var _hmRulesJson={"0":{"9":60,"10":55,"11":50,"8":65,"7":-1},"1":{"9":60,"10":55,"11":50,"8":65,"7":-1}};
+</script>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionModule" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="short_title" property="shortTitle" jdbcType="VARCHAR" />
+    <result column="is_display" property="isDisplay" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="more" property="more" jdbcType="VARCHAR" />
+    <result column="more_url" property="moreUrl" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="BIGINT" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_user" property="modifyUser" jdbcType="BIGINT" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, title, short_title, is_display, sort, more, more_url, channel_id, create_user, 
+    create_at, modify_user, modify_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_module
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_module
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionModule" >
+    insert into champion_module (fid, title, short_title, 
+      is_display, sort, more, 
+      more_url, channel_id, create_user, 
+      create_at, modify_user, modify_at
+      )
+    values (#{fid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{shortTitle,jdbcType=VARCHAR}, 
+      #{isDisplay,jdbcType=BIT}, #{sort,jdbcType=INTEGER}, #{more,jdbcType=VARCHAR}, 
+      #{moreUrl,jdbcType=VARCHAR}, #{channelId,jdbcType=BIGINT}, #{createUser,jdbcType=BIGINT}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{modifyUser,jdbcType=BIGINT}, #{modifyAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionModule" >
+    insert into champion_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="shortTitle != null" >
+        short_title,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="more != null" >
+        more,
+      </if>
+      <if test="moreUrl != null" >
+        more_url,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyUser != null" >
+        modify_user,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="more != null" >
+        #{more,jdbcType=VARCHAR},
+      </if>
+      <if test="moreUrl != null" >
+        #{moreUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionModule" >
+    update champion_module
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTitle != null" >
+        short_title = #{shortTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="more != null" >
+        more = #{more,jdbcType=VARCHAR},
+      </if>
+      <if test="moreUrl != null" >
+        more_url = #{moreUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        modify_user = #{modifyUser,jdbcType=BIGINT},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionModule" >
+    update champion_module
+    set title = #{title,jdbcType=VARCHAR},
+      short_title = #{shortTitle,jdbcType=VARCHAR},
+      is_display = #{isDisplay,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      more = #{more,jdbcType=VARCHAR},
+      more_url = #{moreUrl,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=BIGINT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_user = #{modifyUser,jdbcType=BIGINT},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+
+  <select id="getListPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from champion_module
+    where is_display = 1
+    ORDER by sort
+    <if test="start != null and end != null" >
+      limit #{start, jdbcType=INTEGER}, #{end, jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="getAllModuleCount" resultType="int" parameterType="java.util.Map" >
+    select
+    count(*)
+    from champion_module where is_display = 1
+  </select>
+</mapper>

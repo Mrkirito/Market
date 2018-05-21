@@ -1,0 +1,93 @@
+$pageModule.init("app/report/hjwchartDataReport", "list")
+<!-- BEGIN CONTAINER -->
+        <div class="row">
+            <div id="newUser" style="width: 100%; min-height:300px;"></div>
+        </div>
+##		<div class="row">
+##            <div id="newUser2" style="width: 100%; min-height:300px;"></div>
+##        </div>
+##		<div class="row">
+##            <div id="newUser3" style="width: 100%; min-height:300px;"></div>
+##        </div>
+<div class="page-container row-fluid">
+    <!-- BEGIN PAGE -->
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="col-sm-12">
+                <div class="panel panel-default search">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">查询条件</h3>
+                    </div>
+                    <div class="panel-body">
+                        <!-- BEGIN PAGE HEADER-->
+                        <div class="form-group col-sm-3">
+                            <label class="control-label pad-btm">统计时间&nbsp;</label>
+							<input type="text" class="form-control reportTime" value="$queryMonth">
+                        </div>
+                        <div style="text-align: center;">
+                            <button class="btn btn-primary search-action">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-list">
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+</div>
+</div>
+
+<div class="data_info hidden">
+    <div class="form-body">
+		<form id="form">
+            <input type="hidden" name="id">
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>数据日期</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control dataDate" name="dataDate" placeholder="请选择数据日期">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>行家服务号总用户</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planPv is_number" name="data1" placeholder="请输入行家服务号总用户">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>行家服务号增加</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planUv is_number" name="data2" placeholder="请输入行家服务号增加">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>行家服务号净增</label>
+            <div class="input-group col-md-9">
+                <input type="text" class="form-control planMakePopulation is_number" name="data3" placeholder="请输入行家服务号净增">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>行家微博总用户</label>
+            <div class="input-group col-md-9">
+                <input type="text" value="0" class="form-control planMakeCount is_number" name="data4" placeholder="请输入行家微博总用户">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>行家微博增加</label>
+            <div class="input-group col-md-9">
+                <input type="text" value="0" class="form-control planUv is_number" name="data5" placeholder="请输入行家微博增加">
+            </div>
+        </div>		
+        <div class="form-group col-sm-12">
+            <label class="col-md-3 control-label"><font color="red">*</font>行家微博净增</label>
+            <div class="input-group col-md-9">
+                <input type="text" value="0" class="form-control studyPv is_number" name="data6" placeholder="请输入行家微博净增">
+            </div>
+        </div>
+
+		</form>
+    </div>
+</div>

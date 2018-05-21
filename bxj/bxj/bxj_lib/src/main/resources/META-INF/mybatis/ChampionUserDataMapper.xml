@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hangjia.bxj.dao.ChampionUserDataMapper" >
+  <resultMap id="BaseResultMap" type="com.hangjia.bxj.model.ChampionUserData" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="publish_count" property="publishCount" jdbcType="INTEGER" />
+    <result column="attention_count" property="attentionCount" jdbcType="INTEGER" />
+    <result column="fans_count" property="fansCount" jdbcType="INTEGER" />
+    <result column="collection_count" property="collectionCount" jdbcType="INTEGER" />
+    <result column="creat_at" property="creatAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, user_id, publish_count, attention_count, fans_count, collection_count, creat_at, 
+    update_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_user_data
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from champion_user_data
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hangjia.bxj.model.ChampionUserData" >
+    insert into champion_user_data (fid, user_id, publish_count, 
+      attention_count, fans_count, collection_count, 
+      creat_at, update_at)
+    values (#{fid,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{publishCount,jdbcType=INTEGER}, 
+      #{attentionCount,jdbcType=INTEGER}, #{fansCount,jdbcType=INTEGER}, #{collectionCount,jdbcType=INTEGER}, 
+      #{creatAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangjia.bxj.model.ChampionUserData" >
+    insert into champion_user_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="publishCount != null" >
+        publish_count,
+      </if>
+      <if test="attentionCount != null" >
+        attention_count,
+      </if>
+      <if test="fansCount != null" >
+        fans_count,
+      </if>
+      <if test="collectionCount != null" >
+        collection_count,
+      </if>
+      <if test="creatAt != null" >
+        creat_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="publishCount != null" >
+        #{publishCount,jdbcType=INTEGER},
+      </if>
+      <if test="attentionCount != null" >
+        #{attentionCount,jdbcType=INTEGER},
+      </if>
+      <if test="fansCount != null" >
+        #{fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCount != null" >
+        #{collectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="creatAt != null" >
+        #{creatAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangjia.bxj.model.ChampionUserData" >
+    update champion_user_data
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="publishCount != null" >
+        publish_count = #{publishCount,jdbcType=INTEGER},
+      </if>
+      <if test="attentionCount != null" >
+        attention_count = #{attentionCount,jdbcType=INTEGER},
+      </if>
+      <if test="fansCount != null" >
+        fans_count = #{fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCount != null" >
+        collection_count = #{collectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="creatAt != null" >
+        creat_at = #{creatAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangjia.bxj.model.ChampionUserData" >
+    update champion_user_data
+    set user_id = #{userId,jdbcType=BIGINT},
+      publish_count = #{publishCount,jdbcType=INTEGER},
+      attention_count = #{attentionCount,jdbcType=INTEGER},
+      fans_count = #{fansCount,jdbcType=INTEGER},
+      collection_count = #{collectionCount,jdbcType=INTEGER},
+      creat_at = #{creatAt,jdbcType=TIMESTAMP},
+      update_at = #{updateAt,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from champion_user_data
+    where user_id = #{userId,jdbcType=BIGINT}
+    Limit 1
+  </select>
+</mapper>

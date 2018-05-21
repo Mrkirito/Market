@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+.split{
+		clear:left;
+	}
+	#queryCondition form .form-control{
+		width:200px;
+	}
+	#queryCondition form .text label{
+		/* border:1px solid red; */
+		float:left;
+		margin-top:5px;
+	}
+	#queryCondition form .text input{
+		/* border:1px solid red; */
+		float:left;
+	}
+	#queryCondition form .text{
+		width:300px;
+		/* border:1px solid blue; */ 
+		float:left;
+	}
+	#queryResult{
+		margin-top:20px;
+	}
